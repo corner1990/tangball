@@ -1,3 +1,3 @@
-<templete>
-  <div>赛事活动</div>
-</templete>
+<template>
+  <div>唐球馆</div>
+</template>
