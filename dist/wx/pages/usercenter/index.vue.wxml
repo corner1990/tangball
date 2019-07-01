@@ -1,0 +1,6 @@
+<template name="282bd695">
+  <view class="_div data-v-aed4f3d4">
+    <view class="_h2 data-v-aed4f3d4">个人中心</view>
+    <view class="_h3 data-v-aed4f3d4">{{name}}</view>
+  </view>
+</template>

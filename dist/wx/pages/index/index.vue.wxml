@@ -1,0 +1,23 @@
+<import src="/components/card.vue.wxml" /><template name="0aa4f4da">
+  <view class="_div data-v-b93b2d1c">
+    <view class="_div data-v-b93b2d1c userinfo" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+      <image class="_img data-v-b93b2d1c userinfo-avatar" wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <image class="_img data-v-b93b2d1c userinfo-avatar" src="/static/images/user.png" background-size="cover"></image>
+      <view class="_div data-v-b93b2d1c userinfo-nickname"><template data="{{...$root[$kk+'0'], $root}}" is="7e54b532"></template></view>
+    </view>
+    <view class="_div data-v-b93b2d1c usermotto">
+      <view class="_div data-v-b93b2d1c user-motto"><template data="{{...$root[$kk+'1'], $root}}" is="7e54b532"></template></view>
+    </view>
+    <form class="_form data-v-b93b2d1c form-container"><input type="text" class="_input data-v-b93b2d1c form-control" value="{{motto}}" placeholder="v-model" /> <input type="text" class="_input data-v-b93b2d1c form-control" value="{{motto}}" bindinput="handleProxy" placeholder="v-model" data-eventid="{{'1'}}" data-comkey="{{$k}}" /> <input type="text" class="_input data-v-b93b2d1c form-control" value="{{motto}}" bindblur="handleProxy" placeholder="v-model.lazy" data-eventid="{{'2'}}" data-comkey="{{$k}}" /></form>
+    <van-button type="primary" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-button data-v-b93b2d1c">van-button</van-button>
+    <van-radio-group value="{{radio}}" bind:change="onChange" class="_van-radio-group data-v-b93b2d1c">
+      <van-radio name="1" class="_van-radio data-v-b93b2d1c">单选框 1</van-radio>
+      <van-radio name="2" class="_van-radio data-v-b93b2d1c">单选框 2</van-radio>
+    </van-radio-group>
+    <navigator url="/pages/counter/main" class="_a data-v-b93b2d1c counter">去往Vuex示例页面</navigator>
+    <view class="_div data-v-b93b2d1c all">
+      <view class="_div data-v-b93b2d1c left"></view>
+      <view class="_div data-v-b93b2d1c right"></view>
+    </view>
+  </view>
+</template>

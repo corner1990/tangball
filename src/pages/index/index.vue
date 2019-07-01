@@ -33,13 +33,12 @@
         <div class="right">
         </div>
     </div>
-  
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
-console.log('onShow')
+
 export default {
   data () {
     return {
