@@ -9,6 +9,11 @@
 export default {
   data: {
     name: 'leo'
+  },
+  onShow () {
+    this.$root.$mp.page.getTabBar().setData({
+      active: 3 // 对应页面的index
+    })
   }
 }
 </script>

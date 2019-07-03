@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "唐球馆"
+  "navigationBarTitleText": "唐球馆",
+  "usingComponents": {
+    "van-panel": "/static/vant/panel/index"
+  }
 }

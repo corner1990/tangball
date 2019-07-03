@@ -1,1 +1,13 @@
 @import "../../common/vendor.wxss";
+
+.main-wrap {
+  padding-bottom: 120rpx;
+}
+.title {
+  margin: 20rpx 40rpx;
+  color: #333;
+  border-bottom: 2rpx solid #000;
+}
+.card {
+  margin: 0 20rpx;
+}
