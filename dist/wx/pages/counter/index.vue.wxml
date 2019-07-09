@@ -1,6 +1,6 @@
-<template name="92535686">
-  <view class="_div data-v-05e1bcdc counter-warp">
-    <view class="_p data-v-05e1bcdc">Vuex counter：{{ count }}</view>
-    <view class="_p data-v-05e1bcdc"><button bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_button data-v-05e1bcdc">+</button> <button bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_button data-v-05e1bcdc">-</button></view>
+<template name="fba14998">
+  <view class="_div data-v-6deceb2d counter-warp">
+    <view class="_p data-v-6deceb2d">Vuex counter：{{ count }}</view>
+    <view class="_p data-v-6deceb2d"><button bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_button data-v-6deceb2d">+</button> <button bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_button data-v-6deceb2d">-</button></view>
   </view>
 </template>

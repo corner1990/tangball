@@ -1,74 +1,77 @@
-<template name="0aa4f4da">
-  <view class="_div data-v-b93b2d1c main-wrap">
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-b93b2d1c">
+<template name="5d07bd0a">
+  <view class="_div data-v-13520ffa main-wrap">
+    <van-tabbar active="{{active}}" class="_van-tabbar data-v-13520ffa">
+      <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-13520ffa">{{item.text}}</van-tabbar-item>
+    </van-tabbar>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-13520ffa">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
-        <swiper-item class="_swiper-item data-v-b93b2d1c">
-          <image src="{{item}}" class="_image data-v-b93b2d1c slide-image" width="355" height="150"></image>
+        <swiper-item class="_swiper-item data-v-13520ffa">
+          <image src="{{item}}" class="_image data-v-13520ffa slide-image" width="355" height="150"></image>
         </swiper-item>
       </block>
     </swiper>
-    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-b93b2d1c"></van-search>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">赛事</view>
-      <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-b93b2d1c">
-        <van-tab title="近期" class="_van-tab data-v-b93b2d1c">
-          <van-card tag="111" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-b93b2d1c"></van-card>
+    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-13520ffa"></van-search>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">赛事</view>
+      <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-13520ffa">
+        <van-tab title="近期" class="_van-tab data-v-13520ffa">
+          <van-card tag="111" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
-        <van-tab title="全国" class="_van-tab data-v-b93b2d1c">
-          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-b93b2d1c"></van-card>
+        <van-tab title="全国" class="_van-tab data-v-13520ffa">
+          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
-        <van-tab title="加盟商" class="_van-tab data-v-b93b2d1c">
-          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-b93b2d1c"></van-card>
+        <van-tab title="加盟商" class="_van-tab data-v-13520ffa">
+          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
-        <van-tab title="全部" class="_van-tab data-v-b93b2d1c">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-b93b2d1c"></van-card>
+        <van-tab title="全部" class="_van-tab data-v-13520ffa">
+          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
       </van-tabs>
     </view>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">唐球达人</view>
-      <view class="_div data-v-b93b2d1c">
-        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-b93b2d1c">
-          <view class="_view data-v-b93b2d1c">内容</view>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">唐球达人</view>
+      <view class="_div data-v-13520ffa">
+        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-13520ffa">
+          <view class="_view data-v-13520ffa">内容</view>
         </van-panel>
       </view>
     </view>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">互动节目</view>
-      <view class="_div data-v-b93b2d1c">
-        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-b93b2d1c">
-          <view class="_view data-v-b93b2d1c">内容</view>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">互动节目</view>
+      <view class="_div data-v-13520ffa">
+        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-13520ffa">
+          <view class="_view data-v-13520ffa">内容</view>
         </van-panel>
       </view>
     </view>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">唐球学院</view>
-      <view class="_div data-v-b93b2d1c">
-        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-b93b2d1c">
-          <view class="_view data-v-b93b2d1c">内容</view>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">唐球学院</view>
+      <view class="_div data-v-13520ffa">
+        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-13520ffa">
+          <view class="_view data-v-13520ffa">内容</view>
         </van-panel>
       </view>
     </view>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">最新动态</view>
-      <view class="_div data-v-b93b2d1c">
-        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-b93b2d1c">
-          <view class="_view data-v-b93b2d1c">内容</view>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">最新动态</view>
+      <view class="_div data-v-13520ffa">
+        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-13520ffa">
+          <view class="_view data-v-13520ffa">内容</view>
         </van-panel>
       </view>
     </view>
-    <view class="_div data-v-b93b2d1c card">
-      <view class="_h3 data-v-b93b2d1c">连锁加盟</view>
-      <view class="_div data-v-b93b2d1c">
-        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-b93b2d1c">
-          <view class="_view data-v-b93b2d1c">内容</view>
+    <view class="_div data-v-13520ffa card">
+      <view class="_h3 data-v-13520ffa">连锁加盟</view>
+      <view class="_div data-v-13520ffa">
+        <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-13520ffa">
+          <view class="_view data-v-13520ffa">内容</view>
         </van-panel>
       </view>
     </view>
-    <navigator url="/pages/counter/main" class="_a data-v-b93b2d1c counter">去往Vuex示例页面</navigator>
-    <view class="_div data-v-b93b2d1c all">
-      <view class="_div data-v-b93b2d1c left"></view>
-      <view class="_div data-v-b93b2d1c right"></view>
+    <navigator url="/pages/counter/main" class="_a data-v-13520ffa counter">去往Vuex示例页面</navigator>
+    <view class="_div data-v-13520ffa all">
+      <view class="_div data-v-13520ffa left"></view>
+      <view class="_div data-v-13520ffa right"></view>
     </view>
   </view>
 </template>
