@@ -4,7 +4,7 @@
       :autoplay="autoplay" :interval="interval" :duration="duration">
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" width="355" height="150"/>
+          <image :src="item" class="slide-image" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -98,12 +98,15 @@
         <div class="right">
         </div>
     </div>
+    <van-tabbar :active="active">
+      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
-import { get } from '@/utils/request'
+// import { get } from '@/utils/request'
 export default {
   data () {
     return {
@@ -112,6 +115,28 @@ export default {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
+      list: [
+        {
+          'text': '首页',
+          'pagePath': '../index/main',
+          'iconPath': 'home-o'
+        },
+        {
+          'text': '唐球馆',
+          'pagePath': '../tanghome/main',
+          'iconPath': 'fire-o'
+        },
+        {
+          'text': '活动',
+          'pagePath': '../event/main',
+          'iconPath': 'medel-o'
+        },
+        {
+          'text': '个人中心',
+          'pagePath': '../usercenter/main',
+          'iconPath': 'friends-o'
+        }
+      ],
       radio: 1,
       imgUrls: [
         'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
@@ -122,7 +147,7 @@ export default {
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 1,
+      active: 0,
       value: '' // 搜索value
     }
   },
@@ -156,15 +181,19 @@ export default {
     /**
      * @desc 赛事切换回调
      */
-    onChange () {}
+    tabChange (url) {
+      console.log(url)
+      wx.switchTab({
+        url
+      })
+    }
   },
-
   created () {
     console.log('12312')
     // let app = getApp()
-    get('http://localhost:4001/api/users').then(res => {
-      console.log('res', res)
-    })
+    // get('http://localhost:4001/api/users').then(res => {
+    //   console.log('res', res)
+    // })
   }
 }
 </script>

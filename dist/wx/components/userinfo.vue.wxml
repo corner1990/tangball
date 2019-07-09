@@ -1,0 +1,9 @@
+<template name="4eda44d9">
+  <view class="_div data-v-67c55bea user-info">
+    <image src="/static/images/timg.jpg" alt="bg" class="_img data-v-67c55bea bg"></image>
+    <view class="_div data-v-67c55bea avatar-row">
+      <image src="/static/images/user.png" alt="avatar" class="_img data-v-67c55bea avatar"></image>
+      <view class="_p data-v-67c55bea name">username</view>
+    </view>
+  </view>
+</template>

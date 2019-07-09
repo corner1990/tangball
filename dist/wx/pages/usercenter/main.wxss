@@ -1,1 +1,37 @@
 @import "../../common/vendor.wxss";
+
+.user-info {
+  position: relative;
+  height: 360rpx;
+  text-align: center;
+  overflow: hidden;
+}
+.user-info .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.avatar-row {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.user-info .avatar {
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: 20rpx;
+  border-radius: 50%;
+}
+.user-info .name {
+  color: #fff;
+}
+.user-list {
+  position: relative;
+  z-index: 5;
+  margin: -80rpx 40rpx 0;
+  background: #fff;
+  min-height: 800rpx;
+  border-radius: 20rpx;
+  border: 2rpx solid #f00;
+}
