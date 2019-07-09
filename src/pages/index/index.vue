@@ -1,13 +1,10 @@
 <template>
   <div class="main-wrap">
-    <van-tabbar :active="active">
-      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
     <swiper :indicator-dots="indicatorDots"
       :autoplay="autoplay" :interval="interval" :duration="duration">
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" width="355" height="150"/>
+          <image :src="item" class="slide-image" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -101,6 +98,9 @@
         <div class="right">
         </div>
     </div>
+    <van-tabbar :active="active">
+      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 

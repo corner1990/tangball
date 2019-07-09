@@ -1,204 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([2],{
+global.webpackJsonpMpvue([5],{
 
-/***/ 131:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "main-wrap"
-  }, [_c('van-tabbar', {
-    attrs: {
-      "active": _vm.active,
-      "mpcomid": '1'
-    }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '0_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  })), _vm._v(" "), _c('swiper', {
-    attrs: {
-      "indicator-dots": _vm.indicatorDots,
-      "autoplay": _vm.autoplay,
-      "interval": _vm.interval,
-      "duration": _vm.duration
-    }
-  }, _vm._l((_vm.imgUrls), function(item, index) {
-    return _c('block', {
-      key: item
-    }, [_c('swiper-item', {
-      attrs: {
-        "mpcomid": '2_' + index
-      }
-    }, [_c('image', {
-      staticClass: "slide-image",
-      attrs: {
-        "src": item,
-        "width": "355",
-        "height": "150"
-      }
-    })])], 1)
-  })), _vm._v(" "), _c('van-search', {
-    attrs: {
-      "value": _vm.value,
-      "placeholder": "请输入搜索关键词",
-      "use-action-slot": "",
-      "bind:search": "onSearch",
-      "mpcomid": '3'
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("赛事")]), _vm._v(" "), _c('van-tabs', {
-    attrs: {
-      "active": _vm.active,
-      "bind:change": "onChange",
-      "mpcomid": '12'
-    }
-  }, [_c('van-tab', {
-    attrs: {
-      "title": "近期",
-      "mpcomid": '5'
-    }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "111",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '4'
-    }
-  })], 1), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "全国",
-      "mpcomid": '7'
-    }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "222",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '6'
-    }
-  })], 1), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "加盟商",
-      "mpcomid": '9'
-    }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "333",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '8'
-    }
-  })], 1), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "全部",
-      "mpcomid": '11'
-    }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "444",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '10'
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("唐球达人")]), _vm._v(" "), _c('div', [_c('van-panel', {
-    attrs: {
-      "title": "标题",
-      "desc": "描述信息",
-      "status": "状态",
-      "mpcomid": '13'
-    }
-  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("互动节目")]), _vm._v(" "), _c('div', [_c('van-panel', {
-    attrs: {
-      "title": "标题",
-      "desc": "描述信息",
-      "status": "状态",
-      "mpcomid": '14'
-    }
-  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("唐球学院")]), _vm._v(" "), _c('div', [_c('van-panel', {
-    attrs: {
-      "title": "标题",
-      "desc": "描述信息",
-      "status": "状态",
-      "mpcomid": '15'
-    }
-  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("最新动态")]), _vm._v(" "), _c('div', [_c('van-panel', {
-    attrs: {
-      "title": "标题",
-      "desc": "描述信息",
-      "status": "状态",
-      "mpcomid": '16'
-    }
-  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('h3', [_vm._v("连锁加盟")]), _vm._v(" "), _c('div', [_c('van-panel', {
-    attrs: {
-      "title": "标题",
-      "desc": "描述信息",
-      "status": "状态",
-      "mpcomid": '17'
-    }
-  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('a', {
-    staticClass: "counter",
-    attrs: {
-      "href": "/pages/counter/main"
-    }
-  }, [_vm._v("去往Vuex示例页面")]), _vm._v(" "), _vm._m(0)], 1)
-}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "all"
-  }, [_c('div', {
-    staticClass: "left"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "right"
-  })])
-}]
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-13520ffa", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 66:
+/***/ 20:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(21);
 
 
 
@@ -214,18 +25,18 @@ app.$mount();
 
 /***/ }),
 
-/***/ 67:
+/***/ 21:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(27);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(68)
+  __webpack_require__(22)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 
 /* template */
@@ -268,18 +79,18 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 68:
+/***/ 22:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 69:
+/***/ 23:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(3);
 //
 //
 //
@@ -473,6 +284,194 @@ if (false) {(function () {
   }
 });
 
+/***/ }),
+
+/***/ 27:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "main-wrap"
+  }, [_c('swiper', {
+    attrs: {
+      "indicator-dots": _vm.indicatorDots,
+      "autoplay": _vm.autoplay,
+      "interval": _vm.interval,
+      "duration": _vm.duration
+    }
+  }, _vm._l((_vm.imgUrls), function(item, index) {
+    return _c('block', {
+      key: item
+    }, [_c('swiper-item', {
+      attrs: {
+        "mpcomid": '0_' + index
+      }
+    }, [_c('image', {
+      staticClass: "slide-image",
+      attrs: {
+        "src": item,
+        "height": "150"
+      }
+    })])], 1)
+  })), _vm._v(" "), _c('van-search', {
+    attrs: {
+      "value": _vm.value,
+      "placeholder": "请输入搜索关键词",
+      "use-action-slot": "",
+      "bind:search": "onSearch",
+      "mpcomid": '1'
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("赛事")]), _vm._v(" "), _c('van-tabs', {
+    attrs: {
+      "active": _vm.active,
+      "bind:change": "onChange",
+      "mpcomid": '10'
+    }
+  }, [_c('van-tab', {
+    attrs: {
+      "title": "近期",
+      "mpcomid": '3'
+    }
+  }, [_c('van-card', {
+    attrs: {
+      "tag": "111",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "111",
+      "mpcomid": '2'
+    }
+  })], 1), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全国",
+      "mpcomid": '5'
+    }
+  }, [_c('van-card', {
+    attrs: {
+      "tag": "222",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "111",
+      "mpcomid": '4'
+    }
+  })], 1), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "加盟商",
+      "mpcomid": '7'
+    }
+  }, [_c('van-card', {
+    attrs: {
+      "tag": "333",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "111",
+      "mpcomid": '6'
+    }
+  })], 1), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全部",
+      "mpcomid": '9'
+    }
+  }, [_c('van-card', {
+    attrs: {
+      "tag": "444",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "111",
+      "mpcomid": '8'
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("唐球达人")]), _vm._v(" "), _c('div', [_c('van-panel', {
+    attrs: {
+      "title": "标题",
+      "desc": "描述信息",
+      "status": "状态",
+      "mpcomid": '11'
+    }
+  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("互动节目")]), _vm._v(" "), _c('div', [_c('van-panel', {
+    attrs: {
+      "title": "标题",
+      "desc": "描述信息",
+      "status": "状态",
+      "mpcomid": '12'
+    }
+  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("唐球学院")]), _vm._v(" "), _c('div', [_c('van-panel', {
+    attrs: {
+      "title": "标题",
+      "desc": "描述信息",
+      "status": "状态",
+      "mpcomid": '13'
+    }
+  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("最新动态")]), _vm._v(" "), _c('div', [_c('van-panel', {
+    attrs: {
+      "title": "标题",
+      "desc": "描述信息",
+      "status": "状态",
+      "mpcomid": '14'
+    }
+  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('h3', [_vm._v("连锁加盟")]), _vm._v(" "), _c('div', [_c('van-panel', {
+    attrs: {
+      "title": "标题",
+      "desc": "描述信息",
+      "status": "状态",
+      "mpcomid": '15'
+    }
+  }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('a', {
+    staticClass: "counter",
+    attrs: {
+      "href": "/pages/counter/main"
+    }
+  }, [_vm._v("去往Vuex示例页面")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('van-tabbar', {
+    attrs: {
+      "active": _vm.active,
+      "mpcomid": '17'
+    }
+  }, _vm._l((_vm.list), function(item, key) {
+    return _c('van-tabbar-item', {
+      key: key,
+      attrs: {
+        "icon": item.iconPath,
+        "eventid": '0_' + key,
+        "mpcomid": '16_' + key
+      },
+      on: {
+        "click": function($event) {
+          _vm.tabChange(item.pagePath)
+        }
+      }
+    }, [_vm._v(_vm._s(item.text))])
+  }))], 1)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "all"
+  }, [_c('div', {
+    staticClass: "left"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "right"
+  })])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-13520ffa", esExports)
+  }
+}
+
 /***/ })
 
-},[66]);
+},[20]);
