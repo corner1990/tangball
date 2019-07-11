@@ -2,7 +2,6 @@
   <div>
     <Info />
     <UserOperList />
-    <h3>{{name}}</h3>
     <van-tabbar :active="active">
       <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in UserList" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
     </van-tabbar>
