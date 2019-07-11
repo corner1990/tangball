@@ -1,6 +1,6 @@
 <import src="/components/usercenter/userinfo.vue.wxml" />
-<import src="/components/usercenter/userCard.vue.wxml" /><template name="6e27acf4">
-  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="09060807"></template> <template data="{{...$root[$kk+'1'], $root}}" is="01c78189"></template>
+<import src="/components/usercenter/userCard.vue.wxml" /><template name="0df832f8">
+  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="0fb38276"></template> <template data="{{...$root[$kk+'1'], $root}}" is="1e308f72"></template>
     <van-tabbar active="{{active}}" class="_van-tabbar data-v-55b86a25">
       <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{UserList}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-55b86a25">{{item.text}}</van-tabbar-item>
     </van-tabbar>

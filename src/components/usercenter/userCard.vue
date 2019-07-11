@@ -12,7 +12,7 @@ export default {
       list: [
         {
           text: '我的赛事',
-          path: '/pages/usercenter/my-event',
+          path: '/pages/myevent/main',
           icon: 'gem-o'
         },
         {

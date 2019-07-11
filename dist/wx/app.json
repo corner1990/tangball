@@ -6,7 +6,7 @@
     "pages/event/main",
     "pages/tanghome/main",
     "pages/usercenter/main",
-    "pages/usercenter/my-event"
+    "pages/myevent/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

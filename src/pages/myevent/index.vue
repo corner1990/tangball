@@ -1,6 +1,6 @@
 <template>
   <div>
-    我的 赛事
+    我的赛事12131
   </div>
 </template>
 
