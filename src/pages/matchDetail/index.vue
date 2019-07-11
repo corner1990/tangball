@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div class="FS24 TAC LH36">XXX首届唐球赛1</div>
+    <div class="FS24 TAC LH36">XXX首届唐球赛12345</div>
   <van-steps :steps="steps" :active="activeStep"  active-color="#f44"/>
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09"/>

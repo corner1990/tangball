@@ -1,6 +1,6 @@
 <template name="95b0c310">
   <view class="_div data-v-e5e3ffb2 main-wrap">
-    <view class="_div data-v-e5e3ffb2 FS24 TAC LH36">XXX首届唐球赛1</view>
+    <view class="_div data-v-e5e3ffb2 FS24 TAC LH36">XXX首届唐球赛12345</view>
     <van-steps steps="{{steps}}" active="{{activeStep}}" active-color="#f44" class="_van-steps data-v-e5e3ffb2"></van-steps>
     <van-cell-group title="赛事信息" class="_van-cell-group data-v-e5e3ffb2">
       <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09" class="_van-cell data-v-e5e3ffb2"></van-cell>

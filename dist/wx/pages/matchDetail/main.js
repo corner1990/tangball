@@ -219,7 +219,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "main-wrap"
   }, [_c('div', {
     staticClass: "FS24 TAC LH36"
-  }, [_vm._v("XXX首届唐球赛1")]), _vm._v(" "), _c('van-steps', {
+  }, [_vm._v("XXX首届唐球赛12345")]), _vm._v(" "), _c('van-steps', {
     attrs: {
       "steps": _vm.steps,
       "active": _vm.activeStep,
