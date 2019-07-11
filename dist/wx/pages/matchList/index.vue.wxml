@@ -1,0 +1,24 @@
+<template name="9a60c676">
+  <view class="_div data-v-609c9ef4 main-wrap">
+    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-609c9ef4"></van-search>
+    <view class="_div data-v-609c9ef4 card">
+      <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
+        <van-tab title="近期" class="_van-tab data-v-609c9ef4">
+          <van-card tag="111" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
+        </van-tab>
+        <van-tab title="全国" class="_van-tab data-v-609c9ef4">
+          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
+        </van-tab>
+        <van-tab title="加盟商" class="_van-tab data-v-609c9ef4">
+          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
+        </van-tab>
+        <van-tab title="全部" class="_van-tab data-v-609c9ef4">
+          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
+        </van-tab>
+      </van-tabs>
+    </view>
+    <van-tabbar active="{{active}}" class="_van-tabbar data-v-609c9ef4">
+      <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-609c9ef4">{{item.text}}</van-tabbar-item>
+    </van-tabbar>
+  </view>
+</template>
