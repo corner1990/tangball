@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/matchList/main",
+    "pages/matchDetail/main",
     "pages/index/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
     "pages/tanghome/main",
-    "pages/usercenter/main",
-    "pages/usercenter/my-event"
+    "pages/usercenter/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

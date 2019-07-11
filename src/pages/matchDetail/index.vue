@@ -1,44 +1,20 @@
 <template>
   <div class="main-wrap">
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
-    <div class="card">
-      <van-tabs :active="active" bind:change="onChange">
-        <van-tab title="近期">
-          <van-card
-            :tag="item.tag"
-            :desc="item.desc"
-            :title="item.title"
-            :thumb="item.thumb"
-            :price="item.price"
-            :thumb-link="'/pages/matchDetail/main?id='+item.id"
-            v-for="(item,i) in matchlist"
-            :key="i"
-          >
-            <view slot="footer">
-              <van-button size="mini" class="MR10">去报名</van-button>
-              <van-button size="mini">查看详情</van-button>
-            </view>
-          </van-card>
-        </van-tab>
-        <van-tab title="全国">
-          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-        <van-tab title="加盟商">
-          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-        <van-tab title="全部">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-      </van-tabs>
-    </div>
+    <div class="FS24 TAC LH36">XXX首届唐球赛1</div>
+  <van-steps :steps="steps" :active="activeStep"  active-color="#f44"/>
+    <van-cell-group title="赛事信息">
+      <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09"/>
+      <van-cell title="距报名截止时间" value="5天6小时26分"/>
+      <van-cell title="举办地点" value="深圳南山XXXXX"/>
+      <van-cell title="报名费" value="200元"/>
+      <van-cell title="已报名人数" value="567人"/>
+    </van-cell-group>
+    <van-cell-group title="分组2">
+      <van-cell title="单元格" value="内容"/>
+    </van-cell-group>
 
-
-    <van-steps
-  :steps="steps"
-  :active="activeStep"
-  direction="vertical"
-  active-color="#f44"
-/>
+    <van-button size="large" square type="primary">立即报名</van-button>
+  
 
     <van-tabbar :active="active">
       <van-tabbar-item
@@ -56,37 +32,34 @@ import card from '@/components/card'
 export default {
   data() {
     return {
-      activeStep:0,
+      activeStep: 0,
       steps: [
-      {
-        text: '步骤一',
-        desc: '描述信息'
-      },
-      {
-        text: '步骤二',
-        desc: '描述信息'
-      },
-      {
-        text: '步骤三',
-        desc: '描述信息'
-      },
-      {
-        text: '步骤四',
-        desc: '描述信息'
-      }
-    ],
-       matchlist: [
         {
-         'id': 1,
+          text: '步骤一',
+          desc: '描述信息'
+        },
+        {
+          text: '步骤二',
+          desc: '描述信息'
+        },
+        {
+          text: '步骤三',
+          desc: '描述信息'
+        },
+        {
+          text: '步骤四',
+          desc: '描述信息'
+        }
+      ],
+      matchlist: [
+        {
           'title': '首届唐球锦标赛1',
           'desc': '这是首届唐球锦标赛',
           'tag': '可报名',
           'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
           'price': 500,
-          'thumbLink':  "pages/matchDetail/main",
         },
-         {
-           'id': 2,
+        {
           'title': '首届唐球锦标赛2',
           'desc': '这是首届唐球锦标赛',
           'tag': '可报名',
