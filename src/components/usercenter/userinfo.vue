@@ -9,7 +9,7 @@
 </template>
 
 <script>
-console.log('info')
+
 export default {
   props: ['用户信息']
 }

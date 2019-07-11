@@ -5,7 +5,8 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/tanghome/main",
-    "pages/usercenter/main"
+    "pages/usercenter/main",
+    "pages/usercenter/my-event"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -51,6 +52,7 @@
     "van-tabbar": "/static/vant/tabbar/index",
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
-    "van-col": "/static/vant/col/index"
+    "van-col": "/static/vant/col/index",
+    "van-icon": "/static/vant/icon/index"
   }
 }
