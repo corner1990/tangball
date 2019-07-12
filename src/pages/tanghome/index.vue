@@ -8,7 +8,7 @@
     >
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" width="355" height="150">
+          <image :src="item" class="slide-image" width="355" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -24,12 +24,7 @@
 
 <script>
 /* eslint-disable */
-
-
-
 import mytabbar from '@/components/mytabbar/mytabbar'
-
-
 export default {
   components: {
     mytabbar

@@ -6,12 +6,12 @@
         <van-tab title="近期">
           <van-card
             :tag="item.tag"
-            :desc="item.desc"
-            :title="item.title"
+            :desc="item.remark"
+            :title="item.matchName"
             :thumb="item.thumb"
-            :price="'报名费'+item.price"
+            :price="'报名费'+item.registrationFee"
             origin-price="1000"
-            :thumb-link="'/pages/matchDetail/main?id='+item.id"
+            :thumb-link="'/pages/matchDetail/main?id='+item.P1"
             v-for="(item,i) in matchlist"
             :key="i"
           >
@@ -62,23 +62,16 @@ export default {
         }
       ],
       matchlist: [
-        {
-          'id': 1,
-          'title': '首届唐球锦标赛1',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-          'price': 500,
-          'thumbLink': "pages/matchDetail/main",
-        },
-        {
-          'id': 2,
-          'title': '首届唐球锦标赛2',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-
-        },
+        // {
+        //   'id': 1,
+        //   'title': '首届唐球锦标赛1',
+        //   'desc': '这是首届唐球锦标赛',
+        //   'tag': '可报名',
+        //   'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
+        //   'price': 500,
+        //   'thumbLink': "pages/matchDetail/main",
+        // },
+        
       ],
 
 

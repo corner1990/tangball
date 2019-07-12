@@ -4,7 +4,7 @@
     <view class="_div data-v-609c9ef4">
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
         <van-tab title="近期" class="_van-tab data-v-609c9ef4">
-          <van-card tag="{{item.tag}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{item.thumb}}" price="{{'报名费'+item.price}}" origin-price="1000" thumb-link="{{'/pages/matchDetail/main?id='+item.id}}" wx:key="i" key="{{i}}" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item" class="_van-card data-v-609c9ef4">
+          <van-card tag="{{item.tag}}" desc="{{item.remark}}" title="{{item.matchName}}" thumb="{{item.thumb}}" price="{{'报名费'+item.registrationFee}}" origin-price="1000" thumb-link="{{'/pages/matchDetail/main?id='+item.P1}}" wx:key="i" key="{{i}}" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item" class="_van-card data-v-609c9ef4">
             <view slot="footer" class="_view data-v-609c9ef4">
               <van-button size="mini" class="_van-button data-v-609c9ef4 MR10">去报名</van-button>
               <van-button size="mini" class="_van-button data-v-609c9ef4">查看详情</van-button>

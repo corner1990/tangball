@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-tabbar :active="activeNeed" active-color="#3a0" inactive-color="#f60">
+    <van-tabbar :active="activeNeed" active-color="#3a0" inactive-color="#333">
       <van-tabbar-item
         :icon="item.iconPath"
         v-for="(item, key) in list"
@@ -19,7 +19,7 @@ export default {
     return {
       list: [
         {
-          'text': '首页1',
+          'text': '首页',
           'pagePath': '../index/main',
           'iconPath': 'home-o'
         },

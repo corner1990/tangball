@@ -1,4 +1,4 @@
-<template name="77e9fed2">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="77e9fed2">
   <view class="_div data-v-13520ffa main-wrap">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-13520ffa">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -69,9 +69,6 @@
     <view class="_div data-v-13520ffa all">
       <view class="_div data-v-13520ffa left"></view>
       <view class="_div data-v-13520ffa right"></view>
-    </view>
-    <van-tabbar active="{{active}}" class="_van-tabbar data-v-13520ffa">
-      <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-13520ffa">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    </view> <template data="{{...$root[$kk+'16'], $root}}" is="59cf42a4"></template>
   </view>
 </template>

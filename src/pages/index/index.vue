@@ -103,7 +103,7 @@
 </template>
 
 <script>
-
+/* eslint-disable */
 
 
 import mytabbar from '@/components/mytabbar/mytabbar'
