@@ -2,14 +2,22 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([4],{
 
+<<<<<<< HEAD
 /***/ 44:
+=======
+/***/ 45:
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(45);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(46);
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 
 
 
@@ -25,6 +33,7 @@ app.$mount();
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35,6 +44,18 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(46)
+=======
+/***/ 46:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5fed356c_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(49);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(47)
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,14 +100,22 @@ if (false) {(function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 46:
+=======
+/***/ 47:
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 47:
+=======
+/***/ 48:
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -159,7 +188,11 @@ if (false) {(function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 48:
+=======
+/***/ 49:
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -229,4 +262,8 @@ if (false) {
 
 /***/ })
 
+<<<<<<< HEAD
 },[44]);
+=======
+},[45]);
+>>>>>>> b43afa40e9b0060ef45e5f512813e2029b4ba99f

@@ -4,7 +4,12 @@
     <view class="_div data-v-609c9ef4 card">
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
         <van-tab title="近期" class="_van-tab data-v-609c9ef4">
-          <van-card tag="111" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
+          <van-card tag="{{item.tag}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{item.thumb}}" price="{{item.price}}" thumb-link="{{'/pages/matchDetail/main?id='+item.id}}" wx:key="i" key="{{i}}" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item" class="_van-card data-v-609c9ef4">
+            <view slot="footer" class="_view data-v-609c9ef4">
+              <van-button size="mini" class="_van-button data-v-609c9ef4 MR10">去报名</van-button>
+              <van-button size="mini" class="_van-button data-v-609c9ef4">查看详情</van-button>
+            </view>
+          </van-card>
         </van-tab>
         <van-tab title="全国" class="_van-tab data-v-609c9ef4">
           <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
@@ -17,6 +22,7 @@
         </van-tab>
       </van-tabs>
     </view>
+    <van-steps steps="{{steps}}" active="{{activeStep}}" direction="vertical" active-color="#f44" class="_van-steps data-v-609c9ef4"></van-steps>
     <van-tabbar active="{{active}}" class="_van-tabbar data-v-609c9ef4">
       <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-609c9ef4">{{item.text}}</van-tabbar-item>
     </van-tabbar>
