@@ -2,7 +2,7 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([2],{
 
-/***/ 122:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104,26 +104,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "active-color": "#f44",
       "mpcomid": '12'
     }
-  }), _vm._v(" "), _c('van-tabbar', {
+  }), _vm._v(" "), _c('UserOperList', {
     attrs: {
-      "active": _vm.active,
+      "mpcomid": '13'
+    }
+  }), _vm._v(" "), _c('mytabbar', {
+    attrs: {
       "mpcomid": '14'
     }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '13_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  }))], 1)
+  })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -166,7 +155,7 @@ app.$mount();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(126);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -226,8 +215,12 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_vant_dialog_dialog__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_usercenter_userCard__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_card__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__ = __webpack_require__(86);
+//
+//
 //
 //
 //
@@ -279,7 +272,12 @@ if (false) {(function () {
 /* eslint-disable */
 
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    card: __WEBPACK_IMPORTED_MODULE_1__components_card__["a" /* default */], UserOperList: __WEBPACK_IMPORTED_MODULE_0__components_usercenter_userCard__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], Dialog: __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__["a" /* default */]
+  },
   data: function data() {
     return {
       activeStep: 0,
@@ -309,8 +307,8 @@ if (false) {(function () {
         'title': '首届唐球锦标赛2',
         'desc': '这是首届唐球锦标赛',
         'tag': '可报名',
-        'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-        'aaaa': '1111'
+        'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg'
+
       }],
       list: [{
         'text': '首页',
@@ -339,10 +337,6 @@ if (false) {(function () {
   },
 
 
-  components: {
-    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */]
-  },
-
   methods: {
     onShow: function onShow() {
       this.show = true;
@@ -366,8 +360,9 @@ if (false) {(function () {
     }
   },
   created: function created() {
+
     // alert("created");//
-    __WEBPACK_IMPORTED_MODULE_1__static_vant_dialog_dialog__["a" /* default */].alert({
+    __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__["a" /* default */].alert({
       title: '标题',
       message: '弹窗内容'
     }).then(function () {
@@ -382,9 +377,163 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_mytabbar_vue__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4b531066_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_mytabbar_vue__ = __webpack_require__(85);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(83)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_mytabbar_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4b531066_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_mytabbar_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\components\\mytabbar\\mytabbar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] mytabbar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4b531066", Component.options)
+  } else {
+    hotAPI.reload("data-v-4b531066", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ 83:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 84:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* eslint-disable */
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: ['text'],
+  data: function data() {
+    return {
+      list: [{
+        'text': '首页1',
+        'pagePath': '../index/main',
+        'iconPath': 'home-o'
+      }, {
+        'text': '唐球馆',
+        'pagePath': '../tanghome/main',
+        'iconPath': 'fire-o'
+      }, {
+        'text': '活动',
+        'pagePath': '../event/main',
+        'iconPath': 'medel-o'
+      }, {
+        'text': '个人中心',
+        'pagePath': '../usercenter/main',
+        'iconPath': 'friends-o'
+      }],
+      indicatorDots: false,
+      autoplay: false,
+      interval: 5000,
+      duration: 1000,
+      active1111: 0,
+      value: '' // 搜索value
+    };
+  }
+});
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {}, [_vm._v("自定义导航11111")]), _vm._v(" "), _c('van-tabbar', {
+    attrs: {
+      "active": _vm.active1111,
+      "mpcomid": '1'
+    }
+  }, _vm._l((_vm.list), function(item, key) {
+    return _c('van-tabbar-item', {
+      key: key,
+      attrs: {
+        "icon": item.iconPath,
+        "eventid": '0_' + key,
+        "mpcomid": '0_' + key
+      },
+      on: {
+        "click": function($event) {
+          _vm.tabChange(item.pagePath)
+        }
+      }
+    }, [_vm._v(_vm._s(item.text))])
+  }))], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4b531066", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
 
 

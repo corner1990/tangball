@@ -12,13 +12,13 @@
       <view class="_h3 data-v-13520ffa">赛事</view>
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-13520ffa">
         <van-tab title="近期" class="_van-tab data-v-13520ffa">
-          <van-card tag="111" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
+          <van-card desc="描述信息" title="商品标题" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
         <van-tab title="全国" class="_van-tab data-v-13520ffa">
-          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
+          <van-card tag="222" desc="描述信息" title="商品标题" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
         <van-tab title="加盟商" class="_van-tab data-v-13520ffa">
-          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>
+          <van-card tag="333" desc="描述信息" title="商品标题" class="_van-card data-v-13520ffa"></van-card>
         </van-tab>
         <van-tab title="全部" class="_van-tab data-v-13520ffa">
           <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-13520ffa"></van-card>

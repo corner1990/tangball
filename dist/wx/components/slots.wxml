@@ -2,3 +2,5 @@
 <import src="/components/usercenter/userinfo.vue.wxml" />
 <import src="/components/usercenter/userCard.vue.wxml" />
 <import src="/components/usercenter/cardItem.vue.wxml" />
+<import src="/components/usercenter/userCard.vue.wxml" />
+<import src="/components/mytabbar/mytabbar.vue.wxml" />

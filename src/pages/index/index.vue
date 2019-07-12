@@ -19,10 +19,10 @@
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="近期">
           <van-card
-            tag="111"
+       
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+           
           />
         </van-tab>
         <van-tab title="全国">
@@ -30,7 +30,7 @@
             tag="222"
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+           
           />
         </van-tab>
         <van-tab title="加盟商">
@@ -38,7 +38,7 @@
             tag="333"
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+       
           />
         </van-tab>
         <van-tab title="全部">

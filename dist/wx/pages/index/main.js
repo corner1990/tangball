@@ -337,10 +337,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('van-card', {
     attrs: {
-      "tag": "111",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
       "mpcomid": '2'
     }
   })], 1), _vm._v(" "), _c('van-tab', {
@@ -353,7 +351,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "tag": "222",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
       "mpcomid": '4'
     }
   })], 1), _vm._v(" "), _c('van-tab', {
@@ -366,7 +363,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "tag": "333",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
       "mpcomid": '6'
     }
   })], 1), _vm._v(" "), _c('van-tab', {

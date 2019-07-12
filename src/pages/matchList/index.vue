@@ -35,21 +35,28 @@
 
     <van-steps :steps="steps" :active="activeStep" direction="vertical" active-color="#f44"/>
 
-    <van-tabbar :active="active">
+    <!-- <van-tabbar :active="active">
       <van-tabbar-item
         :icon="item.iconPath"
         v-for="(item, key) in list"
         :key="key"
         @click="tabChange(item.pagePath)"
       >{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    </van-tabbar> -->
+    <UserOperList />
+    <mytabbar class="" ></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
+import UserOperList from '@/components/usercenter/userCard'
 import card from '@/components/card'
+import mytabbar from '@/components/mytabbar/mytabbar'
 import Dialog from '../../../static/vant/dialog/dialog';
 export default {
+   components: {
+    card,UserOperList,mytabbar,Dialog
+  },
   data() {
     return {
       activeStep: 0,
@@ -87,7 +94,7 @@ export default {
           'desc': '这是首届唐球锦标赛',
           'tag': '可报名',
           'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-          'aaaa': '1111',
+       
         },
       ],
       list: [
@@ -121,9 +128,7 @@ export default {
     }
   },
 
-  components: {
-    card
-  },
+ 
 
   methods: {
     onShow() {
@@ -146,6 +151,7 @@ export default {
     }
   },
   created() {
+    
     // alert("created");//
     Dialog.alert({
       title: '标题',

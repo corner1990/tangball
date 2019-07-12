@@ -2,3 +2,25 @@
 .card {
   padding: 20rpx;
 }
+.user-list {
+  position: relative;
+  z-index: 5;
+  margin: -80rpx 40rpx 0;
+  background: #fff;
+  padding-top: 40rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 6rpx 12rpx #ddd;
+}
+.card {
+  width: 140rpx;
+  height: 140rpx;
+  margin: 0 24rpx 40rpx;
+  text-align: center;
+  display: inline-block;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 4rpx #ddd;
+  border-radius: 40rpx;
+}
+.card-title {
+  font-size: 28rpx;
+}
