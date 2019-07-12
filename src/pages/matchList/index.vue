@@ -32,7 +32,7 @@
 </template>
 <script>
 /* eslint-disable */
-import { get } from '@/utils/request'
+import { get,post } from '@/utils/request'
 import card from '@/components/card'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import Dialog from '../../../static/vant/dialog/dialog';
@@ -71,7 +71,7 @@ export default {
         //   'price': 500,
         //   'thumbLink': "pages/matchDetail/main",
         // },
-        
+
       ],
 
 
@@ -93,26 +93,10 @@ export default {
      */
 
   },
-  created() {
-
-    console.log("created标题标题标题标题");
-
-    get('http://120.76.160.41:3000/crossList?page=tangball_match').then(res => {
-      console.log('res', res)
-      let { data } = res;
-      this.matchlist = data.list;
-
-
-    })
-
-
-    // alert("created");//
-    Dialog.alert({
-      title: '标题',
-      message: '弹窗内容'
-    }).then(() => {
-      // on close
-    });
+  async created() {
+    //ajax请求接口数据
+   let { data }= await post(global.PUB.domain + '/crossList?page=tangball_match');
+   this.matchlist = data.list;
 
   }
 }
