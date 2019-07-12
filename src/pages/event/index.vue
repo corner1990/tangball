@@ -1,5 +1,12 @@
 <template>
-  <div>赛事活动
+  <div>
+    赛事活动
+    <van-tabs active="tabActive" bind:change="onChange">
+      <van-tab title="近期赛事">内容 1</van-tab>
+      <van-tab title="全国性赛事">内容 2</van-tab>
+      <van-tab title="加盟商赛事">内容 3</van-tab>
+      <van-tab title="全部赛事">内容 4</van-tab>
+    </van-tabs>
     <van-tabbar :active="active">
       <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
     </van-tabbar>
@@ -10,6 +17,7 @@
 export default {
   data: {
     active: 2,
+    tabActive: 1,
     list: [
       {
         'text': '首页',

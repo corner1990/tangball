@@ -1,10 +1,12 @@
 {
   "pages": [
+    "pages/matchList/main",
     "pages/index/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
     "pages/tanghome/main",
+    "pages/tanghomeDetail/main",
     "pages/usercenter/main",
     "pages/myevent/main"
   ],
@@ -53,6 +55,8 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-    "van-icon": "/static/vant/icon/index"
+    "van-icon": "/static/vant/icon/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index"
   }
 }

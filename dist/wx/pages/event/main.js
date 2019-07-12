@@ -1,6 +1,6 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([7],{
+global.webpackJsonpMpvue([8],{
 
 /***/ 15:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -98,10 +98,18 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: {
     active: 2,
+    tabActive: 1,
     list: [{
       'text': '首页',
       'pagePath': '../index/main',
@@ -143,10 +151,36 @@ if (false) {(function () {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("赛事活动\n  "), _c('van-tabbar', {
+  return _c('div', [_vm._v("\n  赛事活动\n  "), _c('van-tabs', {
+    attrs: {
+      "active": "tabActive",
+      "bind:change": "onChange",
+      "mpcomid": '4'
+    }
+  }, [_c('van-tab', {
+    attrs: {
+      "title": "近期赛事",
+      "mpcomid": '0'
+    }
+  }, [_vm._v("内容 1")]), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全国性赛事",
+      "mpcomid": '1'
+    }
+  }, [_vm._v("内容 2")]), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "加盟商赛事",
+      "mpcomid": '2'
+    }
+  }, [_vm._v("内容 3")]), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全部赛事",
+      "mpcomid": '3'
+    }
+  }, [_vm._v("内容 4")])], 1), _vm._v(" "), _c('van-tabbar', {
     attrs: {
       "active": _vm.active,
-      "mpcomid": '1'
+      "mpcomid": '6'
     }
   }, _vm._l((_vm.list), function(item, key) {
     return _c('van-tabbar-item', {
@@ -154,7 +188,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "icon": item.iconPath,
         "eventid": '0_' + key,
-        "mpcomid": '0_' + key
+        "mpcomid": '5_' + key
       },
       on: {
         "click": function($event) {

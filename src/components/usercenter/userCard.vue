@@ -11,6 +11,11 @@ export default {
     return {
       list: [
         {
+          text: '赛事列表',
+          path: '/pages/matchList/main',
+          icon: 'gem-o'
+        },
+        {
           text: '我的赛事',
           path: '/pages/myevent/main',
           icon: 'gem-o'
