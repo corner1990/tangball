@@ -98,16 +98,23 @@
         <div class="right">
         </div>
     </div>
-    <van-tabbar :active="active">
-      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    <mytabbar ></mytabbar>
   </div>
 </template>
 
 <script>
+
+
+
+import mytabbar from '@/components/mytabbar/mytabbar'
+
+
 import card from '@/components/card'
 // import { get } from '@/utils/request'
 export default {
+  components: {
+    card,mytabbar
+  },
   data () {
     return {
       motto: 'Hello miniprograme',
@@ -115,28 +122,7 @@ export default {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      list: [
-        {
-          'text': '首页',
-          'pagePath': '../index/main',
-          'iconPath': 'home-o'
-        },
-        {
-          'text': '唐球馆',
-          'pagePath': '../tanghome/main',
-          'iconPath': 'fire-o'
-        },
-        {
-          'text': '活动',
-          'pagePath': '../event/main',
-          'iconPath': 'medel-o'
-        },
-        {
-          'text': '个人中心',
-          'pagePath': '../usercenter/main',
-          'iconPath': 'friends-o'
-        }
-      ],
+    
       radio: 1,
       imgUrls: [
         'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
@@ -147,14 +133,12 @@ export default {
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 0,
+    
       value: '' // 搜索value
     }
   },
 
-  components: {
-    card
-  },
+  
 
   methods: {
     bindViewTap () {

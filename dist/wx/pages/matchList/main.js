@@ -1,8 +1,8 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([2],{
+global.webpackJsonpMpvue([1],{
 
-/***/ 126:
+/***/ 134:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,18 +12,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('van-search', {
     attrs: {
       "value": _vm.value,
-      "placeholder": "请输入搜索关键词12345",
+      "placeholder": "请输入搜索关键词",
       "use-action-slot": "",
       "bind:search": "onSearch",
       "mpcomid": '0'
     }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "card"
-  }, [_c('van-tabs', {
+  }), _vm._v(" "), _c('div', [_c('van-tabs', {
     attrs: {
       "active": _vm.active,
       "bind:change": "onChange",
-      "mpcomid": '11'
+      "mpcomid": '8'
     }
   }, [_c('van-tab', {
     attrs: {
@@ -60,57 +58,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "全国",
-      "mpcomid": '6'
-    }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "222",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
       "mpcomid": '5'
     }
-  })], 1), _vm._v(" "), _c('van-tab', {
+  }, [_vm._v("全国")]), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "加盟商",
-      "mpcomid": '8'
+      "mpcomid": '6'
     }
-  }, [_c('van-card', {
-    attrs: {
-      "tag": "333",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '7'
-    }
-  })], 1), _vm._v(" "), _c('van-tab', {
+  }, [_vm._v("加盟商")]), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "全部",
-      "mpcomid": '10'
+      "mpcomid": '7'
     }
-  }, [_c('van-card', {
+  }, [_vm._v("全部")])], 1)], 1), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "tag": "444",
-      "desc": "描述信息",
-      "title": "商品标题",
-      "thumb": "111",
       "mpcomid": '9'
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c('van-steps', {
-    attrs: {
-      "steps": _vm.steps,
-      "active": _vm.activeStep,
-      "direction": "vertical",
-      "active-color": "#f44",
-      "mpcomid": '12'
-    }
-  }), _vm._v(" "), _c('UserOperList', {
-    attrs: {
-      "mpcomid": '13'
-    }
-  }), _vm._v(" "), _c('mytabbar', {
-    attrs: {
-      "mpcomid": '14'
     }
   })], 1)
 }
@@ -127,14 +89,109 @@ if (false) {
 
 /***/ }),
 
-/***/ 78:
+/***/ 178:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return get; });
+/* unused harmony export post */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_qs__);
+/* unused harmony reexport axios */
+
+
+
+
+// 时间戳
+// const NewTimeStamp = new Date().getTime()
+
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.timeout = 30000;
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.adapter = function (config) {
+  return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+    // console.log(config,'adapter')
+    var data = config.method === 'get' ? config.params : __WEBPACK_IMPORTED_MODULE_2_qs___default.a.stringify(config.data);
+    // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
+    wx.request({
+      url: config.url,
+      method: config.method,
+      data: data,
+      success: function success(res) {
+        return resolve(res);
+      },
+      fail: function fail(err) {
+        return reject(err);
+      }
+    });
+  });
+};
+
+// axios 拦截器
+function Instance() {
+  // 请求拦截器
+  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.request.use(function (request) {
+    // request.headers.token = 'token=11124654654687';
+    // console.log(request) // 请求成功
+    return request;
+  }, function (error) {
+    // console.log(error); // 请求失败
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
+  });
+
+  // 添加响应拦截器
+  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.response.use(function (response) {
+    console.log(response.data.data); // 响应成功
+    return response;
+  }, function (error) {
+    // console.log(error); // 响应失败
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
+  });
+}
+
+Instance();
+
+/**
+ * @desc get请求
+ * @param { String } url 接口url
+ * @param { object } params 请求参数
+ * @return { Promise } 然后一个promise对象
+ */
+function get(url, params) {
+  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+    method: 'get',
+    url: url,
+    params: params
+  });
+}
+/**
+ * @desc post请求
+ * @param { String } url 接口url
+ * @param { object } params 请求参数
+ * @return { Promise } 然后一个promise对象
+ */
+function post(url, params) {
+  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+    method: 'post',
+    url: url,
+    data: params
+  });
+}
+
+
+/***/ }),
+
+/***/ 79:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(80);
 
 
 
@@ -150,16 +207,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 79:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(134);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(80)
+  __webpack_require__(81)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -204,38 +261,21 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 81:
+/***/ 82:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_usercenter_userCard__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_request__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_card__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__ = __webpack_require__(86);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__ = __webpack_require__(94);
 //
 //
 //
@@ -276,7 +316,7 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    card: __WEBPACK_IMPORTED_MODULE_1__components_card__["a" /* default */], UserOperList: __WEBPACK_IMPORTED_MODULE_0__components_usercenter_userCard__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], Dialog: __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__["a" /* default */]
+    card: __WEBPACK_IMPORTED_MODULE_1__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], Dialog: __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__["a" /* default */]
   },
   data: function data() {
     return {
@@ -310,32 +350,10 @@ if (false) {(function () {
         'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg'
 
       }],
-      list: [{
-        'text': '首页',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      }, {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      }, {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      }, {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }],
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-      active: 0,
+
       value: '' // 搜索value
     };
   },
-
 
   methods: {
     onShow: function onShow() {
@@ -347,19 +365,19 @@ if (false) {(function () {
     /**
      * @desc 搜索回调
      */
-    onSearch: function onSearch() {},
-
-    /**
-     * @desc 赛事切换回调
-     */
-    tabChange: function tabChange(url) {
-      console.log(url);
-      wx.switchTab({
-        url: url
-      });
-    }
+    onSearch: function onSearch() {}
   },
   created: function created() {
+    var _this = this;
+
+    console.log("created标题标题标题标题");
+
+    Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* get */])('http://120.76.160.41:3000/crossList?page=tangball_match').then(function (res) {
+      console.log('res', res);
+      var data = res.data;
+
+      _this.matchlist = data.list;
+    });
 
     // alert("created");//
     __WEBPACK_IMPORTED_MODULE_3__static_vant_dialog_dialog__["a" /* default */].alert({
@@ -373,167 +391,13 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 82:
+/***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_mytabbar_vue__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4b531066_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_mytabbar_vue__ = __webpack_require__(85);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(83)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_mytabbar_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4b531066_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_mytabbar_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src\\components\\mytabbar\\mytabbar.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] mytabbar.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4b531066", Component.options)
-  } else {
-    hotAPI.reload("data-v-4b531066", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 83:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 84:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* eslint-disable */
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: ['text'],
-  data: function data() {
-    return {
-      list: [{
-        'text': '首页1',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      }, {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      }, {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      }, {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }],
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-      active1111: 0,
-      value: '' // 搜索value
-    };
-  }
-});
-
-/***/ }),
-
-/***/ 85:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {}, [_vm._v("自定义导航11111")]), _vm._v(" "), _c('van-tabbar', {
-    attrs: {
-      "active": _vm.active1111,
-      "mpcomid": '1'
-    }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '0_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  }))], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4b531066", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 86:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
 
 
@@ -600,4 +464,4 @@ Dialog.resetDefaultOptions();
 
 /***/ })
 
-},[78]);
+},[79]);

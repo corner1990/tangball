@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="" >自定义导航11111</div>
-     <van-tabbar :active="active1111">
-
+    <van-tabbar :active="activeNeed" active-color="#3a0" inactive-color="#f60">
       <van-tabbar-item
         :icon="item.iconPath"
         v-for="(item, key) in list"
@@ -16,8 +14,8 @@
 <script>
 /* eslint-disable */
 export default {
-  props: ['text'],
-  data:function(){
+  props: [ 'active'],
+  data: function () {
     return {
       list: [
         {
@@ -45,13 +43,24 @@ export default {
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active1111: 0,
+      activeNeed:this.active||0,
       value: '' // 搜索value
     }
-  }
+  },
+  methods: {
+
+    /**
+     * @desc 导航切换回调
+     */
+    tabChange(url) {
+      console.log(url)
+      wx.switchTab({
+        url
+      })
+    }
+  },
 }
 </script>
 
 <style>
-
 </style>

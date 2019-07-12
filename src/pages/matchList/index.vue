@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
-    <van-search :value="value" placeholder="请输入搜索关键词12345" use-action-slot bind:search="onSearch"/>
-    <div class="card">
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+    <div>
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="近期">
           <van-card
@@ -21,41 +21,24 @@
             </view>
           </van-card>
         </van-tab>
-        <van-tab title="全国">
-          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-        <van-tab title="加盟商">
-          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-        <van-tab title="全部">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
+        <van-tab title="全国">全国</van-tab>
+        <van-tab title="加盟商">加盟商</van-tab>
+        <van-tab title="全部">全部</van-tab>
       </van-tabs>
     </div>
 
-    <van-steps :steps="steps" :active="activeStep" direction="vertical" active-color="#f44"/>
-
-    <!-- <van-tabbar :active="active">
-      <van-tabbar-item
-        :icon="item.iconPath"
-        v-for="(item, key) in list"
-        :key="key"
-        @click="tabChange(item.pagePath)"
-      >{{item.text}}</van-tabbar-item>
-    </van-tabbar> -->
-    <UserOperList />
-    <mytabbar class="" ></mytabbar>
+    <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import UserOperList from '@/components/usercenter/userCard'
+import { get } from '@/utils/request'
 import card from '@/components/card'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import Dialog from '../../../static/vant/dialog/dialog';
 export default {
-   components: {
-    card,UserOperList,mytabbar,Dialog
+  components: {
+    card, mytabbar, Dialog
   },
   data() {
     return {
@@ -94,42 +77,14 @@ export default {
           'desc': '这是首届唐球锦标赛',
           'tag': '可报名',
           'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-       
+
         },
       ],
-      list: [
-        {
-          'text': '首页',
-          'pagePath': '../index/main',
-          'iconPath': 'home-o'
-        },
-        {
-          'text': '唐球馆',
-          'pagePath': '../tanghome/main',
-          'iconPath': 'fire-o'
-        },
-        {
-          'text': '活动',
-          'pagePath': '../event/main',
-          'iconPath': 'medel-o'
-        },
-        {
-          'text': '个人中心',
-          'pagePath': '../usercenter/main',
-          'iconPath': 'friends-o'
-        }
-      ],
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-      active: 0,
+
+
       value: '' // 搜索value
     }
   },
-
- 
-
   methods: {
     onShow() {
       this.show = true
@@ -143,15 +98,21 @@ export default {
     /**
      * @desc 赛事切换回调
      */
-    tabChange(url) {
-      console.log(url)
-      wx.switchTab({
-        url
-      })
-    }
+
   },
   created() {
-    
+
+    console.log("created标题标题标题标题");
+
+    get('http://120.76.160.41:3000/crossList?page=tangball_match').then(res => {
+      console.log('res', res)
+      let { data } = res;
+      this.matchlist = data.list;
+
+
+    })
+
+
     // alert("created");//
     Dialog.alert({
       title: '标题',

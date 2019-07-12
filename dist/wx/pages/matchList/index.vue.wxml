@@ -1,8 +1,7 @@
-<import src="/components/usercenter/userCard.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="9a60c676">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="7d8e17c3">
   <view class="_div data-v-609c9ef4 main-wrap">
-    <van-search value="{{value}}" placeholder="请输入搜索关键词12345" use-action-slot bind:search="onSearch" class="_van-search data-v-609c9ef4"></van-search>
-    <view class="_div data-v-609c9ef4 card">
+    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-609c9ef4"></van-search>
+    <view class="_div data-v-609c9ef4">
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
         <van-tab title="近期" class="_van-tab data-v-609c9ef4">
           <van-card tag="{{item.tag}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{item.thumb}}" price="{{'报名费'+item.price}}" origin-price="1000" thumb-link="{{'/pages/matchDetail/main?id='+item.id}}" wx:key="i" key="{{i}}" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item" class="_van-card data-v-609c9ef4">
@@ -12,17 +11,10 @@
             </view>
           </van-card>
         </van-tab>
-        <van-tab title="全国" class="_van-tab data-v-609c9ef4">
-          <van-card tag="222" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
-        </van-tab>
-        <van-tab title="加盟商" class="_van-tab data-v-609c9ef4">
-          <van-card tag="333" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
-        </van-tab>
-        <van-tab title="全部" class="_van-tab data-v-609c9ef4">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" class="_van-card data-v-609c9ef4"></van-card>
-        </van-tab>
+        <van-tab title="全国" class="_van-tab data-v-609c9ef4">全国</van-tab>
+        <van-tab title="加盟商" class="_van-tab data-v-609c9ef4">加盟商</van-tab>
+        <van-tab title="全部" class="_van-tab data-v-609c9ef4">全部</van-tab>
       </van-tabs>
-    </view>
-    <van-steps steps="{{steps}}" active="{{activeStep}}" direction="vertical" active-color="#f44" class="_van-steps data-v-609c9ef4"></van-steps> <template data="{{...$root[$kk+'13'], $root}}" is="0ef398bd"></template> <template data="{{...$root[$kk+'14'], $root}}" is="94ff113c"></template>
+    </view> <template data="{{...$root[$kk+'9'], $root}}" is="59cf42a4"></template>
   </view>
 </template>

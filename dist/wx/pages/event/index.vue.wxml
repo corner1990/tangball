@@ -1,6 +1,4 @@
-<template name="18da049c">
-  <view class="_div data-v-7e06a7cb">赛事活动 <van-tabbar active="{{active}}" class="_van-tabbar data-v-7e06a7cb">
-      <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-7e06a7cb">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+<template name="00cca2cc">
+  <view class="_div data-v-7e06a7cb">赛事活动 <mytabbar class="_mytabbar data-v-7e06a7cb"></mytabbar>
   </view>
 </template>
