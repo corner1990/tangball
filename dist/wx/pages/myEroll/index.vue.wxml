@@ -1,0 +1,17 @@
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="22211096">
+  <view class="_div data-v-2285b0c7 main-wrap">
+    <view class="_div data-v-2285b0c7 FS24 TAC LH36">XXX首届唐球赛12345</view>
+    <van-steps steps="{{steps}}" active="{{activeStep}}" active-color="#f44" class="_van-steps data-v-2285b0c7"></van-steps>
+    <van-cell-group title="赛事信息" class="_van-cell-group data-v-2285b0c7">
+      <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09" class="_van-cell data-v-2285b0c7"></van-cell>
+      <van-cell title="距报名截止时间" value="5天6小时26分" class="_van-cell data-v-2285b0c7"></van-cell>
+      <van-cell title="举办地点" value="深圳南山XXXXX" class="_van-cell data-v-2285b0c7"></van-cell>
+      <van-cell title="报名费" value="200元" class="_van-cell data-v-2285b0c7"></van-cell>
+      <van-cell title="已报名人数" value="567人" class="_van-cell data-v-2285b0c7"></van-cell>
+    </van-cell-group>
+    <van-cell-group title="分组2" class="_van-cell-group data-v-2285b0c7">
+      <van-cell title="单元格" value="内容" class="_van-cell data-v-2285b0c7"></van-cell>
+    </van-cell-group>
+    <van-button size="large" square type="primary" class="_van-button data-v-2285b0c7">立即报名</van-button> <template data="{{...$root[$kk+'10'], $root}}" is="59cf42a4"></template>
+  </view>
+</template>

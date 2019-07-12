@@ -2,199 +2,16 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([2],{
 
-/***/ 153:
+/***/ 100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
-
-
-var queue = [];
-function getContext() {
-    var pages = getCurrentPages();
-    return pages[pages.length - 1];
-}
-var Dialog = function Dialog(options) {
-    options = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, Dialog.currentOptions, options);
-    return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
-        var context = options.context || getContext();
-        var dialog = context.selectComponent(options.selector);
-        delete options.selector;
-        if (dialog) {
-            dialog.set(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({ onCancel: reject, onConfirm: resolve }, options));
-            queue.push(dialog);
-        } else {
-            console.warn('未找到 van-dialog 节点，请确认 selector 及 context 是否正确');
-        }
-    });
-};
-Dialog.defaultOptions = {
-    show: true,
-    title: '',
-    message: '',
-    zIndex: 100,
-    overlay: true,
-    className: '',
-    asyncClose: false,
-    messageAlign: '',
-    transition: 'scale',
-    selector: '#van-dialog',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消',
-    showConfirmButton: true,
-    showCancelButton: false,
-    closeOnClickOverlay: false,
-    confirmButtonOpenType: ''
-};
-Dialog.alert = Dialog;
-Dialog.confirm = function (options) {
-    return Dialog(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({ showCancelButton: true }, options));
-};
-Dialog.close = function () {
-    queue.forEach(function (dialog) {
-        dialog.close();
-    });
-    queue = [];
-};
-Dialog.stopLoading = function () {
-    queue.forEach(function (dialog) {
-        dialog.stopLoading();
-    });
-};
-Dialog.setDefaultOptions = function (options) {
-    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()(Dialog.currentOptions, options);
-};
-Dialog.resetDefaultOptions = function () {
-    Dialog.currentOptions = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, Dialog.defaultOptions);
-};
-Dialog.resetDefaultOptions();
-/* harmony default export */ __webpack_exports__["a"] = (Dialog);
-
-/***/ }),
-
-/***/ 160:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "main-wrap"
-  }, [_c('van-search', {
-    attrs: {
-      "value": _vm.value,
-      "placeholder": "请输入搜索关键词",
-      "use-action-slot": "",
-      "bind:search": "onSearch",
-      "mpcomid": '0'
-    }
-  }), _vm._v(" "), _c('div', [_c('van-tabs', {
-    attrs: {
-      "active": _vm.active,
-      "bind:change": "onChange",
-      "mpcomid": '8'
-    }
-  }, [_c('van-tab', {
-    attrs: {
-      "title": "近期",
-      "mpcomid": '4'
-    }
-  }, _vm._l((_vm.matchlist), function(item, i) {
-    return _c('van-card', {
-      key: i,
-      attrs: {
-        "tag": item.tag,
-        "desc": item.remark,
-        "title": item.matchName,
-        "thumb": item.thumb,
-        "price": '报名费' + item.registrationFee,
-        "origin-price": "1000",
-        "thumb-link": '/pages/matchDetail/main?id=' + item.P1,
-        "mpcomid": '3_' + i
-      }
-    }, [_c('view', {
-      slot: "footer"
-    }, [_c('van-button', {
-      staticClass: "MR10",
-      attrs: {
-        "size": "mini",
-        "mpcomid": '1_' + i
-      }
-    }, [_vm._v("去报名")]), _vm._v(" "), _c('van-button', {
-      attrs: {
-        "size": "mini",
-        "mpcomid": '2_' + i
-      }
-    }, [_vm._v("查看详情")])], 1)])
-  })), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "全国",
-      "mpcomid": '5'
-    }
-  }, [_vm._v("全国")]), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "加盟商",
-      "mpcomid": '6'
-    }
-  }, [_vm._v("加盟商")]), _vm._v(" "), _c('van-tab', {
-    attrs: {
-      "title": "全部",
-      "mpcomid": '7'
-    }
-  }, [_vm._v("全部")])], 1)], 1), _vm._v(" "), _c('mytabbar', {
-    attrs: {
-      "mpcomid": '9'
-    }
-  })], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-609c9ef4", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 95:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(96);
-
-
-
-// add this to handle exception
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.errorHandler = function (err) {
-  if (console && console.error) {
-    console.error(err);
-  }
-};
-
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
-app.$mount();
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(168);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(97)
+  __webpack_require__(101)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -239,25 +56,25 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 97:
+/***/ 101:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 98:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(189);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_request__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_card__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_mytabbar_mytabbar__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__static_vant_dialog_dialog__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_request__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_card__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__static_vant_dialog_dialog__ = __webpack_require__(161);
 
 
 //
@@ -375,21 +192,21 @@ if (false) {(function () {
     }))();
   }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
 
 /***/ }),
 
-/***/ 99:
+/***/ 139:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export get */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return post; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_qs__);
 /* unused harmony reexport axios */
 
@@ -472,6 +289,189 @@ function post(url, params) {
 }
 
 
+/***/ }),
+
+/***/ 161:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
+
+
+var queue = [];
+function getContext() {
+    var pages = getCurrentPages();
+    return pages[pages.length - 1];
+}
+var Dialog = function Dialog(options) {
+    options = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, Dialog.currentOptions, options);
+    return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+        var context = options.context || getContext();
+        var dialog = context.selectComponent(options.selector);
+        delete options.selector;
+        if (dialog) {
+            dialog.set(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({ onCancel: reject, onConfirm: resolve }, options));
+            queue.push(dialog);
+        } else {
+            console.warn('未找到 van-dialog 节点，请确认 selector 及 context 是否正确');
+        }
+    });
+};
+Dialog.defaultOptions = {
+    show: true,
+    title: '',
+    message: '',
+    zIndex: 100,
+    overlay: true,
+    className: '',
+    asyncClose: false,
+    messageAlign: '',
+    transition: 'scale',
+    selector: '#van-dialog',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    showConfirmButton: true,
+    showCancelButton: false,
+    closeOnClickOverlay: false,
+    confirmButtonOpenType: ''
+};
+Dialog.alert = Dialog;
+Dialog.confirm = function (options) {
+    return Dialog(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({ showCancelButton: true }, options));
+};
+Dialog.close = function () {
+    queue.forEach(function (dialog) {
+        dialog.close();
+    });
+    queue = [];
+};
+Dialog.stopLoading = function () {
+    queue.forEach(function (dialog) {
+        dialog.stopLoading();
+    });
+};
+Dialog.setDefaultOptions = function (options) {
+    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()(Dialog.currentOptions, options);
+};
+Dialog.resetDefaultOptions = function () {
+    Dialog.currentOptions = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, Dialog.defaultOptions);
+};
+Dialog.resetDefaultOptions();
+/* harmony default export */ __webpack_exports__["a"] = (Dialog);
+
+/***/ }),
+
+/***/ 168:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "main-wrap"
+  }, [_c('van-search', {
+    attrs: {
+      "value": _vm.value,
+      "placeholder": "请输入搜索关键词",
+      "use-action-slot": "",
+      "bind:search": "onSearch",
+      "mpcomid": '0'
+    }
+  }), _vm._v(" "), _c('div', [_c('van-tabs', {
+    attrs: {
+      "active": _vm.active,
+      "bind:change": "onChange",
+      "mpcomid": '8'
+    }
+  }, [_c('van-tab', {
+    attrs: {
+      "title": "近期",
+      "mpcomid": '4'
+    }
+  }, _vm._l((_vm.matchlist), function(item, i) {
+    return _c('van-card', {
+      key: i,
+      attrs: {
+        "tag": item.tag,
+        "desc": item.remark,
+        "title": item.matchName,
+        "thumb": item.thumb,
+        "price": '报名费' + item.registrationFee,
+        "origin-price": "1000",
+        "thumb-link": '/pages/matchDetail/main?id=' + item.P1,
+        "mpcomid": '3_' + i
+      }
+    }, [_c('view', {
+      slot: "footer"
+    }, [_c('van-button', {
+      staticClass: "MR10",
+      attrs: {
+        "size": "mini",
+        "mpcomid": '1_' + i
+      }
+    }, [_vm._v("去报名")]), _vm._v(" "), _c('van-button', {
+      attrs: {
+        "size": "mini",
+        "mpcomid": '2_' + i
+      }
+    }, [_vm._v("查看详情")])], 1)])
+  })), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全国",
+      "mpcomid": '5'
+    }
+  }, [_vm._v("全国")]), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "加盟商",
+      "mpcomid": '6'
+    }
+  }, [_vm._v("加盟商")]), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全部",
+      "mpcomid": '7'
+    }
+  }, [_vm._v("全部")])], 1)], 1), _vm._v(" "), _c('mytabbar', {
+    attrs: {
+      "mpcomid": '9'
+    }
+  })], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-609c9ef4", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(100);
+
+
+
+// add this to handle exception
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.errorHandler = function (err) {
+  if (console && console.error) {
+    console.error(err);
+  }
+};
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
+app.$mount();
+
 /***/ })
 
-},[95]);
+},[99]);

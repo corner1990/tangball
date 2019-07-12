@@ -1,4 +1,4 @@
-<template name="eee1143e">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="eee1143e">
   <view class="_div data-v-5fed356c">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-5fed356c">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -12,7 +12,6 @@
       <view class="_div data-v-5fed356c">
         <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-5fed356c"></van-panel>
       </view>
-    </view>
-    <mytabbar class="_mytabbar data-v-5fed356c"></mytabbar>
+    </view> <template data="{{...$root[$kk+'2'], $root}}" is="59cf42a4"></template>
   </view>
 </template>
