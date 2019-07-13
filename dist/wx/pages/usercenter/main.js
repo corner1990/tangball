@@ -127,7 +127,13 @@ if (false) {(function () {
     }
   },
 
-  onShow: function onShow() {}
+  onShow: function onShow() {
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
+  }
 });
 
 /***/ }),

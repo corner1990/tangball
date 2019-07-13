@@ -267,6 +267,11 @@ if (false) {(function () {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
   }
 });
 

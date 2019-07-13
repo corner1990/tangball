@@ -178,6 +178,11 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+    wx.hideTabBar({
+      complete () {
+        console.log('关闭tabbar')
+      }
+    })
   }
 }
 </script>

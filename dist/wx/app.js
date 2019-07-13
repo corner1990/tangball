@@ -103,7 +103,11 @@ if (false) {(function () {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
     var logs = void 0;
     if (global.mpvuePlatform === 'swan') {
       logs = global.mpvue.getStorageSync({ key: 'logs' }).data || [];
@@ -120,6 +124,9 @@ if (false) {(function () {
   },
   log: function log() {
     console.log('log at:' + Date.now());
+  },
+  onShow: function onShow() {
+    wx.hideTabBar();
   }
 });
 
