@@ -1,4 +1,4 @@
-<template name="95b0c310">
+<template name="3fad7837">
   <view class="_div data-v-e5e3ffb2 main-wrap">
     <view class="_div data-v-e5e3ffb2 FS24 TAC LH36">XXX首届唐球赛12345</view>
     <van-steps steps="{{steps}}" active="{{activeStep}}" active-color="#f44" class="_van-steps data-v-e5e3ffb2"></van-steps>

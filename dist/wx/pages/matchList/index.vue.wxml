@@ -1,4 +1,4 @@
-<template name="9a60c676">
+<template name="182eda44">
   <view class="_div data-v-609c9ef4 main-wrap">
     <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-609c9ef4"></van-search>
     <view class="_div data-v-609c9ef4 card">

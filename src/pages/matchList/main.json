@@ -7,5 +7,6 @@
     "van-tabs": "/static/vant/tabs/index",
     "van-panel": "/static/vant/panel/index",
     "van-steps": "/static/vant/steps/index"
+
   }
 }
