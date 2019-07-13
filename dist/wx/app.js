@@ -57,7 +57,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\App.vue"
+Component.options.__file = "src/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -92,7 +92,11 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
 
+
+/* eslint-disable*/
 /* harmony default export */ __webpack_exports__["a"] = ({
   created: function created() {
     // 调用API从本地缓存中获取数据
@@ -117,6 +121,34 @@ if (false) {(function () {
       logs.unshift(Date.now());
       global.mpvue.setStorageSync('logs', logs);
     }
+
+    wx.login({
+      success: function success(res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+            method: 'post',
+            data: {
+              code: res.code
+            },
+            success: function success(res) {
+              var statusCode = res.statusCode,
+                  data = res.data;
+
+              if (statusCode === 200) {
+                wx.setStorage({
+                  key: 'ids',
+                  data: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(data)
+                });
+              }
+            }
+          });
+        } else {
+          console.log('登录失败！' + res.errMsg);
+        }
+      }
+    });
   },
   log: function log() {
     console.log('log at:' + Date.now());

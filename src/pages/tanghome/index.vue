@@ -18,6 +18,7 @@
         <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
       </div>
     </div>
+    <van-button type="danger" @click="sendPay">支付</van-button>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -25,6 +26,7 @@
 <script>
 /* eslint-disable */
 import mytabbar from '@/components/mytabbar/mytabbar'
+import { post } from '@/utils/request'
 export default {
   components: {
     mytabbar
@@ -51,6 +53,57 @@ export default {
       wx.switchTab({
         url
       })
+    },
+    /**
+     * @desc 发起支付
+     */
+    sendPay () {
+      console.log('发起支付')
+      let self = this;
+      wx.getStorage({
+        key: 'ids',
+        success (res) {
+          let ids = JSON.parse(res.data)
+          self.pay(ids.openid)
+        }
+      })
+    },
+    pay (openId) {
+      let data = {
+        "total_fee": 0.01,
+        openId,
+        "goodsNameAll": "abc"
+      }
+      const self = this;
+      wx.request({
+        url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
+        data,
+        method: 'post',
+        success (res) {
+          let { statusCode, data } = res
+          if (statusCode === 200) {
+            let { data: chrildData } = data;
+            self.funlyPay(JSON.parse(chrildData))
+          }
+        } 
+      })
+    },
+    funlyPay (data) {
+      let { msg, status, timestamp: timeStamp, ...args } = data
+      if (status == 100) {
+        wx.requestPayment({
+          ...args,
+          signType: 'MD5',
+          timeStamp,
+          success (res) {
+            console.log('ok', res)
+          },
+          fail (err) {
+            console.log('err', err)
+          }
+        })
+      }
+      console.log('data', data)
     }
   },
 

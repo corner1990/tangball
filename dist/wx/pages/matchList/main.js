@@ -31,7 +31,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\pages\\matchList\\index.vue"
+Component.options.__file = "src/pages/matchList/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -193,101 +193,6 @@ if (false) {(function () {
   }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
-
-/***/ }),
-
-/***/ 139:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export get */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return post; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_qs__);
-/* unused harmony reexport axios */
-
-
-
-
-// 时间戳
-// const NewTimeStamp = new Date().getTime()
-
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.timeout = 30000;
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.adapter = function (config) {
-  return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
-    // console.log(config,'adapter')
-    var data = config.method === 'get' ? config.params : __WEBPACK_IMPORTED_MODULE_2_qs___default.a.stringify(config.data);
-    // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
-    wx.request({
-      url: config.url,
-      method: config.method,
-      data: data,
-      success: function success(res) {
-        return resolve(res);
-      },
-      fail: function fail(err) {
-        return reject(err);
-      }
-    });
-  });
-};
-
-// axios 拦截器
-function Instance() {
-  // 请求拦截器
-  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.request.use(function (request) {
-    // request.headers.token = 'token=11124654654687';
-    // console.log(request) // 请求成功
-    return request;
-  }, function (error) {
-    // console.log(error); // 请求失败
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
-  });
-
-  // 添加响应拦截器
-  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.response.use(function (response) {
-    console.log(response.data.data); // 响应成功
-    return response;
-  }, function (error) {
-    // console.log(error); // 响应失败
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
-  });
-}
-
-Instance();
-
-/**
- * @desc get请求
- * @param { String } url 接口url
- * @param { object } params 请求参数
- * @return { Promise } 然后一个promise对象
- */
-function get(url, params) {
-  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-    method: 'get',
-    url: url,
-    params: params
-  });
-}
-/**
- * @desc post请求
- * @param { String } url 接口url
- * @param { object } params 请求参数
- * @return { Promise } 然后一个promise对象
- */
-function post(url, params) {
-  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-    method: 'post',
-    url: url,
-    data: params
-  });
-}
-
 
 /***/ }),
 

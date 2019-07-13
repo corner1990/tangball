@@ -1,4 +1,4 @@
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="7d8e17c3">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="3f9a211a">
   <view class="_div data-v-609c9ef4 main-wrap">
     <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-609c9ef4"></van-search>
     <view class="_div data-v-609c9ef4">
@@ -15,6 +15,6 @@
         <van-tab title="加盟商" class="_van-tab data-v-609c9ef4">加盟商</van-tab>
         <van-tab title="全部" class="_van-tab data-v-609c9ef4">全部</van-tab>
       </van-tabs>
-    </view> <template data="{{...$root[$kk+'9'], $root}}" is="59cf42a4"></template>
+    </view> <template data="{{...$root[$kk+'9'], $root}}" is="a6892b24"></template>
   </view>
 </template>

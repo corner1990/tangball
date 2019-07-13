@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable*/
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -23,10 +24,36 @@ export default {
       logs.unshift(Date.now())
       mpvue.setStorageSync('logs', logs)
     }
+
+    wx.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+            method: 'post',
+            data: {
+              code: res.code
+            },
+            success (res) {
+              let { statusCode, data } = res
+              if (statusCode === 200) {
+                wx.setStorage({
+                  key: 'ids',
+                  data: JSON.stringify(data)
+                })
+              }
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
   },
   log () {
     console.log(`log at:${Date.now()}`)
-  }
+  },
 }
 </script>
 

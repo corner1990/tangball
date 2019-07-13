@@ -54,7 +54,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\pages\\tanghome\\index.vue"
+Component.options.__file = "src/pages/tanghome/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -90,7 +90,15 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_request__ = __webpack_require__(139);
+
+
+//
 //
 //
 //
@@ -118,9 +126,10 @@ if (false) {(function () {
 
 /* eslint-disable */
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */]
   },
   data: {
     active: 1,
@@ -140,6 +149,64 @@ if (false) {(function () {
       wx.switchTab({
         url: url
       });
+    },
+
+    /**
+     * @desc 发起支付
+     */
+    sendPay: function sendPay() {
+      console.log('发起支付');
+      var self = this;
+      wx.getStorage({
+        key: 'ids',
+        success: function success(res) {
+          var ids = JSON.parse(res.data);
+          self.pay(ids.openid);
+        }
+      });
+    },
+    pay: function pay(openId) {
+      var data = {
+        "total_fee": 0.01,
+        openId: openId,
+        "goodsNameAll": "abc"
+      };
+      var self = this;
+      wx.request({
+        url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
+        data: data,
+        method: 'post',
+        success: function success(res) {
+          var statusCode = res.statusCode,
+              data = res.data;
+
+          if (statusCode === 200) {
+            var chrildData = data.data;
+
+            self.funlyPay(JSON.parse(chrildData));
+          }
+        }
+      });
+    },
+    funlyPay: function funlyPay(data) {
+      var msg = data.msg,
+          status = data.status,
+          timeStamp = data.timestamp,
+          args = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(data, ['msg', 'status', 'timestamp']);
+
+      if (status == 100) {
+        wx.requestPayment(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, args, {
+          signType: 'MD5',
+          timeStamp: timeStamp,
+          success: function success(res) {
+            console.log('ok', res);
+          },
+          fail: function fail(err) {
+            console.log('err', err);
+          }
+        }));
+      }
+      console.log('data', data);
     }
   },
 
@@ -187,9 +254,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "status": "状态",
       "mpcomid": '1'
     }
-  })], 1)], 1), _vm._v(" "), _c('mytabbar', {
+  })], 1)], 1), _vm._v(" "), _c('van-button', {
     attrs: {
+      "type": "danger",
+      "eventid": '0',
       "mpcomid": '2'
+    },
+    on: {
+      "click": _vm.sendPay
+    }
+  }, [_vm._v("支付")]), _vm._v(" "), _c('mytabbar', {
+    attrs: {
+      "mpcomid": '3'
     }
   })], 1)
 }
