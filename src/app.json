@@ -21,7 +21,7 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-
+   
     "list": [{
       "text": "首页",
       "pagePath": "pages/index/main",
@@ -54,6 +54,6 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-    "van-icon": "/static/vant/icon/index"
+    "van-icon": "/static/vant/icon/index"  
   }
 }

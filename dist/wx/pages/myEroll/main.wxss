@@ -1,0 +1,13 @@
+@import "../../common/vendor.wxss";
+
+.main-wrap.data-v-2285b0c7 {
+  padding-bottom: 120rpx;
+}
+.title.data-v-2285b0c7 {
+  margin: 20rpx 40rpx;
+  color: #333;
+  border-bottom: 2rpx solid #000;
+}
+.card.data-v-2285b0c7 {
+  margin: 0 20rpx;
+}

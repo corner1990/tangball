@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([8],{
+global.webpackJsonpMpvue([15],{
 
-/***/ 16:
+/***/ 67:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(68);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 17:
+/***/ 68:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_7e06a7cb_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_7e06a7cb_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(74);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(18)
+  __webpack_require__(69)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,19 +79,18 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 18:
+/***/ 69:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 19:
+/***/ 70:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
 //
 //
 //
@@ -99,27 +98,15 @@ if (false) {(function () {
 //
 //
 
+/* eslint-disable */
+
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
-  data: {
-    active: 2,
-    list: [{
-      'text': '首页',
-      'pagePath': '../index/main',
-      'iconPath': 'home-o'
-    }, {
-      'text': '唐球馆',
-      'pagePath': '../tanghome/main',
-      'iconPath': 'fire-o'
-    }, {
-      'text': '活动',
-      'pagePath': '../event/main',
-      'iconPath': 'medel-o'
-    }, {
-      'text': '个人中心',
-      'pagePath': '../usercenter/main',
-      'iconPath': 'friends-o'
-    }]
+  components: {
+    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */]
   },
+  data: {},
   methods: {
     /**
      * @desc tab切换回调
@@ -138,31 +125,16 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 20:
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("赛事活动\n  "), _c('van-tabbar', {
+  return _c('div', [_vm._v("赛事活动\n  "), _c('mytabbar', {
     attrs: {
-      "active": _vm.active,
-      "mpcomid": '1'
+      "mpcomid": '0'
     }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '0_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  }))], 1)
+  })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -177,4 +149,4 @@ if (false) {
 
 /***/ })
 
-},[16]);
+},[67]);
