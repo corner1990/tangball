@@ -1,9 +1,19 @@
 {
   "pages": [
+<<<<<<< HEAD
+=======
     "pages/index/main",
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
+<<<<<<< HEAD
+    "pages/tanghome/main",
+   
+
+    "pages/index/main",
+=======
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
