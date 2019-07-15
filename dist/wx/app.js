@@ -2,15 +2,15 @@ require("./common/manifest.js")
 require("./common/vendor.js")
 global.webpackJsonpMpvue([16],{
 
-/***/ 55:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_public_css__);
 /* eslint-disable */
 
@@ -29,15 +29,15 @@ app.$mount();
 
 /***/ }),
 
-/***/ 56:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(60);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(57)
+  __webpack_require__(59)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -81,18 +81,22 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 57:
+/***/ 59:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 58:
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
 
+
+/* eslint-disable*/
 /* harmony default export */ __webpack_exports__["a"] = ({
   created: function created() {
     // 调用API从本地缓存中获取数据
@@ -103,7 +107,11 @@ if (false) {(function () {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
     var logs = void 0;
     if (global.mpvuePlatform === 'swan') {
       logs = global.mpvue.getStorageSync({ key: 'logs' }).data || [];
@@ -117,19 +125,50 @@ if (false) {(function () {
       logs.unshift(Date.now());
       global.mpvue.setStorageSync('logs', logs);
     }
+
+    wx.login({
+      success: function success(res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+            method: 'post',
+            data: {
+              code: res.code
+            },
+            success: function success(res) {
+              var statusCode = res.statusCode,
+                  data = res.data;
+
+              if (statusCode === 200) {
+                wx.setStorage({
+                  key: 'ids',
+                  data: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(data)
+                });
+              }
+            }
+          });
+        } else {
+          console.log('登录失败！' + res.errMsg);
+        }
+      }
+    });
   },
   log: function log() {
     console.log('log at:' + Date.now());
+  },
+  onShow: function onShow() {
+    wx.hideTabBar();
   }
 });
 
 /***/ }),
 
-/***/ 59:
+/***/ 63:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
 
-},[55]);
+},[57]);

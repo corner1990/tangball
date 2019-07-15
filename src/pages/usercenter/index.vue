@@ -32,6 +32,12 @@ export default {
     }
   },
   
-  onShow () {}
+  onShow () {
+    wx.hideTabBar({
+      complete () {
+        console.log('关闭tabbar')
+      }
+    })
+  }
 }
 </script>
