@@ -1,43 +1,69 @@
 require("./common/manifest.js")
 require("./common/vendor.js")
-global.webpackJsonpMpvue([16],{
+global.webpackJsonpMpvue([5],{
 
-/***/ 57:
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_public_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_index_js__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(47);
 /* eslint-disable */
-
-
-
-
 global.PUB = {};
 global.PUB.domain = "http://120.76.160.41:3000";
+
+
+
+
+
+ //导入debug_item
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_index_js__["a" /* default */]); //作为全局组件，必须有install
+
+
+ //导入vuex模块
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vuex__["a" /* default */]); //应用组件
+
+var store = new __WEBPACK_IMPORTED_MODULE_4_vuex__["a" /* default */].Store({ //定义Vuex的存储对象
+  state: {
+    debug: true
+
+  },
+
+  mutations: {
+    //变更事件
+    setDebug: function setDebug(state, param) {
+      //设置debug模式
+      state.debug = param;
+    }
+  }
+});
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$store = store; //让vue实例中可访问$store
+
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.productionTip = false;
 __WEBPACK_IMPORTED_MODULE_1__App__["a" /* default */].mpType = 'app';
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__App__["a" /* default */]);
 app.$mount();
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)))
 
 /***/ }),
 
-/***/ 58:
+/***/ 61:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(63);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(59)
+  __webpack_require__(62)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -81,18 +107,18 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 59:
+/***/ 62:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 60:
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
 
 
@@ -164,11 +190,26 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 63:
+/***/ 65:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+/***/ }),
+
+/***/ 66:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__debug_item_vue__ = __webpack_require__(7);
+/* eslint-disable */
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    install: function install(Vue) {
+        Vue.component('debug_item', __WEBPACK_IMPORTED_MODULE_0__debug_item_vue__["a" /* default */]); //控制组件标签
+    }
+});
+
 /***/ })
 
-},[57]);
+},[60]);

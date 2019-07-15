@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/tanghome/main",
-    "pages/matchList/main",
-    "pages/matchDetail/main",
     "pages/index/main",
+    "pages/matchList/main",
+    "pages/tanghome/main",
+    "pages/matchDetail/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
@@ -57,7 +57,8 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-    "van-icon": "/static/vant/icon/index"
+    "van-icon": "/static/vant/icon/index",
+    "van-cell": "/static/vant/cell/index"
   },
-  "sitemapLocation": "sitemap38.json"
+  "sitemapLocation": "sitemap94.json"
 }
