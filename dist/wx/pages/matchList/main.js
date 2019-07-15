@@ -2,14 +2,14 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([2],{
 
-/***/ 103:
+/***/ 141:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(142);
 
 
 
@@ -25,16 +25,21 @@ app.$mount();
 
 /***/ }),
 
-/***/ 104:
+/***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(174);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_609c9ef4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(176);
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(105)
+  __webpack_require__(143)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,26 +84,34 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 105:
+/***/ 143:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 106:
+/***/ 144:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(107);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__matchListComponent__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_request__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_card__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mytabbar_mytabbar__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__static_vant_dialog_dialog__ = __webpack_require__(168);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_request__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_card__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__static_vant_dialog_dialog__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_common_debug_item_debug_item__ = __webpack_require__(7);
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 
 
 //
@@ -137,9 +150,12 @@ if (false) {(function () {
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
+=======
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 
 /* eslint-disable */
 
@@ -147,12 +163,20 @@ if (false) {(function () {
 
 
 
+<<<<<<< HEAD
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
     card: __WEBPACK_IMPORTED_MODULE_4__components_card__["a" /* default */],
     mytabbar: __WEBPACK_IMPORTED_MODULE_5__components_mytabbar_mytabbar__["a" /* default */],
     Dialog: __WEBPACK_IMPORTED_MODULE_6__static_vant_dialog_dialog__["a" /* default */],
     matchListcomponent: __WEBPACK_IMPORTED_MODULE_2__matchListComponent__["a" /* default */]
+=======
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    card: __WEBPACK_IMPORTED_MODULE_3__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_4__components_mytabbar_mytabbar__["a" /* default */], Dialog: __WEBPACK_IMPORTED_MODULE_5__static_vant_dialog_dialog__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_6__components_common_debug_item_debug_item__["a" /* default */]
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
   },
   data: function data() {
     return {
@@ -182,7 +206,11 @@ if (false) {(function () {
         // },
       ],
 
+<<<<<<< HEAD
       value: "" // 搜索value
+=======
+      value: '999' // 搜索value
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     };
   },
 
@@ -234,10 +262,11 @@ if (false) {(function () {
     }))();
   }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)))
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 143:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -391,12 +420,15 @@ if (false) {
 /***/ }),
 
 /***/ 168:
+=======
+/***/ 170:
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
 
 
@@ -463,31 +495,98 @@ Dialog.resetDefaultOptions();
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 174:
+=======
+/***/ 176:
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('van-search', {
+  }, [_c('debug_item', {
     attrs: {
-      "value": _vm.value,
-      "placeholder": "请输入搜索关键词",
+      "path": "steps",
+      "text": "步骤",
+      "eventid": '0',
+      "mpcomid": '0'
+    },
+    model: {
+      value: (_vm.steps),
+      callback: function($$v) {
+        _vm.steps = $$v
+      },
+      expression: "steps"
+    }
+  }), _vm._v(" "), _c('debug_item', {
+    attrs: {
+      "path": "value",
+      "text": "搜索关键词",
+      "eventid": '1',
+      "mpcomid": '1'
+    },
+    model: {
+      value: (_vm.value),
+      callback: function($$v) {
+        _vm.value = $$v
+      },
+      expression: "value"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.value),
+      expression: "value"
+    }],
+    attrs: {
+      "type": "text",
+      "eventid": '2'
+    },
+    domProps: {
+      "value": (_vm.value)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.value = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('van-search', {
+    attrs: {
+      "placeholder": "请输入搜索关键词123",
       "use-action-slot": "",
       "bind:search": "onSearch",
-      "mpcomid": '0'
+      "eventid": '3',
+      "mpcomid": '2'
+    },
+    model: {
+      value: (_vm.value),
+      callback: function($$v) {
+        _vm.value = $$v
+      },
+      expression: "value"
     }
   }), _vm._v(" "), _c('div', [_c('van-tabs', {
     attrs: {
       "active": _vm.active,
       "bind:change": "onChange",
+<<<<<<< HEAD
       "mpcomid": '7'
+=======
+      "mpcomid": '10'
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     }
   }, [_c('van-tab', {
     attrs: {
       "title": "近期",
+<<<<<<< HEAD
       "mpcomid": '2'
+=======
+      "mpcomid": '6'
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     }
   }, _vm._l((_vm.matchlist), function(item, i) {
     return _c('matchListcomponent', {
@@ -500,6 +599,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "price": '报名费' + item.registrationFee,
         "origin-price": "1000",
         "thumb-link": '/pages/matchDetail/main?id=' + item.P1,
+<<<<<<< HEAD
         "mpcomid": '1_' + i
       }
     })
@@ -507,6 +607,28 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "title": "全国",
       "mpcomid": '4'
+=======
+        "mpcomid": '5_' + i
+      }
+    }, [_c('view', {
+      slot: "footer"
+    }, [_c('van-button', {
+      staticClass: "MR10",
+      attrs: {
+        "size": "mini",
+        "mpcomid": '3_' + i
+      }
+    }, [_vm._v("去报名")]), _vm._v(" "), _c('van-button', {
+      attrs: {
+        "size": "mini",
+        "mpcomid": '4_' + i
+      }
+    }, [_vm._v("查看详情")])], 1)])
+  })), _vm._v(" "), _c('van-tab', {
+    attrs: {
+      "title": "全国",
+      "mpcomid": '7'
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     }
   }, _vm._l((_vm.matchlist), function(item, i) {
     return _c('matchListcomponent', {
@@ -525,16 +647,28 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "加盟商",
+<<<<<<< HEAD
       "mpcomid": '5'
+=======
+      "mpcomid": '8'
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     }
   }, [_vm._v("加盟商")]), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "全部",
+<<<<<<< HEAD
       "mpcomid": '6'
     }
   }, [_vm._v("全部")])], 1)], 1), _vm._v(" "), _c('mytabbar', {
     attrs: {
       "mpcomid": '8'
+=======
+      "mpcomid": '9'
+    }
+  }, [_vm._v("全部")])], 1)], 1), _vm._v(" "), _c('mytabbar', {
+    attrs: {
+      "mpcomid": '11'
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     }
   })], 1)
 }
@@ -551,4 +685,4 @@ if (false) {
 
 /***/ })
 
-},[103]);
+},[141]);
