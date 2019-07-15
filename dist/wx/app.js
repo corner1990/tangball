@@ -1,40 +1,43 @@
 require("./common/manifest.js")
 require("./common/vendor.js")
-global.webpackJsonpMpvue([9],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+global.webpackJsonpMpvue([16],{
+
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_public_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_public_css__);
+/* eslint-disable */
 
 
 
+
+global.PUB = {};
+global.PUB.domain = "http://120.76.160.41:3000";
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.productionTip = false;
 __WEBPACK_IMPORTED_MODULE_1__App__["a" /* default */].mpType = 'app';
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__App__["a" /* default */]);
 app.$mount();
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(14)))
 
 /***/ }),
-/* 5 */
+
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(60);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(6)
+  __webpack_require__(59)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -54,7 +57,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\App.vue"
+Component.options.__file = "src/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -77,17 +80,23 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 6 */
+
+/***/ 59:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 7 */
+
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
 
+
+/* eslint-disable*/
 /* harmony default export */ __webpack_exports__["a"] = ({
   created: function created() {
     // 调用API从本地缓存中获取数据
@@ -98,7 +107,11 @@ if (false) {(function () {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
     var logs = void 0;
     if (global.mpvuePlatform === 'swan') {
       logs = global.mpvue.getStorageSync({ key: 'logs' }).data || [];
@@ -112,17 +125,50 @@ if (false) {(function () {
       logs.unshift(Date.now());
       global.mpvue.setStorageSync('logs', logs);
     }
+
+    wx.login({
+      success: function success(res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+            method: 'post',
+            data: {
+              code: res.code
+            },
+            success: function success(res) {
+              var statusCode = res.statusCode,
+                  data = res.data;
+
+              if (statusCode === 200) {
+                wx.setStorage({
+                  key: 'ids',
+                  data: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(data)
+                });
+              }
+            }
+          });
+        } else {
+          console.log('登录失败！' + res.errMsg);
+        }
+      }
+    });
   },
   log: function log() {
     console.log('log at:' + Date.now());
+  },
+  onShow: function onShow() {
+    wx.hideTabBar();
   }
 });
 
 /***/ }),
-/* 8 */
+
+/***/ 63:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-],[4]);
+
+},[57]);
