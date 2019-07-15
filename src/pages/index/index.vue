@@ -126,7 +126,7 @@ import card from '@/components/card'
 export default {
   components: {
     card,mytabbar
-  },
+  }, 
   data () {
     return {
        arrLink: [

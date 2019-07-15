@@ -1,19 +1,9 @@
 {
   "pages": [
-<<<<<<< HEAD
-=======
     "pages/index/main",
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
-<<<<<<< HEAD
-    "pages/tanghome/main",
-   
-
-    "pages/index/main",
-=======
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
@@ -70,11 +60,7 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-<<<<<<< HEAD
-    "van-icon": "/static/vant/icon/index"  
-=======
     "van-icon": "/static/vant/icon/index" ,
     "van-cell": "/static/vant/cell/index"  
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
   }
 }

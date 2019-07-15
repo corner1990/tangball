@@ -5,6 +5,4 @@
 <import src="/components/usercenter/userinfo.vue.wxml" />
 <import src="/components/usercenter/userCard.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" />
-<import src="/pages/matchList/matchListComponent.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" />
 <import src="/components/usercenter/cardItem.vue.wxml" />
