@@ -128,23 +128,9 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('debug_item', {
+  }, [_c('mytabbar', {
     attrs: {
-      "path": "pageName",
-      "text": "页面名称",
-      "eventid": '0',
       "mpcomid": '0'
-    },
-    model: {
-      value: (_vm.pageName),
-      callback: function($$v) {
-        _vm.pageName = $$v
-      },
-      expression: "pageName"
-    }
-  }), _vm._v(" "), _c('mytabbar', {
-    attrs: {
-      "mpcomid": '1'
     }
   })], 1)
 }
