@@ -54,7 +54,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/pages/venueDetail/index.vue"
+Component.options.__file = "src\\pages\\venueDetail\\index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -113,6 +113,17 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* eslint-disable */
 
@@ -120,52 +131,36 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__["a" /* default */]
+    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */],
+    mytabbar: __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__["a" /* default */]
+
   },
   data: function data() {
     return {
       activeStep: 0,
-      steps: [{
-        text: '步骤一',
-        desc: '描述信息'
-      }, {
-        text: '步骤二',
-        desc: '描述信息'
-      }, {
-        text: '步骤三',
-        desc: '描述信息'
-      }, {
-        text: '步骤四',
-        desc: '描述信息'
-      }],
-      matchlist: [{
-        'title': '首届唐球锦标赛1',
-        'desc': '这是首届唐球锦标赛',
-        'tag': '可报名',
-        'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-        'price': 500
-      }, {
-        'title': '首届唐球锦标赛2',
-        'desc': '这是首届唐球锦标赛',
-        'tag': '可报名',
-        'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-        'aaaa': '1111'
-      }],
+      active: 0,
+      imgUrls: ["https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640", "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640", "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"],
 
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
 
-      value: '' // 搜索value
+      value: "" // 搜索value
     };
   },
 
 
   methods: {
+    onChange: function onChange(event) {
+      wx.showToast({
+        title: "\u5207\u6362\u5230\u6807\u7B7E " + (event.detail.index + 1),
+        icon: "none"
+      });
+    },
     onShow: function onShow() {
       this.show = true;
-      console.log('mpvue.data', this);
+      console.log("mpvue.data", this);
       // mpvue.setData({show: true})
     },
 
@@ -198,70 +193,59 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "main-wrap"
   }, [_c('div', {
     staticClass: "FS24 TAC LH36"
-  }, [_vm._v("XXX首届唐球赛12345")]), _vm._v(" "), _c('van-steps', {
+  }, [_vm._v("深圳XXX场馆")]), _vm._v(" "), _c('swiper', {
     attrs: {
-      "steps": _vm.steps,
-      "active": _vm.activeStep,
-      "active-color": "#f44",
-      "mpcomid": '0'
+      "indicator-dots": _vm.indicatorDots,
+      "autoplay": _vm.autoplay,
+      "interval": _vm.interval,
+      "duration": _vm.duration
     }
-  }), _vm._v(" "), _c('van-cell-group', {
+  }, _vm._l((_vm.imgUrls), function(item, index) {
+    return _c('block', {
+      key: item
+    }, [_c('swiper-item', {
+      attrs: {
+        "mpcomid": '0_' + index
+      }
+    }, [_c('image', {
+      staticClass: "slide-image",
+      attrs: {
+        "src": item,
+        "width": "350",
+        "height": "150"
+      }
+    })])], 1)
+  })), _vm._v(" "), _c('div', [_c('van-tabs', {
     attrs: {
-      "title": "赛事信息",
-      "mpcomid": '6'
-    }
-  }, [_c('van-cell', {
-    attrs: {
-      "title": "赛事时间",
-      "title-width": "100px",
-      "value": "2019.07.30-2019.08.09",
-      "mpcomid": '1'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "距报名截止时间",
-      "value": "5天6小时26分",
-      "mpcomid": '2'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "举办地点",
-      "value": "深圳南山XXXXX",
-      "mpcomid": '3'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "报名费",
-      "value": "200元",
-      "mpcomid": '4'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "已报名人数",
-      "value": "567人",
+      "active": _vm.active,
+      "bind:change": "onChange",
       "mpcomid": '5'
     }
-  })], 1), _vm._v(" "), _c('van-cell-group', {
+  }, [_c('van-tab', {
     attrs: {
-      "title": "分组2",
-      "mpcomid": '8'
+      "title": "场馆介绍",
+      "mpcomid": '2'
     }
-  }, [_c('van-cell', {
+  }, [_c('van-panel', {
     attrs: {
-      "title": "单元格",
-      "value": "内容",
-      "mpcomid": '7'
+      "title": "深圳XXX场馆",
+      "desc": "描述信息",
+      "status": "营业中",
+      "mpcomid": '1'
     }
-  })], 1), _vm._v(" "), _c('van-button', {
+  }, [_c('view', [_vm._v("内容")])])], 1), _vm._v(" "), _c('van-tab', {
     attrs: {
-      "size": "large",
-      "square": "",
-      "type": "primary",
-      "mpcomid": '9'
+      "title": "xxx",
+      "mpcomid": '3'
     }
-  }, [_vm._v("立即报名")]), _vm._v(" "), _c('mytabbar', {
+  }, [_vm._v("内容 2")]), _vm._v(" "), _c('van-tab', {
     attrs: {
-      "mpcomid": '10'
+      "title": "地理位置",
+      "mpcomid": '4'
+    }
+  })], 1)], 1), _vm._v(" "), _c('mytabbar', {
+    attrs: {
+      "mpcomid": '6'
     }
   })], 1)
 }

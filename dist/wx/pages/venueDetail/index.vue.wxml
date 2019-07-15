@@ -1,17 +1,23 @@
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="c2fface0">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="2fe24558">
   <view class="_div data-v-a988065e main-wrap">
-    <view class="_div data-v-a988065e FS24 TAC LH36">XXX首届唐球赛12345</view>
-    <van-steps steps="{{steps}}" active="{{activeStep}}" active-color="#f44" class="_van-steps data-v-a988065e"></van-steps>
-    <van-cell-group title="赛事信息" class="_van-cell-group data-v-a988065e">
-      <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09" class="_van-cell data-v-a988065e"></van-cell>
-      <van-cell title="距报名截止时间" value="5天6小时26分" class="_van-cell data-v-a988065e"></van-cell>
-      <van-cell title="举办地点" value="深圳南山XXXXX" class="_van-cell data-v-a988065e"></van-cell>
-      <van-cell title="报名费" value="200元" class="_van-cell data-v-a988065e"></van-cell>
-      <van-cell title="已报名人数" value="567人" class="_van-cell data-v-a988065e"></van-cell>
-    </van-cell-group>
-    <van-cell-group title="分组2" class="_van-cell-group data-v-a988065e">
-      <van-cell title="单元格" value="内容" class="_van-cell data-v-a988065e"></van-cell>
-    </van-cell-group>
-    <van-button size="large" square type="primary" class="_van-button data-v-a988065e">立即报名</van-button> <template data="{{...$root[$kk+'10'], $root}}" is="a6892b24"></template>
+    <view class="_div data-v-a988065e FS24 TAC LH36">深圳XXX场馆</view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-a988065e">
+      <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
+        <swiper-item class="_swiper-item data-v-a988065e">
+          <image src="{{item}}" class="_image data-v-a988065e slide-image" width="350" height="150"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="_div data-v-a988065e">
+      <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-a988065e">
+        <van-tab title="场馆介绍" class="_van-tab data-v-a988065e">
+          <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中" class="_van-panel data-v-a988065e">
+            <view class="_view data-v-a988065e">内容</view>
+          </van-panel>
+        </van-tab>
+        <van-tab title="xxx" class="_van-tab data-v-a988065e">内容 2</van-tab>
+        <van-tab title="地理位置" class="_van-tab data-v-a988065e"></van-tab>
+      </van-tabs>
+    </view> <template data="{{...$root[$kk+'6'], $root}}" is="77188228"></template>
   </view>
 </template>

@@ -1,106 +1,94 @@
 <template>
   <div class="main-wrap">
-    <div class="FS24 TAC LH36">XXX首届唐球赛12345</div>
-  <van-steps :steps="steps" :active="activeStep"  active-color="#f44"/>
-    <van-cell-group title="赛事信息">
-      <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09"/>
-      <van-cell title="距报名截止时间" value="5天6小时26分"/>
-      <van-cell title="举办地点" value="深圳南山XXXXX"/>
-      <van-cell title="报名费" value="200元"/>
-      <van-cell title="已报名人数" value="567人"/>
-    </van-cell-group>
-    <van-cell-group title="分组2">
-      <van-cell title="单元格" value="内容"/>
-    </van-cell-group>
+    <div class="FS24 TAC LH36">深圳XXX场馆</div>
+    <swiper
+      :indicator-dots="indicatorDots"
+      :autoplay="autoplay"
+      :interval="interval"
+      :duration="duration"
+    >
+      <block v-for="item in imgUrls" :key="item">
+        <swiper-item>
+          <image :src="item" class="slide-image" width="350" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <div>
+      <van-tabs :active="active" bind:change="onChange">
+        <van-tab title="场馆介绍">
+          <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中">
+            <view>内容</view>
+          </van-panel>
+        </van-tab>
+        <van-tab title="xxx">内容 2</van-tab>
+        <van-tab title="地理位置">
+          
+        </van-tab>
+      </van-tabs>
+    </div>
 
-    <van-button size="large" square type="primary">立即报名</van-button>
-  
-
-   <mytabbar></mytabbar>
+    <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import card from '@/components/card'
-import mytabbar from '@/components/mytabbar/mytabbar'
+import card from "@/components/card";
+import mytabbar from "@/components/mytabbar/mytabbar";
 
 
 export default {
-    components: {
-    card,mytabbar
+  components: {
+    card,
+    mytabbar,
+  
   },
   data() {
     return {
       activeStep: 0,
-      steps: [
-        {
-          text: '步骤一',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤二',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤三',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤四',
-          desc: '描述信息'
-        }
+      active: 0,
+      imgUrls: [
+        "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
+        "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
+        "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
-      matchlist: [
-        {
-          'title': '首届唐球锦标赛1',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-          'price': 500,
-        },
-        {
-          'title': '首届唐球锦标赛2',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-          'aaaa': '1111',
-        },
-      ],
-    
+
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
 
-      value: '' // 搜索value
-    }
+      value: "" // 搜索value
+    };
   },
 
-
-
   methods: {
+    onChange(event) {
+      wx.showToast({
+        title: `切换到标签 ${event.detail.index + 1}`,
+        icon: "none"
+      });
+    },
     onShow() {
-      this.show = true
-      console.log('mpvue.data', this)
+      this.show = true;
+      console.log("mpvue.data", this);
       // mpvue.setData({show: true})
     },
     /**
      * @desc 搜索回调
      */
-    onSearch() { },
+    onSearch() {},
     /**
      * @desc 赛事切换回调
      */
     tabChange(url) {
-      console.log(url)
+      console.log(url);
       wx.switchTab({
         url
-      })
+      });
     }
   },
-  created() {
-  }
-}
+  created() {}
+};
 </script>
 
 <style scoped>
@@ -114,5 +102,9 @@ export default {
 }
 .card {
   margin: 0 10px;
+}
+.bm-view {
+  width: 100%;
+  height: 300px;
 }
 </style>

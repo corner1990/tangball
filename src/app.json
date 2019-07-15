@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/venueDetail/main",
     "pages/tanghome/main",
     "pages/matchList/main",
     "pages/matchDetail/main",
