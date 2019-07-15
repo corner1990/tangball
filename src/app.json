@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/tanghome/main",
     "pages/matchList/main",
     "pages/matchDetail/main",
+    "pages/tanghome/main",
+   
+
     "pages/index/main",
     "pages/counter/main",
     "pages/logs/main",

@@ -1,27 +1,34 @@
 <template>
   <div class="main-wrap">
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
     <div>
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="近期">
-          <van-card
-            :tag="item.tag"
+          <matchListcomponent
             :desc="item.remark"
             :title="item.matchName"
+            :matchTime="item.matchTime"
             :thumb="item.thumb"
             :price="'报名费'+item.registrationFee"
             origin-price="1000"
             :thumb-link="'/pages/matchDetail/main?id='+item.P1"
             v-for="(item,i) in matchlist"
             :key="i"
-          >
-            <view slot="footer">
-              <van-button size="mini" class="MR10">去报名</van-button>
-              <van-button size="mini">查看详情</van-button>
-            </view>
-          </van-card>
+          ></matchListcomponent>
         </van-tab>
-        <van-tab title="全国">全国</van-tab>
+        <van-tab title="全国">
+          <matchListcomponent
+            :desc="item.remark"
+            :title="item.matchName"
+            :matchTime="item.matchTime"
+            :thumb="item.thumb"
+            :price="'报名费'+item.registrationFee"
+            origin-price="1000"
+            :thumb-link="'/pages/matchDetail/main?id='+item.P1"
+            v-for="(item,i) in matchlist"
+            :key="i"
+          ></matchListcomponent>
+        </van-tab>
         <van-tab title="加盟商">加盟商</van-tab>
         <van-tab title="全部">全部</van-tab>
       </van-tabs>
@@ -32,33 +39,37 @@
 </template>
 <script>
 /* eslint-disable */
-import { get,post } from '@/utils/request'
-import card from '@/components/card'
-import mytabbar from '@/components/mytabbar/mytabbar'
-import Dialog from '../../../static/vant/dialog/dialog';
+import matchListcomponent from "./matchListComponent";
+import { get, post } from "@/utils/request";
+import card from "@/components/card";
+import mytabbar from "@/components/mytabbar/mytabbar";
+import Dialog from "../../../static/vant/dialog/dialog";
 export default {
   components: {
-    card, mytabbar, Dialog
+    card,
+    mytabbar,
+    Dialog,
+    matchListcomponent
   },
   data() {
     return {
       activeStep: 0,
       steps: [
         {
-          text: '步骤一',
-          desc: '描述信息'
+          text: "步骤一",
+          desc: "描述信息"
         },
         {
-          text: '步骤二',
-          desc: '描述信息'
+          text: "步骤二",
+          desc: "描述信息"
         },
         {
-          text: '步骤三',
-          desc: '描述信息'
+          text: "步骤三",
+          desc: "描述信息"
         },
         {
-          text: '步骤四',
-          desc: '描述信息'
+          text: "步骤四",
+          desc: "描述信息"
         }
       ],
       matchlist: [
@@ -71,35 +82,37 @@ export default {
         //   'price': 500,
         //   'thumbLink': "pages/matchDetail/main",
         // },
-
       ],
 
-
-      value: '' // 搜索value
-    }
+      value: "" // 搜索value
+    };
   },
   methods: {
     onShow() {
-      this.show = true
-      console.log('mpvue.data', this)
+      this.show = true;
+      console.log("mpvue.data", this);
       // mpvue.setData({show: true})
     },
+    onDaying() {
+      console.log(this.matchlist);
+    },
+
     /**
      * @desc 搜索回调
      */
-    onSearch() { },
+    onSearch() {}
     /**
      * @desc 赛事切换回调
      */
-
   },
   async created() {
     //ajax请求接口数据
-   let { data }= await post(global.PUB.domain + '/crossList?page=tangball_match');
-   this.matchlist = data.list;
-
+    let { data } = await post(
+      global.PUB.domain + "/crossList?page=tangball_match"
+    );
+    this.matchlist = data.list;
   }
-}
+};
 </script>
 
 <style scoped>
