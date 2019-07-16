@@ -95,7 +95,7 @@ if (false) {(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__matchListComponent__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_request__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_util__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_card__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mytabbar_mytabbar__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__static_vant_dialog_dialog__ = __webpack_require__(174);
@@ -213,6 +213,9 @@ if (false) {(function () {
 
   },
   created: function created() {
+    console.log("赛事列表created");
+  },
+  mounted: function mounted() {
     var _this = this;
 
     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -222,16 +225,30 @@ if (false) {(function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return Object(__WEBPACK_IMPORTED_MODULE_3__utils_request__["a" /* post */])(global.PUB.domain + '/crossList?page=tangball_match');
 
-            case 2:
+              console.log("赛事列表mounted");
+              // //ajax请求接口数据
+              // let { data } = await post(global.PUB.domain + '/crossList?page=tangball_match',{findJson:{ "matchType": 2 }});
+              // this.matchlist = data.list;
+
+
+              /**
+               * ajax请求参赛次数排行榜
+               * 请求会员表tangball_member
+               */
+              _context.next = 3;
+              return __WEBPACK_IMPORTED_MODULE_3__utils_util__["a" /* default */].post({
+                url: global.PUB.domain + '/crossList?page=tangball_match',
+                param: { findJson: { "matchType": 1 } }
+              });
+
+            case 3:
               _ref = _context.sent;
               data = _ref.data;
 
               _this.matchlist = data.list;
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -492,17 +509,17 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('debug_item', {
     attrs: {
-      "path": "value",
-      "text": "搜索关键词",
+      "path": "matchlist",
+      "text": "赛事列表",
       "eventid": '1',
       "mpcomid": '1'
     },
     model: {
-      value: (_vm.value),
+      value: (_vm.matchlist),
       callback: function($$v) {
-        _vm.value = $$v
+        _vm.matchlist = $$v
       },
-      expression: "value"
+      expression: "matchlist"
     }
   }), _vm._v(" "), _c('input', {
     directives: [{
