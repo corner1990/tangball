@@ -221,7 +221,7 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      arrLink: [{ "title": "赛事列表", "url": "/pages/matchList/main" }, { "title": "赛事详情", "url": "/pages/matchDetail/main" }, { "title": "赛事报名", "url": "/pages/matchEroll/main" }, { "title": "场馆列表", "url": "/pages/venueList/main" }, { "title": "场馆详情", "url": "/pages/venueDetail/main" }, { "title": "唐球达人", "url": "/pages/rankingList/main" }, { "title": "个人中心-首页", "url": "/pages/usercenter/main" }, { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" }, { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" }, { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }],
+      arrLink: [{ "title": "赛事列表", "url": "/pages/matchList/main" }, { "title": "赛事详情", "url": "/pages/matchDetail/main" }, { "title": "赛事报名", "url": "/pages/matchEroll/main" }, { "title": "场馆列表", "url": "/pages/venueList/main" }, { "title": "场馆详情", "url": "/pages/venueDetail/main" }, { "title": "唐球达人", "url": "/pages/rankingList/main" }, { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" }, { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" }, { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }],
       motto: 'Hello miniprograme',
       userInfo: {
         nickName: 'mpvue',

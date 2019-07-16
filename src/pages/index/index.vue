@@ -126,7 +126,7 @@ import card from '@/components/card'
 export default {
   components: {
     card,mytabbar
-  },
+  }, 
   data () {
     return {
        arrLink: [
@@ -136,7 +136,7 @@ export default {
         {"title":"场馆列表","url":"/pages/venueList/main"},
         {"title":"场馆详情","url":"/pages/venueDetail/main"},
         {"title":"唐球达人","url":"/pages/rankingList/main"},
-        {"title":"个人中心-首页","url":"/pages/usercenter/main"},
+   
         {"title":"个人中心-赛事报名列表","url":"/pages/myEroll/main"},
         {"title":"个人中心-赛事报名详情","url":"/pages/myErollDetail/main"},
         {"title":"个人中心-系统消息列表","url":"/pages/myMsgList/main"}
