@@ -106,6 +106,10 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
 
 /* eslint-disable */
 
@@ -114,13 +118,13 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
       pageName: "唐球达人",
       matchTimeRanklist: [] //比赛次数排行列表
-
     };
   },
 
@@ -209,12 +213,40 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "pageName"
     }
-  }), _vm._v(" "), _c('debug_item', {
+  }), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '1'
+    }
+  }, [_vm._v("参赛次数")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '2'
+    }
+  }, [_vm._v("成绩排名")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '3'
+    }
+  }, [_vm._v("鸟王排名")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '4'
+    }
+  }, [_vm._v("积分排名")]), _vm._v(" "), _c('debug_item', {
     attrs: {
       "path": "matchTimeRanklist",
       "text": "比赛次数排行列表",
       "eventid": '1',
-      "mpcomid": '1'
+      "mpcomid": '5'
     },
     model: {
       value: (_vm.matchTimeRanklist),
@@ -225,7 +257,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "mpcomid": '2'
+      "mpcomid": '6'
     }
   })], 1)
 }
