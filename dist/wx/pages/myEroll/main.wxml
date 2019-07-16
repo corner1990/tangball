@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-<import src="/pages/myEroll/index.vue.wxml" /><template is="477f528b" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/myEroll/index.vue.wxml" /><template is="22211096" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
+<import src="/pages/myEroll/index.vue.wxml" /><template is="dfb7d5f4" data="{{ ...$root['0'], $root }}"/>

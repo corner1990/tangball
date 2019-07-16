@@ -54,7 +54,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\pages\\matchEroll\\index.vue"
+Component.options.__file = "src/pages/matchEroll/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -98,6 +98,40 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* eslint-disable */
 
@@ -109,8 +143,12 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      pageName: "比赛报名操作"
-
+      pageName: "比赛报名操作",
+      imgUrls: ['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640', 'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640', 'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'],
+      indicatorDots: false,
+      autoplay: false,
+      interval: 5000,
+      duration: 1000
     };
   },
 
@@ -128,9 +166,116 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('mytabbar', {
+  }, [_c('swiper', {
     attrs: {
-      "mpcomid": '0'
+      "indicator-dots": _vm.indicatorDots,
+      "autoplay": _vm.autoplay,
+      "interval": _vm.interval,
+      "duration": _vm.duration
+    }
+  }, _vm._l((_vm.imgUrls), function(item, index) {
+    return _c('block', {
+      key: item
+    }, [_c('swiper-item', {
+      attrs: {
+        "mpcomid": '0_' + index
+      }
+    }, [_c('image', {
+      staticClass: "slide-image",
+      attrs: {
+        "src": item,
+        "height": "150"
+      }
+    })])], 1)
+  })), _vm._v(" "), _c('div', {
+    staticClass: "event-info"
+  }, [_c('h3', [_vm._v("赛事名称")]), _vm._v(" "), _c('p', [_vm._v("比赛时间：2019-09-01")]), _vm._v(" "), _c('p', [_vm._v("比赛地点： 22223423424")])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-wrap"
+  }, [_c('form', [_c('van-row', {
+    attrs: {
+      "mpcomid": '3'
+    }
+  }, [_c('van-col', {
+    staticClass: "title",
+    attrs: {
+      "span": "8",
+      "mpcomid": '1'
+    }
+  }, [_vm._v("参赛人姓名")]), _vm._v(" "), _c('van-col', {
+    attrs: {
+      "span": "16",
+      "mpcomid": '2'
+    }
+  }, [_c('input', {
+    attrs: {
+      "placeholder": "参赛人姓名"
+    }
+  })])], 1), _vm._v(" "), _c('van-row', {
+    attrs: {
+      "mpcomid": '8'
+    }
+  }, [_c('van-col', {
+    staticClass: "title",
+    attrs: {
+      "span": "8",
+      "mpcomid": '4'
+    }
+  }, [_vm._v("手机号码")]), _vm._v(" "), _c('van-col', {
+    attrs: {
+      "span": "10",
+      "mpcomid": '5'
+    }
+  }, [_c('input', {
+    attrs: {
+      "placeholder": "手机号码"
+    }
+  })]), _vm._v(" "), _c('van-col', {
+    attrs: {
+      "span": "6",
+      "mpcomid": '7'
+    }
+  }, [_c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '6'
+    }
+  }, [_vm._v("获取验证码")])], 1)], 1), _vm._v(" "), _c('van-row', {
+    attrs: {
+      "mpcomid": '11'
+    }
+  }, [_c('van-col', {
+    staticClass: "title",
+    attrs: {
+      "span": "8",
+      "mpcomid": '9'
+    }
+  }, [_vm._v("报名费")]), _vm._v(" "), _c('van-col', {
+    staticClass: "price",
+    attrs: {
+      "span": "16",
+      "mpcomid": '10'
+    }
+  })], 1), _vm._v(" "), _c('van-row', {
+    staticClass: "button-wrap",
+    attrs: {
+      "mpcomid": '14'
+    }
+  }, [_c('van-col', {
+    attrs: {
+      "span": "24",
+      "mpcomid": '13'
+    }
+  }, [_c('van-button', {
+    attrs: {
+      "type": "info",
+      "block": "",
+      "mpcomid": '12'
+    }
+  }, [_vm._v("立刻报名")])], 1)], 1)], 1)], 1), _vm._v(" "), _c('mytabbar', {
+    attrs: {
+      "mpcomid": '15'
     }
   })], 1)
 }
