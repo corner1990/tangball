@@ -17,33 +17,34 @@
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="场馆介绍">
           <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中">
-            <view>内容</view>
+            <view>
+              <Map></Map>
+            </view>
           </van-panel>
         </van-tab>
         <van-tab title="xxx">内容 2</van-tab>
-        <van-tab title="地理位置">
-          
-        </van-tab>
+        <van-tab title="地理位置"></van-tab>
       </van-tabs>
     </div>
 
+    <debug_item path="pageName" v-model="pageName" text="页面名称" />
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
-
-
+import debug_item from "@/components/common/debug_item/debug_item";
+import Map from "@/components/map/Map"
 export default {
   components: {
-    card,
     mytabbar,
-  
+    debug_item,
+    Map
   },
   data() {
     return {
+      pageName: "场馆详情",
       activeStep: 0,
       active: 0,
       imgUrls: [
@@ -62,6 +63,7 @@ export default {
   },
 
   methods: {
+  
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,

@@ -1,6 +1,10 @@
 <template>
   <div class="main-wrap">
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+     <debug_item path="steps" v-model="steps" text="步骤"/>
+     <debug_item path="value" v-model="value" text="搜索关键词"/>
+
+     <input type="text"  v-model="value">
+    <van-search v-model="value" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch"/>
     <div>
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="近期">
@@ -32,13 +36,16 @@
 </template>
 <script>
 /* eslint-disable */
-import { get,post } from '@/utils/request'
+import { get, post } from '@/utils/request'
 import card from '@/components/card'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import Dialog from '../../../static/vant/dialog/dialog';
+
+import debug_item from '@/components/common/debug_item/debug_item'
+
 export default {
   components: {
-    card, mytabbar, Dialog
+    card, mytabbar, Dialog,debug_item
   },
   data() {
     return {
@@ -75,7 +82,7 @@ export default {
       ],
 
 
-      value: '' // 搜索value
+      value: '999' // 搜索value
     }
   },
   methods: {
@@ -95,8 +102,8 @@ export default {
   },
   async created() {
     //ajax请求接口数据
-   let { data }= await post(global.PUB.domain + '/crossList?page=tangball_match');
-   this.matchlist = data.list;
+    let { data } = await post(global.PUB.domain + '/crossList?page=tangball_match');
+    this.matchlist = data.list;
 
   }
 }

@@ -1,0 +1,3 @@
+<template name="f2e147e8">
+  <view class="_div data-v-27844fe7 main-wrap"><map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;" class="_map data-v-27844fe7"></map></view>
+</template>
