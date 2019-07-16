@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-<import src="/pages/myMsgList/index.vue.wxml" /><template is="b11af630" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/myMsgList/index.vue.wxml" /><template is="609cec33" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
+<import src="/pages/myMsgList/index.vue.wxml" /><template is="f6826ad8" data="{{ ...$root['0'], $root }}"/>

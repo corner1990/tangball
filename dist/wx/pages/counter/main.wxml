@@ -1,9 +1,1 @@
-<<<<<<< HEAD
 <import src="/pages/counter/index.vue.wxml" /><template is="90bf64c6" data="{{ ...$root['0'], $root }}"/>
-=======
-<<<<<<< HEAD
-<import src="/pages/counter/index.vue.wxml" /><template is="da32e61e" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/counter/index.vue.wxml" /><template is="6d884afc" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
->>>>>>> f10629f61eec2a4cbf29b7b357b891de519597f8

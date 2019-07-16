@@ -1,9 +1,1 @@
-<<<<<<< HEAD
 <import src="/pages/tanghome/index.vue.wxml" /><template is="fd107140" data="{{ ...$root['0'], $root }}"/>
-=======
-<<<<<<< HEAD
-<import src="/pages/tanghome/index.vue.wxml" /><template is="0ef9728c" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/tanghome/index.vue.wxml" /><template is="eee1143e" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
->>>>>>> f10629f61eec2a4cbf29b7b357b891de519597f8
