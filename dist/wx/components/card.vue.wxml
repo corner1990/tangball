@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <template name="b601c74e">
-=======
-<template name="4402a138">
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
   <view class="_div data-v-3d9803a2">
     <view class="_p data-v-3d9803a2 card">
       {{text}}
