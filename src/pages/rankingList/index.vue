@@ -37,17 +37,19 @@ export default {
 
   },
   async mounted() {
-    console.log("唐球达人-mounted-1");
-    //ajax请求接口数据
+  
+    /**
+     * ajax请求参赛次数排行榜
+     * 请求会员表tangball_member
+     */
     let { data } = await util.post({
       url: global.PUB.domain + '/crossList?page=tangball_member',
       param: {
-        pageSize: 50, sortJson: { entries: -1 }
+        pageSize: 50, //每页50条数据
+        sortJson: { entries: -1 }//按参赛次数降序排序
       }
     });
-    console.log("data", data);
     this.matchTimeRanklist = data.list;
-    console.log("唐球达人-mounted-2");
 
   }
 }
