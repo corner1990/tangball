@@ -90,8 +90,22 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(7);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(6);
+
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -105,19 +119,53 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
-      pageName: "唐球达人"
+      pageName: "唐球达人",
+      matchTimeRanklist: [], //比赛次数排行列表
+      value: '' // 搜索value
 
     };
   },
 
 
-  methods: {},
-  created: function created() {}
+  methods: {
+    onSearch: function onSearch() {}
+  },
+  created: function created() {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var _ref, data;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("唐球达人-created");
+              //ajax请求接口数据
+              _context.next = 3;
+              return post(global.PUB.domain + '/crossList?page=tangball_member');
+
+            case 3:
+              _ref = _context.sent;
+              data = _ref.data;
+
+              console.log("data", data);
+              _this.matchTimeRanklist = data.list;
+
+            case 7:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }))();
+  }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
 
 /***/ }),
 
@@ -142,9 +190,32 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "pageName"
     }
+  }), _vm._v(" "), _c('debug_item', {
+    attrs: {
+      "path": "matchTimeRanklist",
+      "text": "比赛次数排行列表",
+      "eventid": '1',
+      "mpcomid": '1'
+    },
+    model: {
+      value: (_vm.matchTimeRanklist),
+      callback: function($$v) {
+        _vm.matchTimeRanklist = $$v
+      },
+      expression: "matchTimeRanklist"
+    }
+  }), _vm._v(" "), _c('van-search', {
+    attrs: {
+      "value": _vm.value,
+      "placeholder": "请输入搜索关键词",
+      "show-action": "",
+      "bind:search": "onSearch",
+      "bind:cancel": "onCancel",
+      "mpcomid": '2'
+    }
   }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "mpcomid": '1'
+      "mpcomid": '3'
     }
   })], 1)
 }
