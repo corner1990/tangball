@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-<import src="/pages/tanghome/index.vue.wxml" /><template is="fd107140" data="{{ ...$root['0'], $root }}"/>
-=======
 <import src="/pages/tanghome/index.vue.wxml" /><template is="eee1143e" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08

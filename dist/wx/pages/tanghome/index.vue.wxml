@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="fd107140">
-=======
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="eee1143e">
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
   <view class="_div data-v-5fed356c">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-5fed356c">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -17,10 +13,6 @@
         <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-5fed356c"></van-panel>
       </view>
     </view>
-<<<<<<< HEAD
-    <van-button type="danger" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-5fed356c">支付</van-button> <template data="{{...$root[$kk+'3'], $root}}" is="1fc9a523"></template>
-=======
     <van-button type="danger" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-5fed356c">支付</van-button> <template data="{{...$root[$kk+'3'], $root}}" is="59cf42a4"></template>
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
   </view>
 </template>

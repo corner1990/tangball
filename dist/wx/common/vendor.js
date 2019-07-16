@@ -9465,7 +9465,8 @@ console.log("util", __WEBPACK_IMPORTED_MODULE_1__utils_util__["a" /* default */]
       var type = __WEBPACK_IMPORTED_MODULE_1__utils_util__["a" /* default */].type(this.value);
       if (type === "array" || type === "object") {
         //如果{000}000
-        this.valueNeed = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.value); //{Json对象转换Json字符串函数}
+        this.valueNeed = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.value, null, 2); //{Json对象转换Json字符串函数}
+
       } else {
         this.valueNeed = this.value;
       }
