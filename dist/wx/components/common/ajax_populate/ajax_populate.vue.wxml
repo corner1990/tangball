@@ -1,0 +1,1 @@
+<import src="/components/slots" /><template name="72118aed"><label class="_span data-v-7fd25e31"><template name="default">{{text}}</template><template data="{{...$root[$p], ...$root[$k], $root}}" is="{{$slotdefault || 'default'}}"></template></label></template>

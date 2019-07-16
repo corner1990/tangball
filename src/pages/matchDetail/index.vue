@@ -1,7 +1,8 @@
 <template>
   <div class="main-wrap">
+    <debug_item path="matchlist" v-model="matchlist" text="赛事列表"/>
     <div class="FS24 TAC LH36">XXX首届唐球赛12345</div>
-  <van-steps :steps="steps" :active="activeStep"  active-color="#f44"/>
+    <van-steps :steps="steps" :active="activeStep" active-color="#f44"/>
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09"/>
       <van-cell title="距报名截止时间" value="5天6小时26分"/>
@@ -14,22 +15,20 @@
     </van-cell-group>
 
     <van-button size="large" square type="primary">立即报名</van-button>
-  
 
-    <van-tabbar :active="active">
-      <van-tabbar-item
-        :icon="item.iconPath"
-        v-for="(item, key) in list"
-        :key="key"
-        @click="tabChange(item.pagePath)"
-      >{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import card from '@/components/card'
+import mytabbar from '@/components/mytabbar/mytabbar'
+import debug_item from '@/components/common/debug_item/debug_item'
+
 export default {
+  components: {
+    card, mytabbar,debug_item
+  },
   data() {
     return {
       activeStep: 0,
@@ -67,40 +66,17 @@ export default {
           'aaaa': '1111',
         },
       ],
-      list: [
-        {
-          'text': '首页',
-          'pagePath': '../index/main',
-          'iconPath': 'home-o'
-        },
-        {
-          'text': '唐球馆',
-          'pagePath': '../tanghome/main',
-          'iconPath': 'fire-o'
-        },
-        {
-          'text': '活动',
-          'pagePath': '../event/main',
-          'iconPath': 'medel-o'
-        },
-        {
-          'text': '个人中心',
-          'pagePath': '../usercenter/main',
-          'iconPath': 'friends-o'
-        }
-      ],
+
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 0,
+
       value: '' // 搜索value
     }
   },
 
-  components: {
-    card
-  },
+
 
   methods: {
     onShow() {

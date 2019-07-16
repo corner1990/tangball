@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 <template name="fd107140">
+=======
+<<<<<<< HEAD
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="0ef9728c">
+=======
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="eee1143e">
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
+>>>>>>> f10629f61eec2a4cbf29b7b357b891de519597f8
   <view class="_div data-v-5fed356c">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-5fed356c">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -13,8 +21,10 @@
         <van-panel title="标题" desc="描述信息" status="状态" class="_van-panel data-v-5fed356c"></van-panel>
       </view>
     </view>
-    <van-tabbar active="{{active}}" class="_van-tabbar data-v-5fed356c">
-      <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-5fed356c">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+<<<<<<< HEAD
+    <van-button type="danger" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-5fed356c">支付</van-button> <template data="{{...$root[$kk+'3'], $root}}" is="63993762"></template>
+=======
+    <van-button type="danger" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-5fed356c">支付</van-button> <template data="{{...$root[$kk+'3'], $root}}" is="59cf42a4"></template>
+>>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
   </view>
 </template>

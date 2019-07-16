@@ -1,37 +1,24 @@
 <template>
   <div>赛事活动
-    <van-tabbar :active="active">
-      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    <mytabbar ></mytabbar>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+
+
+
+import mytabbar from '@/components/mytabbar/mytabbar'
+
+ 
 export default {
+  components: {
+    mytabbar
+  },
   data: {
-    active: 2,
-    list: [
-      {
-        'text': '首页',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      },
-      {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      },
-      {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      },
-      {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }
-    ]
+
+    
   },
   methods: {
     /**

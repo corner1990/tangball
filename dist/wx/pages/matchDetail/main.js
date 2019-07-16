@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([6],{
+global.webpackJsonpMpvue([14],{
 
-/***/ 35:
+/***/ 131:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(132);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 36:
+/***/ 132:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_e5e3ffb2_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_e5e3ffb2_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(135);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(37)
+  __webpack_require__(133)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,25 +79,20 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 37:
+/***/ 133:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 38:
+/***/ 134:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_common_debug_item_debug_item__ = __webpack_require__(7);
 //
 //
 //
@@ -122,7 +117,13 @@ if (false) {(function () {
 
 /* eslint-disable */
 
+
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_2__components_common_debug_item_debug_item__["a" /* default */]
+  },
   data: function data() {
     return {
       activeStep: 0,
@@ -152,36 +153,16 @@ if (false) {(function () {
         'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
         'aaaa': '1111'
       }],
-      list: [{
-        'text': '首页',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      }, {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      }, {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      }, {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }],
+
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 0,
+
       value: '' // 搜索value
     };
   },
 
-
-  components: {
-    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */]
-  },
 
   methods: {
     onShow: function onShow() {
@@ -210,96 +191,95 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 39:
+/***/ 135:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('div', {
+  }, [_c('debug_item', {
+    attrs: {
+      "path": "matchlist",
+      "text": "赛事列表",
+      "eventid": '0',
+      "mpcomid": '0'
+    },
+    model: {
+      value: (_vm.matchlist),
+      callback: function($$v) {
+        _vm.matchlist = $$v
+      },
+      expression: "matchlist"
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "FS24 TAC LH36"
   }, [_vm._v("XXX首届唐球赛12345")]), _vm._v(" "), _c('van-steps', {
     attrs: {
       "steps": _vm.steps,
       "active": _vm.activeStep,
       "active-color": "#f44",
-      "mpcomid": '0'
+      "mpcomid": '1'
     }
   }), _vm._v(" "), _c('van-cell-group', {
     attrs: {
       "title": "赛事信息",
-      "mpcomid": '6'
+      "mpcomid": '7'
     }
   }, [_c('van-cell', {
     attrs: {
       "title": "赛事时间",
       "title-width": "100px",
       "value": "2019.07.30-2019.08.09",
-      "mpcomid": '1'
+      "mpcomid": '2'
     }
   }), _vm._v(" "), _c('van-cell', {
     attrs: {
       "title": "距报名截止时间",
       "value": "5天6小时26分",
-      "mpcomid": '2'
+      "mpcomid": '3'
     }
   }), _vm._v(" "), _c('van-cell', {
     attrs: {
       "title": "举办地点",
       "value": "深圳南山XXXXX",
-      "mpcomid": '3'
+      "mpcomid": '4'
     }
   }), _vm._v(" "), _c('van-cell', {
     attrs: {
       "title": "报名费",
       "value": "200元",
-      "mpcomid": '4'
+      "mpcomid": '5'
     }
   }), _vm._v(" "), _c('van-cell', {
     attrs: {
       "title": "已报名人数",
       "value": "567人",
-      "mpcomid": '5'
+      "mpcomid": '6'
     }
   })], 1), _vm._v(" "), _c('van-cell-group', {
     attrs: {
       "title": "分组2",
-      "mpcomid": '8'
+      "mpcomid": '9'
     }
   }, [_c('van-cell', {
     attrs: {
       "title": "单元格",
       "value": "内容",
-      "mpcomid": '7'
+      "mpcomid": '8'
     }
   })], 1), _vm._v(" "), _c('van-button', {
     attrs: {
       "size": "large",
       "square": "",
       "type": "primary",
-      "mpcomid": '9'
+      "mpcomid": '10'
     }
-  }, [_vm._v("立即报名")]), _vm._v(" "), _c('van-tabbar', {
+  }, [_vm._v("立即报名")]), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "active": _vm.active,
       "mpcomid": '11'
     }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '10_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  }))], 1)
+  })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -314,4 +294,4 @@ if (false) {
 
 /***/ })
 
-},[35]);
+},[131]);

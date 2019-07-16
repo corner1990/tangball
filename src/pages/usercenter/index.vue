@@ -2,41 +2,24 @@
   <div>
     <Info />
     <UserOperList />
-    <van-tabbar :active="active">
-      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in UserList" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+     <mytabbar :active="3"></mytabbar>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Info from '@/components/usercenter/userinfo'
 import UserOperList from '@/components/usercenter/userCard'
+import mytabbar from '@/components/mytabbar/mytabbar'
+
 export default {
+  components: {
+    Info,
+    UserOperList,mytabbar
+  },
   data: {
     name: 'leo',
-    active: 3,
-    list: [
-      {
-        'text': '首页',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      },
-      {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      },
-      {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      },
-      {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }
-    ]
+    
   },
   methods: {
     /**
@@ -48,10 +31,13 @@ export default {
       })
     }
   },
-  components: {
-    Info,
-    UserOperList
-  },
-  onShow () {}
+  
+  onShow () {
+    wx.hideTabBar({
+      complete () {
+        console.log('关闭tabbar')
+      }
+    })
+  }
 }
 </script>

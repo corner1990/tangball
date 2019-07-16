@@ -1,13 +1,20 @@
 {
   "pages": [
-    "pages/matchList/main",
-    "pages/matchDetail/main",
     "pages/index/main",
+    "pages/matchList/main",
+    "pages/tanghome/main",
+    "pages/matchDetail/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
-    "pages/tanghome/main",
-    "pages/usercenter/main"
+    "pages/usercenter/main",
+    "pages/venueList/main",
+    "pages/venueDetail/main",
+    "pages/matchEroll/main",
+    "pages/rankingList/main",
+    "pages/myEroll/main",
+    "pages/myErollDetail/main",
+    "pages/myMsgList/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,12 +23,11 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "custom": true,
     "color": "#999",
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-
+   
     "list": [{
       "text": "首页",
       "pagePath": "pages/index/main",
@@ -54,6 +60,7 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-    "van-icon": "/static/vant/icon/index"
+    "van-icon": "/static/vant/icon/index" ,
+    "van-cell": "/static/vant/cell/index"  
   }
 }
