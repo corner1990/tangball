@@ -1,10 +1,5 @@
 <import src="/components/usercenter/userinfo.vue.wxml" />
 <import src="/components/usercenter/userCard.vue.wxml" />
-<<<<<<< HEAD
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="0875210a">
-  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="12e6e0bc"></template> <template data="{{...$root[$kk+'1'], $root}}" is="0ba85a3e"></template> <template data="{{...$root[$kk+'2'], $root}}" is="1fc9a523"></template></view>
-=======
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="c8a8fc88">
-  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="3c09bc06"></template> <template data="{{...$root[$kk+'1'], $root}}" is="4a86c902"></template> <template data="{{...$root[$kk+'2'], $root}}" is="59cf42a4"></template></view>
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="fcec8f90">
+  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="4a691c79"></template> <template data="{{...$root[$kk+'1'], $root}}" is="432a95fb"></template> <template data="{{...$root[$kk+'2'], $root}}" is="1131ac20"></template></view>
 </template>

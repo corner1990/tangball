@@ -90,8 +90,19 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(6);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_util__ = __webpack_require__(71);
+
+
+//
+//
+//
+//
 //
 //
 //
@@ -103,21 +114,61 @@ if (false) {(function () {
 
 
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
-      pageName: "场馆列表"
-
+      pageName: "场馆列表",
+      venueList: [],
+      value: "" // 搜索value
     };
   },
 
 
-  methods: {},
-  created: function created() {}
+  methods: {
+    /**
+     * @desc 搜索回调
+     */
+    onSearch: function onSearch() {}
+  },
+  created: function created() {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var _ref, data;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("场馆列表-created");
+              _context.next = 3;
+              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                url: global.PUB.domain + "/crossList?page=tangball_venue"
+
+              });
+
+            case 3:
+              _ref = _context.sent;
+              data = _ref.data;
+
+              console.log("data111111", data);
+              _this.venueList = data.list;
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }))();
+  }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
 
 /***/ }),
 
@@ -142,9 +193,31 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "pageName"
     }
+  }), _vm._v(" "), _c('van-search', {
+    attrs: {
+      "value": _vm.value,
+      "placeholder": "请输入搜索关键词",
+      "use-action-slot": "",
+      "bind:search": "onSearch",
+      "mpcomid": '1'
+    }
+  }), _vm._v(" "), _c('debug_item', {
+    attrs: {
+      "path": "venueList",
+      "text": "场馆列表",
+      "eventid": '1',
+      "mpcomid": '2'
+    },
+    model: {
+      value: (_vm.venueList),
+      callback: function($$v) {
+        _vm.venueList = $$v
+      },
+      expression: "venueList"
+    }
   }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "mpcomid": '1'
+      "mpcomid": '3'
     }
   })], 1)
 }
