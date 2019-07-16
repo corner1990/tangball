@@ -90,12 +90,13 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_util__ = __webpack_require__(32);
 
 
 //
@@ -107,6 +108,7 @@ if (false) {(function () {
 //
 
 /* eslint-disable */
+
 
 
 
@@ -123,35 +125,65 @@ if (false) {(function () {
   },
 
 
-  methods: {},
+  methods: {
+    onShow: function onShow() {
+
+      console.log("rankingList-mpvue.data", this);
+      // mpvue.setData({show: true})
+    }
+  },
   created: function created() {
     var _this = this;
 
     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var _ref, data;
-
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               console.log("唐球达人-created");
-              //ajax请求接口数据
-              _context.next = 3;
-              return post(global.PUB.domain + '/crossList?page=tangball_member');
 
-            case 3:
-              _ref = _context.sent;
-              data = _ref.data;
-
-              console.log("data", data);
-              _this.matchTimeRanklist = data.list;
-
-            case 7:
+            case 1:
             case 'end':
               return _context.stop();
           }
         }
       }, _callee, _this);
+    }))();
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _ref, data;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log("唐球达人-mounted-1");
+              //ajax请求接口数据
+              _context2.next = 3;
+              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                url: global.PUB.domain + '/crossList?page=tangball_member',
+                param: {
+                  pageSize: 50, sortJson: { entries: -1 }
+                }
+              });
+
+            case 3:
+              _ref = _context2.sent;
+              data = _ref.data;
+
+              console.log("data", data);
+              _this2.matchTimeRanklist = data.list;
+              console.log("唐球达人-mounted-2");
+
+            case 8:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
     }))();
   }
 });

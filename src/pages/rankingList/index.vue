@@ -9,6 +9,7 @@
 /* eslint-disable */
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
+import util from "@/utils/util";
 
 export default {
   components: {
@@ -23,14 +24,30 @@ export default {
   },
 
   methods: {
+    onShow() {
+
+      console.log("rankingList-mpvue.data", this);
+      // mpvue.setData({show: true})
+    }
 
   },
   async created() {
     console.log("唐球达人-created");
+
+
+  },
+  async mounted() {
+    console.log("唐球达人-mounted-1");
     //ajax请求接口数据
-    let { data } = await post(global.PUB.domain + '/crossList?page=tangball_member');
-   console.log("data", data);
+    let { data } = await util.post({
+      url: global.PUB.domain + '/crossList?page=tangball_member',
+      param: {
+        pageSize: 50, sortJson: { entries: -1 }
+      }
+    });
+    console.log("data", data);
     this.matchTimeRanklist = data.list;
+    console.log("唐球达人-mounted-2");
 
   }
 }
