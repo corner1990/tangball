@@ -1,7 +1,3 @@
-
-
-<import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="770d9539">
-  <view class="_div data-v-311a7da2 main-wrap"><template path="pageName" value="{{pageName}}" bindchange="handleProxy" text="页面名称" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="397ff173"></template> <template data="{{...$root[$kk+'1'], $root}}" is="59cf42a4"></template></view>
-
+  <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="59cf42a4"></template></view>
 </template>
