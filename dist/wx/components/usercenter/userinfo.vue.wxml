@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <template name="09060807">
+=======
+<template name="3c09bc06">
+>>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
   <view class="_div data-v-3c1339a6 user-info">
     <image src="/static/images/timg.jpg" alt="bg" class="_img data-v-3c1339a6 bg"></image>
     <view class="_div data-v-3c1339a6 avatar-row">

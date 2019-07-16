@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="b76385fa">
   <view class="_div data-v-311a7da2 main-wrap">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-311a7da2">
@@ -37,4 +38,8 @@
       </form>
     </view> <template data="{{...$root[$kk+'15'], $root}}" is="a6892b24"></template>
   </view>
+=======
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="770d9539">
+  <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="59cf42a4"></template></view>
+>>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
 </template>

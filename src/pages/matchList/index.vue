@@ -1,9 +1,9 @@
 <template>
   <div class="main-wrap">
-     <debug_item path="steps" v-model="steps" text="步骤"/>
-     <debug_item path="value" v-model="value" text="搜索关键词"/>
+    <debug_item path="steps" v-model="steps" text="步骤"/>
+    <debug_item path="matchlist" v-model="matchlist" text="赛事列表"/>
 
-     <input type="text"  v-model="value">
+    <input type="text" v-model="value">
     <van-search v-model="value" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch"/>
     <div>
       <van-tabs :active="active" bind:change="onChange">
@@ -44,7 +44,7 @@
 <script>
 /* eslint-disable */
 import matchListcomponent from "./matchListComponent";
-import { get, post } from "@/utils/request";
+import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import Dialog from "../../../static/vant/dialog/dialog";
@@ -54,7 +54,7 @@ export default {
     card,
     mytabbar,
     Dialog,
-    matchListcomponent,debug_item
+    matchListcomponent, debug_item
   },
   data() {
     return {
@@ -106,14 +106,31 @@ export default {
     /**
      * @desc 搜索回调
      */
-    onSearch() {}
+    onSearch() { }
     /**
      * @desc 赛事切换回调
      */
   },
-  async created() {
-    //ajax请求接口数据
-    let { data } = await post(global.PUB.domain + '/crossList?page=tangball_match');
+   created() {
+    console.log("赛事列表created");
+
+
+  }, async mounted() {
+
+    console.log("赛事列表mounted");
+    // //ajax请求接口数据
+    // let { data } = await post(global.PUB.domain + '/crossList?page=tangball_match',{findJson:{ "matchType": 2 }});
+    // this.matchlist = data.list;
+
+
+    /**
+     * ajax请求参赛次数排行榜
+     * 请求会员表tangball_member
+     */
+    let { data } = await util.post({
+      url: global.PUB.domain + '/crossList?page=tangball_match',
+      param: { findJson: { "matchType": 1 } }
+    });
     this.matchlist = data.list;
 
   }

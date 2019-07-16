@@ -1,6 +1,10 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
+<<<<<<< HEAD
 global.webpackJsonpMpvue([11],{
+=======
+global.webpackJsonpMpvue([12],{
+>>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
 
 /***/ 186:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -91,7 +95,7 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(6);
 //
 //
 //
@@ -109,7 +113,7 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      pageName: "个人中心-系统消息列表"
+      pageName: "个人中心-我的赛事报名详情"
 
     };
   },

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="797c783a">
   <view class="_div data-v-43ab7364 main-wrap">
     <view class="_div data-v-43ab7364 FS24 TAC LH36">XXX首届唐球赛12345</view>
@@ -14,4 +15,9 @@
     </van-cell-group>
     <van-button size="large" square type="primary" class="_van-button data-v-43ab7364">立即报名</van-button> <template data="{{...$root[$kk+'10'], $root}}" is="a6892b24"></template>
   </view>
+=======
+<import src="/components/common/debug_item/debug_item.vue.wxml" />
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="609cec33">
+  <view class="_div data-v-43ab7364 main-wrap"><template path="pageName" value="{{pageName}}" bindchange="handleProxy" text="页面名称" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="397ff173"></template> <template data="{{...$root[$kk+'1'], $root}}" is="59cf42a4"></template></view>
+>>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
 </template>

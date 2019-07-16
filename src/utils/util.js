@@ -86,6 +86,26 @@ Promise.prototype.finally = function (callback) {
     reason => P.resolve(callback()).then(() => { throw reason })
   );
 };
+
+
+var parseParam = function(param, key1) { //函数：{将json转成url参数形式}-递归
+  var paramStr = "";
+  if (typeof(param) == "string" || typeof(param) == "number" || typeof(param) == "boolean") { //Q1：{参数类型}是字符串，数字或布尔
+    paramStr += "&" + key1 + "=" + encodeURIComponent(param);
+  } else { //Q2：{参数类型}是数组或对象
+    for (var key in param) {
+      var k = key1 == null ? key : key1 + (param instanceof Object ? "[" + key + "]" : "." + key);
+      // if (param[key]) {//如果{key}存在
+      paramStr += '&' + parseParam(param[key], k);
+      // }
+
+    }
+  }
+  return paramStr.substr(1);
+};
+
+
+
 /**
  * 微信请求get方法
  * url
@@ -93,10 +113,12 @@ Promise.prototype.finally = function (callback) {
  */
 function getRequest(url, data) {
   var getRequest = wxPromisify(wx.request)
+  data=parseParam(data); //调用：{将json转成url参数形式},
+  console.log("data###", data);
   return getRequest({
     url: url,
     method: 'GET',
-    data: data,
+    data:  data,
     header: {
       'Content-Type': 'application/json'
     }
@@ -107,12 +129,16 @@ function getRequest(url, data) {
  * url
  * data 以对象的格式传入
  */
-function postRequest(url, data) {
+function postRequest(json) {
+  let {url,param}=json;
+  console.log("postRequest####");
   var postRequest = wxPromisify(wx.request)
+  param=parseParam(param); //调用：{将json转成url参数形式},
+  console.log("param###", param);
   return postRequest({
     url: url,
     method: 'POST',
-    data: data,
+    data: param,
     header: {
       "content-type": "application/x-www-form-urlencoded"
     },
@@ -178,7 +204,7 @@ export default {
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数
   $get: getRequest, // get方法封装
-  $post: postRequest, //post方法封装
+  post: postRequest, //post方法封装
   wxPromisify: wxPromisify, //promise 方法
   wxLogin: wxLogin, // 登录用户发那个发封装
   wxGetUserInfo: wxGetUserInfo, // 获取用户信息方法封装
