@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <import src="/pages/index/index.vue.wxml" /><template is="e897949a" data="{{ ...$root['0'], $root }}"/>
+=======
+<import src="/pages/index/index.vue.wxml" /><template is="77e9fed2" data="{{ ...$root['0'], $root }}"/>
+>>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08

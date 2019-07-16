@@ -90,23 +90,8 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(7);
 //
 //
 //
@@ -120,70 +105,17 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_1__components_mytabbar_mytabbar__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
-      activeStep: 0,
-      steps: [{
-        text: '步骤一',
-        desc: '描述信息'
-      }, {
-        text: '步骤二',
-        desc: '描述信息'
-      }, {
-        text: '步骤三',
-        desc: '描述信息'
-      }, {
-        text: '步骤四',
-        desc: '描述信息'
-      }],
-      matchlist: [{
-        'title': '首届唐球锦标赛1',
-        'desc': '这是首届唐球锦标赛',
-        'tag': '可报名',
-        'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-        'price': 500
-      }, {
-        'title': '首届唐球锦标赛2',
-        'desc': '这是首届唐球锦标赛',
-        'tag': '可报名',
-        'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-        'aaaa': '1111'
-      }],
+      pageName: "个人中心-系统消息列表"
 
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-
-      value: '' // 搜索value
     };
   },
 
 
-  methods: {
-    onShow: function onShow() {
-      this.show = true;
-      console.log('mpvue.data', this);
-      // mpvue.setData({show: true})
-    },
-
-    /**
-     * @desc 搜索回调
-     */
-    onSearch: function onSearch() {},
-
-    /**
-     * @desc 赛事切换回调
-     */
-    tabChange: function tabChange(url) {
-      console.log(url);
-      wx.switchTab({
-        url: url
-      });
-    }
-  },
+  methods: {},
   created: function created() {}
 });
 
@@ -196,72 +128,23 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('div', {
-    staticClass: "FS24 TAC LH36"
-  }, [_vm._v("XXX首届唐球赛12345")]), _vm._v(" "), _c('van-steps', {
+  }, [_c('debug_item', {
     attrs: {
-      "steps": _vm.steps,
-      "active": _vm.activeStep,
-      "active-color": "#f44",
+      "path": "pageName",
+      "text": "页面名称",
+      "eventid": '0',
       "mpcomid": '0'
+    },
+    model: {
+      value: (_vm.pageName),
+      callback: function($$v) {
+        _vm.pageName = $$v
+      },
+      expression: "pageName"
     }
-  }), _vm._v(" "), _c('van-cell-group', {
+  }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "title": "赛事信息",
-      "mpcomid": '6'
-    }
-  }, [_c('van-cell', {
-    attrs: {
-      "title": "赛事时间",
-      "title-width": "100px",
-      "value": "2019.07.30-2019.08.09",
       "mpcomid": '1'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "距报名截止时间",
-      "value": "5天6小时26分",
-      "mpcomid": '2'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "举办地点",
-      "value": "深圳南山XXXXX",
-      "mpcomid": '3'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "报名费",
-      "value": "200元",
-      "mpcomid": '4'
-    }
-  }), _vm._v(" "), _c('van-cell', {
-    attrs: {
-      "title": "已报名人数",
-      "value": "567人",
-      "mpcomid": '5'
-    }
-  })], 1), _vm._v(" "), _c('van-cell-group', {
-    attrs: {
-      "title": "分组2",
-      "mpcomid": '8'
-    }
-  }, [_c('van-cell', {
-    attrs: {
-      "title": "单元格",
-      "value": "内容",
-      "mpcomid": '7'
-    }
-  })], 1), _vm._v(" "), _c('van-button', {
-    attrs: {
-      "size": "large",
-      "square": "",
-      "type": "primary",
-      "mpcomid": '9'
-    }
-  }, [_vm._v("立即报名")]), _vm._v(" "), _c('mytabbar', {
-    attrs: {
-      "mpcomid": '10'
     }
   })], 1)
 }

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="51b0fa10">
   <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="1fc9a523"></template></view>
+=======
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="770d9539">
+  <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="59cf42a4"></template></view>
+>>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
 </template>

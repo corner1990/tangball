@@ -1,6 +1,7 @@
 <template>
   <div class="main-wrap">
     <debug_item path="pageName" v-model="pageName" text="页面名称"/>
+    <debug_item path="matchTimeRanklist" v-model="matchTimeRanklist" text="比赛次数排行列表"/>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -15,7 +16,8 @@ export default {
   },
   data() {
     return {
-      pageName: "唐球达人"
+      pageName: "唐球达人",
+      matchTimeRanklist: [],//比赛次数排行列表
 
     }
   },
@@ -23,7 +25,13 @@ export default {
   methods: {
 
   },
-  created() {
+  async created() {
+    console.log("唐球达人-created");
+    //ajax请求接口数据
+    let { data } = await post(global.PUB.domain + '/crossList?page=tangball_member');
+   console.log("data", data);
+    this.matchTimeRanklist = data.list;
+
   }
 }
 </script>

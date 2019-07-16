@@ -109,7 +109,7 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      pageName: "个人中心-系统消息列表"
+      pageName: "个人中心-我的赛事报名详情"
 
     };
   },

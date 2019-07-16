@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <import src="/pages/myErollDetail/index.vue.wxml" /><template is="2ca85ba8" data="{{ ...$root['0'], $root }}"/>
+=======
+<import src="/pages/myErollDetail/index.vue.wxml" /><template is="7962d472" data="{{ ...$root['0'], $root }}"/>
+>>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
