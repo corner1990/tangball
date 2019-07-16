@@ -1,19 +1,9 @@
 {
   "pages": [
-<<<<<<< HEAD
-=======
-    "pages/index/main",
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/matchList/main",
+    "pages/index/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
-<<<<<<< HEAD
-    "pages/tanghome/main",
-   
-
-    "pages/index/main",
-=======
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
@@ -30,28 +20,32 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-   
-    "list": [{
-      "text": "首页",
-      "pagePath": "pages/index/main",
-      "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
-    }, {
-      "text": "唐球馆",
-      "pagePath": "pages/tanghome/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }, {
-      "text": "活动",
-      "pagePath": "pages/event/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }, {
-      "text": "个人中心",
-      "pagePath": "pages/usercenter/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }],
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/tabs/home.png",
+        "selectedIconPath": "static/tabs/home-active.png"
+      },
+      {
+        "text": "唐球馆",
+        "pagePath": "pages/tanghome/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      },
+      {
+        "text": "活动",
+        "pagePath": "pages/event/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/usercenter/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      }
+    ],
     "position": "bottom"
   },
   "usingComponents": {
@@ -63,11 +57,8 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-<<<<<<< HEAD
-    "van-icon": "/static/vant/icon/index"  
-=======
-    "van-icon": "/static/vant/icon/index" ,
-    "van-cell": "/static/vant/cell/index"  
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
-  }
+    "van-icon": "/static/vant/icon/index",
+    "van-cell": "/static/vant/cell/index"
+  },
+  "sitemapLocation": "sitemap97.json"
 }

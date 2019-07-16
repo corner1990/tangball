@@ -12,7 +12,7 @@
         <view class="_div data-v-607d94f0">{{price}}</view>
       </view>
       <view slot="footer" class="_div data-v-607d94f0 rpg11">
-        <view class="_div data-v-607d94f0 macth-btn" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">去报名</view>
+        <view class="_div data-v-607d94f0 macth-btn" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">火热报名中</view>
         <view class="_div data-v-607d94f0 macth-btn">查看详情</view>
       </view>
     </view>

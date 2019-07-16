@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="4419e9cf">
   <view class="_div data-v-7e06a7cb">赛事活动 <template data="{{...$root[$kk+'0'], $root}}" is="63993762"></template></view>
-=======
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="00cca2cc">
-  <view class="_div data-v-7e06a7cb">赛事活动 <template data="{{...$root[$kk+'0'], $root}}" is="59cf42a4"></template></view>
->>>>>>> 1a93282b5be89defaf6e8841188b56961d958392
 </template>

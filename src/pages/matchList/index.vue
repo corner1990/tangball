@@ -20,6 +20,7 @@
             :key="i"
           ></matchListcomponent>
         </van-tab>
+
         <van-tab title="全国">
           <matchListcomponent
             :desc="item.remark"
@@ -77,17 +78,7 @@ export default {
           desc: "描述信息"
         }
       ],
-      matchlist: [
-        // {
-        //   'id': 1,
-        //   'title': '首届唐球锦标赛1',
-        //   'desc': '这是首届唐球锦标赛',
-        //   'tag': '可报名',
-        //   'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-        //   'price': 500,
-        //   'thumbLink': "pages/matchDetail/main",
-        // },
-      ],
+      matchlist: [],
 
 
       value: '999' // 搜索value

@@ -1,4 +1,4 @@
-<template name="397ff173">
+<template name="2ed2b230">
   <view class="_div data-v-1ec9ebfd debug_item">
     <view class="_div data-v-1ec9ebfd FWB">{{text}}:{{path}}</view>
     <view class="_div data-v-1ec9ebfd">{{valueNeed}}</view>
