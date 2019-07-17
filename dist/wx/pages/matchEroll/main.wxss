@@ -1,1 +1,20 @@
 @import "../../common/vendor.wxss";
+
+.main-wrap.data-v-311a7da2 {
+  margin: 0 40rpx;
+}
+.event-info.data-v-311a7da2 {
+  line-height: 60rpx;
+  font-size: 32rpx;
+}
+.form-wrap.data-v-311a7da2 {
+  margin-top: 40rpx;
+  line-height: 72rpx;
+  font-size: 32rpx;
+}
+.form-wrap ._input.data-v-311a7da2 {
+  height: 72rpx;
+}
+.form-wrap .button.data-v-311a7da2 {
+  width: 100%;
+}

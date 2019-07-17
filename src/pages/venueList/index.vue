@@ -1,8 +1,10 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
+    <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
     <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
+     <!-- 引进筛选城市组件 -->
+    <city_select ></city_select>
      <venueListComponent
         :area="item.area"
         :title="item.name"
@@ -13,7 +15,10 @@
         :key="i"
       ></venueListComponent>
     <mytabbar></mytabbar>
+   
+   
   </div>
+  
 </template>
 <script>
 /* eslint-disable */
@@ -21,12 +26,14 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
+import city_select from '@/components/city_select'
 
 export default {
   components: {
     mytabbar,
     debug_item,
-    venueListComponent
+    venueListComponent,
+    city_select
   },
   data() {
     return {
