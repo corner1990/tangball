@@ -1,3 +1,40 @@
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="308522d8">
-  <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="f0b045fa"></template></view>
+  <view class="_div data-v-311a7da2 main-wrap">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-311a7da2">
+      <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
+        <swiper-item class="_swiper-item data-v-311a7da2">
+          <image src="{{item}}" class="_image data-v-311a7da2 slide-image" height="150"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="_div data-v-311a7da2 event-info">
+      <view class="_h3 data-v-311a7da2">赛事名称</view>
+      <view class="_p data-v-311a7da2">比赛时间：2019-09-01</view>
+      <view class="_p data-v-311a7da2">比赛地点： 22223423424</view>
+    </view>
+    <view class="_div data-v-311a7da2 form-wrap">
+      <form class="_form data-v-311a7da2">
+        <van-row class="_van-row data-v-311a7da2">
+          <van-col span="8" class="_van-col data-v-311a7da2 title">参赛人姓名</van-col>
+          <van-col span="16" class="_van-col data-v-311a7da2"><input placeholder="参赛人姓名" class="_input data-v-311a7da2" /></van-col>
+        </van-row>
+        <van-row class="_van-row data-v-311a7da2">
+          <van-col span="8" class="_van-col data-v-311a7da2 title">手机号码</van-col>
+          <van-col span="10" class="_van-col data-v-311a7da2"><input placeholder="手机号码" class="_input data-v-311a7da2" /></van-col>
+          <van-col span="6" class="_van-col data-v-311a7da2">
+            <van-button plain type="primary" size="small" class="_van-button data-v-311a7da2">获取验证码</van-button>
+          </van-col>
+        </van-row>
+        <van-row class="_van-row data-v-311a7da2">
+          <van-col span="8" class="_van-col data-v-311a7da2 title">报名费</van-col>
+          <van-col span="16" class="_van-col data-v-311a7da2 price"></van-col>
+        </van-row>
+        <van-row class="_van-row data-v-311a7da2 button-wrap">
+          <van-col span="24" class="_van-col data-v-311a7da2">
+            <van-button type="info" block class="_van-button data-v-311a7da2">立刻报名</van-button>
+          </van-col>
+        </van-row>
+      </form>
+    </view> <template data="{{...$root[$kk+'15'], $root}}" is="f0b045fa"></template>
+  </view>
 </template>
