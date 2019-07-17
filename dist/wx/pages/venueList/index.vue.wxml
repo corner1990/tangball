@@ -1,7 +1,7 @@
 <import src="/components/city_select.vue.wxml" />
 <import src="/pages/venueList/venueListComponent.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="94f19226">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="182c0e9d">
   <view class="_div data-v-ced483c4 main-wrap">
-    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-ced483c4"></van-search> <template bindselect="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="3dc8a758"></template> <template wx:key="i" data="{{...$root[$kk+'2_'+i], $root}}" is="714eb2c5" wx:for="{{venueList}}" wx:for-index="i" wx:for-item="item"></template> <template data="{{...$root[$kk+'3'], $root}}" is="59cf42a4"></template>
+    <van-search value="{{value}}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" class="_van-search data-v-ced483c4"></van-search> <template bindselect="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="279d4de2"></template> <template wx:key="i" data="{{...$root[$kk+'2_'+i], $root}}" is="05f9d915" wx:for="{{venueList}}" wx:for-index="i" wx:for-item="item"></template> <template data="{{...$root[$kk+'3'], $root}}" is="a6892b24"></template>
   </view>
 </template>

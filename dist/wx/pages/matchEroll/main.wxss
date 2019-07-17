@@ -1,7 +1,7 @@
 @import "../../common/vendor.wxss";
 
 .main-wrap.data-v-311a7da2 {
-  margin: 0 40rpx;
+  margin: 0 20rpx;
 }
 .event-info.data-v-311a7da2 {
   line-height: 60rpx;
@@ -17,4 +17,18 @@
 }
 .form-wrap .button.data-v-311a7da2 {
   width: 100%;
+}
+.bind-phone {
+  margin-top: 40rpx;
+  height: 400rpx;
+}
+.bind-phone ._input {
+  vertical-align: center;
+}
+.row {
+  height: 140rpx;
+  border-bottom: 2rpx solid #dedede;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
