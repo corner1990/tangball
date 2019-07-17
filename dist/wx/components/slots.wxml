@@ -1,21 +1,17 @@
 <import src="/components/mytabbar/mytabbar.vue.wxml" />
-<import src="/components/common/debug_item/debug_item.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" />
 <import src="/components/card.vue.wxml" />
-<import src="/components/usercenter/userinfo.vue.wxml" />
-<import src="/components/usercenter/userCard.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" />
-<<<<<<< HEAD
-<import src="/components/usercenter/cardItem.vue.wxml" />
-<import src="/components/map/map.vue.wxml" />
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" />
 <import src="/components/map/Map.vue.wxml" />
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" />
-=======
+<import src="/components/usercenter/userinfo.vue.wxml" />
+<import src="/components/usercenter/userCard.vue.wxml" />
+<import src="/components/mytabbar/mytabbar.vue.wxml" />
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/pages/matchList/matchListComponent.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" />
 <import src="/components/usercenter/cardItem.vue.wxml" />
->>>>>>> 9722b3c7d3e988e34ff8c8e69f45f7c0cbc48b5c
+<import src="/modules/vue-baidu-map/components/map/Map.vue.wxml" />
+<import src="/components/common/debug_item/debug_item.vue.wxml" />
+<import src="/components/mytabbar/mytabbar.vue.wxml" />

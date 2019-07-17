@@ -1,6 +1,6 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([7],{
+global.webpackJsonpMpvue([3],{
 
 /***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -30,7 +30,7 @@ app.$mount();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a988065e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a988065e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(233);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -91,9 +91,8 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-<<<<<<< HEAD
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_map_Map__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_map_Map__ = __webpack_require__(229);
 //
 //
 //
@@ -121,9 +120,6 @@ if (false) {(function () {
 //
 //
 //
-=======
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(6);
->>>>>>> 9722b3c7d3e988e34ff8c8e69f45f7c0cbc48b5c
 //
 //
 //
@@ -192,6 +188,240 @@ if (false) {(function () {
 /***/ }),
 
 /***/ 229:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(232);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(230)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-27844fe7"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\components\\map\\Map.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Map.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-27844fe7", Component.options)
+  } else {
+    hotAPI.reload("data-v-27844fe7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ 230:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 231:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(5);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* eslint-disable */
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
+  },
+  data: function data() {
+    return {
+      latitude: 23.099994,
+      longitude: 113.32452,
+      markers: [{
+        id: 1,
+        latitude: 23.099994,
+        longitude: 113.32452,
+        name: "T.I.T 创意园",
+        iconPath: "/static/images/location.png"
+      }],
+      covers: [{
+        latitude: 23.099994,
+        longitude: 113.32452,
+        iconPath: "/static/images/location.png"
+      }, {
+        latitude: 23.099994,
+        longitude: 113.30452,
+        iconPath: "/static/images/location.png"
+      }]
+    };
+  },
+
+
+  method: {
+    onReady: function onReady(e) {
+      this.mapCtx = wx.createMapContext("myMap");
+    },
+    getCenterLocation: function getCenterLocation() {
+      this.mapCtx.getCenterLocation({
+        success: function success(res) {
+          console.log(res.longitude);
+          console.log(res.latitude);
+        }
+      });
+    },
+    moveToLocation: function moveToLocation() {
+      this.mapCtx.moveToLocation();
+    },
+    translateMarker: function translateMarker() {
+      this.mapCtx.translateMarker({
+        markerId: 1,
+        autoRotate: true,
+        duration: 1000,
+        destination: {
+          latitude: 23.10229,
+          longitude: 113.3345211
+        },
+        animationEnd: function animationEnd() {
+          console.log("animation end");
+        }
+      });
+    },
+    includePoints: function includePoints() {
+      this.mapCtx.includePoints({
+        padding: [10],
+        points: [{
+          latitude: 23.10229,
+          longitude: 113.3345211
+        }, {
+          latitude: 23.00229,
+          longitude: 113.3345211
+        }]
+      });
+    }
+  },
+  created: function created() {}
+});
+
+/***/ }),
+
+/***/ 232:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "main-wrap"
+  }, [_c('div', {
+    staticClass: "page-body"
+  }, [_c('div', {
+    staticClass: "page-section page-section-gap"
+  }, [_c('map', {
+    staticStyle: {
+      "width": "100%",
+      "height": "300px"
+    },
+    attrs: {
+      "id": "myMap",
+      "latitude": _vm.latitude,
+      "longitude": _vm.longitude,
+      "markers": _vm.markers,
+      "covers": _vm.covers
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "btn-area"
+  }, [_c('button', {
+    staticClass: "page-body-button",
+    attrs: {
+      "bindtap": "getCenterLocation",
+      "type": "primary"
+    }
+  }, [_vm._v("获取位置")]), _vm._v(" "), _c('button', {
+    staticClass: "page-body-button",
+    attrs: {
+      "bindtap": "moveToLocation",
+      "type": "primary"
+    }
+  }, [_vm._v("移动位置")]), _vm._v(" "), _c('button', {
+    staticClass: "page-body-button",
+    attrs: {
+      "bindtap": "translateMarker",
+      "type": "primary"
+    }
+  }, [_vm._v("移动标注")]), _vm._v(" "), _c('button', {
+    staticClass: "page-body-button",
+    attrs: {
+      "bindtap": "includePoints",
+      "type": "primary"
+    }
+  }, [_vm._v("缩放视野展示所有经纬度")])], 1)])])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-27844fe7", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 233:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -282,193 +512,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-a988065e", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 258:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(261);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(259)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-27844fe7"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src\\components\\map\\Map.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Map.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-27844fe7", Component.options)
-  } else {
-    hotAPI.reload("data-v-27844fe7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 259:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 260:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(7);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* eslint-disable */
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */],
-    debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
-  },
-  data: function data() {
-    return {
-      markers: [{
-        iconPath: "https://upload-images.jianshu.io/upload_images/3687593-16487a4e40fd817c.png",
-        id: 0,
-        latitude: 23.099994,
-        longitude: 113.32452,
-        width: 35,
-        height: 35
-      }],
-      polyline: [{
-        points: [{
-          longitude: 113.3245211,
-          latitude: 23.10229
-        }, {
-          longitude: 113.32452,
-          latitude: 23.21229
-        }],
-        color: "#FF0000DD",
-        width: 2,
-        dottedLine: true
-      }],
-      controls: [{
-        id: 1,
-        iconPath: "/resources/location.png",
-        position: {
-          left: 0,
-          top: 300 - 50,
-          width: 50,
-          height: 50
-        },
-        clickable: true
-      }]
-    };
-  },
-
-
-  methods: {
-    regionchange: function regionchange(e) {
-      console.log(e.type);
-    },
-    markertap: function markertap(e) {
-      console.log(e.markerId);
-    },
-    controltap: function controltap(e) {
-      console.log(e.controlId);
-    }
-  },
-  created: function created() {}
-});
-
-/***/ }),
-
-/***/ 261:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "main-wrap"
-  }, [_c('map', {
-    staticStyle: {
-      "width": "100%",
-      "height": "300px"
-    },
-    attrs: {
-      "id": "map",
-      "longitude": "113.324520",
-      "latitude": "23.099994",
-      "scale": "14",
-      "controls": _vm.controls,
-      "bindcontroltap": "controltap",
-      "markers": _vm.markers,
-      "bindmarkertap": "markertap",
-      "polyline": _vm.polyline,
-      "bindregionchange": "regionchange",
-      "show-location": ""
-    }
-  })], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-27844fe7", esExports)
   }
 }
 
