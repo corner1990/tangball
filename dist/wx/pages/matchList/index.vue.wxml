@@ -1,7 +1,7 @@
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/pages/matchList/matchListComponent.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="57cd5c7b">
-  <view class="_div data-v-609c9ef4 main-wrap"><template path="steps" value="{{steps}}" bindchange="handleProxy" text="步骤" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="93270faa"></template> <template path="value" value="{{value}}" bindchange="handleProxy" text="搜索关键词" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="93270faa"></template> <input type="text" value="{{value}}" bindinput="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_input data-v-609c9ef4" />
+  <view class="_div data-v-609c9ef4 main-wrap"><template path="steps" value="{{steps}}" bindchange="handleProxy" text="步骤" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="93270faa"></template> <template path="matchlist" value="{{matchlist}}" bindchange="handleProxy" text="赛事列表" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="93270faa"></template> <input type="text" value="{{value}}" bindinput="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_input data-v-609c9ef4" />
     <van-search value="{{value}}" bindchange="handleProxy" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-search data-v-609c9ef4"></van-search>
     <view class="_div data-v-609c9ef4">
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
