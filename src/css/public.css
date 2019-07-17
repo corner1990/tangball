@@ -386,6 +386,10 @@ table.n-table.n-table-debug th {
 .H30{ height: 30px;}
 .H40{ height: 40px;}
 .H50{ height: 50px;}
+.H60{ height: 50px;}
+.H70{ height: 50px;}
+.H80{ height: 50px;}
+.H90{ height: 50px;}
 .H100{ height: 100px;}
 .H200{ height: 200px;}
 .H300{ height: 300px;}
@@ -726,6 +730,7 @@ table.n-table.n-table-debug th {
 .LH38{ line-height: 38px;}
 .LH40{ line-height: 40px;}
 .LH50{ line-height: 50px;}
+.LH110{ line-height: 110px;}
  
  .FS12{
    font-size: 12px;

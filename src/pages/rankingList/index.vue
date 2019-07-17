@@ -11,8 +11,9 @@
 </template>
 <script>
 /* eslint-disable */
-import mytabbar from "@/components/mytabbar/mytabbar";
-import debug_item from "@/components/common/debug_item/debug_item";
+import mytabbar from '@/components/mytabbar/mytabbar'
+import debug_item from '@/components/common/debug_item/debug_item'
+import util from "@/utils/util";
 
 export default {
   components: {
@@ -26,14 +27,33 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    onShow() {
+
+      console.log("rankingList-mpvue.data", this);
+      // mpvue.setData({show: true})
+    }
+
+  },
   async created() {
     console.log("唐球达人-created");
-    //ajax请求接口数据
-    let { data } = await post(
-      global.PUB.domain + "/crossList?page=tangball_member"
-    );
-    console.log("data", data);
+
+
+  },
+  async mounted() {
+  
+    /**
+     * ajax请求参赛次数排行榜
+     * 请求会员表tangball_member
+     */
+    let { data } = await util.post({
+      url: global.PUB.domain + '/crossList?page=tangball_member',
+      param: {
+        pageSize: 50, //每页50条数据
+        sortJson: { entries: 1 },//按参赛次数降序排序
+         selectJson: { P1: 1 ,entries: 1 ,name: 1},//指定返回哪些字段
+      }
+    });
     this.matchTimeRanklist = data.list;
   }
 };
