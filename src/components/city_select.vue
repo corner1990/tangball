@@ -11,8 +11,8 @@
            v-for="(item,index) in cityList" 
            :key="item.P1"
            :class="selectIndex==index?'active':''"
-           @click="checkedCity(index,item.P2)"
-           >{{item.P2}}</button>
+           @click="checkedCity(index,item.P7)"
+           >{{item.P2}}({{item.tangball?item.tangball.countVenue:0}})</button>
           <button class="city-button" @click="allCity()" v-show="showCityButton"><van-icon name="arrow-up" /></button>
       </div>
   </div>
@@ -55,6 +55,9 @@ export default {
                 param:{
                     findJson:{
                         P8:"0001"
+                    },
+                    sortJson:{
+                        "tangball.countVenue":-1
                     }
                 }
             })

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/venueDetail/main",
     "pages/index/main",
     "pages/matchList/main",
     "pages/tanghome/main",
@@ -9,7 +10,6 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/venueList/main",
-    "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",

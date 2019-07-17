@@ -1,5 +1,5 @@
 <import src="/components/usercenter/userinfo.vue.wxml" />
 <import src="/components/usercenter/userCard.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="c8a8fc88">
-  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="3c09bc06"></template> <template data="{{...$root[$kk+'1'], $root}}" is="4a86c902"></template> <template data="{{...$root[$kk+'2'], $root}}" is="59cf42a4"></template></view>
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="0954d404">
+  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="3571ac45"></template> <template data="{{...$root[$kk+'1'], $root}}" is="2e3325c7"></template> <template data="{{...$root[$kk+'2'], $root}}" is="77188228"></template></view>
 </template>

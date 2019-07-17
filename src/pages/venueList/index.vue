@@ -2,9 +2,9 @@
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
     <!-- 引进筛选城市组件 -->
-    <city_select @select="getvenue"></city_select>
+    <city_select @select="search"></city_select>
     <venueListComponent
       :area="item.area"
       :title="item.name"
@@ -44,13 +44,32 @@ export default {
     /**
      * @desc 搜索回调
      */
-    onSearch() {},
-    async getvenue(cityId) {
+    async search(areaId) {
+      console.log("areaId", areaId);
+
       let { data } = await util.post({
-        url: global.PUB.domain + "/crossList?page=tangball_venue",
-        param: {}
+        url: global.PUB.domain + "/crossListRelation",
+        param: {
+          "needRelation": "1",
+          "columnItem": "P7",
+          "columnTarget": "area",
+          "sheetRelation": {
+            "page": "dmagic_area",
+            "findJson": {
+              "P8": areaId
+            }
+          },
+          "sheetTarget": {
+            "page": "tangball_venue",
+            "pageSize": "9999",
+            "findJson": {}
+          }
+        }
       });
       this.venueList = data.list;
+      console.log("this.venueList", this.venueList);
+
+
     }
   },
   mounted() {
