@@ -143,11 +143,7 @@ if (false) {(function () {
     };
   },
 
-
   methods: {
-    /**
-     * @desc 搜索回调
-     */
     search: function search(areaId) {
       var _this = this;
 
@@ -159,7 +155,6 @@ if (false) {(function () {
             switch (_context.prev = _context.next) {
               case 0:
                 console.log("areaId", areaId);
-
                 _context.next = 3;
                 return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
                   url: global.PUB.domain + "/crossListRelation",
@@ -197,35 +192,8 @@ if (false) {(function () {
       }))();
     }
   },
-  created: function created() {
-    var _this2 = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var _ref2, data;
-
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
-                url: global.PUB.domain + "/crossList?page=tangball_venue",
-                param: {}
-              });
-
-            case 2:
-              _ref2 = _context2.sent;
-              data = _ref2.data;
-
-              _this2.venueList = data.list;
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2);
-    }))();
+  mounted: function mounted() {
+    this.search();
   }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
@@ -500,7 +468,7 @@ if (false) {(function () {
         allCity: function allCity() {
             this.selectIndex = -1;
             this.showCityButton = !this.showCityButton;
-            this.$emit("select", this.cityList);
+            this.$emit("select");
         },
 
         // 获取所有城市列表

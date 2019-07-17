@@ -39,14 +39,9 @@ export default {
       value: "" // 搜索value
     };
   },
-
   methods: {
-    /**
-     * @desc 搜索回调
-     */
     async search(areaId) {
       console.log("areaId", areaId);
-
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
@@ -68,17 +63,11 @@ export default {
       });
       this.venueList = data.list;
       console.log("this.venueList", this.venueList);
-
-
     }
   },
-  async created() {
-    let { data } = await util.post({
-      url: global.PUB.domain + "/crossList?page=tangball_venue",
-      param: {}
-    });
-    this.venueList = data.list;
-  }
+   mounted(){
+     this.search()
+   }
 };
 </script>
 

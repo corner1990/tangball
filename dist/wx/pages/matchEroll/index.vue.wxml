@@ -1,4 +1,4 @@
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="770d9539">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="308522d8">
   <view class="_div data-v-311a7da2 main-wrap">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-311a7da2">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -35,6 +35,6 @@
           </van-col>
         </van-row>
       </form>
-    </view> <template data="{{...$root[$kk+'15'], $root}}" is="59cf42a4"></template>
+    </view> <template data="{{...$root[$kk+'15'], $root}}" is="f0b045fa"></template>
   </view>
 </template>

@@ -1,1 +1,1 @@
-<import src="/pages/myErollDetail/index.vue.wxml" /><template is="7962d472" data="{{ ...$root['0'], $root }}"/>
+<import src="/pages/myErollDetail/index.vue.wxml" /><template is="7a4fa070" data="{{ ...$root['0'], $root }}"/>
