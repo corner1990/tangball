@@ -51,7 +51,7 @@ export default {
       param: {
         pageSize: 50, //每页50条数据
         sortJson: { entries: -1 },//按参赛次数降序排序
-        //  selectJson: { P1: 1 ,entries: 1 },//指定返回哪些字段
+         selectJson: { P1: 1 ,entries: 1 ,name: 1},//指定返回哪些字段
       }
     });
     this.matchTimeRanklist = data.list;
