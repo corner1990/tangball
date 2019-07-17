@@ -70,17 +70,17 @@
   margin: 0 auto;
   width: 100%;
   text-align: center;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 .ranking-content div {
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   width: 100px;
   display: inline-block;
   text-align: center;
   margin: 10px 5px;
 }
 .ranking-content div:first-child {
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   width: 100px;
   height: 40px;
   line-height: 40px;
