@@ -2,23 +2,20 @@
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
-     <!-- 引进筛选城市组件 -->
-    <city_select ></city_select>
-     <venueListComponent
-        :area="item.area"
-        :title="item.name"
-        :phone="item.phoneNumber"
-        :address="item.address"
-        :album="item.album"
-        v-for="(item,i) in venueList"
-        :key="i"
-      ></venueListComponent>
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+    <!-- 引进筛选城市组件 -->
+    <city_select @select="search"></city_select>
+    <venueListComponent
+      :area="item.area"
+      :title="item.name"
+      :phone="item.phoneNumber"
+      :address="item.address"
+      :album="item.album"
+      v-for="(item,i) in venueList"
+      :key="i"
+    ></venueListComponent>
     <mytabbar></mytabbar>
-   
-   
   </div>
-  
 </template>
 <script>
 /* eslint-disable */
@@ -47,7 +44,33 @@ export default {
     /**
      * @desc 搜索回调
      */
-    onSearch() {}
+    async search(areaId) {
+      console.log("areaId", areaId);
+
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossListRelation",
+        param: {
+          "needRelation": "1",
+          "columnItem": "P7",
+          "columnTarget": "area",
+          "sheetRelation": {
+            "page": "dmagic_area",
+            "findJson": {
+              "P8": areaId
+            }
+          },
+          "sheetTarget": {
+            "page": "tangball_venue",
+            "pageSize": "9999",
+            "findJson": {}
+          }
+        }
+      });
+      this.venueList = data.list;
+      console.log("this.venueList", this.venueList);
+
+
+    }
   },
   async created() {
     let { data } = await util.post({

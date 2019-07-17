@@ -120,9 +120,6 @@ if (false) {(function () {
 //
 //
 //
-//
-//
-//
 
 /* eslint-disable */
 
@@ -151,36 +148,83 @@ if (false) {(function () {
     /**
      * @desc 搜索回调
      */
-    onSearch: function onSearch() {}
+    search: function search(areaId) {
+      var _this = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _ref, data;
+
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log("areaId", areaId);
+
+                _context.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                  url: global.PUB.domain + "/crossListRelation",
+                  param: {
+                    "needRelation": "1",
+                    "columnItem": "P7",
+                    "columnTarget": "area",
+                    "sheetRelation": {
+                      "page": "dmagic_area",
+                      "findJson": {
+                        "P8": areaId
+                      }
+                    },
+                    "sheetTarget": {
+                      "page": "tangball_venue",
+                      "pageSize": "9999",
+                      "findJson": {}
+                    }
+                  }
+                });
+
+              case 3:
+                _ref = _context.sent;
+                data = _ref.data;
+
+                _this.venueList = data.list;
+                console.log("this.venueList", _this.venueList);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
+    }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var _ref, data;
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _ref2, data;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.next = 2;
+              _context2.next = 2;
               return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
                 url: global.PUB.domain + "/crossList?page=tangball_venue",
                 param: {}
               });
 
             case 2:
-              _ref = _context.sent;
-              data = _ref.data;
+              _ref2 = _context2.sent;
+              data = _ref2.data;
 
-              _this.venueList = data.list;
+              _this2.venueList = data.list;
 
             case 5:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, _this);
+      }, _callee2, _this2);
     }))();
   }
 });
@@ -476,6 +520,9 @@ if (false) {(function () {
                                     param: {
                                         findJson: {
                                             P8: "0001"
+                                        },
+                                        sortJson: {
+                                            "tangball.countVenue": -1
                                         }
                                     }
                                 });
@@ -554,10 +601,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       on: {
         "click": function($event) {
-          _vm.checkedCity(index, item.P2)
+          _vm.checkedCity(index, item.P7)
         }
       }
-    }, [_vm._v(_vm._s(item.P2))])
+    }, [_vm._v(_vm._s(item.P2) + "(" + _vm._s(item.tangball ? item.tangball.countVenue : 0) + ")")])
   }), _vm._v(" "), _c('button', {
     directives: [{
       name: "show",
@@ -611,7 +658,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('city_select', {
     attrs: {
+      "eventid": '0',
       "mpcomid": '1'
+    },
+    on: {
+      "select": _vm.search
     }
   }), _vm._v(" "), _vm._l((_vm.venueList), function(item, i) {
     return _c('venueListComponent', {
