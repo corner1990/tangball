@@ -1,6 +1,6 @@
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="11b448ae">
-  <view class="_div data-v-e5e3ffb2 main-wrap"><template path="matchlist" value="{{matchlist}}" bindchange="handleProxy" text="赛事列表" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="93270faa"></template>
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="bfc82a0c">
+  <view class="_div data-v-e5e3ffb2 main-wrap"><template path="matchlist" value="{{matchlist}}" bindchange="handleProxy" text="赛事列表" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="07be0277"></template>
     <view class="_div data-v-e5e3ffb2 FS24 TAC LH36">XXX首届唐球赛12345</view>
     <van-steps steps="{{steps}}" active="{{activeStep}}" active-color="#f44" class="_van-steps data-v-e5e3ffb2"></van-steps>
     <van-cell-group title="赛事信息" class="_van-cell-group data-v-e5e3ffb2">
@@ -13,6 +13,6 @@
     <van-cell-group title="分组2" class="_van-cell-group data-v-e5e3ffb2">
       <van-cell title="单元格" value="内容" class="_van-cell data-v-e5e3ffb2"></van-cell>
     </van-cell-group>
-    <van-button size="large" square type="primary" class="_van-button data-v-e5e3ffb2">立即报名</van-button> <template data="{{...$root[$kk+'11'], $root}}" is="77188228"></template>
+    <van-button size="large" square type="primary" class="_van-button data-v-e5e3ffb2">立即报名</van-button> <template data="{{...$root[$kk+'11'], $root}}" is="1131ac20"></template>
   </view>
 </template>
