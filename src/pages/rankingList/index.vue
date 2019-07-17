@@ -4,7 +4,6 @@
     <rankingListcomponent></rankingListcomponent>
     <debug_item path="matchTimeRanklist" v-model="matchTimeRanklist" text="比赛次数排行列表" />
     <mytabbar></mytabbar>
-    
   </div>
 </template>
 <script>
@@ -49,6 +48,7 @@ export default {
         selectJson: { P1: 1, entries: 1, name: 1 } //指定返回哪些字段
       }
     });
+    console.log("mou-matchtime", data.list);
     this.matchTimeRanklist = data.list;
   }
 };
