@@ -120,9 +120,6 @@ if (false) {(function () {
 //
 //
 //
-//
-//
-//
 
 /* eslint-disable */
 
@@ -151,38 +148,42 @@ if (false) {(function () {
     /**
      * @desc 搜索回调
      */
-    onSearch: function onSearch() {}
-  },
-  created: function created() {
-    var _this = this;
+    onSearch: function onSearch() {},
+    getvenue: function getvenue(cityId) {
+      var _this = this;
 
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var _ref, data;
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _ref, data;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
-                url: global.PUB.domain + "/crossList?page=tangball_venue",
-                param: {}
-              });
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                  url: global.PUB.domain + "/crossList?page=tangball_venue",
+                  param: {}
+                });
 
-            case 2:
-              _ref = _context.sent;
-              data = _ref.data;
+              case 2:
+                _ref = _context.sent;
+                data = _ref.data;
 
-              _this.venueList = data.list;
+                _this.venueList = data.list;
 
-            case 5:
-            case "end":
-              return _context.stop();
+              case 5:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee, _this);
-    }))();
-  }
+        }, _callee, _this);
+      }))();
+    }
+  },
+  mounted: function mounted() {
+    this.getvenue();
+  },
+  created: function created() {}
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
@@ -271,8 +272,6 @@ if (false) {(function () {
 //
 //
 //
-//
-//
 
 /* eslint-disable */
 
@@ -301,17 +300,24 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   return _c('div', {
     staticClass: "main-venue"
   }, [_c('div', {
-    staticClass: "FL"
+    staticClass: "venue-imgbox"
   }, [(_vm.album && _vm.album.length) ? _c('img', {
-    staticClass: "venue-imgbox",
+    staticClass: "venue-img",
     attrs: {
+      "alt": "title",
       "src": _vm.album[0].url
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "venue-textbox"
-  }, [_c('div', [_c('span', {
+  }, [_c('div', {
+    staticClass: "MB5"
+  }, [_c('span', {
     staticClass: "C_999"
-  }, [_vm._v("【" + _vm._s(_vm.area) + "】")]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c('div', [_vm._v("电话:" + _vm._s(_vm.phone))]), _vm._v(" "), _c('div', [_vm._v("地址:" + _vm._s(_vm.address))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("【" + _vm._s(_vm.area) + "】")]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c('div', {
+    staticClass: "MB5"
+  }, [_vm._v("电话:" + _vm._s(_vm.phone))]), _vm._v(" "), _c('div', {
+    staticClass: "MB5"
+  }, [_vm._v("地址:" + _vm._s(_vm.address))])]), _vm._v(" "), _c('div', {
     staticClass: "LH110"
   }, [_c('van-icon', {
     attrs: {
@@ -611,7 +617,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('city_select', {
     attrs: {
+      "eventid": '0',
       "mpcomid": '1'
+    },
+    on: {
+      "select": _vm.getvenue
     }
   }), _vm._v(" "), _vm._l((_vm.venueList), function(item, i) {
     return _c('venueListComponent', {

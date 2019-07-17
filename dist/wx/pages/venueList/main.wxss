@@ -25,10 +25,16 @@
   width: 270rpx;
   height: 180rpx;
   margin: 20rpx;
+  float: left;
+}
+.venue-img.data-v-b471b998 {
+  width: 270rpx;
+  height: 180rpx;
 }
 .venue-textbox.data-v-b471b998 {
   width: 330rpx;
   height: 180rpx;
+  font-size: 32rpx;
   float: left;
   margin-top: 20rpx;
 }
