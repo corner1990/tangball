@@ -1,5 +1,17 @@
 <template>
   <div class="main-wrap">
+
+
+<van-cell
+  is-link
+  :title="item.title"
+  link-type="navigateTo"
+  :url="item.url" v-for="(item,i) in arrLink" :key="i"
+/>
+
+
+
+
     <swiper :indicator-dots="indicatorDots"
       :autoplay="autoplay" :interval="interval" :duration="duration">
       <block v-for="item in imgUrls" :key="item">
@@ -19,10 +31,10 @@
       <van-tabs :active="active" bind:change="onChange">
         <van-tab title="近期">
           <van-card
-            tag="111"
+       
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+           
           />
         </van-tab>
         <van-tab title="全国">
@@ -30,7 +42,7 @@
             tag="222"
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+           
           />
         </van-tab>
         <van-tab title="加盟商">
@@ -38,7 +50,7 @@
             tag="333"
             desc="描述信息"
             title="商品标题"
-            thumb="111"
+       
           />
         </van-tab>
         <van-tab title="全部">
@@ -98,45 +110,44 @@
         <div class="right">
         </div>
     </div>
-    <van-tabbar :active="active">
-      <van-tabbar-item :icon="item.iconPath" v-for="(item, key) in list" :key="key" @click="tabChange(item.pagePath)">{{item.text}}</van-tabbar-item>
-    </van-tabbar>
+    <mytabbar ></mytabbar>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+
+
+import mytabbar from '@/components/mytabbar/mytabbar'
+
+
 import card from '@/components/card'
 // import { get } from '@/utils/request'
 export default {
+  components: {
+    card,mytabbar
+  }, 
   data () {
     return {
+       arrLink: [
+        {"title":"赛事列表","url":"/pages/matchList/main"},
+        {"title":"赛事详情","url":"/pages/matchDetail/main"},
+        {"title":"赛事报名","url":"/pages/matchEroll/main"},
+        {"title":"场馆列表","url":"/pages/venueList/main"},
+        {"title":"场馆详情","url":"/pages/venueDetail/main"},
+        {"title":"唐球达人","url":"/pages/rankingList/main"},
+   
+        {"title":"个人中心-赛事报名列表","url":"/pages/myEroll/main"},
+        {"title":"个人中心-赛事报名详情","url":"/pages/myErollDetail/main"},
+        {"title":"个人中心-系统消息列表","url":"/pages/myMsgList/main"}
+	
+      ],
       motto: 'Hello miniprograme',
       userInfo: {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      list: [
-        {
-          'text': '首页',
-          'pagePath': '../index/main',
-          'iconPath': 'home-o'
-        },
-        {
-          'text': '唐球馆',
-          'pagePath': '../tanghome/main',
-          'iconPath': 'fire-o'
-        },
-        {
-          'text': '活动',
-          'pagePath': '../event/main',
-          'iconPath': 'medel-o'
-        },
-        {
-          'text': '个人中心',
-          'pagePath': '../usercenter/main',
-          'iconPath': 'friends-o'
-        }
-      ],
+    
       radio: 1,
       imgUrls: [
         'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
@@ -147,14 +158,12 @@ export default {
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 0,
+    
       value: '' // 搜索value
     }
   },
 
-  components: {
-    card
-  },
+  
 
   methods: {
     bindViewTap () {
@@ -194,6 +203,11 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+    wx.hideTabBar({
+      complete () {
+        console.log('关闭tabbar')
+      }
+    })
   }
 }
 </script>

@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([7],{
+global.webpackJsonpMpvue([17],{
 
-/***/ 21:
+/***/ 119:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(120);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 22:
+/***/ 120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(126);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(23)
+  __webpack_require__(121)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,18 +79,19 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 23:
+/***/ 121:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 24:
+/***/ 122:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_card__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_card__ = __webpack_require__(21);
 //
 //
 //
@@ -197,49 +198,47 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* eslint-disable */
+
+
 
 
 // import { get } from '@/utils/request'
 /* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    card: __WEBPACK_IMPORTED_MODULE_1__components_card__["a" /* default */], mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */]
+  },
   data: function data() {
     return {
+      arrLink: [{ "title": "赛事列表", "url": "/pages/matchList/main" }, { "title": "赛事详情", "url": "/pages/matchDetail/main" }, { "title": "赛事报名", "url": "/pages/matchEroll/main" }, { "title": "场馆列表", "url": "/pages/venueList/main" }, { "title": "场馆详情", "url": "/pages/venueDetail/main" }, { "title": "唐球达人", "url": "/pages/rankingList/main" }, { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" }, { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" }, { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }],
       motto: 'Hello miniprograme',
       userInfo: {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      list: [{
-        'text': '首页',
-        'pagePath': '../index/main',
-        'iconPath': 'home-o'
-      }, {
-        'text': '唐球馆',
-        'pagePath': '../tanghome/main',
-        'iconPath': 'fire-o'
-      }, {
-        'text': '活动',
-        'pagePath': '../event/main',
-        'iconPath': 'medel-o'
-      }, {
-        'text': '个人中心',
-        'pagePath': '../usercenter/main',
-        'iconPath': 'friends-o'
-      }],
+
       radio: 1,
       imgUrls: ['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640', 'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640', 'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'],
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      active: 0,
+
       value: '' // 搜索value
     };
   },
 
-
-  components: {
-    card: __WEBPACK_IMPORTED_MODULE_0__components_card__["a" /* default */]
-  },
 
   methods: {
     bindViewTap: function bindViewTap() {
@@ -281,19 +280,35 @@ if (false) {(function () {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+    wx.hideTabBar({
+      complete: function complete() {
+        console.log('关闭tabbar');
+      }
+    });
   }
 });
 
 /***/ }),
 
-/***/ 28:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('swiper', {
+  }, [_vm._l((_vm.arrLink), function(item, i) {
+    return _c('van-cell', {
+      key: i,
+      attrs: {
+        "is-link": "",
+        "title": item.title,
+        "link-type": "navigateTo",
+        "url": item.url,
+        "mpcomid": '0_' + i
+      }
+    })
+  }), _vm._v(" "), _c('swiper', {
     attrs: {
       "indicator-dots": _vm.indicatorDots,
       "autoplay": _vm.autoplay,
@@ -305,7 +320,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       key: item
     }, [_c('swiper-item', {
       attrs: {
-        "mpcomid": '0_' + index
+        "mpcomid": '1_' + index
       }
     }, [_c('image', {
       staticClass: "slide-image",
@@ -320,7 +335,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入搜索关键词",
       "use-action-slot": "",
       "bind:search": "onSearch",
-      "mpcomid": '1'
+      "mpcomid": '2'
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -328,51 +343,47 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "active": _vm.active,
       "bind:change": "onChange",
-      "mpcomid": '10'
+      "mpcomid": '11'
     }
   }, [_c('van-tab', {
     attrs: {
       "title": "近期",
-      "mpcomid": '3'
+      "mpcomid": '4'
     }
   }, [_c('van-card', {
     attrs: {
-      "tag": "111",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '2'
+      "mpcomid": '3'
     }
   })], 1), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "全国",
-      "mpcomid": '5'
+      "mpcomid": '6'
     }
   }, [_c('van-card', {
     attrs: {
       "tag": "222",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '4'
+      "mpcomid": '5'
     }
   })], 1), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "加盟商",
-      "mpcomid": '7'
+      "mpcomid": '8'
     }
   }, [_c('van-card', {
     attrs: {
       "tag": "333",
       "desc": "描述信息",
       "title": "商品标题",
-      "thumb": "111",
-      "mpcomid": '6'
+      "mpcomid": '7'
     }
   })], 1), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "全部",
-      "mpcomid": '9'
+      "mpcomid": '10'
     }
   }, [_c('van-card', {
     attrs: {
@@ -380,7 +391,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "desc": "描述信息",
       "title": "商品标题",
       "thumb": "111",
-      "mpcomid": '8'
+      "mpcomid": '9'
     }
   })], 1)], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -389,7 +400,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "标题",
       "desc": "描述信息",
       "status": "状态",
-      "mpcomid": '11'
+      "mpcomid": '12'
     }
   }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -398,7 +409,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "标题",
       "desc": "描述信息",
       "status": "状态",
-      "mpcomid": '12'
+      "mpcomid": '13'
     }
   }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -407,7 +418,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "标题",
       "desc": "描述信息",
       "status": "状态",
-      "mpcomid": '13'
+      "mpcomid": '14'
     }
   }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -416,7 +427,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "标题",
       "desc": "描述信息",
       "status": "状态",
-      "mpcomid": '14'
+      "mpcomid": '15'
     }
   }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "card"
@@ -425,33 +436,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "标题",
       "desc": "描述信息",
       "status": "状态",
-      "mpcomid": '15'
+      "mpcomid": '16'
     }
   }, [_c('view', [_vm._v("内容")])])], 1)], 1), _vm._v(" "), _c('a', {
     staticClass: "counter",
     attrs: {
       "href": "/pages/counter/main"
     }
-  }, [_vm._v("去往Vuex示例页面")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('van-tabbar', {
+  }, [_vm._v("去往Vuex示例页面")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "active": _vm.active,
       "mpcomid": '17'
     }
-  }, _vm._l((_vm.list), function(item, key) {
-    return _c('van-tabbar-item', {
-      key: key,
-      attrs: {
-        "icon": item.iconPath,
-        "eventid": '0_' + key,
-        "mpcomid": '16_' + key
-      },
-      on: {
-        "click": function($event) {
-          _vm.tabChange(item.pagePath)
-        }
-      }
-    }, [_vm._v(_vm._s(item.text))])
-  }))], 1)
+  })], 2)
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
@@ -474,4 +470,4 @@ if (false) {
 
 /***/ })
 
-},[21]);
+},[119]);

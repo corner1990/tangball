@@ -1,0 +1,6 @@
+<template name="751694aa">
+  <view class="_div data-v-1ec9ebfd debug_item">
+    <view class="_div data-v-1ec9ebfd FWB">{{text}}:{{path}}</view>
+    <view class="_div data-v-1ec9ebfd">{{valueNeed}}</view>
+  </view>
+</template>
