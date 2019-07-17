@@ -108,7 +108,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 /* eslint-disable */
 
@@ -178,9 +177,10 @@ if (false) {(function () {
               _ref = _context2.sent;
               data = _ref.data;
 
+              console.log("mou-matchtime", data.list);
               _this2.matchTimeRanklist = data.list;
 
-            case 5:
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -198,7 +198,6 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4bb28a66_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_rankingListComponent_vue__ = __webpack_require__(181);
 var disposed = false
 function injectStyle (ssrContext) {
@@ -217,7 +216,7 @@ var __vue_scopeId__ = "data-v-4bb28a66"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4bb28a66_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_rankingListComponent_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
@@ -256,8 +255,9 @@ if (false) {(function () {
 /***/ }),
 
 /***/ 180:
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 //
 //
 //
@@ -299,6 +299,18 @@ if (false) {(function () {
 //
 //
 //
+//
+
+/* eslint-disable */
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data: function data() {
+    return {};
+  },
+
+  components: {},
+  methods: {},
+  created: function created() {}
+});
 
 /***/ }),
 
@@ -351,7 +363,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "ranking-title"
   }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("男子选手")]), _vm._v(" "), _c('div', [_vm._v("成绩")])]), _vm._v(" "), _c('div', {
     staticClass: "ranking-content"
-  }, [_c('div', [_vm._v("1")]), _vm._v(" "), _c('div', [_c('a', [_vm._v("张三")]), _vm._v(" "), _c('a', [_vm._v("地区")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v("99")]), _vm._v(" "), _c('a', [_vm._v("2019-10-1")])])])]), _vm._v(" "), _c('van-tab', {
+  }, [_c('div', [_c('a', [_vm._v("1")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v("张三")]), _vm._v(" "), _c('a', [_vm._v("地区")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v("99")]), _vm._v(" "), _c('a', [_vm._v("2019-10-1")])])])]), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "女子",
       "mpcomid": '5'

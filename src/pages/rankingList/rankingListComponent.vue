@@ -16,7 +16,9 @@
         </div>
 
         <div class="ranking-content">
-          <div>1</div>
+          <div>
+            <a>1</a>
+          </div>
           <div>
             <a>张三</a>
             <a>地区</a>
@@ -38,8 +40,16 @@
     </van-tabs>
   </div>
 </template>
-
 <script>
+/* eslint-disable */
+export default {
+  data() {
+    return {};
+  },
+  components: {},
+  methods: {},
+  created() {}
+};
 </script>
 
 <style scoped>
@@ -70,30 +80,11 @@
   margin: 0 auto;
   width: 100%;
   text-align: center;
-  /* background-color: aquamarine; */
 }
 .ranking-content div {
-  /* background-color: antiquewhite; */
   width: 100px;
   display: inline-block;
   text-align: center;
-  margin: 10px 5px;
+  margin: 5px;
 }
-.ranking-content div:first-child {
-  /* background-color: antiquewhite; */
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: center;
-  margin: 10px 5px;
-}
-/* .ranking-content div a {
-  background-color: red;
-  height: 25px;
-  line-height: 25px;
-  display: inline-block;
-  text-align: center;
-  margin: 10px 5px;
-} */
 </style>

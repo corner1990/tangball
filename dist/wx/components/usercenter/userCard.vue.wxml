@@ -1,3 +1,3 @@
-<import src="/components/usercenter/cardItem.vue.wxml" /><template name="432a95fb">
-  <view class="_div data-v-34d4b328 user-list"><template wx:key="key" data="{{...$root[$kk+'0_'+key], $root}}" is="597b527a" wx:for="{{list}}" wx:for-index="key" wx:for-item="item"></template></view>
+<import src="/components/usercenter/cardItem.vue.wxml" /><template name="4a86c902">
+  <view class="_div data-v-34d4b328 user-list"><template wx:key="key" data="{{...$root[$kk+'0_'+key], $root}}" is="6ad45c47" wx:for="{{list}}" wx:for-index="key" wx:for-item="item"></template></view>
 </template>
