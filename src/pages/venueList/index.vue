@@ -2,7 +2,9 @@
   <div class="main-wrap">
     <debug_item path="pageName" v-model="pageName" text="页面名称"/>
     <mytabbar></mytabbar>
+    <!-- 引进筛选城市组件 -->
     <city_select @select="print"></city_select>
+    <!-- 测试筛选城市组件 -->
     <div v-if="showCity">
       <div>{{selectCity}}</div>
     </div>
@@ -27,6 +29,7 @@ export default {
   },
 
   methods: {
+    // 测试筛选城市组件方法
     print(city){
       this.showCity = true
       console.log(city);

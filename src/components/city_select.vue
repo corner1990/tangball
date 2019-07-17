@@ -3,7 +3,9 @@
       <div style="height:10px"></div>
       <div class="select-text" @click="showCityBox()">按省份/城市筛选</div>
       <div class="city-box" v-if="showCity"> 
+          
           <button :class="selectIndex==-1?'active':''" class="city-button" @click="allCity()">所有</button>
+          <!-- 遍历数组得到所有城市按钮，在其点击时添加聚焦样式 -->
           <button class="city-button"
             v-show="showCityButton"
            v-for="(item,index) in cityList" 
@@ -29,20 +31,24 @@ export default {
         }
     },
     methods:{
+        // 显示所有城市的方法
         showCityBox(){
             this.showCity = !this.showCity
             console.log();
             
         },
+        // 选中城市时
         checkedCity(index,city){
             this.selectIndex = index
             this.$emit("select",city)
         },
+        // 选中所有城市时 
         allCity(){
             this.selectIndex = -1
             this.showCityButton = !this.showCityButton
             this.$emit("select",this.cityList)
         },
+        // 获取所有城市列表
         async getCityList(){     
             let { data } = await util.post({
                 url:global.PUB.domain + '/crossList?page=dmagic_area',
@@ -56,6 +62,7 @@ export default {
         }
     },
     mounted(){
+        // 在页面加载完之后，获取所有城市列表
         this.getCityList()
     }
 }
