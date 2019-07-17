@@ -104,6 +104,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 /* eslint-disable */
 
@@ -123,6 +125,7 @@ if (false) {(function () {
 
 
   methods: {
+    // 测试筛选城市组件方法
     print: function print(city) {
       this.showCity = true;
       console.log(city);
@@ -272,6 +275,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 /* eslint-disable */
 
@@ -286,19 +291,26 @@ if (false) {(function () {
     },
 
     methods: {
+        // 显示所有城市的方法
         showCityBox: function showCityBox() {
             this.showCity = !this.showCity;
             console.log();
         },
+
+        // 选中城市时
         checkedCity: function checkedCity(index, city) {
             this.selectIndex = index;
             this.$emit("select", city);
         },
+
+        // 选中所有城市时 
         allCity: function allCity() {
             this.selectIndex = -1;
             this.showCityButton = !this.showCityButton;
             this.$emit("select", this.cityList);
         },
+
+        // 获取所有城市列表
         getCityList: function getCityList() {
             var _this = this;
 
@@ -335,6 +347,7 @@ if (false) {(function () {
         }
     },
     mounted: function mounted() {
+        // 在页面加载完之后，获取所有城市列表
         this.getCityList();
     }
 });
