@@ -1,4 +1,4 @@
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="ef213ffc">
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="048a29d3">
   <view class="_div data-v-13520ffa main-wrap">
     <van-cell is-link title="{{item.title}}" link-type="navigateTo" url="{{item.url}}" wx:key="i" key="{{i}}" wx:for="{{arrLink}}" wx:for-index="i" wx:for-item="item" class="_van-cell data-v-13520ffa"></van-cell>
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-13520ffa">
@@ -70,6 +70,6 @@
     <view class="_div data-v-13520ffa all">
       <view class="_div data-v-13520ffa left"></view>
       <view class="_div data-v-13520ffa right"></view>
-    </view> <template data="{{...$root[$kk+'17'], $root}}" is="a6892b24"></template>
+    </view> <template data="{{...$root[$kk+'17'], $root}}" is="f0b045fa"></template>
   </view>
 </template>

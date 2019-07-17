@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-<import src="/pages/rankingList/index.vue.wxml" /><template is="35b596e4" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/rankingList/index.vue.wxml" /><template is="7f96bbf4" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
+<import src="/pages/rankingList/index.vue.wxml" /><template is="15de3b96" data="{{ ...$root['0'], $root }}"/>

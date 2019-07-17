@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<template name="dc417b5e">
-=======
-<template name="6ad45c47">
->>>>>>> 4e8e12392b6a138fd425cbdcf854c7c6fd6c0655
+<template name="f6204a34">
   <view class="_div data-v-76271820 card" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
     <van-icon name="{{data.icon}}" color="#00cedc" size="30px" class="_van-icon data-v-76271820"></van-icon>
     <view class="_p data-v-76271820 card-title">{{data.text}}</view>
