@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrap">
+    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
     <div class="FS24 TAC LH36">深圳XXX场馆</div>
     <swiper
       :indicator-dots="indicatorDots"
@@ -9,13 +10,13 @@
     >
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" width="350" height="150" />
+          <image :src="item" class="slide-image" width="350" height="150"></image>
         </swiper-item>
       </block>
     </swiper>
     <div>
       <van-tabs :active="active" bind:change="onChange">
-        <van-tab title="场馆介绍">
+        <van-tab title="场馆介绍1">
           <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中">
             <view>
               <Map></Map>
@@ -26,8 +27,6 @@
         <van-tab title="地理位置"></van-tab>
       </van-tabs>
     </div>
-
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -35,7 +34,8 @@
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-import Map from "@/components/map/Map"
+import Map from "@/components/map/Map";
+import util from "@/utils/util";
 export default {
   components: {
     mytabbar,
@@ -44,6 +44,7 @@ export default {
   },
   data() {
     return {
+      venueDoc: null,
       pageName: "场馆详情",
       activeStep: 0,
       active: 0,
@@ -63,7 +64,7 @@ export default {
   },
 
   methods: {
-  
+
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,
@@ -78,7 +79,7 @@ export default {
     /**
      * @desc 搜索回调
      */
-    onSearch() {},
+    onSearch() { },
     /**
      * @desc 赛事切换回调
      */
@@ -87,9 +88,28 @@ export default {
       wx.switchTab({
         url
       });
+    },
+    /**
+    * ajax获取当前场馆数据函数
+
+    */
+    async getDoc() {
+      console.log("getDoc");
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossDetail?page=tangball_venue",
+        param: {
+          id: 20, //每场馆id
+        }
+      });
+      this.venueDoc = data.Doc
+      console.log("getDoc-2");
     }
   },
-  created() {}
+  created() { },
+  mounted() {
+    console.log("mounted123");
+    this.getDoc();//调用：{ajax获取当前场馆数据函数}
+  }
 };
 </script>
 

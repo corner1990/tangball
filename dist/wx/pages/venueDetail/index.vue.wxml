@@ -1,7 +1,7 @@
-<import src="/components/map/Map.vue.wxml" />
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="5ddb74e1">
-  <view class="_div data-v-a988065e main-wrap">
+<import src="/components/map/Map.vue.wxml" />
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="2f3d62c0">
+  <view class="_div data-v-a988065e main-wrap"><template path="pageName" value="{{venueDoc}}" bindchange="handleProxy" text="场馆数据" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="397ff173"></template>
     <view class="_div data-v-a988065e FS24 TAC LH36">深圳XXX场馆</view>
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="_swiper data-v-a988065e">
       <block wx:key="item" key="{{item}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="item">
@@ -12,14 +12,14 @@
     </swiper>
     <view class="_div data-v-a988065e">
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-a988065e">
-        <van-tab title="场馆介绍" class="_van-tab data-v-a988065e">
+        <van-tab title="场馆介绍1" class="_van-tab data-v-a988065e">
           <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中" class="_van-panel data-v-a988065e">
-            <view class="_view data-v-a988065e"><template data="{{...$root[$kk+'1'], $root}}" is="2276dae3"></template></view>
+            <view class="_view data-v-a988065e"><template data="{{...$root[$kk+'2'], $root}}" is="1b11a5c4"></template></view>
           </van-panel>
         </van-tab>
         <van-tab title="xxx" class="_van-tab data-v-a988065e">内容 2</van-tab>
         <van-tab title="地理位置" class="_van-tab data-v-a988065e"></van-tab>
       </van-tabs>
-    </view> <template path="pageName" value="{{pageName}}" bindchange="handleProxy" text="页面名称" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'7'], $root}}" is="2d0f75b4"></template> <template data="{{...$root[$kk+'8'], $root}}" is="f0b045fa"></template>
+    </view> <template data="{{...$root[$kk+'8'], $root}}" is="59cf42a4"></template>
   </view>
 </template>
