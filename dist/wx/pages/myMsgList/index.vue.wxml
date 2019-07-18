@@ -1,4 +1,0 @@
-<import src="/components/common/debug_item/debug_item.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="0984a298">
-  <view class="_div data-v-43ab7364 main-wrap"><template path="pageName" value="{{pageName}}" bindchange="handleProxy" text="页面名称" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="2d0f75b4"></template> <template data="{{...$root[$kk+'1'], $root}}" is="f0b045fa"></template></view>
-</template>

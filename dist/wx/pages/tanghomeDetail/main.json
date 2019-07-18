@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "唐球馆详细信息",
-  "usingComponents": {
-    "van-panel": "/static/vant/panel/index"
-  }
-}

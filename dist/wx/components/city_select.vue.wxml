@@ -1,8 +1,0 @@
-<template name="117f9612">
-  <view class="_div data-v-78fd99ae select-city-box">
-    <view style="height:10px" class="_div data-v-78fd99ae"></view>
-    <view class="_div data-v-78fd99ae city-box"><button class="_button data-v-78fd99ae city-button {{selectIndex == -1 ? 'active' : ''}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">所有</button> <button class="_button data-v-78fd99ae city-button {{selectIndex == index ? 'active' : ''}}" hidden="{{!(index>5?showCityButton:true)}}" wx:key="item.P1" key="{{item.P1}}" bindtap="handleProxy" data-eventid="{{'1_'+index}}" data-comkey="{{$k}}" wx:for="{{cityList}}" wx:for-index="index" wx:for-item="item">{{item.P2}}({{item.tangball?item.tangball.countVenue:0}})</button> <button class="_button data-v-78fd99ae city-button" bindtap="handleProxy" hidden="{{!(showCityButton)}}" data-eventid="{{'2'}}" data-comkey="{{$k}}">
-        <van-icon name="arrow-up" class="_van-icon data-v-78fd99ae"></van-icon>
-      </button> <button class="_button data-v-78fd99ae city-button" bindtap="handleProxy" hidden="{{!(!showCityButton)}}" data-eventid="{{'3'}}" data-comkey="{{$k}}">更多...</button></view>
-  </view>
-</template>
