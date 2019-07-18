@@ -1,4 +1,8 @@
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
+<<<<<<< HEAD
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="e8f5ce7e">
+  <view class="_div data-v-a988065e main-wrap"><template path="pageName" value="{{pageName}}" bindchange="handleProxy" text="页面名称" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="b4954cd8"></template> <template data="{{...$root[$kk+'1'], $root}}" is="1fc9a523"></template></view>
+=======
 <import src="/components/map/Map.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="c2fface0">
   <view class="_div data-v-a988065e main-wrap"><template path="pageName" value="{{venueDoc}}" bindchange="handleProxy" text="场馆数据" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="6af2babc"></template>
@@ -22,4 +26,5 @@
       </van-tabs>
     </view> <template data="{{...$root[$kk+'8'], $root}}" is="a6892b24"></template>
   </view>
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 </template>

@@ -1,1 +1,85 @@
 @import "../../common/vendor.wxss";
+
+.top-box.data-v-43ab7364 {
+  height: 70rpx;
+  background: white;
+  position: relative;
+}
+.all-box.data-v-43ab7364 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  text-align: center;
+  line-height: 70rpx;
+  top: 0;
+  left: 10rpx;
+}
+.compile-box.data-v-43ab7364 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  text-align: center;
+  line-height: 70rpx;
+  top: 0;
+  right: 10rpx;
+}
+.mas-box.data-v-43ab7364 {
+  height: 100rpx;
+  border-radius: 20rpx;
+  margin: 20rpx 16rpx;
+  padding: 0 10rpx;
+  position: relative;
+  background-color: #9EEA6A;
+  color: #232323;
+}
+.news.data-v-43ab7364 {
+  height: 100rpx;
+  text-align: left;
+  line-height: 50rpx;
+  overflow: auto;
+}
+.delete-box.data-v-43ab7364 {
+  margin: 20rpx;
+  height: 50rpx;
+  width: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  color: teal;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.bottom-box.data-v-43ab7364 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  background-color: #d20a0a;
+  color: #ffffff;
+  height: 200rpx;
+  line-height: 100rpx;
+  width: 100%;
+}
+.content-box.data-v-43ab7364 {
+  position: relative;
+  height: 700rpx;
+  margin: 0 10rpx;
+  padding: 10rpx 10rpx;
+  border: black 2rpx solid;
+  border-radius: 16rpx;
+  overflow: auto;
+}
+.close-box.data-v-43ab7364 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  background-color: #d20a0a;
+  color: #ffffff;
+  line-height: 100rpx;
+  width: 100%;
+  font-size: 40rpx;
+}
+.chooseMas.data-v-43ab7364 {
+  background-color: turquoise;
+}
