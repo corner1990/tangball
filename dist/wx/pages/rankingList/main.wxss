@@ -31,13 +31,5 @@
   width: 200rpx;
   display: inline-block;
   text-align: center;
-  margin: 20rpx 10rpx;
-}
-.ranking-content ._div.data-v-4bb28a66:first-child {
-  width: 200rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  display: inline-block;
-  text-align: center;
-  margin: 20rpx 10rpx;
+  margin: 10rpx;
 }

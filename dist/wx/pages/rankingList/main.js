@@ -1,6 +1,6 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([4],{
+global.webpackJsonpMpvue([5],{
 
 /***/ 174:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -30,7 +30,7 @@ app.$mount();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_42716a25_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_42716a25_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(186);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -90,18 +90,10 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rankingListComponent__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_util__ = __webpack_require__(15);
-
-
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rankingListComponent__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_util__ = __webpack_require__(9);
 //
 //
 //
@@ -118,78 +110,16 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */],
-    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */],
-    rankingListcomponent: __WEBPACK_IMPORTED_MODULE_4__rankingListComponent__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */],
+    rankingListcomponent: __WEBPACK_IMPORTED_MODULE_2__rankingListComponent__["a" /* default */]
   },
   data: function data() {
     return {
-      pageName: "唐球达人",
-      matchTimeRanklist: [] //比赛次数排行列表
+      pageName: "唐球达人"
     };
-  },
-
-
-  methods: {
-    onShow: function onShow() {
-      console.log("rankingList-mpvue.data", this);
-      // mpvue.setData({show: true})
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              console.log("唐球达人-created");
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, _this);
-    }))();
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var _ref, data;
-
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return __WEBPACK_IMPORTED_MODULE_5__utils_util__["a" /* default */].post({
-                url: global.PUB.domain + "/crossList?page=tangball_member",
-                param: {
-                  pageSize: 50, //每页50条数据
-                  sortJson: { entries: 1 }, //按参赛次数降序排序
-                  selectJson: { P1: 1, entries: 1, name: 1 //指定返回哪些字段
-                  } }
-              });
-
-            case 2:
-              _ref = _context2.sent;
-              data = _ref.data;
-
-              _this2.matchTimeRanklist = data.list;
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2);
-    }))();
   }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(9)))
 
 /***/ }),
 
@@ -198,8 +128,7 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4bb28a66_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_rankingListComponent_vue__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4bb28a66_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_rankingListComponent_vue__ = __webpack_require__(185);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -217,7 +146,7 @@ var __vue_scopeId__ = "data-v-4bb28a66"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_rankingListComponent_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_4bb28a66_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_rankingListComponent_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
@@ -256,7 +185,22 @@ if (false) {(function () {
 /***/ }),
 
 /***/ 180:
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_util__ = __webpack_require__(9);
+
+
+
+
+var _components$data$comp;
 
 //
 //
@@ -301,66 +245,253 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* eslint-disable */
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_components$data$comp = {
+  components: {
+    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
+  },
+  data: function data() {
+    return {
+      cfList: {
+        //默认排序参数
+        sortJsonDefault: {
+          "item.entries": 1
+        }
+      },
+      matchTimeRanklist: [], //比赛次数排行列表
+      achievementRanklist: [] //比赛成绩排行列表
+    };
+  }
+}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_components$data$comp, "components", {}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_components$data$comp, "methods", {
+  onShow: function onShow() {
+    console.log("rankingList-mpvue.data", this);
+    // mpvue.setData({show: true})
+  },
+  matchTime: function matchTime() {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var _ref, data;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                url: global.PUB.domain + "/crossList?page=tangball_member",
+                param: {
+                  pageSize: 50, //每页50条数据
+                  sortJson: { entries: 1 }, //按参赛次数降序排序
+                  selectJson: { P1: 1, entries: 1, name: 1 //指定返回哪些字段
+                  } }
+              });
+
+            case 2:
+              _ref = _context.sent;
+              data = _ref.data;
+
+              _this.matchTimeRanklist = data.list;
+              console.log(1111);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }))();
+  },
+  matchAchievement: function matchAchievement() {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _ref2, data;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
+                url: global.PUB.domain + "/crossList?page=tangball_achievement",
+                param: {
+                  pageSize: 50, //每页50条数据
+                  sortJson: { matchScore: -1 }, //按参赛成绩杆数降序排序
+                  selectJson: { P1: 1, ranking: 1, matchScore: 1, participantsName: 1 //指定返回哪些字段
+                  } }
+              });
+
+            case 2:
+              _ref2 = _context2.sent;
+              data = _ref2.data;
+
+              _this2.achievementRanklist = data.list;
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
+    }))();
+  }
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_components$data$comp, "created", function created() {
+  var _this3 = this;
+
+  return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee3() {
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            console.log("唐球达人-created");
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, _this3);
+  }))();
+}), _components$data$comp);
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 
-/***/ 181:
+/***/ 185:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return _c('div', [_c('debug_item', {
+    attrs: {
+      "path": "matchTimeRanklist",
+      "text": "比赛次数排行列表",
+      "eventid": '0',
+      "mpcomid": '0'
+    },
+    model: {
+      value: (_vm.matchTimeRanklist),
+      callback: function($$v) {
+        _vm.matchTimeRanklist = $$v
+      },
+      expression: "matchTimeRanklist"
+    }
+  }), _vm._v(" "), _c('debug_item', {
+    attrs: {
+      "path": "achievementRanklist",
+      "text": "比赛成绩排行列表",
+      "eventid": '1',
+      "mpcomid": '1'
+    },
+    model: {
+      value: (_vm.achievementRanklist),
+      callback: function($$v) {
+        _vm.achievementRanklist = $$v
+      },
+      expression: "achievementRanklist"
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "button-center"
   }, [_c('van-button', {
     attrs: {
       "plain": "",
       "type": "primary",
       "size": "small",
-      "mpcomid": '0'
+      "eventid": '2',
+      "mpcomid": '2'
+    },
+    on: {
+      "click": _vm.matchTime
     }
   }, [_vm._v("参赛次数")]), _vm._v(" "), _c('van-button', {
     attrs: {
       "plain": "",
       "type": "primary",
       "size": "small",
-      "mpcomid": '1'
+      "eventid": '3',
+      "mpcomid": '3'
+    },
+    on: {
+      "click": _vm.matchAchievement
     }
   }, [_vm._v("成绩排名")]), _vm._v(" "), _c('van-button', {
     attrs: {
       "plain": "",
       "type": "primary",
       "size": "small",
-      "mpcomid": '2'
+      "mpcomid": '4'
     }
   }, [_vm._v("鸟王排名")]), _vm._v(" "), _c('van-button', {
     attrs: {
       "plain": "",
       "type": "primary",
       "size": "small",
-      "mpcomid": '3'
+      "mpcomid": '5'
     }
   }, [_vm._v("积分排名")])], 1), _vm._v(" "), _c('van-tabs', {
     attrs: {
       "active": _vm.active,
-      "mpcomid": '6'
+      "mpcomid": '8'
     }
   }, [_c('van-tab', {
     attrs: {
       "title": "男子",
-      "mpcomid": '4'
+      "mpcomid": '6'
     }
   }, [_c('div', {
     staticClass: "ranking-title"
-  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("男子选手")]), _vm._v(" "), _c('div', [_vm._v("成绩")])]), _vm._v(" "), _c('div', {
-    staticClass: "ranking-content"
-  }, [_c('div', [_vm._v("1")]), _vm._v(" "), _c('div', [_c('a', [_vm._v("张三")]), _vm._v(" "), _c('a', [_vm._v("地区")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v("99")]), _vm._v(" "), _c('a', [_vm._v("2019-10-1")])])])]), _vm._v(" "), _c('van-tab', {
+  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("男子选手")]), _vm._v(" "), _c('div', [_vm._v("参数成绩")])]), _vm._v(" "), _vm._l((_vm.achievementRanklist), function(item, index) {
+    return _c('div', {
+      key: item,
+      staticClass: "ranking-content"
+    }, [_c('div', [_c('a', [_vm._v("1")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v(_vm._s(item.participantsName))])]), _vm._v(" "), _c('div', [_c('a', [_vm._v(_vm._s(item.matchScore))])])])
+  }), _vm._v(" "), _c('div', {
+    staticClass: "ranking-title"
+  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("男子选手")]), _vm._v(" "), _c('div', [_vm._v("参赛次数")])]), _vm._v(" "), _vm._l((_vm.matchTimeRanklist), function(item, index) {
+    return _c('div', {
+      key: item,
+      staticClass: "ranking-content"
+    }, [_c('div', [_c('a', [_vm._v("1")])]), _vm._v(" "), _c('div', [_c('a', [_vm._v(_vm._s(item.name))])]), _vm._v(" "), _c('div', [_c('a', [_vm._v(_vm._s(item.entries))])])])
+  })], 2), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "女子",
-      "mpcomid": '5'
+      "mpcomid": '7'
     }
   }, [_c('div', {
     staticClass: "ranking-title"
-  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("女子选手")]), _vm._v(" "), _c('div', [_vm._v("成绩")])])])], 1)], 1)
+  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("女子选手")]), _vm._v(" "), _c('div', [_vm._v("参数成绩")])]), _vm._v(" "), _c('div', {
+    staticClass: "ranking-title"
+  }, [_c('div', [_vm._v("排名")]), _vm._v(" "), _c('div', [_vm._v("女子选手")]), _vm._v(" "), _c('div', [_vm._v("参赛次数")])])])], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -375,7 +506,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 182:
+/***/ 186:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -400,23 +531,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "mpcomid": '1'
     }
-  }), _vm._v(" "), _c('debug_item', {
-    attrs: {
-      "path": "matchTimeRanklist",
-      "text": "比赛次数排行列表",
-      "eventid": '1',
-      "mpcomid": '2'
-    },
-    model: {
-      value: (_vm.matchTimeRanklist),
-      callback: function($$v) {
-        _vm.matchTimeRanklist = $$v
-      },
-      expression: "matchTimeRanklist"
-    }
   }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "mpcomid": '3'
+      "mpcomid": '2'
     }
   })], 1)
 }

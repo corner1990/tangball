@@ -11,8 +11,8 @@
            v-for="(item,index) in cityList" 
            :key="item.P1"
            :class="selectIndex==index?'active':''"
-           @click="checkedCity(index,item.P2)"
-           >{{item.P2}}</button>
+           @click="checkedCity(index,item.P7)"
+           >{{item.P2}}({{item.tangball?item.tangball.countVenue:0}})</button>
           <button class="city-button" @click="allCity()" v-show="showCityButton"><van-icon name="arrow-up" /></button>
       </div>
   </div>
@@ -46,7 +46,7 @@ export default {
         allCity(){
             this.selectIndex = -1
             this.showCityButton = !this.showCityButton
-            this.$emit("select",this.cityList)
+            this.$emit("select")
         },
         // 获取所有城市列表
         async getCityList(){     
@@ -55,6 +55,9 @@ export default {
                 param:{
                     findJson:{
                         P8:"0001"
+                    },
+                    sortJson:{
+                        "tangball.countVenue":-1
                     }
                 }
             })
@@ -87,6 +90,8 @@ export default {
         padding-left:5px;
     }
     .city-button{
+        padding: 0px;
+        text-align: center;
         display: inline-block;
         width: 23%;
         margin-right: 2%;
