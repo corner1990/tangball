@@ -1,3 +1,16 @@
+<import src="/components/matchErooll/personInfo.vue.wxml" />
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="57340bfe">
-  <view class="_div data-v-311a7da2 main-wrap"><template data="{{...$root[$kk+'0'], $root}}" is="cfaa1d28"></template></view>
+  <view class="_div data-v-311a7da2 main-wrap">
+    <van-steps steps="{{steps}}" active="{{active}}" active-color="#1989fa" class="_van-steps data-v-311a7da2"></van-steps> <template data="{{...$root[$kk+'1'], $root}}" is="98325426"></template>
+    <view class="_div data-v-311a7da2 btn-wrap">
+      <van-row class="_van-row data-v-311a7da2">
+        <van-col span="11" class="_van-col data-v-311a7da2">
+          <van-button type="info" plain disabled="{{(active > 0)}}" block bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-311a7da2">上一步</van-button>
+        </van-col>
+        <van-col span="11" offset="2" class="_van-col data-v-311a7da2">
+          <van-button type="info" block bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_van-button data-v-311a7da2">{{btnText}}</van-button>
+        </van-col>
+      </van-row>
+    </view> <template data="{{...$root[$kk+'7'], $root}}" is="cfaa1d28"></template>
+  </view>
 </template>

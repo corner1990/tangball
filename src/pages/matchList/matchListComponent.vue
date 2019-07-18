@@ -1,25 +1,22 @@
 <template>
   <div>
-    <div class="match-box" >
+    <div class="match-box">
       <div class="match-img-box">
-        <img :src="item.thumb" />
+        <img :src="index" />
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
         <p>{{desc}}</p>
         <div>{{matchTime}}</div>
-        <div>{{item.endTime}}</div>
-         <div>{{price}}</div>
+        
+        <div>{{price}}</div>
       </div>
 
       <div slot="footer" class="rpg11">
-        <div class="macth-btn" @click="daying">去报名</div>
+        <div class="macth-btn" @click="daying">火热报名中</div>
         <div class="macth-btn">查看详情</div>
       </div>
     </div>
-  
-     
-
   </div>
 </template>
 <script>
@@ -27,23 +24,18 @@
 
 export default {
   data() {
-    return {
-    
-    };
+    return {};
   },
-props: ["title","desc","price","matchTime"],
+  props: ["title", "desc", "price", "matchTime"],
   components: {},
   methods: {
-    dayin(){
-      console.log("cf",cf.matchlist)
-    }
+   
   },
-  created() {},
+  created() {}
 };
 </script>
 
 <style scoped>
-
 .main-wrap {
   padding-bottom: 60px;
 }
@@ -90,14 +82,16 @@ props: ["title","desc","price","matchTime"],
   flex-direction: column;
 }
 .macth-btn {
-  background: pink;
-  opacity: 0.5;
-  /* height: 25px; */
-  line-height: 25px;
+  background: #fef6f6;
+  line-height: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  width: 60px;
+  height: 20px;
   text-align: center;
-
+  border: 1px solid #fdd6d4;
   border-radius: 5px;
-  /* display: inline-block; */
-  margin: 15px 5px 0 5px;
+  color: #f66f67;
+  margin: 10px 5px 0 5px;
 }
 </style>

@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/index/main",
     "pages/matchList/main",
+    "pages/index/main",
+    
+   
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -9,7 +11,6 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/venueList/main",
-    "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
@@ -27,32 +28,28 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-    "list": [
-      {
-        "text": "首页",
-        "pagePath": "pages/index/main",
-        "iconPath": "static/tabs/home.png",
-        "selectedIconPath": "static/tabs/home-active.png"
-      },
-      {
-        "text": "唐球馆",
-        "pagePath": "pages/tanghome/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      },
-      {
-        "text": "活动",
-        "pagePath": "pages/event/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      },
-      {
-        "text": "个人中心",
-        "pagePath": "pages/usercenter/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      }
-    ],
+   
+    "list": [{
+      "text": "首页",
+      "pagePath": "pages/index/main",
+      "iconPath": "static/tabs/home.png",
+      "selectedIconPath": "static/tabs/home-active.png"
+    }, {
+      "text": "唐球馆",
+      "pagePath": "pages/tanghome/main",
+      "iconPath": "static/tabs/orders.png",
+      "selectedIconPath": "static/tabs/orders-active.png"
+    }, {
+      "text": "活动",
+      "pagePath": "pages/event/main",
+      "iconPath": "static/tabs/orders.png",
+      "selectedIconPath": "static/tabs/orders-active.png"
+    }, {
+      "text": "个人中心",
+      "pagePath": "pages/usercenter/main",
+      "iconPath": "static/tabs/orders.png",
+      "selectedIconPath": "static/tabs/orders-active.png"
+    }],
     "position": "bottom"
   },
   "usingComponents": {
@@ -67,7 +64,9 @@
     "van-icon": "/static/vant/icon/index",
     "van-tab": "/static/vant/tab/index",
     "van-tabs": "/static/vant/tabs/index",
-    "van-cell": "/static/vant/cell/index"
-  },
-  "sitemapLocation": "sitemap.json"
+    "van-cell": "/static/vant/cell/index" , 
+    "van-steps": "/static/vant/steps/index",
+    "van-field": "/static/vant/field/index",
+    "van-cell-group": "/static/vant/cell-group/index"
+  }
 }

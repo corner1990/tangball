@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/index/main",
     "pages/matchList/main",
+    "pages/index/main",
+    
+   
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -9,7 +11,6 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/venueList/main",
-    "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
@@ -63,6 +64,9 @@
     "van-icon": "/static/vant/icon/index",
     "van-tab": "/static/vant/tab/index",
     "van-tabs": "/static/vant/tabs/index",
-    "van-cell": "/static/vant/cell/index"  
+    "van-cell": "/static/vant/cell/index" , 
+    "van-steps": "/static/vant/steps/index",
+    "van-field": "/static/vant/field/index",
+    "van-cell-group": "/static/vant/cell-group/index"
   }
 }
