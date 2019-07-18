@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([4],{
+global.webpackJsonpMpvue([5],{
 
-/***/ 229:
+/***/ 241:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(242);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 230:
+/***/ 242:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(232);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a988065e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(237);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a988065e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(249);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(231)
+  __webpack_require__(243)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,21 +79,27 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 231:
+/***/ 243:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 232:
+/***/ 244:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_map_Map__ = __webpack_require__(233);
-//
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_map_Map__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_util__ = __webpack_require__(9);
+
+
 //
 //
 //
@@ -131,14 +137,16 @@ if (false) {(function () {
 
 
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */],
-    debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */],
-    Map: __WEBPACK_IMPORTED_MODULE_2__components_map_Map__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */],
+    Map: __WEBPACK_IMPORTED_MODULE_4__components_map_Map__["a" /* default */]
   },
   data: function data() {
     return {
+      venueDoc: null,
       pageName: "场馆详情",
       activeStep: 0,
       active: 0,
@@ -180,23 +188,66 @@ if (false) {(function () {
       wx.switchTab({
         url: url
       });
+    },
+
+    /**
+    * ajax获取当前场馆数据函数
+      */
+    getDoc: function getDoc() {
+      var _this = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _ref, data;
+
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log("getDoc");
+                _context.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_5__utils_util__["a" /* default */].post({
+                  url: global.PUB.domain + "/crossDetail?page=tangball_venue",
+                  param: {
+                    id: 20 //每场馆id
+                  }
+                });
+
+              case 3:
+                _ref = _context.sent;
+                data = _ref.data;
+
+                _this.venueDoc = data.Doc;
+                console.log("getDoc-2");
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
     }
   },
-  created: function created() {}
+  created: function created() {},
+  mounted: function mounted() {
+    console.log("mounted123");
+    this.getDoc(); //调用：{ajax获取当前场馆数据函数}
+  }
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 
-/***/ 233:
+/***/ 245:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(235);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_Map_vue__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_27844fe7_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_Map_vue__ = __webpack_require__(248);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(234)
+  __webpack_require__(246)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -241,19 +292,19 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 234:
+/***/ 246:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 235:
+/***/ 247:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(4);
 //
 //
 //
@@ -357,7 +408,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 236:
+/***/ 248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -421,14 +472,28 @@ if (false) {
 
 /***/ }),
 
-/***/ 237:
+/***/ 249:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-wrap"
-  }, [_c('div', {
+  }, [_c('debug_item', {
+    attrs: {
+      "path": "pageName",
+      "text": "场馆数据",
+      "eventid": '0',
+      "mpcomid": '0'
+    },
+    model: {
+      value: (_vm.venueDoc),
+      callback: function($$v) {
+        _vm.venueDoc = $$v
+      },
+      expression: "venueDoc"
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "FS24 TAC LH36"
   }, [_vm._v("深圳XXX场馆")]), _vm._v(" "), _c('swiper', {
     attrs: {
@@ -442,7 +507,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       key: item
     }, [_c('swiper-item', {
       attrs: {
-        "mpcomid": '0_' + index
+        "mpcomid": '1_' + index
       }
     }, [_c('image', {
       staticClass: "slide-image",
@@ -456,49 +521,35 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "active": _vm.active,
       "bind:change": "onChange",
-      "mpcomid": '6'
+      "mpcomid": '7'
     }
   }, [_c('van-tab', {
     attrs: {
-      "title": "场馆介绍",
-      "mpcomid": '3'
+      "title": "场馆介绍1",
+      "mpcomid": '4'
     }
   }, [_c('van-panel', {
     attrs: {
       "title": "深圳XXX场馆",
       "desc": "描述信息",
       "status": "营业中",
-      "mpcomid": '2'
+      "mpcomid": '3'
     }
   }, [_c('view', [_c('Map', {
     attrs: {
-      "mpcomid": '1'
+      "mpcomid": '2'
     }
   })], 1)])], 1), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "xxx",
-      "mpcomid": '4'
+      "mpcomid": '5'
     }
   }, [_vm._v("内容 2")]), _vm._v(" "), _c('van-tab', {
     attrs: {
       "title": "地理位置",
-      "mpcomid": '5'
+      "mpcomid": '6'
     }
-  })], 1)], 1), _vm._v(" "), _c('debug_item', {
-    attrs: {
-      "path": "pageName",
-      "text": "页面名称",
-      "eventid": '0',
-      "mpcomid": '7'
-    },
-    model: {
-      value: (_vm.pageName),
-      callback: function($$v) {
-        _vm.pageName = $$v
-      },
-      expression: "pageName"
-    }
-  }), _vm._v(" "), _c('mytabbar', {
+  })], 1)], 1), _vm._v(" "), _c('mytabbar', {
     attrs: {
       "mpcomid": '8'
     }
@@ -517,4 +568,4 @@ if (false) {
 
 /***/ })
 
-},[229]);
+},[241]);

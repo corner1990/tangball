@@ -72,20 +72,8 @@ export default {
 </script>
 
 <style scoped>
-.main-venue {
-  width: 345px;
-  height: 110px;
-  margin: 15px;
+.main-wrap {
+  padding-bottom: 60px;
 }
-.venue-imgbox {
-  width: 135px;
-  height: 90px;
-  margin: 10px;
-}
-.venue-textbox {
-  width: 165px;
-  height: 90px;
-  float: left;
-  margin-top: 10px;
-}
+
 </style>
