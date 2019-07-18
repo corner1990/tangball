@@ -1,15 +1,23 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([8],{
+global.webpackJsonpMpvue([6],{
 
+<<<<<<< HEAD
 /***/ 202:
+=======
+/***/ 183:
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(203);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(184);
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 
 
 
@@ -25,6 +33,7 @@ app.$mount();
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35,6 +44,18 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(204)
+=======
+/***/ 184:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5fed356c_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(211);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(185)
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -54,7 +75,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\pages\\tanghome\\index.vue"
+Component.options.__file = "src/pages/tanghome/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -79,13 +100,18 @@ if (false) {(function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 204:
+=======
+/***/ 185:
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -93,9 +119,18 @@ if (false) {(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(207);
+=======
+/***/ 186:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(188);
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_request__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_request__ = __webpack_require__(189);
 
 
 //
@@ -218,7 +253,106 @@ if (false) {(function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 208:
+=======
+/***/ 189:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export get */
+/* unused harmony export post */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_qs__);
+/* unused harmony reexport axios */
+
+
+
+
+// 时间戳
+// const NewTimeStamp = new Date().getTime()
+
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.timeout = 30000;
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+__WEBPACK_IMPORTED_MODULE_1_axios___default.a.defaults.adapter = function (config) {
+  return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+    // console.log(config,'adapter')
+    var data = config.method === 'get' ? config.params : __WEBPACK_IMPORTED_MODULE_2_qs___default.a.stringify(config.data);
+    // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
+    wx.request({
+      url: config.url,
+      method: config.method,
+      data: data,
+      success: function success(res) {
+        return resolve(res);
+      },
+      fail: function fail(err) {
+        return reject(err);
+      }
+    });
+  });
+};
+
+// axios 拦截器
+function Instance() {
+  // 请求拦截器
+  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.request.use(function (request) {
+    // request.headers.token = 'token=11124654654687';
+    // console.log(request) // 请求成功
+    return request;
+  }, function (error) {
+    // console.log(error); // 请求失败
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
+  });
+
+  // 添加响应拦截器
+  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.interceptors.response.use(function (response) {
+    console.log(response.data.data); // 响应成功
+    return response;
+  }, function (error) {
+    // console.log(error); // 响应失败
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(error);
+  });
+}
+
+Instance();
+
+/**
+ * @desc get请求
+ * @param { String } url 接口url
+ * @param { object } params 请求参数
+ * @return { Promise } 然后一个promise对象
+ */
+function get(url, params) {
+  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+    method: 'get',
+    url: url,
+    params: params
+  });
+}
+/**
+ * @desc post请求
+ * @param { String } url 接口url
+ * @param { object } params 请求参数
+ * @return { Promise } 然后一个promise对象
+ */
+function post(url, params) {
+  return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+    method: 'post',
+    url: url,
+    data: params
+  });
+}
+
+
+/***/ }),
+
+/***/ 211:
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -282,4 +416,8 @@ if (false) {
 
 /***/ })
 
+<<<<<<< HEAD
 },[202]);
+=======
+},[183]);
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8

@@ -1,5 +1,6 @@
 <import src="/components/common/debug_item/debug_item.vue.wxml" />
 <import src="/pages/matchList/matchListComponent.vue.wxml" />
+<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="bca013b8">
   <view class="_div data-v-609c9ef4 main-wrap"><template path="steps" value="{{steps}}" bindchange="handleProxy" text="步骤" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="b4954cd8"></template> <template path="value" value="{{value}}" bindchange="handleProxy" text="搜索关键词" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="b4954cd8"></template> <input type="text" value="{{value}}" bindinput="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_input data-v-609c9ef4" />
     <van-search value="{{value}}" bindchange="handleProxy" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-search data-v-609c9ef4"></van-search>
@@ -7,9 +8,18 @@
       <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
         <van-tab title="近期" class="_van-tab data-v-609c9ef4"><template origin-price="1000" wx:key="i" data="{{...$root[$kk+'3_'+i], $root}}" is="42ade750" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item"></template></van-tab>
         <van-tab title="全国" class="_van-tab data-v-609c9ef4"><template origin-price="1000" wx:key="i" data="{{...$root[$kk+'5_'+i], $root}}" is="42ade750" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item"></template></van-tab>
+=======
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="3f9a211a">
+  <view class="_div data-v-609c9ef4 main-wrap"><template path="steps" value="{{steps}}" bindchange="handleProxy" text="步骤" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="6af2babc"></template> <template path="matchlist" value="{{matchlist}}" bindchange="handleProxy" text="赛事列表" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="6af2babc"></template> <input type="text" value="{{value}}" bindinput="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_input data-v-609c9ef4" />
+    <van-search value="{{value}}" bindchange="handleProxy" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-search data-v-609c9ef4"></van-search>
+    <view class="_div data-v-609c9ef4">
+      <van-tabs active="{{active}}" bind:change="onChange" class="_van-tabs data-v-609c9ef4">
+        <van-tab title="近期" class="_van-tab data-v-609c9ef4"><template origin-price="1000" wx:key="i" data="{{...$root[$kk+'3_'+i], $root}}" is="2ff3eb69" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item"></template></van-tab>
+        <van-tab title="全国" class="_van-tab data-v-609c9ef4"><template origin-price="1000" wx:key="i" data="{{...$root[$kk+'5_'+i], $root}}" is="2ff3eb69" wx:for="{{matchlist}}" wx:for-index="i" wx:for-item="item"></template></van-tab>
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
         <van-tab title="加盟商" class="_van-tab data-v-609c9ef4">加盟商</van-tab>
         <van-tab title="全部" class="_van-tab data-v-609c9ef4">全部</van-tab>
       </van-tabs>
-    </view> <template data="{{...$root[$kk+'10'], $root}}" is="1fc9a523"></template>
+    </view> <template data="{{...$root[$kk+'10'], $root}}" is="a6892b24"></template>
   </view>
 </template>

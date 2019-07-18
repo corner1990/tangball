@@ -1,1 +1,64 @@
 @import "../../common/vendor.wxss";
+
+.main-venue.data-v-ced483c4 {
+  width: 690rpx;
+  height: 220rpx;
+  margin: 30rpx;
+}
+.venue-imgbox.data-v-ced483c4 {
+  width: 270rpx;
+  height: 180rpx;
+  margin: 20rpx;
+}
+.venue-textbox.data-v-ced483c4 {
+  width: 330rpx;
+  height: 180rpx;
+  float: left;
+  margin-top: 20rpx;
+}
+.main-venue.data-v-b471b998 {
+  width: 690rpx;
+  height: 220rpx;
+  margin: 30rpx;
+}
+.venue-imgbox.data-v-b471b998 {
+  width: 270rpx;
+  height: 180rpx;
+  margin: 20rpx;
+}
+.venue-textbox.data-v-b471b998 {
+  width: 330rpx;
+  height: 180rpx;
+  float: left;
+  margin-top: 20rpx;
+}
+.select-city-box {
+  height: 100%;
+  background-color: rgb(228, 228, 230);
+}
+.select-text {
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: white;
+  margin-bottom: 20rpx;
+  font-size: 34rpx;
+  padding-left: 40rpx;
+}
+.city-box {
+  padding-top: 10rpx;
+  background-color: white;
+  padding-left: 10rpx;
+}
+.city-button {
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  width: 23%;
+  margin-right: 2%;
+  height: 70rpx;
+  font-size: 32rpx;
+  background-color: rgb(228, 228, 230);
+}
+.active {
+  background-color: rgb(25, 137, 250);
+}
