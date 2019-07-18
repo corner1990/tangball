@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/venueDetail/main",
     "pages/index/main",
+    "pages/venueDetail/main",
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
