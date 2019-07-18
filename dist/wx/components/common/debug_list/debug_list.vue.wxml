@@ -1,6 +1,0 @@
-<import src="/components/slots" /><template name="62f1e6da">
-  <view class="_div data-v-985df1c6">
-    <block wx:if="{{isReady}}" name="default"></block>
-    <view class="_div data-v-985df1c6">调试：</view> <template wx:if="{{isReady}}" data="{{...$root[$p], ...$root[$k], $root}}" is="{{$slotdefault || 'default'}}"></template>
-  </view>
-</template>
