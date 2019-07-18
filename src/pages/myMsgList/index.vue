@@ -5,19 +5,27 @@
     <div class="top-box">
       <div class="all-box" v-show="showSelect" @click="allCheck()">全选</div>
 
-      <div class="compile-box" @click="compile()">编辑</div>
+      <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
     </div>
     <div class="content-box" v-if="showcontent">
       {{crow[gant].mas}}
       <div class="close-box" @click="shut()">关闭</div>
     </div>
     <div v-show="!showcontent">
-    <div class="mas-box" v-for="(mass,index) in crow" :key="mass.id" >
-      <div class="news" @click="content(index)">{{mass.mas}}</div>
-      <input type="checkbox" class="delete-box"  @click="del(index)" :checked="checked" v-if="showSelect">
+      <div class="mas-box" :class="evolve" v-for="(mass,index) in crow" :key="index">
+        <div class="news" @click="content(index)">
+          {{mass.mas}}
+          <input
+            type="checkbox"
+            class="delete-box"
+            @click="del(index)"
+            :checked="checked"
+            v-if="showSelect"
+          />
+        </div>
+      </div>
     </div>
-    </div>
-    <div class="bottom-box" v-show="showSelect">删 除</div>
+    <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
   </div>
 </template>
 <script>
@@ -32,9 +40,12 @@ export default {
   },
   data() {
     return {
+      evolve: "masEvolve",
+      evolve:false,
       gant: {},
-      checkedList:[],
-      checked:false,
+      checkedList: [],
+      showcompile: true,
+      checked: false,
       showSelect: false,
       showcontent: false,
       crow: [
@@ -44,58 +55,76 @@ export default {
             "这是一很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的消息1"
         },
         { id: "2", mas: "这是消息2" },
-        { id: "3", mas: "这是消息3" }
+        { id: "3", mas: "这是消息3" },
+        { id: "4", mas: "这是消息4" },
+        { id: "5", mas: "这是消息5" },
+        { id: "6", mas: "这是消息6" },
+        { id: "7", mas: "这是消息7" },
+        { id: "8", mas: "这是消息8" },
+        { id: "9", mas: "这是消息9" }
       ],
       pageName: "个人中心-系统消息列表"
     };
-  }, 
+  },
 
   methods: {
-  allCheck(){
-     for (let i = 0; i <this.checkedList.length; i++) {
-
-         if (this.checked) {
-           this.checkedList[i] = false
-         }else{
-           this.checkedList[i] = true
-         }
-
-     }
-      this.checked = !this.checked
+    purification() {
+      for (let i = this.crow.length - 1; i >= 0; i--) {
+        if (this.checkedList[i]) {
+          console.log(i);
+          this.crow.splice(i, 1);
+          this.checkedList.splice(i, 1);
+        }
+      }
       console.log(this.checkedList);
-      
-  },
+      console.log(this.crow);
+      this.compile();
+    },
+    allCheck() {
+      for (let i = 0; i < this.checkedList.length; i++) {
+        if (this.checked) {
+          this.checkedList[i] = false;
+        } else {
+          this.checkedList[i] = true;
+        }
+      }
+      this.checked = !this.checked;
+      console.log(this.checkedList);
+    },
     del(index) {
-           this.checkedList[index] = !this.checkedList[index]
-           console.log(this.checkedList[index]);
-           
+      this.checkedList[index] = !this.checkedList[index];
     },
     compile() {
-      console.log(this.showSelect);
-      this.showSelect = !this.showSelect;
+      if (this.showcontent) {
+      } else {
+        this.showSelect = !this.showSelect;
+        console.log(this.showSelect);
+      }
     },
     content(index) {
-      console.log(this.showcontent);
-      this.showcontent = true;
-      console.log(this.gant);
-     
-      this.gant = index;
+      this.evolve=true;
+      if (this.showSelect) {
+      } else {
+        this.showcontent = true;
+        this.gant = index;
+        this.showcompile = false;
+      }
+      
     },
-
     shut() {
       this.showcontent = false;
+      this.showcompile = true;
     }
   },
-  mounted(){
-    this.checkedList.length = this.crow.length
-    for (let i = 0; i <this.checkedList.length; i++) {
-       if (this.checkedList[i]) {
-         this.checkedList[i] = !this.checkedList[i]
-       }else{
-         this.checkedList[i] = false
-       }
-       
-     }
+  mounted() {
+    this.checkedList.length = this.crow.length;
+    for (let i = 0; i < this.checkedList.length; i++) {
+      if (this.checkedList[i]) {
+        this.checkedList[i] = !this.checkedList[i];
+      } else {
+        this.checkedList[i] = false;
+      }
+    }
   }
 };
 </script>
@@ -130,8 +159,12 @@ export default {
   margin: 10px 8px;
   padding: 0px 5px;
   position: relative;
-  background-color:#9EEA6A;
-  color:#232323;
+  background-color: #9eea6a;
+  color: #232323;
+  border: coral 1px solid;
+}
+.masEvolve {
+  border: 0px;
 }
 .news {
   height: 50px;
@@ -140,7 +173,7 @@ export default {
   overflow: auto;
 }
 .delete-box {
-  margin:10px;
+  margin: 10px;
   height: 25px;
   width: 25px;
   text-align: center;
@@ -149,7 +182,6 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-
 }
 .bottom-box {
   position: fixed;
@@ -182,7 +214,7 @@ export default {
   width: 100%;
   font-size: 20px;
 }
-.chooseMas{
-background-color:turquoise;
+.chooseMas {
+  background-color: turquoise;
 }
 </style>
