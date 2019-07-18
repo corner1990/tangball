@@ -46,7 +46,7 @@ export default {
         allCity(){
             this.selectIndex = -1
             this.showCityButton = !this.showCityButton
-            this.$emit("select",this.cityList)
+            this.$emit("select")
         },
         // 获取所有城市列表
         async getCityList(){     
@@ -90,6 +90,8 @@ export default {
         padding-left:5px;
     }
     .city-button{
+        padding: 0px;
+        text-align: center;
         display: inline-block;
         width: 23%;
         margin-right: 2%;

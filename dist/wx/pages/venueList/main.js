@@ -143,11 +143,7 @@ if (false) {(function () {
     };
   },
 
-
   methods: {
-    /**
-     * @desc 搜索回调
-     */
     search: function search(areaId) {
       var _this = this;
 
@@ -159,7 +155,6 @@ if (false) {(function () {
             switch (_context.prev = _context.next) {
               case 0:
                 console.log("areaId", areaId);
-
                 _context.next = 3;
                 return __WEBPACK_IMPORTED_MODULE_4__utils_util__["a" /* default */].post({
                   url: global.PUB.domain + "/crossListRelation",
@@ -198,9 +193,8 @@ if (false) {(function () {
     }
   },
   mounted: function mounted() {
-    this.getvenue();
-  },
-  created: function created() {}
+    this.search();
+  }
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
@@ -479,7 +473,7 @@ if (false) {(function () {
         allCity: function allCity() {
             this.selectIndex = -1;
             this.showCityButton = !this.showCityButton;
-            this.$emit("select", this.cityList);
+            this.$emit("select");
         },
 
         // 获取所有城市列表
