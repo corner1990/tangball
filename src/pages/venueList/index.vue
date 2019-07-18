@@ -4,7 +4,7 @@
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
     <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
     <!-- 引进筛选城市组件 -->
-    <city_select @select="search"></city_select>
+    <city_select @select="search" :selectIndex="selectIndex"></city_select>
     <venueListComponent
       :area="item.area"
       :title="item.name"
@@ -23,7 +23,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
-import city_select from "@/components/city_select";
+import city_select from '@/components/city_select'
 
 export default {
   components: {
@@ -34,6 +34,8 @@ export default {
   },
   data() {
     return {
+      // 地区组件聚焦的index
+      selectIndex:-1,
       pageName: "场馆列表",
       venueList: [],
       value: "" // 搜索value
@@ -41,6 +43,9 @@ export default {
   },
   methods: {
     async search(areaId) {
+      if (areaId) {
+        this.selectIndex = 0
+      }
       console.log("areaId", areaId);
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
@@ -62,18 +67,32 @@ export default {
         }
       });
       this.venueList = data.list;
-      console.log("this.venueList", this.venueList);
     }
   },
    mounted(){
      this.search()
+    //  每次刷新页面将地区组件聚焦到所有
+     this.selectIndex = -1
+     
    }
 };
 </script>
 
 <style scoped>
-.main-wrap {
-  padding-bottom: 60px;
+.main-venue {
+  width: 345px;
+  height: 110px;
+  margin: 15px;
 }
-
+.venue-imgbox {
+  width: 135px;
+  height: 90px;
+  margin: 10px;
+}
+.venue-textbox {
+  width: 165px;
+  height: 90px;
+  float: left;
+  margin-top: 10px;
+}
 </style>
