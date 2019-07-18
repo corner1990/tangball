@@ -11,3 +11,21 @@
 .card.data-v-e5e3ffb2 {
   margin: 0 20rpx;
 }
+.browsing van-button.data-v-e5e3ffb2 {
+  margin-right: 20rpx;
+}
+.van-collapse-item ._div.data-v-e5e3ffb2 {
+  color: #333;
+  z-index: 1000000000;
+}
+.valueNeed ._span.data-v-e5e3ffb2 {
+  display: block;
+  background-color: #fafafa;
+  padding: 6rpx 0;
+  margin: 20rpx 30rpx;
+}
+.valueNeed.data-v-e5e3ffb2 {
+  text-align: center;
+  border: 2rpx solid #fbfbfb;
+  border-radius: 10rpx;
+}

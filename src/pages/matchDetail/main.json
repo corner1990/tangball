@@ -8,6 +8,8 @@
     "van-panel": "/static/vant/panel/index",
     "van-steps": "/static/vant/steps/index",
     "van-cell": "/static/vant/cell/index",
-    "van-cell-group": "/static/vant/cell-group/index"
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-collapse": "/static/vant/collapse/index",
+    "van-collapse-item": "/static/vant/collapse-item/index"
   }
 }
