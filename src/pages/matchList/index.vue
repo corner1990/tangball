@@ -79,6 +79,8 @@ export default {
         param: { findJson: { matchType: this.matchType } }
       });
       this.matchlist = data.list;
+      localStorage.matchID=this.matchlist.P1
+       console.log("getlist成功", this.matchlist.P1);
       console.log("getlist成功", this.matchlist);
     },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
