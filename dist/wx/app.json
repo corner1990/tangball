@@ -1,5 +1,10 @@
 {
   "pages": [
+<<<<<<< HEAD
+=======
+    "pages/venueDetail/main",
+    "pages/index/main",
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
     "pages/matchList/main",
     "pages/index/main",
     
@@ -11,7 +16,6 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/venueList/main",
-    "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
@@ -63,6 +67,13 @@
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
     "van-icon": "/static/vant/icon/index" ,
+<<<<<<< HEAD
     "van-cell": "/static/vant/cell/index"  
+=======
+    "van-cell": "/static/vant/cell/index",
+    "van-steps": "/static/vant/steps/index",
+    "van-field": "/static/vant/field/index",
+    "van-cell-group": "/static/vant/cell-group/index"
+>>>>>>> e2ec035580b3243ef67dd12c516f79980ea616b8
   }
 }

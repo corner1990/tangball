@@ -1107,6 +1107,22 @@ page {
   height: 100rpx;
 }
 
+.H60 {
+  height: 100rpx;
+}
+
+.H70 {
+  height: 100rpx;
+}
+
+.H80 {
+  height: 100rpx;
+}
+
+.H90 {
+  height: 100rpx;
+}
+
 .H100 {
   height: 200rpx;
 }
@@ -2437,6 +2453,10 @@ page {
 
 .LH50 {
   line-height: 100rpx;
+}
+
+.LH110 {
+  line-height: 220rpx;
 }
 
 .FS12 {
