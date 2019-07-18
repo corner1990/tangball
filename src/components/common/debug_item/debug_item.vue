@@ -42,7 +42,11 @@ export default {
     setValue(){//函数：{设置值函数}
        let type = util.type(this.value);
         if (type === "array" || type === "object") {//如果{000}000
-          this.valueNeed = JSON.stringify(this.value);//{Json对象转换Json字符串函数}
+          this.valueNeed = JSON.stringify(this.value, null, 2);//{Json对象转换Json字符串函数}
+
+
+
+
         }else{
            this.valueNeed = this.value;
         }

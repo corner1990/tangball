@@ -1,17 +1,11 @@
 <template>
   <div class="main-wrap">
-
-
-<van-cell
-  is-link
-  :title="item.title"
-  link-type="navigateTo"
-  :url="item.url" v-for="(item,i) in arrLink" :key="i"
-/>
-
-
-
-
+    <van-cell
+      is-link
+      :title="item.title"
+      link-type="navigateTo"
+      :url="item.url" v-for="(item,i) in arrLink" :key="i"
+    />
     <swiper :indicator-dots="indicatorDots"
       :autoplay="autoplay" :interval="interval" :duration="duration">
       <block v-for="item in imgUrls" :key="item">
@@ -130,7 +124,7 @@ export default {
   data () {
     return {
        arrLink: [
-        {"title":"赛事列表","url":"/pages/matchList/main"},
+        {"title":"赛事列表-","url":"/pages/matchList/main"},
         {"title":"赛事详情","url":"/pages/matchDetail/main"},
         {"title":"赛事报名","url":"/pages/matchEroll/main"},
         {"title":"场馆列表","url":"/pages/venueList/main"},

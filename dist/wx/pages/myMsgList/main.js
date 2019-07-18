@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([10],{
+global.webpackJsonpMpvue([11],{
 
-/***/ 191:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(178);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 192:
+/***/ 178:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_43ab7364_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_43ab7364_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(181);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(193)
+  __webpack_require__(179)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,19 +79,35 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 193:
+/***/ 179:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 194:
+/***/ 180:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -105,23 +121,72 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_1__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
+      gant: {},
+      checkedList: [],
+      checked: false,
+      showSelect: false,
+      showcontent: false,
+      crow: [{
+        id: "1",
+        mas: "这是一很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的消息1"
+      }, { id: "2", mas: "这是消息2" }, { id: "3", mas: "这是消息3" }],
       pageName: "个人中心-系统消息列表"
-
     };
   },
 
 
-  methods: {},
-  created: function created() {}
+  methods: {
+    allCheck: function allCheck() {
+      for (var i = 0; i < this.checkedList.length; i++) {
+
+        if (this.checked) {
+          this.checkedList[i] = false;
+        } else {
+          this.checkedList[i] = true;
+        }
+      }
+      this.checked = !this.checked;
+      console.log(this.checkedList);
+    },
+    del: function del(index) {
+      this.checkedList[index] = !this.checkedList[index];
+      console.log(this.checkedList[index]);
+    },
+    compile: function compile() {
+      console.log(this.showSelect);
+      this.showSelect = !this.showSelect;
+    },
+    content: function content(index) {
+      console.log(this.showcontent);
+      this.showcontent = true;
+      console.log(this.gant);
+
+      this.gant = index;
+    },
+    shut: function shut() {
+      this.showcontent = false;
+    }
+  },
+  mounted: function mounted() {
+    this.checkedList.length = this.crow.length;
+    for (var i = 0; i < this.checkedList.length; i++) {
+      if (this.checkedList[i]) {
+        this.checkedList[i] = !this.checkedList[i];
+      } else {
+        this.checkedList[i] = false;
+      }
+    }
+  }
 });
 
 /***/ }),
 
-/***/ 195:
+/***/ 181:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -146,7 +211,89 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "mpcomid": '1'
     }
-  })], 1)
+  }), _vm._v(" "), _c('div', {
+    staticClass: "top-box"
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showSelect),
+      expression: "showSelect"
+    }],
+    staticClass: "all-box",
+    attrs: {
+      "eventid": '1'
+    },
+    on: {
+      "click": function($event) {
+        _vm.allCheck()
+      }
+    }
+  }, [_vm._v("全选")]), _vm._v(" "), _c('div', {
+    staticClass: "compile-box",
+    attrs: {
+      "eventid": '2'
+    },
+    on: {
+      "click": function($event) {
+        _vm.compile()
+      }
+    }
+  }, [_vm._v("编辑")])]), _vm._v(" "), (_vm.showcontent) ? _c('div', {
+    staticClass: "content-box"
+  }, [_vm._v("\n    " + _vm._s(_vm.crow[_vm.gant].mas) + "\n    "), _c('div', {
+    staticClass: "close-box",
+    attrs: {
+      "eventid": '3'
+    },
+    on: {
+      "click": function($event) {
+        _vm.shut()
+      }
+    }
+  }, [_vm._v("关闭")])]) : _vm._e(), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.showcontent),
+      expression: "!showcontent"
+    }]
+  }, _vm._l((_vm.crow), function(mass, index) {
+    return _c('div', {
+      key: mass.id,
+      staticClass: "mas-box"
+    }, [_c('div', {
+      staticClass: "news",
+      attrs: {
+        "eventid": '4_' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.content(index)
+        }
+      }
+    }, [_vm._v(_vm._s(mass.mas))]), _vm._v(" "), (_vm.showSelect) ? _c('input', {
+      staticClass: "delete-box",
+      attrs: {
+        "type": "checkbox",
+        "checked": _vm.checked,
+        "eventid": '5_' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.del(index)
+        }
+      }
+    }) : _vm._e()])
+  })), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showSelect),
+      expression: "showSelect"
+    }],
+    staticClass: "bottom-box"
+  }, [_vm._v("删 除")])], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -161,4 +308,4 @@ if (false) {
 
 /***/ })
 
-},[191]);
+},[177]);
