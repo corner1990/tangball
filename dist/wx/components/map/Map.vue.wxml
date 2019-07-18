@@ -1,8 +1,0 @@
-<template name="2276dae3">
-  <view class="_div data-v-27844fe7 main-wrap">
-    <view class="_div data-v-27844fe7 page-body">
-      <view class="_div data-v-27844fe7 page-section page-section-gap"><map id="myMap" style="width: 100%; height: 300px;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" covers="{{covers}}" class="_map data-v-27844fe7"></map></view>
-      <view class="_div data-v-27844fe7 btn-area"><button bindtap="getCenterLocation" class="_button data-v-27844fe7 page-body-button" type="primary">获取位置</button> <button bindtap="moveToLocation" class="_button data-v-27844fe7 page-body-button" type="primary">移动位置</button> <button bindtap="translateMarker" class="_button data-v-27844fe7 page-body-button" type="primary">移动标注</button> <button bindtap="includePoints" class="_button data-v-27844fe7 page-body-button" type="primary">缩放视野展示所有经纬度</button></view>
-    </view>
-  </view>
-</template>
