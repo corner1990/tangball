@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="match-box">
+    <div class="match-box" >
       <div class="match-img-box">
-        <img :src="index" />
+        <img :src="item.thumb" />
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
@@ -18,6 +18,9 @@
         <div class="macth-btn">查看详情</div>
       </div>
     </div>
+  
+     
+
   </div>
 </template>
 <script>
@@ -49,11 +52,12 @@ export default {
       }
     }
   },
-  created() {}
+  created() {},
 };
 </script>
 
 <style scoped>
+
 .main-wrap {
   padding-bottom: 60px;
 }
@@ -106,10 +110,10 @@ export default {
   width: 60px;
   height: 20px;
   text-align: center;
-  border: 1px solid #fdd6d4;
+
   border-radius: 5px;
-  color: #f66f67;
-  margin: 10px 5px 0 5px;
+  /* display: inline-block; */
+  margin: 15px 5px 0 5px;
 }
 .btn {
   background-color: #ccc;

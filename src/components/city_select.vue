@@ -40,6 +40,7 @@ export default {
             let str = this.cityList[0]
             this.cityList[0] = this.cityList[index]
             this.cityList[index] = str
+            this.showCityButton = !this.showCityButton
             this.selectIndex = 0
             this.$emit("select",city)
         },
