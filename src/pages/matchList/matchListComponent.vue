@@ -8,12 +8,13 @@
         <h1>{{title}}</h1>
         <p>{{desc}}</p>
         <div>{{matchTime}}</div>
-        
+
         <div>{{price}}</div>
       </div>
 
-      <div slot="footer" class="rpg11">
-        <div class="macth-btn" @click="daying">火热报名中</div>
+      <div name="footer" class="rpg11">
+        <div :class="{'macth-btn':true,btn:publicationStatus==2}" @click="daying">{{Status}}</div>
+
         <div class="macth-btn">查看详情</div>
       </div>
     </div>
@@ -24,12 +25,29 @@
 
 export default {
   data() {
-    return {};
+    return {
+      Status: ""
+    };
   },
-  props: ["title", "desc", "price", "matchTime"],
+  props: ["title", "desc", "price", "matchTime", "publicationStatus"],
   components: {},
+  mounted() {
+    if (this.publicationStatus == 1) {
+      return (this.Status = "火热报名中");
+    } else if (this.publicationStatus == 2){
+      return (this.Status = "报名已结束");
+    }else{
+      return (this.Status="notdefined")
+    }
+  },
   methods: {
-   
+    daying() {
+      if (this.publicationStatus == 1) {
+        console.log("aa")
+      }else{
+         return
+      }
+    }
   },
   created() {}
 };
@@ -82,7 +100,6 @@ export default {
   flex-direction: column;
 }
 .macth-btn {
-  background: #fef6f6;
   line-height: 20px;
   font-size: 11px;
   font-weight: bold;
@@ -93,5 +110,11 @@ export default {
   border-radius: 5px;
   color: #f66f67;
   margin: 10px 5px 0 5px;
+}
+.btn {
+  background-color: #ccc;
+   color: #000;
+    border: 1px solid #000;
+    opacity: 0.5;
 }
 </style>
