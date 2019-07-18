@@ -43,7 +43,7 @@ export default {
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      activeNeed:this.active||0,
+      activeNeed:this.active||999,
       value: '' // 搜索value
     }
   },

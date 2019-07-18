@@ -6,8 +6,9 @@
     <input type="text" v-model="value" />
     <van-search v-model="value" placeholder="请输入搜索关键词123" use-action-slot bind:search="onSearch" />
     <div>
-      <van-tabs :active="active" @change="onClickTab">
-        <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
+      <button @click="nationwideList">我可以的！</button>
+      <van-tabs :active="active" bind:change="onChange">
+        <van-tab title="近期">
           <matchListcomponent
             :desc="item.remark"
             :title="item.matchName"
@@ -19,6 +20,23 @@
             :key="i"
           ></matchListcomponent>
         </van-tab>
+       
+          <van-tab title="全国" @click="nationwideList">
+            <matchListcomponent
+              :desc="item.remark"
+              :title="item.matchName"
+              :matchTime="item.matchTime"
+              :thumb="item.thumb"
+              :price="'报名费'+item.registrationFee"
+              origin-price="1000"
+              :thumb-link="'/pages/matchDetail/main?id='+item.P1"
+              v-for="(item,i) in nationwideMatchlist"
+              :key="i"
+            ></matchListcomponent>
+          </van-tab>
+  
+        <van-tab title="加盟商">加盟商</van-tab>
+        <van-tab title="全部">全部</van-tab>
       </van-tabs>
     </div>
 
@@ -43,8 +61,8 @@ export default {
   },
   data() {
     return {
-      matchType: null,
       activeStep: 0,
+      matchType: null,
       steps: [
         {
           text: "步骤一",
@@ -64,62 +82,21 @@ export default {
         }
       ],
       matchlist: [],
-      tabList:[
-        {category:"近期"},{category:"全国"},{category:"加盟商"},{category:"全部"}
-      ],
+      nationwideMatchlist: [],
 
-      value: "999" // 搜索value
+      value: "111" // 搜索value
     };
   },
   methods: {
-    //----------- 请求接口数据的函数-------------------
-    async getlist() {
-      let { data } = await util.post({
-        url: global.PUB.domain + "/crossList?page=tangball_match",
-        param: { findJson: { matchType: this.matchType } }
-      });
-      this.matchlist = data.list;
-      console.log("getlist成功", this.matchlist);
-    },
-    //----------- 点击标签时触发的函数，并且会默认传递event-------------------
-    onClickTab(event) {
-      console.group("onClickTab", event.target); //这个对象包含tab的index和title
-      console.log("onClickTab", event.target.index);
-
-      //如果是近期（因为近期的index为1）
-      if (event.target.index == 0) {
-        console.group("如果是近期", event.target.title);
-          this.matchType = null;//改变请求接口参数
-        this.getlist(); //调用一次接口
-      }
-
-      if (event.target.index == 1) {
-        console.group("如果是全国", event.target.title);
-        this.matchType = 2; //改变请求接口参数
-        this.getlist(); //调用一次接口
-      }
-
-      if (event.target.index == 2) {
-        console.group("如果是加盟商", event.target.title);
-        console.log("如果是加盟商2", event.target.title);
-        this.matchType = 1;
-        this.getlist(); //调用一次接口
-      }
-
-      if (event.target.index == 3) {
-        console.group("如果是全部", event.target.title);
-        console.log("如果是全部", event.target.title);
-        this.matchType = 3;
-        this.getlist();
-      }
-    },
     onShow() {
       this.show = true;
       console.log("mpvue.data", this);
       // mpvue.setData({show: true})
     },
-    onDaying() {
-      console.log(this.matchlist);
+    nationwideList() {
+      console.log("大傻子");
+      this.matchType = 2;
+     
     },
 
     /**
@@ -130,11 +107,25 @@ export default {
      * @desc 赛事切换回调
      */
   },
-  created() {
-    console.log("赛事列表created");
-  },
+
+
   async mounted() {
-    this.getlist(); //页面创建成功后，调用一次请求接口，此时是加载所有数据
+    console.log("赛事列表mounted");
+    // //ajax请求接口数据
+    // let { data } = await post(global.PUB.domain + '/crossList?page=tangball_match',{findJson:{ "matchType": 2 }});
+    // this.matchlist = data.list;
+
+    /**
+     * ajax请求参赛次数排行榜
+     * 请求会员表tangball_member
+     */
+
+    let { data } = await util.post({
+      url: global.PUB.domain + "/crossList?page=tangball_match",
+      param: { findJson: { matchType: this.matchType } }
+    });
+    this.matchlist = data.list;
+    console.log("aa", this.matchlist);
   }
 };
 </script>

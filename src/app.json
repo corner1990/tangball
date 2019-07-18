@@ -2,12 +2,21 @@
   "pages": [
     "pages/matchList/main",
     "pages/index/main",
+    
+   
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
-    "pages/usercenter/main"
+    "pages/usercenter/main",
+    "pages/venueList/main",
+    "pages/venueDetail/main",
+    "pages/matchEroll/main",
+    "pages/rankingList/main",
+    "pages/myEroll/main",
+    "pages/myErollDetail/main",
+    "pages/myMsgList/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

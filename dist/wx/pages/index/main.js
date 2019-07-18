@@ -2,14 +2,14 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([15],{
 
-/***/ 117:
+/***/ 118:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(119);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 118:
+/***/ 119:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_13520ffa_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(125);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(119)
+  __webpack_require__(120)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,19 +79,19 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 119:
+/***/ 120:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 120:
+/***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_card__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_card__ = __webpack_require__(21);
 //
 //
 //
@@ -221,7 +221,7 @@ if (false) {(function () {
   },
   data: function data() {
     return {
-      arrLink: [{ "title": "赛事列表", "url": "/pages/matchList/main" }, { "title": "赛事详情", "url": "/pages/matchDetail/main" }, { "title": "赛事报名", "url": "/pages/matchEroll/main" }, { "title": "场馆列表", "url": "/pages/venueList/main" }, { "title": "场馆详情", "url": "/pages/venueDetail/main" }, { "title": "唐球达人", "url": "/pages/rankingList/main" }, { "title": "个人中心-首页", "url": "/pages/usercenter/main" }, { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" }, { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" }, { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }],
+      arrLink: [{ "title": "赛事列表", "url": "/pages/matchList/main" }, { "title": "赛事详情", "url": "/pages/matchDetail/main" }, { "title": "赛事报名", "url": "/pages/matchEroll/main" }, { "title": "场馆列表", "url": "/pages/venueList/main" }, { "title": "场馆详情", "url": "/pages/venueDetail/main" }, { "title": "唐球达人", "url": "/pages/rankingList/main" }, { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" }, { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" }, { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }],
       motto: 'Hello miniprograme',
       userInfo: {
         nickName: 'mpvue',
@@ -290,7 +290,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 124:
+/***/ 125:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -470,4 +470,4 @@ if (false) {
 
 /***/ })
 
-},[117]);
+},[118]);

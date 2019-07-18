@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称"/>
+   
     <mytabbar></mytabbar>
   </div>
 </template>

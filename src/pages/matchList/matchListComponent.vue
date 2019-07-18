@@ -2,13 +2,13 @@
   <div>
     <div class="match-box">
       <div class="match-img-box">
-        <img :src="item.thumb" />
+        <img :src="index" />
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
         <p>{{desc}}</p>
         <div>{{matchTime}}</div>
-        <div>{{item.endTime}}</div>
+        
         <div>{{price}}</div>
       </div>
 
@@ -29,9 +29,7 @@ export default {
   props: ["title", "desc", "price", "matchTime"],
   components: {},
   methods: {
-    dayin() {
-      console.log("cf", cf.matchlist);
-    }
+   
   },
   created() {}
 };
