@@ -1,6 +1,7 @@
 <template>
   <div class="main-wrap">
     <debug_item path="pageName" v-model="pageName" text="页面名称"/>
+     <debug_item path="dataId" v-model="dataId" text="数据id传参"/>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -8,6 +9,7 @@
 /* eslint-disable */
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
+import util from "@/utils/util";
 
 export default {
   components: {
@@ -15,6 +17,7 @@ export default {
   },
   data() {
     return {
+      dataId:null,
       pageName: "个人中心-我的赛事报名详情"
 
     }
@@ -23,7 +26,13 @@ export default {
   methods: {
 
   },
-  created() {
+  mounted() {
+   let param=util.getQuery();//获取页面参数
+   console.log("param", param);
+
+
+   this.dataId=param.dataId;
+ 
   }
 }
 </script>
