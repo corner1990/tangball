@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <template name="1131ac20">
+=======
+<template name="59cf42a4">
+>>>>>>> afa2e0580181853dad98763cae87008f7f68b1ce
   <view class="_div data-v-4b531066">
     <van-tabbar active="{{activeNeed}}" active-color="#3a0" inactive-color="#333" class="_van-tabbar data-v-4b531066">
       <van-tabbar-item icon="{{item.iconPath}}" wx:key="key" key="{{key}}" bindtap="handleProxy" data-eventid="{{'0_'+key}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="key" wx:for-item="item" class="_van-tabbar-item data-v-4b531066">{{item.text}}</van-tabbar-item>

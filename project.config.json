@@ -1,5 +1,5 @@
 {
-	"description": "项目配置文件。",
+	"description": "项目配置文件1。",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -20,13 +20,8 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-<<<<<<< HEAD
-	"appid": "wxbe9319d3ce24c24b",
+	"appid": "wx8c385eac14a82873",
 	"projectname": "tangball",
-=======
-	"appid": "wx95c489b51de50019",
-	"projectname": "bowling",
->>>>>>> 9ba64291e2ce9643bc2c0b96c5d503d7045fc31f
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"libVersion": "2.7.4",

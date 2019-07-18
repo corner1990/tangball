@@ -1,7 +1,13 @@
 <import src="/components/matchErooll/personInfo.vue.wxml" />
+<<<<<<< HEAD
 <import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="5cebcbb5">
   <view class="_div data-v-311a7da2 main-wrap">
     <van-steps steps="{{steps}}" active="{{active}}" class="_van-steps data-v-311a7da2"></van-steps> <template data="{{...$root[$kk+'1'], $root}}" is="f1a6a88e"></template>
+=======
+<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="770d9539">
+  <view class="_div data-v-311a7da2 main-wrap">
+    <van-steps steps="{{steps}}" active="{{active}}" class="_van-steps data-v-311a7da2"></van-steps> <template data="{{...$root[$kk+'1'], $root}}" is="1e46f096"></template>
+>>>>>>> afa2e0580181853dad98763cae87008f7f68b1ce
     <van-row class="_van-row data-v-311a7da2">
       <van-col span="11" class="_van-col data-v-311a7da2">
         <van-button type="info" plain disabled="{{(active > 0)}}" block bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-button data-v-311a7da2">上一步</van-button>
@@ -23,6 +29,10 @@
           </van-col>
         </van-row>
       </form>
+<<<<<<< HEAD
     </view> <template data="{{...$root[$kk+'10'], $root}}" is="1131ac20"></template>
+=======
+    </view> <template data="{{...$root[$kk+'10'], $root}}" is="59cf42a4"></template>
+>>>>>>> afa2e0580181853dad98763cae87008f7f68b1ce
   </view>
 </template>
