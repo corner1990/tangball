@@ -1,11 +1,8 @@
 {
   "pages": [
-    "pages/venueDetail/main",
     "pages/index/main",
-<<<<<<< HEAD
-=======
+    "pages/venueDetail/main",
     "pages/matchList/main",
->>>>>>> 8fa7598e45e9b5b50177eba17f75a43f9ab2f564
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
