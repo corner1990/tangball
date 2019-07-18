@@ -2,14 +2,14 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([9],{
 
-/***/ 196:
+/***/ 197:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(198);
 
 
 
@@ -25,16 +25,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 197:
+/***/ 198:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_42716a25_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_42716a25_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(201);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(198)
+  __webpack_require__(199)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -79,25 +79,29 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 198:
+/***/ 199:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 199:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(145);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__ = __webpack_require__(6);
 
 
+//
+//
+//
+//
 //
 //
 //
@@ -112,13 +116,13 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   components: {
-    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */], debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
+    mytabbar: __WEBPACK_IMPORTED_MODULE_2__components_mytabbar_mytabbar__["a" /* default */],
+    debug_item: __WEBPACK_IMPORTED_MODULE_3__components_common_debug_item_debug_item__["a" /* default */]
   },
   data: function data() {
     return {
       pageName: "唐球达人",
       matchTimeRanklist: [] //比赛次数排行列表
-
     };
   },
 
@@ -137,7 +141,7 @@ if (false) {(function () {
               console.log("唐球达人-created");
               //ajax请求接口数据
               _context.next = 3;
-              return post(global.PUB.domain + '/crossList?page=tangball_member');
+              return post(global.PUB.domain + "/crossList?page=tangball_member");
 
             case 3:
               _ref = _context.sent;
@@ -147,7 +151,7 @@ if (false) {(function () {
               _this.matchTimeRanklist = data.list;
 
             case 7:
-            case 'end':
+            case "end":
               return _context.stop();
           }
         }
@@ -155,11 +159,11 @@ if (false) {(function () {
     }))();
   }
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
 
 /***/ }),
 
-/***/ 200:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -180,12 +184,40 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       },
       expression: "pageName"
     }
-  }), _vm._v(" "), _c('debug_item', {
+  }), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '1'
+    }
+  }, [_vm._v("参赛次数")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '2'
+    }
+  }, [_vm._v("成绩排名")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '3'
+    }
+  }, [_vm._v("鸟王排名")]), _vm._v(" "), _c('van-button', {
+    attrs: {
+      "plain": "",
+      "type": "primary",
+      "size": "small",
+      "mpcomid": '4'
+    }
+  }, [_vm._v("积分排名")]), _vm._v(" "), _c('debug_item', {
     attrs: {
       "path": "matchTimeRanklist",
       "text": "比赛次数排行列表",
       "eventid": '1',
-      "mpcomid": '1'
+      "mpcomid": '5'
     },
     model: {
       value: (_vm.matchTimeRanklist),
@@ -196,7 +228,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('mytabbar', {
     attrs: {
-      "mpcomid": '2'
+      "mpcomid": '6'
     }
   })], 1)
 }
@@ -213,4 +245,4 @@ if (false) {
 
 /***/ })
 
-},[196]);
+},[197]);

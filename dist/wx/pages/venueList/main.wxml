@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 <import src="/pages/venueList/index.vue.wxml" /><template is="4cadd564" data="{{ ...$root['0'], $root }}"/>
-=======
-<import src="/pages/venueList/index.vue.wxml" /><template is="94f19226" data="{{ ...$root['0'], $root }}"/>
->>>>>>> 79cbfc789eba56993dad2109fcbf4c2097594e08
