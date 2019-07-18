@@ -16,7 +16,9 @@ export default {
   components: {
     mytabbar
   },
-  data: {    
+  data: {
+
+    
   },
   methods: {
     /**

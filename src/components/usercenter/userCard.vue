@@ -17,7 +17,7 @@ export default {
         },
         {
           text: '我的赛事',
-          path: '/pages/myevent/main',
+          path: '/pages/usercenter/my-event',
           icon: 'gem-o'
         },
         {

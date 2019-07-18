@@ -3,19 +3,30 @@
     <van-steps
         :steps="steps"
         :active="active"
-        active-color="#1989fa"
       />
     <!-- <BingPhone v-show="0" /> -->
     <PersonInfo />
-    <div class="btn-wrap">
-      <van-row>
-        <van-col span="11">
-          <van-button type="info" plain :disabled="(active > 0)" block @click="prevStep">上一步</van-button>
-        </van-col>
-        <van-col span="11" offset="2">
-          <van-button type="info" block @click="nextStep">{{btnText}}</van-button>
-        </van-col>
-      </van-row>
+    <van-row>
+      <van-col span="11">
+        <van-button type="info" plain :disabled="(active > 0)" block @click="prevStep">上一步</van-button>
+      </van-col>
+      <van-col span="11" offset="2">
+        <van-button type="info" block @click="nextStep">{{btnText}}</van-button>
+      </van-col>
+    </van-row>
+    <div class="event-info">
+      <h3>赛事名称</h3>
+      <p>比赛时间：2019-09-01</p>
+      <p>比赛地点： 22223423424</p>
+    </div>
+    <div class="form-wrap">      
+      <form>
+        <van-row class="button-wrap">
+          <van-col span="24">
+            <van-button type="info" block>立刻报名</van-button>
+          </van-col>
+        </van-row>
+      </form>
     </div>
     <mytabbar></mytabbar>
   </div>
@@ -93,8 +104,5 @@ export default {
   }
   .form-wrap .button{
     width: 100%;
-  }
-  .main-wrap .btn-wrap{
-    margin-top: 30px;
   }
 </style>

@@ -1,1 +1,0 @@
-<import src="/pages/counter/index.vue.wxml" /><template is="fba14998" data="{{ ...$root['0'], $root }}"/>

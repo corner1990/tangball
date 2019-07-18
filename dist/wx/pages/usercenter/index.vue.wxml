@@ -1,5 +1,0 @@
-<import src="/components/usercenter/userinfo.vue.wxml" />
-<import src="/components/usercenter/userCard.vue.wxml" />
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="0df832f8">
-  <view class="_div data-v-55b86a25"><template data="{{...$root[$kk+'0'], $root}}" is="0fb38276"></template> <template data="{{...$root[$kk+'1'], $root}}" is="1e308f72"></template> <template data="{{...$root[$kk+'2'], $root}}" is="cfaa1d28"></template></view>
-</template>
