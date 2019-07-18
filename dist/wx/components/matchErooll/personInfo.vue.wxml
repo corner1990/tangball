@@ -1,0 +1,25 @@
+<template name="167090b6">
+  <van-cell-group class="_van-cell-group data-v-25983632">
+    <van-field value="{{info.name}}" type="text" label="参赛人姓名" placeholder="请输入参赛人姓名" required class="_van-field data-v-25983632"></van-field>
+    <van-field value="{{info.phone}}" label="联系电话" placeholder="请输入手机号" class="_van-field data-v-25983632"></van-field>
+    <van-row class="_van-row data-v-25983632">
+      <van-col span="8" class="_van-col data-v-25983632 title">性别</van-col>
+      <van-col span="10" class="_van-col data-v-25983632">
+        <van-radio-group value="{{radio}}" class="_van-radio-group data-v-25983632">
+          <van-cell title="男" value-class="value-class" clickable data-name="1" class="_van-cell data-v-25983632">
+            <van-radio name="1" class="_van-radio data-v-25983632"></van-radio>
+          </van-cell>
+          <van-cell title="nv" value-class="value-class" clickable data-name="2" class="_van-cell data-v-25983632">
+            <van-radio name="2" class="_van-radio data-v-25983632"></van-radio>
+          </van-cell>
+        </van-radio-group>
+      </van-col>
+    </van-row>
+    <van-field value="{{info.age}}" label="年龄" placeholder="请输入年龄" error class="_van-field data-v-25983632"></van-field>
+    <van-field value="{{info.job}}" label="职业" placeholder="请输入职业" error class="_van-field data-v-25983632"></van-field>
+    <van-row class="_van-row data-v-25983632">
+      <van-col span="8" class="_van-col data-v-25983632 title">球龄</van-col>
+      <van-col span="16" class="_van-col data-v-25983632"></van-col>
+    </van-row>
+  </van-cell-group>
+</template>

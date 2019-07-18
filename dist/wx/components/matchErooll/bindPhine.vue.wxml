@@ -1,0 +1,10 @@
+<template name="5a687730">
+  <view class="_section data-v-1d9b7f6c bind-phone">
+    <van-field value="{{phone}}" label="手机号" placeholder="请输入手机号" border="false" required class="_van-field data-v-1d9b7f6c"></van-field>
+    <van-cell-group class="_van-cell-group data-v-1d9b7f6c">
+      <van-field value="{{sms}}" center clearable label="短信验证码" placeholder="请输入短信验证码" required use-button-slot class="_van-field data-v-1d9b7f6c">
+        <van-button slot="button" size="small" type="info" class="_van-button data-v-1d9b7f6c">发送验证码</van-button>
+      </van-field>
+    </van-cell-group>
+  </view>
+</template>
