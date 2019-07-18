@@ -1,25 +1,35 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
-     <venDetail></venDetail>
-  
-
+   
+    <div class="FS24 TAC LH36">深圳XXX场馆</div>
+    
+    <div>
+      <van-tabs :active="active" bind:change="onChange">
+        <van-tab title="场馆介绍1">
+          <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中">
+            <view>
+            
+            </view>
+          </van-panel>
+        </van-tab>
+        <van-tab title="xxx">
+          <venDetail></venDetail>
+        </van-tab>
+        <van-tab title="地理位置"><Map></Map></van-tab>
+      </van-tabs>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import mytabbar from "@/components/mytabbar/mytabbar";
-import debug_item from "@/components/common/debug_item/debug_item";
+
 import Map from "@/components/map/Map";
 import util from "@/utils/util";
-import venDetail from "./detail";
+
 export default {
   components: {
-    mytabbar,
-    debug_item,
     Map,
-    venDetail
   },
   data() {
     return {

@@ -2,7 +2,7 @@
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
     <!-- 引进筛选城市组件 -->
     <city_select @select="search"></city_select>
     <venueListComponent
@@ -45,19 +45,19 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
-          "needRelation": "1",
-          "columnItem": "P7",
-          "columnTarget": "area",
-          "sheetRelation": {
-            "page": "dmagic_area",
-            "findJson": {
-              "P8": areaId
+          needRelation: "1",
+          columnItem: "P7",
+          columnTarget: "area",
+          sheetRelation: {
+            page: "dmagic_area",
+            findJson: {
+              P8: areaId
             }
           },
-          "sheetTarget": {
-            "page": "tangball_venue",
-            "pageSize": "9999",
-            "findJson": {}
+          sheetTarget: {
+            page: "tangball_venue",
+            pageSize: "9999",
+            findJson: {}
           }
         }
       });
@@ -65,9 +65,9 @@ export default {
       console.log("this.venueList", this.venueList);
     }
   },
-   mounted(){
-     this.search()
-   }
+  mounted() {
+    this.search();
+  }
 };
 </script>
 
@@ -75,5 +75,4 @@ export default {
 .main-wrap {
   padding-bottom: 60px;
 }
-
 </style>
