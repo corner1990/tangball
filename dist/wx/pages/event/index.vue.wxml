@@ -1,3 +1,0 @@
-<import src="/components/mytabbar/mytabbar.vue.wxml" /><template name="101f0fca">
-  <view class="_div data-v-7e06a7cb">赛事活动 <template data="{{...$root[$kk+'0'], $root}}" is="a6892b24"></template></view>
-</template>
