@@ -124,7 +124,7 @@ export default {
   data () {
     return {
        arrLink: [
-        {"title":"赛事列表","url":"/pages/matchList/main"},
+        {"title":"赛事列表-","url":"/pages/matchList/main"},
         {"title":"赛事详情","url":"/pages/matchDetail/main"},
         {"title":"赛事报名","url":"/pages/matchEroll/main"},
         {"title":"场馆列表","url":"/pages/venueList/main"},
