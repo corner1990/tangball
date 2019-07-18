@@ -27,28 +27,32 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-   
-    "list": [{
-      "text": "首页",
-      "pagePath": "pages/index/main",
-      "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
-    }, {
-      "text": "唐球馆",
-      "pagePath": "pages/tanghome/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }, {
-      "text": "活动",
-      "pagePath": "pages/event/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }, {
-      "text": "个人中心",
-      "pagePath": "pages/usercenter/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }],
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/tabs/home.png",
+        "selectedIconPath": "static/tabs/home-active.png"
+      },
+      {
+        "text": "唐球馆",
+        "pagePath": "pages/tanghome/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      },
+      {
+        "text": "活动",
+        "pagePath": "pages/event/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/usercenter/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      }
+    ],
     "position": "bottom"
   },
   "usingComponents": {
@@ -60,7 +64,8 @@
     "van-tabbar-item": "/static/vant/tabbar-item/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
-    "van-icon": "/static/vant/icon/index" ,
-    "van-cell": "/static/vant/cell/index"  
-  }
+    "van-icon": "/static/vant/icon/index",
+    "van-cell": "/static/vant/cell/index"
+  },
+  "sitemapLocation": "sitemap98.json"
 }

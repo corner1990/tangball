@@ -18,6 +18,7 @@ export default {
       pageName: "场馆详情"
 
     }
+    
   },
 
   methods: {
