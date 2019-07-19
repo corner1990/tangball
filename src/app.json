@@ -1,10 +1,5 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/index/main",
-    "pages/venueDetail/main",
-=======
->>>>>>> 068b826fb1874fc44d80ec9271779b1441ea5f2b
     "pages/matchList/main",
     "pages/index/main",
     
