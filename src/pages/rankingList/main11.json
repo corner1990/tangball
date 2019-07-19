@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "赛事列表",
+  "navigationBarTitleText": "唐球达人",
   "usingComponents": {
     "van-search": "/static/vant/search/index",
     "van-card": "/static/vant/card/index",
@@ -7,6 +7,7 @@
     "van-tabs": "/static/vant/tabs/index",
     "van-panel": "/static/vant/panel/index",
     "van-steps": "/static/vant/steps/index",
-    "van-dialog": "/static/vant/dialog/index"
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index"
   }
 }

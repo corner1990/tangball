@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/matchList/main",
+    "pages/venueDetail/main",
     "pages/index/main",
+    "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -69,5 +70,5 @@
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index"
   },
-  "sitemapLocation": "sitemap59.json"
+  "sitemapLocation": "sitemap98.json"
 }
