@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="match-box" >
+    <div class="match-box">
       <div class="match-img-box">
-        <img :src="item.thumb" />
+        <img :src="a" />
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
@@ -13,14 +13,15 @@
       </div>
 
       <div name="footer" class="rpg11">
-        <div :class="{'macth-btn':true,btn:publicationStatus==2}" @click="daying">{{Status}}</div>
-
+        <!-- <div :class="{'macth-btn':true,btn:publicationStatus==2}" @click="daying">{{Status}}</div> -->
+        <navigator url="/pages/matchEroll/main" hover-class="navigator-hover">
+          <van-button plain size="small" type="danger" v-if="applyIngStatus" @click="daying">火热报名中</van-button>
+          
+        </navigator>
+        <van-button disabled size="small" v-if="applyEndStatus" >报名已结束</van-button>
         <div class="macth-btn">查看详情</div>
       </div>
     </div>
-  
-     
-
   </div>
 </template>
 <script>
@@ -29,35 +30,37 @@
 export default {
   data() {
     return {
-      Status: ""
+      applyIngStatus: true,
+     applyEndStatus:false
     };
   },
-  props: ["title", "desc", "price", "matchTime", "publicationStatus"],
+  props: ["title", "desc", "price", "matchTime", "publicationStatus","matchListP1"],
   components: {},
   mounted() {
+  
     if (this.publicationStatus == 1) {
-      return (this.Status = "火热报名中");
-    } else if (this.publicationStatus == 2){
-      return (this.Status = "报名已结束");
-    }else{
-      return (this.Status="notdefined")
+      
+      return (this.applyIngStatus=true,this.applyEndStatus=false)
+    } else {
+      return (this.applyIngStatus=false,this.applyEndStatus=true)
     }
   },
   methods: {
     daying() {
       if (this.publicationStatus == 1) {
-        console.log("aa")
-      }else{
-         return
+        var ak00=this.matchListP1
+        console.log("ak00",ak00)
+        this.$store.commit("ak00")
+      } else {
+        return;
       }
     }
   },
-  created() {},
+  created() {}
 };
 </script>
 
 <style scoped>
-
 .main-wrap {
   padding-bottom: 60px;
 }
@@ -117,8 +120,8 @@ export default {
 }
 .btn {
   background-color: #ccc;
-   color: #000;
-    border: 1px solid #000;
-    opacity: 0.5;
+  color: #000;
+  border: 1px solid #000;
+  opacity: 0.5;
 }
 </style>
