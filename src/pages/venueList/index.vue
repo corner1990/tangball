@@ -13,6 +13,7 @@
       :phone="item.phoneNumber"
       :address="item.address"
       :album="item.album"
+      
       v-for="(item,i) in venueList"
       :key="i"
     ></venueListComponent>
@@ -44,8 +45,8 @@ export default {
     };
   },
   methods: {
-    onSearch:{
-      alert()
+    onSearch(){
+      console.log("111")
     },
     async search(areaId) {
       if (areaId) {
