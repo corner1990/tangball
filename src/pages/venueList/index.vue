@@ -1,8 +1,10 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
-    <debug_item path="venueList" v-model="venueList" text="场馆列表" />
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
+    <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
+    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
+    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot @search="onSearch">
+      <div slot="action" @tap="onSearch">搜索</div>
+    </van-search>
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
     <venueListComponent
@@ -11,6 +13,7 @@
       :phone="item.phoneNumber"
       :address="item.address"
       :album="item.album"
+      :P1="item.P1"
       v-for="(item,i) in venueList"
       :key="i"
     ></venueListComponent>
@@ -23,7 +26,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
-import city_select from '@/components/city_select'
+import city_select from "@/components/city_select";
 
 export default {
   components: {
@@ -35,16 +38,27 @@ export default {
   data() {
     return {
       // 地区组件聚焦的index
-      selectIndex:-1,
+      selectIndex: -1,
       pageName: "场馆列表",
       venueList: [],
-      value: "" // 搜索value
+      value: "", // 搜索value
+      keywords: ""
     };
   },
   methods: {
+    onSearch(keywords) {
+      var newlist = [];
+      this.venueList.forEach(item => {
+        if (item.name.indexOf(keywords) != -1) {
+          newlist.push(item);
+        }
+      });
+      return newlist;
+      console.log("111", keywords);
+    },
     async search(areaId) {
       if (areaId) {
-        this.selectIndex = 0
+        this.selectIndex = 0;
       }
       console.log("areaId", areaId);
       let { data } = await util.post({
@@ -69,12 +83,11 @@ export default {
       this.venueList = data.list;
     }
   },
-   mounted(){
-     this.search()
+  mounted() {
+    this.search();
     //  每次刷新页面将地区组件聚焦到所有
-     this.selectIndex = -1
-     
-   }
+    this.selectIndex = -1;
+  }
 };
 </script>
 
