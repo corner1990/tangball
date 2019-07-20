@@ -8,12 +8,13 @@
         <h1>{{title}}</h1>
         <p>{{desc}}</p>
         <div>{{matchTime}}</div>
-        <div>{{item.endTime}}</div>
-         <div>{{price}}</div>
+
+        <div>{{price}}</div>
       </div>
 
-      <div slot="footer" class="rpg11">
-        <div class="macth-btn" @click="daying">去报名</div>
+      <div name="footer" class="rpg11">
+        <div :class="{'macth-btn':true,btn:publicationStatus==2}" @click="daying">{{Status}}</div>
+
         <div class="macth-btn">查看详情</div>
       </div>
     </div>
@@ -28,14 +29,27 @@
 export default {
   data() {
     return {
-    
+      Status: ""
     };
   },
-props: ["title","desc","price","matchTime"],
+  props: ["title", "desc", "price", "matchTime", "publicationStatus"],
   components: {},
+  mounted() {
+    if (this.publicationStatus == 1) {
+      return (this.Status = "火热报名中");
+    } else if (this.publicationStatus == 2){
+      return (this.Status = "报名已结束");
+    }else{
+      return (this.Status="notdefined")
+    }
+  },
   methods: {
-    dayin(){
-      console.log("cf",cf.matchlist)
+    daying() {
+      if (this.publicationStatus == 1) {
+        console.log("aa")
+      }else{
+         return
+      }
     }
   },
   created() {},
@@ -90,14 +104,21 @@ props: ["title","desc","price","matchTime"],
   flex-direction: column;
 }
 .macth-btn {
-  background: pink;
-  opacity: 0.5;
-  /* height: 25px; */
-  line-height: 25px;
+  line-height: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  width: 60px;
+  height: 20px;
   text-align: center;
 
   border-radius: 5px;
   /* display: inline-block; */
   margin: 15px 5px 0 5px;
+}
+.btn {
+  background-color: #ccc;
+   color: #000;
+    border: 1px solid #000;
+    opacity: 0.5;
 }
 </style>
