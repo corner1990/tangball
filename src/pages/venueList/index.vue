@@ -47,14 +47,9 @@ export default {
   },
   methods: {
     onSearch(keywords) {
-      var newlist = [];
-      this.venueList.forEach(item => {
-        if (item.name.indexOf(keywords) != -1) {
-          newlist.push(item);
-        }
-      });
-      return newlist;
-      console.log("111", keywords);
+      
+
+      console.log("keywords", keywords);
     },
     async search(areaId) {
       if (areaId) {
