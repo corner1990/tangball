@@ -197,7 +197,18 @@ function timeout(ms) {//使用promise封装一个延迟方法
   return new Promise((resolve) => {//resolve延迟解决后的回调函数, reject延迟异常的处理函数
       setTimeout(resolve, ms, 'done');
   });
-}
+} 
+
+function getQuery() {
+  /* 获取当前路由栈数组 */
+  const pages = getCurrentPages()
+  const currentPage = pages[pages.length - 1]
+  const options = currentPage.options
+  return options
+} 
+
+
+
 
 
 export default {
@@ -211,5 +222,5 @@ export default {
   formatDate:formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  ,deepCopy,type,timeout
+  ,deepCopy,type,timeout,getQuery
 }

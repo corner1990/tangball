@@ -1,9 +1,29 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
-     <venDetail></venDetail>
-  
-
+    <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
+    <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
+    <img :src="venueDoc.album[0].url" />
+    <div>
+      <van-tabs :active="active" v-bind:change="onChange">
+        <van-tab title="场馆介绍1">
+          <div>{{venueDoc.name}}</div>
+          <div class="main-wrap">
+            <div class="page-body">
+              <div class="page-section page-section-gap">
+                <map
+                  id="myMap"
+                  :latitude="venueDoc.extend.latitude"
+                  :longitude="venueDoc.extend.longitude"
+                  :markers="markers"
+                  :covers="covers"
+                ></map>
+              </div>
+            </div>
+          </div>
+        </van-tab>
+        <van-tab title="地理位置"></van-tab>
+      </van-tabs>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -11,62 +31,40 @@
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-import Map from "@/components/map/Map";
 import util from "@/utils/util";
-import venDetail from "./detail";
+// import Map from "@/components/map/Map";
 export default {
   components: {
     mytabbar,
-    debug_item,
-    Map,
-    venDetail
+    debug_item
+    // Map
   },
   data() {
     return {
-      venueDoc: null,
       pageName: "场馆详情",
-      activeStep: 0,
-      active: 0,
-      imgUrls: [
-        "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
-        "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
-        "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
-      ],
-
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-
-      value: "" // 搜索value
+      value: "", // 搜索value
+      venueDoc: null,
+      markers: [
+        {
+          id: 1,
+          latitude: 23.099994,
+          longitude: 113.32452,
+          name: "T.I.T 创意园",
+          iconPath: "/static/images/location.png"
+        }
+      ]
     };
   },
 
   methods: {
-
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,
         icon: "none"
       });
     },
-    onShow() {
-      this.show = true;
-      console.log("mpvue.data", this);
-      // mpvue.setData({show: true})
-    },
-    /**
-     * @desc 搜索回调
-     */
-    onSearch() { },
-    /**
-     * @desc 赛事切换回调
-     */
-    tabChange(url) {
-      console.log(url);
-      wx.switchTab({
-        url
-      });
+    onReady: function(e) {
+      this.mapCtx = wx.createMapContext("myMap");
     },
     /**
     * ajax获取当前场馆数据函数
@@ -77,17 +75,23 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossDetail?page=tangball_venue",
         param: {
-          id: 20, //每场馆id
+          id: 20 //每场馆id
         }
       });
-      this.venueDoc = data.Doc
+      this.venueDoc = data.Doc;
+      this.markers.push({
+        longitude: this.venueDoc.extend.longitude,
+        latitude: this.venueDoc.extend.latitude,
+        iconPath: "/static/images/location.png"
+      });
+      //   Object.assign(this.markers, this.venueDoc.extend)
       console.log("getDoc-2");
     }
   },
-  created() { },
+  created() {},
   mounted() {
     console.log("mounted123");
-    this.getDoc();//调用：{ajax获取当前场馆数据函数}
+    this.getDoc(); //调用：{ajax获取当前场馆数据函数}
   }
 };
 </script>
@@ -101,11 +105,12 @@ export default {
   color: #333;
   border-bottom: 1px solid #000;
 }
-.card {
-  margin: 0 10px;
-}
-.bm-view {
+map {
   width: 100%;
   height: 300px;
+}
+.page-section-gap {
+  box-sizing: border-box;
+  padding: 0 30rpx;
 }
 </style>

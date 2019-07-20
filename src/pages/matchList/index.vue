@@ -12,13 +12,16 @@
             :desc="item.remark"
             :title="item.matchName"
             :matchTime="item.matchTime"
-            :thumb="item.thumb"
+            :publicationStatus="item.publicationStatus"
             :price="'报名费'+item.registrationFee"
             origin-price="1000"
             :thumb-link="'/pages/matchDetail/main?id='+item.P1"
             v-for="(item,i) in matchlist"
             :key="i"
-          ></matchListcomponent>
+          >
+    
+         
+          </matchListcomponent>
         </van-tab>
         <van-tab title="全国">
           <matchListcomponent
