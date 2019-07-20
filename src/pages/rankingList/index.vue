@@ -1,7 +1,36 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
-    <rankingListcomponent></rankingListcomponent>
+    <debug_item v-model="memberList" text="会员列表" />
+    <debug_item v-model="achievementList" text="会员列表" />
+    <div class="button-center">
+      <!-- ----参赛次数、成绩排名、鸟王排名、积分排名等按钮--- -->
+      <van-button
+        plain
+        type="primary"
+        size="small"
+        @click="clickfun(index,item)"
+        :key="index"
+        v-for="(item,index) in arrList "
+      >{{item.name}}</van-button>
+    </div>
+    <!---------- 男女选项卡-------- -->
+    <van-tabs :active="active" @change="changeSex">
+      <van-tab :title="doc" v-for="(doc,i) in sexArr" :key="i">
+        <!-- 子选项卡，排名、男子排名、参赛次数 -->
+        <div class="ranking-title">排名</div>
+        <div class="ranking-title">{{doc+"名字"}}</div>
+        <div class="ranking-title">{{activeTitle}}</div>
+
+        <rankingListcomponent
+          v-for="(each,j) in memberList[sexIndex - 1].list "
+          :ranking="j+1"
+          :cf="each"
+          :value="arrList[rankingIndex].value"
+          :key="j"
+        ></rankingListcomponent>
+      </van-tab>
+    </van-tabs>
+    <div class="bottom-space"></div>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -20,11 +49,118 @@ export default {
   },
   data() {
     return {
-      pageName: "唐球达人"
+      // 配置的数据列表
+      arrList: [
+        {
+          name: "参赛次数",
+          title: "参赛次数",
+          value: ["name", "entries"]
+        },
+        {
+          name: "成绩排名",
+          title: "参数成绩",
+          value: ["participantsName", "matchScore"]
+        },
+        {
+          name: "鸟王排名",
+          title: "参赛排名"
+        },
+        {
+          name: "积分排名",
+          title: "积分",
+          value: ["name", "integral"]
+        }
+      ],
+      sexArr: ["男子", "女子"],
+      rankingIndex: 0, //参赛次数、成绩排名、鸟王排名、积分排名的索引
+      sexIndex: 1, //男或者女的索引
+      activeTitle: "参赛次数", //参赛次数、成绩排名、鸟王排名、积分排名的文字
+      achievementList: [{ list: [] }, { list: [] }], //成绩数据列表  ,第一个元素是男，第二个元素是女
+      memberList: [{ list: [] }, { list: [] }] //会员数据列表
     };
+  },
+  methods: {
+    onShow() {
+      console.log("rankingList-mpvue.data", this);
+    },
+    // -------------------切换男女函数------------------
+    changeSex(e) {
+      if (e.target.index == 0) {
+      }
+      this.sexIndex = e.target.index + 1; //改变当前男女状态的索引
+    },
+    // -----参赛次数、成绩排名、鸟王排名、积分排名函数
+    async clickfun(index, item) {
+      this.rankingIndex = index;
+      this.activeTitle = item.title;
+
+      if (index == 1) {
+        this.getAchievementList(); //index为1：成绩排名，触发成绩列表函数
+      } else {
+        this.getMemberList(); //请求会员列表函数
+      }
+    },
+    // -------------------会员列表------------------
+    async getMemberList(url, sortJson, selectJson) {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_member",
+        param: {
+          pageSize: 50, //每页50条数据
+          sortJson1: { entries: 1, integral: 1 }
+        }
+      });
+
+      // 根据成绩列表的第一个列表是男，第二个列表是女
+      this.memberList[0].list = data.list.filter(doc => {
+        return doc.sex == 1;
+      });
+      this.memberList[1].list = data.list.filter(doc => {
+        return doc.sex == 2;
+      });
+    },
+    // -------------------成绩列表------------------
+    async getAchievementList(url, sortJson, selectJson) {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_achievement",
+        param: {
+          pageSize: 50, //每页50条数据
+          sortJson2: { matchScore: -1 }
+        }
+      });
+      this.achievementList = data.list;
+    }
+  },
+
+  beforeMount() {
+    console.log("唐球达人-created");
+    this.getMemberList(); //获取会员列表
   }
 };
 </script>
 
 <style scoped>
+/* 排名按钮 */
+.button-center {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+.button-center van-button {
+  margin: 5px;
+}
+/* 排名标题 */
+.ranking-title {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  text-align: center;
+  margin: 10px 5px;
+}
+/* 底部间隙 */
+.bottom-space {
+  height: 60px;
+  width: 100%;
+}
 </style>
