@@ -5,7 +5,7 @@
     <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
     <van-button type="primary" size="large" @click="addAEnroll()">新增一个报名（配合后台查看数据）</van-button>
     <van-button type="primary" size="large" @click="modifyAEnroll()">修改一个报名（配合后台查看数据）</van-button>
-
+    <van-button type="primary" size="large" @click="deleteAEnroll()">删除一个报名（配合后台查看数据）</van-button>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   },
 
   methods: {
-    //函数：{添加一条报名函数}-请配合后台查看新增的数据
+    //函数：{添加一条报名函数}-请配合后台查看数据
     async addAEnroll() {
       await util.ajaxAdd({
         page: "tangball_enroll",
@@ -47,15 +47,26 @@ export default {
         icon: "success"
       });
     },
-    //函数：{修改一条报名函数}-请配合后台查看新增的数据
+    //函数：{修改一条报名函数}-请配合后台查看数据
     async modifyAEnroll() {
       await util.ajaxModify({
         page: "tangball_enroll",
         findJson: { P1: 44 }, //锁定需要修改的数据
-        modifyJson: { age: 45, phone: "13345678888" } //修改字段
+        modifyJson: { age: 18, phone: "13345678888" } //修改字段
       });
       wx.showToast({
         title: "修改成功",
+        icon: "success"
+      });
+    },
+    //函数：{删除一条报名函数}-请配合后台查看数据
+    async deleteAEnroll() {
+      await util.ajaxDelete({
+        page: "tangball_enroll",
+        findJson: { P1: 46 } //锁定需要删除的数据
+      });
+      wx.showToast({
+        title: "删除成功",
         icon: "success"
       });
     }

@@ -236,6 +236,21 @@ async function ajaxGetList(_json) {
 }
 
 
+//ajax删除一条数据的函数
+async function ajaxDelete(_json) {
+  let { page, findJson } = _json;
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossDelete?page=${page}`,
+    param: {
+      findJson
+    }
+  });
+  return data
+}
+
+
+
+
 //ajax修改数据的函数
 async function ajaxModify(_json) {
   let { page, findJson, modifyJson, } = _json;
@@ -274,5 +289,5 @@ export default {
   formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,ajaxAdd,ajaxModify
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,ajaxAdd,ajaxModify,ajaxDelete
 }
