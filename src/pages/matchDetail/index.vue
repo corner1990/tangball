@@ -1,106 +1,148 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="matchlist" v-model="matchlist" text="赛事列表"/>
-    <div class="FS24 TAC LH36">XXX首届唐球赛12345</div>
-    <van-steps :steps="steps" :active="activeStep" active-color="#f44"/>
+    <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
+    <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
+
+    <!-- 赛事照片 -->
+    <div class>
+      <img :src="matchlist.album[0].url" v-if="matchlist.album" />
+    </div>
+    <!-- 赛事名称 -->
+    <div class="FS24 TAC LH36">{{matchlist.matchName}}</div>
+    <!-- 赛事状态 -->
+    <!-- <van-cell class="browsing">
+      <van-button round plain type="primary" size="mini" v-if="matchStatus">{{matchStatus}}</van-button>
+    </van-cell>-->
+    <!-- 赛事步骤 -->
+    <van-steps :steps="steps" :active="activeStep" active-color="#f44" />
+
     <van-cell-group title="赛事信息">
-      <van-cell title="赛事时间" title-width="100px" value="2019.07.30-2019.08.09"/>
-      <van-cell title="距报名截止时间" value="5天6小时26分"/>
-      <van-cell title="举办地点" value="深圳南山XXXXX"/>
-      <van-cell title="报名费" value="200元"/>
-      <van-cell title="已报名人数" value="567人"/>
-    </van-cell-group>
-    <van-cell-group title="分组2">
-      <van-cell title="单元格" value="内容"/>
+      <van-cell title="赛事时间" title-width="100px" :value="matchlist.matchTime" />
+      <van-cell title="距报名截止时间" :value="matchlistDoc.enrollTimeEnd" />
+
+      <!-- 如果是全国赛 -->
+      <van-collapse
+        v-model="activeName"
+        @change="handleChange"
+        v-if="matchlist.matchType==2&&matchlist.matchType"
+      >
+        <van-collapse-item title="举办地点" name="1">
+          <div class="collapse">
+            <span
+              v-for="(item,index) in matchlistDoc.cityVenueList"
+              :key="index"
+            >{{item.cityName}}--{{item.venueName}}</span>
+          </div>
+        </van-collapse-item>
+      </van-collapse>
+
+      <van-cell title="报名费" :value="matchlist.registrationFee" />
+      <van-cell title="已报名人数" :value="matchlist.registeredPersons" />
     </van-cell-group>
 
-    <van-button size="large" square type="primary">立即报名</van-button>
-
+    <navigator :url="url">
+      <van-button size="large" type="primary">立即报名</van-button>
+    </navigator>
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import card from '@/components/card'
-import mytabbar from '@/components/mytabbar/mytabbar'
-import debug_item from '@/components/common/debug_item/debug_item'
-
+import card from "@/components/card";
+import mytabbar from "@/components/mytabbar/mytabbar";
+import debug_item from "@/components/common/debug_item/debug_item";
+import util from "@/utils/util";
 export default {
   components: {
-    card, mytabbar,debug_item
+    card,
+    mytabbar,
+    debug_item,
+    util
   },
   data() {
     return {
-      activeStep: 0,
+      activeName: null, //举办地点聚焦
+      P1: 46, //请求接口id
+      activeStep: 0, //步骤条id
+      url: "/pages/matchEroll/main",
       steps: [
-        {
-          text: '步骤一',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤二',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤三',
-          desc: '描述信息'
-        },
-        {
-          text: '步骤四',
-          desc: '描述信息'
-        }
+        //步骤条数组
+        { text: "选拔赛", desc: "", value: 11 },
+        { text: "晋级赛", desc: "", value: 12 },
+        { text: "决赛", desc: "", value: 13 },
+        { text: "淘汰赛", desc: "", value: 21 },
+        { text: "1/4决赛", desc: "", value: 22 },
+        { text: "决赛", desc: "", value: 23 }
       ],
-      matchlist: [
-        {
-          'title': '首届唐球锦标赛1',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=358607504,2119176225&fm=26&gp=0.jpg',
-          'price': 500,
-        },
-        {
-          'title': '首届唐球锦标赛2',
-          'desc': '这是首届唐球锦标赛',
-          'tag': '可报名',
-          'thumb': 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3468639195,1703499497&fm=26&gp=0.jpg',
-          'aaaa': '1111',
-        },
-      ],
-
+      matchlist: [], //赛事列表
+      matchlistDoc: {}, //赛事详情列表
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-
-      value: '' // 搜索value
-    }
+      value: "" // 搜索value
+    };
   },
 
-
-
   methods: {
+    handleChange(val) {
+      //举办地点点击函数
+      this.activeName = val.mp.detail;
+    },
     onShow() {
-      this.show = true
-      console.log('mpvue.data', this)
+      this.show = true;
+      console.log("mpvue.data", this);
       // mpvue.setData({show: true})
     },
     /**
      * @desc 搜索回调
      */
-    onSearch() { },
+    onSearch() {},
     /**
      * @desc 赛事切换回调
      */
     tabChange(url) {
-      console.log(url)
+      console.log(url);
       wx.switchTab({
         url
-      })
+      });
     }
   },
-  created() {
+  created() {},
+  async mounted() {
+    // 请求赛事列表接口函数
+    let { data } = await util.post({
+      url: global.PUB.domain + "/crossList?page=tangball_match",
+      param: { findJson: { P1: this.P1 } }
+    });
+    this.matchlist = data.list[0];
+
+    // 请求赛事详情接口函数
+    let doc = await util.post({
+      url: global.PUB.domain + "/crossDetail?page=tangball_match",
+      param: { id: this.P1 }
+    });
+    this.matchlistDoc = doc.data.doc;
+
+    // 赛事步骤状态处理
+    if (this.matchlist.matchProgress.smallProgress) {
+      this.steps.forEach((item, index) => {
+        if (this.matchlist.matchProgress.smallProgress == item.value) {
+          this.activeStep = index; //当前选中状态
+        }
+      });
+    }
+
+    //报名截止时间格式处理
+    let time = this.matchlistDoc.enrollTimeEnd;
+    time = time.slice(0, time.indexOf("T"));
+    this.matchlistDoc.enrollTimeEnd = time;
+  },
+  onLoad: function(options) {
+    this.P1 = options.id;
+    this.url = "/pages/matchEroll/main?id=" + this.P1 + "";
   }
-}
+};
 </script>
 
 <style scoped>
@@ -114,5 +156,21 @@ export default {
 }
 .card {
   margin: 0 10px;
+}
+/* 赛事状态按钮 */
+/* .browsing van-button {
+  margin-right: 10px;
+} */
+/* 折叠面板 */
+.collapse {
+  text-align: center;
+  border: 1px solid #fbfbfb;
+  border-radius: 5px;
+}
+/* 折叠面板 内容*/
+.collapse span {
+  display: block;
+  background-color: #fafafa;
+  margin: 5px 15px;
 }
 </style>

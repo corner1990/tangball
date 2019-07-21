@@ -12,11 +12,11 @@
       <div>地址:{{address}}</div>
     </div>
     <div class="LH110">
-      <van-icon name="arrow" size="20px" />
+      <navigator :url="'/pages/venueDetail/main?id='+P1">
+        <van-icon name="arrow" size="20px" />
+      </navigator>
     </div>
   </div>
-
- 
 </template>
 <script>
 /* eslint-disable */
@@ -25,15 +25,17 @@ export default {
   data() {
     return {};
   },
-  props: ["area", "title", "phone", "address","album"],
+  props: ["area", "title", "phone", "address", "album","P1"],
   components: {},
   methods: {
-    dayin() {
-      console.log("cf", cf.venueList);
-    }
+    
   },
-  created() {}
+  created() {},
+  mounted(){
+    console.log(this.P1)
+  }
 };
+
 </script>
 
 <style scoped>
