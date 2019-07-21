@@ -1,38 +1,28 @@
 <template>
   <van-cell-group class="personInfo">
-    <van-field
-      :value="info.name"
-      type="text"
-      label="参赛人姓名"
-      placeholder="请输入参赛人姓名"
-      required
-    />
-    <van-field
-      :value="info.phone"
-      label="联系电话"
-      placeholder="请输入手机号"
-    />
     <div class="flex line">
-      <p class="title">性别</p>
-      <van-radio-group :value="radio" class="flex">
-        <van-radio name="1">男</van-radio>
-        &emsp;
-        <van-radio name="2">女</van-radio>
-      </van-radio-group>
+      <title class="title">姓名</title>
+      <div>高富帅</div>
     </div>
-    <van-field
-      :value="info.age"
-      label="年龄"
-      placeholder="请输入年龄"
-    />
-    <van-field
-      :value="info.job"
-      label="职业"
-      placeholder="请输入职业"
-    />
     <div class="flex line">
-      <title class="title">球龄</title>
-      <div>球龄</div>
+      <title class="title">联系电话</title>
+      <div>15286458326</div>
+    </div>
+    <div class="flex line">
+      <p class="title">赛事名称</p>
+      <div>高富帅才有资格</div>
+    </div>
+    <div class="flex line">
+      <p class="title">赛事时间</p>
+      <div>2019-05-15</div>
+    </div>
+    <div class="flex line">
+      <p class="title">赛事地点</p>
+      <div>广东神，深圳市，福田区，深航中路1238900号</div>
+    </div>
+    <div class="flex line">
+      <title class="title">报名费</title>
+      <div><span class="price">1999 (元)</span></div>
     </div>
   </van-cell-group>
 </template>
@@ -53,7 +43,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .flex{
     display: flex;
     justify-content: space-between;
@@ -68,6 +58,11 @@ export default {
   .line .title{
     width: 78px;
     margin-right: 10px;
+  }
+  .price{
+    margin-right: .133rem;
+    color: #f00;
+    font-weight: 700;
   }
 </style>
 

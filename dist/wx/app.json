@@ -1,6 +1,10 @@
 {
   "pages": [
+<<<<<<< HEAD
+    "pages/matchEroll/main",
+=======
     "pages/ajaxDemo/main",
+>>>>>>> 32dfcbe414937a1e2cceb8f4a6cf49ff31e9bd63
     "pages/venueDetail/main",
     "pages/index/main",
     "pages/matchList/main",
@@ -11,7 +15,6 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/venueList/main",
-    "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
     "pages/myErollDetail/main",
@@ -65,6 +68,7 @@
     "van-cell": "/static/vant/cell/index",
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
-    "van-cell-group": "/static/vant/cell-group/index"
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-dialog": "/static/vant/dialog/index"
   }
 }
