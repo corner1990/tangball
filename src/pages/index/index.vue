@@ -112,6 +112,7 @@ export default {
   data() {
     return {
       arrLink: [
+         { "title": "ajaxDemo", "url": "/pages/ajaxDemo/main" },
         { "title": "赛事列表-", "url": "/pages/matchList/main" },
         { "title": "赛事详情", "url": "/pages/matchDetail/main" },
         { "title": "赛事报名", "url": "/pages/matchEroll/main" },

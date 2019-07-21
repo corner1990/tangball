@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
     "pages/venueDetail/main",
     "pages/index/main",
     "pages/matchList/main",

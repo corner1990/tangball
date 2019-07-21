@@ -207,8 +207,34 @@ function getQuery() {
   return options
 } 
 
+//ajax获取单条数据详情的函数
+async function ajaxGetDoc(_json) {
+  let {page,id}=_json;
+  console.log("ajaxGetDoc");
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossDetail?page=${page}`,
+    param: {
+      id: id, //数据id
+    }
+  });
+  return data.Doc
+} 
 
 
+//ajax获取数据列表的函数
+async function ajaxGetList(_json) {
+  let {page,findJson,selectJson,sortJson,pageIndex,pageSize}=_json;
+  console.log("ajaxGetDoc");
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossList?page=${page}`,
+    param: {
+      findJson,selectJson,sortJson,pageIndex,pageSize
+    }
+  });
+  return data.list
+
+
+} 
 
 
 export default {
@@ -222,5 +248,5 @@ export default {
   formatDate:formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  ,deepCopy,type,timeout,getQuery
+  ,deepCopy,type,timeout,getQuery,ajaxGetDoc,ajaxGetList
 }

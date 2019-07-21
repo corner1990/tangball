@@ -1,29 +1,32 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
-    <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
-    <img :src="venueDoc.album[0].url" />
-    <div>
-      <van-tabs :active="active" v-bind:change="onChange">
-        <van-tab title="场馆介绍1">
-          <div>{{venueDoc.name}}</div>
-          <div class="main-wrap">
-            <div class="page-body">
-              <div class="page-section page-section-gap">
-                <map
-                  id="myMap"
-                  :latitude="venueDoc.extend.latitude"
-                  :longitude="venueDoc.extend.longitude"
-                  :markers="markers"
-                  :covers="covers"
-                ></map>
+    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
+    <div class v-if="venueDoc">
+      <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
+      <img :src="venueDoc.album[0].url">
+      <div>
+        <van-tabs :active="active" v-bind:change="onChange">
+          <van-tab title="场馆介绍1">
+            <div>{{venueDoc.name}}</div>
+            <div class="main-wrap">
+              <div class="page-body">
+                <div class="page-section page-section-gap">
+                  <map
+                    id="myMap"
+                    :latitude="venueDoc.extend.latitude"
+                    :longitude="venueDoc.extend.longitude"
+                    :markers="markers"
+                    :covers="covers"
+                  ></map>
+                </div>
               </div>
             </div>
-          </div>
-        </van-tab>
-        <van-tab title="地理位置"></van-tab>
-      </van-tabs>
+          </van-tab>
+          <van-tab title="地理位置"></van-tab>
+        </van-tabs>
+      </div>
     </div>
+
     <mytabbar></mytabbar>
   </div>
 </template>
