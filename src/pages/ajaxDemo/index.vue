@@ -2,7 +2,9 @@
   <div class="main-wrap">
     <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
     <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
-    <debug_item path="matchDoc" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
+    <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
+    <van-button type="primary" size="large" @click="addAEnroll()">新增一个报名（配合后台查看数据）</van-button>
+    <van-button type="primary" size="large" @click="modifyAEnroll()">修改一个报名（配合后台查看数据）</van-button>
 
     <mytabbar></mytabbar>
   </div>
@@ -28,20 +30,49 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    //函数：{添加一条报名函数}-请配合后台查看新增的数据
+    async addAEnroll() {
+      await util.ajaxAdd({
+        page: "tangball_enroll",
+        data: {
+          sex: 1,
+          memberId: 10,
+          matchId: 37, //赛事Idid
+          cityVenueId: 37 //城市球馆id
+        }
+      });
+      wx.showToast({
+        title: "新增成功",
+        icon: "success"
+      });
+    },
+    //函数：{修改一条报名函数}-请配合后台查看新增的数据
+    async modifyAEnroll() {
+      await util.ajaxModify({
+        page: "tangball_enroll",
+        findJson: { P1: 44 }, //锁定需要修改的数据
+        modifyJson: { age: 45, phone: "13345678888" } //修改字段
+      });
+      wx.showToast({
+        title: "修改成功",
+        icon: "success"
+      });
+    }
+  },
   created() {},
   async mounted() {
     //ajax获取单个会员数据
     this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
     //ajax获取单个赛事数据
     this.matchDoc = await util.ajaxGetDoc({ page: "tangball_match", id: 37 });
-    //ajax获取会员列表-男性+参数次数降序+前5条
+    //ajax获取会员列表
     this.memberList = await util.ajaxGetList({
       page: "tangball_member",
       pageSize: 5,
-      findJson: { sex: 1 },//查询条件
-      sortJson: { entries: -1 },//排序条件
-      selectJson: { name:1,entries: 1 },//只返回指定字典
+      findJson: { sex: 1 }, //查询条件
+      sortJson: { entries: -1 }, //排序条件
+      selectJson: { name: 1, entries: 1 } //只返回指定字典
     });
   }
 };
