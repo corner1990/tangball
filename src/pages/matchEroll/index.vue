@@ -98,6 +98,51 @@ export default {
       setTimeout(() => {
         Dialog.close()
       }, 1000)
+      let self = this;
+      wx.getStorage({
+        key: 'ids',
+        success (res) {
+          let ids = JSON.parse(res.data)
+          self.pay(ids.openid)
+        }
+      })
+    },
+    pay (openId) {
+      let data = {
+        "total_fee": 0.01,
+        openId,
+        "goodsNameAll": "abc"
+      }
+      const self = this;
+      wx.request({
+        url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
+        data,
+        method: 'post',
+        success (res) {
+          let { statusCode, data } = res
+          if (statusCode === 200) {
+            let { data: chrildData } = data;
+            self.funlyPay(JSON.parse(chrildData))
+          }
+        } 
+      })
+    },
+    funlyPay (data) {
+      let { msg, status, timestamp: timeStamp, ...args } = data
+      if (status == 100) {
+        wx.requestPayment({
+          ...args,
+          signType: 'MD5',
+          timeStamp,
+          success (res) {
+            console.log('ok', res)
+          },
+          fail (err) {
+            console.log('err', err)
+          }
+        })
+      }
+      console.log('data', data)
     }
   },
   created() {
