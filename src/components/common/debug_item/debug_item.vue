@@ -1,7 +1,7 @@
 <template>
   <div class="debug_item">
     <div class="FWB">{{text}}:{{path}}</div>
-    <div class>{{valueNeed}}</div>
+    <div class="valueShow">{{valueNeed}}</div>
   </div>
 </template>
 
@@ -65,7 +65,7 @@ export default {
 <style scoped>
 .valueShow {
   overflow-y: auto;
-  max-height: 50px;
+  max-height: 120px;
 }
 
 .debug_item {

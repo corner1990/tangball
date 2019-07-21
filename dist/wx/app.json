@@ -1,6 +1,10 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/matchEroll/main",
+=======
+    "pages/ajaxDemo/main",
+>>>>>>> 32dfcbe414937a1e2cceb8f4a6cf49ff31e9bd63
     "pages/venueDetail/main",
     "pages/index/main",
     "pages/matchList/main",
