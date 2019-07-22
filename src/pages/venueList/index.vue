@@ -28,6 +28,7 @@ import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
 import city_select from "@/components/city_select";
 
+
 export default {
   components: {
     mytabbar,
@@ -42,14 +43,17 @@ export default {
       pageName: "场馆列表",
       venueList: [],
       value: "", // 搜索value
-      keywords: ""
+     
     };
   },
   methods: {
-    onSearch(keywords) {
-      
-
-      console.log("keywords", keywords);
+    onSearch() {
+      console.log("venueList", this.venueList);
+      this.venueList.forEach(doc => {
+       
+        console.log("doc", doc.name.includes(this.value));
+        console.log("value",this.value);
+      });
     },
     async search(areaId) {
       if (areaId) {

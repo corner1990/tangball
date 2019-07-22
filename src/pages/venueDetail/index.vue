@@ -1,22 +1,22 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
+    <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
+    <debug_item path="pageName" v-model="venueList" text="场馆数据" />
     <div class v-if="venueDoc">
-      <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
-      <img :src="venueDoc.album[0].url">
+      <div class="FS24 TAC LH36">{{venueList.name}}</div>
+      <img :src="venueList.album[0].url" />
       <div>
         <van-tabs :active="active" v-bind:change="onChange">
           <van-tab title="场馆介绍1">
-            <div>{{venueDoc.name}}</div>
+            <div>{{venueList.name}}</div>
             <div class="main-wrap">
               <div class="page-body">
                 <div class="page-section page-section-gap">
                   <map
                     id="myMap"
-                    :latitude="venueDoc.extend.latitude"
-                    :longitude="venueDoc.extend.longitude"
+                    :latitude="venueList.extend.latitude"
+                    :longitude="venueList.extend.longitude"
                     :markers="markers"
-                    :covers="covers"
                   ></map>
                 </div>
               </div>
@@ -35,27 +35,18 @@
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
-// import Map from "@/components/map/Map";
 export default {
   components: {
     mytabbar,
     debug_item
-    // Map
   },
   data() {
     return {
       pageName: "场馆详情",
       value: "", // 搜索value
       venueDoc: null,
-      markers: [
-        {
-          id: 1,
-          latitude: 23.099994,
-          longitude: 113.32452,
-          name: "T.I.T 创意园",
-          iconPath: "/static/images/location.png"
-        }
-      ]
+      venueList: [],
+      markers: []
     };
   },
 
@@ -76,12 +67,17 @@ export default {
     async getDoc() {
       console.log("getDoc");
       let { data } = await util.post({
+        url: global.PUB.domain + "/crossListRelation",
+        param: { findJson: { P1: this.P1 } }
+      });
+      this.venueList = data.list[0];
+      let doc = await util.post({
         url: global.PUB.domain + "/crossDetail?page=tangball_venue",
         param: {
-          id: 20 //每场馆id
+          id: this.P1 //每场馆id
         }
       });
-      this.venueDoc = data.Doc;
+      this.venueDoc = doc.data.Doc;
       this.markers.push({
         longitude: this.venueDoc.extend.longitude,
         latitude: this.venueDoc.extend.latitude,
@@ -95,6 +91,13 @@ export default {
   mounted() {
     console.log("mounted123");
     this.getDoc(); //调用：{ajax获取当前场馆数据函数}
+  },
+  // 页面登陆事件
+  onLoad(options) {
+    const id = P1.id
+    // 看一下传过来的是什么
+    console.log(options);
+    // 获取传过来的id
   }
 };
 </script>
