@@ -36,9 +36,11 @@ export default {
     mytabbar,
     debug_item
   },
-  props:[
-      'crowArr'
-  ],
+  props:{
+    crowArr:{
+    typr:Array
+    }
+},
   data() {
     return {
       unreadBox:[],
