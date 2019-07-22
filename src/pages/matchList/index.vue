@@ -127,8 +127,7 @@ export default {
 
 
     /**
-     * ajax请求参赛次数排行榜
-     * 请求会员表tangball_member
+     * ajax请求赛事列表
      */
     let { data } = await util.post({
       url: global.PUB.domain + '/crossList?page=tangball_match',

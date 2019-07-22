@@ -28,6 +28,7 @@ import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
 import city_select from "@/components/city_select";
 
+
 export default {
   components: {
     mytabbar,
