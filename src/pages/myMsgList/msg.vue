@@ -1,17 +1,11 @@
 <template>
-  <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
-    <mytabbar></mytabbar>
-    <div class="top-box">
-      <div class="read-box" :class="!focuss?'masEvolve':''" @click="read()">已读</div>
-      <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread()">未读</div>
-    </div>
+<div>
     <div class="top-box">
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-show="showSelect" @click="allCheck()">全选</div>
     </div>
     <div class="content-box" v-if="showcontent">
-      {{crow[gant].name}}
+      {{crowArr[gant].name}}
       <br />
       {{crow[gant].mas}}
       <div class="close-box" @click="shut()">已 读</div>
@@ -33,41 +27,47 @@
       </div>
     </div>
     <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
-  </div>
+</div>
 </template>
-<script>
-/* eslint-disable */
-import mytabbar from "@/components/mytabbar/mytabbar";
-import debug_item from "@/components/common/debug_item/debug_item";
+<script >
 
 export default {
   components: {
     mytabbar,
     debug_item
   },
+  props:[
+      'crowArr'
+  ],
   data() {
     return {
       unreadBox:[],
-      focuss: true,
-      evolve: "masEvolve",
       gant: {},
       checkedList: [],
       showcompile: true,
       checked: false,
       showSelect: false,
       showcontent: false,
-      
-      pageName: "个人中心-系统消息列表"
+      crow: [
+        {
+          id: "1",
+          name: "发信人1",
+          mas:
+            "这是一很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的消息1"
+        },
+        { id: "2", name: "发信人2", mas: "这是消息2" },
+        { id: "3", name: "发信人3", mas: "这是消息3" },
+        { id: "4", name: "发信人4", mas: "这是消息4" },
+        { id: "5", name: "发信人5", mas: "这是消息5" },
+        { id: "6", name: "发信人6", mas: "这是消息6" },
+        { id: "7", name: "发信人7", mas: "这是消息7" },
+        { id: "8", name: "发信人8", mas: "这是消息8" },
+        { id: "9", name: "发信人9", mas: "这是消息9" }
+      ],
     };
   },
 
   methods: {
-    read() {
-     this.focuss = false;
-    },
-    unread() {
-       this.focuss = true;
-    },
     purification() {
       for (let i = this.crow.length - 1; i >= 0; i--) {
         if (this.checkedList[i]) {
@@ -124,40 +124,11 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .top-box {
   height: 35px;
   background: white;
   position: relative;
-}
-
-.read-box {
-  width: 50%;
-  height: 35px;
-  position: absolute;
-  text-align: center;
-  line-height: 35px;
-  top: 0;
-  right: 0px;
-}
-.unread-box {
-  width: 50%;
-  height: 35px;
-  position: absolute;
-  text-align: center;
-  line-height: 35px;
-  top: 0;
-  left: 0px;
-}
-.all-box {
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  text-align: center;
-  line-height: 35px;
-  top: 0;
-  right: 5px;
 }
 .compile-box {
   width: 35px;
@@ -168,6 +139,15 @@ export default {
   top: 0;
   left: 5px;
 }
+.all-box {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  text-align: center;
+  line-height: 35px;
+  top: 0;
+  right: 5px;
+}
 .mas-box {
   height: 50px;
   border-radius: 10px;
@@ -176,9 +156,6 @@ export default {
   position: relative;
   background-color: #f5f5f5;
   color: #232323;
-}
-.masEvolve {
-  background-color: #f5f5f5;
 }
 .news {
   height: 50px;
@@ -217,17 +194,6 @@ export default {
   border-radius: 8px;
   overflow: auto;
   background-color: #f5f5f5;
-}
-.close-box {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  background-color: #d20a0a;
-  color: #ffffff;
-  line-height: 50px;
-  width: 100%;
-  font-size: 20px;
 }
 
 </style>
