@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     onSearch:{
-      alert()
+
     },
     async search(areaId) {
       if (areaId) {
