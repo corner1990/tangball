@@ -1,32 +1,32 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据"/>
-    <div class="FS24 TAC LH36">深圳XXX场馆</div>
-    <swiper
-      :indicator-dots="indicatorDots"
-      :autoplay="autoplay"
-      :interval="interval"
-      :duration="duration"
-    >
-      <block v-for="item in imgUrls" :key="item">
-        <swiper-item>
-          <image :src="item" class="slide-image" width="350" height="150"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-    <div>
-      <van-tabs :active="active" bind:change="onChange">
-        <van-tab title="场馆介绍1">
-          <van-panel title="深圳XXX场馆" desc="描述信息" status="营业中">
-            <view>
-              <Map></Map>
-            </view>
-          </van-panel>
-        </van-tab>
-        <van-tab title="xxx">内容 2</van-tab>
-        <van-tab title="地理位置"></van-tab>
-      </van-tabs>
+    <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
+    <debug_item path="pageName" v-model="venueList" text="场馆数据" />
+    <div class v-if="venueDoc">
+      <div class="FS24 TAC LH36">{{venueList.name}}</div>
+      <img :src="venueList.album[0].url" />
+      <div>
+        <van-tabs :active="active" v-bind:change="onChange">
+          <van-tab title="场馆介绍1">
+            <div>{{venueList.name}}</div>
+            <div class="main-wrap">
+              <div class="page-body">
+                <div class="page-section page-section-gap">
+                  <map
+                    id="myMap"
+                    :latitude="venueList.extend.latitude"
+                    :longitude="venueList.extend.longitude"
+                    :markers="markers"
+                  ></map>
+                </div>
+              </div>
+            </div>
+          </van-tab>
+          <van-tab title="地理位置"></van-tab>
+        </van-tabs>
+      </div>
     </div>
+
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -34,60 +34,31 @@
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-import Map from "@/components/map/Map";
 import util from "@/utils/util";
 export default {
   components: {
     mytabbar,
-    debug_item,
-    Map
+    debug_item
   },
   data() {
     return {
-      venueDoc: null,
       pageName: "场馆详情",
-      activeStep: 0,
-      active: 0,
-      imgUrls: [
-        "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
-        "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
-        "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
-      ],
-
-      indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000,
-
-      value: "" // 搜索value
+      value: "", // 搜索value
+      venueDoc: null,
+      venueList: [],
+      markers: []
     };
   },
 
   methods: {
-
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,
         icon: "none"
       });
     },
-    onShow() {
-      this.show = true;
-      console.log("mpvue.data", this);
-      // mpvue.setData({show: true})
-    },
-    /**
-     * @desc 搜索回调
-     */
-    onSearch() { },
-    /**
-     * @desc 赛事切换回调
-     */
-    tabChange(url) {
-      console.log(url);
-      wx.switchTab({
-        url
-      });
+    onReady: function(e) {
+      this.mapCtx = wx.createMapContext("myMap");
     },
     /**
     * ajax获取当前场馆数据函数
@@ -96,19 +67,37 @@ export default {
     async getDoc() {
       console.log("getDoc");
       let { data } = await util.post({
+        url: global.PUB.domain + "/crossListRelation",
+        param: { findJson: { P1: this.P1 } }
+      });
+      this.venueList = data.list[0];
+      let doc = await util.post({
         url: global.PUB.domain + "/crossDetail?page=tangball_venue",
         param: {
-          id: 20, //每场馆id
+          id: this.P1 //每场馆id
         }
       });
-      this.venueDoc = data.Doc
+      this.venueDoc = doc.data.Doc;
+      this.markers.push({
+        longitude: this.venueDoc.extend.longitude,
+        latitude: this.venueDoc.extend.latitude,
+        iconPath: "/static/images/location.png"
+      });
+      //   Object.assign(this.markers, this.venueDoc.extend)
       console.log("getDoc-2");
     }
   },
-  created() { },
+  created() {},
   mounted() {
     console.log("mounted123");
-    this.getDoc();//调用：{ajax获取当前场馆数据函数}
+    this.getDoc(); //调用：{ajax获取当前场馆数据函数}
+  },
+  // 页面登陆事件
+  onLoad(options) {
+    const id = P1.id
+    // 看一下传过来的是什么
+    console.log(options);
+    // 获取传过来的id
   }
 };
 </script>
@@ -122,11 +111,12 @@ export default {
   color: #333;
   border-bottom: 1px solid #000;
 }
-.card {
-  margin: 0 10px;
-}
-.bm-view {
+map {
   width: 100%;
   height: 300px;
+}
+.page-section-gap {
+  box-sizing: border-box;
+  padding: 0 30rpx;
 }
 </style>

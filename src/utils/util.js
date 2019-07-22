@@ -26,6 +26,9 @@ function generateMixed(n) {
   }
   return res;
 }
+
+
+
 function wxPromisify(fn) {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
@@ -47,36 +50,33 @@ function wxPromisify(fn) {
  * @param fmt 目标字符串格式，支持的字符有：y,M,d,q,w,H,h,m,S，默认：yyyy-MM-dd HH:mm:ss
  * @returns 返回格式化后的日期字符串
  */
-function formatDate(date, fmt)
-{
-    date = date == undefined ? new Date() : date;
-    date = typeof date == 'number' ? new Date(date) : date;
-    fmt = fmt || 'yyyy-MM-dd HH:mm:ss';
-    var obj =
-    {
-        'y': date.getFullYear(), // 年份，注意必须用getFullYear
-        'M': date.getMonth() + 1, // 月份，注意是从0-11
-        'd': date.getDate(), // 日期
-        'q': Math.floor((date.getMonth() + 3) / 3), // 季度
-        'w': date.getDay(), // 星期，注意是0-6
-        'H': date.getHours(), // 24小时制
-        'h': date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, // 12小时制
-        'm': date.getMinutes(), // 分钟
-        's': date.getSeconds(), // 秒
-        'S': date.getMilliseconds() // 毫秒
-    };
-    var week = ['天', '一', '二', '三', '四', '五', '六'];
-    for(var i in obj)
-    {
-        fmt = fmt.replace(new RegExp(i+'+', 'g'), function(m)
-        {
-            var val = obj[i] + '';
-            if(i == 'w') return (m.length > 2 ? '星期' : '周') + week[val];
-            for(var j = 0, len = val.length; j < m.length - len; j++) val = '0' + val;
-            return m.length == 1 ? val : val.substring(val.length - m.length);
-        });
-    }
-    return fmt;
+function formatDate(date, fmt) {
+  date = date == undefined ? new Date() : date;
+  date = typeof date == 'number' ? new Date(date) : date;
+  fmt = fmt || 'yyyy-MM-dd HH:mm:ss';
+  var obj =
+  {
+    'y': date.getFullYear(), // 年份，注意必须用getFullYear
+    'M': date.getMonth() + 1, // 月份，注意是从0-11
+    'd': date.getDate(), // 日期
+    'q': Math.floor((date.getMonth() + 3) / 3), // 季度
+    'w': date.getDay(), // 星期，注意是0-6
+    'H': date.getHours(), // 24小时制
+    'h': date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, // 12小时制
+    'm': date.getMinutes(), // 分钟
+    's': date.getSeconds(), // 秒
+    'S': date.getMilliseconds() // 毫秒
+  };
+  var week = ['天', '一', '二', '三', '四', '五', '六'];
+  for (var i in obj) {
+    fmt = fmt.replace(new RegExp(i + '+', 'g'), function (m) {
+      var val = obj[i] + '';
+      if (i == 'w') return (m.length > 2 ? '星期' : '周') + week[val];
+      for (var j = 0, len = val.length; j < m.length - len; j++) val = '0' + val;
+      return m.length == 1 ? val : val.substring(val.length - m.length);
+    });
+  }
+  return fmt;
 }
 //无论promise对象最后状态如何都会执行
 Promise.prototype.finally = function (callback) {
@@ -88,9 +88,9 @@ Promise.prototype.finally = function (callback) {
 };
 
 
-var parseParam = function(param, key1) { //函数：{将json转成url参数形式}-递归
+var parseParam = function (param, key1) { //函数：{将json转成url参数形式}-递归
   var paramStr = "";
-  if (typeof(param) == "string" || typeof(param) == "number" || typeof(param) == "boolean") { //Q1：{参数类型}是字符串，数字或布尔
+  if (typeof (param) == "string" || typeof (param) == "number" || typeof (param) == "boolean") { //Q1：{参数类型}是字符串，数字或布尔
     paramStr += "&" + key1 + "=" + encodeURIComponent(param);
   } else { //Q2：{参数类型}是数组或对象
     for (var key in param) {
@@ -113,12 +113,12 @@ var parseParam = function(param, key1) { //函数：{将json转成url参数形�
  */
 function getRequest(url, data) {
   var getRequest = wxPromisify(wx.request)
-  data=parseParam(data); //调用：{将json转成url参数形式},
+  data = parseParam(data); //调用：{将json转成url参数形式},
   console.log("data###", data);
   return getRequest({
     url: url,
     method: 'GET',
-    data:  data,
+    data: data,
     header: {
       'Content-Type': 'application/json'
     }
@@ -130,10 +130,10 @@ function getRequest(url, data) {
  * data 以对象的格式传入
  */
 function postRequest(json) {
-  let {url,param}=json;
+  let { url, param } = json;
   console.log("postRequest####");
   var postRequest = wxPromisify(wx.request)
-  param=parseParam(param); //调用：{将json转成url参数形式},
+  param = parseParam(param); //调用：{将json转成url参数形式},
   console.log("param###", param);
   return postRequest({
     url: url,
@@ -153,10 +153,10 @@ function wxLogin() {
 // 是否为空对象
 
 function isEmptyObject(e) {
-    var t;
-    for (t in e)
-        return !1;
-    return !0
+  var t;
+  for (t in e)
+    return !1;
+  return !0
 
 }
 /**
@@ -173,7 +173,7 @@ function wxGetSystemInfo() {
   return wxPromisify(wx.getSystemInfo)
 }
 // 检测授权状态
-  
+
 
 let deepCopy = function (obj) {//深拷贝一个Json对象的函数
   let str = JSON.stringify(obj);//json对象转字符串
@@ -183,7 +183,7 @@ let deepCopy = function (obj) {//深拷贝一个Json对象的函数
 
 let class2type = {},
   //用于记录[object class]样式  
-arrObjs = "Boolean Number String Function Array Date RegExp Null Undefined".split(" ");
+  arrObjs = "Boolean Number String Function Array Date RegExp Null Undefined".split(" ");
 for (var i = 0, l = arrObjs.length; i < l; i++) {
   class2type["[object " + arrObjs[i] + "]"] = arrObjs[i].toLowerCase();
 }
@@ -195,9 +195,87 @@ let type = function (obj) {
 
 function timeout(ms) {//使用promise封装一个延迟方法
   return new Promise((resolve) => {//resolve延迟解决后的回调函数, reject延迟异常的处理函数
-      setTimeout(resolve, ms, 'done');
+    setTimeout(resolve, ms, 'done');
   });
 }
+
+function getQuery() {
+  /* 获取当前路由栈数组 */
+  const pages = getCurrentPages()
+  const currentPage = pages[pages.length - 1]
+  const options = currentPage.options
+  return options
+}
+
+//ajax获取单条数据详情的函数
+async function ajaxGetDoc(_json) {
+  let { page, id } = _json;
+  console.log("ajaxGetDoc");
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossDetail?page=${page}`,
+    param: {
+      id: id, //数据id
+    }
+  });
+  return data.Doc
+}
+
+
+//ajax获取数据列表的函数
+async function ajaxGetList(_json) {
+  let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossList?page=${page}`,
+    param: {
+      findJson, selectJson, sortJson, pageIndex, pageSize
+    }
+  });
+  return data.list
+
+
+}
+
+
+//ajax删除一条数据的函数
+async function ajaxDelete(_json) {
+  let { page, findJson } = _json;
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossDelete?page=${page}`,
+    param: {
+      findJson
+    }
+  });
+  return data
+}
+
+
+
+
+//ajax修改数据的函数
+async function ajaxModify(_json) {
+  let { page, findJson, modifyJson, } = _json;
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossModify?page=${page}`,
+    param: {
+      findJson, modifyJson
+    }
+  });
+  return data
+}
+
+//ajax新增数据的函数
+async function ajaxAdd(_json) {
+  console.log("ajaxAdd");
+  let { page, data } = _json;
+  return await postRequest({
+    url: global.PUB.domain + `/crossAdd?page=${page}`,
+    param: {
+      data
+    }
+  });
+  
+}
+
 
 
 export default {
@@ -208,8 +286,8 @@ export default {
   wxPromisify: wxPromisify, //promise 方法
   wxLogin: wxLogin, // 登录用户发那个发封装
   wxGetUserInfo: wxGetUserInfo, // 获取用户信息方法封装
-  formatDate:formatDate, // 格式化时间方法
+  formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  ,deepCopy,type,timeout
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,ajaxAdd,ajaxModify,ajaxDelete
 }

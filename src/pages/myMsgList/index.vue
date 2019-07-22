@@ -1,7 +1,8 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
+    <debug_item path="pageName" v-model="pageName" text="页面名称"/>
     <mytabbar></mytabbar>
+<<<<<<< HEAD
     <div class="top-box">
       <div class="read-box" :class="!focuss?'masEvolve':''" @click="read()">已读</div>
       <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread()">未读</div>
@@ -33,20 +34,22 @@
       </div>
     </div>
     <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
+=======
+>>>>>>> c097b310c2026be81d6cbbf423aea36ac8d0b11f
   </div>
 </template>
 <script>
 /* eslint-disable */
-import mytabbar from "@/components/mytabbar/mytabbar";
-import debug_item from "@/components/common/debug_item/debug_item";
+import mytabbar from '@/components/mytabbar/mytabbar'
+import debug_item from '@/components/common/debug_item/debug_item'
 
 export default {
   components: {
-    mytabbar,
-    debug_item
+    mytabbar, debug_item
   },
   data() {
     return {
+<<<<<<< HEAD
       unreadBox:[],
       focuss: true,
       evolve: "masEvolve",
@@ -121,11 +124,23 @@ export default {
         this.checkedList[i] = false;
       }
     }
+=======
+      pageName: "个人中心-系统消息列表"
+
+    }
+  },
+
+  methods: {
+
+  },
+  created() {
+>>>>>>> c097b310c2026be81d6cbbf423aea36ac8d0b11f
   }
-};
+}
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .top-box {
   height: 35px;
   background: white;
@@ -230,4 +245,6 @@ export default {
   font-size: 20px;
 }
 
+=======
+>>>>>>> c097b310c2026be81d6cbbf423aea36ac8d0b11f
 </style>
