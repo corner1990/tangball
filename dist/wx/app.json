@@ -1,10 +1,17 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/venueList/main",
     "pages/index/main",
     "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/ajaxDemo/main",
+=======
+    "pages/matchEroll/main",
+    "pages/ajaxDemo/main",
+    "pages/venueDetail/main",
+    "pages/index/main",
+>>>>>>> f79564cb6b4829d9efe5ec88d429b863656441f1
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
