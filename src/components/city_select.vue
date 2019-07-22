@@ -29,7 +29,7 @@ export default {
     },
     data(){
         return {
-            showCity:false,
+            showCity:false, 
             cityList:[],
             showCityButton:false,
         }

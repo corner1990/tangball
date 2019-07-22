@@ -13,6 +13,7 @@
       :phone="item.phoneNumber"
       :address="item.address"
       :album="item.album"
+      :P1="item.P1"
       v-for="(item,i) in venueList"
       :key="i"
     ></venueListComponent>
@@ -40,12 +41,15 @@ export default {
       selectIndex: -1,
       pageName: "场馆列表",
       venueList: [],
-      value: "" // 搜索value
+      value: "", // 搜索value
+      keywords: ""
     };
   },
   methods: {
-    onSearch:{
+    onSearch(keywords) {
+      
 
+      console.log("keywords", keywords);
     },
     async search(areaId) {
       if (areaId) {
