@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/matchEroll/main",
     "pages/ajaxDemo/main",
+    "pages/matchEroll/main",
     "pages/venueDetail/main",
     "pages/index/main",
     "pages/matchList/main",
