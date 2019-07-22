@@ -6,7 +6,7 @@
     <div>
       <van-tabs :active="active" v-bind:change="onChange">
         <van-tab title="场馆介绍1">
-          <div>{{venueDoc.name}}</div>
+          <div style="font-size:30px">{{venueDoc.name}}</div>
           <div class="main-wrap">
             <div class="page-body">
               <div class="page-section page-section-gap">
