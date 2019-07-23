@@ -6,10 +6,6 @@
       <div class="read-box" :class="!focuss?'masEvolve':''" @click="read">已读</div>
       <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread">未读</div>
     </div>
-<<<<<<< HEAD
-    <msg  :crowArr="msgg"></msg>
-    <msg :crowArr="msgg"></msg>
-=======
     <div class="top-box">
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-show="showSelect" @click="allCheck()">全选</div>
@@ -37,7 +33,6 @@
       </div>
     </div>
     <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
   </div>
 </template>
 <script>
@@ -54,11 +49,7 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-      msgg:"",
-=======
       unreadBox:[],
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
       focuss: true,
       evolve: "masEvolve",
       crow: [
@@ -88,10 +79,6 @@ export default {
       this.msgg = this.crow2;
     },
     unread() {
-<<<<<<< HEAD
-      this.focuss = true;
-      this.msgg = this.crow;
-=======
        this.focuss = true;
     },
     purification() {
@@ -146,19 +133,12 @@ export default {
       } else {
         this.checkedList[i] = false;
       }
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
     }
   }
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-.main-wrap {
-  padding-bottom: 100px;
-}
-=======
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
 .top-box {
   height: 35px;
   background: white;
@@ -186,8 +166,6 @@ export default {
 .masEvolve {
   background-color: #f5f5f5;
 }
-<<<<<<< HEAD
-=======
 .news {
   height: 50px;
   text-align: left;
@@ -238,5 +216,4 @@ export default {
   font-size: 20px;
 }
 
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
 </style>
