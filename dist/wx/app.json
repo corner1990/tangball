@@ -1,20 +1,11 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/myMsgList/main",
-    "pages/venueDetail/main",
-    "pages/index/main",
-    "pages/matchEroll/main",
-    "pages/matchList/main",
-=======
     "pages/matchList/main",
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
     "pages/venueList/main",
     "pages/index/main",
     "pages/matchEroll/main",
-   
->>>>>>> 876e487b6163238c54e26bb9bf6a5fda2a5e4f33
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -24,6 +15,7 @@
     "pages/rankingList/main",
     "pages/myEroll/main",
     "pages/myErollDetail/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -79,6 +71,5 @@
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }
