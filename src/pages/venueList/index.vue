@@ -59,6 +59,8 @@ export default {
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
+      }else{
+        this.selectIndex = -1; 
       }
       console.log("areaId", areaId);
       let { data } = await util.post({
@@ -86,7 +88,6 @@ export default {
   mounted() {
     this.search();
     //  每次刷新页面将地区组件聚焦到所有
-    this.selectIndex = -1;
   }
 };
 </script>
