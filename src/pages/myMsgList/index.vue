@@ -6,7 +6,12 @@
       <div class="read-box" :class="!focuss?'masEvolve':''" @click="read">已读</div>
       <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread">未读</div>
     </div>
+<<<<<<< HEAD
     <msg :crowArr="msgg" @newMsgg="moveMsg"></msg>
+=======
+    <msg  :crowArr="msgg"></msg>
+    <msg :crowArr="msgg"></msg>
+>>>>>>> 876e487b6163238c54e26bb9bf6a5fda2a5e4f33
   </div>
 </template>
 <script>
@@ -23,7 +28,11 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       msgg: "",
+=======
+      msgg:"",
+>>>>>>> 876e487b6163238c54e26bb9bf6a5fda2a5e4f33
       focuss: true,
       evolve: "masEvolve",
       crow: [
@@ -57,9 +66,12 @@ export default {
     unread() {
       this.focuss = true;
       this.msgg = this.crow;
+<<<<<<< HEAD
     },
     moveMsg(transmit) {
       this.crow2 = transmit.newcrow;
+=======
+>>>>>>> 876e487b6163238c54e26bb9bf6a5fda2a5e4f33
     }
   }
 };
