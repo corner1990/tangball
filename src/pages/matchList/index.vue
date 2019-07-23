@@ -12,13 +12,16 @@
             :desc="item.remark"
             :title="item.matchName"
             :matchTime="item.matchTime"
-            :thumb="item.thumb"
+            :publicationStatus="item.publicationStatus"
             :price="'报名费'+item.registrationFee"
             origin-price="1000"
             :thumb-link="'/pages/matchDetail/main?id='+item.P1"
             v-for="(item,i) in matchlist"
             :key="i"
-          ></matchListcomponent>
+          >
+    
+         
+          </matchListcomponent>
         </van-tab>
         <van-tab title="全国">
           <matchListcomponent
@@ -124,8 +127,7 @@ export default {
 
 
     /**
-     * ajax请求参赛次数排行榜
-     * 请求会员表tangball_member
+     * ajax请求赛事列表
      */
     let { data } = await util.post({
       url: global.PUB.domain + '/crossList?page=tangball_match',

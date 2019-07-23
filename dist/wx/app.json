@@ -1,7 +1,11 @@
 {
   "pages": [
-    "pages/venueDetail/main",
+    "pages/ajaxDemo/main",
+    "pages/myMsgList/main",
+    "pages/venueList/main",
     "pages/index/main",
+    "pages/venueDetail/main",
+    "pages/matchEroll/main",
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
@@ -9,12 +13,10 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    "pages/venueList/main",
-    "pages/matchEroll/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main",
-    "pages/myMsgList/main"
+    "pages/myErollDetail/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -68,7 +70,14 @@
     "van-cell": "/static/vant/cell/index",
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
+<<<<<<< HEAD
     "van-cell-group": "/static/vant/cell-group/index"
   },
   "sitemapLocation": "sitemap.json"
 }
+=======
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-dialog": "/static/vant/dialog/index"
+  }
+}
+>>>>>>> 86a2d600bc9a99673d8dbfc295ccd408643a34ad
