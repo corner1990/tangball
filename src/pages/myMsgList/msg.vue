@@ -1,35 +1,35 @@
 <template>
-<div>
+  <div>
     <div class="top-box">
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-show="showSelect" @click="allCheck()">全选</div>
     </div>
     <div>
-    <div class="content-box" v-if="showcontent">
-      {{crowArr[gant].name}}
-      <br />
-      {{crowArr[gant].mas}}
-      <div class="close-box" @click="shut()">已 读</div>
-    </div>
-    <div v-show="!showcontent">
-      <div class="mas-box" v-for="(mass,index) in crowArr" :key="index">
-        <div class="news" @click="content(index,mass.id )">
-          {{mass.name}}
-          <br />
-          {{mass.mas}}
-          <input
-            type="checkbox"
-            class="delete-box"
-            @click="del(index)"
-            :checked="checked"
-            v-if="showSelect"
-          />
+      <div class="content-box" v-if="showcontent">
+        {{crowArr[gant].name}}
+        <br />
+        {{crowArr[gant].mas}}
+        <div class="close-box" @click="shut(gant)">已 读</div>
+      </div>
+      <div v-show="!showcontent">
+        <div class="mas-box" v-for="(mass,index) in crowArr" :key="index">
+          <div class="news" @click="content(index,mass.id )">
+            {{mass.name}}
+            <br />
+            {{mass.mas}}
+            <input
+              type="checkbox"
+              class="delete-box"
+              @click="del(index)"
+              :checked="checked"
+              v-if="showSelect"
+            />
+          </div>
         </div>
       </div>
     </div>
-    </div>
     <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
-</div>
+  </div>
 </template>
 <script >
 /* eslint-disable */
@@ -42,10 +42,6 @@ export default {
     typr:Array,
     default:[]
     },
-    showMsg:{
-typr:Boolean,
-default:true,
-    }
 },
   data() { 
     return { 
@@ -58,7 +54,10 @@ default:true,
       showcontent: false,
     }
   },
-
+  // watch:{
+  //   crowArr:function(nval,oval){
+  //     console.log("新，旧",nval,oval)
+  // },}
   methods: { 
     purification() {
       for (let i = this.crowArr.length - 1; i >= 0; i--) {
@@ -95,13 +94,14 @@ default:true,
         this.gant = index
         this.showcompile = false
         this.unreadBox.push(this.crowArr[index])
-        console.log(this.unreadBox)
-      
+        let transmit={newcrow:this.unreadBox}
+        this.$emit('newMsgg',transmit)
       }
     },
-    shut() { 
+    shut(gant) { 
       this.showcontent = false
       this.showcompile = true
+      this.crowArr.splice(gant, 1)
     }
   },
   mounted() { 
@@ -113,16 +113,16 @@ default:true,
         this.checkedList[i] = false
       }
     }
-  }
+  },
 };
 </script>
 <style scoped>
-.top-box { 
+.top-box {
   height: 35px;
   background: white;
   position: relative;
 }
-.compile-box { 
+.compile-box {
   width: 35px;
   height: 35px;
   position: absolute;
@@ -131,7 +131,7 @@ default:true,
   top: 0;
   left: 5px;
 }
-.all-box { 
+.all-box {
   width: 35px;
   height: 35px;
   position: absolute;
@@ -140,7 +140,7 @@ default:true,
   top: 0;
   right: 5px;
 }
-.mas-box { 
+.mas-box {
   height: 50px;
   border-radius: 10px;
   margin: 10px 8px;
@@ -149,13 +149,13 @@ default:true,
   background-color: #f5f5f5;
   color: #232323;
 }
-.news { 
+.news {
   height: 50px;
   text-align: left;
   line-height: 25px;
   overflow: auto;
 }
-.delete-box { 
+.delete-box {
   margin: 10px;
   height: 25px;
   width: 25px;
@@ -166,7 +166,7 @@ default:true,
   top: 0;
   right: 0;
 }
-.bottom-box { 
+.bottom-box {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -178,7 +178,7 @@ default:true,
   width: 100%;
   /* z-index:100; */
 }
-.content-box { 
+.content-box {
   position: relative;
   height: 350px;
   margin: 0 5px;
@@ -199,5 +199,4 @@ default:true,
   width: 100%;
   font-size: 20px;
 }
-
 </style>
