@@ -4,13 +4,7 @@
     "pages/myMsgList/main",
     "pages/venueList/main",
     "pages/index/main",
-<<<<<<< HEAD
     "pages/matchEroll/main",
-    "pages/ajaxDemo/main",
-=======
-    "pages/venueDetail/main",
-    "pages/matchEroll/main",
->>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
