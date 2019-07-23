@@ -7,16 +7,18 @@
     </van-search>
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-    <venueListComponent
-      :area="item.area"
-      :title="item.name"
-      :phone="item.phoneNumber"
-      :address="item.address"
-      :album="item.album"
-      :P1="item.P1"
-      v-for="(item,i) in venueList"
-      :key="i"
-    ></venueListComponent>
+    <div style="margin-bottom:50px">
+      <venueListComponent
+        :area="item.area"
+        :title="item.name"
+        :phone="item.phoneNumber"
+        :address="item.address"
+        :album="item.album"
+        :P1="item.P1"
+        v-for="(item,i) in venueList"
+        :key="i"
+      ></venueListComponent>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -27,7 +29,6 @@ import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "./venueListComponent";
 import city_select from "@/components/city_select";
-
 
 export default {
   components: {
@@ -91,6 +92,9 @@ export default {
 </script>
 
 <style scoped>
+.list {
+  margin-bottom: 20px;
+}
 .main-venue {
   width: 345px;
   height: 110px;
