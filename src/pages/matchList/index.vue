@@ -16,12 +16,10 @@
             :price="'报名费'+item.registrationFee"
             origin-price="1000"
             :matchListP1="item.P1"
+   
             v-for="(item,i) in matchlist"
             :key="i"
-          >
-    
-         
-          </matchListcomponent>
+          ></matchListcomponent>
         </van-tab>
       </van-tabs>
     </div>
@@ -49,27 +47,13 @@ export default {
     return {
       matchType: null,
       activeStep: 0,
-      steps: [
-        {
-          text: "步骤一",
-          desc: "描述信息"
-        },
-        {
-          text: "步骤二",
-          desc: "描述信息"
-        },
-        {
-          text: "步骤三",
-          desc: "描述信息"
-        },
-        {
-          text: "步骤四",
-          desc: "描述信息"
-        }
-      ],
+    
       matchlist: [],
-      tabList:[
-        {category:"近期"},{category:"全国"},{category:"加盟商"},{category:"全部"}
+      tabList: [
+        { category: "近期" },
+        { category: "全国" },
+        { category: "加盟商" },
+        { category: "全部" }
       ],
 
       value: "999" // 搜索value
@@ -83,19 +67,21 @@ export default {
         param: { findJson: { matchType: this.matchType } }
       });
       this.matchlist = data.list;
-      localStorage.matchID=this.matchlist.P1
-       console.log("getlist成功", this.matchlist.P1);
-      console.log("getlist成功", this.matchlist);
+
+      //--------------数组的日期排序-----------------------
+      this.matchlist.sort((a, b) => {
+        return a.matchTime > b.matchTime ? -1 : 1;
+      });
     },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
       console.group("onClickTab", event.target); //这个对象包含tab的index和title
       console.log("onClickTab", event.target.index);
-
+      // ------------------地区区分---------------------
       //如果是近期（因为近期的index为1）
       if (event.target.index == 0) {
         console.group("如果是近期", event.target.title);
-          this.matchType = null;//改变请求接口参数
+        this.matchType = null; //改变请求接口参数
         this.getlist(); //调用一次接口
       }
 
@@ -115,19 +101,10 @@ export default {
       if (event.target.index == 3) {
         console.group("如果是全部", event.target.title);
         console.log("如果是全部", event.target.title);
-        this.matchType = 3;
+         this.matchType = null; 
         this.getlist();
       }
     },
-    onShow() {
-      this.show = true;
-      console.log("mpvue.data", this);
-      // mpvue.setData({show: true})
-    },
-    onDaying() {
-      console.log(this.matchlist);
-    },
-
     /**
      * @desc 搜索回调
      */
@@ -135,9 +112,6 @@ export default {
     /**
      * @desc 赛事切换回调
      */
-  },
-  created() {
-    console.log("赛事列表created");
   },
   async mounted() {
     this.getlist(); //页面创建成功后，调用一次请求接口，此时是加载所有数据

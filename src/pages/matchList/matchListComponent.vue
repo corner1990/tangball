@@ -2,24 +2,27 @@
   <div>
     <div class="match-box">
       <div class="match-img-box">
-        <img :src="a" />
+        <img
+          src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3778486341,778005772&fm=26&gp=0.jpg"
+        />
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
-        <p>{{desc}}</p>
-        <div>{{matchTime}}</div>
+
+        <div>赛事时间：{{matchTime}}</div>
 
         <div>{{price}}</div>
       </div>
 
       <div name="footer" class="rpg11">
         <!-- <div :class="{'macth-btn':true,btn:publicationStatus==2}" @click="daying">{{Status}}</div> -->
-        <navigator url="/pages/matchEroll/main" hover-class="navigator-hover">
+        <navigator :url="applyUrl">
           <van-button plain size="small" type="danger" v-if="applyIngStatus" @click="daying">火热报名中</van-button>
-          
         </navigator>
-        <van-button disabled size="small" v-if="applyEndStatus" >报名已结束</van-button>
-        <div class="macth-btn">查看详情</div>
+        <van-button disabled size="small" v-if="applyEndStatus">报名已结束</van-button>
+        <navigator :url="matchDetailUrl">
+          <div class="macth-btn">查看详情</div>
+        </navigator>
       </div>
     </div>
   </div>
@@ -31,31 +34,28 @@ export default {
   data() {
     return {
       applyIngStatus: true,
-     applyEndStatus:false
+      applyEndStatus: false,
+      applyUrl: "/pages/matchEroll/main?id=" + this.matchListP1 + "",
+      matchDetailUrl: "/pages/matchDetail/main?id=" + this.matchListP1 + ""
     };
   },
-  props: ["title", "desc", "price", "matchTime", "publicationStatus","matchListP1"],
+  props: [
+    "title",
+    "desc",
+    "price",
+    "matchTime",
+    "publicationStatus",
+    "matchListP1"
+  ],
   components: {},
   mounted() {
-  
     if (this.publicationStatus == 1) {
-      
-      return (this.applyIngStatus=true,this.applyEndStatus=false)
+      (this.applyIngStatus = true), (this.applyEndStatus = false);
     } else {
-      return (this.applyIngStatus=false,this.applyEndStatus=true)
+      (this.applyIngStatus = false), (this.applyEndStatus = true);
     }
   },
-  methods: {
-    daying() {
-      if (this.publicationStatus == 1) {
-        var ak00=this.matchListP1
-        console.log("ak00",ak00)
-        this.$store.commit("ak00")
-      } else {
-        return;
-      }
-    }
-  },
+  methods: {},
   created() {}
 };
 </script>
@@ -78,19 +78,20 @@ export default {
   display: flex;
 }
 .rpg11 {
-  /* position: absolute; */
+  /* position: absolute;
   right: 0px;
-  bottom: 10px;
+  bottom: 10px; */
 
   /* float: right; */
+  margin-top: 15px;
   margin-right: 5px;
 }
 .match-img-box {
   /* float: left; */
 
-  margin: 15px 0 0 5px;
-  height: 70px;
-  width: 70px;
+  margin: 15px 1px 0 10px;
+  height: 80px;
+  width: 80px;
   background: #fff;
 }
 .match-img-box img {
@@ -98,13 +99,16 @@ export default {
   height: 100%;
 }
 .match-img-box1 {
-  /* color: #fff; */
-  /* border: 1px solid #000; */
+   padding:0 0 5px 5px;
   flex: 1;
   margin: 15px 0 0 0px;
-  /* background: #000; */
   display: flex;
   flex-direction: column;
+}
+.match-img-box1 h1 {
+  font-weight:bold;
+  font-size: 16px;
+ 
 }
 .macth-btn {
   line-height: 20px;
