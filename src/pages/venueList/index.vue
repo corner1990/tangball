@@ -7,16 +7,18 @@
     </van-search>
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-    <venueListComponent
-      :area="item.area"
-      :title="item.name"
-      :phone="item.phoneNumber"
-      :address="item.address"
-      :album="item.album"
-      :P1="item.P1"
-      v-for="(item,i) in venueList"
-      :key="i"
-    ></venueListComponent>
+    <div style="margin-bottom:50px">
+      <venueListComponent
+        :area="item.area"
+        :title="item.name"
+        :phone="item.phoneNumber"
+        :address="item.address"
+        :album="item.album"
+        :P1="item.P1"
+        v-for="(item,i) in venueList"
+        :key="i"
+      ></venueListComponent>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -42,14 +44,17 @@ export default {
       pageName: "场馆列表",
       venueList: [],
       value: "", // 搜索value
-      keywords: ""
+     
     };
   },
   methods: {
-    onSearch(keywords) {
-      
-
-      console.log("keywords", keywords);
+    onSearch() {
+      console.log("venueList", this.venueList);
+      this.venueList.forEach(doc => {
+       
+        console.log("doc", doc.name.includes(this.value));
+        console.log("value",this.value);
+      });
     },
     async search(areaId) {
       if (areaId) {
@@ -88,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+.list {
+  margin-bottom: 20px;
+}
 .main-venue {
   width: 345px;
   height: 110px;

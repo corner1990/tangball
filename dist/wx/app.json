@@ -1,9 +1,16 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
+    "pages/myMsgList/main",
+    "pages/venueList/main",
+    "pages/index/main",
+<<<<<<< HEAD
     "pages/matchEroll/main",
     "pages/ajaxDemo/main",
+=======
     "pages/venueDetail/main",
-    "pages/index/main",
+    "pages/matchEroll/main",
+>>>>>>> 3438088cab21587082a1832b81eca6ea4076d27f
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
@@ -11,11 +18,10 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    "pages/venueList/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main",
-    "pages/myMsgList/main"
+    "pages/myErollDetail/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -68,4 +74,8 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb9f6d0a8eb3d8f0cc16d9179d6d518e715312ec
