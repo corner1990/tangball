@@ -1,13 +1,8 @@
 {
   "pages": [
-<<<<<<< HEAD
     "pages/myMsgList/main",
     "pages/venueDetail/main",
-=======
-    "pages/venueList/main",
->>>>>>> c097b310c2026be81d6cbbf423aea36ac8d0b11f
     "pages/index/main",
-    "pages/venueDetail/main",
     "pages/matchEroll/main",
     "pages/ajaxDemo/main",
     "pages/matchList/main",
@@ -17,7 +12,6 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    
     "pages/rankingList/main",
     "pages/myEroll/main",
     "pages/myErollDetail/main"
