@@ -1,22 +1,22 @@
 <template>
-  <div class="main-venue">
-    <div class="FL">
-      <img class="venue-imgbox" v-if="album&&album.length" :src="album[0].url" />
-    </div>
-    <div class="venue-textbox">
-      <div>
-        <span class="C_999">【{{area}}】</span>
-        <span>{{title}}</span>
+  <div class="main-venue" v-if="itemshow">
+    <navigator :url="'/pages/venueDetail/main?id='+P1">
+      <div class="FL">
+        <img class="venue-imgbox" v-if="album&&album.length" :src="album[0].url" />
       </div>
-      <div>电话:{{phone}}</div>
-      <div>地址:{{address}}</div>
-    </div>
-    <div class="LH110">
-      <van-icon name="arrow" size="20px" />
-    </div>
+      <div class="venue-textbox">
+        <div>
+          <span class="C_999">【{{area}}】</span>
+          <span>{{title}}</span>
+        </div>
+        <div>电话:{{phone}}</div>
+        <div>地址:{{address}}</div>
+      </div>
+      <div class="LH110">
+        <van-icon name="arrow" size="20px" />
+      </div>
+    </navigator>
   </div>
-
- 
 </template>
 <script>
 /* eslint-disable */
@@ -25,14 +25,13 @@ export default {
   data() {
     return {};
   },
-  props: ["area", "title", "phone", "address","album"],
+  props: ["area", "title", "phone", "address", "album", "P1", "itemshow"],
   components: {},
-  methods: {
-    dayin() {
-      console.log("cf", cf.venueList);
-    }
-  },
-  created() {}
+  methods: {},
+  created() {},
+  mounted() {
+   
+  }
 };
 </script>
 

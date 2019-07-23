@@ -19,8 +19,8 @@
 		}
 	},
 	"miniprogramRoot": "dist/wx/",
-	"compileType": "miniprogram",
-	"appid": "wx95c489b51de50019",
+	"compileType": "tangball",
+	"appid": "wx8c385eac14a82873",
 	"projectname": "bowling",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
