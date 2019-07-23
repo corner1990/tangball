@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
+    "pages/myMsgList/main",
     "pages/venueList/main",
     "pages/index/main",
     "pages/venueDetail/main",
     "pages/matchEroll/main",
-    "pages/ajaxDemo/main",
     "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
@@ -14,8 +15,8 @@
     "pages/usercenter/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main",
-    "pages/myMsgList/main"
+    "pages/myErollDetail/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
