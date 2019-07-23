@@ -57,7 +57,8 @@ export default {
   // watch:{
   //   crowArr:function(nval,oval){
   //     console.log("新，旧",nval,oval)
-  // },}
+  //     this.shut()
+  // },},
   methods: { 
     purification() {
       for (let i = this.crowArr.length - 1; i >= 0; i--) {

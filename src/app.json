@@ -1,14 +1,7 @@
 {
   "pages": [
-<<<<<<< HEAD
     "pages/myMsgList/main",
     "pages/venueDetail/main",
-=======
-    "pages/matchList/main",
-    "pages/ajaxDemo/main",
-    "pages/myMsgList/main",
-    "pages/venueList/main",
->>>>>>> 876e487b6163238c54e26bb9bf6a5fda2a5e4f33
     "pages/index/main",
     "pages/matchEroll/main",
    
