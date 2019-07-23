@@ -2,14 +2,19 @@
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
+
+     <!-- 搜索框 -->
     <div class="searchBox">
       <input type="text" v-model="keywords" placeholder="请输入搜索关键词" />
       <div slot="action" @click="onSearch">
-        <van-icon name="search" size="24px"/>
+        <van-icon name="search" size="24px" />
       </div>
     </div>
+    
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
+
+    <!-- 赛事场馆列表组件 -->
     <venueListComponent
       :area="item.area"
       :title="item.name"
@@ -65,8 +70,10 @@ export default {
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
+      } else {
+        this.selectIndex = -1;
       }
-      console.log("areaId", areaId);
+
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
@@ -95,7 +102,6 @@ export default {
   mounted() {
     this.search();
     //  每次刷新页面将地区组件聚焦到所有
-    this.selectIndex = -1;
   }
 };
 </script>
@@ -109,25 +115,27 @@ export default {
   width: 100%;
   height: 30px;
   padding: 10px;
-  background-color: #F8B432;
+  background-color: #f8b432;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
 }
 .searchBox input {
-  width: 85%;
+  width: 83%;
   height: 30px;
-  background-color: #FFFFFF;
+  border-radius: 10px;
+  background-color: #ffffff;
   float: left;
   padding-left: 5px;
 }
 .searchBox div {
   width: 10%;
   height: 30px;
-  /* line-height: 30px; */
-  background-color: #30BB3D;
+  border-radius: 10px;
+  background-color: #30bb3d;
   text-align: center;
   float: left;
+  margin-left: 5px;
 }
 </style>

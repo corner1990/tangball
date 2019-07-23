@@ -273,9 +273,23 @@ async function ajaxAdd(_json) {
       data
     }
   });
-  
+
 }
 
+//函数定义：{模态弹窗的函数}-封装成promise
+let showModal = function (param) {
+  var promise = new Promise((resolve, reject) => {
+    param = param || {};
+    wx.showModal({
+      title: param.title || "",
+      content: param.content || "",
+      success: async res => {
+        resolve(res);
+      }
+    })
+  });
+  return promise;
+};
 
 
 export default {
@@ -289,5 +303,6 @@ export default {
   formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,ajaxAdd,ajaxModify,ajaxDelete
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,
+   ajaxAdd, ajaxModify, ajaxDelete, showModal
 }

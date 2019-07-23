@@ -30,7 +30,7 @@ export default {
   methods: {},
   created() {},
   mounted() {
-    console.log(this.P1);
+   
   }
 };
 </script>
