@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrap">
+    <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
     <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
     <div class="data-group" v-for="(item,i) in enrollList" :key="i">
       <div class="data-group-left">数据id:{{item.P1}}-会员id:{{item.memberId}}-赛事id:{{item.matchId}}</div>
@@ -23,12 +24,13 @@
           <!-- <van-field :value="formData.matchId" placeholder="赛事id(vant)" @change="changeMatchId"/>
           -->
           <my_field v-model="formData.matchId" label="赛事id">
-            <span class="" >aa</span>
+            <span class>aa</span>
           </my_field>
           <my_field v-model="formData.memberId" label="会员id"></my_field>
         </div>
       </van-cell-group>
     </van-dialog>
+    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
     <debug_item path="formData" v-model="formData" text="表单数据"/>
     <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
     <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
@@ -55,6 +57,8 @@ export default {
   },
   data() {
     return {
+      memberId: 17,
+      myMsgList: null,
       test: "111",
       titleDialog: "弹窗标题",
       formData: {},
@@ -154,6 +158,20 @@ export default {
       this.enrollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 5
+      });
+    },
+    //函数：{ajax获取消息列表函数}
+    async ajaxMsgList() {
+      //ajax获取消息列表
+      this.myMsgList = await util.ajaxGetList({
+        page: "tangball_msg",
+        pageSize: 999,
+        findJson: {
+          //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
+          $or: [{ range: 1 }, { range: 2, memberIdList: 17 }]
+        }
+        // sortJson: { publishTime: -1 }, //排序条件
+        // selectJson: { name: 1, entries: 1 } //只返回指定字段
       });
     }
   },

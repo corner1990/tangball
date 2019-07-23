@@ -23,7 +23,11 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       msgg:"",
+=======
+      msgg: "",
+>>>>>>> e44ecdf9ac76496b5bfe445e37ddd86b434c2761
       focuss: true,
       evolve: "masEvolve",
       crow: [
