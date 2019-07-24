@@ -3,14 +3,14 @@
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
 
-     <!-- 搜索框 -->
+    <!-- 搜索框 -->
     <div class="searchBox">
       <input type="text" v-model="keywords" placeholder="请输入搜索关键词" />
       <div slot="action" @click="onSearch">
         <van-icon name="search" size="24px" />
       </div>
     </div>
-    
+
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
 
@@ -125,7 +125,7 @@ export default {
   width: 83%;
   height: 30px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #fff;
   float: left;
   padding-left: 5px;
 }
@@ -133,9 +133,9 @@ export default {
   width: 10%;
   height: 30px;
   border-radius: 10px;
-  background-color: #30bb3d;
   text-align: center;
   float: left;
   margin-left: 5px;
+  color: #fff;
 }
 </style>

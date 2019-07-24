@@ -100,15 +100,15 @@ export default {
 .city-button {
   padding: 0px;
   text-align: center;
-  color:#343434;
+  color:#333;
   display: inline-block;
   width: 23%;
   margin-right: 2%;
   height: 35px;
   font-size: 16px;
-  background-color:#F8B432;
 }
 .active {
-  background-color: #30BB3D;
+  background-color: #F4B116;
+  color:#fff;
 }
 </style>

@@ -3,6 +3,7 @@
     "pages/myMsgList/main",
     "pages/matchList/main",
     "pages/ajaxDemo/main",
+    
     "pages/venueList/main",
     "pages/index/main",
     "pages/matchEroll/main",
@@ -15,6 +16,7 @@
     "pages/rankingList/main",
     "pages/myEroll/main",
     "pages/myErollDetail/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -70,6 +72,5 @@
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index"
-  },
-  "sitemapLocation": "sitemap4.json"
+  }
 }
