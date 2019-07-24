@@ -1,8 +1,9 @@
 <template>
   <div class="field-box">
-    <div class="field-label" >{{label}}</div>
-    <div class="field-item" ><input type="text" class="field-input" v-model="valueNeed"></div>
-    
+    <div class="field-label">{{label}}</div>
+    <div class="field-item">
+      <input type="text" class="field-input" v-model="valueNeed">
+    </div>
   </div>
 </template>
 
@@ -12,8 +13,8 @@ import mix from "@/utils/mix";
 console.log("mix", mix);
 
 export default {
-   mixins: [mix.form_item], //混入
-   props:["label"],
+  mixins: [mix.form_item], //混入
+  props: ["label"],
   data() {
     return {
       dialogImageUrl: "",
@@ -41,16 +42,14 @@ export default {
   text-align: left;
   /* width: 60px; */
   padding: 3px 0 0 0;
-
 }
 .field-item {
   flex: 1;
 }
 
-
-.field-input{
+.field-input {
   padding: 0 10px 0 10px;
-   display: inline-block;
+  display: inline-block;
   /* border: 1px #ddd solid; */
   height: 28px;
   line-height: 28px;

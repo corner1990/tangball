@@ -2,23 +2,30 @@
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot @search="onSearch">
-      <div slot="action" @tap="onSearch">搜索</div>
-    </van-search>
+
+     <!-- 搜索框 -->
+    <div class="searchBox">
+      <input type="text" v-model="keywords" placeholder="请输入搜索关键词" />
+      <div slot="action" @click="onSearch">
+        <van-icon name="search" size="24px" />
+      </div>
+    </div>
+    
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-    <div style="margin-bottom:50px">
-      <venueListComponent
-        :area="item.area"
-        :title="item.name"
-        :phone="item.phoneNumber"
-        :address="item.address"
-        :album="item.album"
-        :P1="item.P1"
-        v-for="(item,i) in venueList"
-        :key="i"
-      ></venueListComponent>
-    </div>
+
+    <!-- 赛事场馆列表组件 -->
+    <venueListComponent
+      :area="item.area"
+      :title="item.name"
+      :phone="item.phoneNumber"
+      :address="item.address"
+      :album="item.album"
+      :P1="item.P1"
+      v-for="(item,i) in venueList"
+      :key="i"
+      :itemshow="item.show"
+    ></venueListComponent>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -43,26 +50,30 @@ export default {
       selectIndex: -1,
       pageName: "场馆列表",
       venueList: [],
-      value: "", // 搜索value
-     
+      keywords: null, //搜索关键词
+      show: true //是否显示
     };
   },
   methods: {
-    onSearch() {
-      console.log("venueList", this.venueList);
-      this.venueList.forEach(doc => {
-       
-        console.log("doc", doc.name.includes(this.value));
-        console.log("value",this.value);
+    onSearch(keywords) {
+      this.venueList.forEach(item => {
+        let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
+        if (index > -1) {
+          //如果关键字匹配
+          item.show = true;
+        } else {
+          //如果关键字不匹配
+          item.show = false;
+        }
       });
     },
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
-      }else{
-        this.selectIndex = -1; 
+      } else {
+        this.selectIndex = -1;
       }
-      console.log("areaId", areaId);
+
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
@@ -82,6 +93,9 @@ export default {
           }
         }
       });
+      data.list.forEach(item => {
+        item.show = true;
+      });
       this.venueList = data.list;
     }
   },
@@ -93,23 +107,35 @@ export default {
 </script>
 
 <style scoped>
-.list {
-  margin-bottom: 20px;
+.main-wrap {
+  padding-bottom: 60px;
+  position: relative;
 }
-.main-venue {
-  width: 345px;
-  height: 110px;
-  margin: 15px;
+.searchBox {
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  background-color: #f8b432;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
-.venue-imgbox {
-  width: 135px;
-  height: 90px;
-  margin: 10px;
-}
-.venue-textbox {
-  width: 165px;
-  height: 90px;
+.searchBox input {
+  width: 83%;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
   float: left;
-  margin-top: 10px;
+  padding-left: 5px;
+}
+.searchBox div {
+  width: 10%;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #30bb3d;
+  text-align: center;
+  float: left;
+  margin-left: 5px;
 }
 </style>

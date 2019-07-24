@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/ajaxDemo/main",
     "pages/myMsgList/main",
+    "pages/matchList/main",
+    "pages/ajaxDemo/main",
+    
     "pages/venueList/main",
     "pages/index/main",
     "pages/matchEroll/main",
-    "pages/matchList/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",

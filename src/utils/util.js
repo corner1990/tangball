@@ -133,15 +133,16 @@ function postRequest(json) {
   let { url, param } = json;
   console.log("postRequest####");
   var postRequest = wxPromisify(wx.request)
-  param = parseParam(param); //调用：{将json转成url参数形式},
+  // param = parseParam(param); //调用：{将json转成url参数形式},
+  var strParam = JSON.stringify(param);//变量定义：{Json对象转换Json字符串函数}
   console.log("param###", param);
   return postRequest({
     url: url,
     method: 'POST',
-    data: param,
-    header: {
-      "content-type": "application/x-www-form-urlencoded"
-    },
+    data: strParam,
+    // header: {
+    //   "content-type": "application/x-www-form-urlencoded"
+    // },
   })
 }
 /**
@@ -304,5 +305,5 @@ export default {
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
   , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,
-   ajaxAdd, ajaxModify, ajaxDelete, showModal
+  ajaxAdd, ajaxModify, ajaxDelete, showModal
 }
