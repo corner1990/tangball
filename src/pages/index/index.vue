@@ -25,7 +25,7 @@
     >
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" height="150"></image>
+          <image :src="item" class="slide-image" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -92,7 +92,7 @@
       <div class="left"></div>
       <div class="right"></div>
     </div>
-    <mytabbar></mytabbar>
+    <mytabbar :active="0"></mytabbar>
   </div>
 </template>
 
@@ -116,7 +116,7 @@ export default {
         { "title": "赛事列表-", "url": "/pages/matchList/main" },
         { "title": "赛事详情", "url": "/pages/matchDetail/main" },
         { "title": "赛事报名", "url": "/pages/matchEroll/main" },
-        { "title": "场馆列表", "url": "/pages/venueList/main" },
+        // { "title": "场馆列表", "url": "/pages/venueList/main" },
         { "title": "场馆详情", "url": "/pages/venueDetail/main" },
         { "title": "唐球达人", "url": "/pages/rankingList/main" },
 
@@ -166,11 +166,7 @@ export default {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
     },
-    onShow() {
-      this.show = true
-      console.log('mpvue.data', this)
-      // mpvue.setData({show: true})
-    },
+  
     /**
      * @desc 搜索回调
      */
@@ -185,17 +181,21 @@ export default {
       })
     }
   },
+    onShow() {
+    console.log("onShow");
+      wx.hideTabBar({
+      complete() {
+        console.log('关闭tabbar')
+      }
+    })
+    },
   created() {
     console.log('12312')
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
-    wx.hideTabBar({
-      complete() {
-        console.log('关闭tabbar')
-      }
-    })
+   
   }
 }
 </script>

@@ -14,7 +14,7 @@
       <van-button round plain type="primary" size="mini" v-if="matchStatus">{{matchStatus}}</van-button>
     </van-cell>-->
     <!-- 赛事步骤 -->
-    <van-steps :steps="steps" :active="activeStep" active-color="#f44" />
+    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
 
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchlist.matchTime" />
