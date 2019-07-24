@@ -18,9 +18,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#F4B116",
+    "navigationBarTitleText": "唐球赛事",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999",
@@ -36,7 +36,7 @@
       },
       {
         "text": "唐球馆",
-        "pagePath": "pages/tanghome/main",
+        "pagePath": "pages/venueList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },
@@ -71,5 +71,5 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index"
   },
-  "sitemapLocation": "sitemap97.json"
+  "sitemapLocation": "sitemap24.json"
 }
