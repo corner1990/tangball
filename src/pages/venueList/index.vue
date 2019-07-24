@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
-    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
+    <debug_item path="venueList" v-model="venueList" text="场馆列表" />
 
     <!-- 搜索框 -->
     <div class="searchBox">
