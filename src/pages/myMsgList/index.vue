@@ -6,6 +6,7 @@
       <div class="read-box" :class="!focuss?'masEvolve':''" @click="read">已读</div>
       <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread">未读</div>
     </div>
+<<<<<<< HEAD
     <div class="top-box">
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-show="showSelect" @click="allCheck()">全选</div>
@@ -33,6 +34,9 @@
       </div>
     </div>
     <div class="bottom-box" v-show="showSelect" @click="purification()">删 除</div>
+=======
+    <msg :crowArr="msgg" @newMsgg="moveMsg"></msg>
+>>>>>>> 25aab6196a0a53bd4d544e9a425fd2921780800e
   </div>
 </template>
 <script>
@@ -49,7 +53,7 @@ export default {
   },
   data() {
     return {
-      unreadBox:[],
+      msgg: "",
       focuss: true,
       evolve: "masEvolve",
       crow: [
@@ -72,7 +76,9 @@ export default {
       pageName: "个人中心-系统消息列表"
     };
   },
-
+  created() {
+    this.msgg = this.crow;
+  },
   methods: {
     read() {
       this.focuss = false;
@@ -81,6 +87,9 @@ export default {
     unread() {
       this.focuss = true;
       this.msgg = this.crow;
+    },
+    moveMsg(transmit) {
+      this.crow2 = transmit.newcrow;
     }
   }
 };

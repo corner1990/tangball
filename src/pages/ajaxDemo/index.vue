@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
-    <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名</van-button>
-
+    <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
+    <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
     <div class="data-group" v-for="(item,i) in enrollList" :key="i">
       <div class="data-group-left">数据id:{{item.P1}}-会员id:{{item.memberId}}-赛事id:{{item.matchId}}</div>
       <div class="data-group-right">
@@ -9,27 +9,30 @@
         <van-icon name="edit" size="20px" @click="showDialogEnroll('modify',item.P1)"/>
       </div>
     </div>
-
     <van-dialog
       use-slot
       :title="titleDialog"
       :show="isShowDialogEnroll"
       show-cancel-button
       @confirm="funAfterConfirm"
-      @close="closeDialog"
+      @close="isShowDialogEnroll=false"
     >
       <van-cell-group>
         <div class>
-          赛事id:
-          <input class="n-input" type="text" v-model="formData.matchId">
-        </div>
-        <div class>
-          会员id:
-          <input class="n-input" type="text" v-model="formData.memberId">
+          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
+          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
+          <!-- <van-field :value="formData.matchId" placeholder="赛事id(vant)" @change="changeMatchId"/>
+          -->
+          <my_field v-model="formData.matchId" label="赛事id">
+            <span class>aa</span>
+          </my_field>
+          <my_field v-model="formData.memberId" label="会员id"></my_field>
         </div>
       </van-cell-group>
     </van-dialog>
-    <debug_item path="enrollList" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
+    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
+    <debug_item path="formData" v-model="formData" text="表单数据"/>
+    <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
     <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
     <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
     <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
@@ -42,20 +45,23 @@
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
+import my_field from "@/components/form_item/my_field"; //导入debug_item
 import util from "@/utils/util";
 export default {
   components: {
     card,
     mytabbar,
     debug_item,
-    util
+    util,
+    my_field
   },
   data() {
     return {
+      memberId: 17,
+      myMsgList: null,
+      test: "111",
       titleDialog: "弹窗标题",
-      formData: {
-        matchId: 999
-      },
+      formData: {},
       isShowDialogEnroll: false,
       enrollList: null, //报名列表
       memberDoc: null, //会员详情
@@ -65,17 +71,26 @@ export default {
   },
 
   methods: {
+    changeMatchId(event) {
+      console.log("changeMatchId");
+      console.log(event);
+      let value = event.mp.detail;
+      this.formData.matchId = value;
+    },
     //函数：{弹窗表单确认后执行的函数}
     funAfterConfirm: null,
     async showDialogEnroll(action, dataId) {
       this.isShowDialogEnroll = true;
       //Q1:{新增}
       if (action == "add") {
-        console.log("add");
+        //
+        /**
+         * 需要对属性进行赋值，直接赋值空对象会残留数据，难受
+         * 如果用纯Input则可以
+         */
+        this.formData = { matchId: null, memberId: null };
         this.titleDialog = "新增报名";
         this.funAfterConfirm = this.addAEnroll; //确认后执行的函数
-        this.formData = {};
-
         //Q2:{修改}
       } else if (action == "modify") {
         this.titleDialog = "修改报名";
@@ -144,6 +159,20 @@ export default {
         page: "tangball_enroll",
         pageSize: 5
       });
+    },
+    //函数：{ajax获取消息列表函数}
+    async ajaxMsgList() {
+      //ajax获取消息列表
+      this.myMsgList = await util.ajaxGetList({
+        page: "tangball_msg",
+        pageSize: 999,
+        findJson: {
+          //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
+          $or: [{ range: 1 }, { range: 2, memberIdList: 17 }]
+        }
+        // sortJson: { publishTime: -1 }, //排序条件
+        // selectJson: { name: 1, entries: 1 } //只返回指定字段
+      });
     }
   },
   created() {},
@@ -155,11 +184,12 @@ export default {
     //ajax获取会员列表
     this.memberList = await util.ajaxGetList({
       page: "tangball_member",
-      pageSize: 5,
+      pageSize: 1,
       findJson: { sex: 1 }, //查询条件
       sortJson: { entries: -1 }, //排序条件
-      selectJson: { name: 1, entries: 1 } //只返回指定字典
+      selectJson: { name: 1, entries: 1 } //只返回指定字段
     });
+
     this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
   }
 };
