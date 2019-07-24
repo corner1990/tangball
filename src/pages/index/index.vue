@@ -212,4 +212,7 @@ export default {
 .card {
   margin: 0 10px;
 }
+.slide-image{
+  width: 100%
+}
 </style>
