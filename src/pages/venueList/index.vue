@@ -26,7 +26,7 @@
       :key="i"
       :itemshow="item.show"
     ></venueListComponent>
-    <mytabbar></mytabbar>
+   <mytabbar :active="1"></mytabbar>
   </div>
 </template>
 <script>
