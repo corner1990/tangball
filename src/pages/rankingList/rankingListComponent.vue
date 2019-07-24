@@ -14,19 +14,18 @@
 /* eslint-disable */
 export default {
   components: {},
-  props: ["cf", "value","ranking"],
+  props: ["cf", "value", "ranking"],
   data() {
     return {
-      cfList: {
-        //默认排序参数
-        sortJsonDefault: {
-          "item.entries": 1
-        }
-      }
+      // cfList: {
+      // //默认排序参数
+      // sortJsonDefault: {
+      //   "item.entries": 1
+      // }
+      // }
     };
   },
-  components: {},
-
+  components: {}
 };
 </script>
 
