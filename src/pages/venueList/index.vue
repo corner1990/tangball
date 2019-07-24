@@ -115,7 +115,7 @@ export default {
   width: 100%;
   height: 30px;
   padding: 10px;
-  background-color: #f8b432;
+  background-color: #F4B116;
   position: fixed;
   top: 0;
   left: 0;
@@ -132,7 +132,6 @@ export default {
 .searchBox div {
   width: 10%;
   height: 30px;
-  border-radius: 10px;
   text-align: center;
   float: left;
   margin-left: 5px;

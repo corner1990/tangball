@@ -80,7 +80,7 @@ export default {
 
 <style>
 .select-city-box {
-  margin-top: 35px;
+  margin-top: 40px;
   height: 100%;
 
 }
