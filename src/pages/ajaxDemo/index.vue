@@ -42,6 +42,7 @@
 </template>
 <script>
 /* eslint-disable */
+import lodash from "lodash";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
@@ -177,6 +178,7 @@ export default {
   },
   created() {},
   async mounted() {
+    console.log("lodash", lodash);
     //ajax获取单个会员数据
     this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
     //ajax获取单个赛事数据
