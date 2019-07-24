@@ -2,6 +2,8 @@
   <div class="main-wrap">
     <debug_item v-model="memberList" text="会员列表" />
     <debug_item v-model="achievementList" text="会员列表" />
+    <pageLink :config="{}"></pageLink>
+
     <div class="button-center">
       <!-- ----参赛次数、成绩排名、鸟王排名、积分排名等按钮--- -->
       <van-button
@@ -20,16 +22,16 @@
         <div class="ranking-title">排名</div>
         <div class="ranking-title">{{doc+"名字"}}</div>
         <div class="ranking-title">{{activeTitle}}</div>
-
-        <rankingListcomponent
+        <rankingListComponent
           v-for="(each,j) in memberList[sexIndex - 1].list "
           :ranking="j+1"
           :cf="each"
           :value="arrList[rankingIndex].value"
           :key="j"
-        ></rankingListcomponent>
+        ></rankingListComponent>
       </van-tab>
     </van-tabs>
+
     <div class="bottom-space"></div>
     <mytabbar></mytabbar>
   </div>
@@ -38,14 +40,16 @@
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-import rankingListcomponent from "./rankingListComponent";
+import rankingListComponent from "./rankingListComponent";
+import pageLink from "./pageLink";
 import util from "@/utils/util";
 
 export default {
   components: {
     mytabbar,
     debug_item,
-    rankingListcomponent
+    rankingListComponent,
+    pageLink
   },
   data() {
     return {
@@ -67,7 +71,7 @@ export default {
         },
         {
           name: "积分排名",
-          title: "积分",
+          title: "积分排名",
           value: ["name", "integral"]
         }
       ],
@@ -105,8 +109,8 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
-          pageSize: 50, //每页50条数据
-          sortJson1: { entries: 1, integral: 1 }
+          pageSize: 20, //每页20条数据
+          sortJson: { entries: -1, integral: -1 }
         }
       });
 
@@ -123,8 +127,8 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_achievement",
         param: {
-          pageSize: 50, //每页50条数据
-          sortJson2: { matchScore: -1 }
+          pageSize: 20, //每页20条数据
+          sortJson: { matchScore: -1 }
         }
       });
       this.achievementList = data.list;
@@ -133,6 +137,7 @@ export default {
 
   beforeMount() {
     console.log("唐球达人-created");
+    this.sexIndex = 1; //初始化性别
     this.getMemberList(); //获取会员列表
   }
 };
