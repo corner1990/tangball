@@ -14,7 +14,9 @@
     "pages/usercenter/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main"
+    "pages/myErollDetail/main",
+    "pages/articleList/main",
+    "pages/articleDetail/main"
     
   ],
   "window": {
