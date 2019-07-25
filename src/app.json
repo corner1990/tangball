@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
     "pages/index/main",
     "pages/myMsgList/main",
     "pages/matchList/main",
-    "pages/ajaxDemo/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
