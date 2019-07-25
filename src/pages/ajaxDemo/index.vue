@@ -230,7 +230,7 @@ export default {
       console.log("this.venuList1", this.venuList);
 
   
-  await util.timeout(3500); //延迟
+  // await util.timeout(3500); //延迟
 
       this.venuList = await util.ajaxPopulate({
         listData: this.venuList,
