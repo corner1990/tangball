@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
-    <debug_item path="venueList" v-model="venueList" text="场馆列表" />
+    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
 
     <!-- 搜索框 -->
     <div class="searchBox">
@@ -16,7 +16,7 @@
 
     <!-- 赛事场馆列表组件 -->
     <venueListComponent
-      :area="item.area"
+      :cityDoc="item.cityDoc"
       :title="item.name"
       :phone="item.phoneNumber"
       :address="item.address"
@@ -26,7 +26,7 @@
       :key="i"
       :itemshow="item.show"
     ></venueListComponent>
-   <mytabbar :active="1"></mytabbar>
+    <mytabbar :active="1"></mytabbar>
   </div>
 </template>
 <script>
@@ -67,36 +67,70 @@ export default {
         }
       });
     },
+    // async search(areaId) {
+    //   if (areaId) {
+    //     this.selectIndex = 0;
+    //   } else {
+    //     this.selectIndex = -1;
+    //   }
+
+    //   let { data } = await util.ajaxGetListPopulate({
+    //     url: global.PUB.domain + "/crossListRelation",
+    //     param: {
+    //       needRelation: "1",
+    //       columnItem: "P7",
+    //       columnTarget: "area",
+    //       sheetRelation: {
+    //         page: "dmagic_area",
+    //         findJson: {
+    //           P8: areaId
+    //         }
+    //       },
+    //       sheetTarget: {
+    //         page: "tangball_venue",
+    //         pageSize: "9999",
+    //         populate: [
+    //           {
+    //             populateColumn: "cityDoc",
+    //             idColumn: "area",
+    //             idKeyColumn: "P7",
+    //             page: "dmagic_area"
+    //           }
+    //         ]
+    //       }
+    //     }
+    //   });
+    //   data.list.forEach(item => {
+    //     item.show = true;
+    //   });
+    //   this.venueList = data.list;
+    //   console.log("this.venueList", this.venueList);
+    // }
+
+    //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
       } else {
         this.selectIndex = -1;
       }
-
-      let { data } = await util.post({
-        url: global.PUB.domain + "/crossListRelation",
-        param: {
-          needRelation: "1",
-          columnItem: "P7",
-          columnTarget: "area",
-          sheetRelation: {
-            page: "dmagic_area",
-            findJson: {
-              P8: areaId
-            }
-          },
-          sheetTarget: {
-            page: "tangball_venue",
-            pageSize: "9999",
-            findJson: {}
+      let list = await util.ajaxGetListPopulate({
+        page: "tangball_venue",
+        pageSize: 100,
+        populate: [
+          {
+            populateColumn: "cityDoc",
+            idColumn: "area",
+            idKeyColumn: "P7",
+            page: "dmagic_area"
           }
-        }
+        ]
       });
-      data.list.forEach(item => {
+      list.forEach(item => {
         item.show = true;
       });
-      this.venueList = data.list;
+      this.venueList = list;
+      console.log("this.venueList", this.venueList);
     }
   },
   mounted() {
@@ -115,7 +149,7 @@ export default {
   width: 100%;
   height: 30px;
   padding: 10px;
-  background-color: #F4B116;
+  background-color: #f4b116;
   position: fixed;
   top: 0;
   left: 0;

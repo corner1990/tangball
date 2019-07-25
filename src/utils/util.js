@@ -1,4 +1,5 @@
 /* eslint-disable */
+import lodash from "lodash";
 function formatTime(timeteamp) {
   var date = new Date(timeteamp)
   var year = date.getFullYear()
@@ -131,11 +132,9 @@ function getRequest(url, data) {
  */
 function postRequest(json) {
   let { url, param } = json;
-  console.log("postRequest####");
   var postRequest = wxPromisify(wx.request)
   // param = parseParam(param); //调用：{将json转成url参数形式},
   var strParam = JSON.stringify(param);//变量定义：{Json对象转换Json字符串函数}
-  console.log("param###", param);
   return postRequest({
     url: url,
     method: 'POST',
@@ -211,7 +210,6 @@ function getQuery() {
 //ajax获取单条数据详情的函数
 async function ajaxGetDoc(_json) {
   let { page, id } = _json;
-  console.log("ajaxGetDoc");
   let { data } = await postRequest({
     url: global.PUB.domain + `/crossDetail?page=${page}`,
     param: {
@@ -235,6 +233,110 @@ async function ajaxGetList(_json) {
 
 
 }
+
+
+
+
+
+
+//ajax获取数据列表的函数
+async function ajaxGetListPopulate(_json) {
+  console.log("ajaxGetListPopulate-1");
+  let { populate } = _json;
+  let listData;//变量：{最终需要返回的列表}
+  {
+    //第一次ajax请求数据
+    let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
+    let { data } = await postRequest({
+      url: global.PUB.domain + `/crossList?page=${page}`,
+      param: {
+        findJson, selectJson, sortJson, pageIndex, pageSize
+      }
+    });
+    listData = data.list;
+  }
+
+
+
+
+/**
+ * 根据填充配置进行一次ajax请求关联数据并进行拼装的函数
+ * 
+ */
+  
+  let funPopulate = async function (populateConfig) {
+    console.log("funPopulate@@");
+    let { page, populateColumn, idColumn, idKeyColumn } = populateConfig;
+
+    let arrId = [];
+    listData.forEach(itemEach => {//循环：{原数据数组}
+      if (itemEach[idColumn]) {//如果{000}000
+        arrId.push(itemEach[idColumn])
+      }
+    })
+
+    //变量：{填充查询条件}
+    let findJson = {
+      [idKeyColumn]: {
+        "$in": arrId
+      }
+    }
+
+
+    let { data } = await postRequest({
+      url: global.PUB.domain + `/crossList?page=${page}`,
+      param: {
+        findJson, pageSize: 999
+      }
+    });
+
+    var dict = lodash.keyBy(data.list, idKeyColumn)
+    listData.forEach(itemEach => {//循环：{原数据数组}
+      let key = itemEach[idColumn];//字典key值
+      itemEach[populateColumn] = dict[key]
+    })
+  }
+
+
+
+
+/**
+ * 循环填充配置数组，请求关联数据，并进行拼装
+ * 
+ */
+
+  if (populate) {//如果{填充配置数组}存在.
+    // let populate0 = populate[0]
+    // populate.forEach(async populateCFEach => {//循环异步操作：{填充配置数组}
+    //   await funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
+
+    // })
+
+    for await (const populateCFEach of populate) {
+      await   funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
+    }
+
+
+
+
+  }
+
+
+
+
+
+
+  console.log("listData###", listData);
+  console.log("ajaxGetListPopulate-3");
+
+
+
+
+  return listData
+
+}
+
+
 
 
 //ajax删除一条数据的函数
@@ -266,7 +368,6 @@ async function ajaxModify(_json) {
 
 //ajax新增数据的函数
 async function ajaxAdd(_json) {
-  console.log("ajaxAdd");
   let { page, data } = _json;
   return await postRequest({
     url: global.PUB.domain + `/crossAdd?page=${page}`,
@@ -304,6 +405,6 @@ export default {
   formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList,
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate,
   ajaxAdd, ajaxModify, ajaxDelete, showModal
 }
