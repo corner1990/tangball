@@ -122,7 +122,9 @@ export default {
 
         { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" },
         { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" },
-        { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }
+        { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" },
+        { "title": "文章列表", "url": "/pages/articleList/main" },
+        { "title": "文章详情", "url": "/pages/articleDetail/main" }
 
       ],
       motto: 'Hello miniprograme',
@@ -211,5 +213,8 @@ export default {
 }
 .card {
   margin: 0 10px;
+}
+.slide-image{
+  width: 100%
 }
 </style>

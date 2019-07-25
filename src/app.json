@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
+    "pages/index/main",
     "pages/myMsgList/main",
     "pages/matchList/main",
-    "pages/ajaxDemo/main",
     "pages/venueList/main",
-    "pages/index/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
@@ -14,7 +14,9 @@
     "pages/usercenter/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main"
+    "pages/myErollDetail/main",
+    "pages/articleList/main",
+    "pages/articleDetail/main"
     
   ],
   "window": {
