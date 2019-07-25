@@ -16,7 +16,8 @@
     "pages/myEroll/main",
     "pages/myErollDetail/main",
     "pages/articleList/main",
-    "pages/articleDetail/main"
+    "pages/articleDetail/main",
+    "pages/myInfo/main"
     
   ],
   "window": {
