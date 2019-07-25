@@ -73,8 +73,7 @@ export default {
     //   } else {
     //     this.selectIndex = -1;
     //   }
-
-    //   let { data } = await util.ajaxGetListPopulate({
+    //   let { data } = await util.post({
     //     url: global.PUB.domain + "/crossListRelation",
     //     param: {
     //       needRelation: "1",
@@ -89,14 +88,7 @@ export default {
     //       sheetTarget: {
     //         page: "tangball_venue",
     //         pageSize: "9999",
-    //         populate: [
-    //           {
-    //             populateColumn: "cityDoc",
-    //             idColumn: "area",
-    //             idKeyColumn: "P7",
-    //             page: "dmagic_area"
-    //           }
-    //         ]
+    //         findJson:{}
     //       }
     //     }
     //   });
