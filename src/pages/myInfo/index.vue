@@ -143,11 +143,11 @@ export default {
           modifyJson:this.memberMessage
         }
       });
-      wx.showToast({
+      wx.switchTab({url:"/pages/index/main"})
+       wx.showToast({
       title: '修改成功',
       icon: 'success'
     })
-      wx.switchTab({url:"/pages/index/main"})
   }
   },
   mounted(){
