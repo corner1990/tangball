@@ -34,7 +34,8 @@ export default {
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+            // url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
+             url: 'https://www.dmagic.cn/paicheng/getOpenId',
             method: 'post',
             data: {
               code: res.code

@@ -1,6 +1,11 @@
 <template>
-  <div class="main-wrap">
-      <web-view :src="url"></web-view>
+  <div class="main-wrap" v-if="ready" >
+    <web-view :src="wxArticleUrl" v-if="wxArticleUrl"></web-view>
+    <div class v-else>
+      <debug_item v-model="wxArticleUrl" text="微信url" />
+      <debug_item v-model="pageName" text="页面名称" />
+      <debug_item v-model="dataId" text="数据id传参" />
+    </div>
   </div>
 </template>
 <script>
@@ -9,29 +14,29 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 
 import util from "@/utils/util";
+
 export default {
   components: {
-  
     mytabbar,
-    debug_item,
-    util,
-    
+    debug_item
   },
   data() {
     return {
-      url: "https://mp.weixin.qq.com/s/Mg_56G3EXofBa89fk8NsIQ",
-      myMsgList: null,
-     
+      ready:false,
+      wxArticleUrl: null,
+      dataId: null,
+      pageName: "文章详情"
     };
   },
 
-  methods: {
-    
-    
-  },
-  created() {},
-  async mounted() {
-    
+  methods: {},
+  mounted() {
+    let param = util.getQuery(); //获取页面参数
+    console.log("param", param);
+
+    this.dataId = param.dataId;
+    this.wxArticleUrl = param.wxArticleUrl;
+    this.ready=true;
   }
 };
 </script>

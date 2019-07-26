@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "ajax请求接口Demo",
+  "navigationBarTitleText": "文章详情",
   "usingComponents": {
     "van-search": "/static/vant/search/index",
     "van-card": "/static/vant/card/index",
