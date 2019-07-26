@@ -58,7 +58,6 @@ export default {
       this.crow2.push(transmit.newcrow.unreadBox);
       if (this.transform) {
         this.setReadStatus({ memberId: this.memberId, msgId: this.msgId });
-        console.log("添加已读被触发了");
       }
     },
     closeDoor(close) {
@@ -130,7 +129,6 @@ export default {
           modifyJson: { memberId, msgId }
         }
       });
-      console.log("setReadStatus我请求了");
     }
   }
 };
@@ -141,6 +139,7 @@ export default {
   padding-bottom: 100px;
 }
 .top-box {
+  margin-top: 8px;
   height: 35px;
   background: white;
   position: relative;
