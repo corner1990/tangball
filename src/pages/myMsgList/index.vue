@@ -1,12 +1,11 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="pageName" text="页面名称" />
     <mytabbar></mytabbar>
     <div class="top-box">
       <div class="read-box" :class="!focuss?'masEvolve':''" @click="read">已读</div>
       <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread">未读</div>
     </div>
-    <msg :crowArr="msgg" @newMsgg="moveMsg"></msg>
+    <msg :transformm="transform" :crowArr="msgg" @newMsgg="moveMsg" @spliceMsgg="closeDoor"></msg>
   </div>
 </template>
 <script>
@@ -14,6 +13,8 @@
 import msg from "@/pages/myMsgList/msg";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
+import util from "@/utils/util";
+import lodash from "lodash"; //导入lodash方法库
 
 export default {
   components: {
@@ -23,43 +24,113 @@ export default {
   },
   data() {
     return {
-      msgg: "",
+      transform: true,
+      memberId: 17,
+      msgId: null,
+      myMsgList: null,
+      myMsgRead: null,
+      dictMsgRead: null,
+      msgg0: [],
+      msgg: [],
       focuss: true,
       evolve: "masEvolve",
-      crow: [
-        {
-          id: "1",
-          name: "发信人1",
-          mas:
-            "这是一很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的消息1"
-        },
-        { id: "2", name: "发信人2", mas: "这是消息2" },
-        { id: "3", name: "发信人3", mas: "这是消息3" },
-        { id: "4", name: "发信人4", mas: "这是消息4" },
-        { id: "5", name: "发信人5", mas: "这是消息5" },
-        { id: "6", name: "发信人6", mas: "这是消息6" },
-        { id: "7", name: "发信人7", mas: "这是消息7" },
-        { id: "8", name: "发信人8", mas: "这是消息8" },
-        { id: "9", name: "发信人9", mas: "这是消息9" }
-      ],
       crow2: [],
       pageName: "个人中心-系统消息列表"
     };
   },
   created() {
-    this.msgg = this.crow;
+    this.getMyMsgList(); //调用：{000函数}
   },
   methods: {
     read() {
       this.focuss = false;
       this.msgg = this.crow2;
+      this.transform = false;
     },
     unread() {
       this.focuss = true;
-      this.msgg = this.crow;
+      this.msgg = this.msgg0;
+      this.transform = true;
     },
     moveMsg(transmit) {
-      this.crow2 = transmit.newcrow;
+      this.msgId = transmit.newcrow.msgId;
+      console.log("次数", this.msgId)
+      this.crow2.push(transmit.newcrow.unreadBox);
+      if (this.transform) {
+        this.setReadStatus({ memberId: this.memberId, msgId: this.msgId });
+        console.log("添加已读被触发了");
+      }
+    },
+    closeDoor(close) {
+      this.gant = close.spliceCrow.gant;
+      if (close.spliceCrow.door) {
+        this.crow2.splice(this.gant, 1);
+      } else {
+        this.msgg0.splice(this.gant, 1);
+      }
+    },
+    async getMyMsgList(_json) {
+      let { data } = await util.post({
+        //请求接口
+        url: global.PUB.domain + "/crossList?page=tangball_msg ",
+        param: {
+          findJson: {
+            //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
+            $or: [{ range: 1 }, { range: 2, memberIdList: this.memberId }]
+          }
+        } //传递参数
+      });
+      {
+        let { data } = await util.post({
+          //请求接口
+          url: global.PUB.domain + "/crossList?page=tangball_msg_read",
+          param: {
+            findJson: {
+              memberId: this.memberId
+            }
+          } //传递参数
+        });
+        this.myMsgRead = data.list;
+      }
+      // this.dictMsgRead = {}; //消息阅读记录的数据字典对象
+      // this.myMsgRead.forEach(msgReadEach => {
+      //   //循环：{消息阅读记录数组}
+      //   this.dictMsgRead[msgReadEach.msgId] = msgReadEach;
+      // });
+      //使用lodash.keyBy制作数据字典
+      this.dictMsgRead = lodash.keyBy(this.myMsgRead, "msgId");
+      //循环：{消息数组}
+      data.list.forEach(msgEach => {
+        let docRead = this.dictMsgRead[msgEach.P1]; //变量：{当前消息对应的已读记录}
+        //如果{当前消息对应的已读记录}存在，表00.示已读
+        if (docRead) {
+          msgEach.isRead = true; //已读
+          msgEach.readTime = docRead.readTime;
+          this.crow2.push(msgEach);
+        } else {
+          msgEach.isRead = false; //未读
+          this.msgg0.push(msgEach);
+        }
+      });
+      this.myMsgList = data.list;
+      this.msgg = this.msgg0;
+    },
+    /**
+     * 函数：{设置消息已读状态的函数}
+     * 往消息已读状态记录表更新一条记录,如果该记录不存在则新增
+     *
+     */
+    async setReadStatus(_json) {
+      let { memberId, msgId } = _json;
+      await util.post({
+        //请求接口
+        url: global.PUB.domain + "/crossModify?page=tangball_msg_read",
+        param: {
+          findJson: { memberId, msgId },
+          modifyJson: { memberId, msgId }
+        }
+      });
+      console.log("setReadStatus我请求了");
     }
   }
 };
@@ -94,6 +165,7 @@ export default {
   left: 0px;
 }
 .masEvolve {
-  background-color: #f5f5f5;
+  background-color: #F4B116;
+  color: #FFFFFF;
 }
 </style>
