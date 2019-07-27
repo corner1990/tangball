@@ -24,42 +24,54 @@ export default {
   },
   data() {
     return {
-      transform: true,
-      memberId: 17,
-      msgId: null,
-      myMsgList: null,
-      myMsgRead: null,
-      dictMsgRead: null,
-      msgg0: [],
-      msgg: [],
-      focuss: true,
-      evolve: "masEvolve",
-      crow2: [],
-      pageName: "个人中心-系统消息列表"
+      transform: true,//传递向子组件告知已读未读的状态值
+      memberId: 19,//用户id
+      msgId: null,//传递给接口的消息id
+      myMsgList: null,//传递接口的消息列表
+      myMsgRead: null,//传递接口的已读消息列表
+      dictMsgRead: null,//传递接口的已读消息数字字典
+      msgg0: [],//未读数组
+      msgg: [],//传递向子组件的数组值
+      focuss: true,//已读未读聚焦
+      evolve: "masEvolve",//按钮聚焦样式
+      crow2: [],//已读数组
+      pageName: "个人中心-系统消息列表"//页面名
     };
   },
   created() {
-    this.getMyMsgList(); //调用：{000函数}
+    //在创建后调用一次消息列表接口接口
+    // 将数据分别加载至页面假数组中，其中在未读时点击会向已读接口传递数据
+    this.getMyMsgList(); 
   },
   methods: {
+    // 已读按钮
+    // 此处控制按钮focuss聚焦，并且传递向子组件的值
+    // msgg值控制子组件显示的为哪个数组
+    // transform值告知子组件处于何种状态，触发监听器
     read() {
       this.focuss = false;
       this.msgg = this.crow2;
       this.transform = false;
     },
+    // 未读按钮
     unread() {
       this.focuss = true;
       this.msgg = this.msgg0;
       this.transform = true;
     },
+// 被子组件$emit触发的方法1，将子组件被点击的未读消息的id传递到父组件
+// 触发已读消息接口，传递已读的消息id
+// 并且修改页面未读消息数组，将页面被点击的已读移动至未读（此处只修改未读，已读在子组件修改）
     moveMsg(transmit) {
       this.msgId = transmit.newcrow.msgId;
-      console.log("次数", this.msgId)
       this.crow2.push(transmit.newcrow.unreadBox);
       if (this.transform) {
         this.setReadStatus({ memberId: this.memberId, msgId: this.msgId });
       }
     },
+    // 被子组件$emit触发的方法2，解决用户未点击消息确定就切换已读未读按钮，导致消息数组无法正确删除的问题
+    // 子组件会传递被点击的消息的index（gant）进来，
+    // 然后判断目前是切换至已读还是未读，然后删除相应的假数组的数据
     closeDoor(close) {
       this.gant = close.spliceCrow.gant;
       if (close.spliceCrow.door) {
@@ -68,6 +80,7 @@ export default {
         this.msgg0.splice(this.gant, 1);
       }
     },
+// 这里是消息列表的接口，此接口只在页面创建后加载一次，将数据加载至页面已读未读的假数组中
     async getMyMsgList(_json) {
       let { data } = await util.post({
         //请求接口
@@ -105,20 +118,22 @@ export default {
         if (docRead) {
           msgEach.isRead = true; //已读
           msgEach.readTime = docRead.readTime;
-          this.crow2.push(msgEach);
+          this.crow2.push(msgEach);//加载数据至已读接口
         } else {
           msgEach.isRead = false; //未读
-          this.msgg0.push(msgEach);
+          this.msgg0.push(msgEach);//加载数据至未读接口
         }
       });
       this.myMsgList = data.list;
-      this.msgg = this.msgg0;
+      this.msgg = this.msgg0;//页面加载后使子组件默认显示未读数组
     },
     /**
      * 函数：{设置消息已读状态的函数}
      * 往消息已读状态记录表更新一条记录,如果该记录不存在则新增
      *
      */
+    //已读数据接口，在页面加载后，只会在未读消息被点击时才会向页面传递当前消息的id，
+    // 将后端接口的消息更改为已读
     async setReadStatus(_json) {
       let { memberId, msgId } = _json;
       await util.post({

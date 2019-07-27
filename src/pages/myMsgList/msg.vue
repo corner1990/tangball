@@ -37,28 +37,34 @@
 /* eslint-disable */
 
 export default {
-  components: {},
   props: {
+    //父组件传入的当前对应已读或未读的数组
     crowArr: {
       type: Array,
       default: []
     },
+//父组件传入，告知子组件此时按钮聚焦为已读或者是未读状态，
+//用于触发子组件的监听器
     transformm: {
       type: Boolean
     }
   },
   data() {
     return {
-      unreadBox: [],
-      msgId: null,
-      gant: {},
-      checkedList: [],
-      showcompile: true,
-      checked: false,
-      showSelect: false,
-      showcontent: false
+      unreadBox: [],//在$emit触发时，传递给父组件当前被选中的未读消息的对应数组数据，使父组件能在已读假数组中添加对应数据
+      msgId: null,//当前被点击的消息id，通过$emit传递给父组件
+      gant: {},//当前被点击消息的index值
+      checkedList: [],//暂存全选true和false状态的数组
+      showcompile: true,//判断编辑按钮显隐
+      checked: false,//多选时复选框默认的状态
+      showSelect: false,//全选，复选框，及确认已读按钮显隐
+      showcontent: false//消息列表显隐
     };
   },
+  //监听器：通过监听父组件传进来的已读未读状态触发
+  // 首先会默认触发全选，将复选框的值全转为false
+  //然后判断消息弹窗是否显隐，如未隐藏则会判断此父组件传入的transformm值，判断是切换至已读还是未读
+  //最后根据transformm值传递给父组件当前消息的index值和此时消息弹窗的位置，使父组件相应的修改已读或未读
   watch: {
     transformm: function(nval, oval) {
       this.allCheck();
@@ -76,6 +82,10 @@ export default {
     }
   },
   methods: {
+    //全部已读确认按钮
+    // 按钮首先判断未读消息列表复选框的true和false状态
+    //然后将true状态的消息的id和内容传递给父组件并触发已读接口
+   //但目前似乎是请求速度过快，导致全选后虽然有传递数据，但有时会丢失数据
     purification() {
       for (let i = this.crowArr.length - 1; i >= 0; i--) {
         if (this.checkedList[i]) {
@@ -91,6 +101,7 @@ export default {
       }
       this.compile();
     },
+    // 全选按钮
     allCheck() {
       for (let i = 0; i < this.checkedList.length; i++) {
         if (this.checked) {
@@ -101,15 +112,18 @@ export default {
       }
       this.checked = !this.checked;
     },
+    // 消息列表点击按钮
     del(index) {
       this.checkedList[index] = !this.checkedList[index];
     },
+    //编辑按钮，当为已读时不显示
     compile() {
       if (this.showcontent) {
       } else {
         this.showSelect = !this.showSelect;
       }
     },
+    // 消息列表按钮，点击会向父件传值，触发事件
     content(index, msgId) {
       this.gant = index;
       this.msgId = msgId;
@@ -122,6 +136,7 @@ export default {
         this.$emit("newMsgg", transmit);
       }
     },
+    // 消息弹窗确定按钮
     shut(gant, msgId) {
       this.showcontent = false;
       this.showcompile = true;
