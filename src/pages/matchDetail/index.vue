@@ -37,7 +37,7 @@
       <van-cell title="已报名人数" :value="matchlist.registeredPersons" />
     </van-cell-group>
 
-    <van-button size="large" type="primary" @click="gotoPage(url)">{{enrollText}}</van-button>
+    <van-button size="large" type="primary" @click="gotoPage(url)" :disabled="status" >{{enrollText}}</van-button>
     <mytabbar></mytabbar>
   </div>
 </template>
