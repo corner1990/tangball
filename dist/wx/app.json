@@ -3,9 +3,12 @@
     "pages/myMsgList/main",
     "pages/myInfo/main",
     "pages/ajaxDemo/main",
+<<<<<<< HEAD
+=======
     "pages/index/main",
     
     "pages/matchList/main",
+>>>>>>> 98747219ad3264a7df7aea02d14c267f94574346
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
@@ -75,7 +78,13 @@
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
+<<<<<<< HEAD
+    "van-dialog": "/static/vant/dialog/index"
+  },
+  "sitemapLocation": "sitemap34.json"
+=======
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
   }
+>>>>>>> 98747219ad3264a7df7aea02d14c267f94574346
 }
