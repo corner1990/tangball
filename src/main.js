@@ -1,7 +1,6 @@
 /* eslint-disable */
 global.PUB={}
-  // global.PUB.domain="http://120.76.160.41:3000" 
-  global.PUB.domain="https://www.dmagic.cn" 
+  global.PUB.domain="http://120.76.160.41:3000" 
 //global.PUB.domain="http://localhost:3000"
 
 
@@ -12,7 +11,6 @@ import './css/public.css'
 
 // import debug_item from '@/components/common/debug_item/index.js';   //导入debug_item
 // Vue.use(debug_item);   //作为全局组件，必须有install
-
 
 
 

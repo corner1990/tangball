@@ -1,13 +1,5 @@
 <template>
   <div class="main-wrap">
-
-  <debug_item v-model="wxArticleList" text="公众号文章列表"/>
-   <div class="data-group" v-for="(item,i) in wxArticleList" :key="i" @click="gotoPage(`/pages/articleDetail/main?dataId=${item.P1}&wxArticleUrl=${item.extend?item.extend.wxArticleUrl:''}`)">
-      {{item.P1}}-{{item.articleTitle}}-
-     
-    </div>
-
-    
     <van-button type="primary" size="small" @click="ajaxVenueList">获取场馆列表</van-button>
     <van-button type="primary" size="small" @click="ajaxVenueList2">获取场馆列表2</van-button>
     <div class="data-group" v-for="(item,i) in venuList" :key="i" v>
@@ -18,7 +10,7 @@
       <span class="C_f30" v-if="item.cityDoc2">cityDoc2</span>
       {{item.area}}
     </div>
-    <debug_item  v-model="venuList" text="场馆列表"/>
+    <debug_item path="venuList" v-model="venuList" text="场馆列表"/>
 <p class="H50 OF2 CL1 "></p>
     <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
     <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
@@ -79,7 +71,6 @@ export default {
   },
   data() {
     return {
-       wxArticleList: null, //文章列表
       venuList: null, //场馆列表
       memberId: 17,
       myMsgList: null,
@@ -95,11 +86,6 @@ export default {
   },
 
   methods: {
-    gotoPage(url) {
-      console.log("gotoPage");
-      // let url="/pages/tanghome/main";
-      wx.navigateTo({ url });
-    },
     changeMatchId(event) {
       console.log("changeMatchId");
       console.log(event);
@@ -282,16 +268,6 @@ export default {
       sortJson: { entries: -1 }, //排序条件
       selectJson: { name: 1, entries: 1 } //只返回指定字段
     });
-
-
-
-//ajax获取文章列表
-    this.wxArticleList = await util.ajaxGetList({
-      page: "tangball_article",
-      pageSize: 10,
-      findJson: { "articleCategory": 3 }, //查询条件
-    });
-
 
     this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
   }

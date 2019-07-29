@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/myMsgList/main",
+    "pages/myInfo/main",
     "pages/ajaxDemo/main",
     "pages/index/main",
-    "pages/myMsgList/main",
+    
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
@@ -16,8 +18,9 @@
     "pages/myEroll/main",
     "pages/myErollDetail/main",
     "pages/articleList/main",
-    "pages/articleDetail/main",
-    "pages/myInfo/main"
+    "pages/articleDetail/main"
+    
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -72,7 +75,7 @@
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
-    "van-dialog": "/static/vant/dialog/index"
-  },
-  "sitemapLocation": "sitemap.json"
+    "van-dialog": "/static/vant/dialog/index",
+    "van-picker": "/static/vant/picker/index"
+  }
 }

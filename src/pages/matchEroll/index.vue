@@ -115,8 +115,7 @@ export default {
       }
       const self = this;
       wx.request({
-        // url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
-        url: 'https://www.dmagic.cn/paicheng/getCode',
+        url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
         data,
         method: 'post',
         success (res) {
