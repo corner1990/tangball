@@ -1,10 +1,15 @@
 {
   "pages": [
     "pages/myMsgList/main",
-    "pages/matchList/main",
+    "pages/myInfo/main",
     "pages/ajaxDemo/main",
-    "pages/venueList/main",
+<<<<<<< HEAD
+=======
     "pages/index/main",
+    
+    "pages/matchList/main",
+>>>>>>> 98747219ad3264a7df7aea02d14c267f94574346
+    "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
@@ -14,13 +19,17 @@
     "pages/usercenter/main",
     "pages/rankingList/main",
     "pages/myEroll/main",
-    "pages/myErollDetail/main"
+    "pages/myErollDetail/main",
+    "pages/articleList/main",
+    "pages/articleDetail/main"
+    
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#F4B116",
+    "navigationBarTitleText": "唐球赛事",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999",
@@ -36,7 +45,7 @@
       },
       {
         "text": "唐球馆",
-        "pagePath": "pages/tanghome/main",
+        "pagePath": "pages/venueList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },
@@ -69,7 +78,13 @@
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
+<<<<<<< HEAD
     "van-dialog": "/static/vant/dialog/index"
   },
   "sitemapLocation": "sitemap34.json"
+=======
+    "van-dialog": "/static/vant/dialog/index",
+    "van-picker": "/static/vant/picker/index"
+  }
+>>>>>>> 98747219ad3264a7df7aea02d14c267f94574346
 }

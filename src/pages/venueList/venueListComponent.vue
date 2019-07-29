@@ -1,12 +1,13 @@
 <template>
   <div class="main-venue" v-if="itemshow">
+    
     <navigator :url="'/pages/venueDetail/main?id='+P1">
       <div class="FL">
         <img class="venue-imgbox" v-if="album&&album.length" :src="album[0].url" />
       </div>
       <div class="venue-textbox">
         <div>
-          <span class="C_999">【{{area}}】</span>
+          <span class="C_999" v-if="cityDoc">【{{cityDoc.P2}}】</span>
           <span>{{title}}</span>
         </div>
         <div>电话:{{phone}}</div>
@@ -25,7 +26,7 @@ export default {
   data() {
     return {};
   },
-  props: ["area", "title", "phone", "address", "album", "P1", "itemshow"],
+  props: ["cityDoc", "title", "phone", "address", "album", "P1", "itemshow"],
   components: {},
   methods: {},
   created() {},

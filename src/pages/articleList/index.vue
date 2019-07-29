@@ -1,17 +1,6 @@
 <template>
   <div class="main-wrap">
-    <van-button type="primary" size="small" @click="ajaxVenueList">获取场馆列表</van-button>
-    <van-button type="primary" size="small" @click="ajaxVenueList2">获取场馆列表2</van-button>
-    <div class="data-group" v-for="(item,i) in venuList" :key="i" v>
-      {{item.P1}}-{{item.name}}-
-      <span class="C_f30" v-if="item.cityDoc">{{item.cityDoc.P2}}</span>
-      <span class="C_f30" v-else>{{item.area}}</span>
-
-      <span class="C_f30" v-if="item.cityDoc2">cityDoc2</span>
-      {{item.area}}
-    </div>
-    <debug_item path="venuList" v-model="venuList" text="场馆列表"/>
-<p class="H50 OF2 CL1 "></p>
+      <web-view src="https://mp.weixin.qq.com/"></web-view>
     <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
     <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
     <div class="data-group" v-for="(item,i) in enrollList" :key="i">
@@ -42,13 +31,12 @@
         </div>
       </van-cell-group>
     </van-dialog>
-
-    <debug_item  v-model="myMsgList" text="我的消息列表1"/>
-    <debug_item v-model="formData" text="表单数据"/>
-    <debug_item  v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
-    <debug_item  v-model="memberDoc" text="ajax获取单个会员数据"/>
-    <debug_item  v-model="matchDoc" text="ajax获取单个赛事数据"/>
-    <debug_item  v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
+    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
+    <debug_item path="formData" v-model="formData" text="表单数据"/>
+    <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
+    <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
+    <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
+    <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
     <div class="H100"></div>
     <mytabbar></mytabbar>
   </div>
@@ -71,7 +59,6 @@ export default {
   },
   data() {
     return {
-      venuList: null, //场馆列表
       memberId: 17,
       myMsgList: null,
       test: "111",
@@ -188,72 +175,9 @@ export default {
         // sortJson: { publishTime: -1 }, //排序条件
         // selectJson: { name: 1, entries: 1 } //只返回指定字段
       });
-    },
-
-    //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
-    async ajaxVenueList() {
-      console.log("ajaxVenueList");
-      let list = await util.ajaxGetListPopulate({
-        page: "tangball_venue",
-        pageSize: 5,
-        populate: [
-          {
-            populateColumn: "cityDoc",
-            idColumn: "area",
-            idKeyColumn: "P7",
-            page: "dmagic_area"
-          },
-          {
-            populateColumn: "cityDoc2",
-            idColumn: "area",
-            idKeyColumn: "P7",
-            page: "dmagic_area"
-          }
-        ]
-      });
-
-      // await util.timeout(500); //延迟
-      await util.timeout(2500); //延迟
-      this.venuList = list;
-      console.log("this.venuList", this.venuList);
-    },
-    //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
-    async ajaxVenueList2() {
-      console.log("ajaxVenueList");
-      let list = await util.ajaxGetList({
-        page: "tangball_venue",
-        pageSize: 5
-
-      });
-
-      this.venuList = list;
-      console.log("this.venuList1", this.venuList);
-
-  
-  // await util.timeout(3500); //延迟
-
-      this.venuList = await util.ajaxPopulate({
-        listData: this.venuList,
-        populateColumn: "cityDoc",
-        idColumn: "area",
-        idKeyColumn: "P7",
-        page: "dmagic_area"
-      });
-
-      // this.venuList = await util.ajaxPopulate({
-      //   listData: this.venuList,
-      //   populateColumn: "cityDoc2",
-      //   idColumn: "area",
-      //   idKeyColumn: "P7",
-      //   page: "dmagic_area"
-      // });
-
-      //  this.venuList = list;
-
-      console.log("this.venuList2", this.venuList);
     }
   },
-  async created() {},
+  created() {},
   async mounted() {
     console.log("lodash", lodash);
     //ajax获取单个会员数据

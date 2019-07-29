@@ -1,7 +1,7 @@
 <template>
   <div class="debug_item">
     <div class="FWB PSR">
-      {{text}}:{{path}}
+      {{text}}:{{pathNeed}}
       <van-icon class="PSA R3 T3" :name="iconName" size="20px" @click="expand"/>
     </div>
     <div class="valueShow" :style="{'max-height':maxHeight+'px;'}">{{valueNeed}}</div>
@@ -11,6 +11,7 @@
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
+import lodash from "lodash";
 console.log("util", util);
 export default {
   components: {
@@ -27,11 +28,12 @@ export default {
     }
   },
 
-  props: ["path", "text", "value"],
+  props: ["text", "value"],
   data() {
     //var valueNeed = JSON.stringify(this.value);//{Json对象转换Json字符串函数}
 
     return {
+      pathNeed:null,
       iconName: "arrow-down",
       maxHeight: 100,
       valueNeed: this.value
@@ -60,7 +62,12 @@ export default {
       }
     }
   },
-  created() {}
+  created() {
+//获取v-model变量名（表达式）
+    this.pathNeed  = lodash.get(this, "$vnode.data.model.expression");
+console.log("this.pathNeed", this.pathNeed);
+
+  }
 };
 </script>
 
