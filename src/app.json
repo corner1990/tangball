@@ -2,10 +2,8 @@
   "pages": [
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main",
-    
+    "pages/myInfo/main", 
     "pages/index/main",
-    
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
@@ -20,8 +18,6 @@
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
-    
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

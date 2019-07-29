@@ -10,7 +10,7 @@
         <van-icon name="edit" size="20px" @click="showDialogEnroll('modify',item.P1)" />
       </div>
     </div>
-    <!--新增/修改弹窗-->
+    <!--新增/修改弹窗--> 
     <van-dialog
       use-slot
       :title="titleDialog"
