@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/ajaxDemo/main",
     "pages/myMsgList/main",
     "pages/myInfo/main",
-    "pages/ajaxDemo/main",
+    
     "pages/index/main",
     
     "pages/matchList/main",
