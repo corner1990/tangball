@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
-    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
+   
 
     <!-- 搜索框 -->
     <div class="searchBox">
@@ -11,8 +11,12 @@
       </div>
     </div>
 
+
+
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
+
+    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
 
     <!-- 赛事场馆列表组件 -->
     <venueListComponent
@@ -67,63 +71,83 @@ export default {
         }
       });
     },
-    // async search(areaId) {
-    //   if (areaId) {
-    //     this.selectIndex = 0;
-    //   } else {
-    //     this.selectIndex = -1;
-    //   }
-    //   let { data } = await util.post({
-    //     url: global.PUB.domain + "/crossListRelation",
-    //     param: {
-    //       needRelation: "1",
-    //       columnItem: "P7",
-    //       columnTarget: "area",
-    //       sheetRelation: {
-    //         page: "dmagic_area",
-    //         findJson: {
-    //           P8: areaId
-    //         }
-    //       },
-    //       sheetTarget: {
-    //         page: "tangball_venue",
-    //         pageSize: "9999",
-    //         findJson:{}
-    //       }
-    //     }
-    //   });
-    //   data.list.forEach(item => {
-    //     item.show = true;
-    //   });
-    //   this.venueList = data.list;
-    //   console.log("this.venueList", this.venueList);
-    // }
-
-    //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
       } else {
         this.selectIndex = -1;
       }
-      let list = await util.ajaxGetListPopulate({
-        page: "tangball_venue",
-        pageSize: 100,
-        populate: [
-          {
-            populateColumn: "cityDoc",
-            idColumn: "area",
-            idKeyColumn: "P7",
-            page: "dmagic_area"
+
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossListRelation",
+        param: {
+          needRelation: "1",
+          columnItem: "P7",
+          columnTarget: "area",
+          sheetRelation: {
+            page: "dmagic_area",
+            findJson: {
+              P8: areaId
+            }
+          },
+          sheetTarget: {
+            page: "tangball_venue",
+            pageSize: "9999",
+            // populate: [
+            //   {
+            //     populateColumn: "cityDoc",
+            //     idColumn: "area",
+            //     idKeyColumn: "P7",
+            //     page: "dmagic_area"
+            //   }
+            // ]
           }
-        ]
+        }
       });
-      list.forEach(item => {
+      data.list.forEach(item => {
         item.show = true;
       });
-      this.venueList = list;
+      this.venueList = data.list;
       console.log("this.venueList", this.venueList);
+
+
+        //填充地区数据cityDoc
+       this.venueList = await util.ajaxPopulate({
+        listData: this.venueList,
+        populateColumn: "cityDoc",
+        idColumn: "area",
+        idKeyColumn: "P7",
+        page: "dmagic_area"
+      });
+
+      console.log("this.venueList2", this.venueList);
     }
+
+    //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
+    // async search(areaId) {
+    //   if (areaId) {
+    //     this.selectIndex = 0;
+    //   } else {
+    //     this.selectIndex = -1;
+    //   }
+    //   let list = await util.ajaxGetListPopulate({ 
+    //     page: "tangball_venue",
+    //     pageSize: 100,
+    //     populate: [
+    //       {
+    //         populateColumn: "cityDoc",
+    //         idColumn: "area",
+    //         idKeyColumn: "P7",
+    //         page: "dmagic_area"
+    //       }
+    //     ]
+    //   });
+    //   list.forEach(item => {
+    //     item.show = true;
+    //   });
+    //   this.venueList = list;
+    //   console.log("this.venueList", this.venueList);
+    // }
   },
   mounted() {
     this.search();

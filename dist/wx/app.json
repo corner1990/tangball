@@ -17,7 +17,6 @@
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -73,5 +72,6 @@
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index"
-  }
+  },
+  "sitemapLocation": "sitemap92.json"
 }

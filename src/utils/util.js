@@ -306,7 +306,7 @@ async function ajaxGetListPopulate(_json) {
  */
 
   if (populate) {//如果{填充配置数组}存在.
-    // let populate0 = populate[0]
+ 
     // populate.forEach(async populateCFEach => {//循环异步操作：{填充配置数组}
     //   await funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
 
@@ -333,6 +333,47 @@ async function ajaxGetListPopulate(_json) {
 
 
   return listData
+
+}
+
+
+
+/**ajax填充数据列表的某个字段函数
+ * 可用于动态数据字典
+ */
+
+
+
+async function ajaxPopulate(populateConfig) {
+  let { listData,page, populateColumn, idColumn, idKeyColumn } = populateConfig;
+  let arrId = [];
+  listData.forEach(itemEach => {//循环：{原数据数组}
+    if (itemEach[idColumn]) {//如果{000}000
+      arrId.push(itemEach[idColumn])
+    }
+  })
+
+  //变量：{填充查询条件}
+  let findJson = {
+    [idKeyColumn]: {
+      "$in": arrId
+    }
+  }
+  let { data } = await postRequest({
+    url: global.PUB.domain + `/crossList?page=${page}`,
+    param: {
+      findJson, pageSize: 999
+    }
+  });
+
+  var dict = lodash.keyBy(data.list, idKeyColumn)
+  listData.forEach(itemEach => {//循环：{原数据数组}
+    let key = itemEach[idColumn];//字典key值
+    itemEach[populateColumn] = dict[key]
+  })
+   return deepCopy(listData);
+
+  //return listData
 
 }
 
@@ -405,6 +446,6 @@ export default {
   formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate,
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate,ajaxPopulate,
   ajaxAdd, ajaxModify, ajaxDelete, showModal
 }
