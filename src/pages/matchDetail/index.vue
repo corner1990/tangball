@@ -4,7 +4,19 @@
 
     <!-- 赛事照片 -->
     <div class>
-      <img :src="matchlistDoc.album[0].url" v-if="matchlistDoc.album" />
+      <swiper
+      :indicator-dots="indicatorDots"
+      :autoplay="autoplay"
+      :interval="interval"
+      :duration="duration"
+    >
+      <block v-for="item in matchlistDoc.album" :key="item">
+        <swiper-item>
+          <image :src="item.url" class="slide-image" height="150" v-if="matchlistDoc.album"/>
+        </swiper-item>
+      </block>
+    </swiper>
+
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
