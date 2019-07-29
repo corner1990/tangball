@@ -2,7 +2,7 @@
   <div class="main-wrap">
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
-    
+
     <!-- 赛事照片 -->
     <div class>
       <img :src="matchlist.album[0].url" v-if="matchlist.album" />
@@ -37,7 +37,7 @@
       <van-cell title="已报名人数" :value="matchlist.registeredPersons" />
     </van-cell-group>
 
-    <van-button size="large" type="primary" @click="gotoPage(url)">立即报名</van-button>
+    <van-button size="large" type="primary" @click="gotoPage(url)">{{enrollText}}</van-button>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -59,8 +59,9 @@ export default {
       activeName: null, //举办地点聚焦
       P1: 37, //请求接口id  当前赛事id
       memberId: 10, //当前会员id
-      status:false,//控制是否跳转报名列表的状态
+      status: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
+      enrollText: "立即报名",
       url: "/pages/matchEroll/main",
       steps: [
         //步骤条数组
@@ -82,23 +83,39 @@ export default {
   },
 
   methods: {
-    async gotoPage(url) {
+    gotoPage(url) {
       console.log("gotoPage");
+
+      if (this.status) {
+        //如果存在该会员
+        this.enrollText = "您已报名";
+        console.log("您已报名");
+      } else {
+        this.enrollText = "立即报名";
+        wx.navigateTo({ url });
+      }
+    },
+    async getEnrollList() {
+       console.log("getEnrollList");
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: { findJson: { memberId: this.memberId } }
       });
       data.list.filter(item => {
-        if (item.matchId == this.P1) {//如果当前会员赛事id含有当前用户
-          this.status=true//状态
+        if (item.matchId == this.P1) {
+          //如果当前会员赛事id含有当前用户
+          this.status = true; //状态
         }
       });
-       if ( this.status) {
-          //如果存在该会员
-          console.log("您已报名");
-        } else {
-          wx.navigateTo({ url });
-        }
+      console.log("this.status");
+
+      if (this.status) {
+        //如果存在该会员
+        this.enrollText = "您已报名";
+      } else {
+        this.enrollText = "立即报名";
+      }
+      console.log(" this.enrollText ", this.enrollText );
     },
     bindViewTap() {
       const url = "../logs/main";
@@ -133,6 +150,7 @@ export default {
   },
   created() {},
   async mounted() {
+    this.getEnrollList();//获取报名订单
     // 请求赛事列表接口函数
     let { data } = await util.post({
       url: global.PUB.domain + "/crossList?page=tangball_match",
@@ -163,7 +181,8 @@ export default {
   },
   onLoad: function(options) {
     this.P1 = options.id;
-    console.log("onLoad",this.P1)
+    //  this.P1 = 37
+    console.log("onLoad", this.P1);
     this.url = "/pages/matchEroll/main?id=" + this.P1 + "";
   }
 };
@@ -197,4 +216,5 @@ export default {
   background-color: #fafafa;
   margin: 5px 15px;
 }
+
 </style>
