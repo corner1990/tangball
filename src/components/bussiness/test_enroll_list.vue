@@ -86,7 +86,6 @@ export default {
     },
     closeDialog() {
       this.isShowDialogEnroll = false;
-      console.log("closeDialog");
     },
     //函数：{修改一条报名函数}-请配合后台查看数据
     async modifyAEnroll() {
@@ -103,7 +102,6 @@ export default {
     },
     //函数：{添加一条报名函数}-请配合后台查看数据
     async addAEnroll() {
-      console.log("addAEnroll");
       await util.ajaxAdd({
         page: "tangball_enroll",
         data: this.formData
@@ -142,9 +140,7 @@ export default {
         pageSize: 5
       });
     },
-    changeMatchId(event) {
-      console.log("changeMatchId");
-      console.log(event);
+    changeMatchId(event) {//没什么用
       let value = event.mp.detail;
       this.formData.matchId = value;
     }

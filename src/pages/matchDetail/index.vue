@@ -113,6 +113,11 @@ export default {
         mpvue.navigateTo({ url });
       }
     },
+    /**
+     * @name xxxx方法
+     * @desc 方法说明
+     * @param 参数说明
+     */
     async getEnrollList() {
       console.log("getEnrollList");
       let { data } = await util.post({
