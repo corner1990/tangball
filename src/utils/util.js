@@ -81,6 +81,7 @@ function formatDate(date, fmt) {
 }
 //无论promise对象最后状态如何都会执行
 Promise.prototype.finally = function (callback) {
+
   let P = this.constructor;
   return this.then(
     value => P.resolve(callback()).then(() => value),
