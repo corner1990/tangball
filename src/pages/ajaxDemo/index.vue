@@ -1,5 +1,7 @@
 <template>
   <div class="main-wrap">
+     <test_article_list ></test_article_list>
+     123
     <phone_msg_code ></phone_msg_code>
 
    <test_venu_list ></test_venu_list>
@@ -22,6 +24,7 @@
 import lodash from "lodash";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
+import test_article_list from "@/components/bussiness/test_article_list";
 import phone_msg_code from "@/components/bussiness/phone_msg_code";
 import test_venu_list from "@/components/bussiness/test_venu_list";
 import test_msg_list from "@/components/bussiness/test_msg_list"; 
@@ -36,7 +39,7 @@ export default {
     debug_item,
     util,
    
-    phone_msg_code,test_venu_list,test_msg_list,test_enroll_list
+    phone_msg_code,test_venu_list,test_msg_list,test_enroll_list,test_article_list
   },
   data() {
     return {

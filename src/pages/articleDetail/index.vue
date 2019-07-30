@@ -1,6 +1,7 @@
 <template>
   <div class="main-wrap">
-      <web-view :src="url"></web-view>
+      <web-view :src="wxArticleUrl" v-if="wxArticleUrl"></web-view>
+      <div class="" v-else> 找不到公众号文章url</div>
   </div>
 </template>
 <script>
@@ -19,8 +20,8 @@ export default {
   },
   data() {
     return {
-      url: "https://mp.weixin.qq.com/s/Mg_56G3EXofBa89fk8NsIQ",
-      myMsgList: null,
+  
+      wxArticleUrl: null,
      
     };
   },
@@ -31,7 +32,10 @@ export default {
   },
   created() {},
   async mounted() {
-    
+    let param=util.getQuery();//获取页面参数
+   console.log("param", param);
+   this.dataId=param.dataId;
+    this.wxArticleUrl=param.wxArticleUrl;
   }
 };
 </script>

@@ -16,7 +16,7 @@ import './css/public.css'
 
 
 import Vuex from 'vuex'//导入vuex模块
-
+import lodash from "lodash";
 
 
 
@@ -37,7 +37,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
 })
 Vue.prototype.$store = store//让vue实例中可访问$store
 
-
+Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 
 
 

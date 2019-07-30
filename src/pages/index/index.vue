@@ -143,8 +143,6 @@ export default {
 
   methods: {
     gotoPage(url) {
-      console.log("gotoPage");
-      // let url="/pages/tanghome/main";
       wx.navigateTo({ url });
     },
     bindViewTap() {
