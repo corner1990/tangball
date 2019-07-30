@@ -131,7 +131,7 @@ function getRequest(url, data) {
  * url
  * data 以对象的格式传入
  */
-function postRequest(json) {
+function post(json) {
   let { url, param } = json;
   var postRequest = wxPromisify(wx.request)
   // param = parseParam(param); //调用：{将json转成url参数形式},
@@ -211,7 +211,7 @@ function getQuery() {
 //ajax获取单条数据详情的函数
 async function ajaxGetDoc(_json) {
   let { page, id } = _json;
-  let { data } = await postRequest({
+  let { data } = await post({
     url: global.PUB.domain + `/crossDetail?page=${page}`,
     param: {
       id: id, //数据id
@@ -224,7 +224,7 @@ async function ajaxGetDoc(_json) {
 //ajax获取数据列表的函数
 async function ajaxGetList(_json) {
   let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
-  let { data } = await postRequest({
+  let { data } = await post({
     url: global.PUB.domain + `/crossList?page=${page}`,
     param: {
       findJson, selectJson, sortJson, pageIndex, pageSize
@@ -248,7 +248,7 @@ async function ajaxGetListPopulate(_json) {
   {
     //第一次ajax请求数据
     let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
-    let { data } = await postRequest({
+    let { data } = await post({
       url: global.PUB.domain + `/crossList?page=${page}`,
       param: {
         findJson, selectJson, sortJson, pageIndex, pageSize
@@ -284,7 +284,7 @@ async function ajaxGetListPopulate(_json) {
     }
 
 
-    let { data } = await postRequest({
+    let { data } = await post({
       url: global.PUB.domain + `/crossList?page=${page}`,
       param: {
         findJson, pageSize: 999
@@ -327,11 +327,6 @@ async function ajaxGetListPopulate(_json) {
 
 
 
-  console.log("listData###", listData);
-  console.log("ajaxGetListPopulate-3");
-
-
-
 
   return listData
 
@@ -360,7 +355,7 @@ async function ajaxPopulate(populateConfig) {
       "$in": arrId
     }
   }
-  let { data } = await postRequest({
+  let { data } = await post({
     url: global.PUB.domain + `/crossList?page=${page}`,
     param: {
       findJson, pageSize: 999
@@ -384,7 +379,7 @@ async function ajaxPopulate(populateConfig) {
 //ajax删除一条数据的函数
 async function ajaxDelete(_json) {
   let { page, findJson } = _json;
-  let { data } = await postRequest({
+  let { data } = await post({
     url: global.PUB.domain + `/crossDelete?page=${page}`,
     param: {
       findJson
@@ -399,7 +394,7 @@ async function ajaxDelete(_json) {
 //ajax修改数据的函数
 async function ajaxModify(_json) {
   let { page, findJson, modifyJson, } = _json;
-  let { data } = await postRequest({
+  let { data } = await post({
     url: global.PUB.domain + `/crossModify?page=${page}`,
     param: {
       findJson, modifyJson
@@ -411,7 +406,7 @@ async function ajaxModify(_json) {
 //ajax新增数据的函数
 async function ajaxAdd(_json) {
   let { page, data } = _json;
-  return await postRequest({
+  return await post({
     url: global.PUB.domain + `/crossAdd?page=${page}`,
     param: {
       data
@@ -440,7 +435,7 @@ export default {
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数
   $get: getRequest, // get方法封装
-  post: postRequest, //post方法封装
+  post: post, //post方法封装
   wxPromisify: wxPromisify, //promise 方法
   wxLogin: wxLogin, // 登录用户发那个发封装
   wxGetUserInfo: wxGetUserInfo, // 获取用户信息方法封装

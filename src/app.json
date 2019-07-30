@@ -1,11 +1,19 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/index/main",
     "pages/matchList/main",
     "pages/myMsgList/main",
     "pages/myInfo/main",
     "pages/ajaxDemo/main",
     
+=======
+    "pages/ajaxDemo/main",
+    "pages/myMsgList/main",
+    "pages/myInfo/main", 
+    "pages/index/main",
+    "pages/matchList/main",
+>>>>>>> 860354fe697e9675afe849058b5fbe14e1f72145
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
@@ -19,8 +27,6 @@
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
-    
-    
   ],
   "window": {
     "backgroundTextStyle": "light",
