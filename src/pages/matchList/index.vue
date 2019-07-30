@@ -1,10 +1,10 @@
 <template>
   <div class="main-wrap">
-         <!-- {{searchValue}} -->
+    <!-- {{searchValue}} -->
     <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
-     <debug_item path="searchValue" v-model="searchValue" text="searchValue" />
-    <van-search placeholder="请输入搜索关键词1" @blur="onSearch(seachValue)" @change="aa"   />
+    <debug_item path="searchValue" v-model="searchValue" text="searchValue" />
+    <van-search placeholder="请输入搜索关键词1" @blur="onSearch(seachValue)" @change="aa" />
 
     <div>
       <van-tabs :active="active" @change="onClickTab">
@@ -17,6 +17,7 @@
             :price="'报名费'+item.registrationFee"
             origin-price="1000"
             :matchListP1="item.P1"
+            :album="item.album"
             v-for="(item,i) in matchlist"
             :key="i"
           ></matchListcomponent>
@@ -71,7 +72,11 @@ export default {
         url: global.PUB.domain + "/crossList?page=tangball_match",
         param: { findJson: { matchType: this.matchType } }
       });
+
       this.matchlist = data.list;
+      console.log("data-----------------------", data);
+      let bb = _.get(this.matchlist[0],"album");
+      console.log("bb-----------------------", bb);
 
       //--------------数组的日期排序-----------------------
       this.matchlist.sort((a, b) => {

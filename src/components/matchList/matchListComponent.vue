@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="match-box">
-      <div class="match-img-box">
-        <img
-          src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3778486341,778005772&fm=26&gp=0.jpg"
-        />
+      <div class="match-img-box" >
+        <!-- <img
+          :src="album[0].url" :title="title" :alt="title" class="placeholderImg"
+        /> -->
       </div>
       <div class="match-img-box1">
         <h1>{{title}}</h1>
@@ -46,7 +46,8 @@ export default {
     "price",
     "matchTime",
     "publicationStatus",
-    "matchListP1"
+    "matchListP1",
+    "album"
   ],
   components: {
 
@@ -64,6 +65,11 @@ export default {
 </script>
 
 <style >
+.placeholderImg{
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg);
+}
 .main-wrap {
   padding-bottom: 60px;
 }
