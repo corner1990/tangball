@@ -2,7 +2,7 @@
   "pages": [
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
+    "pages/myInfo/main",
     "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
@@ -74,5 +74,6 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
-  }
+  },
+  "sitemapLocation": "sitemap0.json"
 }
