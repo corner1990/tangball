@@ -29,11 +29,18 @@ function generateMixed(n) {
 }
 
 
+ /**
+     * @name 将微信的一些异步方法转化为promise对象的函数
+     * @desc 带success，fail回调函数
+     * @param fn
+     */
 
 function wxPromisify(fn) {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
       obj.success = function (res) {
+        console.log("wxPromisify-obj.success");
+        console.log("res", res);
         //成功
         resolve(res)
       }
@@ -45,6 +52,19 @@ function wxPromisify(fn) {
     })
   }
 }
+
+
+
+
+// var wxPromisify=(api) => {
+//   return (options, ...params) => {
+//     return new Promise((resolve, reject) => {
+//       api(Object.assign({}, options, { success: resolve, fail: reject }), ...params);
+//     });
+//   }
+// }
+
+
 /**
  * 将日期格式化成指定格式的字符串
  * @param date 要格式化的日期，不传时默认当前时间，也可以是一个时间戳
