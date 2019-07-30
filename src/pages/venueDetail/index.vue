@@ -58,7 +58,7 @@ export default {
     return {
       radio: 1,
       indicatorDots: false,
-      autoplay: false,
+      autoplay: true,
       interval: 5000,
       duration: 1000,
       pageName: "场馆详情",
