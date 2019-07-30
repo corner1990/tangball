@@ -212,7 +212,7 @@ function getQuery() {
 async function ajaxGetDoc(_json) {
   let { page, id } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossDetail?page=${page}`,
+    url: `${global.PUB.domain}/crossDetail?page=${page}`,
     param: {
       id: id, //数据id
     }
@@ -225,7 +225,7 @@ async function ajaxGetDoc(_json) {
 async function ajaxGetList(_json) {
   let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossList?page=${page}`,
+    url:  `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, selectJson, sortJson, pageIndex, pageSize
     }
@@ -249,7 +249,7 @@ async function ajaxGetListPopulate(_json) {
     //第一次ajax请求数据
     let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
     let { data } = await post({
-      url: global.PUB.domain + `/crossList?page=${page}`,
+      url:  `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, selectJson, sortJson, pageIndex, pageSize
       }
@@ -285,7 +285,7 @@ async function ajaxGetListPopulate(_json) {
 
 
     let { data } = await post({
-      url: global.PUB.domain + `/crossList?page=${page}`,
+      url:  `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, pageSize: 999
       }
@@ -356,7 +356,7 @@ async function ajaxPopulate(populateConfig) {
     }
   }
   let { data } = await post({
-    url: global.PUB.domain + `/crossList?page=${page}`,
+    url:  `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, pageSize: 999
     }
@@ -380,7 +380,8 @@ async function ajaxPopulate(populateConfig) {
 async function ajaxDelete(_json) {
   let { page, findJson } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossDelete?page=${page}`,
+    url:  `${global.PUB.domain}/crossDelete?page=${page}`,
+    
     param: {
       findJson
     }
@@ -395,7 +396,7 @@ async function ajaxDelete(_json) {
 async function ajaxModify(_json) {
   let { page, findJson, modifyJson, } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossModify?page=${page}`,
+    url: `${global.PUB.domain}/crossModify?page=${page}`,
     param: {
       findJson, modifyJson
     }
@@ -407,7 +408,7 @@ async function ajaxModify(_json) {
 async function ajaxAdd(_json) {
   let { page, data } = _json;
   return await post({
-    url: global.PUB.domain + `/crossAdd?page=${page}`,
+    url:  `${global.PUB.domain}/crossAdd?page=${page}`,
     param: {
       data
     }

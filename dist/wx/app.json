@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/myEroll/main",
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main",
+    "pages/myInfo/main", 
     "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
@@ -14,7 +15,7 @@
     "pages/event/main",
     "pages/usercenter/main",
     "pages/rankingList/main",
-    "pages/myEroll/main",
+    
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
@@ -44,8 +45,8 @@
         "selectedIconPath": "static/tabs/orders-active.png"
       },
       {
-        "text": "唐球达人",
-        "pagePath": "pages/rankingList/main",
+        "text": "活动",
+        "pagePath": "pages/event/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },
@@ -74,6 +75,5 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }
