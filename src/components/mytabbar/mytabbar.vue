@@ -29,8 +29,8 @@ export default {
           iconPath: "fire-o"
         },
         {
-          text: "活动",
-          pagePath: "../event/main",
+          text: "唐球达人",
+          pagePath: "../rankingList/main",
           iconPath: "medel-o"
         },
         {
