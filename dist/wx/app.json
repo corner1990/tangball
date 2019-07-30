@@ -2,7 +2,7 @@
   "pages": [
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
+    "pages/myInfo/main",
     "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
@@ -45,8 +45,8 @@
         "selectedIconPath": "static/tabs/orders-active.png"
       },
       {
-        "text": "活动",
-        "pagePath": "pages/event/main",
+        "text": "唐球达人",
+        "pagePath": "pages/rankingList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },
@@ -75,5 +75,6 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
