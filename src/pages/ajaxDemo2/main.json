@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "场馆列表",
+  "navigationBarTitleText": "ajax请求接口Demo",
   "usingComponents": {
     "van-search": "/static/vant/search/index",
     "van-card": "/static/vant/card/index",
@@ -8,5 +8,8 @@
     "van-panel": "/static/vant/panel/index",
     "van-steps": "/static/vant/steps/index",
     "van-cell": "/static/vant/cell/index",
-    "van-cell-group": "/static/vant/cell-group/index"
-  }  }
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-collapse": "/static/vant/collapse/index",
+    "van-collapse-item": "/static/vant/collapse-item/index"
+  }
+}

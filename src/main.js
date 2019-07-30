@@ -1,7 +1,7 @@
 /* eslint-disable */
 global.PUB={}
-  global.PUB.domain="http://120.76.160.41:3000" 
-//global.PUB.domain="http://localhost:3000"
+global.PUB.domain="http://120.76.160.41:3000" 
+  //global.PUB.domain="http://localhost:3000"
 
 
 import Vue from 'vue'
@@ -15,14 +15,9 @@ import './css/public.css'
 
 
 
-
-console.log("################");
-
-
 import Vuex from 'vuex'//导入vuex模块
 
 
-console.log("global.PUB.mix", global.PUB.mix);
 
 
 Vue.use(Vuex)//应用组件
