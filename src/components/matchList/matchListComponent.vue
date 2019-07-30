@@ -20,8 +20,9 @@
           <van-button plain size="small" type="danger" v-if="applyIngStatus" @click="daying">火热报名中</van-button>
         </navigator>
         <van-button disabled size="small" v-if="applyEndStatus">报名已结束</van-button>
+        <div style="height:10px;"></div>
         <navigator :url="matchDetailUrl">
-          <div class="macth-btn">查看详情</div>
+          <van-button plain size="small" type="default">&nbsp;&nbsp;查看详情&nbsp;</van-button>
         </navigator>
       </div>
     </div>
@@ -47,7 +48,9 @@ export default {
     "publicationStatus",
     "matchListP1"
   ],
-  components: {},
+  components: {
+
+  },
   mounted() {
     if (this.publicationStatus == 1) {
       (this.applyIngStatus = true), (this.applyEndStatus = false);
@@ -60,7 +63,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .main-wrap {
   padding-bottom: 60px;
 }
@@ -99,16 +102,15 @@ export default {
   height: 100%;
 }
 .match-img-box1 {
-   padding:0 0 5px 5px;
+  padding: 0 0 5px 5px;
   flex: 1;
   margin: 15px 0 0 0px;
   display: flex;
   flex-direction: column;
 }
 .match-img-box1 h1 {
-  font-weight:bold;
+  font-weight: bold;
   font-size: 16px;
- 
 }
 .macth-btn {
   line-height: 20px;
