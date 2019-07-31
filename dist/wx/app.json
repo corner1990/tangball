@@ -16,7 +16,6 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    
     "pages/rankingList/main",
     
     "pages/myErollDetail/main",
@@ -78,5 +77,10 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
+<<<<<<< HEAD
+  },
+  "sitemapLocation": "sitemap52.json"
+=======
   }
+>>>>>>> d1661d772375e4260c786ad027c7abd9e9a1a8bf
 }

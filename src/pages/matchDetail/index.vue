@@ -2,6 +2,10 @@
   <div class="main-wrap">
     <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
 
+    <!-- 显示选择场馆弹窗 -->
+    <van-dialog use-slot title="请选择场馆" :show="showdDialog" @close="onClose" v-if="showdDialog">
+      <van-picker :columns="cityVenueList" @change="pickerChange" />
+    </van-dialog>
     <!-- 赛事照片 -->
     <div class>
       <swiper
@@ -69,13 +73,15 @@ export default {
   },
   data() {
     return {
+      showdDialog: false,
+      cityVenueList: null,
+      venueId: null,
       NationalmatchIndex: null, //举办地点聚焦
       P1: 37, //  当前赛事id
       memberId: 17, //当前会员id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
-      url: null, //跳转到报名订单的地址
       steps: [
         //步骤条数组
         { text: "选拔赛", desc: "", value: 11 },
@@ -97,14 +103,53 @@ export default {
 
   methods: {
     /**
+     * @name onClose是弹窗的函数
+     * @desc
+     * @param event是默认值
+     */
+    onClose() {
+      this.showdDialog = !this.showdDialog; //控制是否打开弹窗
+      //拼接跳转到报名订单的地址
+      let url = `/pages/matchEroll/main?id=${this.P1}&venueId=${this.venueId}`;
+      if (!this.status && this.venueId) {
+        wx.navigateTo({ url });
+      } else {
+        this.showdDialog = true;
+      }
+    },
+
+    /**
+     * @name pickerChange是场馆选择器函数
+     * @desc 场馆选择，缓存当前选中的场馆id
+     * @param event是默认值
+     */
+    pickerChange(event) {
+      // 缓存当前选中的场馆id
+      let index = event.mp.detail.index;
+      this.venueId = this.matchlistDoc.cityVenueList[index].venueId;
+    },
+
+    /**
      * @name gotoPage是立即报名函数
      * @desc 点击立即报名按钮，跳转到报名页
      * @param url是跳转的地址
      */
-    gotoPage(url) {
-      // 如果当前状态 ！this.isMatchIdStatus（为报名时间没有截止和该用户未报名）
-      if (!this.isMatchIdStatus) {
-        wx.navigateTo({ url });
+    gotoPage() {
+      if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
+        let url = `/pages/matchEroll/main?id=${this.P1}`;
+        if (!this.status) {
+          wx.navigateTo({ url });
+        }
+      } else {
+        this.showdDialog = true; //打开弹窗
+        this.venueId = null;
+        // 拼接场馆列表数组
+        this.cityVenueList = this.matchlistDoc.cityVenueList.map(
+          (item, index) => {
+            return item.cityName + "---" + item.venueName;
+          }
+        );
+        this.venueId = this.matchlistDoc.cityVenueList[0].venueId; //默认选中第一个
       }
     },
 
@@ -171,6 +216,7 @@ export default {
   },
   created() {},
   async mounted() {
+    this.showdDialog = false;
     /**
      * @desc 请求赛事详情接口函数
      */
@@ -204,8 +250,9 @@ export default {
    * @desc 获取页面参数,
    */
   onLoad: function(options) {
-    this.P1 = options.id;
-    this.url = `/pages/matchEroll/main?id=${this.P1}`; //拼接跳转到报名订单的地址
+    if (options.id) {
+      this.P1 = options.id;
+    }
     console.log("onLoad", this.P1);
   }
 };
