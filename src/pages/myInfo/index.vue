@@ -72,6 +72,12 @@ export default {
       ]
     }
   },
+  computed: {
+  //唐球会员信息-在vuex中获取
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo 
+    }
+  },
 
   methods: {
     // 点击下拉款确定的话将数据信息保存下来，实现双向绑定
@@ -125,7 +131,8 @@ export default {
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
           findJson: {
-            P1: this.memberId
+            // P1: this.memberId
+            openid:this.tangballUserInfo.openid
           },
         }
       });
@@ -139,7 +146,7 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: {P1: this.memberId},
+          findJson: {openid: this.tangballUserInfo.openid},
           modifyJson:this.memberMessage
         }
       });

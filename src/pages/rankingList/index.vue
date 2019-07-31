@@ -1,7 +1,8 @@
 <template>
   <div class="main-wrap">
-    <debug_item v-model="memberList" text="会员列表" />
-    <debug_item v-model="achievementList" text="会员列表" />
+    <!-- <debug_item v-model="memberList" text="会员列表" />
+    <debug_item v-model="achievementList" text="会员列表" /> -->
+   <p class="H20 OF2 CL1 "></p>
     <!-- 分页组件 -->
     <pageLink :config="{}"></pageLink>
 

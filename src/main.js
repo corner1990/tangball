@@ -26,7 +26,8 @@ Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
     debug:true,
-    userInfo:{}
+    wxUserInfo:{},//微信用户信息
+    tangballUserInfo:{}//唐球用户信息
 
    
   },
@@ -34,8 +35,10 @@ const store = new Vuex.Store({//定义Vuex的存储对象
   mutations: {//变更事件
     setDebug(state, param) {//设置debug模式
       state.debug= param;
-    },setUserInfo(state, param) {//设置debug模式
-      state.userInfo= param;
+    },setWXUserInfo(state, param) {//设置微信用户信息
+      state.wxUserInfo= param;
+    },setTangballUserInfo(state, param) {//设置唐球用户信息
+      state.tangballUserInfo= param;
     }
   }
 })
