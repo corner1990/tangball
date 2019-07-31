@@ -12,8 +12,8 @@
         <div>电话:{{cf.phoneNumber}}</div>
         <div>地址:{{cf.address}}</div>
       </div>
-      <div class="LH110">
-        <van-icon name="arrow" size="20px" />
+      <div class="LH110 arrow">
+        <van-icon name="arrow" size="20px" style="color:#999999"/>
       </div>
     </navigator>
   </div>
@@ -51,13 +51,14 @@ export default {
 <style scoped>
 .main-venue {
   width: 345px;
-  height: 110px;
-  margin: 15px;
+  height: 90px;
+  margin: 5px 3px;
+  padding-left:15px;
 }
 .venue-imgBox {
   width: 135px;
-  height: 90px;
-  margin: 10px;
+  height: 80px;
+  margin: 5px;
   float: left;
 }
 .venue-imgBox img {
@@ -69,5 +70,8 @@ export default {
   height: 90px;
   float: left;
   margin-top: 10px;
+  line-height: 20px;
+  padding-left:10px;
 }
+
 </style>
