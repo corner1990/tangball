@@ -6,7 +6,7 @@
   
     "pages/myMsgList/main",
     "pages/myInfo/main", 
-   
+    "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",

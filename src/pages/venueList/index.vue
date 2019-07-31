@@ -41,11 +41,17 @@ export default {
       selectIndex: -1,
       pageName: "场馆列表",
       venueList: [],
-      keywords: null, //搜索关键词
+      keywords: null, //搜索关键字
       show: true //是否显示
     };
   },
   methods: {
+
+    /**
+     * @desc 搜索方法
+     * @param 搜索关键字：keywords
+     * @param 是否显示：show
+     */
     onSearch(keywords) {
       this.venueList.forEach(item => {
         let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
@@ -58,6 +64,11 @@ export default {
         }
       });
     },
+
+    /**
+     * @desc 请求接口数据的函数
+     * 
+     */
     async search(areaId) {
       if (areaId) {
         this.selectIndex = 0;
