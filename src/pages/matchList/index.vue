@@ -1,9 +1,9 @@
 <template>
   <div class="main-wrap">
     <!-- {{searchValue}} -->
-    <debug_item path="steps" v-model="steps" text="步骤" />
+    <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
-    <debug_item path="searchValue" v-model="searchValue" text="searchValue" />
+    <debug_item path="searchValue" v-model="searchValue" text="searchValue" /> -->
     <van-search placeholder="请输入搜索关键词" @blur="onSearch(seachValue)" @change="changeValue" />
 
     <div>

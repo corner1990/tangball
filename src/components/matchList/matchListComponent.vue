@@ -6,21 +6,15 @@
       </div>
       <div class="match-img-box1">
         <h1>{{cf.matchName}}</h1>
-
         <div>赛事时间：{{cf.matchTime}}</div>
-
         <div>报名费用：{{cf.registrationFee}}</div>
       </div>
-
       <div name="footer" class="rpg11">
         <navigator :url="applyUrl">
           <van-button plain size="small" type="danger" v-if="applyIngStatus">火热报名中</van-button>
         </navigator>
-
         <van-button disabled size="small" v-if="applyEndStatus">报名已结束</van-button>
-
         <div style="height:10px;"></div>
-
         <navigator :url="matchDetailUrl">
           <van-button plain size="small" type="default">&nbsp;&nbsp;查看详情&nbsp;</van-button>
         </navigator>
@@ -29,21 +23,19 @@
   </div>
 </template>
 <script>
-
-
 export default {
-  data() {
+  data () {
     return {
       matchListImg: null,
       applyIngStatus: true,
       applyEndStatus: false,
-      applyUrl: "/pages/matchEroll/main?id=" + this.cf.P1 + "",
-      matchDetailUrl: "/pages/matchDetail/main?id=" + this.cf.P1 + ""
-    };
+      applyUrl: '/pages/matchEroll/main?id=' + this.cf.P1,
+      matchDetailUrl: '/pages/matchDetail/main?id=' + this.cf.P1
+    }
   },
-  props: ["cf"],
+  props: ['cf'],
   components: {},
-  mounted() {
+  mounted () {
     /**
      * @name 加载图片的方法
      * @desc 调用lodash库导入图片，默认占位图
@@ -52,12 +44,12 @@ export default {
      */
 
     let placeholderImg =
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg'
     this.matchListImg = this.$lodash.get(
       this.cf,
-      "album[0].url",
+      'album[0].url',
       placeholderImg
-    );
+    )
 
     /**
      * @name 根据报名状态判断显示按钮的方法
@@ -66,15 +58,17 @@ export default {
      * @param 报名已结束按钮：applyEndStatus,默认为false
      */
 
-    if (this.cf.publicationStatus == 1) {
-      (this.applyIngStatus = true), (this.applyEndStatus = false);
+    if (this.cf.publicationStatus === 1) {
+      this.applyIngStatus = true
+      this.applyEndStatus = false
     } else {
-      (this.applyIngStatus = false), (this.applyEndStatus = true);
+      this.applyIngStatus = false
+      this.applyEndStatus = true
     }
   },
   methods: {},
-  created() {}
-};
+  created () {}
+}
 </script>
 
 <style >
@@ -95,17 +89,10 @@ export default {
   display: flex;
 }
 .rpg11 {
-  /* position: absolute;
-  right: 0px;
-  bottom: 10px; */
-
-  /* float: right; */
   margin-top: 15px;
   margin-right: 5px;
 }
 .match-img-box {
-  /* float: left; */
-
   margin: 15px 1px 0 10px;
   height: 80px;
   width: 80px;
