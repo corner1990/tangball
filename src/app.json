@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/myEroll/main",
+    "pages/authorize/main",
     "pages/ajaxDemo/main",
+    "pages/myEroll/main",
+  
     "pages/myMsgList/main",
     "pages/myInfo/main", 
    

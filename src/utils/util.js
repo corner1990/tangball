@@ -451,6 +451,11 @@ let showModal = function (param) {
   return promise;
 };
 
+let gotoPage = function (url) {
+  wx.navigateTo({ url });
+};
+
+
 
 export default {
   formatTime: formatTime, // 时间格式化函数
@@ -464,5 +469,5 @@ export default {
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
   , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate,ajaxPopulate,
-  ajaxAdd, ajaxModify, ajaxDelete, showModal
+  ajaxAdd, ajaxModify, ajaxDelete, showModal,gotoPage
 }
