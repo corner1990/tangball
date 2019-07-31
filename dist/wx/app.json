@@ -3,9 +3,8 @@
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
-  
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
+    "pages/myInfo/main",
     "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
@@ -16,9 +15,7 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    
     "pages/rankingList/main",
-    
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
@@ -78,5 +75,6 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
