@@ -127,8 +127,8 @@ export default {
 
       radio: 1,
       imgUrls: [
-        "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
-        "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
+        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
         "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
       indicatorDots: false,
