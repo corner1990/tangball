@@ -17,6 +17,11 @@ export default {
           path: '/pages/matchEroll/main',
           icon: 'gem-o'
         },
+         {
+          text: '个人信息',
+          path: '/pages/myInfo/main',
+          icon: 'manager-o'
+        },
         // {
         //   text: '我的订单',
         //   path: '',
