@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-box">
+  <div class="demo-box"> 
     <!-- <van-button type="primary" size="small" @click="ajaxVenueList" class="MR10">获取场馆列表</van-button> -->
     <van-button type="primary" size="large" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" @click="getUserInfo1">获取权限</van-button>
   </div>
