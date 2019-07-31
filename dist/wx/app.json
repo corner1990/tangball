@@ -1,12 +1,11 @@
 {
   "pages": [
+    "pages/index/main",
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
-  
     "pages/myMsgList/main",
     "pages/myInfo/main", 
-    "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
