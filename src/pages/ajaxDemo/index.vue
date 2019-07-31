@@ -1,5 +1,11 @@
 <template>
   <div class="main-wrap">
+
+ 
+
+ <authorize ></authorize>
+
+
      <test_article_list ></test_article_list>
      123
     <phone_msg_code ></phone_msg_code>
@@ -28,6 +34,7 @@ import test_article_list from "@/components/bussiness/test_article_list";
 import phone_msg_code from "@/components/bussiness/phone_msg_code";
 import test_venu_list from "@/components/bussiness/test_venu_list";
 import test_msg_list from "@/components/bussiness/test_msg_list"; 
+import authorize from "@/components/bussiness/authorize"; 
 import test_enroll_list from "@/components/bussiness/test_enroll_list"; 
 import debug_item from "@/components/common/debug_item/debug_item";
 
@@ -39,7 +46,7 @@ export default {
     debug_item,
     util,
    
-    phone_msg_code,test_venu_list,test_msg_list,test_enroll_list,test_article_list
+    phone_msg_code,test_venu_list,test_msg_list,test_enroll_list,test_article_list,authorize
   },
   data() {
     return {
