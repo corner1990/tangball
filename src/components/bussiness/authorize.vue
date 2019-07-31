@@ -6,7 +6,6 @@
 </template>
 <script>
 /* eslint-disable */
-
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
