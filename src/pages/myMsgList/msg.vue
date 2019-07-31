@@ -11,7 +11,7 @@
         标题：{{crowArr[gant].name}}
         <br />
         {{crowArr[gant].detail}}
-        <div class="close-box" @click="shut(gant,msgId)">确 定</div>
+        <div class="close-box" @click="shut(gant,msgId)">关 闭</div>
       </div>
       <div v-show="!showcontent">
         <div class="mas-box" v-for="(mass,index) in crowArr" :key="index">
