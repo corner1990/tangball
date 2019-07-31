@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/myEroll/main",
     "pages/ajaxDemo/main",
     "pages/myMsgList/main",
     "pages/myInfo/main", 
@@ -15,7 +16,7 @@
     "pages/usercenter/main",
     
     "pages/rankingList/main",
-    "pages/myEroll/main",
+    
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"

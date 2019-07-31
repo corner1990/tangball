@@ -29,11 +29,18 @@ function generateMixed(n) {
 }
 
 
+ /**
+     * @name 将微信的一些异步方法转化为promise对象的函数
+     * @desc 带success，fail回调函数
+     * @param fn
+     */
 
 function wxPromisify(fn) {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
       obj.success = function (res) {
+        console.log("wxPromisify-obj.success");
+        console.log("res", res);
         //成功
         resolve(res)
       }
@@ -45,6 +52,19 @@ function wxPromisify(fn) {
     })
   }
 }
+
+
+
+
+// var wxPromisify=(api) => {
+//   return (options, ...params) => {
+//     return new Promise((resolve, reject) => {
+//       api(Object.assign({}, options, { success: resolve, fail: reject }), ...params);
+//     });
+//   }
+// }
+
+
 /**
  * 将日期格式化成指定格式的字符串
  * @param date 要格式化的日期，不传时默认当前时间，也可以是一个时间戳
@@ -212,7 +232,7 @@ function getQuery() {
 async function ajaxGetDoc(_json) {
   let { page, id } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossDetail?page=${page}`,
+    url: `${global.PUB.domain}/crossDetail?page=${page}`,
     param: {
       id: id, //数据id
     }
@@ -225,7 +245,7 @@ async function ajaxGetDoc(_json) {
 async function ajaxGetList(_json) {
   let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossList?page=${page}`,
+    url:  `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, selectJson, sortJson, pageIndex, pageSize
     }
@@ -249,7 +269,7 @@ async function ajaxGetListPopulate(_json) {
     //第一次ajax请求数据
     let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
     let { data } = await post({
-      url: global.PUB.domain + `/crossList?page=${page}`,
+      url:  `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, selectJson, sortJson, pageIndex, pageSize
       }
@@ -285,7 +305,7 @@ async function ajaxGetListPopulate(_json) {
 
 
     let { data } = await post({
-      url: global.PUB.domain + `/crossList?page=${page}`,
+      url:  `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, pageSize: 999
       }
@@ -356,7 +376,7 @@ async function ajaxPopulate(populateConfig) {
     }
   }
   let { data } = await post({
-    url: global.PUB.domain + `/crossList?page=${page}`,
+    url:  `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, pageSize: 999
     }
@@ -380,7 +400,8 @@ async function ajaxPopulate(populateConfig) {
 async function ajaxDelete(_json) {
   let { page, findJson } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossDelete?page=${page}`,
+    url:  `${global.PUB.domain}/crossDelete?page=${page}`,
+    
     param: {
       findJson
     }
@@ -395,7 +416,7 @@ async function ajaxDelete(_json) {
 async function ajaxModify(_json) {
   let { page, findJson, modifyJson, } = _json;
   let { data } = await post({
-    url: global.PUB.domain + `/crossModify?page=${page}`,
+    url: `${global.PUB.domain}/crossModify?page=${page}`,
     param: {
       findJson, modifyJson
     }
@@ -407,7 +428,7 @@ async function ajaxModify(_json) {
 async function ajaxAdd(_json) {
   let { page, data } = _json;
   return await post({
-    url: global.PUB.domain + `/crossAdd?page=${page}`,
+    url:  `${global.PUB.domain}/crossAdd?page=${page}`,
     param: {
       data
     }

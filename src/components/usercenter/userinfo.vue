@@ -1,18 +1,26 @@
 <template>
   <div class="user-info">
-    <img src="/static/images/timg.jpg" alt="bg" class="bg">
+    <img src="/static/images/timg.jpg" alt="bg" class="bg" />
     <div class="avatar-row">
-      <img src="/static/images/user.png" alt="avatar" class="avatar">
-      <p class="name">username</p>
+      <img :src="avatarUrl" alt="avatar" class="avatar" />
+      <p class="name">{{nickName}}</p>
     </div>
   </div>
 </template>
 
 <script>
-
+/* eslint-disable */
 export default {
-  props: ['用户信息']
-}
+  props: ["用户信息"],
+  computed: {
+    avatarUrl: function() {
+      return this.$store.state.userInfo.avatarUrl; //|| "/static/images/user.png"
+    },
+    nickName: function() {
+      return this.$store.state.userInfo.nickName; //|| "/static/images/user.png"
+    }
+  }
+};
 </script>
 
 <style >
@@ -28,19 +36,19 @@ export default {
   left: 0;
   width: 100%;
 }
-.avatar-row{
+.avatar-row {
   position: relative;
   z-index: 2;
   text-align: center;
 }
 
-.user-info .avatar{
+.user-info .avatar {
   width: 80px;
   height: 80px;
   margin-top: 10px;
   border-radius: 50%;
 }
-.user-info .name{
+.user-info .name {
   color: #fff;
 }
 </style>
