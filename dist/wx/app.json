@@ -4,8 +4,8 @@
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main",
-    "pages/index/main",
+    "pages/myInfo/main", 
+   
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
