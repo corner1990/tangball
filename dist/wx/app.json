@@ -4,8 +4,7 @@
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
-   
+    "pages/myInfo/main",
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
@@ -76,5 +75,5 @@
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap34.json"
 }
