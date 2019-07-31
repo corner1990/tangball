@@ -47,8 +47,8 @@
         "selectedIconPath": "static/tabs/orders-active.png"
       },
       {
-        "text": "活动",
-        "pagePath": "pages/event/main",
+        "text": "唐球达人",
+        "pagePath": "pages/rankingList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },

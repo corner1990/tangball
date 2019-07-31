@@ -477,8 +477,8 @@ let getMyWXSetting = async function (url) {
      * @param vm：vue实例，传递给ajaxMyWXUserInfo方法需要对vuex进行操作
     
      */
-let loginAndInitUser = async function (vm,wxLoginAsync) {
- 
+let loginAndInitUser = async function (vm, wxLoginAsync) {
+
   let resLogin = await wxLogin(); //微信会员登录结果
   console.log("resLogin", resLogin);
   let js_code = resLogin.code; //当前用户的微信code
@@ -572,9 +572,10 @@ let util = {
   ajaxAdd, ajaxModify, ajaxDelete, showModal, gotoPage, ajaxMyWXUserInfo, getMyWXSetting, loginAndInitUser
 }
 /****************************将微信的一些异步接口转成promise，支持同步的写法-START****************************/
- wxLogin = util.wxPromisify(wx.login);
+//这几个方法就是要这样重写，特别奇怪
+wxLogin = util.wxPromisify(wx.login);
 let wxGetSetting = util.wxPromisify(wx.getSetting);
-  wxGetUserInfo = util.wxPromisify(wx.getUserInfo);
+wxGetUserInfo = util.wxPromisify(wx.getUserInfo);
 /****************************将微信的一些异步接口转成promise，支持同步的写法-END****************************/
 
 export default util

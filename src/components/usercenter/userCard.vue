@@ -5,46 +5,43 @@
 </template>
 
 <script>
+/* eslint-disable */
 import itemCard from './cardItem'
 export default {
   data () {
     return {
       list: [
+     
         {
-          text: '赛事列表',
-          path: '/pages/matchList/main',
+          text: '我的报名',
+          path: '/pages/matchEroll/main',
           icon: 'gem-o'
         },
-        {
-          text: '我的赛事',
-          path: '/pages/usercenter/my-event',
-          icon: 'gem-o'
-        },
-        {
-          text: '我的订单',
-          path: '',
-          icon: 'balance-list-o'
-        },
-        {
-          text: '我的财富',
-          path: '',
-          icon: 'balance-o'
-        },
-        {
-          text: '收货地址',
-          path: '',
-          icon: 'logistics'
-        },
-        {
-          text: '我的客服',
-          path: '',
-          icon: 'chat-o'
-        },
-        {
-          text: '商务合作',
-          path: '',
-          icon: 'exchange'
-        }
+        // {
+        //   text: '我的订单',
+        //   path: '',
+        //   icon: 'balance-list-o'
+        // },
+        // {
+        //   text: '我的财富',
+        //   path: '',
+        //   icon: 'balance-o'
+        // },
+        // {
+        //   text: '收货地址',
+        //   path: '',
+        //   icon: 'logistics'
+        // },
+        // {
+        //   text: '我的客服',
+        //   path: '',
+        //   icon: 'chat-o'
+        // },
+        // {
+        //   text: '商务合作',
+        //   path: '',
+        //   icon: 'exchange'
+        // }
       ]
     }
   },
