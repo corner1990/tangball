@@ -1,7 +1,5 @@
 <template>
   <div class="main-wrap">
-    
-
     <van-cell
       is-link
       :title="item.title"
@@ -93,15 +91,16 @@
 
 <script>
 /* eslint-disable */
-
+import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
-import matchlist from '../matchList/index'
+import matchlist from "../matchList/index";
 import card from "@/components/card";
 // import { get } from '@/utils/request'
 export default {
   components: {
     card,
-    mytabbar,matchlist
+    mytabbar,
+    matchlist
   },
   data() {
     return {
@@ -173,15 +172,31 @@ export default {
     }
   },
   onShow() {
-    console.log("onShow");
+    console.log("index-onShow");
     wx.hideTabBar({
       complete() {
         console.log("关闭tabbar");
       }
     });
   },
+  async mounted() {
+    /****************************微信会员登录和信息存储-START****************************/
+    console.log("index-mounted");
+    let result = await util.getMyWXSetting();
+    console.log("result#", result);
+    //如果未授权，先return,等待用户主动授权
+    if (result == "noAuth") {
+      console.log("noAuth,等待授权");
+      util.gotoPage("/pages/authorize/main"); //跳转到授权页面
+      return;
+    }
+
+    await util.loginAndInitUser(this);//函数：{登录并ajax初始化用户信息的函数}
+
+    /****************************微信会员登录和信息存储-END****************************/
+  },
+
   created() {
-    console.log("12312");
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)

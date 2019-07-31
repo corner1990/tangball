@@ -29,11 +29,11 @@ function generateMixed(n) {
 }
 
 
- /**
-     * @name 将微信的一些异步方法转化为promise对象的函数
-     * @desc 带success，fail回调函数
-     * @param fn
-     */
+/**
+    * @name 将微信的一些异步方法转化为promise对象的函数
+    * @desc 带success，fail回调函数
+    * @param fn
+    */
 
 function wxPromisify(fn) {
   return function (obj = {}) {
@@ -245,7 +245,7 @@ async function ajaxGetDoc(_json) {
 async function ajaxGetList(_json) {
   let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
   let { data } = await post({
-    url:  `${global.PUB.domain}/crossList?page=${page}`,
+    url: `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, selectJson, sortJson, pageIndex, pageSize
     }
@@ -269,7 +269,7 @@ async function ajaxGetListPopulate(_json) {
     //第一次ajax请求数据
     let { page, findJson, selectJson, sortJson, pageIndex, pageSize } = _json;
     let { data } = await post({
-      url:  `${global.PUB.domain}/crossList?page=${page}`,
+      url: `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, selectJson, sortJson, pageIndex, pageSize
       }
@@ -280,11 +280,11 @@ async function ajaxGetListPopulate(_json) {
 
 
 
-/**
- * 根据填充配置进行一次ajax请求关联数据并进行拼装的函数
- * 
- */
-  
+  /**
+   * 根据填充配置进行一次ajax请求关联数据并进行拼装的函数
+   * 
+   */
+
   let funPopulate = async function (populateConfig) {
     console.log("funPopulate@@");
     let { page, populateColumn, idColumn, idKeyColumn } = populateConfig;
@@ -305,7 +305,7 @@ async function ajaxGetListPopulate(_json) {
 
 
     let { data } = await post({
-      url:  `${global.PUB.domain}/crossList?page=${page}`,
+      url: `${global.PUB.domain}/crossList?page=${page}`,
       param: {
         findJson, pageSize: 999
       }
@@ -321,20 +321,20 @@ async function ajaxGetListPopulate(_json) {
 
 
 
-/**
- * 循环填充配置数组，请求关联数据，并进行拼装
- * 
- */
+  /**
+   * 循环填充配置数组，请求关联数据，并进行拼装
+   * 
+   */
 
   if (populate) {//如果{填充配置数组}存在.
- 
+
     // populate.forEach(async populateCFEach => {//循环异步操作：{填充配置数组}
     //   await funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
 
     // })
 
     for await (const populateCFEach of populate) {
-      await   funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
+      await funPopulate(populateCFEach);//调用：{根据填充配置进行一次ajax请求关联数据的函数}
     }
 
 
@@ -361,7 +361,7 @@ async function ajaxGetListPopulate(_json) {
 
 
 async function ajaxPopulate(populateConfig) {
-  let { listData,page, populateColumn, idColumn, idKeyColumn } = populateConfig;
+  let { listData, page, populateColumn, idColumn, idKeyColumn } = populateConfig;
   let arrId = [];
   listData.forEach(itemEach => {//循环：{原数据数组}
     if (itemEach[idColumn]) {//如果{000}000
@@ -376,7 +376,7 @@ async function ajaxPopulate(populateConfig) {
     }
   }
   let { data } = await post({
-    url:  `${global.PUB.domain}/crossList?page=${page}`,
+    url: `${global.PUB.domain}/crossList?page=${page}`,
     param: {
       findJson, pageSize: 999
     }
@@ -387,7 +387,7 @@ async function ajaxPopulate(populateConfig) {
     let key = itemEach[idColumn];//字典key值
     itemEach[populateColumn] = dict[key]
   })
-   return deepCopy(listData);
+  return deepCopy(listData);
 
   //return listData
 
@@ -400,8 +400,8 @@ async function ajaxPopulate(populateConfig) {
 async function ajaxDelete(_json) {
   let { page, findJson } = _json;
   let { data } = await post({
-    url:  `${global.PUB.domain}/crossDelete?page=${page}`,
-    
+    url: `${global.PUB.domain}/crossDelete?page=${page}`,
+
     param: {
       findJson
     }
@@ -428,7 +428,7 @@ async function ajaxModify(_json) {
 async function ajaxAdd(_json) {
   let { page, data } = _json;
   return await post({
-    url:  `${global.PUB.domain}/crossAdd?page=${page}`,
+    url: `${global.PUB.domain}/crossAdd?page=${page}`,
     param: {
       data
     }
@@ -456,8 +456,108 @@ let gotoPage = function (url) {
 };
 
 
+let getMyWXSetting = async function (url) {
+  console.log("getMyWXSetting");
+  let resSetting = await wxGetSetting();
+  if (resSetting.authSetting["scope.userInfo"]) {
+    console.log("用户已经授权过,跳转到首页");
+    wx.switchTab({
+      url: "/pages/index/main"
+    });
 
-export default {
+  } else {
+    console.log("用户还未授权过，返回noAuth");
+    return "noAuth"
+  }
+};
+
+/**
+     * @name 登录并ajax初始化用户信息的函数
+     * @desc 
+     * @param vm：vue实例，传递给ajaxMyWXUserInfo方法需要对vuex进行操作
+    
+     */
+let loginAndInitUser = async function (vm,wxLoginAsync) {
+ 
+  let resLogin = await wxLogin(); //微信会员登录结果
+  console.log("resLogin", resLogin);
+  let js_code = resLogin.code; //当前用户的微信code
+  if (js_code) {
+    //Q1：{当前用户的微信code}存在
+    try {
+      console.log("getUserInfo开始");
+      let resUserInfo = await wxGetUserInfo(); //微信会员登录
+      console.log("getUserInfo成功");
+      await util.ajaxMyWXUserInfo(resUserInfo, js_code, vm); //调用：{ajax获取当前微信用户详细信息}
+    } catch (err) {
+      console.log("getUserInfo或ajaxMyWXUserInfo失败,原因", err);
+    }
+  } else {
+    //Q2：{当前用户的微信code}不存在
+    console.log("登录失败！" + res.errMsg);
+  }
+
+
+
+};
+
+
+/**
+    * @name ajax获取当前微信用户详细信息
+    * @desc 包括头像，openid等
+    * @param resUserInfo：用户的基础信息, js_code
+    * @param js_code：微信用户code
+    * @param vm：vue实例，需要对vuex进行操作
+    */
+
+let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
+  console.log("ajaxMyWXUserInfo####");
+  wx.showLoading({
+    title: "请求openId"
+    // mask: true,
+  });
+
+  var iv = encodeURIComponent(resUserInfo.iv);
+  var encryptedData = encodeURIComponent(resUserInfo.encryptedData);
+  console.log("js_code", js_code);
+  console.log("iv", iv);
+  console.log("encryptedData", encryptedData);
+
+  try {
+    /**
+     * ajax请求微信用户信息
+     */
+    let { data } = await util.post({
+      url: global.PUB.domain + "/tangball/getWXUser",
+      param: {
+        js_code,
+        iv,
+        encryptedData
+      }
+    });
+
+    console.log("data######", data);
+
+    wx.setStorage({
+      //存储ids到storeage
+      key: "ids",
+      data: JSON.stringify(data.data1)
+    });
+    wx.hideLoading();
+
+    console.log("vm.$store.commit");
+    vm.$store.commit("setUserInfo", data.data2);
+  } catch (err) {
+    wx.showLoading({
+      title: "请求openId失败"
+    });
+  }
+};
+
+
+
+
+let util = {
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数
   $get: getRequest, // get方法封装
@@ -468,6 +568,13 @@ export default {
   formatDate: formatDate, // 格式化时间方法
   wxGetSystemInfo: wxGetSystemInfo, //获取系统信息封装
   isEmptyObject: isEmptyObject // 判断对象是否为空
-  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate,ajaxPopulate,
-  ajaxAdd, ajaxModify, ajaxDelete, showModal,gotoPage
+  , deepCopy, type, timeout, getQuery, ajaxGetDoc, ajaxGetList, ajaxGetListPopulate, ajaxPopulate,
+  ajaxAdd, ajaxModify, ajaxDelete, showModal, gotoPage, ajaxMyWXUserInfo, getMyWXSetting, loginAndInitUser
 }
+/****************************将微信的一些异步接口转成promise，支持同步的写法-START****************************/
+ wxLogin = util.wxPromisify(wx.login);
+let wxGetSetting = util.wxPromisify(wx.getSetting);
+  wxGetUserInfo = util.wxPromisify(wx.getUserInfo);
+/****************************将微信的一些异步接口转成promise，支持同步的写法-END****************************/
+
+export default util
