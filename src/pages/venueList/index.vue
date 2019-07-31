@@ -24,7 +24,7 @@
       :title="item.name"
       :phone="item.phoneNumber"
       :address="item.address"
-      :album="item.album"
+     
       :P1="item.P1"
       v-for="(item,i) in venueList"
       :key="i"

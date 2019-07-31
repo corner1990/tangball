@@ -1,8 +1,9 @@
 /* eslint-disable */
 global.PUB={}
-  global.PUB.domain="http://120.76.160.41:3000" 
-//global.PUB.domain="http://localhost:3000"
-
+//  global.PUB.domain="http://120.76.160.41:3000" 
+ global.PUB.domain="https://www.dmagic.cn" 
+// global.PUB.domain="http://localhost:3000"
+// global.PUB.domain="http://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
 
 import Vue from 'vue'
 import App from './App'
@@ -15,14 +16,9 @@ import './css/public.css'
 
 
 
-
-console.log("################");
-
-
 import Vuex from 'vuex'//导入vuex模块
+import lodash from "lodash";
 
-
-console.log("global.PUB.mix", global.PUB.mix);
 
 
 Vue.use(Vuex)//应用组件
@@ -30,19 +26,22 @@ Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
     debug:true,
+    userInfo:{}
+
    
   },
  
   mutations: {//变更事件
     setDebug(state, param) {//设置debug模式
       state.debug= param;
-      
+    },setUserInfo(state, param) {//设置debug模式
+      state.userInfo= param;
     }
   }
 })
 Vue.prototype.$store = store//让vue实例中可访问$store
 
-
+Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 
 
 

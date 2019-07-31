@@ -1,27 +1,41 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
-    
+
+    <!-- 显示选择场馆弹窗 -->
+    <van-dialog use-slot title="请选择场馆" :show="showdDialog" @close="onClose" v-if="showdDialog">
+      <van-picker :columns="cityVenueList" @change="pickerChange" />
+    </van-dialog>
     <!-- 赛事照片 -->
     <div class>
-      <img :src="matchlist.album[0].url" v-if="matchlist.album" />
+      <swiper
+        :indicator-dots="indicatorDots"
+        :autoplay="autoplay"
+        :interval="interval"
+        :duration="duration"
+      >
+        <block v-for="item in matchlistDoc.album" :key="item">
+          <swiper-item>
+            <image :src="item.url" class="slide-image" height="150" v-if="matchlistDoc.album" />
+          </swiper-item>
+        </block>
+      </swiper>
     </div>
     <!-- 赛事名称 -->
-    <div class="FS24 TAC LH36">{{matchlist.matchName}}</div>
+    <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
 
     <!-- 赛事步骤 -->
     <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
 
     <van-cell-group title="赛事信息">
-      <van-cell title="赛事时间" title-width="100px" :value="matchlist.matchTime" />
+      <van-cell title="赛事时间" title-width="100px" :value="matchlistDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchlistDoc.enrollTimeEnd" />
 
       <!-- 如果是全国赛 -->
       <van-collapse
-        v-model="activeName"
-        @change="handleChange"
-        v-if="matchlist.matchType==2&&matchlist.matchType"
+        v-model="NationalmatchIndex"
+        @change="matchTypeChange"
+        v-if="matchlistDoc.matchType==2&&matchlistDoc.matchType"
       >
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
@@ -33,11 +47,14 @@
         </van-collapse-item>
       </van-collapse>
 
-      <van-cell title="报名费" :value="matchlist.registrationFee" />
-      <van-cell title="已报名人数" :value="matchlist.registeredPersons" />
+      <van-cell title="报名费" :value="matchlistDoc.registrationFee" />
+      <van-cell title="已报名人数" :value="matchlistDoc.registeredPersons" />
     </van-cell-group>
 
-    <van-button size="large" type="primary" @click="gotoPage(url)">立即报名</van-button>
+    <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
+    <van-button size="large" v-if="isMatchIdStatus" plain disabled :style="style">{{enrollText}}</van-button>
+    <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
+
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -56,12 +73,15 @@ export default {
   },
   data() {
     return {
-      activeName: null, //举办地点聚焦
-      P1: 37, //请求接口id  当前赛事id
-      memberId: 10, //当前会员id
-      status:false,//控制是否跳转报名列表的状态
+      showdDialog: false,
+      cityVenueList: null,
+      venueId: null,
+      NationalmatchIndex: null, //举办地点聚焦
+      P1: 37, //  当前赛事id
+      memberId: 17, //当前会员id
+      isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
-      url: "/pages/matchEroll/main",
+      enrollText: "立即报名", //管理是否立即报名的文字
       steps: [
         //步骤条数组
         { text: "选拔赛", desc: "", value: 11 },
@@ -71,8 +91,8 @@ export default {
         { text: "1/4决赛", desc: "", value: 22 },
         { text: "决赛", desc: "", value: 23 }
       ],
-      matchlist: [], //赛事列表
       matchlistDoc: {}, //赛事详情列表
+      style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
       indicatorDots: false,
       autoplay: false,
       interval: 5000,
@@ -82,24 +102,57 @@ export default {
   },
 
   methods: {
-    async gotoPage(url) {
-      console.log("gotoPage");
-      let { data } = await util.post({
-        url: global.PUB.domain + "/crossList?page=tangball_enroll",
-        param: { findJson: { memberId: this.memberId } }
-      });
-      data.list.filter(item => {
-        if (item.matchId == this.P1) {//如果当前会员赛事id含有当前用户
-          this.status=true//状态
-        }
-      });
-       if ( this.status) {
-          //如果存在该会员
-          console.log("您已报名");
-        } else {
+    /**
+     * @name onClose是弹窗的函数
+     * @desc
+     * @param event是默认值
+     */
+    onClose() {
+      this.showdDialog = !this.showdDialog; //控制是否打开弹窗
+      //拼接跳转到报名订单的地址
+      let url = `/pages/matchEroll/main?id=${this.P1}&venueId=${this.venueId}`;
+      if (!this.status && this.venueId) {
+        wx.navigateTo({ url });
+      } else {
+        this.showdDialog = true;
+      }
+    },
+
+    /**
+     * @name pickerChange是场馆选择器函数
+     * @desc 场馆选择，缓存当前选中的场馆id
+     * @param event是默认值
+     */
+    pickerChange(event) {
+      // 缓存当前选中的场馆id
+      let index = event.mp.detail.index;
+      this.venueId = this.matchlistDoc.cityVenueList[index].venueId;
+    },
+
+    /**
+     * @name gotoPage是立即报名函数
+     * @desc 点击立即报名按钮，跳转到报名页
+     * @param url是跳转的地址
+     */
+    gotoPage() {
+      if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
+        let url = `/pages/matchEroll/main?id=${this.P1}`;
+        if (!this.status) {
           wx.navigateTo({ url });
         }
+      } else {
+        this.showdDialog = true; //打开弹窗
+        this.venueId = null;
+        // 拼接场馆列表数组
+        this.cityVenueList = this.matchlistDoc.cityVenueList.map(
+          (item, index) => {
+            return item.cityName + "---" + item.venueName;
+          }
+        );
+        this.venueId = this.matchlistDoc.cityVenueList[0].venueId; //默认选中第一个
+      }
     },
+
     bindViewTap() {
       const url = "../logs/main";
       if (mpvuePlatform === "wx") {
@@ -108,9 +161,39 @@ export default {
         mpvue.navigateTo({ url });
       }
     },
-    handleChange(val) {
-      //举办地点点击函数
-      this.activeName = val.mp.detail;
+
+    /**
+     * @name getEnrollList是获取报名订单列表函数
+     * @desc 获取报名订单列表，并传入当前的会员id，判断列表中的赛事id是否等于当前赛事id，通过isMatchIdStatus状态进行管理
+     * @param 接口返回值是报名订单列表
+     */
+    async getEnrollList() {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_enroll",
+        param: { findJson: { memberId: this.memberId } }
+      });
+
+      this.isMatchIdStatus = false; //变量初始化为false
+      this.enrollText = "立即报名"; //初始化为立即报名
+
+      data.list.filter((item, index) => {
+        //如果当前会员赛事id含有当前用户
+        if (item.matchId == this.P1) {
+          console.log("符合条件", index);
+          this.isMatchIdStatus = true; //该用户已经报名
+          this.enrollText = "您已报名";
+          return;
+        }
+      });
+    },
+
+    /**
+     * @name matchTypeChange举办地点函数
+     * @desc 当点击举办地点时，选择展开或者折叠
+     * @param val是默认传的参数
+     */
+    matchTypeChange(val) {
+      this.NationalmatchIndex = val.mp.detail;
     },
     onShow() {
       this.show = true;
@@ -133,38 +216,44 @@ export default {
   },
   created() {},
   async mounted() {
-    // 请求赛事列表接口函数
+    this.showdDialog = false;
+    /**
+     * @desc 请求赛事详情接口函数
+     */
+    //
     let { data } = await util.post({
-      url: global.PUB.domain + "/crossList?page=tangball_match",
-      param: { findJson: { P1: this.P1 } }
-    });
-    this.matchlist = data.list[0];
-
-    // 请求赛事详情接口函数
-    let doc = await util.post({
       url: global.PUB.domain + "/crossDetail?page=tangball_match",
       param: { id: this.P1 }
     });
-    this.matchlistDoc = doc.data.doc;
+    this.matchlistDoc = data.Doc; //赛事详情列表
 
+    // 如果报名未截止
+    if (this.matchlistDoc.publicationStatus == 1) {
+      this.getEnrollList(); //获取报名订单列表函数
+    } else {
+      // 如果报名时间已经截止
+      this.enrollText = "报名已结束";
+      this.isMatchIdStatus = true;
+    }
     // 赛事步骤状态处理
-    if (this.matchlist.matchProgress.smallProgress) {
+    let Progress = this.matchlistDoc.matchProgress.smallProgress; //当前赛事阶段
+    if (Progress) {
+      //如果当前赛事阶段存在
       this.steps.forEach((item, index) => {
-        if (this.matchlist.matchProgress.smallProgress == item.value) {
-          this.activeStep = index; //当前选中状态
+        if (Progress == item.value) {
+          this.activeStep = index; //当前步骤条的选中状态
         }
       });
     }
-
-    //报名截止时间格式处理
-    let time = this.matchlistDoc.enrollTimeEnd;
-    time = time.slice(0, time.indexOf("T"));
-    this.matchlistDoc.enrollTimeEnd = time;
   },
+  /**
+   * @desc 获取页面参数,
+   */
   onLoad: function(options) {
-    this.P1 = options.id;
-    console.log("onLoad",this.P1)
-    this.url = "/pages/matchEroll/main?id=" + this.P1 + "";
+    if (options.id) {
+      this.P1 = options.id;
+    }
+    console.log("onLoad", this.P1);
   }
 };
 </script>
@@ -181,10 +270,7 @@ export default {
 .card {
   margin: 0 10px;
 }
-/* 赛事状态按钮 */
-/* .browsing van-button {
-  margin-right: 10px;
-} */
+
 /* 折叠面板 */
 .collapse {
   text-align: center;

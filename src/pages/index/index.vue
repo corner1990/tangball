@@ -38,23 +38,9 @@
         </swiper-item>
       </block>
     </swiper>
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch" />
+
     <div class="card">
-      <h3>赛事</h3>
-      <van-tabs :active="active" bind:change="onChange">
-        <van-tab title="近期">
-          <van-card desc="描述信息" title="商品标题" />
-        </van-tab>
-        <van-tab title="全国">
-          <van-card tag="222" desc="描述信息" title="商品标题" />
-        </van-tab>
-        <van-tab title="加盟商">
-          <van-card tag="333" desc="描述信息" title="商品标题" />
-        </van-tab>
-        <van-tab title="全部">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111" />
-        </van-tab>
-      </van-tabs>
+      <matchlist></matchlist>
     </div>
     <div class="card">
       <h3>唐球达人</h3>
@@ -109,13 +95,13 @@
 /* eslint-disable */
 
 import mytabbar from "@/components/mytabbar/mytabbar";
-
+import matchlist from '../matchList/index'
 import card from "@/components/card";
 // import { get } from '@/utils/request'
 export default {
   components: {
     card,
-    mytabbar
+    mytabbar,matchlist
   },
   data() {
     return {
@@ -157,8 +143,6 @@ export default {
 
   methods: {
     gotoPage(url) {
-      console.log("gotoPage");
-      // let url="/pages/tanghome/main";
       wx.navigateTo({ url });
     },
     bindViewTap() {

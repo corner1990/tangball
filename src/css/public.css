@@ -798,3 +798,18 @@ table.n-table.n-table-debug th {
 .BC_ddd{
   background-color:  #ddd;
 }
+
+.demo-box{
+  padding: 6px;
+  margin: 8px 6px 12px 6px;
+  border: 2px #333 solid;
+
+}
+.n-input {
+  display: inline-block;
+  border: 1px #ddd solid;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 5px;
+  padding:0 0 0 8px;
+}
