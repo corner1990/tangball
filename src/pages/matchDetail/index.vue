@@ -2,17 +2,14 @@
   <div class="main-wrap">
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
-
+    
     <!-- 赛事照片 -->
     <div class>
       <img :src="matchlist.album[0].url" v-if="matchlist.album" />
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlist.matchName}}</div>
-    <!-- 赛事状态 -->
-    <!-- <van-cell class="browsing">
-      <van-button round plain type="primary" size="mini" v-if="matchStatus">{{matchStatus}}</van-button>
-    </van-cell>-->
+
     <!-- 赛事步骤 -->
     <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
 
@@ -40,9 +37,7 @@
       <van-cell title="已报名人数" :value="matchlist.registeredPersons" />
     </van-cell-group>
 
-    <navigator :url="url">
-      <van-button size="large" type="primary">立即报名</van-button>
-    </navigator>
+    <van-button size="large" type="primary" @click="gotoPage(url)">立即报名</van-button>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -62,7 +57,9 @@ export default {
   data() {
     return {
       activeName: null, //举办地点聚焦
-      P1: 46, //请求接口id
+      P1: 37, //请求接口id  当前赛事id
+      memberId: 10, //当前会员id
+      status:false,//控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       url: "/pages/matchEroll/main",
       steps: [
@@ -85,6 +82,32 @@ export default {
   },
 
   methods: {
+    async gotoPage(url) {
+      console.log("gotoPage");
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_enroll",
+        param: { findJson: { memberId: this.memberId } }
+      });
+      data.list.filter(item => {
+        if (item.matchId == this.P1) {//如果当前会员赛事id含有当前用户
+          this.status=true//状态
+        }
+      });
+       if ( this.status) {
+          //如果存在该会员
+          console.log("您已报名");
+        } else {
+          wx.navigateTo({ url });
+        }
+    },
+    bindViewTap() {
+      const url = "../logs/main";
+      if (mpvuePlatform === "wx") {
+        mpvue.switchTab({ url });
+      } else {
+        mpvue.navigateTo({ url });
+      }
+    },
     handleChange(val) {
       //举办地点点击函数
       this.activeName = val.mp.detail;
@@ -140,6 +163,7 @@ export default {
   },
   onLoad: function(options) {
     this.P1 = options.id;
+    console.log("onLoad",this.P1)
     this.url = "/pages/matchEroll/main?id=" + this.P1 + "";
   }
 };

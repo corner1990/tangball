@@ -43,12 +43,12 @@
       </van-cell-group>
     </van-dialog>
 
-    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
-    <debug_item path="formData" v-model="formData" text="表单数据"/>
-    <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
-    <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
-    <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
-    <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
+    <debug_item  v-model="myMsgList" text="我的消息列表1"/>
+    <debug_item v-model="formData" text="表单数据"/>
+    <debug_item  v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
+    <debug_item  v-model="memberDoc" text="ajax获取单个会员数据"/>
+    <debug_item  v-model="matchDoc" text="ajax获取单个赛事数据"/>
+    <debug_item  v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
     <div class="H100"></div>
     <mytabbar></mytabbar>
   </div>
