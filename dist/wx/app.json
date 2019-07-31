@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/index/main",
+    "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
-  
     "pages/myMsgList/main",
     "pages/myInfo/main", 
-    "pages/index/main",
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
@@ -47,8 +47,8 @@
         "selectedIconPath": "static/tabs/orders-active.png"
       },
       {
-        "text": "活动",
-        "pagePath": "pages/event/main",
+        "text": "唐球达人",
+        "pagePath": "pages/rankingList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },

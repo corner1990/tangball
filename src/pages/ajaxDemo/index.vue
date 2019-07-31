@@ -22,7 +22,7 @@
     <debug_item v-model="matchDoc" text="ajax获取单个赛事数据" />
     <debug_item v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条" />
     <div class="H100"></div>
-    <mytabbar></mytabbar>
+    <mytabbar></mytabbar> 
   </div>
 </template>
 <script>
