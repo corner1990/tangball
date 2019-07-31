@@ -10,13 +10,26 @@
         :interval="interval"
         :duration="duration"
       >
-        <block v-for="item in venueDoc.album" :key="item">
+        <block v-for="item in venueDoc.album" :key="item.url">
           <swiper-item>
-            <image :src="item.url" v-if="venueDoc.album" class="slide-image" height="250" />
+            <!--点击图片事件-->
+            <img
+              style="width:100%"
+              @click="showImg(item.url)"
+              :src="item.url"
+              v-if="venueDoc.album"
+              class="slide-image"
+              height="250"
+            />
           </swiper-item>
         </block>
       </swiper>
       <div>
+        <!--显示图片弹窗-->
+        <van-popup v-if="show" :show="show" @close="onClose">
+          <img alt :src="bigImg" />
+        </van-popup>
+
         <van-tabs :active="active" v-bind:change="onChange">
           <van-tab title="场馆介绍1">
             <div style="font-size:23px">
@@ -56,6 +69,7 @@ export default {
   },
   data() {
     return {
+      show: false,
       radio: 1,
       indicatorDots: false,
       autoplay: true,
@@ -71,6 +85,14 @@ export default {
   },
 
   methods: {
+    showImg(url) {
+      this.show = true;
+      this.bigImg = url;
+      console.log(this.url);
+    },
+    onClose() {
+      this.show = false;
+    },
     onChange(event) {
       wx.showToast({
         title: `切换到标签 ${event.detail.index + 1}`,

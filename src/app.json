@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
   
