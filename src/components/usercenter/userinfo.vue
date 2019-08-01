@@ -4,7 +4,8 @@
     <img src="/static/images/timg.jpg" alt="bg" class="bg" />
     <div class="avatar-row">
       <img :src="avatarUrl" alt="avatar" class="avatar" />
-      <p class="name">{{nickName}}</p>123
+      <p class="name">{{nickName}}</p>
+       <p>积分：{{integral}}</p>
     </div>
   </div>
 </template>
@@ -26,6 +27,9 @@ export default {
     },
     tangballUserInfo: function() {
       return this.$store.state.tangballUserInfo //
+    },
+     integral: function() {
+      return this.$store.state.tangballUserInfo.integral; //
     }
   },
   mounted(){

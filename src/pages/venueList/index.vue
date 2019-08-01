@@ -123,7 +123,7 @@ export default {
 
 <style scoped>
 .main-wrap {
-  padding-bottom: 60px;
+  padding-bottom: 80px;
   position: relative;
 }
 .searchBox {

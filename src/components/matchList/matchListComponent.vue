@@ -82,20 +82,21 @@ export default {
 }
 
 .match-box {
-  margin-bottom: 5px;
+  margin: 5px 15px;
+  /* margin-bottom: 5px; */
   /* position: relative; */
-  border-bottom: #d9d9d9 1px solid;
-  height: 105px;
+  border-bottom: #f4b116 1px solid;
+  height: 97px;
   display: flex;
 }
 .rpg11 {
-  margin-top: 15px;
+  margin-top: 5px;
   margin-right: 5px;
 }
 .match-img-box {
-  margin: 15px 1px 0 10px;
-  height: 80px;
-  width: 80px;
+  margin: 5px 1px 0 0px;
+  height: 85px;
+  width: 85px;
   background: #fff;
 }
 .match-img-box img {
@@ -105,7 +106,7 @@ export default {
 .match-img-box1 {
   padding: 0 0 5px 5px;
   flex: 1;
-  margin: 15px 0 0 0px;
+  margin: 5px 0 0 0px;
   display: flex;
   flex-direction: column;
 }
