@@ -1,14 +1,22 @@
 <template>
   <div class="main-wrap">
     <!-- <debug_item v-model="memberList" text="会员列表" />
-    <debug_item v-model="achievementList" text="会员列表" /> -->
-   <p class="H20 OF2 CL1 "></p>
+    <debug_item v-model="achievementList" text="会员列表" />-->
+    <p class="H10 OF2 CL1"></p>
     <!-- 分页组件 -->
-    <pageLink :config="{}"></pageLink>
-
-    <div class="button-center">
-      <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
-      <van-button
+    <pageLink></pageLink>
+    <div class="button-box">
+      <div
+        @click="clickfun(index,item,item.id)"
+        :key="index"
+        v-for="(item,index) in arrList "
+        :class="{buttonFocus : item.id===selected}"
+      >{{item.name}}</div>
+    </div>
+    <p class="H10 OF2 CL1"></p>
+    <!-- <div class="button-center"> -->
+    <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
+    <!-- <van-button
         plain
         type="primary"
         size="small"
@@ -16,7 +24,7 @@
         :key="index"
         v-for="(item,index) in arrList "
       >{{item.name}}</van-button>
-    </div>
+    </div>-->
     <!--男女选项卡 -->
     <van-tabs :active="active" @change="changeSex">
       <van-tab :title="doc" v-for="(doc,i) in sexArr" :key="i">
@@ -63,23 +71,28 @@ export default {
         {
           name: "参赛次数",
           title: "参赛次数",
-          value: ["name", "entries"]
+          value: ["name", "entries"],
+          id: 1
         },
         {
           name: "成绩排名",
           title: "参数成绩",
-          value: ["participantsName", "matchScore"]
+          value: ["participantsName", "matchScore"],
+          id: 2
         },
         {
           name: "鸟王排名",
-          title: "参赛排名"
+          title: "参赛排名",
+          id: 3
         },
         {
           name: "积分排名",
-          title: "积分排名",
-          value: ["name", "integral"]
+          title: "积分",
+          value: ["name", "integral"],
+          id: 4
         }
       ],
+      selected: 0,
       sexArr: ["男子", "女子"],
       rankingIndex: 0, //参赛次数、成绩排名、鸟王排名、积分排名的索引
       sexIndex: 1, //男或者女的索引
@@ -104,7 +117,7 @@ export default {
      * @desc 参赛次数、成绩排名、鸟王排名、积分排名函数
      * @param index索引值 item.title点击的名称
      */
-    async clickfun(index, item) {
+    async clickfun(index, item, id) {
       this.rankingIndex = index;
       this.activeTitle = item.title;
       if (index == 1) {
@@ -112,6 +125,8 @@ export default {
       } else {
         this.getMemberList(); //请求会员列表函数
       }
+      this.selected = id; //按钮聚焦
+      console.log("id", this.selected);
     },
     /**
      * @name getMemberList请求会员列表
@@ -163,19 +178,44 @@ export default {
 </script>
 
 <style scoped>
+.button-box {
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  color: #f4b116;
+  text-align: center;
+}
+.button-box div {
+  padding: 0 5px;
+  border: 1px solid #f4b116;
+}
+
+.buttonFocus {
+  background-color: #f4b116;
+  color: #fff;
+}
+
 /* 排名按钮 */
 .button-center {
   margin: 0 auto;
   width: 100%;
   max-width: 800px;
   text-align: center;
+  padding-top: 10px;
 }
 .button-center van-button {
   margin: 5px;
 }
+
 .ranking-title-box {
   display: flex;
   justify-content: space-evenly;
+  border: 1px solid #fff;
+  border-bottom-color: #f8f8f8;
+  font-weight: bold;
+  margin: 5px 10px 5px 10px;
 }
 /* 排名标题 */
 .ranking-title {

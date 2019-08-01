@@ -8,7 +8,7 @@
         <div class="venue-textBox">
           <div class="venue-text">
             <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
-            <span>{{cf.name}}</span>
+            <span class="FWB FS16">{{cf.name}}</span>
           </div>
           <div>电话:{{cf.phoneNumber}}</div>
           <div class="venue-text">地址:{{cf.address}}</div>
@@ -52,28 +52,26 @@ export default {
 
 <style scoped>
 .main-venue {
-  width: 350px;
-  margin: 5px;
-  padding: 0 10px;
+  width: 355px;
+  margin: 10px;
   overflow: hidden;
+  border-bottom: 1px solid #f4b116;
 }
 .venue-imgBox {
-  width: 110px;
-  height: 70px;
-  margin: 5px auto;
+  width: 85px;
+  height: 85px;
+  margin-bottom: 10px;
   float: left;
-  /* border: 1px solid #f00; */
 }
 .venue-imgBox img {
   width: 100%;
   height: 100%;
 }
 .venue-textBox {
-  width: 190px;
+  width: 210px;
   float: left;
   margin: 5px 10px;
-  line-height: 20px;
-  /* border: 1px solid #f00; */
+  line-height: 25px;
 }
 .venue-text {
   white-space: nowrap;
@@ -85,6 +83,5 @@ export default {
   color: #999;
   float: right;
   margin-top: 28px;
-  /* border: 1px solid #f00; */
 }
 </style>
