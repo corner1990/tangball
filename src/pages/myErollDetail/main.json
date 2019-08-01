@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "赛事详情",
+  "navigationBarTitleText": "报名详情",
   "usingComponents": {
     "van-search": "/static/vant/search/index",
     "van-card": "/static/vant/card/index",

@@ -1,14 +1,5 @@
 <template>
   <div class="main-wrap">
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')" >我的参赛详情2</van-button>
-   
-   <view class="btn-area">
-  <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
-  <navigator url="/pages/myErollDetail/main?dataId=3" open-type="redirect" hover-class="other-navigator-hover">在当前页打开</navigator>
-  <navigator url="/pages/tanghome/main" open-type="switchTab" hover-class="other-navigator-hover">切换 Tab-针对tabar中的页面</navigator>
-</view>
-   
     <van-cell
       is-link
       :title="item.title"
@@ -17,7 +8,25 @@
       v-for="(item,i) in arrLink"
       :key="i"
     />
+    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
+    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
+
+    <view class="btn-area">
+      <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
+      <navigator
+        url="/pages/myErollDetail/main?dataId=3"
+        open-type="redirect"
+        hover-class="other-navigator-hover"
+      >在当前页打开</navigator>
+      <navigator
+        url="/pages/tanghome/main"
+        open-type="switchTab"
+        hover-class="other-navigator-hover"
+      >切换 Tab-针对tabar中的页面</navigator>
+    </view>
     <swiper
+      :indicator-active-color="indicatorActiveColor"
+      :indicator-color="indicatorColor"
       :indicator-dots="indicatorDots"
       :autoplay="autoplay"
       :interval="interval"
@@ -25,27 +34,13 @@
     >
       <block v-for="item in imgUrls" :key="item">
         <swiper-item>
-          <image :src="item" class="slide-image" height="150"/>
+          <image :src="item" class="slide-image" height="150" />
         </swiper-item>
       </block>
     </swiper>
-    <van-search :value="value" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch"/>
+
     <div class="card">
-      <h3>赛事</h3>
-      <van-tabs :active="active" bind:change="onChange">
-        <van-tab title="近期">
-          <van-card desc="描述信息" title="商品标题"/>
-        </van-tab>
-        <van-tab title="全国">
-          <van-card tag="222" desc="描述信息" title="商品标题"/>
-        </van-tab>
-        <van-tab title="加盟商">
-          <van-card tag="333" desc="描述信息" title="商品标题"/>
-        </van-tab>
-        <van-tab title="全部">
-          <van-card tag="444" desc="描述信息" title="商品标题" thumb="111"/>
-        </van-tab>
-      </van-tabs>
+      <matchlist></matchlist>
     </div>
     <div class="card">
       <h3>唐球达人</h3>
@@ -98,106 +93,119 @@
 
 <script>
 /* eslint-disable */
-
-
-import mytabbar from '@/components/mytabbar/mytabbar'
-
-
-import card from '@/components/card'
+import util from "@/utils/util";
+import mytabbar from "@/components/mytabbar/mytabbar";
+import matchlist from "../matchList/index";
+import card from "@/components/card";
 // import { get } from '@/utils/request'
 export default {
   components: {
-    card, mytabbar
+    card,
+    mytabbar,
+    matchlist
   },
   data() {
     return {
       arrLink: [
-         { "title": "ajaxDemo", "url": "/pages/ajaxDemo/main" },
-        { "title": "赛事列表-", "url": "/pages/matchList/main" },
-        { "title": "赛事详情", "url": "/pages/matchDetail/main" },
-        { "title": "赛事报名", "url": "/pages/matchEroll/main" },
+        { title: "ajaxDemo", url: "/pages/ajaxDemo/main" },
+        { title: "赛事列表-", url: "/pages/matchList/main" },
+        { title: "赛事详情", url: "/pages/matchDetail/main" },
+        { title: "赛事报名", url: "/pages/matchEroll/main" },
         // { "title": "场馆列表", "url": "/pages/venueList/main" },
-        { "title": "场馆详情", "url": "/pages/venueDetail/main" },
-        { "title": "唐球达人", "url": "/pages/rankingList/main" },
-
-        { "title": "个人中心-赛事报名列表", "url": "/pages/myEroll/main" },
-        { "title": "个人中心-赛事报名详情", "url": "/pages/myErollDetail/main" },
-        { "title": "个人中心-系统消息列表", "url": "/pages/myMsgList/main" }
-
+        { title: "场馆详情", url: "/pages/venueDetail/main" },
+        { title: "唐球达人", url: "/pages/rankingList/main" },
+        { title: "个人中心-我的资料", url: "/pages/myInfo/main" },
+        { title: "个人中心-赛事报名列表", url: "/pages/myEroll/main" },
+        { title: "个人中心-赛事报名详情", url: "/pages/myErollDetail/main" },
+        { title: "个人中心-系统消息列表", url: "/pages/myMsgList/main" },
+        { title: "文章列表", url: "/pages/articleList/main" },
+        { title: "文章详情", url: "/pages/articleDetail/main" }
       ],
-      motto: 'Hello miniprograme',
+      motto: "Hello miniprograme",
       userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
+        nickName: "mpvue",
+        avatarUrl: "http://mpvue.com/assets/logo.png"
       },
 
       radio: 1,
       imgUrls: [
-        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
+        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
+        "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
-      indicatorDots: false,
+      indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-
-      value: '' // 搜索value
-    }
+      indicatorActiveColor: "#2f0000",
+      indicatorColor: "#e0e0e0",
+      value: "" // 搜索value
+    };
   },
 
-
-
   methods: {
-    gotoPage(url){
-      console.log("gotoPage");
-      // let url="/pages/tanghome/main";
-       wx.navigateTo({ url })
+    gotoPage(url) {
+      wx.navigateTo({ url });
     },
     bindViewTap() {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
+      const url = "../logs/main";
+      if (mpvuePlatform === "wx") {
+        mpvue.switchTab({ url });
       } else {
-        mpvue.navigateTo({ url })
+        mpvue.navigateTo({ url });
       }
     },
     clickHandle(ev) {
-      console.log('clickHandle:', ev)
+      console.log("clickHandle:", ev);
       // throw {message: 'custom test'}
     },
-  
+
     /**
      * @desc 搜索回调
      */
-    onSearch() { },
+    onSearch() {},
     /**
      * @desc 赛事切换回调
      */
     tabChange(url) {
-      console.log(url)
+      console.log(url);
       wx.switchTab({
         url
-      })
+      });
     }
   },
-    onShow() {
-    console.log("onShow");
-      wx.hideTabBar({
+  onShow() {
+    console.log("index-onShow");
+    wx.hideTabBar({
       complete() {
-        console.log('关闭tabbar')
+        console.log("关闭tabbar");
       }
-    })
-    },
+    });
+  },
+  async mounted() {
+    /****************************微信会员登录和信息存储-START****************************/
+    console.log("index-mounted");
+    let result = await util.getMyWXSetting();
+    console.log("result#", result);
+    //如果未授权，先return,等待用户主动授权
+    if (result == "noAuth") {
+      console.log("noAuth,等待授权");
+      util.gotoPage("/pages/authorize/main"); //跳转到授权页面
+      return;
+    }
+
+    await util.loginAndInitUser(this);//函数：{登录并ajax初始化用户信息的函数}
+
+    /****************************微信会员登录和信息存储-END****************************/
+  },
+
   created() {
-    console.log('12312')
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
-   
   }
-}
+};
 </script>
 
 <style scoped>
@@ -211,5 +219,8 @@ export default {
 }
 .card {
   margin: 0 10px;
+}
+.slide-image {
+  width: 100%;
 }
 </style>

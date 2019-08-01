@@ -1,7 +1,21 @@
 <script>
 /* eslint-disable*/
+
+import util from "@/utils/util";
+//函数定义：{根据微信用户id初始化用户信息和学习数据}
+
+
+
+
+
 export default {
-  created () {
+  methods: {
+    initByUserInfo: async function(res, js_code) {
+     
+    }
+  },
+  async created() {
+    console.log("APP-created");
     // 调用API从本地缓存中获取数据
     /*
      * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
@@ -10,58 +24,32 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-    wx.hideTabBar({
-      complete () {
-        console.log('关闭tabbar')
-      }
-    })
-    let logs
-    if (mpvuePlatform === 'swan') {
-      logs = mpvue.getStorageSync({key: 'logs'}).data || []
-      logs.unshift(Date.now())
+    /****************************日志存储-START****************************/
+    let logs;
+    if (mpvuePlatform === "swan") {
+      logs = mpvue.getStorageSync({ key: "logs" }).data || [];
+      logs.unshift(Date.now());
       mpvue.setStorageSync({
-        key: 'logs',
+        //日志
+        key: "logs",
         data: logs
-      })
+      });
     } else {
-      logs = mpvue.getStorageSync('logs') || []
-      logs.unshift(Date.now())
-      mpvue.setStorageSync('logs', logs)
+      logs = mpvue.getStorageSync("logs") || [];
+      logs.unshift(Date.now());
+      mpvue.setStorageSync("logs", logs);
     }
+    /****************************日志存储-END****************************/
 
-    wx.login({
-      success (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getOpenId',
-            method: 'post',
-            data: {
-              code: res.code
-            },
-            success (res) {
-              let { statusCode, data } = res
-              if (statusCode === 200) {
-                wx.setStorage({
-                  key: 'ids',
-                  data: JSON.stringify(data)
-                })
-              }
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    })
+    
   },
-  log () {
-    console.log(`log at:${Date.now()}`)
+  log() {
+    console.log(`log at:${Date.now()}`);
   },
-  onShow () {
-    wx.hideTabBar()
+  onShow() {
+    wx.hideTabBar();
   }
-}
+};
 </script>
 
 <style>

@@ -1,21 +1,40 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/matchEroll/main",
-    "pages/myMsgList/main",
-    "pages/matchList/main",
-    "pages/ajaxDemo/main",
-    "pages/venueList/main",
+=======
     "pages/index/main",
+    "pages/authorize/main",
+    "pages/ajaxDemo/main",
+    "pages/myEroll/main",
+>>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
+    "pages/myMsgList/main",
+    "pages/myInfo/main", 
+    "pages/matchList/main",
+    "pages/venueList/main",
+<<<<<<< HEAD
+    "pages/index/main",
+=======
+    "pages/matchEroll/main",
+>>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
+    "pages/venueDetail/main",
     "pages/rankingList/main",
+<<<<<<< HEAD
     "pages/myEroll/main",
     "pages/myErollDetail/main"
     
+=======
+    
+    "pages/myErollDetail/main",
+    "pages/articleList/main",
+    "pages/articleDetail/main"
+>>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,8 +61,8 @@
         "selectedIconPath": "static/tabs/orders-active.png"
       },
       {
-        "text": "活动",
-        "pagePath": "pages/event/main",
+        "text": "唐球达人",
+        "pagePath": "pages/rankingList/main",
         "iconPath": "static/tabs/orders.png",
         "selectedIconPath": "static/tabs/orders-active.png"
       },

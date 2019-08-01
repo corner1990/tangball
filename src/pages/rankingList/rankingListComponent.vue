@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 子组件：用于展示排名信息-->
     <div class="ranking-content">
       <div>
         <a>{{ranking}}</a>
@@ -16,14 +17,7 @@ export default {
   components: {},
   props: ["cf", "value", "ranking"],
   data() {
-    return {
-      // cfList: {
-      // //默认排序参数
-      // sortJsonDefault: {
-      //   "item.entries": 1
-      // }
-      // }
-    };
+    return {};
   },
   components: {}
 };
@@ -31,13 +25,13 @@ export default {
 
 <style scoped>
 .ranking-content {
-  margin: 0 auto;
-  width: 100%;
+  display: flex;
+  margin: 5px 10px;
+  justify-content: space-evenly;
   text-align: center;
 }
 .ranking-content div {
   width: 100px;
-  display: inline-block;
   text-align: center;
   margin: 5px;
 }

@@ -125,7 +125,7 @@ export default {
       }
       const self = this;
       wx.request({
-        url: 'https://e6234kn.hn3.mofasuidao.cn/paicheng/getCode',
+        url: `${global.PUB.domain}/paicheng/getCode`,
         data,
         method: 'post',
         success (res) {

@@ -6,7 +6,7 @@
       </div>
       <div class="venue-textbox">
         <div>
-          <span class="C_999">【{{area}}】</span>
+          <span class="C_999" v-if="cityDoc">【{{cityDoc.P2}}】</span>
           <span>{{title}}</span>
         </div>
         <div>电话:{{phone}}</div>
@@ -25,13 +25,11 @@ export default {
   data() {
     return {};
   },
-  props: ["area", "title", "phone", "address", "album", "P1", "itemshow"],
+  props: ["cityDoc", "title", "phone", "address", "album", "P1", "itemshow"],
   components: {},
   methods: {},
   created() {},
-  mounted() {
-   
-  }
+  mounted() {}
 };
 </script>
 
@@ -40,6 +38,7 @@ export default {
   width: 345px;
   height: 110px;
   margin: 15px;
+  border-bottom: #f4b116 1px solid;
 }
 .venue-imgbox {
   width: 135px;

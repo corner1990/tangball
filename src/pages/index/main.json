@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "唐球",
+  "navigationBarTitleText": "唐球赛事",
   "usingComponents": {
     "van-search": "/static/vant/search/index",
     "van-card": "/static/vant/card/index",
