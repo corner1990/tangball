@@ -1,7 +1,7 @@
 <template>
-  <div class="main-venue" v-if="cf.show">
-    <navigator :url="venueDetaiUrl">
-      <div>
+  <div>
+    <navigator :url="venueDetaiUrl" hover-class="none">
+      <div class="main-venue" v-if="cf.show">
         <div class="venue-imgBox">
           <img :src="venueListImg" />
         </div>
@@ -52,8 +52,8 @@ export default {
 
 <style scoped>
 .main-venue {
-  width: 355px;
-  margin: 10px;
+  width: 345px;
+  margin: 15px;
   overflow: hidden;
   border-bottom: 1px solid #f4b116;
 }
@@ -68,9 +68,9 @@ export default {
   height: 100%;
 }
 .venue-textBox {
-  width: 210px;
+  width: 63%;
   float: left;
-  margin: 5px 10px;
+  margin: 5px 0 5px 10px;
   line-height: 25px;
 }
 .venue-text {
