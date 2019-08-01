@@ -13,7 +13,7 @@
         :class="{buttonFocus : item.id===selected}"
       >{{item.name}}</div>
     </div>
-
+    <p class="H10 OF2 CL1"></p>
     <!-- <div class="button-center"> -->
     <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
     <!-- <van-button
@@ -180,8 +180,8 @@ export default {
 <style scoped>
 .button-box {
   font-size: 18px;
-  height: 35px;
-  line-height: 35px;
+  height: 40px;
+  line-height: 40px;
   display: flex;
   justify-content: space-evenly;
   color: #f4b116;
@@ -212,6 +212,10 @@ export default {
 .ranking-title-box {
   display: flex;
   justify-content: space-evenly;
+  border: 1px solid #fff;
+  border-bottom-color: #f8f8f8;
+  font-weight: bold;
+  margin: 5px 10px 5px 10px;
 }
 /* 排名标题 */
 .ranking-title {
