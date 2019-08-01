@@ -25,6 +25,8 @@
       >切换 Tab-针对tabar中的页面</navigator>
     </view>
     <swiper
+      :indicator-active-color="indicatorActiveColor"
+      :indicator-color="indicatorColor"
       :indicator-dots="indicatorDots"
       :autoplay="autoplay"
       :interval="interval"
@@ -131,11 +133,12 @@ export default {
         "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
         "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
-      indicatorDots: false,
+      indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-
+      indicatorActiveColor: "#2f0000",
+      indicatorColor: "#e0e0e0",
       value: "" // 搜索value
     };
   },

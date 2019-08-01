@@ -266,8 +266,19 @@ export default {
 </script>
 
 <style scoped>
+.swiper-item {
+height:1000px;
+
+}
+
+.slide-image{
+  width: 100%;
+  height: 120%;
+  overflow: hidden;
+}
 .main-wrap {
   padding-bottom: 60px;
+
 }
 .title {
   margin: 10px 20px;
