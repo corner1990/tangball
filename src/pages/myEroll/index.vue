@@ -21,9 +21,7 @@
             plain
             size="small"
             type="danger"
-            @click="daying"
-            
-           
+            @click="daying" 
           >查看详情</van-button>
         </div>
       </div>

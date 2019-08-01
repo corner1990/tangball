@@ -9,6 +9,7 @@
         :autoplay="autoplay"
         :interval="interval"
         :duration="duration"
+        indicator-active-color="white"
       >
         <block v-for="item in venueDoc.album" :key="item.url">
           <swiper-item>
@@ -33,9 +34,9 @@
         <van-tabs :active="active" v-bind:change="onChange">
           <van-tab title="场馆介绍1">
             <div style="font-size:16px;margin-top:5px">
-              <h2>场馆名称:{{venueDoc.name}}</h2>
-              <h2>场馆地址:{{venueDoc.address}}</h2>
-              <h2>场馆电话:{{venueDoc.phoneNumber}}</h2>
+              <van-cell title="场馆名称" title-width="100px" :value="venueDoc.name" />
+              <van-cell title="场馆地址" title-width="100px" :value="venueDoc.address" />
+              <van-cell title="场馆电话" title-width="100px" :value="venueDoc.phoneNumber" />
             </div>
           </van-tab>
           <van-tab title="地理位置">
@@ -46,7 +47,6 @@
                   :latitude="venueDoc.extend.latitude"
                   :longitude="venueDoc.extend.longitude"
                   :markers="markers"
-           
                 ></map>
               </div>
             </div>
@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       //注册图片
-      bigImg:"",
+      bigImg: "",
       show: false,
       // radio: 1,
       indicatorDots: true,
@@ -81,7 +81,7 @@ export default {
       pageName: "场馆详情",
       value: "", // 搜索value
       venueDoc: null,
-      markers: [{longitude:"",latitude:"",iconPath: ""}]
+      markers: [{ longitude: "", latitude: "", iconPath: "" }]
       // imgUrls: []
       // P1: null
     };
@@ -96,7 +96,7 @@ export default {
     onClose() {
       this.show = false;
     },
-  
+
     /**
     * ajax获取当前场馆数据函数
 
@@ -110,12 +110,12 @@ export default {
         }
       });
       this.venueDoc = doc.data.Doc;
-      
-      console.log("555555555",this.markers)
+
+      console.log("555555555", this.markers);
       //  Object.assign(this.markers[0], ...this.venueDoc.extend)
-      console.log("2222",this.markers)
-      this.markers[0]=this.venueDoc.extend
-       console.log("3333",this.markers)
+      console.log("2222", this.markers);
+      this.markers[0] = this.venueDoc.extend;
+      console.log("3333", this.markers);
       // this.markers.push({
       //   longitude: this.venueDoc.extend.longitude,
       //   latitude: this.venueDoc.extend.latitude,

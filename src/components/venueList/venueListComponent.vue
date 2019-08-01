@@ -1,6 +1,6 @@
 <template>
   <div class="main-venue" v-if="cf.show">
-    <navigator :url="venueDetaiUrl">
+    <navigator style=" height: 90px" :url="venueDetaiUrl">
       <div class="venue-imgBox">
         <img :src="venueListImg" />
       </div>
@@ -13,7 +13,7 @@
         <div>地址:{{cf.address}}</div>
       </div>
       <div class="LH110 arrow">
-        <van-icon name="arrow" size="20px" style="color:#999999"/>
+        <van-icon name="arrow" size="20px" style="color:#999999" />
       </div>
     </navigator>
   </div>
@@ -51,9 +51,9 @@ export default {
 <style scoped>
 .main-venue {
   width: 345px;
-  height: 90px;
-  margin: 5px 3px;
-  padding-left:15px;
+  margin-left: 15px;
+  border-bottom: 1px solid #f4b116;
+  margin-top: 8px;
 }
 .venue-imgBox {
   width: 135px;
@@ -71,7 +71,6 @@ export default {
   float: left;
   margin-top: 10px;
   line-height: 20px;
-  padding-left:10px;
+  padding-left: 10px;
 }
-
 </style>

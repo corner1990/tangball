@@ -9,6 +9,7 @@
     <!-- 赛事照片 -->
     <div class>
       <swiper
+        style="height:250px"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
@@ -16,7 +17,13 @@
       >
         <block v-for="item in matchlistDoc.album" :key="item">
           <swiper-item>
-            <image :src="item.url" class="slide-image"  v-if="matchlistDoc.album"  style="width:100%"  height="250"/>
+            <image
+              :src="item.url"
+              class="slide-image"
+              v-if="matchlistDoc.album"
+              style="width:100%"
+              height="250"
+            />
           </swiper-item>
         </block>
       </swiper>
@@ -93,7 +100,7 @@ export default {
       ],
       matchlistDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
-      indicatorDots: false,
+      indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
