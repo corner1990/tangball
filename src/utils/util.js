@@ -133,19 +133,41 @@ var parseParam = function (param, key1) { //函数：{将json转成url参数形�
  * url
  * data 以对象的格式传入
  */
-function getRequest(url, data) {
-  var getRequest = wxPromisify(wx.request)
-  data = parseParam(data); //调用：{将json转成url参数形式},
-  console.log("data###", data);
-  return getRequest({
+// function getRequest(url, data) {
+//   var getRequest = wxPromisify(wx.request)
+//   data = parseParam(data); //调用：{将json转成url参数形式},
+//   console.log("data###", data);
+//   return getRequest({
+//     url: url,
+//     method: 'GET',
+//     data: data,
+//     header: {
+//       'Content-Type': 'application/json'
+//     }
+//   })
+// }
+
+/**
+ * 微信请求get方法封装
+ * url
+ * data 以对象的格式传入
+ */
+function get(json) {
+  let { url, param } = json;
+  var postRequest = wxPromisify(wx.request)
+  // param = parseParam(param); //调用：{将json转成url参数形式},
+  var strParam = JSON.stringify(param);//变量定义：{Json对象转换Json字符串函数}
+  return postRequest({
     url: url,
-    method: 'GET',
-    data: data,
-    header: {
-      'Content-Type': 'application/json'
-    }
+    method: 'get',
+    data: strParam,
+
   })
 }
+
+
+
+
 /**
  * 微信请求post方法封装
  * url
@@ -477,8 +499,8 @@ let getMyWXSetting = async function (url) {
      * @param vm：vue实例，传递给ajaxMyWXUserInfo方法需要对vuex进行操作
     
      */
-let loginAndInitUser = async function (vm,wxLoginAsync) {
- 
+let loginAndInitUser = async function (vm, wxLoginAsync) {
+
   let resLogin = await wxLogin(); //微信会员登录结果
   console.log("resLogin", resLogin);
   let js_code = resLogin.code; //当前用户的微信code
@@ -536,7 +558,11 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
       }
     });
 
-    console.log("data######", data);
+
+
+
+
+
 
     wx.setStorage({
       //存储ids到storeage
@@ -546,7 +572,27 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     wx.hideLoading();
 
     console.log("vm.$store.commit");
-    vm.$store.commit("setUserInfo", data.data2);
+    vm.$store.commit("setWXUserInfo", data.data2);
+    let openid = vm.$lodash.get(data, `data2.openId`);
+    let wxNickName = vm.$lodash.get(data, `data2.nickName`);
+    console.log("openid", openid);
+
+    {
+      /**
+          * ajax获取唐球用户信息，如果不存在会自动注册
+          */
+      let { data } = await util.post({
+        url: global.PUB.domain + "/tangball/getTangballUser",
+        param: {
+          openid, wxNickName
+        }
+      });
+      console.log("data##￥￥￥￥", data);
+      vm.$store.commit("setTangballUserInfo", data);
+
+    }
+
+
   } catch (err) {
     wx.showLoading({
       title: "请求openId失败"
@@ -560,7 +606,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
 let util = {
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数
-  $get: getRequest, // get方法封装
+  get: get, // get方法封装
   post: post, //post方法封装
   wxPromisify: wxPromisify, //promise 方法
   wxLogin: wxLogin, // 登录用户发那个发封装
@@ -572,9 +618,10 @@ let util = {
   ajaxAdd, ajaxModify, ajaxDelete, showModal, gotoPage, ajaxMyWXUserInfo, getMyWXSetting, loginAndInitUser
 }
 /****************************将微信的一些异步接口转成promise，支持同步的写法-START****************************/
- wxLogin = util.wxPromisify(wx.login);
+//这几个方法就是要这样重写，特别奇怪
+wxLogin = util.wxPromisify(wx.login);
 let wxGetSetting = util.wxPromisify(wx.getSetting);
-  wxGetUserInfo = util.wxPromisify(wx.getUserInfo);
+wxGetUserInfo = util.wxPromisify(wx.getUserInfo);
 /****************************将微信的一些异步接口转成promise，支持同步的写法-END****************************/
 
 export default util

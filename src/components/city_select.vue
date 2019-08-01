@@ -82,7 +82,7 @@ export default {
 .select-city-box {
   margin-top: 40px;
   height: 100%;
-
+  padding: 0px 15px;
 }
 .select-text {
   height: 40px;
