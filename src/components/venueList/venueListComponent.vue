@@ -1,19 +1,21 @@
 <template>
   <div class="main-venue" v-if="cf.show">
     <navigator :url="venueDetaiUrl">
-      <div class="venue-imgBox">
-        <img :src="venueListImg" />
-      </div>
-      <div class="venue-textBox">
-        <div>
-          <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
-          <span>{{cf.name}}</span>
+      <div>
+        <div class="venue-imgBox">
+          <img :src="venueListImg" />
         </div>
-        <div>电话:{{cf.phoneNumber}}</div>
-        <div>地址:{{cf.address}}</div>
-      </div>
-      <div class="LH110 arrow">
-        <van-icon name="arrow" size="20px" style="color:#999999"/>
+        <div class="venue-textBox">
+          <div class="venue-text">
+            <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
+            <span>{{cf.name}}</span>
+          </div>
+          <div>电话:{{cf.phoneNumber}}</div>
+          <div class="venue-text">地址:{{cf.address}}</div>
+        </div>
+        <div class="arrow">
+          <van-icon name="arrow" size="20px" />
+        </div>
       </div>
     </navigator>
   </div>
@@ -50,28 +52,39 @@ export default {
 
 <style scoped>
 .main-venue {
-  width: 345px;
-  height: 90px;
-  margin: 5px 3px;
-  padding-left:15px;
+  width: 350px;
+  margin: 5px;
+  padding: 0 10px;
+  overflow: hidden;
 }
 .venue-imgBox {
-  width: 135px;
-  height: 80px;
-  margin: 5px;
+  width: 110px;
+  height: 70px;
+  margin: 5px auto;
   float: left;
+  /* border: 1px solid #f00; */
 }
 .venue-imgBox img {
   width: 100%;
   height: 100%;
 }
 .venue-textBox {
-  width: 165px;
-  height: 90px;
+  width: 190px;
   float: left;
-  margin-top: 10px;
+  margin: 5px 10px;
   line-height: 20px;
-  padding-left:10px;
+  /* border: 1px solid #f00; */
+}
+.venue-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+.arrow {
+  color: #999;
+  float: right;
+  margin-top: 28px;
+  /* border: 1px solid #f00; */
+}
 </style>
