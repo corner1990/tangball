@@ -50,10 +50,11 @@ export default {
 
 <style scoped>
 .main-venue {
-  width: 345px;
+  height: 100%;
+  width: 100%;
   margin-left: 15px;
   border-bottom: 1px solid #f4b116;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 .venue-imgBox {
   width: 135px;
@@ -67,9 +68,8 @@ export default {
 }
 .venue-textBox {
   width: 165px;
-  height: 90px;
+  height: 100%;
   float: left;
-  margin-top: 10px;
   line-height: 20px;
   padding-left: 10px;
 }

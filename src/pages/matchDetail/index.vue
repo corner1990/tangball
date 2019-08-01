@@ -18,6 +18,7 @@
         <block v-for="item in matchlistDoc.album" :key="item">
           <swiper-item>
             <image
+              @click="showImg(item.url)"
               :src="item.url"
               class="slide-image"
               v-if="matchlistDoc.album"
@@ -27,6 +28,11 @@
           </swiper-item>
         </block>
       </swiper>
+
+      <!--显示图片弹窗-->
+      <van-popup customStyle="height:250px" v-if="show" :show="show" @close="ClosePhoto">
+        <img style="height:250px" alt :src="bigImg" />
+      </van-popup>
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
@@ -80,6 +86,8 @@ export default {
   },
   data() {
     return {
+      bigImg: "",
+      show: false,
       showdDialog: false,
       cityVenueList: null,
       venueId: null,
@@ -109,6 +117,14 @@ export default {
   },
 
   methods: {
+       showImg(url) {
+      this.show = true;
+      this.bigImg = url;
+      console.log(this.url);
+    },
+    ClosePhoto() {
+      this.show = false;
+    },
     /**
      * @name onClose是弹窗的函数
      * @desc
@@ -267,18 +283,16 @@ export default {
 
 <style scoped>
 .swiper-item {
-height:1000px;
-
+  height: 1000px;
 }
 
-.slide-image{
+.slide-image {
   width: 100%;
   height: 120%;
   overflow: hidden;
 }
 .main-wrap {
   padding-bottom: 60px;
-
 }
 .title {
   margin: 10px 20px;
