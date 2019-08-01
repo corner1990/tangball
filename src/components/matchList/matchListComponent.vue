@@ -82,6 +82,7 @@ export default {
 }
 
 .match-box {
+  margin: 5px 15px;
   /* margin-bottom: 5px; */
   /* position: relative; */
   border-bottom: #f4b116 1px solid;
