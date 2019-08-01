@@ -4,10 +4,6 @@
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
-<<<<<<< HEAD
-    "pages/index/main",
-=======
->>>>>>> 17d6bd4b42509f0a6cb299625724b772ca78164a
     "pages/myMsgList/main",
     "pages/myInfo/main", 
     "pages/matchList/main",
