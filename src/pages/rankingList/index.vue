@@ -1,12 +1,22 @@
 <template>
   <div class="main-wrap">
-    <debug_item v-model="memberList" text="会员列表" />
-    <debug_item v-model="achievementList" text="会员列表" />
-    <pageLink :config="{}"></pageLink>
+    <!-- <debug_item v-model="memberList" text="会员列表" />
+    <debug_item v-model="achievementList" text="会员列表" />-->
+    <p class="H10 OF2 CL1"></p>
+    <!-- 分页组件 -->
+    <pageLink></pageLink>
+    <div class="button-box">
+      <div
+        @click="clickfun(index,item,item.id)"
+        :key="index"
+        v-for="(item,index) in arrList "
+        :class="{buttonFocus : item.id===selected}"
+      >{{item.name}}</div>
+    </div>
 
-    <div class="button-center">
-      <!-- ----参赛次数、成绩排名、鸟王排名、积分排名等按钮--- -->
-      <van-button
+    <!-- <div class="button-center"> -->
+    <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
+    <!-- <van-button
         plain
         type="primary"
         size="small"
@@ -14,14 +24,17 @@
         :key="index"
         v-for="(item,index) in arrList "
       >{{item.name}}</van-button>
-    </div>
-    <!---------- 男女选项卡-------- -->
+    </div>-->
+    <!--男女选项卡 -->
     <van-tabs :active="active" @change="changeSex">
       <van-tab :title="doc" v-for="(doc,i) in sexArr" :key="i">
         <!-- 子选项卡，排名、男子排名、参赛次数 -->
-        <div class="ranking-title">排名</div>
-        <div class="ranking-title">{{doc+"名字"}}</div>
-        <div class="ranking-title">{{activeTitle}}</div>
+        <div class="ranking-title-box">
+          <div class="ranking-title">排名</div>
+          <div class="ranking-title">{{doc+"名字"}}</div>
+          <div class="ranking-title">{{activeTitle}}</div>
+        </div>
+        <!-- 展示排名信息组件 -->
         <rankingListComponent
           v-for="(each,j) in memberList[sexIndex - 1].list "
           :ranking="j+1"
@@ -58,23 +71,28 @@ export default {
         {
           name: "参赛次数",
           title: "参赛次数",
-          value: ["name", "entries"]
+          value: ["name", "entries"],
+          id: 1
         },
         {
           name: "成绩排名",
           title: "参数成绩",
-          value: ["participantsName", "matchScore"]
+          value: ["participantsName", "matchScore"],
+          id: 2
         },
         {
           name: "鸟王排名",
-          title: "参赛排名"
+          title: "参赛排名",
+          id: 3
         },
         {
           name: "积分排名",
-          title: "积分排名",
-          value: ["name", "integral"]
+          title: "积分",
+          value: ["name", "integral"],
+          id: 4
         }
       ],
+      selected: 0,
       sexArr: ["男子", "女子"],
       rankingIndex: 0, //参赛次数、成绩排名、鸟王排名、积分排名的索引
       sexIndex: 1, //男或者女的索引
@@ -84,27 +102,37 @@ export default {
     };
   },
   methods: {
-    onShow() {
-      console.log("rankingList-mpvue.data", this);
-    },
-    // -------------------切换男女函数------------------
+    /**
+     * @name changeSex切换男女函数方法
+     * @desc 判断当前状态是男还是女，并改变索引值
+     * @param 参数说明
+     */
     changeSex(e) {
       if (e.target.index == 0) {
       }
       this.sexIndex = e.target.index + 1; //改变当前男女状态的索引
     },
-    // -----参赛次数、成绩排名、鸟王排名、积分排名函数
-    async clickfun(index, item) {
+    /**
+     * @name clickfun根据索引值判断需要调用的列表
+     * @desc 参赛次数、成绩排名、鸟王排名、积分排名函数
+     * @param index索引值 item.title点击的名称
+     */
+    async clickfun(index, item, id) {
       this.rankingIndex = index;
       this.activeTitle = item.title;
-
       if (index == 1) {
         this.getAchievementList(); //index为1：成绩排名，触发成绩列表函数
       } else {
         this.getMemberList(); //请求会员列表函数
       }
+      this.selected = id; //按钮聚焦
+      console.log("id", this.selected);
     },
-    // -------------------会员列表------------------
+    /**
+     * @name getMemberList请求会员列表
+     * @desc 会员列表
+     * @param pageSize展示页数 entries次数排名正序 integral积分排名正序
+     */
     async getMemberList(url, sortJson, selectJson) {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_member",
@@ -114,7 +142,9 @@ export default {
         }
       });
 
-      // 根据成绩列表的第一个列表是男，第二个列表是女
+      /**
+       * @desc 根据成绩列表的第一个列表是男，第二个列表是女
+       */
       this.memberList[0].list = data.list.filter(doc => {
         return doc.sex == 1;
       });
@@ -122,7 +152,11 @@ export default {
         return doc.sex == 2;
       });
     },
-    // -------------------成绩列表------------------
+    /**
+     * @name getAchievementList请求成绩列表
+     * @desc 成绩列表
+     * @param pageSize展示页数 matchScore成绩排名正序
+     */
     async getAchievementList(url, sortJson, selectJson) {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_achievement",
@@ -144,24 +178,48 @@ export default {
 </script>
 
 <style scoped>
+.button-box {
+  font-size: 18px;
+  height: 35px;
+  line-height: 35px;
+  display: flex;
+  justify-content: space-evenly;
+  color: #f4b116;
+  text-align: center;
+}
+.button-box div {
+  padding: 0 5px;
+  border: 1px solid #f4b116;
+}
+
+.buttonFocus {
+  background-color: #f4b116;
+  color: #fff;
+}
+
 /* 排名按钮 */
 .button-center {
   margin: 0 auto;
   width: 100%;
   max-width: 800px;
   text-align: center;
+  padding-top: 10px;
 }
 .button-center van-button {
   margin: 5px;
 }
+
+.ranking-title-box {
+  display: flex;
+  justify-content: space-evenly;
+}
 /* 排名标题 */
 .ranking-title {
+  margin: 10px 5px;
   width: 100px;
   height: 30px;
-  line-height: 30px;
-  display: inline-block;
   text-align: center;
-  margin: 10px 5px;
+  line-height: 30px;
 }
 /* 底部间隙 */
 .bottom-space {

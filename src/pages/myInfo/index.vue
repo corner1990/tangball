@@ -1,6 +1,5 @@
 <template>
   <div class="myInfo-box">
-    <h1 class="message-head">基本信息</h1>
     <div class="message-main" >
       <div style="height:5px;"></div>
       <!-- 循环遍历信息，渲染页面 -->
@@ -30,7 +29,8 @@
               </div>
               <input v-else
               class="input-text" :class="focusIndex==index?'active':''" type="text" v-model="memberMessage[message.index]"
-              @click="focusIndex=index"/>
+              @click="focusIndex=index"
+              placeholder="请输入"/>
             </div>
             <div style="clear:both"></div>
           </div>
@@ -52,8 +52,8 @@ export default {
   },
   data() {
     return {
-      ballAge:"",
-      sex:"",
+      ballAge:"请选择",
+      sex:"请选择",
       num:"aa",
       memberId:"28",
       modifyList:{},
@@ -70,6 +70,12 @@ export default {
         {index:"phone",value:"手机号码:"},
         {index:"career",value:"职业:"}
       ]
+    }
+  },
+  computed: {
+  //唐球会员信息-在vuex中获取
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo 
     }
   },
 
@@ -125,21 +131,21 @@ export default {
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
           findJson: {
-            P1: this.memberId
+            // P1: this.memberId
+            openid:this.tangballUserInfo.openid
           },
         }
       });
       this.memberMessage = data.list[0]
       this.sexToString();
       this.ballAgeToString();
-     console.log(this.memberMessage);
   },
   // 请求修改接口,修改成功跳转到首页
   async modifyMember(){
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: {P1: this.memberId},
+          findJson: {openid: this.tangballUserInfo.openid},
           modifyJson:this.memberMessage
         }
       });
@@ -161,7 +167,8 @@ export default {
 <style scoped>
 .myInfo-box{
   height: 500px;
-  background-color: rgb(246, 248, 250)
+  background-color: rgb(246, 248, 250);
+  overflow: hidden;
 }
 .message-head{
   font-size:18px;
@@ -208,11 +215,13 @@ export default {
      background-color: #F4B116;
      text-align: center;
      margin-left: 5%;
-     height: 30px;
-     line-height: 30px;
-     width:30%;
+     height: 40px;
+     line-height: 40px;
+     width:90%;
      color: white;
-     font-size: 16px;
+     font-size: 20px;
+     margin-right: 20px;
+     border-radius: 10px;
    }
    /* 遮罩层样式 */
    .mask-layer{

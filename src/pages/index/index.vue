@@ -93,7 +93,7 @@
 
 <script>
 /* eslint-disable */
-
+import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import matchlist from "../matchList/index";
 import card from "@/components/card";
@@ -129,8 +129,8 @@ export default {
 
       radio: 1,
       imgUrls: [
-        "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
-        "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
+        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
         "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
       indicatorDots: true,
@@ -175,15 +175,31 @@ export default {
     }
   },
   onShow() {
-    console.log("onShow");
+    console.log("index-onShow");
     wx.hideTabBar({
       complete() {
         console.log("关闭tabbar");
       }
     });
   },
+  async mounted() {
+    /****************************微信会员登录和信息存储-START****************************/
+    console.log("index-mounted");
+    let result = await util.getMyWXSetting();
+    console.log("result#", result);
+    //如果未授权，先return,等待用户主动授权
+    if (result == "noAuth") {
+      console.log("noAuth,等待授权");
+      util.gotoPage("/pages/authorize/main"); //跳转到授权页面
+      return;
+    }
+
+    await util.loginAndInitUser(this);//函数：{登录并ajax初始化用户信息的函数}
+
+    /****************************微信会员登录和信息存储-END****************************/
+  },
+
   created() {
-    console.log("12312");
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)

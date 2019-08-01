@@ -1,5 +1,6 @@
 <template>
   <div>
+   
     <Info />
     <UserOperList />
      <mytabbar :active="3"></mytabbar>
