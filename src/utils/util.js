@@ -558,7 +558,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
       }
     });
 
-   
+
 
 
 
@@ -572,10 +572,10 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     wx.hideLoading();
 
     console.log("vm.$store.commit");
-    vm.$store.commit("setUserInfo", data.data2);
+    vm.$store.commit("setWXUserInfo", data.data2);
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
-console.log("openid", openid);
+    console.log("openid", openid);
 
     {
       /**
@@ -584,16 +584,13 @@ console.log("openid", openid);
       let { data } = await util.post({
         url: global.PUB.domain + "/tangball/getTangballUser",
         param: {
-          openid,wxNickName
+          openid, wxNickName
         }
       });
-      console.log("data##", data);
+      console.log("data##￥￥￥￥", data);
+      vm.$store.commit("setTangballUserInfo", data);
 
     }
-
-
-
-
 
 
   } catch (err) {

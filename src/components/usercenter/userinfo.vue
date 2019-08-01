@@ -1,24 +1,35 @@
 <template>
   <div class="user-info">
+     
     <img src="/static/images/timg.jpg" alt="bg" class="bg" />
     <div class="avatar-row">
       <img :src="avatarUrl" alt="avatar" class="avatar" />
-      <p class="name">{{nickName}}</p>
+      <p class="name">{{nickName}}</p>123
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
+import debug_item from "@/components/common/debug_item/debug_item";
 export default {
+   components: {
+     debug_item,
+  },
   props: ["用户信息"],
   computed: {
     avatarUrl: function() {
-      return this.$store.state.userInfo.avatarUrl; //|| "/static/images/user.png"
+      return this.$store.state.wxUserInfo.avatarUrl; //|| "/static/images/user.png"
     },
     nickName: function() {
-      return this.$store.state.userInfo.nickName; //|| "/static/images/user.png"
+      return this.$store.state.wxUserInfo.nickName; //|| "/static/images/user.png"
+    },
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo //
     }
+  },
+  mounted(){
+    console.log("this.tangballUserInfo", this.tangballUserInfo);
   }
 };
 </script>
