@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/matchEroll/main",
     "pages/myMsgList/main",
     "pages/matchList/main",
     "pages/ajaxDemo/main",
     "pages/venueList/main",
     "pages/index/main",
-    "pages/matchEroll/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -70,6 +70,7 @@
     "van-steps": "/static/vant/steps/index",
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
-    "van-dialog": "/static/vant/dialog/index"
+    "van-dialog": "/static/vant/dialog/index",
+    "van-picker": "/static/vant/picker/index"
   }
 }
