@@ -15,9 +15,7 @@
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
-    
     "pages/rankingList/main",
-    
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
