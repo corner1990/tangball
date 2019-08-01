@@ -1,6 +1,5 @@
 <template>
   <div class="main-venue" v-if="itemshow">
-    
     <navigator :url="'/pages/venueDetail/main?id='+P1">
       <div class="FL">
         <img class="venue-imgbox" v-if="album&&album.length" :src="album[0].url" />
@@ -30,9 +29,7 @@ export default {
   components: {},
   methods: {},
   created() {},
-  mounted() {
-   
-  }
+  mounted() {}
 };
 </script>
 
@@ -41,6 +38,7 @@ export default {
   width: 345px;
   height: 110px;
   margin: 15px;
+  border-bottom: #f4b116 1px solid;
 }
 .venue-imgbox {
   width: 135px;

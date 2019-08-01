@@ -1,7 +1,5 @@
 <template>
   <div class="main-wrap">
-    
-
     <van-cell
       is-link
       :title="item.title"
@@ -27,6 +25,8 @@
       >切换 Tab-针对tabar中的页面</navigator>
     </view>
     <swiper
+      :indicator-active-color="indicatorActiveColor"
+      :indicator-color="indicatorColor"
       :indicator-dots="indicatorDots"
       :autoplay="autoplay"
       :interval="interval"
@@ -95,13 +95,14 @@
 /* eslint-disable */
 
 import mytabbar from "@/components/mytabbar/mytabbar";
-import matchlist from '../matchList/index'
+import matchlist from "../matchList/index";
 import card from "@/components/card";
 // import { get } from '@/utils/request'
 export default {
   components: {
     card,
-    mytabbar,matchlist
+    mytabbar,
+    matchlist
   },
   data() {
     return {
@@ -132,11 +133,12 @@ export default {
         "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
         "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
       ],
-      indicatorDots: false,
+      indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-
+      indicatorActiveColor: "#2f0000",
+      indicatorColor: "#e0e0e0",
       value: "" // 搜索value
     };
   },

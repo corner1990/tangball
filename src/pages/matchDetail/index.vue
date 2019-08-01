@@ -16,7 +16,7 @@
       >
         <block v-for="item in matchlistDoc.album" :key="item">
           <swiper-item>
-            <image :src="item.url" class="slide-image" height="150" v-if="matchlistDoc.album" />
+            <image :src="item.url" class="slide-image"   v-if="matchlistDoc.album" />
           </swiper-item>
         </block>
       </swiper>
@@ -259,8 +259,19 @@ export default {
 </script>
 
 <style scoped>
+.swiper-item {
+height:1000px;
+
+}
+
+.slide-image{
+  width: 100%;
+  height: 120%;
+  overflow: hidden;
+}
 .main-wrap {
   padding-bottom: 60px;
+
 }
 .title {
   margin: 10px 20px;
