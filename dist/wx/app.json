@@ -20,7 +20,8 @@
     
     "pages/myErollDetail/main",
     "pages/articleList/main",
-    "pages/articleDetail/main"
+    "pages/articleDetail/main",
+    "pages/searchPage/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

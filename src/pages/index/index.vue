@@ -119,7 +119,8 @@ export default {
         { title: "个人中心-赛事报名详情", url: "/pages/myErollDetail/main" },
         { title: "个人中心-系统消息列表", url: "/pages/myMsgList/main" },
         { title: "文章列表", url: "/pages/articleList/main" },
-        { title: "文章详情", url: "/pages/articleDetail/main" }
+        { title: "文章详情", url: "/pages/articleDetail/main" },
+        { title: "搜索页面", url: "/pages/searchPage/main" },
       ],
       motto: "Hello miniprograme",
       userInfo: {
