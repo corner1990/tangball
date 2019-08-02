@@ -17,10 +17,10 @@
     "pages/usercenter/main",
     "pages/venueDetail/main",
     "pages/rankingList/main",
-    
     "pages/myErollDetail/main",
     "pages/articleList/main",
-    "pages/articleDetail/main"
+    "pages/articleDetail/main",
+    "pages/searchPage/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import lodash from "lodash";
+const lodash = require("./lodash");
 function formatTime(timeteamp) {
   var date = new Date(timeteamp)
   var year = date.getFullYear()
