@@ -56,7 +56,7 @@ computed: {
     /**
      * @name 查看详情按钮跳转
      * @desc 向报名详情传id
-     * @param 使用拼接P1传参
+     * @param 使用模板字符串拼接P1传参
      */
     gotoPage(P1) {
       let url=`/pages/myErollDetail/main?P1=${P1}`

@@ -39,7 +39,7 @@
       </block>
     </swiper>
 
-    <div class="card">
+    <div>
       <matchlist></matchlist>
     </div>
     <div class="card">
