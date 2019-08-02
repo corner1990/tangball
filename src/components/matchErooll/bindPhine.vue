@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .bind-phone{
   margin-top: 20px;
   height: 200px;
