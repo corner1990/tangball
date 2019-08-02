@@ -4,13 +4,12 @@
     <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="searchValue" v-model="searchValue" text="searchValue" /> -->
+    <navigator url="/pages/searchPage/main">
     <div class="search-box">
-      <navigator url="/pages/searchPage/main">
       <div class="search-text">搜索</div>
       <div class="search-img"><van-icon name="arrow" size="20px" /></div>
-      <div class="search-img"><van-icon name="arrow" size="20px" /></div>
-      </navigator>
     </div>
+    </navigator>
 
     <div>
       <van-tabs :active="active" @change="onClickTab">
@@ -140,7 +139,7 @@ export default {
   margin-right: 8px;
 }
 .search-img{
-  float: left;
+  float: right;
   color: #999999;
   padding-top:8px;
 }
