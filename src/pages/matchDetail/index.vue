@@ -9,6 +9,7 @@
     <!-- 赛事照片 -->
     <div class>
       <swiper
+        style="height:250px"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
@@ -16,10 +17,22 @@
       >
         <block v-for="item in matchlistDoc.album" :key="item">
           <swiper-item>
-                 <image :src="item.url" class="slide-image"  v-if="matchlistDoc.album"  style="width:100%"  height="250"/>
+            <image
+              @click="showImg(item.url)"
+              :src="item.url"
+              class="slide-image"
+              v-if="matchlistDoc.album"
+              style="width:100%"
+              height="250"
+            />
           </swiper-item>
         </block>
       </swiper>
+
+      <!--显示图片弹窗-->
+      <van-popup customStyle="height:250px" v-if="show" :show="show" @close="ClosePhoto">
+        <img style="height:250px" alt :src="bigImg" />
+      </van-popup>
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
@@ -73,6 +86,8 @@ export default {
   },
   data() {
     return {
+      bigImg: "",
+      show: false,
       showdDialog: false,
       cityVenueList: null,
       venueId: null,
@@ -93,7 +108,7 @@ export default {
       ],
       matchlistDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
-      indicatorDots: false,
+      indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
@@ -102,6 +117,14 @@ export default {
   },
 
   methods: {
+       showImg(url) {
+      this.show = true;
+      this.bigImg = url;
+      console.log(this.url);
+    },
+    ClosePhoto() {
+      this.show = false;
+    },
     /**
      * @name onClose是弹窗的函数
      * @desc
@@ -260,18 +283,16 @@ export default {
 
 <style scoped>
 .swiper-item {
-height:1000px;
-
+  height: 1000px;
 }
 
-.slide-image{
+.slide-image {
   width: 100%;
   height: 120%;
   overflow: hidden;
 }
 .main-wrap {
   padding-bottom: 60px;
-
 }
 .title {
   margin: 10px 20px;

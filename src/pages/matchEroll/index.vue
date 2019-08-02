@@ -4,9 +4,14 @@
         :steps="steps"
         :active="active"
       />
-    <!-- <BingPhone v-show="0" /> -->
+    <div v-show="false">
+      <!-- <BingPhone  /> -->
+    </div>
+    <div>
+      <PersonInfo  />
+    </div>
     <!-- <PersonInfo /> -->
-    <EventInfo />
+    <!-- <EventInfo /> -->
     <div class="btn-wrap" v-show="active < 3">
       <van-row>
         <van-col span="11">
@@ -38,6 +43,7 @@ import BingPhone from '@/components/matchErooll/bindPhine'
 import PersonInfo from '@/components/matchErooll/personInfo'
 import EventInfo from '@/components/matchErooll/eventInfo'
 import Dialog from '../../../static/vant/dialog/dialog';
+import util from "@/utils/util";
 export default {
   components: {
     mytabbar,
@@ -52,13 +58,10 @@ export default {
       btnText: '下一步',
       steps: [
         {
-          text: '绑定手机'
+          text: '确认报名资料'
         },
         {
-          text: '基本信息'
-        },
-        {
-          text: '确认信息'
+          text: '支付报名费'
         },
         {
           text: '完成缴费',
@@ -67,7 +70,14 @@ export default {
       active: 0
     }
   },
-
+  async monuted () {
+     // 请求赛事详情接口函数
+    // let doc = await util.post({
+    //   url: global.PUB.domain + "/crossDetail?page=tangball_match",
+    //   param: { id: this.P1 }
+    // });
+    console.log('this', this)
+  },
   methods: {
     nextStep () {
       if (this.active >= 3) {
@@ -146,7 +156,7 @@ export default {
     }
   },
   created() {
-  }
+  },
 }
 </script>
 

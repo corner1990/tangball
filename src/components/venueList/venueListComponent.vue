@@ -1,19 +1,21 @@
 <template>
-  <div class="main-venue" v-if="cf.show">
-    <navigator :url="venueDetaiUrl">
-      <div class="venue-imgBox">
-        <img :src="venueListImg" />
-      </div>
-      <div class="venue-textBox">
-        <div>
-          <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
-          <span>{{cf.name}}</span>
+  <div>
+    <navigator :url="venueDetaiUrl" hover-class="none">
+      <div class="main-venue" v-if="cf.show">
+        <div class="venue-imgBox">
+          <img :src="venueListImg" />
         </div>
-        <div>电话:{{cf.phoneNumber}}</div>
-        <div>地址:{{cf.address}}</div>
-      </div>
-      <div class="LH110 arrow">
-        <van-icon name="arrow" size="20px" style="color:#999999"/>
+        <div class="venue-textBox">
+          <div class="venue-text">
+            <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
+            <span class="FWB FS16">{{cf.name}}</span>
+          </div>
+          <div>电话:{{cf.phoneNumber}}</div>
+          <div class="venue-text">地址:{{cf.address}}</div>
+        </div>
+        <div class="arrow">
+          <van-icon name="arrow" size="20px" />
+        </div>
       </div>
     </navigator>
   </div>
@@ -51,14 +53,14 @@ export default {
 <style scoped>
 .main-venue {
   width: 345px;
-  height: 90px;
-  margin: 5px 3px;
-  padding-left:15px;
+  margin: 15px;
+  overflow: hidden;
+  border-bottom: 1px solid #f4b116;
 }
 .venue-imgBox {
-  width: 135px;
-  height: 80px;
-  margin: 5px;
+  width: 85px;
+  height: 85px;
+  margin-bottom: 10px;
   float: left;
 }
 .venue-imgBox img {
@@ -66,12 +68,20 @@ export default {
   height: 100%;
 }
 .venue-textBox {
-  width: 165px;
-  height: 90px;
+  width: 63%;
   float: left;
-  margin-top: 10px;
-  line-height: 20px;
-  padding-left:10px;
+  margin: 5px 0 5px 10px;
+  line-height: 25px;
+}
+.venue-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+.arrow {
+  color: #999;
+  float: right;
+  margin-top: 28px;
+}
 </style>
