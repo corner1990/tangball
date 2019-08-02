@@ -93,7 +93,7 @@ export default {
       venueId: null,
       NationalmatchIndex: null, //举办地点聚焦
       P1: 37, //  当前赛事id
-      memberId: 17, //当前会员id
+      // tangballUserId: 17, //当前会员id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
@@ -117,7 +117,7 @@ export default {
   },
 
   methods: {
-       showImg(url) {
+    showImg(url) {
       this.show = true;
       this.bigImg = url;
       console.log(this.url);
@@ -193,7 +193,7 @@ export default {
     async getEnrollList() {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
-        param: { findJson: { memberId: this.memberId } }
+        param: { findJson: { tangballUserId: this.tangballUserId } }
       });
 
       this.isMatchIdStatus = false; //变量初始化为false
@@ -267,6 +267,12 @@ export default {
           this.activeStep = index; //当前步骤条的选中状态
         }
       });
+    }
+    console.log("tangballUserInfo", this.tangballUserInfo);
+  },
+  computed: {
+    tangballUserId: function() {
+      return this.$store.state.tangballUserInfo.P1; //
     }
   },
   /**
