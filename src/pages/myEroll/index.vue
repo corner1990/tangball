@@ -42,13 +42,18 @@ export default {
     mytabbar,
     debug_item
   },
+
   data() {
     return {
       myErollList: null,
-      memberId: 12
     };
   },
-
+computed: {
+  //唐球会员信息-在vuex中获取
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo 
+    }
+  },
   methods: {
   
     /**
@@ -61,7 +66,7 @@ export default {
       this.myErollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 9999,
-        findJson: { memberId: this.memberId }
+        findJson: { memberId: this.tangballUserInfo.P1 }
       });
 
       this.myErollList = await util.ajaxPopulate({
