@@ -1,22 +1,14 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/matchEroll/main",
-=======
     "pages/index/main",
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
->>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
+    "pages/myInfo/main",
     "pages/matchList/main",
     "pages/venueList/main",
-<<<<<<< HEAD
-    "pages/index/main",
-=======
     "pages/matchEroll/main",
->>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
     "pages/tanghome/main",
     "pages/matchDetail/main",
     "pages/counter/main",
@@ -25,16 +17,9 @@
     "pages/usercenter/main",
     "pages/venueDetail/main",
     "pages/rankingList/main",
-<<<<<<< HEAD
-    "pages/myEroll/main",
-    "pages/myErollDetail/main"
-    
-=======
-    
     "pages/myErollDetail/main",
     "pages/articleList/main",
     "pages/articleDetail/main"
->>>>>>> d706062827e9dc4bc6e8b6bd21f8d09887cb5c41
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -91,5 +76,6 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
