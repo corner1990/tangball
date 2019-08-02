@@ -9,16 +9,14 @@
         <div>赛事时间：{{cf.matchTime}}</div>
         <div>报名费用：{{cf.registrationFee}}</div>
       </div>
-      <div name="footer" class="rpg11">
-        <navigator :url="applyUrl">
-          <van-button plain size="small" type="danger" v-if="applyIngStatus">火热报名中</van-button>
-        </navigator>
-        <van-button disabled size="small" v-if="applyEndStatus">报名已结束</van-button>
-        <div style="height:10px;"></div>
-        <navigator :url="matchDetailUrl">
-          <van-button plain size="small" type="default">&nbsp;&nbsp;查看详情&nbsp;</van-button>
-        </navigator>
+         <navigator :url="matchDetailUrl">
+      <div  class="rpg11">
+           <div class="arrow">
+          <van-icon name="arrow" size="20px" />
+        </div>
+      
       </div>
+        </navigator>
     </div>
   </div>
 </template>
@@ -72,9 +70,11 @@ export default {
 </script>
 
 <style >
-.main-wrap {
-  padding-bottom: 60px;
-}
+.arrow{
+  height: 100%;
+  color: #ccc;
+  margin-top:35px;
+  }
 .title {
   margin: 10px 20px;
   color: #333;
@@ -90,6 +90,7 @@ export default {
   display: flex;
 }
 .rpg11 {
+  height: 100%;
   margin-top: 5px;
   margin-right: 5px;
 }
