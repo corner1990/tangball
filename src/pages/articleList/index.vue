@@ -1,9 +1,21 @@
 <template>
   <div class="main-wrap">
- 
-    <debug_item path="articleList" v-model="articleList" text="文章列表"/>
+    <debug_item path="articleList" v-model="articleList" text="文章列表" />
 
-    <div class="H100">aaaaaaaaaaaaaaaaaaaaa</div>
+    <div class="H100">
+      aaaaaaaaaaaaaaaaaaaaa
+      <div
+        class="data-group"
+        v-for="(item,i) in articleList"
+        :key="i"
+        @click="gotoPage(`/pages/articleDetail/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
+      >
+        <div class="data-group-left">{{item.articleTitle}}</div>
+        <div class="data-group-right">
+          <img src="../image/location.png" />
+        </div>
+      </div>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -15,6 +27,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import my_field from "@/components/form_item/my_field"; //导入debug_item
 import util from "@/utils/util";
+
 export default {
   components: {
     card,
@@ -25,141 +38,25 @@ export default {
   },
   data() {
     return {
-      memberId: 17,
-      myMsgList: null,
-      test: "111",
-      titleDialog: "弹窗标题",
-      formData: {},
-      isShowDialogEnroll: false,
-      enrollList: null, //报名列表
-      memberDoc: null, //会员详情
-      matchDoc: null, //赛事详情
-      memberList: null //会员列表
+      articleList: null //文章列表
     };
   },
-
   methods: {
-    changeMatchId(event) {
-      console.log("changeMatchId");
-      console.log(event);
-      let value = event.mp.detail;
-      this.formData.matchId = value;
+    gotoPage(url) {
+      wx.navigateTo({ url });
     },
-    //函数：{弹窗表单确认后执行的函数}
-    funAfterConfirm: null,
-    async showDialogEnroll(action, dataId) {
-      this.isShowDialogEnroll = true;
-      //Q1:{新增}
-      if (action == "add") {
-        //
-        /**
-         * 需要对属性进行赋值，直接赋值空对象会残留数据，难受
-         * 如果用纯Input则可以
-         */
-        this.formData = { matchId: null, memberId: null };
-        this.titleDialog = "新增报名";
-        this.funAfterConfirm = this.addAEnroll; //确认后执行的函数
-        //Q2:{修改}
-      } else if (action == "modify") {
-        this.titleDialog = "修改报名";
-        this.funAfterConfirm = this.modifyAEnroll; //确认后执行的函数
-        //ajax获取单个会员数据
-        this.formData = await util.ajaxGetDoc({
-          page: "tangball_enroll",
-          id: dataId
-        });
-      }
-    },
-    closeDialog() {
-      this.isShowDialogEnroll = false;
-      console.log("closeDialog");
-    },
-    //函数：{修改一条报名函数}-请配合后台查看数据
-    async modifyAEnroll() {
-      let resp = await util.ajaxModify({
-        page: "tangball_enroll",
-        findJson: { P1: this.formData.P1 }, //锁定需要修改的数据
-        modifyJson: this.formData //修改字段
-      });
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-      wx.showToast({
-        title: "修改成功",
-        icon: "success"
-      });
-    },
-    //函数：{添加一条报名函数}-请配合后台查看数据
-    async addAEnroll() {
-      console.log("addAEnroll");
-      await util.ajaxAdd({
-        page: "tangball_enroll",
-        data: this.formData
-      });
-      wx.showToast({
-        title: "新增成功",
-        icon: "success"
-      });
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-    },
-
-    //函数：{删除一条报名函数}-请配合后台查看数据
-    async deleteAEnroll(dataId) {
-      let res = await util.showModal({
-        title: "确认删除数据？",
-        content: "content"
-      }); //调用：{模态弹窗的函数}
-      if (!res.confirm) {
-        return;
-      }
-      await util.ajaxDelete({
-        page: "tangball_enroll",
-        findJson: { P1: dataId } //锁定需要删除的数据
-      });
-
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-      wx.showToast({
-        title: "删除成功",
-        icon: "success"
-      });
-    },
-    //函数：{ajax获取报名列表函数}
-    async ajaxEnrollList() {
-      this.enrollList = await util.ajaxGetList({
-        page: "tangball_enroll",
-        pageSize: 5
-      });
-    },
-    //函数：{ajax获取消息列表函数}
-    async ajaxMsgList() {
-      //ajax获取消息列表
-      this.myMsgList = await util.ajaxGetList({
-        page: "tangball_msg",
-        pageSize: 999,
+    async getArticleList() {
+      this.articleList = await util.ajaxGetList({
+        page: "tangball_article",
+        pageSize: 15,
         findJson: {
-          //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
-          $or: [{ range: 1 }, { range: 2, memberIdList: 17 }]
+          articleCategory: null
         }
-        // sortJson: { publishTime: -1 }, //排序条件
-        // selectJson: { name: 1, entries: 1 } //只返回指定字段
       });
     }
   },
-  created() {},
-  async mounted() {
-    console.log("lodash", lodash);
-    //ajax获取单个会员数据
-    this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
-    //ajax获取单个赛事数据
-    this.matchDoc = await util.ajaxGetDoc({ page: "tangball_match", id: 37 });
-    //ajax获取会员列表
-    this.memberList = await util.ajaxGetList({
-      page: "tangball_member",
-      pageSize: 1,
-      findJson: { sex: 1 }, //查询条件
-      sortJson: { entries: -1 }, //排序条件
-      selectJson: { name: 1, entries: 1 } //只返回指定字段
-    });
-
-    this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
+  mounted() {
+    this.getArticleList();
   }
 };
 </script>
@@ -173,10 +70,18 @@ export default {
 }
 .data-group-left {
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .data-group-right {
-  text-align: right;
-  width: 60px;
+  border: 1px solid #000;
+  height: 75px;
+  width: 135px;
+}
+.data-group-right img {
+  height: 100%;
+  width: 100%;
 }
 .n-input {
   display: inline-block;
