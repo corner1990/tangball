@@ -27,7 +27,8 @@
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
+// import lodash from "lodash";
+const lodash = require("@/utils/lodash");
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import test_article_list from "@/components/bussiness/test_article_list";

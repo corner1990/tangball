@@ -1,49 +1,16 @@
 <template>
   <div class="main-wrap">
-      <web-view src="https://mp.weixin.qq.com/"></web-view>
-    <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
-    <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
-    <div class="data-group" v-for="(item,i) in enrollList" :key="i">
-      <div class="data-group-left">数据id:{{item.P1}}-会员id:{{item.memberId}}-赛事id:{{item.matchId}}</div>
-      <div class="data-group-right">
-        <van-icon name="close" size="20px" @click="deleteAEnroll(item.P1)"/>
-        <van-icon name="edit" size="20px" @click="showDialogEnroll('modify',item.P1)"/>
-      </div>
-    </div>
-    <van-dialog
-      use-slot
-      :title="titleDialog"
-      :show="isShowDialogEnroll"
-      show-cancel-button
-      @confirm="funAfterConfirm"
-      @close="isShowDialogEnroll=false"
-    >
-      <van-cell-group>
-        <div class>
-          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
-          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
-          <!-- <van-field :value="formData.matchId" placeholder="赛事id(vant)" @change="changeMatchId"/>
-          -->
-          <my_field v-model="formData.matchId" label="赛事id">
-            <span class>aa</span>
-          </my_field>
-          <my_field v-model="formData.memberId" label="会员id"></my_field>
-        </div>
-      </van-cell-group>
-    </van-dialog>
-    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
-    <debug_item path="formData" v-model="formData" text="表单数据"/>
-    <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
-    <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
-    <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
-    <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
-    <div class="H100"></div>
+ 
+    <debug_item path="articleList" v-model="articleList" text="文章列表"/>
+
+    <div class="H100">aaaaaaaaaaaaaaaaaaaaa</div>
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
+// import lodash from "lodash";
+const lodash = require("@/utils/lodash");
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
