@@ -4,7 +4,13 @@
     <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="searchValue" v-model="searchValue" text="searchValue" /> -->
-    <van-search placeholder="请输入搜索关键词" @blur="onSearch(seachValue)" @change="changeValue" />
+    <div class="search-box">
+      <navigator url="/pages/searchPage/main">
+      <div class="search-text">搜索</div>
+      <div class="search-img"><van-icon name="arrow" size="20px" /></div>
+      <div class="search-img"><van-icon name="arrow" size="20px" /></div>
+      </navigator>
+    </div>
 
     <div>
       <van-tabs :active="active" @change="onClickTab">
@@ -121,5 +127,23 @@ export default {
 }
 .card {
   margin: 0 10px;
+}
+.search-box{
+  margin-left: 5%;
+  height:40px;
+  width:90%;
+  font-size: 18px;
+  line-height: 40px;
+  border-bottom: 1px solid #F4B116;
+}
+.search-text{
+  float: left;
+  color: gray;
+  margin-right: 8px;
+}
+.search-img{
+  float: left;
+  color: #999999;
+  padding-top:8px;
 }
 </style>
