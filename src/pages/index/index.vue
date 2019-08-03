@@ -40,7 +40,7 @@
     </swiper>
     <div>
       <div class="index_area_title">唐球赛事</div>
-      <div class="card">
+      <div class>
         <matchlist></matchlist>
       </div>
     </div>
