@@ -10,29 +10,15 @@
         required
       />
       <div class="flex line">
-        <title class="title">性别</title>
-        <van-radio-group :value="radio">
-          <div class="flex radio-wrap">
-            <van-cell
-                title="男"
-                clickable
-                value-class="radio-item"
-                data-name="1"
-                @click="onRadioChange('1')"
-              >
-                <van-radio name="1" />
-              </van-cell>
-              <van-cell
-                title="女"
-                clickable
-                data-name="2"
-                @click="onRadioChange('2')"
-                value-class="radio-item"
-              >
-                <van-radio name="2" />
-              </van-cell>
-          </div>  
-        </van-radio-group>
+        <title class="sub-title">性别</title>
+        <radio-group class="radio-group" @change="onRadioChange" >
+          <label class="radio">
+            <radio value="1" :checked="info.sex=== '1'"/>男
+          </label>
+          <label class="radio">
+            <radio value="2" :checked="info.sex=== '2'"/>女
+          </label>
+        </radio-group>
       </div>
       <van-field
         :value="info.phone"
@@ -40,32 +26,32 @@
         placeholder="请输入手机号"
       />
       <div class="flex line">
-        <p class="title">球龄</p>
+        <p class="sub-title">球龄</p>
         <div @click="selectAge">
-          <input type="text" class="tangBallInput" v-model="selectVal" placeholder="请输入球龄">
+          <input type="text" class="tangBallInput" v-model="info.ballAge" placeholder="请输入球龄">
         </div>
       </div>
       <van-field
-        :value="info.job"
+        :value="info.career"
         label="职业"
         placeholder="请输入职业"
       />
     </van-cell-group>
     <h3 class="info-title event-info">赛事及场馆信息</h3>
     <div class="flex line">
-      <p class="title">赛事名称</p>
+      <p class="sub-title">赛事名称</p>
       <div>高富帅才有资格</div>
     </div>
     <div class="flex line">
-      <p class="title">赛事时间</p>
+      <p class="sub-title">赛事时间</p>
       <div>2019-05-15</div>
     </div>
     <div class="flex line">
-      <p class="title" style="width: 90px;">赛事地点</p>
+      <p class="sub-title" style="width: 90px;">赛事地点</p>
       <div>广东神，深圳市，福田区，深航中路1238900号</div>
     </div>
     <div class="flex line">
-      <title class="title">报名费</title>
+      <title class="sub-title">报名费</title>
       <div><span class="price">1999 (元)</span></div>
     </div>
     <van-cell-group>
@@ -76,6 +62,7 @@
         label="短信验证码"
         placeholder="请输入短信验证码"
         required
+        @change="verfiyChange"
         use-button-slot
       >
         <van-button slot="button" size="small" type="info" @click="getVerfity">发送验证码</van-button>
@@ -103,29 +90,34 @@ import util from '@/utils/util'
 export default {
   data () {
     return {
-      info: {
-        name: '高富帅',
-        phone: '15276513522',
-        age: 12,
-        job: ''
-      },
       radio: '1',
       showSelectBallAge: false,
       selectVal: '',
-      columns: ['1-3年', '3-5年', '5年以上']
+      columns: ['1-3年', '3-5年', '5年以上'],
+      sex: 1,
+      sexList: [
+        {name: '男', value: '1'},
+        {name: '女', value: '2'}
+      ],
+      timer: 0,
+      num: 0
     }
   },
-  async mounted () {
+  mounted () {
     // 请求赛事列表接口函数
-    let { data } = await util.post({
-      url: `${global.PUB.domain}/crossList?page=tangball_match`,
-      param: { findJson: { P1: this.P1 } }
-    })
-    console.log('data', data)
   },
+  watch: {
+    // info: {
+    //   handler (info, oldName) {
+    //   },
+    //   immediate: true,
+    //   deep: true
+    // }
+  },
+  props: ['info'],
   methods: {
     onRadioChange (radio) {
-      this.radio = radio
+      this.info.sex = radio.target.value
     },
     selectAge () {
       this.showSelectBallAge = true
@@ -135,19 +127,26 @@ export default {
     },
     onSelectChange (e) {
       let { value, index } = e.target
-      this.selectVal = value
       this.selectIndex = index
+      this.info.ballAge = value
       this.hideSelectBallAge()
     },
     async getVerfity () {
-      console.log('获取验证码')
       let { phone: mobile } = this.info
       // 请求赛事列表接口函数
       let { data } = await util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
-        param: {mobile}
+        param: { mobile }
       })
       console.log('data', data)
+    },
+    verfiyChange (e) {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.$emit('changeInfo', {
+          verfiy: e.mp.detail
+        })
+      }, 500)
     }
   }
 }
@@ -167,7 +166,7 @@ export default {
     font-size: .373rem;
     text-indent: .053rem;
   }
-  .line .title{
+  .line .sub-title{
     width: 80px;
     margin-right: 10px;
   }

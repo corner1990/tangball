@@ -1,6 +1,8 @@
 <template>
   <div>
+     <navigator :url="matchDetailUrl">
     <div class="match-box">
+      
       <div class="match-img-box">
         <img :src="matchListImg" />
       </div>
@@ -9,15 +11,16 @@
         <div>赛事时间：{{cf.matchTime}}</div>
         <div>报名费用：{{cf.registrationFee}}</div>
       </div>
-         <navigator :url="matchDetailUrl">
+        
       <div  class="rpg11">
            <div class="arrow">
           <van-icon name="arrow" size="20px" />
         </div>
       
       </div>
-        </navigator>
+        
     </div>
+    </navigator>
   </div>
 </template>
 <script>

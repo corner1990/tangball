@@ -128,7 +128,7 @@ export default {
     // 请求会员接口
     async getMember() {
       let { data } = await util.post({
-        url: global.PUB.domain + "/crossList?page=tangball_member",
+        url: global.PUB.domain + "/crossDetail?page=tangball_member",
         param: {
           findJson: {
             // P1: this.memberId
@@ -136,7 +136,7 @@ export default {
           },
         }
       });
-      this.memberMessage = data.list[0]
+      this.memberMessage = data.Doc
       this.sexToString();
       this.ballAgeToString();
   },

@@ -69,17 +69,17 @@ export default {
   async mounted() {
     console.log("lodash", lodash);
     //ajax获取单个会员数据
-    this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
+    // this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
     //ajax获取单个赛事数据
-    this.matchDoc = await util.ajaxGetDoc({ page: "tangball_match", id: 37 });
+    // this.matchDoc = await util.ajaxGetDoc({ page: "tangball_match", id: 37 });
     //ajax获取会员列表
-    this.memberList = await util.ajaxGetList({
-      page: "tangball_member",
-      pageSize: 1,
-      findJson: { sex: 1 }, //查询条件
-      sortJson: { entries: -1 }, //排序条件
-      selectJson: { name: 1, entries: 1 } //只返回指定字段
-    });
+    // this.memberList = await util.ajaxGetList({
+    //   page: "tangball_member",
+    //   pageSize: 1,
+    //   findJson: { sex: 1 }, //查询条件
+    //   sortJson: { entries: -1 }, //排序条件
+    //   selectJson: { name: 1, entries: 1 } //只返回指定字段
+    // });
 
     
   }
