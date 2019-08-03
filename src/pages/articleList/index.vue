@@ -1,9 +1,9 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="articleList" v-model="articleList" text="文章列表" />
+  
 
     <div class="H100">
-      aaaaaaaaaaaaaaaaaaaaa
+     
       <div
         class="data-group"
         v-for="(item,i) in articleList"
@@ -12,12 +12,14 @@
       >
         <div class="data-group-left">
           <span class="title_text">{{item.articleTitle}}</span>
-          <div class="">{{item.CategoryName}}{{item.CreateTime}}</div>
+          <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
         </div>
+        
         <div class="data-group-right">
           <img src="../image/location.png" />
         </div>
       </div>
+      <div style="height:50px"></div>
     </div>
     <mytabbar></mytabbar>
   </div>
@@ -119,6 +121,7 @@ export default {
 </script>
 
 <style scoped>
+
 .data-group {
   padding: 5px 10px;
   border-bottom: 1px #ddd solid;
@@ -127,8 +130,17 @@ export default {
 }
 .data-group-left {
   width: 210px;
+  position: relative;
+}
+.name_time_text{
+  font-size: 12px;
+  color: #ccc;
+    position: absolute;
+    bottom:0px;
+    left: 0px;
 }
 .title_text {
+  font-size: 18px;
   /* 自动换行 */
   text-overflow: ellipsis;
   overflow: hidden;
@@ -139,7 +151,7 @@ export default {
 }
 .data-group-right {
   flex: 1;
-  border: 1px solid #000;
+  
   height: 75px;
 }
 .data-group-right img {
