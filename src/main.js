@@ -1,9 +1,9 @@
 /* eslint-disable */
 global.PUB={}
 //  global.PUB.domain="http://120.76.160.41:3000" 
- global.PUB.domain="https://www.dmagic.cn"  
+//  global.PUB.domain="https://www.dmagic.cn"  
 //  global.PUB.domain="http://localhost:3000"
-// global.PUB.domain="http://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
+global.PUB.domain="http://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
 
 import Vue from 'vue'
 import App from './App'
@@ -27,9 +27,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
     debug:true,
     wxUserInfo:{},//微信用户信息
-    tangballUserInfo:{}//唐球用户信息
-
-   
+    tangballUserInfo:{}//唐球用户信息   
   },
  
   mutations: {//变更事件

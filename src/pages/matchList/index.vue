@@ -116,9 +116,7 @@ export default {
 </script>
 
 <style scoped>
-.main-wrap {
-  padding-bottom: 60px;
-}
+
 .title {
   margin: 10px 20px;
   color: #333;
