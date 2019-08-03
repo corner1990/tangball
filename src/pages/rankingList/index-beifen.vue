@@ -1,6 +1,7 @@
 <template>
   <div class="main-wrap">
     <debug_item v-model="memberList" text="会员列表" />
+    <debug_item v-model="achievementList" text="比赛成绩列表" />
     <p class="H10 OF2 CL1"></p>
     <!-- 分页组件 -->
     <pageLink></pageLink>
@@ -63,24 +64,24 @@ export default {
           name: "参赛次数",
           title: "参赛次数",
           value: ["name", "entries"],
-          id: 0
+          id: 1
         },
         {
           name: "成绩排名",
           title: "参数成绩",
-          value: ["name", "countAchievement"],
-          id: 1
+          value: ["participantsName", "matchScore"],
+          id: 2
         },
         {
           name: "鸟王排名",
           title: "参赛排名",
-          id: 2
+          id: 3
         },
         {
           name: "积分排名",
           title: "积分",
           value: ["name", "integral"],
-          id: 3
+          id: 4
         }
       ],
       selected: 0,
@@ -88,6 +89,7 @@ export default {
       rankingIndex: 0, //参赛次数、成绩排名、鸟王排名、积分排名的索引
       sexIndex: 1, //男或者女的索引
       activeTitle: "参赛次数", //参赛次数、成绩排名、鸟王排名、积分排名的文字
+      achievementList: [{ list: [] }, { list: [] }], //成绩数据列表  ,第一个元素是男，第二个元素是女
       memberList: [{ list: [] }, { list: [] }] //会员数据列表
     };
   },
@@ -110,8 +112,13 @@ export default {
     async clickfun(index, item, id) {
       this.rankingIndex = index;
       this.activeTitle = item.title;
+      if (index == 1) {
+        this.getAchievementList(); //index为1：成绩排名，触发成绩列表函数
+      } else {
+        this.getMemberList(); //请求会员列表函数
+      }
       this.selected = id; //按钮聚焦
-      this.getMemberList(); //请求会员列表函数
+      console.log("id", this.selected);
     },
     /**
      * @name getMemberList请求会员列表
@@ -119,12 +126,11 @@ export default {
      * @param pageSize展示页数 entries次数排名正序 integral积分排名正序
      */
     async getMemberList(url, sortJson, selectJson) {
-      let RankingName = this.arrList[this.rankingIndex].value[1]; //排名名称
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
           pageSize: 20, //每页20条数据
-          sortJson: { [RankingName]: -1 } //参赛次数
+          sortJson: { entries: -1, integral: -1,matchScore:-1}
         }
       });
 
@@ -137,6 +143,21 @@ export default {
       this.memberList[1].list = data.list.filter(doc => {
         return doc.sex == 2;
       });
+    },
+    /**
+     * @name getAchievementList请求成绩列表
+     * @desc 成绩列表
+     * @param pageSize展示页数 matchScore成绩排名正序
+     */
+    async getAchievementList(url, sortJson, selectJson) {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_achievement",
+        param: {
+          pageSize: 20, //每页20条数据
+          sortJson: { matchScore: -1 }
+        }
+      });
+      this.achievementList = data.list;
     }
   },
 

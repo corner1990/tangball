@@ -38,51 +38,20 @@
         </swiper-item>
       </block>
     </swiper>
-
     <div>
-      <matchlist></matchlist>
-    </div>
-    <div class="card">
-      <h3>唐球达人</h3>
-      <div>
-        <van-panel title="标题" desc="描述信息" status="状态">
-          <view>内容</view>
-        </van-panel>
+      <div class="index_area_title">唐球赛事</div>
+      <div class="card">
+        <matchlist></matchlist>
       </div>
     </div>
-    <div class="card">
-      <h3>互动节目</h3>
-      <div>
-        <van-panel title="标题" desc="描述信息" status="状态">
-          <view>内容</view>
-        </van-panel>
+    <div>
+      <div class="index_area_title">文章列表</div>
+      <div class="card">
+        <articleList></articleList>
       </div>
     </div>
-    <div class="card">
-      <h3>唐球学院</h3>
-      <div>
-        <van-panel title="标题" desc="描述信息" status="状态">
-          <view>内容</view>
-        </van-panel>
-      </div>
-    </div>
-    <div class="card">
-      <h3>最新动态</h3>
-      <div>
-        <van-panel title="标题" desc="描述信息" status="状态">
-          <view>内容</view>
-        </van-panel>
-      </div>
-    </div>
-    <div class="card">
-      <h3>连锁加盟</h3>
-      <div>
-        <van-panel title="标题" desc="描述信息" status="状态">
-          <view>内容</view>
-        </van-panel>
-      </div>
-    </div>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+
+    
     <div class="all">
       <div class="left"></div>
       <div class="right"></div>
@@ -96,13 +65,15 @@
 import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import matchlist from "../matchList/index";
+import articleList from "../articleList/index";
 import card from "@/components/card";
 // import { get } from '@/utils/request'
 export default {
   components: {
     card,
     mytabbar,
-    matchlist
+    matchlist,
+    articleList
   },
   data() {
     return {
@@ -120,7 +91,7 @@ export default {
         { title: "个人中心-系统消息列表", url: "/pages/myMsgList/main" },
         { title: "文章列表", url: "/pages/articleList/main" },
         { title: "文章详情", url: "/pages/articleDetail/main" },
-        { title: "搜索页面", url: "/pages/searchPage/main" },
+        { title: "搜索页面", url: "/pages/searchPage/main" }
       ],
       motto: "Hello miniprograme",
       userInfo: {
@@ -195,7 +166,7 @@ export default {
       return;
     }
 
-    await util.loginAndInitUser(this);//函数：{登录并ajax初始化用户信息的函数}
+    await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
 
     /****************************微信会员登录和信息存储-END****************************/
   },
@@ -210,6 +181,15 @@ export default {
 </script>
 
 <style scoped>
+.index_area_title {
+  background: #f4b116;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+  text-align: center;
+}
 .main-wrap {
   padding-bottom: 60px;
 }
