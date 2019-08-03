@@ -65,8 +65,7 @@ export default {
         pageSize: 15,
         findJson: {}
       });
-      console.log("this.articleList ", this.articleList);
-      console.log("this.Categorylist", this.Categorylist);
+     
 
       let dictPerson = {}; //人员数据字典对象
       this.Categorylist.forEach(item => {
@@ -75,7 +74,7 @@ export default {
       });
       
       
-      console.log("dictPerson", dictPerson);
+     
       this.articleList.forEach(matchEach => {
         /**
          * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
@@ -83,7 +82,7 @@ export default {
         matchEach.CategoryName = dictPerson[matchEach.articleCategory].name;
 
       });
-      console.log("this.articleList后 ", this.articleList);
+  
     }
   },
   mounted() {
