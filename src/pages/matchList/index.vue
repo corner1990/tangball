@@ -3,12 +3,14 @@
     <!-- {{searchValue}} -->
     <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
-    <debug_item path="searchValue" v-model="searchValue" text="searchValue" /> -->
+    <debug_item path="searchValue" v-model="searchValue" text="searchValue" />-->
     <navigator url="/pages/searchPage/main">
-    <div class="search-box">
-      <div class="search-text">搜索</div>
-      <div class="search-img"><van-icon name="arrow" size="20px" /></div>
-    </div>
+      <div class="search-box">
+        <div class="search-text">搜索</div>
+        <div class="search-img">
+          <van-icon name="arrow" size="20px" />
+        </div>
+      </div>
     </navigator>
 
     <div>
@@ -72,39 +74,31 @@ export default {
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
       // ------------------地区区分---------------------
-      //如果是近期（因为近期的index为1）
+      //如果是近期（因为近期的index为0）
       if (event.target.index == 0) {
-        console.group("如果是近期", event.target.title);
         this.matchType = null; //改变请求接口参数
         this.getlist(); //调用一次接口
       }
-
+      //全国Index=1
       if (event.target.index == 1) {
-        console.group("如果是全国", event.target.title);
         this.matchType = 2; //改变请求接口参数
         this.getlist(); //调用一次接口
       }
-
+      //如果是加盟商Index=2
       if (event.target.index == 2) {
-        console.group("如果是加盟商", event.target.title);
-        console.log("如果是加盟商2", event.target.title);
         this.matchType = 1;
         this.getlist(); //调用一次接口
       }
-
+      //全部列表
       if (event.target.index == 3) {
-        console.group("如果是全部", event.target.title);
-        console.log("如果是全部", event.target.title);
         this.matchType = null;
         this.getlist();
       }
-    },
+    }
     /**
      * @desc 搜索回调
      */
-    onSearch(seachValue) {
-      console.log("后面的值：", seachValue);
-    }
+
     /**
      * @desc 赛事切换回调
      */
@@ -116,7 +110,6 @@ export default {
 </script>
 
 <style scoped>
-
 .title {
   margin: 10px 20px;
   color: #333;
@@ -125,22 +118,22 @@ export default {
 .card {
   margin: 0 10px;
 }
-.search-box{
+.search-box {
   margin-left: 5%;
-  height:40px;
-  width:90%;
+  height: 40px;
+  width: 90%;
   font-size: 18px;
   line-height: 40px;
-  border-bottom: 1px solid #F4B116;
+  border-bottom: 1px solid #f4b116;
 }
-.search-text{
+.search-text {
   float: left;
   color: gray;
   margin-right: 8px;
 }
-.search-img{
+.search-img {
   float: right;
   color: #999999;
-  padding-top:8px;
+  padding-top: 8px;
 }
 </style>

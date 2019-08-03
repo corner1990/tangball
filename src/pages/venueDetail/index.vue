@@ -30,7 +30,6 @@
         <van-popup customStyle="height:250px" v-if="show" :show="show" @close="onClose">
           <img style="height:250px" alt :src="bigImg" />
         </van-popup>
-
         <van-tabs :active="active" v-bind:change="onChange">
           <van-tab title="场馆介绍1">
             <div style="font-size:16px;margin-top:5px">
@@ -91,7 +90,6 @@ export default {
     showImg(url) {
       this.show = true;
       this.bigImg = url;
-      console.log(this.url);
     },
     onClose() {
       this.show = false;
@@ -110,26 +108,19 @@ export default {
         }
       });
       this.venueDoc = doc.data.Doc;
-
-      console.log("555555555", this.markers);
       //  Object.assign(this.markers[0], ...this.venueDoc.extend)
-      console.log("2222", this.markers);
       this.markers[0] = this.venueDoc.extend;
-      console.log("3333", this.markers);
       // this.markers.push({
       //   longitude: this.venueDoc.extend.longitude,
       //   latitude: this.venueDoc.extend.latitude,
       //   iconPath: "/static/images/location.png"
       // });
       //   Object.assign(this.markers, this.venueDoc.extend)
-      console.log("getDoc-2");
-      console.log("doc-2", this.venueDoc.album);
       // this.imgUrls=this.venueDoc.album
     }
   },
   created() {},
   mounted() {
-    console.log("mounted123");
     this.getDoc(); //调用：{ajax获取当前场馆数据函数}
   },
   // 页面登陆事件
@@ -137,8 +128,6 @@ export default {
     //获取id
     this.P1 = options.id;
     // 看一下传过来的是什么
-    console.log(options);
-    // 获取传过来的id
   }
 };
 </script>
