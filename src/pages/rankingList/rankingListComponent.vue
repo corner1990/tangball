@@ -26,8 +26,7 @@ export default {
 <style scoped>
 .ranking-content {
   display: flex;
-  margin: 0 auto;
-  width: 100%;
+  margin: 5px 10px;
   justify-content: space-evenly;
   text-align: center;
 }

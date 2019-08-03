@@ -10,11 +10,11 @@
 </template>
 <script>
 /* eslint-disable */
+const lodash = require("@/utils/lodash");
 import msg from "@/pages/myMsgList/msg";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
-import lodash from "lodash"; //导入lodash方法库
 
 export default {
   components: {

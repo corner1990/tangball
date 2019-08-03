@@ -9,16 +9,14 @@
         <div>赛事时间：{{cf.matchTime}}</div>
         <div>报名费用：{{cf.registrationFee}}</div>
       </div>
-      <div name="footer" class="rpg11">
-        <navigator :url="applyUrl">
-          <van-button plain size="small" type="danger" v-if="applyIngStatus">火热报名中</van-button>
-        </navigator>
-        <van-button disabled size="small" v-if="applyEndStatus">报名已结束</van-button>
-        <div style="height:10px;"></div>
-        <navigator :url="matchDetailUrl">
-          <van-button plain size="small" type="default">&nbsp;&nbsp;查看详情&nbsp;</van-button>
-        </navigator>
+         <navigator :url="matchDetailUrl">
+      <div  class="rpg11">
+           <div class="arrow">
+          <van-icon name="arrow" size="20px" />
+        </div>
+      
       </div>
+        </navigator>
     </div>
   </div>
 </template>
@@ -72,9 +70,11 @@ export default {
 </script>
 
 <style >
-.main-wrap {
-  padding-bottom: 60px;
-}
+.arrow{
+  height: 100%;
+  color: #ccc;
+  margin-top:35px;
+  }
 .title {
   margin: 10px 20px;
   color: #333;
@@ -82,20 +82,22 @@ export default {
 }
 
 .match-box {
-  margin-bottom: 5px;
+  margin: 5px 15px;
+  /* margin-bottom: 5px; */
   /* position: relative; */
-  border-bottom: #d9d9d9 1px solid;
-  height: 105px;
+  border-bottom: #f4b116 1px solid;
+  height: 97px;
   display: flex;
 }
 .rpg11 {
-  margin-top: 15px;
+  height: 100%;
+  margin-top: 5px;
   margin-right: 5px;
 }
 .match-img-box {
-  margin: 15px 1px 0 10px;
-  height: 80px;
-  width: 80px;
+  margin: 5px 1px 0 0px;
+  height: 85px;
+  width: 85px;
   background: #fff;
 }
 .match-img-box img {
@@ -105,7 +107,7 @@ export default {
 .match-img-box1 {
   padding: 0 0 5px 5px;
   flex: 1;
-  margin: 15px 0 0 0px;
+  margin: 5px 0 0 0px;
   display: flex;
   flex-direction: column;
 }

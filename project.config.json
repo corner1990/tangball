@@ -5,7 +5,7 @@
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": true,
@@ -25,7 +25,7 @@
 	"projectname": "bowling",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.7.7",
+	"libVersion": "2.8.0",
 	"condition": {
 		"search": {
 			"current": -1,

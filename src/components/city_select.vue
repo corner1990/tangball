@@ -32,13 +32,18 @@ export default {
   },
   data() {
     return {
-      showCity: false,
-      cityList: [],
-      showCityButton: false
+      cityList: [],//城市数据列表
+      showCityButton: false//是否显示所有城市index
     };
   },
   methods: {
-    // 选中城市时
+    /**
+    * @name 选中城市触发的方法
+    * @desc 选中城市时，将选中的城市显示在第一个，调换数组中城市的位置
+    *       然后设置显示部分城市，将选中的城市数据发送到父组件上
+    * @param index 选中的城市在数组中的索引 city  选中的城市
+    *         showCityButton  是否显示所有城市
+    */
     checkedCity(index, city) {
       let str = this.cityList[0];
       this.cityList[0] = this.cityList[index];
@@ -47,13 +52,21 @@ export default {
       this.selectIndex = 0;
       this.$emit("select", city);
     },
-    // 选中所有城市时
+    /**
+    * @name 选中所有城市时触发的方法
+    * @desc 选中所有城市时，聚焦所有，并显示所有城市，向父组件发送自定义事件
+    * @param 
+    */
     allCity() {
       this.selectIndex = -1;
       this.showCityButton = !this.showCityButton;
       this.$emit("select");
     },
-    // 获取所有城市列表
+    /**
+    * @name 获取城市列表的方法
+    * @desc 根据P8为0001获取所有市级数据
+    * @param 
+    */
     async getCityList() {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=dmagic_area",
@@ -73,6 +86,7 @@ export default {
   mounted() {
     // 在页面加载完之后，获取所有城市列表
     this.getCityList();
+    //页面加载完之后聚焦 所有城市
     this.selectIndex = -1;
   }
 };

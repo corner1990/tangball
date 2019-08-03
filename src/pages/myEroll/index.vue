@@ -21,9 +21,7 @@
             plain
             size="small"
             type="danger"
-            @click="daying"
-            
-           
+            @click="gotoPage(item.P1)"
           >查看详情</van-button>
         </div>
       </div>
@@ -42,26 +40,40 @@ export default {
     mytabbar,
     debug_item
   },
+
   data() {
     return {
       myErollList: null,
-      memberId: 12
     };
   },
-
+computed: {
+  //唐球会员信息-在vuex中获取
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo 
+    }
+  },
   methods: {
-  
+    /**
+     * @name 查看详情按钮跳转
+     * @desc 向报名详情传id
+     * @param 使用模板字符串拼接P1传参
+     */
+    gotoPage(P1) {
+      let url=`/pages/myErollDetail/main?P1=${P1}`
+      wx.navigateTo({ url });
+    },
+
     /**
      * @name ajax获取报名列表函数
      * @desc 三重ajax请求
      * @param xxxx
      */
-    
+
     async ajaxEnrollList() {
       this.myErollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 9999,
-        findJson: { memberId: this.memberId }
+        findJson: { memberId: this.tangballUserInfo.P1 }
       });
 
       this.myErollList = await util.ajaxPopulate({

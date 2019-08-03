@@ -1,54 +1,39 @@
 <template>
   <div class="main-wrap">
-      <web-view src="https://mp.weixin.qq.com/"></web-view>
-    <van-button type="primary" size="small" @click="ajaxMsgList">获取消息列表</van-button>
-    <van-button type="primary" size="small" @click="showDialogEnroll('add')">新增报名1</van-button>
-    <div class="data-group" v-for="(item,i) in enrollList" :key="i">
-      <div class="data-group-left">数据id:{{item.P1}}-会员id:{{item.memberId}}-赛事id:{{item.matchId}}</div>
-      <div class="data-group-right">
-        <van-icon name="close" size="20px" @click="deleteAEnroll(item.P1)"/>
-        <van-icon name="edit" size="20px" @click="showDialogEnroll('modify',item.P1)"/>
-      </div>
-    </div>
-    <van-dialog
-      use-slot
-      :title="titleDialog"
-      :show="isShowDialogEnroll"
-      show-cancel-button
-      @confirm="funAfterConfirm"
-      @close="isShowDialogEnroll=false"
-    >
-      <van-cell-group>
-        <div class>
-          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
-          <!-- <input type="text" class="n-input" v-model="formData.matchId"> -->
-          <!-- <van-field :value="formData.matchId" placeholder="赛事id(vant)" @change="changeMatchId"/>
-          -->
-          <my_field v-model="formData.matchId" label="赛事id">
-            <span class>aa</span>
-          </my_field>
-          <my_field v-model="formData.memberId" label="会员id"></my_field>
+  
+
+    <div class="H100">
+     
+      <div
+        class="data-group"
+        v-for="(item,i) in articleList"
+        :key="i"
+        @click="gotoPage(`/pages/articleDetail/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
+      >
+        <div class="data-group-left">
+          <span class="title_text">{{item.articleTitle}}</span>
+          <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
         </div>
-      </van-cell-group>
-    </van-dialog>
-    <debug_item path="myMsgList" v-model="myMsgList" text="我的消息列表"/>
-    <debug_item path="formData" v-model="formData" text="表单数据"/>
-    <debug_item path="isShowDialogEnroll" v-model="isShowDialogEnroll" text="是否显示修改弹窗"/>
-    <debug_item path="memberDoc" v-model="memberDoc" text="ajax获取单个会员数据"/>
-    <debug_item path="matchDoc" v-model="matchDoc" text="ajax获取单个赛事数据"/>
-    <debug_item path="memberList" v-model="memberList" text="ajax获取会员列表-男性+参数次数降序+前5条"/>
-    <div class="H100"></div>
+        
+        <div class="data-group-right">
+          <img src="../image/location.png" />
+        </div>
+      </div>
+      <div style="height:50px"></div>
+    </div>
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
+// import lodash from "lodash";
+const lodash = require("@/utils/lodash");
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import my_field from "@/components/form_item/my_field"; //导入debug_item
 import util from "@/utils/util";
+
 export default {
   components: {
     card,
@@ -59,146 +44,84 @@ export default {
   },
   data() {
     return {
-      memberId: 17,
-      myMsgList: null,
-      test: "111",
-      titleDialog: "弹窗标题",
-      formData: {},
-      isShowDialogEnroll: false,
-      enrollList: null, //报名列表
-      memberDoc: null, //会员详情
-      matchDoc: null, //赛事详情
-      memberList: null //会员列表
+      articleList: null, //文章列表
+      Categorylist: null //文章列表
     };
   },
-
   methods: {
-    changeMatchId(event) {
-      console.log("changeMatchId");
-      console.log(event);
-      let value = event.mp.detail;
-      this.formData.matchId = value;
+    gotoPage(url) {
+      wx.navigateTo({ url });
     },
-    //函数：{弹窗表单确认后执行的函数}
-    funAfterConfirm: null,
-    async showDialogEnroll(action, dataId) {
-      this.isShowDialogEnroll = true;
-      //Q1:{新增}
-      if (action == "add") {
-        //
-        /**
-         * 需要对属性进行赋值，直接赋值空对象会残留数据，难受
-         * 如果用纯Input则可以
-         */
-        this.formData = { matchId: null, memberId: null };
-        this.titleDialog = "新增报名";
-        this.funAfterConfirm = this.addAEnroll; //确认后执行的函数
-        //Q2:{修改}
-      } else if (action == "modify") {
-        this.titleDialog = "修改报名";
-        this.funAfterConfirm = this.modifyAEnroll; //确认后执行的函数
-        //ajax获取单个会员数据
-        this.formData = await util.ajaxGetDoc({
-          page: "tangball_enroll",
-          id: dataId
-        });
-      }
-    },
-    closeDialog() {
-      this.isShowDialogEnroll = false;
-      console.log("closeDialog");
-    },
-    //函数：{修改一条报名函数}-请配合后台查看数据
-    async modifyAEnroll() {
-      let resp = await util.ajaxModify({
-        page: "tangball_enroll",
-        findJson: { P1: this.formData.P1 }, //锁定需要修改的数据
-        modifyJson: this.formData //修改字段
-      });
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-      wx.showToast({
-        title: "修改成功",
-        icon: "success"
-      });
-    },
-    //函数：{添加一条报名函数}-请配合后台查看数据
-    async addAEnroll() {
-      console.log("addAEnroll");
-      await util.ajaxAdd({
-        page: "tangball_enroll",
-        data: this.formData
-      });
-      wx.showToast({
-        title: "新增成功",
-        icon: "success"
-      });
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-    },
-
-    //函数：{删除一条报名函数}-请配合后台查看数据
-    async deleteAEnroll(dataId) {
-      let res = await util.showModal({
-        title: "确认删除数据？",
-        content: "content"
-      }); //调用：{模态弹窗的函数}
-      if (!res.confirm) {
-        return;
-      }
-      await util.ajaxDelete({
-        page: "tangball_enroll",
-        findJson: { P1: dataId } //锁定需要删除的数据
-      });
-
-      this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-      wx.showToast({
-        title: "删除成功",
-        icon: "success"
-      });
-    },
-    //函数：{ajax获取报名列表函数}
-    async ajaxEnrollList() {
-      this.enrollList = await util.ajaxGetList({
-        page: "tangball_enroll",
-        pageSize: 5
-      });
-    },
-    //函数：{ajax获取消息列表函数}
-    async ajaxMsgList() {
-      //ajax获取消息列表
-      this.myMsgList = await util.ajaxGetList({
-        page: "tangball_msg",
-        pageSize: 999,
+    async getArticleList() {
+      this.articleList = await util.ajaxGetList({
+        page: "tangball_article",
+        pageSize: 15,
         findJson: {
-          //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
-          $or: [{ range: 1 }, { range: 2, memberIdList: 17 }]
+          articleCategory: null
         }
-        // sortJson: { publishTime: -1 }, //排序条件
-        // selectJson: { name: 1, entries: 1 } //只返回指定字段
       });
+      this.Categorylist = await util.ajaxGetList({
+        page: "tangball_article_category",
+        pageSize: 15,
+        findJson: {}
+      });
+      console.log("this.articleList ", this.articleList);
+      console.log("this.Categorylist", this.Categorylist);
+
+      let dictPerson = {}; //人员数据字典对象
+      this.Categorylist.forEach(item => {
+        //循环：{人员数组}
+        dictPerson[item.P1] = item;
+      });
+      
+      
+      console.log("dictPerson", dictPerson);
+      this.articleList.forEach(matchEach => {
+        /**
+         * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
+         */
+        matchEach.CategoryName = dictPerson[matchEach.articleCategory].name;
+
+      });
+      console.log("this.articleList后 ", this.articleList);
     }
   },
-  created() {},
-  async mounted() {
-    console.log("lodash", lodash);
-    //ajax获取单个会员数据
-    this.memberDoc = await util.ajaxGetDoc({ page: "tangball_member", id: 10 });
-    //ajax获取单个赛事数据
-    this.matchDoc = await util.ajaxGetDoc({ page: "tangball_match", id: 37 });
-    //ajax获取会员列表
-    this.memberList = await util.ajaxGetList({
-      page: "tangball_member",
-      pageSize: 1,
-      findJson: { sex: 1 }, //查询条件
-      sortJson: { entries: -1 }, //排序条件
-      selectJson: { name: 1, entries: 1 } //只返回指定字段
-    });
-
-    this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
+  mounted() {
+    this.getArticleList();
   }
+  // created() {
+  //   //id是自增
+  //   this.Categorylist = [
+  //     { P1: "1", name: "张三" },//p1
+  //     { P1: "2", name: "李四" },
+  //     { P1: "4", name: "大明" }
+  //   ];
+  //   //赛事数组
+  //   this.articleList = [
+  //     { id: 1, matc: "赛事1", articleCategory: "1" },//articleCategory
+  //     { id: 2, matchName: "赛事2", articleCategory: "4" }
+  //   ];
+
+  //   /**为第三种方式准备 */
+  //   this.dictPerson = {}; //人员数据字典对象
+  //   this.Categorylist.forEach(Category => {
+  //     //循环：{人员数组}
+  //     this.dictPerson[Category.P1] = Category;
+  //   });
+
+  //   this.articleList.forEach(matchEach => {
+
+  //     /**
+  //      * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
+  //      */
+  //     matchEach.personName = this.dictPerson[matchEach.articleCategory].name;
+  //   });
+  // }
 };
 </script>
 
 <style scoped>
+
 .data-group {
   padding: 5px 10px;
   border-bottom: 1px #ddd solid;
@@ -206,11 +129,34 @@ export default {
   display: flex;
 }
 .data-group-left {
-  flex: 1;
+  width: 210px;
+  position: relative;
+}
+.name_time_text{
+  font-size: 12px;
+  color: #ccc;
+    position: absolute;
+    bottom:0px;
+    left: 0px;
+}
+.title_text {
+  font-size: 18px;
+  /* 自动换行 */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 .data-group-right {
-  text-align: right;
-  width: 60px;
+  flex: 1;
+  
+  height: 75px;
+}
+.data-group-right img {
+  height: 100%;
+  width: 100%;
 }
 .n-input {
   display: inline-block;
