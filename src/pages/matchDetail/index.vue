@@ -92,8 +92,8 @@ export default {
       cityVenueList: null,
       venueId: null,
       NationalmatchIndex: null, //举办地点聚焦
-      P1: 37, //  当前赛事id
-      // tangballUserId: 17, //当前会员id
+      matchId: 37, //  当前赛事id
+
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
@@ -120,7 +120,6 @@ export default {
     showImg(url) {
       this.show = true;
       this.bigImg = url;
-      console.log(this.url);
     },
     ClosePhoto() {
       this.show = false;
@@ -133,7 +132,10 @@ export default {
     onClose() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let url = `/pages/matchEroll/main?id=${this.P1}&venueId=${this.venueId}`;
+      let { matchName, matchTime, registrationFee } = this.matchlistDoc;
+      let url = `/pages/matchEroll/main?matchId=${this.matchId}&venueId=${
+        this.venueId
+      }&matchName=${matchName}&matchTime=${matchTime}&registrationFee=${registrationFee}`;
       if (!this.status && this.venueId) {
         wx.navigateTo({ url });
       } else {
@@ -159,7 +161,10 @@ export default {
      */
     gotoPage() {
       if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
-        let url = `/pages/matchEroll/main?id=${this.P1}`;
+        let { matchName, matchTime, registrationFee } = this.matchlistDoc;
+        let url = `/pages/matchEroll/main?matchId=${
+          this.matchId
+        }&matchName=${matchName}&matchTime=${matchTime}&registrationFee=${registrationFee}`;
         if (!this.status) {
           wx.navigateTo({ url });
         }
@@ -175,16 +180,6 @@ export default {
         this.venueId = this.matchlistDoc.cityVenueList[0].venueId; //默认选中第一个
       }
     },
-
-    bindViewTap() {
-      const url = "../logs/main";
-      if (mpvuePlatform === "wx") {
-        mpvue.switchTab({ url });
-      } else {
-        mpvue.navigateTo({ url });
-      }
-    },
-
     /**
      * @name getEnrollList是获取报名订单列表函数
      * @desc 获取报名订单列表，并传入当前的会员id，判断列表中的赛事id是否等于当前赛事id，通过isMatchIdStatus状态进行管理
@@ -201,15 +196,13 @@ export default {
 
       data.list.filter((item, index) => {
         //如果当前会员赛事id含有当前用户
-        if (item.matchId == this.P1) {
-          console.log("符合条件", index);
+        if (item.matchId == this.matchId) {
           this.isMatchIdStatus = true; //该用户已经报名
           this.enrollText = "您已报名";
           return;
         }
       });
     },
-
     /**
      * @name matchTypeChange举办地点函数
      * @desc 当点击举办地点时，选择展开或者折叠
@@ -220,7 +213,7 @@ export default {
     },
     onShow() {
       this.show = true;
-      console.log("mpvue.data", this);
+
       // mpvue.setData({show: true})
     },
     /**
@@ -231,7 +224,6 @@ export default {
      * @desc 赛事切换回调
      */
     tabChange(url) {
-      console.log(url);
       wx.switchTab({
         url
       });
@@ -246,7 +238,7 @@ export default {
     //
     let { data } = await util.post({
       url: global.PUB.domain + "/crossDetail?page=tangball_match",
-      param: { id: this.P1 }
+      param: { id: this.matchId }
     });
     this.matchlistDoc = data.Doc; //赛事详情列表
 
@@ -268,11 +260,11 @@ export default {
         }
       });
     }
-    console.log("tangballUserInfo", this.tangballUserInfo);
   },
   computed: {
+    // 当前会员id
     tangballUserId: function() {
-      return this.$store.state.tangballUserInfo.P1; //
+      return this.$store.state.tangballUserInfo.matchId; //
     }
   },
   /**
@@ -280,9 +272,8 @@ export default {
    */
   onLoad: function(options) {
     if (options.id) {
-      this.P1 = options.id;
+      this.matchId = options.id;
     }
-    console.log("onLoad", this.P1);
   }
 };
 </script>
