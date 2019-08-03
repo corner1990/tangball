@@ -4,15 +4,13 @@
         :steps="steps"
         :active="active"
       />
-    <div v-show="false">
-      <!-- <BingPhone  /> -->
+    <div v-show="active===0">
+      <PersonInfo :info="info" @changeInfo="changeInfo" />
     </div>
-    <div>
-      <PersonInfo  />
+    <div v-show="active===1">
+      <EventInfo />
     </div>
-    <!-- <PersonInfo /> -->
-    <!-- <EventInfo /> -->
-    <div class="btn-wrap" v-show="active < 3">
+    <div class="btn-wrap" v-show="active < 2">
       <van-row>
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
@@ -22,15 +20,6 @@
         </van-col>
       </van-row>
     </div>
-    <div class="form-wrap" v-show="active >= 3">      
-      <form>
-        <van-row class="button-wrap">
-          <van-col span="24">
-            <van-button type="info" block @click="showTip">立刻报名</van-button>
-          </van-col>
-        </van-row>
-      </form>
-    </div>
     <van-dialog id="van-dialog" />
     <mytabbar></mytabbar>
   </div>
@@ -39,7 +28,6 @@
 /* eslint-disable */
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
-import BingPhone from '@/components/matchErooll/bindPhine'
 import PersonInfo from '@/components/matchErooll/personInfo'
 import EventInfo from '@/components/matchErooll/eventInfo'
 import Dialog from '../../../static/vant/dialog/dialog';
@@ -48,7 +36,6 @@ export default {
   components: {
     mytabbar,
     debug_item,
-    BingPhone,
     PersonInfo,
     EventInfo
   },
@@ -67,23 +54,40 @@ export default {
           text: '完成缴费',
         }
       ],
-      active: 0
+      active: 0,
+      info: {
+        name: '高富帅', // 姓名
+        phone: '15276513522', // 手机号
+        age: 12,
+        sex: '1',
+        ballAge: '',
+        career: '', // 职业
+        idCard: '', // 身份证号
+        matchId: 29, // 赛事id
+        orderMoney: 1,
+        memberId: '' // 报名会员id
+      },
     }
   },
-  async monuted () {
+  async mounted () {
      // 请求赛事详情接口函数
     // let doc = await util.post({
     //   url: global.PUB.domain + "/crossDetail?page=tangball_match",
     //   param: { id: this.P1 }
     // });
-    console.log('this', this)
+    // console.log('this', this)
+    // 页面加载请求会员数据
+    this.initInfo();
   },
   methods: {
     nextStep () {
-      if (this.active >= 3) {
-        return false;
+      if (this.active >= 1) {
+        return this.showTip();
       }
       this.active = this.active + 1
+      if(this.active === 1) {
+        this.btnText = '立即报名'
+      }
     },
     prevStep () {
       if (this.active <= 0) {
@@ -102,30 +106,27 @@ export default {
       })
       .catch(() => {
         Dialog.close()
-      });
+      })
     },
     sendPay () {
       setTimeout(() => {
         Dialog.close()
       }, 1000)
-      let self = this;
-      wx.getStorage({
-        key: 'ids',
-        success (res) {
-          let ids = JSON.parse(res.data)
-          self.pay(ids.openid)
-        }
-      })
+      // 统一下单
+      this.pay(this.info)
     },
-    pay (openId) {
+    /**
+     * @desc 统一下单
+     */
+    pay (info) {
       let data = {
         "total_fee": 0.01,
-        openId,
-        "goodsNameAll": "abc"
+        "goodsNameAll": "abc",
+        ...info
       }
       const self = this;
       wx.request({
-        url: `${global.PUB.domain}/paicheng/getCode`,
+        url: `${global.PUB.domain}/tangball/wxCreateOrder`,
         data,
         method: 'post',
         success (res) {
@@ -153,16 +154,42 @@ export default {
         })
       }
       console.log('data', data)
-    }
-  },
-  created() {
-  },
+    },
+    initInfo () {
+      let { tangballUserInfo } = this.$store.state;
+      let { name, sex, P1: memberId, openid: openId } = tangballUserInfo;
+      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId }
+    },
+    // 请求修改接口,修改成功跳转到首页
+    async modifyMember(){
+        let { data } = await util.post({
+          url: global.PUB.domain + "/crossModify?page=tangball_member",
+          param: {
+            findJson: {openid: this.tangballUserInfo.openid},
+            modifyJson:this.memberMessage
+          }
+        });
+        wx.switchTab({url:"/pages/index/main"})
+        wx.showToast({
+        title: '修改成功',
+        icon: 'success'
+      })
+    },
+    /**
+     * @desc 修改信息
+     */
+    changeInfo (info) {
+      this.info = {...this.info, ...info}
+    },
+    getVenue () {},
+    getEvent () {}
+  }
 }
 </script>
 
 <style scoped>
   .main-wrap{
-    margin: 0 10px;
+    margin: 0 10px 100px;
   }
   .event-info{
     line-height: 30px;
