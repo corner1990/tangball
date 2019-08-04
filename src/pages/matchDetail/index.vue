@@ -90,7 +90,8 @@ export default {
       show: false,
       showdDialog: false,
       cityVenueList: null,
-      venueId: null,//场馆id
+      venueId: null, //场馆id
+      venueName: null, //场馆名字
       NationalmatchIndex: null, //举办地点聚焦
       matchId: 37, //  当前赛事id
 
@@ -137,7 +138,7 @@ export default {
         matchTime,
         registrationFee: total_fee
       } = this.matchlistDoc;
-      let { matchId, venueId } = this;
+      let { matchId, venueId, venueName } = this;
       let url = `/pages/matchEroll/main`;
       if (!this.status && this.venueId) {
         wx.setStorage({
@@ -147,7 +148,8 @@ export default {
             matchTime,
             total_fee,
             matchId,
-            venueId
+            venueId,
+            venueName
           }),
           success() {
             wx.navigateTo({ url });
@@ -167,8 +169,10 @@ export default {
      */
     pickerChange(event) {
       // 缓存当前选中的场馆id
+
       let index = event.mp.detail.index;
       this.venueId = this.matchlistDoc.cityVenueList[index].venueId;
+      this.venueName = event.mp.detail.value;
     },
 
     /**
@@ -205,6 +209,7 @@ export default {
           }
         );
         this.venueId = this.matchlistDoc.cityVenueList[0].venueId; //默认选中第一个
+        this.venueName = this.cityVenueList[0];
       }
     },
     /**
