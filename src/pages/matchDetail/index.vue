@@ -161,12 +161,19 @@ export default {
      */
     gotoPage() {
       if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
-        let { matchName, matchTime, registrationFee } = this.matchlistDoc;
-        let url = `/pages/matchEroll/main?matchId=${
-          this.matchId
-        }&matchName=${matchName}&matchTime=${matchTime}&registrationFee=${registrationFee}`;
+        let { matchName, matchTime, registrationFee: total_fee } = this.matchlistDoc;
+        let { matchId } = this;
+        let url = `/pages/matchEroll/main`;
         if (!this.status) {
-          wx.navigateTo({ url });
+          // 保存报名数据
+          wx.setStorage({
+            key: 'matchInfo',
+            data: JSON.stringify({matchName, matchTime, total_fee, matchId}),
+            success () {
+              wx.navigateTo({ url });
+            }
+          })
+          
         }
       } else {
         this.showdDialog = true; //打开弹窗
@@ -213,7 +220,6 @@ export default {
     },
     onShow() {
       this.show = true;
-
       // mpvue.setData({show: true})
     },
     /**
