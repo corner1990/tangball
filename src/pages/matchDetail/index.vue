@@ -90,7 +90,7 @@ export default {
       show: false,
       showdDialog: false,
       cityVenueList: null,
-      venueId: null,
+      venueId: null,//场馆id
       NationalmatchIndex: null, //举办地点聚焦
       matchId: 37, //  当前赛事id
 
@@ -132,11 +132,28 @@ export default {
     onClose() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime, registrationFee } = this.matchlistDoc;
-      let url = `/pages/matchEroll/main?matchId=${this.matchId}&venueId=${
-        this.venueId
-      }&matchName=${matchName}&matchTime=${matchTime}&registrationFee=${registrationFee}`;
+      let {
+        matchName,
+        matchTime,
+        registrationFee: total_fee
+      } = this.matchlistDoc;
+      let { matchId, venueId } = this;
+      let url = `/pages/matchEroll/main`;
       if (!this.status && this.venueId) {
+        wx.setStorage({
+          key: "matchInfo",
+          data: JSON.stringify({
+            matchName,
+            matchTime,
+            total_fee,
+            matchId,
+            venueId
+          }),
+          success() {
+            wx.navigateTo({ url });
+          }
+        });
+
         wx.navigateTo({ url });
       } else {
         this.showdDialog = true;
@@ -161,19 +178,22 @@ export default {
      */
     gotoPage() {
       if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
-        let { matchName, matchTime, registrationFee: total_fee } = this.matchlistDoc;
+        let {
+          matchName,
+          matchTime,
+          registrationFee: total_fee
+        } = this.matchlistDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main`;
         if (!this.status) {
           // 保存报名数据
           wx.setStorage({
-            key: 'matchInfo',
-            data: JSON.stringify({matchName, matchTime, total_fee, matchId}),
-            success () {
+            key: "matchInfo",
+            data: JSON.stringify({ matchName, matchTime, total_fee, matchId }),
+            success() {
               wx.navigateTo({ url });
             }
-          })
-          
+          });
         }
       } else {
         this.showdDialog = true; //打开弹窗
