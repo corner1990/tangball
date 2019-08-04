@@ -1,11 +1,5 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="matchlist" v-model="matchlistDoc" text="赛事列表详情" />
-
-    <!-- 显示选择场馆弹窗 -->
-    <van-dialog use-slot title="请选择场馆" :show="showdDialog" @close="onClose" v-if="showdDialog">
-      <van-picker :columns="cityVenueList" @change="pickerChange" />
-    </van-dialog>
     <!-- 赛事照片 -->
     <div class>
       <swiper
@@ -30,7 +24,12 @@
       </swiper>
 
       <!--显示图片弹窗-->
-      <van-popup customStyle="height:250px" v-if="show" :show="show" @close="ClosePhoto">
+      <van-popup
+        customStyle="height:250px"
+        v-if="showBigImg"
+        :show="showBigImg"
+        @close="ClosePhoto"
+      >
         <img style="height:250px" alt :src="bigImg" />
       </van-popup>
     </div>
@@ -68,34 +67,41 @@
     <van-button size="large" v-if="isMatchIdStatus" plain disabled :style="style">{{enrollText}}</van-button>
     <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
 
+    <!-- 显示选择场馆弹窗 -->
+    <van-dialog
+      use-slot
+      title="请选择场馆"
+      :show="showdDialog"
+      @close="onCloseDialog"
+      v-if="showdDialog"
+    >
+      <van-picker :columns="cityVenueList" @change="pickerChange" />
+    </van-dialog>
     <mytabbar></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 export default {
   components: {
-    card,
     mytabbar,
     debug_item,
     util
   },
   data() {
     return {
-      bigImg: "",
-      show: false,
-      showdDialog: false,
-      cityVenueList: null,
+      bigImg: "", //图片点击放大地址
+      showBigImg: false, //控制图片点击放大
+      showdDialog: false, //控制选择场馆弹窗
+      cityVenueList: null, //场馆列表
       venueId: null, //场馆id
       venueName: null, //场馆名字
       cityName: null, //场馆城市名
       NationalmatchIndex: null, //举办地点聚焦
       matchId: 37, //  当前赛事id
-
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
@@ -119,19 +125,26 @@ export default {
   },
 
   methods: {
-    showImg(url) {
-      this.show = true;
-      this.bigImg = url;
-    },
-    ClosePhoto() {
-      this.show = false;
-    },
     /**
-     * @name onClose是弹窗的函数
-     * @desc
+     * @desc 打开点击图片放大函数
+     */
+    showImg(url) {
+      this.showBigImg = true;
+      this.bigImg = url; //缓存当前的图片地址
+    },
+
+    /**
+     * @desc 关闭点击图片放大函数
+     */
+    ClosePhoto() {
+      this.showBigImg = false;
+    },
+
+    /**
+     * @desc onCloseDialog是弹窗的关闭函数
      * @param event是默认值
      */
-    onClose() {
+    onCloseDialog() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
       let {
@@ -157,7 +170,6 @@ export default {
             wx.navigateTo({ url });
           }
         });
-
         wx.navigateTo({ url });
       } else {
         this.showdDialog = true;
@@ -170,17 +182,19 @@ export default {
      * @param event是默认值
      */
     pickerChange(event) {
-      // 缓存当前选中的场馆id
-
-      let index = event.mp.detail.index;
-      this.venueId = this.matchlistDoc.cityVenueList[index].venueId;
-      this.cityName = this.matchlistDoc.cityVenueList[index].cityName;
-      this.venueName = this.matchlistDoc.cityVenueList[index].venueName;
+      // 缓存当前选中的场馆id、场馆名字、城市名字
+      let { index } = event.mp.detail;
+      let { venueId, cityName, venueName } = this.matchlistDoc.cityVenueList[
+        index
+      ];
+      this.venueId = venueId;
+      this.cityName = cityName;
+      this.venueName = venueName;
     },
 
     /**
      * @name gotoPage是立即报名函数
-     * @desc 点击立即报名按钮，跳转到报名页
+     * @desc 点击立即报名按钮，如果不是全国赛事则直接跳转到报名页，否则需要打开弹窗选择场馆
      * @param url是跳转的地址
      */
     gotoPage() {
@@ -204,44 +218,52 @@ export default {
         }
       } else {
         this.showdDialog = true; //打开弹窗
-        this.venueId = null;
+        this.venueId = null; //清空变量
+        this.cityName = null;
+        this.venueName = null;
         // 拼接场馆列表数组
         this.cityVenueList = this.matchlistDoc.cityVenueList.map(
           (item, index) => {
             return item.cityName + "---" + item.venueName;
           }
         );
-        this.venueId = this.matchlistDoc.cityVenueList[0].venueId; //默认选中第一个
-        this.cityName = this.matchlistDoc.cityVenueList[0].cityName;
-        this.venueName = this.matchlistDoc.cityVenueList[0].venueName;
+        let {
+          venueId,
+          cityName,
+          venueName
+        } = this.matchlistDoc.cityVenueList[0];
+
+        this.venueId = venueId; //默认选中第一个
+        this.cityName = cityName;
+        this.venueName = venueName;
       }
     },
     /**
      * @name getEnrollList是获取报名订单列表函数
-     * @desc 获取报名订单列表，并传入当前的会员id，判断列表中的赛事id是否等于当前赛事id，通过isMatchIdStatus状态进行管理
+     * @desc 获取报名订单列表，并传入当前的赛事id，判断列表中的会员id是否等于当前会员id，通过isMatchIdStatus状态进行管理
      * @param 接口返回值是报名订单列表
      */
     async getEnrollList() {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
-        param: { findJson: { tangballUserId: this.tangballUserId } }
+        param: { findJson: { matchId: this.matchId } }
       });
 
       this.isMatchIdStatus = false; //变量初始化为false
       this.enrollText = "立即报名"; //初始化为立即报名
-
-      data.list.filter((item, index) => {
-        //如果当前会员赛事id含有当前用户
-        if (item.matchId == this.matchId) {
-          this.isMatchIdStatus = true; //该用户已经报名
-          this.enrollText = "您已报名";
-          return;
-        }
-      });
+      if (data.list) {
+        data.list.filter((item, index) => {
+          //如果报名列表中的的会员包含当前会员
+          if (item.memberId == this.tangballUserId) {
+            this.isMatchIdStatus = true; //该用户已经报名
+            this.enrollText = "您已报名";
+            return;
+          }
+        });
+      }
     },
     /**
-     * @name matchTypeChange举办地点函数
-     * @desc 当点击举办地点时，选择展开或者折叠
+     * @desc  matchTypeChange举办地点函数 当点击举办地点时，选择展开或者折叠
      * @param val是默认传的参数
      */
     matchTypeChange(val) {
@@ -249,7 +271,6 @@ export default {
     },
     onShow() {
       this.show = true;
-      // mpvue.setData({show: true})
     },
     /**
      * @desc 搜索回调
@@ -299,7 +320,7 @@ export default {
   computed: {
     // 当前会员id
     tangballUserId: function() {
-      return this.$store.state.tangballUserInfo.matchId; //
+      return this.$store.state.tangballUserInfo.P1;
     }
   },
   /**
@@ -330,9 +351,6 @@ export default {
   margin: 10px 20px;
   color: #333;
   border-bottom: 1px solid #000;
-}
-.card {
-  margin: 0 10px;
 }
 
 /* 折叠面板 */
