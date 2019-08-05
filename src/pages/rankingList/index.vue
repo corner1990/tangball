@@ -141,7 +141,6 @@ export default {
   },
 
   beforeMount() {
-    console.log("唐球达人-created");
     this.sexIndex = 1; //初始化性别
     this.getMemberList(); //获取会员列表
   }

@@ -8,7 +8,7 @@
       <PersonInfo :info="info" @changeInfo="changeInfo" />
     </div>
     <div v-show="active===1">
-      <EventInfo />
+      <EventInfo :info="info" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <van-row>
@@ -84,21 +84,44 @@ export default {
       if (this.active >= 1) {
         return this.showTip();
       }
-      this.active = this.active + 1
-      if(this.active === 1) {
-        this.btnText = '立即报名'
+      if (this.active === 0 && !this.info.verfiy) {
+        return Dialog.alert({
+          title: '提示',
+          message: '请先获取并且输入验证码'
+        });
       }
+      this.checkVerfiy()
     },
     prevStep () {
       if (this.active <= 0) {
         return false;
       }
+      this.btnText = '下一步';
       this.active = this.active - 1
     },
+    async checkVerfiy () {
+      let { phone: mobile, verfiy: vCode } = this.info;
+      let { data } = await util.post({
+        url: global.PUB.domain + "/tangball/checkMobileVCode",
+        param: { mobile, vCode }
+      });
+      if (data.code !== 0) {
+        return Dialog.alert({
+          title: '错误提醒',
+          message: data.message
+        });
+      }
+      this.active = this.active + 1
+      if(this.active === 1) {
+        this.btnText = '立即报名'
+      }
+    },
     showTip () {
+      let data = wx.getStorageSync('matchInfo')
+      let { matchName, matchTime, total_fee } = JSON.parse(data)
       Dialog.confirm({
         title: '参赛报名提醒',
-        message: '你将要报名参加xxx赛事，xxxx时举办，报名费xxx元，一旦报名成功，将不在退还',
+        message: `你将要报名参加${matchName}，${matchTime} 时举办，报名费${total_fee}元，一旦报名成功，将不在退还`,
         asyncClose: true
       })
       .then(() => {
@@ -153,13 +176,14 @@ export default {
           }
         })
       }
-      console.log('data', data)
     },
     initInfo () {
       let { tangballUserInfo } = this.$store.state;
-      let { name, sex, P1: memberId, openid: openId } = tangballUserInfo;
-      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId }
+      wx.self = this;
+      let { name, sex = -1, openid: openId, memberId } = tangballUserInfo;
+      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId}
     },
+    askAndGoBack () {},
     // 请求修改接口,修改成功跳转到首页
     async modifyMember(){
         let { data } = await util.post({

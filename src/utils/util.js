@@ -39,8 +39,8 @@ function wxPromisify(fn) {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
       obj.success = function (res) {
-        console.log("wxPromisify-obj.success");
-        console.log("res", res);
+        // console.log("wxPromisify-obj.success");
+        // console.log("res", res);
         //成功
         resolve(res)
       }
@@ -284,7 +284,7 @@ async function ajaxGetList(_json) {
 
 //ajax获取数据列表的函数
 async function ajaxGetListPopulate(_json) {
-  console.log("ajaxGetListPopulate-1");
+  // console.log("ajaxGetListPopulate-1");
   let { populate } = _json;
   let listData;//变量：{最终需要返回的列表}
   {
@@ -308,7 +308,7 @@ async function ajaxGetListPopulate(_json) {
    */
 
   let funPopulate = async function (populateConfig) {
-    console.log("funPopulate@@");
+    // console.log("funPopulate@@");
     let { page, populateColumn, idColumn, idKeyColumn } = populateConfig;
 
     let arrId = [];
@@ -479,16 +479,16 @@ let gotoPage = function (url) {
 
 
 let getMyWXSetting = async function (url) {
-  console.log("getMyWXSetting");
+  // console.log("getMyWXSetting");
   let resSetting = await wxGetSetting();
   if (resSetting.authSetting["scope.userInfo"]) {
-    console.log("用户已经授权过,跳转到首页");
+    // console.log("用户已经授权过,跳转到首页");
     wx.switchTab({
       url: "/pages/index/main"
     });
 
   } else {
-    console.log("用户还未授权过，返回noAuth");
+    // console.log("用户还未授权过，返回noAuth");
     return "noAuth"
   }
 };
@@ -502,21 +502,21 @@ let getMyWXSetting = async function (url) {
 let loginAndInitUser = async function (vm, wxLoginAsync) {
 
   let resLogin = await wxLogin(); //微信会员登录结果
-  console.log("resLogin", resLogin);
+  // console.log("resLogin", resLogin);
   let js_code = resLogin.code; //当前用户的微信code
   if (js_code) {
     //Q1：{当前用户的微信code}存在
     try {
-      console.log("getUserInfo开始");
+      // console.log("getUserInfo开始");
       let resUserInfo = await wxGetUserInfo(); //微信会员登录
-      console.log("getUserInfo成功");
+      // console.log("getUserInfo成功");
       await util.ajaxMyWXUserInfo(resUserInfo, js_code, vm); //调用：{ajax获取当前微信用户详细信息}
     } catch (err) {
-      console.log("getUserInfo或ajaxMyWXUserInfo失败,原因", err);
+      // console.log("getUserInfo或ajaxMyWXUserInfo失败,原因", err);
     }
   } else {
     //Q2：{当前用户的微信code}不存在
-    console.log("登录失败！" + res.errMsg);
+    // console.log("登录失败！" + res.errMsg);
   }
 
 
