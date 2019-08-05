@@ -246,20 +246,15 @@ export default {
     async getEnrollList() {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
-        param: { findJson: { matchId: this.matchId } }
+        param: {
+          findJson: { matchId: this.matchId, memberId: this.tangballUserId }
+        }
       });
-
       this.isMatchIdStatus = false; //变量初始化为false
       this.enrollText = "立即报名"; //初始化为立即报名
-      if (data.list) {
-        data.list.filter((item, index) => {
-          //如果报名列表中的的会员包含当前会员
-          if (item.memberId == this.tangballUserId) {
-            this.isMatchIdStatus = true; //该用户已经报名
-            this.enrollText = "您已报名";
-            return;
-          }
-        });
+      if (data.list[0].P1) {
+        this.isMatchIdStatus = true; //该用户已经报名
+        this.enrollText = "您已报名";
       }
     },
     /**
