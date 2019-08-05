@@ -24,6 +24,16 @@
         hover-class="other-navigator-hover"
       >切换 Tab-针对tabar中的页面</navigator>
     </view>
+      <navigator url="/pages/searchPage/main">
+      <div class="search-box">
+    <div class="search-text">搜索</div>
+        <div class="search-img">
+          <van-icon name="arrow" size="20px" />
+         
+        </div>
+      </div>
+    </navigator>
+
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -38,7 +48,9 @@
         </swiper-item>
       </block>
     </swiper>
+     
     <div>
+   
       <div class="index_area_title">唐球赛事</div>
       <div class>
         <matchlist></matchlist>
@@ -51,7 +63,6 @@
       </div>
     </div>
 
-    
     <div class="all">
       <div class="left"></div>
       <div class="right"></div>
@@ -128,7 +139,6 @@ export default {
       }
     },
     clickHandle(ev) {
-     
       // throw {message: 'custom test'}
     },
 
@@ -140,28 +150,23 @@ export default {
      * @desc 赛事切换回调
      */
     tabChange(url) {
-     
       wx.switchTab({
         url
       });
     }
   },
   onShow() {
-   
     wx.hideTabBar({
-      complete() {
-  
-      }
+      complete() {}
     });
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
 
     let result = await util.getMyWXSetting();
-   
+
     //如果未授权，先return,等待用户主动授权
     if (result == "noAuth") {
-    
       util.gotoPage("/pages/authorize/main"); //跳转到授权页面
       return;
     }
@@ -182,13 +187,15 @@ export default {
 
 <style scoped>
 .index_area_title {
-  background: #f4b116;
+  margin-top: 5px;
+  /* background: #f4f7fe; */
   height: 40px;
-  color: #fff;
-  font-size: 16px;
+  color: #000;
+  font-size: 18px;
   font-weight: bold;
   line-height: 40px;
-  text-align: center;
+  /* text-align: center; */
+  padding-left: 30px;
 }
 .main-wrap {
   padding-bottom: 60px;
@@ -203,5 +210,24 @@ export default {
 }
 .slide-image {
   width: 100%;
+}
+.search-text {
+  float: left;
+  color: gray;
+  margin-right: 8px;
+}
+.search-box {
+  margin-left: 5%;
+  height: 40px;
+  width: 90%;
+  font-size: 18px;
+  line-height: 40px;
+  border-bottom: 1px solid #f4b116;
+}
+
+.search-img {
+  float: right;
+  color: #999999;
+  padding-top: 8px;
 }
 </style>

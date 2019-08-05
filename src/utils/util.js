@@ -587,7 +587,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
           openid, wxNickName
         }
       });
-      console.log("data##￥￥￥￥", data);
+   
       vm.$store.commit("setTangballUserInfo", data);
 
     }
