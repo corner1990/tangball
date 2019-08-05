@@ -1,9 +1,6 @@
 <template>
   <div class="main-wrap">
-    <van-steps
-        :steps="steps"
-        :active="active"
-      />
+    <van-steps :steps="steps" :active="active" />
     <div v-show="active===0">
       <PersonInfo :info="info" @changeInfo="changeInfo" />
     </div>
@@ -26,11 +23,11 @@
 </template>
 <script>
 /* eslint-disable */
-import mytabbar from '@/components/mytabbar/mytabbar'
-import debug_item from '@/components/common/debug_item/debug_item'
-import PersonInfo from '@/components/matchErooll/personInfo'
-import EventInfo from '@/components/matchErooll/eventInfo'
-import Dialog from '../../../static/vant/dialog/dialog';
+import mytabbar from "@/components/mytabbar/mytabbar";
+import debug_item from "@/components/common/debug_item/debug_item";
+import PersonInfo from "@/components/matchErooll/personInfo";
+import EventInfo from "@/components/matchErooll/eventInfo";
+import Dialog from "../../../static/vant/dialog/dialog";
 import util from "@/utils/util";
 export default {
   components: {
@@ -39,38 +36,39 @@ export default {
     PersonInfo,
     EventInfo
   },
-  data () {
+  data() {
     return {
+      matchInfo:{},//存储赛事信息
       pageName: "比赛报名",
-      btnText: '下一步',
+      btnText: "下一步",
       steps: [
         {
-          text: '确认报名资料'
+          text: "确认报名资料"
         },
         {
-          text: '支付报名费'
+          text: "支付报名费"
         },
         {
-          text: '完成缴费',
+          text: "完成缴费"
         }
       ],
       active: 0,
       info: {
-        name: '高富帅', // 姓名
-        phone: '', // 手机号
-        age: 12,
-        sex: '1',
-        ballAge: '',
-        career: '', // 职业
-        idCard: '', // 身份证号
-        matchId: 29, // 赛事id
-        orderMoney: 1,
-        memberId: '' // 报名会员id
-      },
-    }
+        // name: "高富帅", // 姓名
+        // phone: "", // 手机号
+        // age: 12,
+        // sex: "1",
+        // ballAge: "",
+        // career: "", // 职业
+        // idCard: "", // 身份证号
+        // matchId: 29, // 赛事id
+        // orderMoney: 1,
+        // memberId: "" // 报名会员id
+      }
+    };
   },
-  async mounted () {
-     // 请求赛事详情接口函数
+  async mounted() {
+    // 请求赛事详情接口函数
     // let doc = await util.post({
     //   url: global.PUB.domain + "/crossDetail?page=tangball_match",
     //   param: { id: this.P1 }
@@ -80,26 +78,26 @@ export default {
     this.initInfo();
   },
   methods: {
-    nextStep () {
+    nextStep() {
       if (this.active >= 1) {
         return this.showTip();
       }
       if (this.active === 0 && !this.info.verfiy) {
         return Dialog.alert({
-          title: '提示',
-          message: '请先获取并且输入验证码'
+          title: "提示",
+          message: "请先获取并且输入验证码"
         });
       }
-      this.checkVerfiy()
+      this.checkVerfiy();
     },
-    prevStep () {
+    prevStep() {
       if (this.active <= 0) {
         return false;
       }
-      this.btnText = '下一步';
-      this.active = this.active - 1
+      this.btnText = "下一步";
+      this.active = this.active - 1;
     },
-    async checkVerfiy () {
+    async checkVerfiy() {
       let { phone: mobile, verfiy: vCode } = this.info;
       let { data } = await util.post({
         url: global.PUB.domain + "/tangball/checkMobileVCode",
@@ -107,132 +105,152 @@ export default {
       });
       if (data.code !== 0) {
         return Dialog.alert({
-          title: '错误提醒',
+          title: "错误提醒",
           message: data.message
         });
       }
-      this.active = this.active + 1
-      if(this.active === 1) {
-        this.btnText = '立即报名'
+      this.active = this.active + 1;
+      if (this.active === 1) {
+        this.btnText = "立即报名";
       }
     },
-    showTip () {
-      let data = wx.getStorageSync('matchInfo')
-      let { matchName, matchTime, total_fee } = JSON.parse(data)
+    showTip() {
+      let data = wx.getStorageSync("matchInfo");
+      let { matchName, matchTime, total_fee } = JSON.parse(data);
       Dialog.confirm({
-        title: '参赛报名提醒',
+        title: "参赛报名提醒",
         message: `你将要报名参加${matchName}，${matchTime} 时举办，报名费${total_fee}元，一旦报名成功，将不在退还`,
         asyncClose: true
       })
-      .then(() => {
-        return this.sendPay()
-      })
-      .catch(() => {
-        Dialog.close()
-      })
+        .then(() => {
+          return this.sendPay();
+        })
+        .catch(() => {
+          Dialog.close();
+        });
     },
-    sendPay () {
+    sendPay() {
       setTimeout(() => {
-        Dialog.close()
-      }, 1000)
+        Dialog.close();
+      }, 1000);
       // 统一下单
-      this.pay(this.info)
+      this.pay(this.info);
     },
     /**
      * @desc 统一下单
      */
-    pay (info) {
+    pay(info) {
       let data = {
-        "total_fee": 0.01,
-        "goodsNameAll": "abc",
+        total_fee: 0.01,
+        goodsNameAll: "abc",
         ...info
-      }
+      };
       const self = this;
       wx.request({
         url: `${global.PUB.domain}/tangball/wxCreateOrder`,
         data,
-        method: 'post',
-        success (res) {
-          let { statusCode, data } = res
+        method: "post",
+        success(res) {
+          let { statusCode, data } = res;
           if (statusCode === 200) {
             let { data: chrildData } = data;
-            self.funlyPay(JSON.parse(chrildData))
+            self.funlyPay(JSON.parse(chrildData));
           }
-        } 
-      })
+        }
+      });
     },
-    funlyPay (data) {
-      let { msg, status, timestamp: timeStamp, ...args } = data
+    funlyPay(data) {
+      let { msg, status, timestamp: timeStamp, ...args } = data;
       if (status == 100) {
         wx.requestPayment({
           ...args,
-          signType: 'MD5',
+          signType: "MD5",
           timeStamp,
-          success (res) {
-            console.log('ok', res)
+          success(res) {
+            console.log("ok", res);
           },
-          fail (err) {
-            console.log('err', err)
+          fail(err) {
+            console.log("err", err);
           }
-        })
+        });
       }
     },
-    initInfo () {
+    initInfo() {
+      let matchInfo = wx.getStorageSync("matchInfo");
+      this.matchInfo = JSON.parse(matchInfo);
+
       let { tangballUserInfo } = this.$store.state;
       console.log("tangballUserInfo", tangballUserInfo);
       wx.self = this;
-      let { name, sex = -1, openid: openId, memberId,phone } = tangballUserInfo;
-      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId,phone}
+      let {
+        P1,
+        name,
+        sex = -1,
+        openid: openId,
+        
+        phone,
+        career
+      } = tangballUserInfo;
+      this.info = {
+        ...this.info,
+        name,
+        sex: `${sex}`,
+        memberId:P1,
+        openId,
+        phone,
+        career,
+        matchId:this.matchInfo.matchId
+      };
       console.log("initInfo-this.info", this.info);
     },
-    askAndGoBack () {},
+    askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
-    async modifyMember(){
-        let { data } = await util.post({
-          url: global.PUB.domain + "/crossModify?page=tangball_member",
-          param: {
-            findJson: {openid: this.tangballUserInfo.openid},
-            modifyJson:this.memberMessage
-          }
-        });
-        wx.switchTab({url:"/pages/index/main"})
-        wx.showToast({
-        title: '修改成功',
-        icon: 'success'
-      })
+    async modifyMember() {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossModify?page=tangball_member",
+        param: {
+          findJson: { openid: this.tangballUserInfo.openid },
+          modifyJson: this.memberMessage
+        }
+      });
+      wx.switchTab({ url: "/pages/index/main" });
+      wx.showToast({
+        title: "修改成功",
+        icon: "success"
+      });
     },
     /**
      * @desc 修改信息
      */
-    changeInfo (info) {
-      this.info = {...this.info, ...info}
+    changeInfo(info) {
+      this.info = { ...this.info, ...info };
     },
-    getVenue () {},
-    getEvent () {}
+    getVenue() {},
+    getEvent() {}
   }
-}
+};
 </script>
 
 <style scoped>
-  .main-wrap{
-    margin: 0 10px 100px;
-  }
-  .event-info{
-    line-height: 30px;
-    font-size: 16px;
-  }
-  .form-wrap{
-    margin-top: 20px;
-    line-height: 36px;
-    font-size: 16px;
-  }
-  .form-wrap input{
-    height: 36px;
-  }
-  .form-wrap .button{
-    width: 100%;
-  }
-  .btn-wrap{
-    margin-top: .533rem
-  }
+.main-wrap {
+  margin: 0 10px 100px;
+}
+.event-info {
+  line-height: 30px;
+  font-size: 16px;
+}
+.form-wrap {
+  margin-top: 20px;
+  line-height: 36px;
+  font-size: 16px;
+}
+.form-wrap input {
+  height: 36px;
+}
+.form-wrap .button {
+  width: 100%;
+}
+.btn-wrap {
+  margin-top: 0.533rem;
+}
 </style>

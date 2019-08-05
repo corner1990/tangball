@@ -1,6 +1,7 @@
 <template>
   <section>
     <h3 class="info-title">个人信息</h3>
+     <debug_item v-model="info" text="info"/>
     <van-cell-group>
       <van-field
         :value="selfInfo.name"
@@ -89,8 +90,14 @@
 </template>
 
 <script>
+/* eslint-disable */
 import util from '@/utils/util'
+
+import debug_item from "@/components/common/debug_item/debug_item";
 export default {
+  components: {
+    debug_item,
+  },
   data () {
     return {
       radio: '1',

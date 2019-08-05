@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息</h3>
+    <h3 class="info-title">个人信息-</h3>
     <debug_item v-model="info" text="info"/>
     <van-cell-group>
       <div class="flex line">
@@ -49,9 +49,7 @@
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
- 
     debug_item,
-    
   },
   data () {
     return {
