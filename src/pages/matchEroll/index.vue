@@ -57,7 +57,7 @@ export default {
       active: 0,
       info: {
         name: '高富帅', // 姓名
-        phone: '15276513522', // 手机号
+        phone: '', // 手机号
         age: 12,
         sex: '1',
         ballAge: '',
@@ -179,9 +179,11 @@ export default {
     },
     initInfo () {
       let { tangballUserInfo } = this.$store.state;
+      console.log("tangballUserInfo", tangballUserInfo);
       wx.self = this;
-      let { name, sex = -1, openid: openId, memberId } = tangballUserInfo;
-      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId}
+      let { name, sex = -1, openid: openId, memberId,phone } = tangballUserInfo;
+      this.info = { ...this.info, name, sex: `${sex}`, memberId, openId,phone}
+      console.log("initInfo-this.info", this.info);
     },
     askAndGoBack () {},
     // 请求修改接口,修改成功跳转到首页
