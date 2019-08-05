@@ -1,43 +1,37 @@
 <template>
   <section>
     <h3 class="info-title">个人信息</h3>
+    <debug_item v-model="info" text="info"/>
     <van-cell-group>
-      <van-field
-        :value="info.name"
-        type="text"
-        label="姓名"
-        placeholder="请输入姓名"
-        required
-      />
+      <div class="flex line">
+        <title class="sub-title">姓名</title>
+        <p>{{ info.name }}</p>
+      </div>
       <div class="flex line">
         <title class="sub-title">性别</title>
-        <p>男</p>
+        <p>{{ sexStr }}</p>
       </div>
       <div class="flex line">
         <title class="sub-title">联系电话</title>
-        <p>电话号码</p>
+        <p>{{ info.phone }}</p>
       </div>
       <div class="flex line">
         <title class="sub-title">球龄</title>
-        <p>1-3年</p>
+        <p>{{ info.ballAge }}</p>
       </div>
       <div class="flex line">
         <title class="sub-title">职业</title>
-        <p>白领</p>
-      </div>
-      <div class="flex line">
-        <title class="sub-title">性别</title>
-        <p>男</p>
+        <p>{{ info.career }}</p>
       </div>
     </van-cell-group>
     <h3 class="info-title event-info">赛事及场馆信息</h3>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
-      <div>高富帅才有资格</div>
+      <div>{{ matchInfo.matchName }}</div>
     </div>
     <div class="flex line">
       <p class="sub-title">赛事时间</p>
-      <div>2019-05-15</div>
+      <div>{{ matchInfo.matchTime }}</div>
     </div>
     <div class="flex line">
       <p class="sub-title" style="width: 90px;">赛事地点</p>
@@ -45,22 +39,55 @@
     </div>
     <div class="flex line">
       <title class="sub-title">报名费</title>
-      <div><span class="price">1999 (元)</span></div>
+      <div><span class="price">{{ matchInfo.total_fee }} (元)</span></div>
     </div>
   </section>
 </template>
 
 <script>
+/* eslint-disable */
+import debug_item from "@/components/common/debug_item/debug_item";
 export default {
+  components: {
+ 
+    debug_item,
+    
+  },
   data () {
     return {
-      info: {
-        name: '高富帅',
-        phone: '15176522133',
-        age: 12,
-        job: ''
-      },
-      radio: '1'
+      radio: '1',
+      matchInfo: {
+        matchName: '',
+        matchTime: '未确定',
+        total_fee: 'xxx'
+      }
+    }
+  },
+  props: ['info'],
+  mounted () {
+    // 获取赛事数据
+    let data = wx.getStorageSync('matchInfo')
+
+  
+    if (data) {
+      this.matchInfo = JSON.parse(data)
+        console.log("this.matchInfo#", this.matchInfo);
+    }
+  },
+  filters: {
+    initSex (val) {
+      console.log('initsex', val)
+      if ([undefined, '', -1].includes(val)) return ''
+      if (val === '1') return '男'
+      if (val === '0') return '女'
+    }
+  },
+  computed: {
+    sexStr () {
+      let { sex } = this.info
+      if ([undefined, '', -1].includes(sex)) return ''
+      if (sex === '1') return '男'
+      if (sex === '0') return '女'
     }
   }
 }
@@ -78,7 +105,7 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: .373rem;
+    font-size: 18px;
     text-indent: .053rem;
   }
   .line .sub-title{

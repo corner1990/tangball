@@ -3,48 +3,51 @@
     <h3 class="info-title">个人信息</h3>
     <van-cell-group>
       <van-field
-        :value="info.name"
+        :value="selfInfo.name"
         type="text"
         label="姓名"
         placeholder="请输入姓名"
         required
+        @change="nameChange"
       />
       <div class="flex line">
         <title class="sub-title">性别</title>
         <radio-group class="radio-group" @change="onRadioChange" >
           <label class="radio">
-            <radio value="1" :checked="info.sex=== '1'"/>男
+            <radio value="1" :checked="selfInfo.sex=== '1'"/>男
           </label>
           <label class="radio">
-            <radio value="2" :checked="info.sex=== '2'"/>女
+            <radio value="2" :checked="selfInfo.sex=== '2'"/>女
           </label>
         </radio-group>
       </div>
       <van-field
-        :value="info.phone"
+        :value="selfInfo.phone"
         label="联系电话"
+        @blur="phoneChange"
         placeholder="请输入手机号"
       />
       <div class="flex line">
         <p class="sub-title">球龄</p>
         <div @click="selectAge">
-          <input type="text" class="tangBallInput" v-model="info.ballAge" placeholder="请输入球龄">
+          <input type="text" class="tangBallInput" v-model="selfInfo.ballAge" placeholder="请输入球龄">
         </div>
       </div>
       <van-field
-        :value="info.career"
+        :value="selfInfo.career"
         label="职业"
         placeholder="请输入职业"
+        @blur="careerChange"
       />
     </van-cell-group>
     <h3 class="info-title event-info">赛事及场馆信息</h3>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
-      <div>高富帅才有资格</div>
+      <div>{{ matchInfo.matchName }}</div>
     </div>
     <div class="flex line">
       <p class="sub-title">赛事时间</p>
-      <div>2019-05-15</div>
+      <div>{{ matchInfo.matchTime }}</div>
     </div>
     <div class="flex line">
       <p class="sub-title" style="width: 90px;">赛事地点</p>
@@ -52,7 +55,7 @@
     </div>
     <div class="flex line">
       <title class="sub-title">报名费</title>
-      <div><span class="price">1999 (元)</span></div>
+      <div><span class="price">{{ matchInfo.total_fee }} (元)</span></div>
     </div>
     <van-cell-group>
       <van-field
@@ -62,7 +65,7 @@
         label="短信验证码"
         placeholder="请输入短信验证码"
         required
-        @change="verfiyChange"
+        @blur="verfiyChange"
         use-button-slot
       >
         <van-button slot="button" size="small" type="info" @click="getVerfity">发送验证码</van-button>
@@ -94,30 +97,47 @@ export default {
       showSelectBallAge: false,
       selectVal: '',
       columns: ['1-3年', '3-5年', '5年以上'],
-      sex: 1,
       sexList: [
         {name: '男', value: '1'},
         {name: '女', value: '2'}
       ],
       timer: 0,
-      num: 0
+      num: 0,
+      matchInfo: {
+        matchName: '',
+        matchTime: '未确定',
+        total_fee: 'xxx'
+      }
     }
   },
   mounted () {
-    // 请求赛事列表接口函数
+    // 获取赛事数据
+    let data = wx.getStorageSync('matchInfo')
+    if (data) {
+      this.matchInfo = JSON.parse(data)
+    }
   },
   watch: {
-    // info: {
-    //   handler (info, oldName) {
-    //   },
-    //   immediate: true,
-    //   deep: true
-    // }
+    info: {
+      handler (info, oldName) {
+        console.log('info12212', info)
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  computed: {
+    selfInfo () {
+      return this.info
+    }
   },
   props: ['info'],
   methods: {
     onRadioChange (radio) {
       this.info.sex = radio.target.value
+      this.$emit('changeInfo', {
+        sex: radio.target.value
+      })
     },
     selectAge () {
       this.showSelectBallAge = true
@@ -129,24 +149,41 @@ export default {
       let { value, index } = e.target
       this.selectIndex = index
       this.info.ballAge = value
+      this.$emit('changeInfo', {
+        ballAge: value
+      })
       this.hideSelectBallAge()
     },
     async getVerfity () {
       let { phone: mobile } = this.info
       // 请求赛事列表接口函数
-      let { data } = await util.post({
+      util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
         param: { mobile }
       })
-      console.log('data', data)
     },
     verfiyChange (e) {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
-        this.$emit('changeInfo', {
-          verfiy: e.mp.detail
-        })
-      }, 500)
+      this.$emit('changeInfo', {
+        verfiy: e.mp.detail.value
+      })
+    },
+    nameChange (e) {
+      let name = e.mp.detail.value
+      this.$emit('changeInfo', {
+        name
+      })
+    },
+    phoneChange (e) {
+      let phone = e.mp.detail.value
+      this.$emit('changeInfo', {
+        phone
+      })
+    },
+    careerChange (e) {
+      let career = e.mp.detail.value
+      this.$emit('changeInfo', {
+        career
+      })
     }
   }
 }
@@ -163,7 +200,7 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: .373rem;
+    font-size: 18px;
     text-indent: .053rem;
   }
   .line .sub-title{

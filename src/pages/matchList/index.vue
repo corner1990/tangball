@@ -23,14 +23,14 @@ import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import Dialog from "../../../static/vant/dialog/dialog";
-import debug_item from "@/components/common/debug_item/debug_item";
+// import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
     card,
     mytabbar,
     Dialog,
     matchListcomponent,
-    debug_item
+    // debug_item
   },
   data() {
     return {

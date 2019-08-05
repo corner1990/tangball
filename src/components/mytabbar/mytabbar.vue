@@ -49,18 +49,16 @@ export default {
   },
   created() {
     if (!this.active && this.active !== 0) {
-
-
       this.activeNeed = null;
     }
-    console.log("this.activeNeed", this.activeNeed);
+    // console.log("this.activeNeed", this.activeNeed);
   },
   methods: {
     /**
      * @desc 导航切换回调
      */
     tabChange(url) {
-      console.log(url);
+      // console.log(url);
       wx.switchTab({
         url
       });
