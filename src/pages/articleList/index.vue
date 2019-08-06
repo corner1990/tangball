@@ -1,9 +1,6 @@
 <template>
   <div class="main-wrap">
-  
-
     <div class="H100">
-     
       <div
         class="data-group"
         v-for="(item,i) in articleList"
@@ -14,7 +11,6 @@
           <span class="title_text">{{item.articleTitle}}</span>
           <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
         </div>
-        
         <div class="data-group-right">
           <img src="../image/location.png" />
         </div>
@@ -26,13 +22,11 @@
 </template>
 <script>
 /* eslint-disable */
-
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import my_field from "@/components/form_item/my_field"; //导入debug_item
 import util from "@/utils/util";
-
 export default {
   components: {
     card,
@@ -64,24 +58,17 @@ export default {
         pageSize: 15,
         findJson: {}
       });
-     
-
       let dictPerson = {}; //人员数据字典对象
       this.Categorylist.forEach(item => {
         //循环：{人员数组}
         dictPerson[item.P1] = item;
       });
-      
-      
-     
       this.articleList.forEach(matchEach => {
         /**
          * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
          */
         matchEach.CategoryName = dictPerson[matchEach.articleCategory].name;
-
       });
-  
     }
   },
   mounted() {
@@ -99,16 +86,13 @@ export default {
   //     { id: 1, matc: "赛事1", articleCategory: "1" },//articleCategory
   //     { id: 2, matchName: "赛事2", articleCategory: "4" }
   //   ];
-
   //   /**为第三种方式准备 */
   //   this.dictPerson = {}; //人员数据字典对象
   //   this.Categorylist.forEach(Category => {
   //     //循环：{人员数组}
   //     this.dictPerson[Category.P1] = Category;
   //   });
-
   //   this.articleList.forEach(matchEach => {
-
   //     /**
   //      * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
   //      */
@@ -117,9 +101,7 @@ export default {
   // }
 };
 </script>
-
 <style scoped>
-
 .data-group {
   padding: 5px 10px;
   border-bottom: 1px #ddd solid;
@@ -149,7 +131,6 @@ export default {
 }
 .data-group-right {
   flex: 1;
-  
   height: 75px;
 }
 .data-group-right img {

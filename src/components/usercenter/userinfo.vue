@@ -1,6 +1,5 @@
 <template>
   <div class="user-info">
-     
     <img src="/static/images/timg.jpg" alt="bg" class="bg" />
     <div class="avatar-row">
       <img :src="avatarUrl" alt="avatar" class="avatar" />
@@ -9,7 +8,6 @@
     </div>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import debug_item from "@/components/common/debug_item/debug_item";
@@ -37,7 +35,6 @@ export default {
   }
 };
 </script>
-
 <style >
 .user-info {
   position: relative;
@@ -56,7 +53,6 @@ export default {
   z-index: 2;
   text-align: center;
 }
-
 .user-info .avatar {
   width: 80px;
   height: 80px;

@@ -10,13 +10,10 @@
 </template>
 <script>
 /* eslint-disable */
-
-
 import msg from "@/pages/myMsgList/msg";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
-
 export default {
   components: {
     mytabbar,
@@ -119,13 +116,9 @@ export default {
       // });
       //使用lodash.keyBy制作数据字典
       console.log("消息",data);
-     
-      
       this.dictMsgRead = this.$lodash.keyBy(this.myMsgRead, "msgId");
       //循环：{消息数组}
       data.list.forEach(msgEach => {
-  
-        
         let docRead = this.dictMsgRead[msgEach.P1]; //变量：{当前消息对应的已读记录}
         //如果{当前消息对应的已读记录}存在，表00.示已读
         if (docRead) {
@@ -140,7 +133,6 @@ export default {
       this.myMsgList = data.list;
       this.msgg = this.msgg0;//页面加载后使子组件默认显示未读数组
       console.log("消息列表",this.myMsgList);
-      
     },
     /**
      * 函数：{设置消息已读状态的函数}
@@ -163,7 +155,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
   padding-bottom: 100px;
@@ -174,7 +165,6 @@ export default {
   background: white;
   position: relative;
 }
-
 .read-box {
   width: 50%;
   height: 35px;

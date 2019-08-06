@@ -7,11 +7,9 @@
     <div class="valueShow" :style="{'max-height':maxHeight+'px;'}">{{valueNeed}}</div>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
-import lodash from "lodash";
 console.log("util", util);
 export default {
   components: {
@@ -27,11 +25,9 @@ export default {
       deep: true
     }
   },
-
   props: ["text", "value"],
   data() {
     //var valueNeed = JSON.stringify(this.value);//{Json对象转换Json字符串函数}
-
     return {
       pathNeed:null,
       iconName: "arrow-down",
@@ -39,7 +35,6 @@ export default {
       valueNeed: this.value
     };
   },
-
   methods: {
     expand() {
       console.log("expand");
@@ -64,13 +59,11 @@ export default {
   },
   created() {
 //获取v-model变量名（表达式）
-    this.pathNeed  = lodash.get(this, "$vnode.data.model.expression");
+    this.pathNeed  = this.$lodash.get(this, "$vnode.data.model.expression");
 console.log("this.pathNeed", this.pathNeed);
-
   }
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .valueShow {
@@ -78,7 +71,6 @@ console.log("this.pathNeed", this.pathNeed);
   max-height: 200px;
   white-space: pre-wrap;
 }
-
 .debug_item {
   padding: 5px;
   border: 1px #f30 solid;

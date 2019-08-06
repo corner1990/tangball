@@ -28,7 +28,6 @@
         </van-tabs>
       </div>
     </div>
-
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -53,12 +52,9 @@ export default {
       markers: [{ longitude: "", latitude: "", iconPath: "" }]
     };
   },
-
   methods: {
-
     /**
     * ajax获取当前场馆数据函数
-
     */
     async getDoc() {
       let doc = await util.post({
@@ -91,7 +87,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
   padding-bottom: 60px;

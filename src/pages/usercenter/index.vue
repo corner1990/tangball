@@ -1,18 +1,15 @@
 <template>
   <div>
-   
     <Info />
     <UserOperList />
      <mytabbar :active="3"></mytabbar>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import Info from '@/components/usercenter/userinfo'
 import UserOperList from '@/components/usercenter/userCard'
 import mytabbar from '@/components/mytabbar/mytabbar'
-
 export default {
   components: {
     Info,
@@ -20,7 +17,6 @@ export default {
   },
   data: {
     name: 'leo',
-    
   },
   methods: {
     /**
@@ -32,7 +28,6 @@ export default {
       })
     }
   },
-  
   onShow () {
     wx.hideTabBar({
       complete () {

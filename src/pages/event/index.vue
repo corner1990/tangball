@@ -3,22 +3,14 @@
     <mytabbar ></mytabbar>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
-
-
-
 import mytabbar from '@/components/mytabbar/mytabbar'
-
- 
 export default {
   components: {
     mytabbar
   },
   data: {
-
-    
   },
   methods: {
     /**
@@ -30,7 +22,6 @@ export default {
       })
     }
   },
-
   onShow () {
     // `this` 指向 vm 实例
   }

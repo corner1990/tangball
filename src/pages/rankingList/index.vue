@@ -4,7 +4,6 @@
     <p class="H10 OF2 CL1"></p>
     <!-- 分页组件 -->
     <pageLink></pageLink>
-
     <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
     <div class="button-box">
       <div
@@ -15,7 +14,6 @@
       >{{item.name}}</div>
     </div>
     <p class="H10 OF2 CL1"></p>
-
     <!--男女选项卡 -->
     <van-tabs :active="active" @change="changeSex">
       <van-tab :title="doc" v-for="(doc,i) in sexArr" :key="i">
@@ -35,7 +33,6 @@
         ></rankingListComponent>
       </van-tab>
     </van-tabs>
-
     <div class="bottom-space"></div>
     <mytabbar></mytabbar>
   </div>
@@ -47,7 +44,6 @@ import debug_item from "@/components/common/debug_item/debug_item";
 import rankingListComponent from "./rankingListComponent";
 import pageLink from "./pageLink";
 import util from "@/utils/util";
-
 export default {
   components: {
     mytabbar,
@@ -127,7 +123,6 @@ export default {
           sortJson: { [RankingName]: -1 } //参赛次数
         }
       });
-
       /**
        * @desc 根据成绩列表的第一个列表是男，第二个列表是女
        */
@@ -139,14 +134,12 @@ export default {
       });
     }
   },
-
   beforeMount() {
     this.sexIndex = 1; //初始化性别
     this.getMemberList(); //获取会员列表
   }
 };
 </script>
-
 <style scoped>
 .button-box {
   font-size: 18px;
@@ -161,12 +154,10 @@ export default {
   padding: 0 5px;
   border: 1px solid #f4b116;
 }
-
 .buttonFocus {
   background-color: #f4b116;
   color: #fff;
 }
-
 /* 排名按钮 */
 .button-center {
   margin: 0 auto;
@@ -178,7 +169,6 @@ export default {
 .button-center van-button {
   margin: 5px;
 }
-
 .ranking-title-box {
   display: flex;
   justify-content: space-evenly;

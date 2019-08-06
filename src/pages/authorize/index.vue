@@ -1,13 +1,11 @@
 <template>
   <div class="main-wrap">
     <p class="H50 OF2 CL1"></p>
-
     <authorize></authorize>
   </div>
 </template>
 <script>
 /* eslint-disable */
-
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
@@ -23,20 +21,15 @@ export default {
   },
   data() {
     return {
-     
     };
   },
-
   methods: {
-    
   },
   async created() {},
   async mounted() {
-    
   }
 };
 </script>
-
 <style scoped>
 .data-group {
   padding: 5px 10px;

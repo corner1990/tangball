@@ -22,7 +22,6 @@
 </template>
 <script>
 /* eslint-disable */
-
 export default {
   data() {
     return {
@@ -49,7 +48,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-venue {
   width: 345px;
@@ -78,7 +76,6 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
 .arrow {
   color: #999;
   float: right;

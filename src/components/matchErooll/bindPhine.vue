@@ -22,7 +22,6 @@
     </van-cell-group>
   </section>
 </template>
-
 <script>
 export default {
   data () {
@@ -33,7 +32,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .bind-phone{
   margin-top: 20px;
@@ -50,5 +48,3 @@ export default {
   align-items: center;
 }
 </style>
-
-

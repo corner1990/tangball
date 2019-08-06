@@ -43,7 +43,6 @@
     </div>
   </section>
 </template>
-
 <script>
 /* eslint-disable */
 import debug_item from "@/components/common/debug_item/debug_item";
@@ -65,8 +64,6 @@ export default {
   mounted () {
     // 获取赛事数据
     let data = wx.getStorageSync('matchInfo')
-
-  
     if (data) {
       this.matchInfo = JSON.parse(data)
         console.log("this.matchInfo#", this.matchInfo);
@@ -90,7 +87,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
   .flex{
     display: flex;
@@ -116,5 +112,3 @@ export default {
     font-weight: 700;
   }
 </style>
-
-

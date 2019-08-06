@@ -5,13 +5,12 @@
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main",
+    "pages/myInfo/main", 
     "pages/matchList/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
     "pages/matchDetail/main",
-    "pages/counter/main",
     "pages/logs/main",
     "pages/event/main",
     "pages/usercenter/main",
@@ -78,6 +77,5 @@
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index",
     "van-toast": "/static/vant/toast/index"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }

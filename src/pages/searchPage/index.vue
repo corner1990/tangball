@@ -16,7 +16,6 @@
         </div>
         </van-tab>
       <van-tab title="文章">
-        
         <div v-if="!isSearch" class="before-search">您还没有进行搜索,请先搜索</div>
         <div v-else-if="articleList.length==0" class="before-search">搜索结果为空,请重新搜索</div>
         <div v-else>
@@ -37,7 +36,6 @@ import debug_item from '@/components/common/debug_item/debug_item'
 import util from '@/utils/util'
 import matchListcomponent from "@/components/matchList/matchListComponent";
 import articleComponent from '../../components/searchArticle/articleComponent'
-
 export default {
   components: {
     mytabbar, debug_item,matchListcomponent,articleComponent
@@ -81,7 +79,6 @@ export default {
     onChange(event){
       this.active=event.mp.detail.index;
       console.log(this.active);
-      
     },
     /**
     * @name 获取赛事列表方法
@@ -132,10 +129,8 @@ export default {
     this.searchMsg = options.search
     this.searchList()
   }
-
 }
 </script>
-
 <style scoped>
   .before-search{
     width: 77%;

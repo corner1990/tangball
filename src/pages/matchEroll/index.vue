@@ -178,7 +178,6 @@ export default {
     initInfo() {
       let matchInfo = wx.getStorageSync("matchInfo");
       this.matchInfo = JSON.parse(matchInfo);
-
       let { tangballUserInfo } = this.$store.state;
       console.log("tangballUserInfo", tangballUserInfo);
       wx.self = this;
@@ -187,7 +186,6 @@ export default {
         name,
         sex = -1,
         openid: openId,
-        
         phone,
         career
       } = tangballUserInfo;
@@ -230,7 +228,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
   margin: 0 10px 100px;

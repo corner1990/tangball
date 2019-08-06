@@ -10,7 +10,6 @@
     />
     <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
     <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
-
     <view class="btn-area">
       <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
       <navigator
@@ -27,7 +26,6 @@
     <van-search 
      placeholder="请输入搜索关键词" 
      @search="searchList"/>
-
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -47,7 +45,6 @@
         </swiper-item>
       </block>
     </swiper>
-
     <!-- <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -62,7 +59,6 @@
         </swiper-item>
       </block>
     </swiper>-->
-
     <div>
       <div class="index_area_title">唐球赛事</div>
       <div class>
@@ -75,7 +71,6 @@
         <articleList></articleList>
       </div>
     </div>
-
     <div class="all">
       <div class="left"></div>
       <div class="right"></div>
@@ -83,7 +78,6 @@
     <mytabbar :active="0"></mytabbar>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
@@ -125,7 +119,6 @@ export default {
         nickName: "mpvue",
         avatarUrl: "http://mpvue.com/assets/logo.png"
       },
-
       radio: 1,
       // imgUrls: [
       //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
@@ -141,7 +134,6 @@ export default {
       value: "" // 搜索value
     };
   },
-
   methods: {
     //函数：{ajax获取轮播图列表函数}
     async ajaxRecommendList() {
@@ -149,11 +141,9 @@ export default {
         page: "tangball_recommend",
         pageSize: 5
       });
-
       arrRecommend.forEach(docEach => {
         docEach.imageUrl = this.$lodash.get(docEach, `album[0].url`);
       });
-
       this.arrRecommend = arrRecommend;
         },
     searchList(event){
@@ -174,7 +164,6 @@ export default {
     clickHandle(ev) {
       // throw {message: 'custom test'}
     },
-
     /**
      * @desc 搜索回调
      */
@@ -195,21 +184,16 @@ export default {
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
-
     let result = await util.getMyWXSetting();
-
     //如果未授权，先return,等待用户主动授权
     if (result == "noAuth") {
       util.gotoPage("/pages/authorize/main"); //跳转到授权页面
       return;
     }
     this.ajaxRecommendList(); //调用：{ajax获取轮播图列表函数}
-
     await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
-
     /****************************微信会员登录和信息存储-END****************************/
   },
-
   created() {
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
@@ -218,7 +202,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .index_area_title {
   margin-top: 5px;
@@ -250,5 +233,4 @@ export default {
   color: gray;
   margin-right: 8px;
 }
-
 </style>

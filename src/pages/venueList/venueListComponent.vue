@@ -20,7 +20,6 @@
 </template>
 <script>
 /* eslint-disable */
-
 export default {
   data() {
     return {};
@@ -32,7 +31,6 @@ export default {
   mounted() {}
 };
 </script>
-
 <style scoped>
 .main-venue {
   width: 345px;

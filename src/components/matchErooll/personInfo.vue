@@ -89,11 +89,9 @@
     <van-toast id="van-toast" />
   </section>
 </template>
-
 <script>
 /* eslint-disable */
 import util from '@/utils/util'
-
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
@@ -187,7 +185,6 @@ export default {
       setTimeout(() => {
         this.waitTime()
       }, 300);
-
     },
     getVerfity (mobile) {
       // 请求赛事列表接口函数
@@ -257,10 +254,7 @@ export default {
   .tangBallInput{
     font-size: .373rem;
   }
-
   .event-info{
     margin-top: .8rem;
   }
 </style>
-
-

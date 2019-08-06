@@ -36,12 +36,10 @@
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
 import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import my_field from "@/components/form_item/my_field"; //导入debug_item
-
 export default {
   components: {
     mytabbar,
@@ -57,7 +55,6 @@ export default {
       enrollList: null //报名列表
     };
   },
-
   methods: {
     //函数：{弹窗表单确认后执行的函数}
     funAfterConfirm: null,
@@ -112,7 +109,6 @@ export default {
       });
       this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
     },
-
     //函数：{删除一条报名函数}-请配合后台查看数据
     async deleteAEnroll(dataId) {
       let res = await util.showModal({
@@ -126,7 +122,6 @@ export default {
         page: "tangball_enroll",
         findJson: { P1: dataId } //锁定需要删除的数据
       });
-
       this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
       wx.showToast({
         title: "删除成功",
@@ -151,7 +146,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .data-group {
   padding: 5px 10px;

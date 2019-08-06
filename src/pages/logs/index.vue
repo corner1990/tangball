@@ -7,7 +7,6 @@
         </swiper-item>
       </block>
     </swiper>
-
     <ul class="container log-list">
       <li v-for="(log, index) in logs" :class="{ red: aa }" :key="index" class="log-item">
         <card :text="(index + 1) + ' . ' + log"></card>
@@ -15,16 +14,13 @@
     </ul>
   </div>
 </template>
-
 <script>
 import { formatTime } from '@/utils/index'
 import card from '@/components/card'
-
 export default {
   components: {
     card
   },
-
   data () {
     return {
       logs: [],
@@ -35,7 +31,6 @@ export default {
       ]
     }
   },
-
   created () {
     let logs
     if (mpvuePlatform === 'my') {
@@ -47,14 +42,12 @@ export default {
   }
 }
 </script>
-
 <style>
 .log-list {
   display: flex;
   flex-direction: column;
   padding: 40rpx;
 }
-
 .log-item {
   margin: 10rpx;
 }
