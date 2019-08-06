@@ -3,16 +3,19 @@
       <div class="article-box">
          <div class="article-title"><span>文章标题:</span>&nbsp;&nbsp;
          {{article.articleTitle}}</div>
-         <div class="article-title">
-           <navigator :url="'/pages/articleDetail/main?id='+article.P1">
+         <div class="article-title" 
+          @click="gotoPage(`/pages/articleDetail/main?dataId=${article.P1}&wxArticleUrl=${$lodash.get(article, 'extend.wxArticleUrl','')}`)">
+         
+          
              文章详情>>
-           </navigator>
+
            </div>
       </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
+
 
 export default {
   props:{
@@ -22,7 +25,10 @@ export default {
     return {
     }
   },
-  mounted () {
+  methods: {
+    gotoPage(url){
+      wx.navigateTo({ url });
+    }
   },
 }
 </script>
