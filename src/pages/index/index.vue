@@ -22,17 +22,17 @@
         url="/pages/tanghome/main"
         open-type="switchTab"
         hover-class="other-navigator-hover"
-      >切换 Tab-针对tabar中的页面</navigator>
+      >切换 Tab-针对tabar中的页面--</navigator>
     </view>
-      <navigator url="/pages/searchPage/main">
+    <navigator url="/pages/searchPage/main">
       <div class="search-box">
-    <div class="search-text">搜索</div>
+        <div class="search-text">搜索</div>
         <div class="search-img">
           <van-icon name="arrow" size="20px" />
-         
         </div>
       </div>
     </navigator>
+    <debug_item v-model="arrRecommend" text="轮播图列表" />
 
     <swiper
       :indicator-active-color="indicatorActiveColor"
@@ -42,15 +42,34 @@
       :interval="interval"
       :duration="duration"
     >
-      <block v-for="item in imgUrls" :key="item">
+      <block v-for="item in arrRecommend" :key="item.P1">
         <swiper-item>
-          <image :src="item" class="slide-image" height="150" />
+          <image
+            :src="item.imageUrl"
+            class="slide-image"
+            height="150"
+            @click="gotoPage(item.link)"
+          />
         </swiper-item>
       </block>
     </swiper>
-     
+
+    <!-- <swiper
+      :indicator-active-color="indicatorActiveColor"
+      :indicator-color="indicatorColor"
+      :indicator-dots="indicatorDots"
+      :autoplay="autoplay"
+      :interval="interval"
+      :duration="duration"
+    >
+      <block v-for="item in imgUrls" :key="item">
+        <swiper-item>
+          <image :src="item" class="slide-image" height="150"  />
+        </swiper-item>
+      </block>
+    </swiper>-->
+
     <div>
-   
       <div class="index_area_title">唐球赛事</div>
       <div class>
         <matchlist></matchlist>
@@ -79,15 +98,18 @@ import matchlist from "../matchList/index";
 import articleList from "../articleList/index";
 import card from "@/components/card";
 // import { get } from '@/utils/request'
+import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
     card,
     mytabbar,
     matchlist,
-    articleList
+    articleList,
+    debug_item
   },
   data() {
     return {
+      arrRecommend: [],
       arrLink: [
         { title: "ajaxDemo", url: "/pages/ajaxDemo/main" },
         { title: "赛事列表-", url: "/pages/matchList/main" },
@@ -111,11 +133,11 @@ export default {
       },
 
       radio: 1,
-      imgUrls: [
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
-        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
-        "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
-      ],
+      // imgUrls: [
+      //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
+      //   "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1765811829,83133326&fm=26&gp=0.jpg",
+      //   "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
+      // ],
       indicatorDots: true,
       autoplay: false,
       interval: 5000,
@@ -127,6 +149,19 @@ export default {
   },
 
   methods: {
+    //函数：{ajax获取轮播图列表函数}
+    async ajaxRecommendList() {
+      let arrRecommend = await util.ajaxGetList({
+        page: "tangball_recommend",
+        pageSize: 5
+      });
+
+      arrRecommend.forEach(docEach => {
+        docEach.imageUrl = this.$lodash.get(docEach, `album[0].url`);
+      });
+
+      this.arrRecommend = arrRecommend;
+    },
     gotoPage(url) {
       wx.navigateTo({ url });
     },
@@ -170,6 +205,7 @@ export default {
       util.gotoPage("/pages/authorize/main"); //跳转到授权页面
       return;
     }
+    this.ajaxRecommendList(); //调用：{ajax获取轮播图列表函数}
 
     await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
 
