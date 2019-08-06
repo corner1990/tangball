@@ -76,6 +76,7 @@
     "van-field": "/static/vant/field/index",
     "van-cell-group": "/static/vant/cell-group/index",
     "van-dialog": "/static/vant/dialog/index",
-    "van-picker": "/static/vant/picker/index"
+    "van-picker": "/static/vant/picker/index",
+    "van-toast": "/static/vant/toast/index"
   }
 }

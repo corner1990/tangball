@@ -127,6 +127,10 @@ export default {
   }
   },
   mounted(){
+  },
+  onLoad(options) {
+    this.searchMsg = options.search
+    this.searchList()
   }
 
 }
