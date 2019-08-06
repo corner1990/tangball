@@ -69,7 +69,7 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="getVerfity">发送验证码</van-button>
+        <van-button slot="button" size="small" type="info" @click="waitTime">{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -86,6 +86,7 @@
         @confirm="onSelectChange"
       />
     </van-popup>
+    <van-toast id="van-toast" />
   </section>
 </template>
 
@@ -114,7 +115,9 @@ export default {
         matchName: '',
         matchTime: '未确定',
         total_fee: 'xxx'
-      }
+      },
+      sendText: '发送验证码',
+      sendTime: 60
     }
   },
   mounted () {
@@ -161,8 +164,32 @@ export default {
       })
       this.hideSelectBallAge()
     },
-    async getVerfity () {
-      let { phone: mobile } = this.info
+    waitTime () {
+      let { phone: mobile } = this.info;
+      if (!mobile) {
+        return wx.showToast({
+          title: '手机号不能为空',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+      if (this.sendTime === 60) {
+        this.getVerfity(mobile)
+      }
+      if (this.sendTime <= 1) {
+        this.sendTime = 60
+        this.sendText = '发送验证码'
+        return false
+      }
+      // debugger
+      this.sendTime -= 1
+      this.sendText = `${this.sendTime}秒后重新获取`
+      setTimeout(() => {
+        this.waitTime()
+      }, 300);
+
+    },
+    getVerfity (mobile) {
       // 请求赛事列表接口函数
       util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
