@@ -10,7 +10,7 @@
 </template>
 <script>
 /* eslint-disable */
-// const lodash = require("@/utils/lodash");
+
 
 import msg from "@/pages/myMsgList/msg";
 import mytabbar from "@/components/mytabbar/mytabbar";
