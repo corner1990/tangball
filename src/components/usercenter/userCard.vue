@@ -22,6 +22,11 @@ export default {
           path: '/pages/myInfo/main',
           icon: 'manager-o'
         },
+        {
+          text: '我的消息',
+          path: '/pages/myMsgList/main',
+          icon: 'chat-o'
+        },
         // {
         //   text: '我的订单',
         //   path: '',

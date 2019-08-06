@@ -24,15 +24,9 @@
         hover-class="other-navigator-hover"
       >切换 Tab-针对tabar中的页面</navigator>
     </view>
-      <navigator url="/pages/searchPage/main">
-      <div class="search-box">
-    <div class="search-text">搜索</div>
-        <div class="search-img">
-          <van-icon name="arrow" size="20px" />
-         
-        </div>
-      </div>
-    </navigator>
+    <van-search 
+     placeholder="请输入搜索关键词" 
+     @search="searchList"/>
 
     <swiper
       :indicator-active-color="indicatorActiveColor"
@@ -127,6 +121,10 @@ export default {
   },
 
   methods: {
+    searchList(event){
+      console.log(event.mp.detail);
+      wx.navigateTo({url:"/pages/searchPage/main?search="+event.mp.detail})
+    },
     gotoPage(url) {
       wx.navigateTo({ url });
     },
@@ -216,18 +214,5 @@ export default {
   color: gray;
   margin-right: 8px;
 }
-.search-box {
-  margin-left: 5%;
-  height: 40px;
-  width: 90%;
-  font-size: 18px;
-  line-height: 40px;
-  border-bottom: 1px solid #f4b116;
-}
 
-.search-img {
-  float: right;
-  color: #999999;
-  padding-top: 8px;
-}
 </style>
