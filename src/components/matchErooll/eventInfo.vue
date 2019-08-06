@@ -99,8 +99,9 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: 18px;
+    font-size: 14px;
     text-indent: .053rem;
+    color: #333;
   }
   .line .sub-title{
     width: 78px;
