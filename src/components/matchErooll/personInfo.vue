@@ -89,12 +89,11 @@
     <van-toast id="van-toast" />
   </section>
 </template>
-
 <script>
 /* eslint-disable */
 import util from '@/utils/util'
-
 import debug_item from "@/components/common/debug_item/debug_item";
+import Toast from '../../../static/vant/toast/toast';
 export default {
   components: {
     debug_item,
@@ -126,15 +125,20 @@ export default {
     if (data) {
       this.matchInfo = JSON.parse(data)
     }
+
+    // Toast.loading({
+    //   mask: true,
+    //   message: '加载中...'
+    // })
   },
   watch: {
-    info: {
-      handler (info, oldName) {
-        console.log('info12212', info)
-      },
-      immediate: true,
-      deep: true
-    }
+    // info: {
+    //   handler (info, oldName) {
+    //     console.log('info12212', info)
+    //   },
+    //   immediate: true,
+    //   deep: true
+    // }
   },
   computed: {
     selfInfo () {
@@ -167,11 +171,7 @@ export default {
     waitTime () {
       let { phone: mobile } = this.info;
       if (!mobile) {
-        return wx.showToast({
-          title: '手机号不能为空',
-          icon: 'fail',
-          duration: 2000
-        })
+        return Toast.fail('手机号不能为空！');
       }
       if (this.sendTime === 60) {
         this.getVerfity(mobile)
@@ -187,7 +187,6 @@ export default {
       setTimeout(() => {
         this.waitTime()
       }, 300);
-
     },
     getVerfity (mobile) {
       // 请求赛事列表接口函数
@@ -234,8 +233,9 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: 18px;
+    font-size: 14px;
     text-indent: .053rem;
+    color: #333;
   }
   .line .sub-title{
     width: 80px;
@@ -249,7 +249,7 @@ export default {
     width: .667rem;
   }
   .info-title{
-    font-size: .38rem;
+    font-size: 18px;
     line-height: .6rem;
     font-weight: 700;
     color: #333;
@@ -257,10 +257,7 @@ export default {
   .tangBallInput{
     font-size: .373rem;
   }
-
   .event-info{
     margin-top: .8rem;
   }
 </style>
-
-

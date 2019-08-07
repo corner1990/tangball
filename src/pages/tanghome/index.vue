@@ -22,7 +22,6 @@
     <mytabbar></mytabbar>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import mytabbar from '@/components/mytabbar/mytabbar'
@@ -42,7 +41,6 @@ export default {
     autoplay: false,
     interval: 5000,
     duration: 1000,
-
   },
   methods: {
     /**
@@ -106,14 +104,12 @@ export default {
       console.log('data', data)
     }
   },
-
   onShow() {
     // `this` 指向 vm 实例
     // console.log('234')
   }
 }
 </script>
-
 <style scaffold>
 .main-wrap {
   padding-bottom: 60px;
@@ -127,4 +123,3 @@ export default {
   margin: 0 10px;
 }
 </style>
-

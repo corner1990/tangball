@@ -3,7 +3,6 @@
     <itemCard v-for="(item, key) in list" :key="key" :data="item" />
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import itemCard from './cardItem'
@@ -11,7 +10,6 @@ export default {
   data () {
     return {
       list: [
-     
         {
           text: '我的报名',
           path: '/pages/matchEroll/main',
@@ -21,6 +19,11 @@ export default {
           text: '个人信息',
           path: '/pages/myInfo/main',
           icon: 'manager-o'
+        },
+        {
+          text: '我的消息',
+          path: '/pages/myMsgList/main',
+          icon: 'chat-o'
         },
         // {
         //   text: '我的订单',
@@ -55,7 +58,6 @@ export default {
   }
 }
 </script>
-
 <style>
 .user-list {
   position: relative;

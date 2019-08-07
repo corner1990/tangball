@@ -47,7 +47,6 @@ export default {
       duration: 1000
     };
   },
-
   methods: {
     showImg(url) {
       this.show = true;
@@ -63,5 +62,3 @@ export default {
   }
 };
 </script>
-
-

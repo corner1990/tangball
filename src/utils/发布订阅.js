@@ -1,5 +1,3 @@
-
-
 let event = {
   events: {
   }, // 保存事件
@@ -22,7 +20,6 @@ let event = {
     // fns.map(fn => fn(params))
     // 处理接收参数
     fns.map(fn => fn.apply(null, params))
-
     // 处理只需要执行一次函数
     this.events[evenTypes] = fns.filter(fn => !fn.type || fn.type !== 'once')
   },
@@ -32,7 +29,6 @@ let event = {
     this.events[evenTypes] = fns.filter(fn => fn !== handle);
   },
   once (evenType, handle) {
-    
     // 添加自定义属性type, 在函数执行之后方便删除
     handle.type = 'once';
     if (!this.events[evenType]) {
@@ -54,18 +50,14 @@ function three(...params) {
 function four(...params) {
   console.log('four', params)
 }
-
 // 订阅事件
 event.on('evenType', one)
 event.on('evenType', two)
-
 event.once('click', three)
 event.on('click', four)
-
 // 删除事件
 event.del('evenType', one)
 // 发布事件
 event.emit('evenType')
 event.emit('click', 1,2,3,4)
 event.emit('click', 1,2,3,4)
-
