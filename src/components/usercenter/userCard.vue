@@ -12,7 +12,7 @@ export default {
       list: [
         {
           text: '我的报名',
-          path: '/pages/matchEroll/main',
+          path: '/pages/myEroll/main',
           icon: 'gem-o'
         },
          {

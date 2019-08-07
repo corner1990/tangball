@@ -11,7 +11,7 @@
         <div class>提交时间：[{{item.time}}]</div>
         <div class>
           报名状态：
-          <span class="C_3a0" v-if="item.payStatus==1">已支付</span>
+          <span class="C_3a0" v-if="item.payStatus==2">已支付</span>
           <span class="C_f30" v-else>等待支付</span>
         </div>
         <div class v-if="item.venueDoc">所选场馆：{{item.venueDoc.name}}</div>
