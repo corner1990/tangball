@@ -10,12 +10,10 @@
       {{item.area}}
     </div>
     <debug_item path="venuList" v-model="venuList" text="场馆列表" />
- 
   </div>
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -31,7 +29,6 @@ export default {
       name: "demo名称", //手机号码
     };
   },
-
   methods: {
      //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
     async ajaxVenueList() {
@@ -54,25 +51,15 @@ export default {
           }
         ]
       });
-
-      // await util.timeout(500); //延迟
-      
       this.venuList = list;
-      console.log("this.venuList", this.venuList);
     },
     //函数：{ajax获取场馆列表，并且根据每条数据的城市id（area）拿到地区名称}
     async ajaxVenueList2() {
-      console.log("ajaxVenueList");
       let list = await util.ajaxGetList({
         page: "tangball_venue",
         pageSize: 5
       });
-
       this.venuList = list;
-      console.log("this.venuList1", this.venuList);
-
-      // await util.timeout(3500); //延迟
-
       this.venuList = await util.ajaxPopulate({
         listData: this.venuList,
         populateColumn: "cityDoc",
@@ -80,18 +67,13 @@ export default {
         idKeyColumn: "P7",
         page: "dmagic_area"
       });
-
-     
-
       console.log("this.venuList2", this.venuList);
     }
   },
   async created() {
- 
   },
   async mounted() {}
 };
 </script>
-
 <style scoped>
 </style>

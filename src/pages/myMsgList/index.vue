@@ -10,12 +10,10 @@
 </template>
 <script>
 /* eslint-disable */
-const lodash = require("@/utils/lodash");
 import msg from "@/pages/myMsgList/msg";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
-
 export default {
   components: {
     mytabbar,
@@ -25,7 +23,10 @@ export default {
   data() {
     return {
       transform: true,//传递向子组件告知已读未读的状态值
-      memberId: 19,//用户id
+<<<<<<< HEAD
+      memberId: 1,//用户id
+=======
+>>>>>>> c924f66ac30472ea2c23734abcd725e66cfa6f57
       msgId: null,//传递给接口的消息id
       myMsgList: null,//传递接口的消息列表
       myMsgRead: null,//传递接口的已读消息列表
@@ -38,10 +39,17 @@ export default {
       pageName: "个人中心-系统消息列表"//页面名
     };
   },
-  created() {
+  computed: {
+  //唐球会员信息-在vuex中获取
+    tangballUserInfo:function() {
+      return this.$store.state.tangballUserInfo
+    }
+  },
+  mounted() {
     //在创建后调用一次消息列表接口接口
     // 将数据分别加载至页面假数组中，其中在未读时点击会向已读接口传递数据
     this.getMyMsgList(); 
+    console.log(this.tangballUserInfo.P1);
   },
   methods: {
     // 已读按钮
@@ -66,7 +74,7 @@ export default {
       this.msgId = transmit.newcrow.msgId;
       this.crow2.push(transmit.newcrow.unreadBox);
       if (this.transform) {
-        this.setReadStatus({ memberId: this.memberId, msgId: this.msgId });
+        this.setReadStatus({ memberId: this.tangballUserInfo.P1, msgId: this.msgId });
       }
     },
     // 被子组件$emit触发的方法2，解决用户未点击消息确定就切换已读未读按钮，导致消息数组无法正确删除的问题
@@ -88,7 +96,7 @@ export default {
         param: {
           findJson: {
             //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
-            $or: [{ range: 1 }, { range: 2, memberIdList: this.memberId }]
+            $or: [{ range: 1 }, { range: 2, memberIdList: this.tangballUserInfo.P1 }]
           }
         } //传递参数
       });
@@ -98,11 +106,12 @@ export default {
           url: global.PUB.domain + "/crossList?page=tangball_msg_read",
           param: {
             findJson: {
-              memberId: this.memberId
+              memberId:this.tangballUserInfo.P1
             }
           } //传递参数
         });
         this.myMsgRead = data.list;
+        console.log("已读",data);
       }
       // this.dictMsgRead = {}; //消息阅读记录的数据字典对象
       // this.myMsgRead.forEach(msgReadEach => {
@@ -110,7 +119,8 @@ export default {
       //   this.dictMsgRead[msgReadEach.msgId] = msgReadEach;
       // });
       //使用lodash.keyBy制作数据字典
-      this.dictMsgRead = lodash.keyBy(this.myMsgRead, "msgId");
+      console.log("消息",data);
+      this.dictMsgRead = this.$lodash.keyBy(this.myMsgRead, "msgId");
       //循环：{消息数组}
       data.list.forEach(msgEach => {
         let docRead = this.dictMsgRead[msgEach.P1]; //变量：{当前消息对应的已读记录}
@@ -126,6 +136,12 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0;//页面加载后使子组件默认显示未读数组
+<<<<<<< HEAD
+      console.log("myMsgList",this.myMsgList)
+      console.log("msgg",this.msgg)
+=======
+      console.log("消息列表",this.myMsgList);
+>>>>>>> c924f66ac30472ea2c23734abcd725e66cfa6f57
     },
     /**
      * 函数：{设置消息已读状态的函数}
@@ -148,7 +164,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
   padding-bottom: 100px;
@@ -159,7 +174,6 @@ export default {
   background: white;
   position: relative;
 }
-
 .read-box {
   width: 50%;
   height: 35px;

@@ -1,21 +1,13 @@
 <script>
 /* eslint-disable*/
-
 import util from "@/utils/util";
 //函数定义：{根据微信用户id初始化用户信息和学习数据}
-
-
-
-
-
 export default {
   methods: {
     initByUserInfo: async function(res, js_code) {
-     
     }
   },
   async created() {
-    console.log("APP-created");
     // 调用API从本地缓存中获取数据
     /*
      * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
@@ -40,8 +32,6 @@ export default {
       mpvue.setStorageSync("logs", logs);
     }
     /****************************日志存储-END****************************/
-
-    
   },
   log() {
     console.log(`log at:${Date.now()}`);
@@ -51,7 +41,6 @@ export default {
   }
 };
 </script>
-
 <style>
 .container {
   height: 100%;

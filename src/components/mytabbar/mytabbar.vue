@@ -10,7 +10,6 @@
     </van-tabbar>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 export default {
@@ -66,6 +65,5 @@ export default {
   }
 };
 </script>
-
 <style>
 </style>

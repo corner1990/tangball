@@ -4,15 +4,6 @@
     <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="searchValue" v-model="searchValue" text="searchValue" />-->
-    <navigator url="/pages/searchPage/main">
-      <div class="search-box">
-        <div class="search-text">搜索</div>
-        <div class="search-img">
-          <van-icon name="arrow" size="20px" />
-        </div>
-      </div>
-    </navigator>
-
     <div>
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
@@ -20,7 +11,6 @@
         </van-tab>
       </van-tabs>
     </div>
-
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -45,7 +35,6 @@ export default {
       searchValue: "111", // 搜索value
       matchType: null,
       activeStep: 0,
-
       matchlist: [],
       tabList: [
         { category: "近期" },
@@ -98,7 +87,6 @@ export default {
     /**
      * @desc 搜索回调
      */
-
     /**
      * @desc 赛事切换回调
      */
@@ -108,7 +96,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .title {
   margin: 10px 20px;
@@ -117,23 +104,5 @@ export default {
 }
 .card {
   margin: 0 10px;
-}
-.search-box {
-  margin-left: 5%;
-  height: 40px;
-  width: 90%;
-  font-size: 18px;
-  line-height: 40px;
-  border-bottom: 1px solid #f4b116;
-}
-.search-text {
-  float: left;
-  color: gray;
-  margin-right: 8px;
-}
-.search-img {
-  float: right;
-  color: #999999;
-  padding-top: 8px;
 }
 </style>

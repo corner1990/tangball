@@ -31,10 +31,8 @@ export default {
       name: "demo名称" //手机号码
     };
   },
-
   methods: {
     getUserInfo1() {
-      console.log("click事件首先触发");
       // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本
       // console.log(wx.canIUse('button.open-type.getUserInfo'))
       if (wx.canIUse("button.open-type.getUserInfo")) {
@@ -44,10 +42,8 @@ export default {
       }
     },
     async bindGetUserInfo(e) {
-      // console.log(e.mp.detail.rawData)
       if (e.mp.detail.rawData) {
         //用户按了允许授权按钮
-        console.log("用户按了允许授权按钮");
         await util.getMyWXSetting();
         await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
       } else {
@@ -60,10 +56,8 @@ export default {
   async mounted() {
     // 一进来看看用户是否授权过
     util.getMyWXSetting();
-    console.log("aaaaaaa");
   }
 };
 </script>
-
 <style scoped>
 </style>

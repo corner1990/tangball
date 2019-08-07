@@ -2,7 +2,6 @@
   <div>
      <navigator :url="matchDetailUrl">
     <div class="match-box">
-      
       <div class="match-img-box">
         <img :src="matchListImg" />
       </div>
@@ -11,14 +10,11 @@
         <div>赛事时间：{{cf.matchTime}}</div>
         <div>报名费用：{{cf.registrationFee}}</div>
       </div>
-        
       <div  class="rpg11">
            <div class="arrow">
           <van-icon name="arrow" size="20px" />
         </div>
-      
       </div>
-        
     </div>
     </navigator>
   </div>
@@ -43,7 +39,6 @@ export default {
      * @param 默认占位图：placeholderImg
      * @param 接收的图片地址：matchListImg
      */
-
     let placeholderImg =
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg'
     this.matchListImg = this.$lodash.get(
@@ -51,14 +46,12 @@ export default {
       'album[0].url',
       placeholderImg
     )
-
     /**
      * @name 根据报名状态判断显示按钮的方法
      * @desc this.cf.publicationStatus  == 1 是可报名状态，否则为false
      * @param 火热报名按钮：applyIngStatus,默认为true
      * @param 报名已结束按钮：applyEndStatus,默认为false
      */
-
     if (this.cf.publicationStatus === 1) {
       this.applyIngStatus = true
       this.applyEndStatus = false
@@ -71,7 +64,6 @@ export default {
   created () {}
 }
 </script>
-
 <style >
 .arrow{
   height: 100%;
@@ -83,7 +75,6 @@ export default {
   color: #333;
   border-bottom: 1px solid #000;
 }
-
 .match-box {
   margin: 5px 15px;
   /* margin-bottom: 5px; */
@@ -125,7 +116,6 @@ export default {
   width: 60px;
   height: 20px;
   text-align: center;
-
   border-radius: 5px;
   /* display: inline-block; */
   margin: 15px 5px 0 5px;

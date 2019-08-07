@@ -22,7 +22,6 @@ export default {
   components: {}
 };
 </script>
-
 <style scoped>
 .ranking-content {
   display: flex;

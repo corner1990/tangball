@@ -1,7 +1,6 @@
 <template>
   <div class="main-wrap">
     <!-- <debug_item path="pageName" v-model="pageName" text="页面名称" /> -->
-
     <!-- 搜索框 -->
     <div class="searchBox">
       <input type="text" v-model="keywords" placeholder="请输入搜索关键词" />
@@ -9,12 +8,9 @@
         <van-icon name="search" size="24px" />
       </div>
     </div>
-
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-
     <!-- 赛事场馆列表组件 -->
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
     <mytabbar :active="1"></mytabbar>
@@ -27,7 +23,6 @@ import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "@/components/venueList/venueListComponent";
 import city_select from "@/components/city_select";
-
 export default {
   components: {
     mytabbar,
@@ -46,7 +41,6 @@ export default {
     };
   },
   methods: {
-
     /**
      * @desc 搜索方法
      * @param 搜索关键字：keywords
@@ -64,7 +58,6 @@ export default {
         }
       });
     },
-
     /**
      * @desc 请求接口数据的函数
      * 
@@ -75,7 +68,6 @@ export default {
       } else {
         this.selectIndex = -1;
       }
-
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
@@ -91,7 +83,6 @@ export default {
           sheetTarget: {
             page: "tangball_venue",
             pageSize: "9999"
-            
           }
         }
       });
@@ -100,7 +91,6 @@ export default {
       });
       this.venueList = data.list;
       console.log("this.venueList", this.venueList);
-
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
         listData: this.venueList,
@@ -109,10 +99,8 @@ export default {
         idKeyColumn: "P7",
         page: "dmagic_area"
       });
-
       console.log("this.venueList2", this.venueList);
     }
-
   },
   mounted() {
     this.search();
@@ -120,7 +108,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
   padding-bottom: 80px;

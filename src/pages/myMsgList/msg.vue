@@ -35,7 +35,6 @@
 </template>
 <script >
 /* eslint-disable */
-
 export default {
   props: {
     //父组件传入的当前对应已读或未读的数组

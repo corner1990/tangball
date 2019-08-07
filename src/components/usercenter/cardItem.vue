@@ -4,7 +4,6 @@
     <p class="card-title">{{data.text}}</p>
   </div>
 </template>
-
 <script>
 export default {
   props: ['data'],
@@ -19,7 +18,6 @@ export default {
   }
 }
 </script>
-
 <style>
 .card {
   width: 70px;

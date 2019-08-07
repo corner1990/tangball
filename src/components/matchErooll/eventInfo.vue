@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息</h3>
+    <h3 class="info-title">个人信息-</h3>
     <debug_item v-model="info" text="info"/>
     <van-cell-group>
       <div class="flex line">
@@ -43,15 +43,12 @@
     </div>
   </section>
 </template>
-
 <script>
 /* eslint-disable */
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
- 
     debug_item,
-    
   },
   data () {
     return {
@@ -67,8 +64,6 @@ export default {
   mounted () {
     // 获取赛事数据
     let data = wx.getStorageSync('matchInfo')
-
-  
     if (data) {
       this.matchInfo = JSON.parse(data)
         console.log("this.matchInfo#", this.matchInfo);
@@ -92,7 +87,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
   .flex{
     display: flex;
@@ -105,8 +99,9 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: 18px;
+    font-size: 14px;
     text-indent: .053rem;
+    color: #333;
   }
   .line .sub-title{
     width: 78px;
@@ -118,5 +113,3 @@ export default {
     font-weight: 700;
   }
 </style>
-
-

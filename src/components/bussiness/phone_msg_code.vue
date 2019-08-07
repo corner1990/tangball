@@ -9,12 +9,10 @@
     <input type="text" v-model="vCode" class="n-input FL MR10" />
     <van-button type="primary" size="small" @click="checkVCode" class="MR10">校验短信验证码</van-button>
   <debug_item v-model="vResult" text="校验结果" />
- 
   </div>
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -31,10 +29,8 @@ export default {
       vResult:null,
     };
   },
-
   methods: {
     async getMsgCode(event) {
-
       let { data } = await util.post({
         url: global.PUB.domain + `/tangball/sendMobileVCode`,
         param: {
@@ -44,7 +40,6 @@ export default {
       this.result=data;
     },
     async checkVCode(event) {
-
       let { data } = await util.post({
         url: global.PUB.domain + `/tangball/checkMobileVCode`,
         param: {
@@ -56,11 +51,9 @@ export default {
     }
   },
   async created() {
-    console.log("created2");
   },
   async mounted() {}
 };
 </script>
-
 <style scoped>
 </style>

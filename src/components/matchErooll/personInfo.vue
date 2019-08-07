@@ -1,6 +1,7 @@
 <template>
   <section>
     <h3 class="info-title">个人信息</h3>
+     <debug_item v-model="info" text="info"/>
     <van-cell-group>
       <van-field
         :value="selfInfo.name"
@@ -68,7 +69,7 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="getVerfity">发送验证码</van-button>
+        <van-button slot="button" size="small" type="info" @click="waitTime">{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -85,12 +86,18 @@
         @confirm="onSelectChange"
       />
     </van-popup>
+    <van-toast id="van-toast" />
   </section>
 </template>
-
 <script>
+/* eslint-disable */
 import util from '@/utils/util'
+import debug_item from "@/components/common/debug_item/debug_item";
+import Toast from '../../../static/vant/toast/toast';
 export default {
+  components: {
+    debug_item,
+  },
   data () {
     return {
       radio: '1',
@@ -107,7 +114,9 @@ export default {
         matchName: '',
         matchTime: '未确定',
         total_fee: 'xxx'
-      }
+      },
+      sendText: '发送验证码',
+      sendTime: 60
     }
   },
   mounted () {
@@ -116,15 +125,20 @@ export default {
     if (data) {
       this.matchInfo = JSON.parse(data)
     }
+
+    // Toast.loading({
+    //   mask: true,
+    //   message: '加载中...'
+    // })
   },
   watch: {
-    info: {
-      handler (info, oldName) {
-        console.log('info12212', info)
-      },
-      immediate: true,
-      deep: true
-    }
+    // info: {
+    //   handler (info, oldName) {
+    //     console.log('info12212', info)
+    //   },
+    //   immediate: true,
+    //   deep: true
+    // }
   },
   computed: {
     selfInfo () {
@@ -154,8 +168,27 @@ export default {
       })
       this.hideSelectBallAge()
     },
-    async getVerfity () {
-      let { phone: mobile } = this.info
+    waitTime () {
+      let { phone: mobile } = this.info;
+      if (!mobile) {
+        return Toast.fail('手机号不能为空！');
+      }
+      if (this.sendTime === 60) {
+        this.getVerfity(mobile)
+      }
+      if (this.sendTime <= 1) {
+        this.sendTime = 60
+        this.sendText = '发送验证码'
+        return false
+      }
+      // debugger
+      this.sendTime -= 1
+      this.sendText = `${this.sendTime}秒后重新获取`
+      setTimeout(() => {
+        this.waitTime()
+      }, 300);
+    },
+    getVerfity (mobile) {
       // 请求赛事列表接口函数
       util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
@@ -200,8 +233,9 @@ export default {
     line-height: 26px;
     margin-left: 15px;
     border-bottom: 1px solid #eee;
-    font-size: 18px;
+    font-size: 14px;
     text-indent: .053rem;
+    color: #333;
   }
   .line .sub-title{
     width: 80px;
@@ -215,7 +249,7 @@ export default {
     width: .667rem;
   }
   .info-title{
-    font-size: .38rem;
+    font-size: 18px;
     line-height: .6rem;
     font-weight: 700;
     color: #333;
@@ -223,10 +257,7 @@ export default {
   .tangBallInput{
     font-size: .373rem;
   }
-
   .event-info{
     margin-top: .8rem;
   }
 </style>
-
-

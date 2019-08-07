@@ -8,27 +8,19 @@
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-
 import util from "@/utils/util";
 export default {
   components: {
-  
     mytabbar,
     debug_item,
     util,
-    
   },
   data() {
     return {
-  
       wxArticleUrl: null,
-     
     };
   },
-
   methods: {
-    
-    
   },
   created() {},
   async mounted() {
@@ -39,7 +31,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .data-group {
   padding: 5px 10px;
