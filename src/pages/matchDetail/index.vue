@@ -54,6 +54,7 @@
           </div>
         </van-collapse-item>
       </van-collapse>
+      <van-cell title="决赛场馆" :value="matchlistDoc.venue" v-else />
       <van-cell title="报名费" :value="matchlistDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchlistDoc.registeredPersons" />
     </van-cell-group>
@@ -144,26 +145,22 @@ export default {
       } = this.matchlistDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main`;
-      if (!this.status && this.venueId) {
-        wx.setStorage({
-          key: "matchInfo",
-          data: JSON.stringify({
-            matchName,
-            matchTime,
-            total_fee,
-            matchId,
-            venueId,
-            venueName,
-            cityName
-          }),
-          success() {
-            wx.navigateTo({ url });
-          }
-        });
-        wx.navigateTo({ url });
-      } else {
-        this.showdDialog = true;
-      }
+      wx.setStorage({
+        key: "matchInfo",
+        data: JSON.stringify({
+          matchName,
+          matchTime,
+          total_fee,
+          matchId,
+          venueId,
+          venueName,
+          cityName
+        }),
+        success() {
+          wx.navigateTo({ url });
+        }
+      });
+      wx.navigateTo({ url });
     },
     /**
      * @name pickerChange是场馆选择器函数
@@ -190,20 +187,25 @@ export default {
         let {
           matchName,
           matchTime,
+          venue,
           registrationFee: total_fee
         } = this.matchlistDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main`;
-        if (!this.status) {
-          // 保存报名数据
-          wx.setStorage({
-            key: "matchInfo",
-            data: JSON.stringify({ matchName, matchTime, total_fee, matchId }),
-            success() {
-              wx.navigateTo({ url });
-            }
-          });
-        }
+        // 保存报名数据
+        wx.setStorage({
+          key: "matchInfo",
+          data: JSON.stringify({
+            matchName,
+            matchTime,
+            total_fee,
+            matchId,
+            venue
+          }),
+          success() {
+            wx.navigateTo({ url });
+          }
+        });
       } else {
         this.showdDialog = true; //打开弹窗
         this.venueId = null; //清空变量
