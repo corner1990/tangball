@@ -149,6 +149,9 @@ export default {
           modifyJson:this.memberMessage
         }
       });
+      this.$store.commit('setTangballUserInfo',this.memberMessage)
+      console.log(this.tangballUserInfo);
+      
       wx.switchTab({url:"/pages/index/main"})
        wx.showToast({
       title: '修改成功',
@@ -159,6 +162,8 @@ export default {
   mounted(){
     // 页面加载请求会员数据
     this.getMember();
+    console.log(this.tangballUserInfo);
+    
   }
 
 }
