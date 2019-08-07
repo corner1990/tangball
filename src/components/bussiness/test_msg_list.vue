@@ -6,7 +6,6 @@
 </template>
 <script>
 /* eslint-disable */
-import lodash from "lodash";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -21,7 +20,6 @@ export default {
         myMsgList: null,
     };
   },
-
   methods: {
    //函数：{ajax获取消息列表函数}
     async ajaxMsgList() {
@@ -39,11 +37,9 @@ export default {
     },
   },
   async created() {
- 
   },
   async mounted() {}
 };
 </script>
-
 <style scoped>
 </style>

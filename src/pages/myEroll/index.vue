@@ -11,11 +11,10 @@
         <div class>提交时间：[{{item.time}}]</div>
         <div class>
           报名状态：
-          <span class="C_3a0" v-if="item.payStatus==1">已支付</span>
+          <span class="C_3a0" v-if="item.payStatus==2">已支付</span>
           <span class="C_f30" v-else>等待支付</span>
         </div>
         <div class v-if="item.venueDoc">所选场馆：{{item.venueDoc.name}}</div>
-
         <div class="TAR">
           <van-button
             plain
@@ -34,13 +33,11 @@
 import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
-
 export default {
   components: {
     mytabbar,
     debug_item
   },
-
   data() {
     return {
       myErollList: null,
@@ -62,20 +59,17 @@ computed: {
       let url=`/pages/myErollDetail/main?P1=${P1}`
       wx.navigateTo({ url });
     },
-
     /**
      * @name ajax获取报名列表函数
      * @desc 三重ajax请求
      * @param xxxx
      */
-
     async ajaxEnrollList() {
       this.myErollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 9999,
         findJson: { memberId: this.tangballUserInfo.P1 }
       });
-
       this.myErollList = await util.ajaxPopulate({
         listData: this.myErollList,
         populateColumn: "matchDoc",
@@ -83,7 +77,6 @@ computed: {
         idKeyColumn: "P1",
         page: "tangball_match"
       });
-
       this.myErollList = await util.ajaxPopulate({
         listData: this.myErollList,
         populateColumn: "venueDoc",
@@ -98,8 +91,6 @@ computed: {
   }
 };
 </script>
-
-
 <style scoped>
 .data-group {
   padding: 5px 10px;
@@ -116,7 +107,6 @@ computed: {
 .main-wrap .data-group {
   padding: 10px 10px;
   margin: 0 0 10px 0;
-
   border-radius: 5px;
 }
 </style>

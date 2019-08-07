@@ -5,18 +5,13 @@
          {{article.articleTitle}}</div>
          <div class="article-title" 
           @click="gotoPage(`/pages/articleDetail/main?dataId=${article.P1}&wxArticleUrl=${$lodash.get(article, 'extend.wxArticleUrl','')}`)">
-         
-          
              文章详情>>
-
            </div>
       </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
-
-
 export default {
   props:{
     article:Object
@@ -32,7 +27,6 @@ export default {
   },
 }
 </script>
-
 <style scoped>
   .article-box{
     margin:10px 5%;

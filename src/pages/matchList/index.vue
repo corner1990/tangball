@@ -4,7 +4,6 @@
     <!-- <debug_item path="steps" v-model="steps" text="步骤" />
     <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
     <debug_item path="searchValue" v-model="searchValue" text="searchValue" />-->
-  
     <div>
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
@@ -12,7 +11,6 @@
         </van-tab>
       </van-tabs>
     </div>
-
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -37,7 +35,6 @@ export default {
       searchValue: "111", // 搜索value
       matchType: null,
       activeStep: 0,
-
       matchlist: [],
       tabList: [
         { category: "近期" },
@@ -90,7 +87,6 @@ export default {
     /**
      * @desc 搜索回调
      */
-
     /**
      * @desc 赛事切换回调
      */
@@ -100,7 +96,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .title {
   margin: 10px 20px;
@@ -110,5 +105,4 @@ export default {
 .card {
   margin: 0 10px;
 }
-
 </style>

@@ -22,7 +22,6 @@
           </swiper-item>
         </block>
       </swiper>
-
       <!--显示图片弹窗-->
       <van-popup
         customStyle="height:250px"
@@ -35,14 +34,11 @@
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
-
     <!-- 赛事步骤 -->
     <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
-
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchlistDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchlistDoc.enrollTimeEnd" />
-
       <!-- 如果是全国赛 -->
       <van-collapse
         v-model="NationalmatchIndex"
@@ -58,15 +54,13 @@
           </div>
         </van-collapse-item>
       </van-collapse>
-
+      <van-cell title="决赛场馆" :value="matchlistDoc.venue" v-else />
       <van-cell title="报名费" :value="matchlistDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchlistDoc.registeredPersons" />
     </van-cell-group>
-
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
     <van-button size="large" v-if="isMatchIdStatus" plain disabled :style="style">{{enrollText}}</van-button>
     <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
-
     <!-- 显示选择场馆弹窗 -->
     <van-dialog
       use-slot
@@ -123,7 +117,6 @@ export default {
       value: "" // 搜索value
     };
   },
-
   methods: {
     /**
      * @desc 打开点击图片放大函数
@@ -132,14 +125,12 @@ export default {
       this.showBigImg = true;
       this.bigImg = url; //缓存当前的图片地址
     },
-
     /**
      * @desc 关闭点击图片放大函数
      */
     ClosePhoto() {
       this.showBigImg = false;
     },
-
     /**
      * @desc onCloseDialog是弹窗的关闭函数
      * @param event是默认值
@@ -154,28 +145,23 @@ export default {
       } = this.matchlistDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main`;
-      if (!this.status && this.venueId) {
-        wx.setStorage({
-          key: "matchInfo",
-          data: JSON.stringify({
-            matchName,
-            matchTime,
-            total_fee,
-            matchId,
-            venueId,
-            venueName,
-            cityName
-          }),
-          success() {
-            wx.navigateTo({ url });
-          }
-        });
-        wx.navigateTo({ url });
-      } else {
-        this.showdDialog = true;
-      }
+      wx.setStorage({
+        key: "matchInfo",
+        data: JSON.stringify({
+          matchName,
+          matchTime,
+          total_fee,
+          matchId,
+          venueId,
+          venueName,
+          cityName
+        }),
+        success() {
+          wx.navigateTo({ url });
+        }
+      });
+      wx.navigateTo({ url });
     },
-
     /**
      * @name pickerChange是场馆选择器函数
      * @desc 场馆选择，缓存当前选中的场馆id
@@ -191,7 +177,6 @@ export default {
       this.cityName = cityName;
       this.venueName = venueName;
     },
-
     /**
      * @name gotoPage是立即报名函数
      * @desc 点击立即报名按钮，如果不是全国赛事则直接跳转到报名页，否则需要打开弹窗选择场馆
@@ -202,20 +187,25 @@ export default {
         let {
           matchName,
           matchTime,
+          venue,
           registrationFee: total_fee
         } = this.matchlistDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main`;
-        if (!this.status) {
-          // 保存报名数据
-          wx.setStorage({
-            key: "matchInfo",
-            data: JSON.stringify({ matchName, matchTime, total_fee, matchId }),
-            success() {
-              wx.navigateTo({ url });
-            }
-          });
-        }
+        // 保存报名数据
+        wx.setStorage({
+          key: "matchInfo",
+          data: JSON.stringify({
+            matchName,
+            matchTime,
+            total_fee,
+            matchId,
+            venue
+          }),
+          success() {
+            wx.navigateTo({ url });
+          }
+        });
       } else {
         this.showdDialog = true; //打开弹窗
         this.venueId = null; //清空变量
@@ -232,7 +222,6 @@ export default {
           cityName,
           venueName
         } = this.matchlistDoc.cityVenueList[0];
-
         this.venueId = venueId; //默认选中第一个
         this.cityName = cityName;
         this.venueName = venueName;
@@ -292,7 +281,6 @@ export default {
       param: { id: this.matchId }
     });
     this.matchlistDoc = data.Doc; //赛事详情列表
-
     // 如果报名未截止
     if (this.matchlistDoc.publicationStatus == 1) {
       this.getEnrollList(); //获取报名订单列表函数
@@ -328,12 +316,10 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .swiper-item {
   height: 1000px;
 }
-
 .slide-image {
   width: 100%;
   height: 120%;
@@ -347,7 +333,6 @@ export default {
   color: #333;
   border-bottom: 1px solid #000;
 }
-
 /* 折叠面板 */
 .collapse {
   text-align: center;

@@ -1,11 +1,16 @@
 <template>
   <div class="main-wrap">
-    <van-steps :steps="steps" :active="active" />
-    <div v-show="active===0">
+    <div v-show="active < 2">
+      <van-steps :steps="steps" :active="active" />
+    </div>
+    <div v-show="active === 0">
       <PersonInfo :info="info" @changeInfo="changeInfo" />
     </div>
-    <div v-show="active===1">
+    <div v-show="active === 1">
       <EventInfo :info="info" />
+    </div>
+    <div v-show="active === 2">
+      <End :info="state" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <van-row>
@@ -27,6 +32,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import PersonInfo from "@/components/matchErooll/personInfo";
 import EventInfo from "@/components/matchErooll/eventInfo";
+import End from "@/components/matchErooll/end";
 import Dialog from "../../../static/vant/dialog/dialog";
 import util from "@/utils/util";
 export default {
@@ -34,7 +40,8 @@ export default {
     mytabbar,
     debug_item,
     PersonInfo,
-    EventInfo
+    EventInfo,
+    End
   },
   data() {
     return {
@@ -54,16 +61,9 @@ export default {
       ],
       active: 0,
       info: {
-        // name: "高富帅", // 姓名
-        // phone: "", // 手机号
-        // age: 12,
-        // sex: "1",
-        // ballAge: "",
-        // career: "", // 职业
-        // idCard: "", // 身份证号
-        // matchId: 29, // 赛事id
-        // orderMoney: 1,
-        // memberId: "" // 报名会员id
+      },
+      state: {
+        errMsg: ''
       }
     };
   },
@@ -159,18 +159,23 @@ export default {
         }
       });
     },
+    endStep (state) {
+      this.state = state
+      this.active = this.active + 1
+    },
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
+      let self = this
       if (status == 100) {
         wx.requestPayment({
           ...args,
           signType: "MD5",
           timeStamp,
           success(res) {
-            console.log("ok", res);
+            self.endStep(res)
           },
           fail(err) {
-            console.log("err", err);
+            self.endStep(err)
           }
         });
       }
@@ -178,7 +183,6 @@ export default {
     initInfo() {
       let matchInfo = wx.getStorageSync("matchInfo");
       this.matchInfo = JSON.parse(matchInfo);
-
       let { tangballUserInfo } = this.$store.state;
       console.log("tangballUserInfo", tangballUserInfo);
       wx.self = this;
@@ -187,7 +191,6 @@ export default {
         name,
         sex = -1,
         openid: openId,
-        
         phone,
         career
       } = tangballUserInfo;
@@ -201,7 +204,6 @@ export default {
         career,
         matchId:this.matchInfo.matchId
       };
-      console.log("initInfo-this.info", this.info);
     },
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
@@ -212,11 +214,6 @@ export default {
           findJson: { openid: this.tangballUserInfo.openid },
           modifyJson: this.memberMessage
         }
-      });
-      wx.switchTab({ url: "/pages/index/main" });
-      wx.showToast({
-        title: "修改成功",
-        icon: "success"
       });
     },
     /**
@@ -230,10 +227,10 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .main-wrap {
-  margin: 0 10px 100px;
+  margin: 0 10px;
+  padding-bottom: 100px;
 }
 .event-info {
   line-height: 30px;

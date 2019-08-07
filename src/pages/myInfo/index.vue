@@ -45,7 +45,6 @@
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
 import util from '@/utils/util'
-
 export default {
   components: {
     mytabbar, debug_item
@@ -78,7 +77,6 @@ export default {
       return this.$store.state.tangballUserInfo 
     }
   },
-
   methods: {
     // 点击下拉款确定的话将数据信息保存下来，实现双向绑定
     changeSelect(event){
@@ -165,10 +163,8 @@ export default {
     console.log(this.tangballUserInfo);
     
   }
-
 }
 </script>
-
 <style scoped>
 .myInfo-box{
   height: 500px;

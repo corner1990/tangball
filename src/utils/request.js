@@ -1,9 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
-
 // 时间戳
 // const NewTimeStamp = new Date().getTime()
-
 axios.defaults.timeout = 30000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.adapter = function (config) {
@@ -20,7 +18,6 @@ axios.defaults.adapter = function (config) {
     })
   })
 }
-
 // axios 拦截器
 function Instance () {
   // 请求拦截器
@@ -32,7 +29,6 @@ function Instance () {
     // console.log(error); // 请求失败
     return Promise.reject(error)
   })
-
   // 添加响应拦截器
   axios.interceptors.response.use(function (response) {
     console.log(response.data.data) // 响应成功
@@ -42,9 +38,7 @@ function Instance () {
     return Promise.reject(error)
   })
 }
-
 Instance()
-
 /**
  * @desc get请求
  * @param { String } url 接口url

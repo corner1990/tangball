@@ -19,7 +19,6 @@
     </div>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
@@ -91,7 +90,6 @@ export default {
   }
 };
 </script>
-
 <style>
 .select-city-box {
   margin-top: 40px;

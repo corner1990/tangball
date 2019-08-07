@@ -6,12 +6,10 @@
     </div>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 import mix from "@/utils/mix";
 console.log("mix", mix);
-
 export default {
   mixins: [mix.form_item], //混入
   props: ["label"],
@@ -21,7 +19,6 @@ export default {
       dialogVisible: false
     };
   },
-
   methods: {
     change() {}
   },
@@ -30,7 +27,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .field-box {
   padding: 5px 10px;
@@ -46,7 +42,6 @@ export default {
 .field-item {
   flex: 1;
 }
-
 .field-input {
   padding: 0 10px 0 10px;
   display: inline-block;
