@@ -37,7 +37,7 @@
     </van-tabs>
 
     <div class="bottom-space"></div>
-    <mytabbar></mytabbar>
+    <mytabbar  :active="2"></mytabbar>
   </div>
 </template>
 <script>
