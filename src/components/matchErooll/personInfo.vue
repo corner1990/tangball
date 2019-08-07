@@ -52,7 +52,7 @@
     </div>
     <div class="flex line">
       <p class="sub-title" style="width: 90px;">赛事地点</p>
-      <div>广东神，深圳市，福田区，深航中路1238900号</div>
+      <div>{{ matchInfo.cityName }} {{ matchInfo.venueName }}</div>
     </div>
     <div class="flex line">
       <title class="sub-title">报名费</title>
@@ -113,12 +113,15 @@ export default {
       matchInfo: {
         matchName: '',
         matchTime: '未确定',
-        total_fee: 'xxx'
+        total_fee: 'xxx',
+        venueName: '',
+        cityName: ''
       },
       sendText: '发送验证码',
       sendTime: 60
     }
   },
+  // {"matchId":37,"venueId":76,"venueName":"深圳南山场馆3","cityName":"深圳"}
   mounted () {
     // 获取赛事数据
     let data = wx.getStorageSync('matchInfo')
