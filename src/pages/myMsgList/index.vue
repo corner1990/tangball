@@ -7,10 +7,6 @@
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
-    <!-- <div class="top-box">
-      <div class="read-box" :class="!focuss?'masEvolve':''" @click="read">已读</div>
-      <div class="unread-box" :class="focuss?'masEvolve':''" @click="unread">未读</div>
-    </div>-->
     <msg :transformm="transform" :crowArr="msgg" @newMsgg="moveMsg" @spliceMsgg="closeDoor"></msg>
   </div>
 </template>
@@ -52,13 +48,11 @@ export default {
     //在创建后调用一次消息列表接口接口
     // 将数据分别加载至页面假数组中，其中在未读时点击会向已读接口传递数据
     this.getMyMsgList();
-    console.log(this.tangballUserInfo.P1);
   },
 
   methods: {
     //顶部聚焦按钮
     onChange(event) {
-      console.log("event", event);
       if (event.mp.detail.index == 0) {
         this.unread();
       } else {
@@ -130,7 +124,6 @@ export default {
           } //传递参数
         });
         this.myMsgRead = data.list;
-        console.log("已读", data);
       }
       // this.dictMsgRead = {}; //消息阅读记录的数据字典对象
       // this.myMsgRead.forEach(msgReadEach => {
@@ -138,7 +131,6 @@ export default {
       //   this.dictMsgRead[msgReadEach.msgId] = msgReadEach;
       // });
       //使用lodash.keyBy制作数据字典
-      console.log("消息", data);
       this.dictMsgRead = this.$lodash.keyBy(this.myMsgRead, "msgId");
       //循环：{消息数组}
       data.list.forEach(msgEach => {
@@ -155,7 +147,6 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
-      console.log("消息列表", this.myMsgList);
     },
     /**
      * 函数：{设置消息已读状态的函数}
@@ -181,35 +172,5 @@ export default {
 <style scoped>
 .main-wrap {
   padding-bottom: 100px;
-}
-.top-box {
-  margin: 8px 0px;
-  height: 35px;
-  background: white;
-  position: relative;
-}
-.read-box {
-  width: 50%;
-  height: 35px;
-  position: absolute;
-  text-align: center;
-  line-height: 35px;
-  top: 0;
-  right: 0px;
-  color: darkgrey;
-}
-.unread-box {
-  width: 50%;
-  height: 35px;
-  position: absolute;
-  text-align: center;
-  line-height: 35px;
-  top: 0;
-  left: 0px;
-  color: darkgrey;
-}
-.masEvolve {
-  border-bottom: #f4b116 5px solid;
-  color: black;
 }
 </style>
