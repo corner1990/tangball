@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       transform: true,//传递向子组件告知已读未读的状态值
-      memberId: 19,//用户id
+      memberId: 1,//用户id
       msgId: null,//传递给接口的消息id
       myMsgList: null,//传递接口的消息列表
       myMsgRead: null,//传递接口的已读消息列表
@@ -126,6 +126,8 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0;//页面加载后使子组件默认显示未读数组
+      console.log("myMsgList",this.myMsgList)
+      console.log("msgg",this.msgg)
     },
     /**
      * 函数：{设置消息已读状态的函数}
