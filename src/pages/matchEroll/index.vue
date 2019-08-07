@@ -3,8 +3,8 @@
     <div v-show="active < 2">
       <van-steps :steps="steps" :active="active" />
     </div>
-    <div v-show="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" />
+    <div v-if="active === 0">
+      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 1">
       <EventInfo :info="info" />
@@ -45,7 +45,8 @@ export default {
   },
   data() {
     return {
-      matchInfo:{},//存储赛事信息
+      objMatchInfo: {}, //存储赛事信息
+      matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
       btnText: "下一步",
       steps: [
@@ -60,14 +61,16 @@ export default {
         }
       ],
       active: 0,
-      info: {
-      },
+      info: {},
       state: {
-        errMsg: ''
+        errMsg: ""
       }
     };
   },
-  async mounted() {
+  mounted() {
+    // 缓存赛事场馆信息，用于传给PersonInfo组件
+    this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+
     // 请求赛事详情接口函数
     // let doc = await util.post({
     //   url: global.PUB.domain + "/crossDetail?page=tangball_match",
@@ -159,23 +162,23 @@ export default {
         }
       });
     },
-    endStep (state) {
-      this.state = state
-      this.active = this.active + 1
+    endStep(state) {
+      this.state = state;
+      this.active = this.active + 1;
     },
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
-      let self = this
+      let self = this;
       if (status == 100) {
         wx.requestPayment({
           ...args,
           signType: "MD5",
           timeStamp,
           success(res) {
-            self.endStep(res)
+            self.endStep(res);
           },
           fail(err) {
-            self.endStep(err)
+            self.endStep(err);
           }
         });
       }
@@ -198,11 +201,11 @@ export default {
         ...this.info,
         name,
         sex: `${sex}`,
-        memberId:P1,
+        memberId: P1,
         openId,
         phone,
         career,
-        matchId:this.matchInfo.matchId
+        matchId: this.matchInfo.matchId
       };
     },
     askAndGoBack() {},
