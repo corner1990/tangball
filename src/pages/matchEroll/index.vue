@@ -14,7 +14,10 @@
       <End :info="state" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
-      <van-row v-if="payStatus==1">
+      <van-row  v-if="payStatus==2">
+        <van-button size="large" type="info" plain>已支付</van-button>
+      </van-row>
+      <van-row v-else>
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
         </van-col>
@@ -22,9 +25,7 @@
           <van-button type="info" block @click="nextStep">{{btnText}}</van-button>
         </van-col>
       </van-row>
-      <van-row v-else>
-        <van-button size="large" type="info" plain>已支付</van-button>
-      </van-row>
+      
     </div>
     <van-dialog id="van-dialog" />
     <mytabbar></mytabbar>
@@ -73,10 +74,12 @@ export default {
     };
   },
   mounted() {
+    console.log("mounted###");
     // 页面加载请求会员数据
     this.getMember();
   },
   onLoad(options) {
+    console.log("onLoad#######");
     // 缓存赛事信息
     // 如果是从报名列表进入
     if (options.id == 2) {
