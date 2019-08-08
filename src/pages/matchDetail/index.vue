@@ -144,7 +144,7 @@ export default {
         registrationFee: total_fee
       } = this.matchlistDoc;
       let { matchId, venueId, venueName, cityName } = this;
-      let url = `/pages/matchEroll/main`;
+      let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
         key: "matchInfo",
         data: JSON.stringify({
@@ -191,7 +191,7 @@ export default {
           registrationFee: total_fee
         } = this.matchlistDoc;
         let { matchId } = this;
-        let url = `/pages/matchEroll/main`;
+        let url = `/pages/matchEroll/main?id=1`;
         // 保存报名数据
         wx.setStorage({
           key: "matchInfo",

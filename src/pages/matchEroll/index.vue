@@ -1,25 +1,29 @@
 <template>
   <div class="main-wrap">
     <div v-show="active < 2">
+      <debug_item v-model="info" text="info" />
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
       <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" />
     </div>
-    <div v-show="active === 1">
+    <div v-if="active === 1">
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 2">
       <End :info="state" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
-      <van-row>
+      <van-row v-if="payStatus==1">
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
         </van-col>
         <van-col span="11" offset="2">
           <van-button type="info" block @click="nextStep">{{btnText}}</van-button>
         </van-col>
+      </van-row>
+      <van-row v-else>
+        <van-button size="large" type="info" plain>已支付</van-button>
       </van-row>
     </div>
     <van-dialog id="van-dialog" />
@@ -45,22 +49,23 @@ export default {
   },
   data() {
     return {
+      payStatus: 1,//是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
       btnText: "下一步",
       steps: [
         {
-          text: '确认报名资料'
+          text: "确认报名资料"
         },
         {
-          text: '支付报名费'
+          text: "支付报名费"
         },
         {
-          text: '完成缴费'
+          text: "完成缴费"
         }
       ],
-      active: 2,
+      active: 0,
       info: {},
       state: {
         errMsg: ""
@@ -68,8 +73,25 @@ export default {
     };
   },
   mounted() {
-    // 缓存赛事场馆信息，用于传给PersonInfo组件
-    this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+    // 页面加载请求会员数据
+    this.getMember();
+  },
+  onLoad(options) {
+    // 缓存赛事信息
+    // 如果是从报名列表进入
+    if (options.id == 2) {
+      let data = JSON.parse(wx.getStorageSync("myErollDetail"));
+      if (data) {
+        let { active, info, matchInfo, P1 } = data;
+        this.active = active;
+        this.info = info;
+        this.objMatchInfo = matchInfo;
+        this.payStatus = this.info.payStatus;
+      }
+    } else {
+      //  如果是从赛事详情进入
+      this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+    }
 
     // 请求赛事详情接口函数
     // let doc = await util.post({
@@ -77,8 +99,6 @@ export default {
     //   param: { id: this.P1 }
     // });
     // console.log('this', this)
-    // 页面加载请求会员数据
-    this.getMember()
   },
   methods: {
     nextStep() {
@@ -118,8 +138,9 @@ export default {
       }
     },
     showTip() {
-      let data = wx.getStorageSync("matchInfo");
-      let { matchName, matchTime, total_fee } = JSON.parse(data);
+      // let data = wx.getStorageSync("matchInfo");
+      // let { matchName, matchTime, total_fee } = JSON.parse(data);
+      let { matchName, matchTime, total_fee } = this.objMatchInfo;
       Dialog.confirm({
         title: "参赛报名提醒",
         message: `你将要报名参加${matchName}，${matchTime} 时举办，报名费${total_fee}元，一旦报名成功，将不在退还`,
@@ -195,7 +216,8 @@ export default {
         sex = -1,
         openid: openId,
         phone,
-        career
+        career,
+        ballAge
       } = tangballUserInfo;
       this.info = {
         ...this.info,
@@ -206,57 +228,58 @@ export default {
         phone,
         career,
         matchId,
-        venueId
+        venueId,
+        ballAge
       };
     },
     // 请求会员接口
-    async getMember () {
+    async getMember() {
       let { tangballUserInfo } = this.$store.state;
       let { data } = await util.post({
-        url: global.PUB.domain + '/crossDetail?page=tangball_member',
+        url: global.PUB.domain + "/crossDetail?page=tangball_member",
         param: {
           findJson: {
             openid: tangballUserInfo.openid
           }
         }
-      })
-      this.initInfo(data.Doc)
+      });
+      this.initInfo(data.Doc);
     },
-    askAndGoBack () {},
+    askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
-    async modifyMember () {
+    async modifyMember() {
       util.post({
-        url: global.PUB.domain + '/crossModify?page=tangball_member',
+        url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
           findJson: { openid: this.tangballUserInfo.openid },
           modifyJson: this.memberMessage
         }
-      })
+      });
     },
     /**
      * @desc 修改信息
      */
     changeInfo(info) {
-      this.info = { ...this.info, ...info }
+      this.info = { ...this.info, ...info };
     },
     /**
      * @desc 还原默认状态
      */
     changeState() {
-      this.btnText =  '下一步'
-      this.info = {}
-      this.active = 0
+      this.btnText = "下一步";
+      this.info = {};
+      this.active = 0;
       this.state = {
-        errMsg: ''
-      }
+        errMsg: ""
+      };
     }
   },
 
   onUnload: function() {
     // 页面销毁时执行
-    this.changeState()
-  },
-}
+    this.changeState();
+  }
+};
 </script>
 <style scoped>
 .main-wrap {
