@@ -7,7 +7,7 @@
       <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 1">
-      <EventInfo :info="info" />
+      <EventInfo :info="info" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 2">
       <End :info="state" />

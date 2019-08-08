@@ -62,7 +62,7 @@ export default {
       }
     }
   },
-  props: ['info'],
+    props: ["info", "matchInfo"],
   mounted () {
     // 获取赛事数据
     let data = wx.getStorageSync('matchInfo')
