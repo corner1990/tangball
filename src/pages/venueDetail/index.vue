@@ -4,7 +4,7 @@
     <div class v-if="venueDoc">
       <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
       <div>
-        <openImg v-model="venueDoc.album"></openImg>
+        <openImg v-model="venueDoc.album" ></openImg>
         <van-tabs :active="active" v-bind:change="onChange">
           <van-tab title="场馆介绍1">
             <div style="font-size:16px;margin-top:5px">

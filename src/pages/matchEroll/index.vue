@@ -60,7 +60,7 @@ export default {
           text: '完成缴费'
         }
       ],
-      active: 2,
+      active: 1,
       info: {},
       state: {
         errMsg: ""
@@ -68,6 +68,7 @@ export default {
     };
   },
   mounted() {
+   this.active=0
     // 缓存赛事场馆信息，用于传给PersonInfo组件
     this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
 
