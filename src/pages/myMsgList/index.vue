@@ -2,7 +2,7 @@
   <div class="main-wrap">
     <mytabbar></mytabbar>
     <div>
-      <van-tabs :active="active" @change="onChange">
+      <van-tabs :active="active" @change="onChange" sticky>
         <van-tab title="未读"></van-tab>
         <van-tab title="已读"></van-tab>
       </van-tabs>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      active: 0,//默认聚焦未读
+      active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
       myMsgList: null, //传递接口的消息列表
@@ -32,8 +32,6 @@ export default {
       dictMsgRead: null, //传递接口的已读消息数字字典
       msgg0: [], //未读数组
       msgg: [], //传递向子组件的数组值
-      focuss: true, //已读未读聚焦
-      evolve: "masEvolve", //按钮聚焦样式
       crow2: [], //已读数组
       pageName: "个人中心-系统消息列表" //页面名
     };
@@ -45,11 +43,15 @@ export default {
     }
   },
   mounted() {
-    //在创建后调用一次消息列表接口接口
-    // 将数据分别加载至页面假数组中，其中在未读时点击会向已读接口传递数据
-    this.getMyMsgList();
+    (this.msgg0 = []), //未读数组
+      (this.crow2 = []), //已读数组
+      //在创建后调用一次消息列表接口接口
+      // 将数据分别加载至页面假数组中，其中在未读时点击会向已读接口传递数据
+      this.getMyMsgList();
   },
-
+  onUnload() {
+    this.transform = true;
+  },
   methods: {
     //顶部聚焦按钮
     onChange(event) {
@@ -60,17 +62,14 @@ export default {
       }
     },
     // 已读按钮
-    // 此处控制按钮focuss聚焦，并且传递向子组件的值
     // msgg值控制子组件显示的为哪个数组
     // transform值告知子组件处于何种状态，触发监听器
     read() {
-      this.focuss = false;
       this.msgg = this.crow2;
       this.transform = false;
     },
     // 未读按钮
     unread() {
-      this.focuss = true;
       this.msgg = this.msgg0;
       this.transform = true;
     },

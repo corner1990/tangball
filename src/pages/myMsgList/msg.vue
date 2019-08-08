@@ -4,7 +4,7 @@
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-if="showSelect" @click="allCheck()">全选</div>
     </div>
-    <div>
+    <div class="flesh">
       <div class="content-box" v-if="showcontent">
         发信人：{{crowArr[gant].CreateUser}}
         <br />
@@ -42,22 +42,22 @@ export default {
       type: Array,
       default: []
     },
-//父组件传入，告知子组件此时按钮聚焦为已读或者是未读状态，
-//用于触发子组件的监听器
+    //父组件传入，告知子组件此时按钮聚焦为已读或者是未读状态，
+    //用于触发子组件的监听器
     transformm: {
       type: Boolean
     }
   },
   data() {
     return {
-      unreadBox: [],//在$emit触发时，传递给父组件当前被选中的未读消息的对应数组数据，使父组件能在已读假数组中添加对应数据
-      msgId: null,//当前被点击的消息id，通过$emit传递给父组件
-      gant: {},//当前被点击消息的index值
-      checkedList: [],//暂存全选true和false状态的数组
-      showcompile: true,//判断编辑按钮显隐
-      checked: false,//多选时复选框默认的状态
-      showSelect: false,//全选，复选框，及确认已读按钮显隐
-      showcontent: false//消息列表显隐
+      unreadBox: [], //在$emit触发时，传递给父组件当前被选中的未读消息的对应数组数据，使父组件能在已读假数组中添加对应数据
+      msgId: null, //当前被点击的消息id，通过$emit传递给父组件
+      gant: {}, //当前被点击消息的index值
+      checkedList: [], //暂存全选true和false状态的数组
+      showcompile: true, //判断编辑按钮显隐
+      checked: false, //多选时复选框默认的状态
+      showSelect: false, //全选，复选框，及确认已读按钮显隐
+      showcontent: false //消息列表显隐
     };
   },
   //监听器：通过监听父组件传进来的已读未读状态触发
@@ -84,7 +84,7 @@ export default {
     //全部已读确认按钮
     // 按钮首先判断未读消息列表复选框的true和false状态
     //然后将true状态的消息的id和内容传递给父组件并触发已读接口
-   //但目前似乎是请求速度过快，导致全选后虽然有传递数据，但有时会丢失数据
+    //但目前似乎是请求速度过快，导致全选后虽然有传递数据，但有时会丢失数据
     purification() {
       for (let i = this.crowArr.length - 1; i >= 0; i--) {
         if (this.checkedList[i]) {
@@ -151,6 +151,21 @@ export default {
         this.checkedList[i] = false;
       }
     }
+  },
+  onUnload() {
+    this.crowArr=[]
+    this.allCheck();
+    if (this.showcontent) {
+      this.showcontent = false;
+      this.showcompile = true;
+      if (this.transformm) {
+        let close = { spliceCrow: { gant: this.gant, door: true } };
+        this.$emit("spliceMsgg", close);
+      } else {
+        let close = { spliceCrow: { gant: this.gant, door: false } };
+        this.$emit("spliceMsgg", close);
+      }
+    }
   }
 };
 </script>
@@ -159,6 +174,10 @@ export default {
   height: 35px;
   background: white;
   position: relative;
+}
+.flesh {
+  height: 475px;
+  overflow: scroll;
 }
 .compile-box {
   width: 35px;
@@ -209,7 +228,7 @@ export default {
   bottom: 0;
   left: 0;
   text-align: center;
-  background-color: #F4B116;
+  background-color: #f4b116;
   color: #ffffff;
   height: 100px;
   line-height: 50px;
@@ -231,7 +250,7 @@ export default {
   bottom: 0;
   left: 0;
   text-align: center;
-  background-color: #F4B116;
+  background-color: #f4b116;
   color: #ffffff;
   line-height: 50px;
   width: 100%;
