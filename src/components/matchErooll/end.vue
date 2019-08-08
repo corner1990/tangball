@@ -15,6 +15,7 @@ export default {
   computed: {
     iconShow () {
       let { errMsg } = this.info
+      console.log('this.inf', this.info)
       let reg = /fail/g
       return reg.test(errMsg)
     }

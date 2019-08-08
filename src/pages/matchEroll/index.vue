@@ -51,16 +51,16 @@ export default {
       btnText: "下一步",
       steps: [
         {
-          text: "确认报名资料"
+          text: '确认报名资料'
         },
         {
-          text: "支付报名费"
+          text: '支付报名费'
         },
         {
-          text: "完成缴费"
+          text: '完成缴费'
         }
       ],
-      active: 0,
+      active: 2,
       info: {},
       state: {
         errMsg: ""
@@ -78,7 +78,7 @@ export default {
     // });
     // console.log('this', this)
     // 页面加载请求会员数据
-    this.initInfo();
+    this.getMember()
   },
   methods: {
     nextStep() {
@@ -187,10 +187,10 @@ export default {
       let matchInfo = wx.getStorageSync("matchInfo");
       this.matchInfo = JSON.parse(matchInfo);
       let { tangballUserInfo } = this.$store.state;
-      console.log("tangballUserInfo", tangballUserInfo);
       wx.self = this;
+      let { matchId, venueId } = this.matchInfo;
       let {
-        P1,
+        P1: memberId,
         name,
         sex = -1,
         openid: openId,
@@ -201,34 +201,62 @@ export default {
         ...this.info,
         name,
         sex: `${sex}`,
-        memberId: P1,
+        memberId,
         openId,
         phone,
         career,
-        matchId: this.matchInfo.matchId
+        matchId,
+        venueId
       };
     },
-    askAndGoBack() {},
-    // 请求修改接口,修改成功跳转到首页
-    async modifyMember() {
+    // 请求会员接口
+    async getMember () {
+      let { tangballUserInfo } = this.$store.state;
       let { data } = await util.post({
-        url: global.PUB.domain + "/crossModify?page=tangball_member",
+        url: global.PUB.domain + '/crossDetail?page=tangball_member',
+        param: {
+          findJson: {
+            openid: tangballUserInfo.openid
+          }
+        }
+      })
+      this.initInfo(data.Doc)
+    },
+    askAndGoBack () {},
+    // 请求修改接口,修改成功跳转到首页
+    async modifyMember () {
+      util.post({
+        url: global.PUB.domain + '/crossModify?page=tangball_member',
         param: {
           findJson: { openid: this.tangballUserInfo.openid },
           modifyJson: this.memberMessage
         }
-      });
+      })
     },
     /**
      * @desc 修改信息
      */
     changeInfo(info) {
-      this.info = { ...this.info, ...info };
+      this.info = { ...this.info, ...info }
     },
-    getVenue() {},
-    getEvent() {}
-  }
-};
+    /**
+     * @desc 还原默认状态
+     */
+    changeState() {
+      this.btnText =  '下一步'
+      this.info = {}
+      this.active = 0
+      this.state = {
+        errMsg: ''
+      }
+    }
+  },
+
+  onUnload: function() {
+    // 页面销毁时执行
+    this.changeState()
+  },
+}
 </script>
 <style scoped>
 .main-wrap {
