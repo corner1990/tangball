@@ -176,7 +176,7 @@ export default {
   position: relative;
 }
 .flesh {
-  height: 475px;
+  height: 100%;
   overflow: scroll;
 }
 .compile-box {
