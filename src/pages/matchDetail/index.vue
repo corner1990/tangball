@@ -2,35 +2,8 @@
   <div class="main-wrap">
     <!-- 赛事照片 -->
     <div class>
-      <swiper
-        style="height:250px"
-        :indicator-dots="indicatorDots"
-        :autoplay="autoplay"
-        :interval="interval"
-        :duration="duration"
-      >
-        <block v-for="item in matchlistDoc.album" :key="item">
-          <swiper-item>
-            <image
-              @click="showImg(item.url)"
-              :src="item.url"
-              class="slide-image"
-              v-if="matchlistDoc.album"
-              style="width:100%"
-              height="250"
-            />
-          </swiper-item>
-        </block>
-      </swiper>
-      <!--显示图片弹窗-->
-      <van-popup
-        customStyle="height:250px"
-        v-if="showBigImg"
-        :show="showBigImg"
-        @close="ClosePhoto"
-      >
-        <img style="height:250px" alt :src="bigImg" />
-      </van-popup>
+      <!--赛事图片-->
+      <openImg v-model="matchlistDoc.album"></openImg>
     </div>
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
@@ -79,11 +52,13 @@
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
+import OpenImg from "@/components/openImg/openImg";
 export default {
   components: {
     mytabbar,
     debug_item,
-    util
+    util,
+    OpenImg
   },
   data() {
     return {
