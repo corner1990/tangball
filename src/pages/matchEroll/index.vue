@@ -118,6 +118,7 @@ export default {
     },
     prevStep() {
       if (this.active <= 0) {
+        wx.navigateBack()
         return false;
       }
       this.btnText = "下一步";

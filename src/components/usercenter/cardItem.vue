@@ -20,7 +20,7 @@ export default {
 </script>
 <style>
 .card {
-  width: 70px;
+  width: 20%;
   height: 70px;
   margin: 0 12px 20px;
   text-align: center;
