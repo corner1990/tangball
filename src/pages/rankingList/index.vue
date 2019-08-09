@@ -34,7 +34,7 @@
       </van-tab>
     </van-tabs>
     <div class="bottom-space"></div>
-    <mytabbar  :active="2"></mytabbar>
+    <mytabbar :active="2"></mytabbar>
   </div>
 </template>
 <script>
@@ -145,14 +145,17 @@ export default {
   font-size: 18px;
   height: 40px;
   line-height: 40px;
-  display: flex;
-  justify-content: space-evenly;
+  /* display: flex; */
+  /* justify-content: space-evenly; */
   color: #f4b116;
   text-align: center;
 }
 .button-box div {
-  padding: 0 5px;
+  width: 20%;
+  margin: 0 5px;
+    padding: 0 2px;
   border: 1px solid #f4b116;
+  display: inline-block;
 }
 .buttonFocus {
   background-color: #f4b116;
