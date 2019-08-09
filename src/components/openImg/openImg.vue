@@ -56,10 +56,9 @@ export default {
     }
   },
   created() {},
-  mounted() {
-  
-  },onLoad(){
-          this.show = false;
+  mounted() {},
+  onLoad() {
+    this.show = false;
   }
 };
 </script>
