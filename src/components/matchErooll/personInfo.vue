@@ -110,7 +110,7 @@ export default {
       // },
       sendText: "发送验证码",
       sendTime: 60,
-      sendStatus:false
+      sendStatus:false//用户是否已经点击发送验证码
     };
   },
   mounted() {
