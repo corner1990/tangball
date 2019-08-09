@@ -182,6 +182,7 @@ export default {
         this.waitTime();
       }, 300);
     },
+    // 根据发送状态判断是否调用倒计时方法
     startSend(){
       if (!this.sendStatus) {
         this.sendStatus = true;
