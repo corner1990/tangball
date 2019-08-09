@@ -1,7 +1,7 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息-</h3>
-    <debug_item v-model="info" text="info" />
+    <h3 class="info-title">个人信息</h3>
+    <!-- <debug_item v-model="info" text="info" /> -->
     <!-- <debug_item path="info.total_fee" v-model="info.total_fee" text="info" /> -->
     <van-cell-group>
       <div class="flex line">
@@ -25,31 +25,33 @@
         <p>{{ info.career }}</p>
       </div>
     </van-cell-group>
-    <h3 class="info-title event-info">赛事及场馆信息</h3>
-    <div class="flex line">
-      <p class="sub-title">赛事名称</p>
-      <div>{{ matchInfo.matchName }}</div>
-    </div>
-    <div class="flex line">
-      <p class="sub-title">赛事时间</p>
-      <div>{{ matchInfo.matchTime }}</div>
-    </div>
-    <div class="flex line">
-      <p class="sub-title" style="width: 90px;">赛事地点</p>
-      <div v-if="matchInfo.venue">{{ matchInfo.venue }}</div>
-      <div v-else>
-        <span>
-          {{ matchInfo.cityName }}
-          {{ matchInfo.venueName }}
-        </span>
+    <van-cell-group>
+      <h3 class="info-title event-info">赛事及场馆信息</h3>
+      <div class="flex line">
+        <p class="sub-title">赛事名称</p>
+        <div>{{ matchInfo.matchName }}</div>
       </div>
-    </div>
-    <div class="flex line">
-      <title class="sub-title">报名费</title>
-      <div>
-        <span class="price">{{ matchInfo.total_fee }} (元)</span>
+      <div class="flex line">
+        <p class="sub-title">赛事时间</p>
+        <div>{{ matchInfo.matchTime }}</div>
       </div>
-    </div>
+      <div class="flex line">
+        <p class="sub-title" style="width: 90px;">赛事地点</p>
+        <div v-if="matchInfo.venue">{{ matchInfo.venue }}</div>
+        <div v-else>
+          <span>
+            {{ matchInfo.cityName }}
+            {{ matchInfo.venueName }}
+          </span>
+        </div>
+      </div>
+      <div class="flex line">
+        <title class="sub-title">报名费</title>
+        <div>
+          <span class="price">{{ matchInfo.total_fee }} (元)</span>
+        </div>
+      </div>
+    </van-cell-group>
   </section>
 </template>
 <script>
@@ -122,5 +124,10 @@ export default {
   margin-right: 0.133rem;
   color: #f00;
   font-weight: 700;
+}
+.info-title {
+ font-weight: bold;
+ font-size: 16px;
+  padding:5px 0 ;
 }
 </style>

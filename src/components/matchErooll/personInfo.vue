@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息</h3>
+    <h2 class="info-title">个人信息</h2>
     <debug_item v-model="info" text="info" />
     <debug_item v-model="matchInfo" text="matchInfo" />
     <van-cell-group>
@@ -32,7 +32,7 @@
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
     </van-cell-group>
-    <h3 class="info-title event-info">赛事及场馆信息</h3>
+    <h2 class="info-title event-info">赛事及场馆信息</h2>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
       <div>{{ matchInfo.matchName }}</div>
@@ -110,7 +110,7 @@ export default {
       // },
       sendText: "发送验证码",
       sendTime: 60,
-      sendStatus:false//用户是否已经点击发送验证码
+      sendStatus: false //用户是否已经点击发送验证码
     };
   },
   mounted() {
@@ -183,10 +183,10 @@ export default {
       }, 300);
     },
     // 根据发送状态判断是否调用倒计时方法
-    startSend(){
+    startSend() {
       if (!this.sendStatus) {
         this.sendStatus = true;
-        this.waitTime()
+        this.waitTime();
       }
     },
     getVerfity(mobile) {
@@ -254,6 +254,7 @@ export default {
   line-height: 0.6rem;
   font-weight: 700;
   color: #333;
+  font-weight: bold;
 }
 .tangBallInput {
   font-size: 0.373rem;

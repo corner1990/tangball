@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div v-show="active < 2">
+    <div v-show="active <2">
       <debug_item v-model="info" text="info" />
       <van-steps :steps="steps" :active="active" />
     </div>
@@ -11,16 +11,18 @@
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 2">
-      <End :info="state" @changeActive="changeActive" />
+      <div v-if="payStatus==2">
+        <EventInfo :info="info" :matchInfo="objMatchInfo" />
+        <van-button size="large" type="info" plain>已支付</van-button>
+      </div>
+      <End :info="state" @changeActive="changeActive" v-else />
     </div>
     <div class="btn-wrap" v-show="active < 2">
-      <van-row v-if="payStatus==2">
-        <van-button size="large" type="info" plain>已支付</van-button>
-      </van-row>
-      <van-row v-else-if="payStatus==1">
+      <!-- <van-row v-if="payStatus==2"></van-row> -->
+      <van-row v-if="payStatus==1">
         <van-button size="large" type="info" @click="nextStep">立即支付</van-button>
       </van-row>
-      <van-row v-else>
+      <van-row v-if="payStatus==0">
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
         </van-col>
@@ -87,11 +89,12 @@ export default {
     if (options.id == 2) {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
-        let { active, info, matchInfo, P1 } = data;
-        this.active = active;
+        let { info, matchInfo, P1 } = data;
+       
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
+         this.active = this.info.payStatus;
       }
     } else {
       //  如果是从赛事详情进入
@@ -202,7 +205,7 @@ export default {
       if (!this.iconShow) {
         // 如果支付成，是显示为已支付
         this.payStatus = 2;
-        this.active = 1;
+        this.active = 2;
       }
     },
     funlyPay(data) {
