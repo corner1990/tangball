@@ -9,7 +9,7 @@
         :duration="duration"
         indicator-active-color="white"
       >
-        <block v-for="item in album" :key="item.url">
+        <block v-for="item in value" :key="item.url[0]">
           <swiper-item>
             <img
               style="width:100%"
@@ -40,7 +40,6 @@ export default {
       //   注册图片
       bigImg: "",
       show: false,
-      album: null,
       indicatorDots: true,
       autoplay: true,
       interval: 4000,
@@ -57,8 +56,9 @@ export default {
     }
   },
   created() {},
-  mounted() {
-    this.album = this.value;
+  mounted() {},
+  onLoad() {
+    this.show = false;
   }
 };
 </script>
