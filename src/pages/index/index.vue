@@ -1,9 +1,9 @@
 <template>
   <div class="main-wrap">
-    
     <van-search 
      placeholder="请输入搜索关键词" 
      @search="searchList"/>
+     <!-- <openImg v-model="venueDoc.album" ></openImg> -->
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"

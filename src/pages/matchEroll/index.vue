@@ -14,7 +14,7 @@
       <End :info="state" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
-      <van-row  v-if="payStatus==2">
+      <van-row v-if="payStatus==2">
         <van-button size="large" type="info" plain>已支付</van-button>
       </van-row>
       <van-row v-else>
@@ -25,7 +25,6 @@
           <van-button type="info" block @click="nextStep">{{btnText}}</van-button>
         </van-col>
       </van-row>
-      
     </div>
     <van-dialog id="van-dialog" />
     <mytabbar></mytabbar>
@@ -50,7 +49,7 @@ export default {
   },
   data() {
     return {
-      payStatus: 1,//是否为已支付状态
+      payStatus: 1, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
@@ -118,6 +117,7 @@ export default {
     },
     prevStep() {
       if (this.active <= 0) {
+        wx.navigateBack();
         return false;
       }
       this.btnText = "下一步";
@@ -189,6 +189,14 @@ export default {
     endStep(state) {
       this.state = state;
       this.active = this.active + 1;
+      let { errMsg } = this.state;
+      let reg = /fail/g;
+      this.iconShow = reg.test(errMsg);
+      if (!this.iconShow) {
+        // 如果支付成，是显示为已支付
+        this.payStatus = 2;
+        this.active = 1;
+      }
     },
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
@@ -272,6 +280,7 @@ export default {
       this.btnText = "下一步";
       this.info = {};
       this.active = 0;
+      this.payStatus = 0;
       this.state = {
         errMsg: ""
       };
