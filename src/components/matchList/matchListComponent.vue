@@ -12,7 +12,7 @@
       </div>
       <div  class="rpg11">
            <div class="arrow">
-          <van-icon name="arrow" size="20px" />
+          <!-- <van-icon name="arrow" size="20px" /> -->
         </div>
       </div>
     </div>
