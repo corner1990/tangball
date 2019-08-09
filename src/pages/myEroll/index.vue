@@ -16,12 +16,7 @@
         </div>
         <div class v-if="item.venueDoc">所选场馆：{{item.venueDoc.name}}</div>
         <div class="TAR">
-          <van-button
-            plain
-            size="small"
-            type="danger"
-            @click="gotoPage(item.P1)"
-          >查看详情</van-button>
+          <van-button plain size="small" type="danger" @click="gotoPage(item.P1,i)">查看详情</van-button>
         </div>
       </div>
     </div>
@@ -40,24 +35,50 @@ export default {
   },
   data() {
     return {
-      myErollList: null,
+      myErollList: null
     };
   },
-computed: {
-  //唐球会员信息-在vuex中获取
+  computed: {
+    //唐球会员信息-在vuex中获取
     tangballUserInfo: function() {
-      return this.$store.state.tangballUserInfo 
+      return this.$store.state.tangballUserInfo;
     }
   },
   methods: {
     /**
      * @name 查看详情按钮跳转
-     * @desc 向报名详情传id
+     * @desc 向报名详情传id，
      * @param 使用模板字符串拼接P1传参
      */
-    gotoPage(P1) {
-      let url=`/pages/myErollDetail/main?P1=${P1}`
-      wx.navigateTo({ url });
+    gotoPage(P1, index) {
+      // 拼接详情需要的数据
+      let info = this.myErollList[index];
+      let url = `/pages/matchEroll/main?id=2`;
+      let { sex, orderMoney } = info;
+      let active = 1;
+      info = { ...info, total_fee: orderMoney };
+      let matchInfo = {
+        ...info.matchDoc,
+        total_fee: orderMoney,
+        sex
+      };
+      wx.setStorage({
+        key: "myErollDetail",
+        data: JSON.stringify({ active, info, matchInfo, P1 }),
+        success() {
+          wx.navigateTo({ url });
+        }
+      });
+      // let url = `/pages/myErollDetail/main?P1=${P1}`;
+      // wx.setStorage({
+      //   key: "myErollList",
+      //   data: JSON.stringify({ myErollList }),
+      //   success() {
+      //     wx.navigateTo({ url });
+      //   }
+      // });
+
+      // wx.navigateTo({ url });
     },
     /**
      * @name ajax获取报名列表函数

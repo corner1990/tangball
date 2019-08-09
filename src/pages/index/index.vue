@@ -1,28 +1,6 @@
 <template>
   <div class="main-wrap">
-    <van-cell
-      is-link
-      :title="item.title"
-      link-type="navigateTo"
-      :url="item.url"
-      v-for="(item,i) in arrLink"
-      :key="i"
-    />
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
-    <view class="btn-area">
-      <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
-      <navigator
-        url="/pages/myErollDetail/main?dataId=3"
-        open-type="redirect"
-        hover-class="other-navigator-hover"
-      >在当前页打开</navigator>
-      <navigator
-        url="/pages/tanghome/main"
-        open-type="switchTab"
-        hover-class="other-navigator-hover"
-      >切换 Tab-针对tabar中的页面--</navigator>
-    </view>
+    
     <van-search 
      placeholder="请输入搜索关键词" 
      @search="searchList"/>
@@ -75,6 +53,29 @@
       <div class="left"></div>
       <div class="right"></div>
     </div>
+    <van-cell
+      is-link
+      :title="item.title"
+      link-type="navigateTo"
+      :url="item.url"
+      v-for="(item,i) in arrLink"
+      :key="i"
+    />
+    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
+    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
+    <view class="btn-area">
+      <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
+      <navigator
+        url="/pages/myErollDetail/main?dataId=3"
+        open-type="redirect"
+        hover-class="other-navigator-hover"
+      >在当前页打开</navigator>
+      <navigator
+        url="/pages/tanghome/main"
+        open-type="switchTab"
+        hover-class="other-navigator-hover"
+      >切换 Tab-针对tabar中的页面--</navigator>
+    </view>
     <mytabbar :active="0"></mytabbar>
   </div>
 </template>

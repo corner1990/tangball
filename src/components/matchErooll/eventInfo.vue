@@ -2,6 +2,7 @@
   <section>
     <h3 class="info-title">个人信息-</h3>
     <debug_item v-model="info" text="info" />
+    <!-- <debug_item path="info.total_fee" v-model="info.total_fee" text="info" /> -->
     <van-cell-group>
       <div class="flex line">
         <title class="sub-title">姓名</title>
@@ -83,16 +84,16 @@ export default {
     initSex(val) {
       console.log("initsex", val);
       if ([undefined, "", -1].includes(val)) return "";
-      if (val === "1") return "男";
-      if (val === "0") return "女";
+      if (val == "1") return "男";
+      if (val == "2") return "女";
     }
   },
   computed: {
     sexStr() {
       let { sex } = this.info;
       if ([undefined, "", -1].includes(sex)) return "";
-      if (sex === "1") return "男";
-      if (sex === "0") return "女";
+      if (sex == "1") return "男";
+      if (sex == "2") return "女";
     }
   }
 };
