@@ -68,7 +68,7 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="waitTime">{{sendText}}</van-button>
+        <van-button slot="button" size="small" type="info" @click="startSend">{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -109,7 +109,8 @@ export default {
       //   total_fee: "xxx"
       // },
       sendText: "发送验证码",
-      sendTime: 60
+      sendTime: 60,
+      sendStatus:false
     };
   },
   mounted() {
@@ -169,6 +170,7 @@ export default {
         this.getVerfity(mobile);
       }
       if (this.sendTime <= 1) {
+        this.sendStatus = false;
         this.sendTime = 60;
         this.sendText = "发送验证码";
         return false;
@@ -179,6 +181,12 @@ export default {
       setTimeout(() => {
         this.waitTime();
       }, 300);
+    },
+    startSend(){
+      if (!this.sendStatus) {
+        this.sendStatus = true;
+        this.waitTime()
+      }
     },
     getVerfity(mobile) {
       // 请求赛事列表接口函数
