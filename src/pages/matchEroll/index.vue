@@ -17,6 +17,9 @@
       <van-row v-if="payStatus==2">
         <van-button size="large" type="info" plain>已支付</van-button>
       </van-row>
+      <van-row v-else-if="payStatus==1">
+        <van-button size="large" type="info"  @click="nextStep">立即支付</van-button>
+      </van-row>
       <van-row v-else>
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
@@ -49,7 +52,7 @@ export default {
   },
   data() {
     return {
-      payStatus: 1, //是否为已支付状态
+      payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
