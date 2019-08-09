@@ -11,7 +11,7 @@
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 2">
-      <End :info="state" />
+      <End :info="state" @changeActive="changeActive" />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <van-row v-if="payStatus==2">
@@ -103,6 +103,9 @@ export default {
     // console.log('this', this)
   },
   methods: {
+    changeActive(index) {
+      this.active = index;
+    },
     nextStep() {
       if (this.active >= 1) {
         return this.showTip();
