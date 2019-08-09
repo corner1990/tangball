@@ -202,7 +202,7 @@ export default {
       });
     },
     nameChange(e) {
-      let name = e.mp.detail.value;
+      let name = e.mp.detail;
       this.$emit("changeInfo", {
         name
       });
