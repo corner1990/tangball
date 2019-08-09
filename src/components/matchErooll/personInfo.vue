@@ -203,8 +203,6 @@ export default {
     },
     nameChange(e) {
       let name = e.mp.detail;
-      console.log(e);
-      
       this.$emit("changeInfo", {
         name
       });
