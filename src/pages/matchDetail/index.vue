@@ -272,6 +272,8 @@ export default {
   created() {},
   async mounted() {
     this.showdDialog = false;
+    this.showBigImg = false;
+
     /**
      * @desc 请求赛事详情接口函数
      */
