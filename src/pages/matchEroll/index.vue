@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div v-show="active <2">
+    <div v-show="active <2||payStatus==2">
       <debug_item v-model="info" text="info" />
       <van-steps :steps="steps" :active="active" />
     </div>
