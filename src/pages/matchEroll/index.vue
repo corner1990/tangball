@@ -18,7 +18,7 @@
         <van-button size="large" type="info" plain>已支付</van-button>
       </van-row>
       <van-row v-else-if="payStatus==1">
-        <van-button size="large" type="info"  @click="nextStep">立即支付</van-button>
+        <van-button size="large" type="info" @click="nextStep">立即支付</van-button>
       </van-row>
       <van-row v-else>
         <van-col span="11">
@@ -198,6 +198,7 @@ export default {
       let { errMsg } = this.state;
       let reg = /fail/g;
       this.iconShow = reg.test(errMsg);
+      this.payStatus = 1;
       if (!this.iconShow) {
         // 如果支付成，是显示为已支付
         this.payStatus = 2;
