@@ -20,7 +20,7 @@
           <div class="__span">已支付</div>
         </div>
       </div>
-      <End :info="state" @changeActive="changeActive" v-else />
+      <End :info="state"  v-else />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <!-- <van-row v-if="payStatus==2"></van-row> -->
@@ -114,9 +114,6 @@ export default {
     // console.log('this', this)
   },
   methods: {
-    changeActive(index) {
-      this.active = index;
-    },
     nextStep() {
       if (this.active >= 1) {
         return this.showTip();
