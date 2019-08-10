@@ -255,6 +255,27 @@ export default {
         venueId,
         ballAge
       };
+      switch (this.info.ballAge) {
+        case 1:
+          this.info.ballAgeText = "一年以下"
+          break;
+        case 2:
+          this.info.ballAgeText = "一到三年"
+          break;
+        case 3:
+          this.info.ballAgeText = "三到五年"
+          break;
+        case 4:
+          this.info.ballAgeText = "五到十年"
+          break;
+        case 5:
+          this.info.ballAgeText = "十年以上"
+          break;
+      
+        default:
+          this.info.ballAgeText = "请选择"
+          break;
+      }
     },
     // 请求会员接口
     async getMember() {

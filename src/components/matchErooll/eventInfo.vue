@@ -18,7 +18,7 @@
       </div>
       <div class="flex line">
         <title class="sub-title">球龄</title>
-        <p>{{ info.ballAge }}</p>
+        <p>{{ info.ballAgeText }}</p>
       </div>
       <div class="flex line">
         <title class="sub-title">职业</title>
