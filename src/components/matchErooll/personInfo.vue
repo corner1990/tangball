@@ -27,7 +27,7 @@
       <div class="flex line">
         <p class="sub-title">球龄</p>
         <div @click="selectAge">
-          <input type="text" class="tangBallInput" v-model="selfInfo.ballAge" placeholder="请输入球龄" />
+          <input type="text" class="tangBallInput" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly />
         </div>
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
@@ -79,6 +79,7 @@
         show-toolbar
         title="选择球龄"
         :columns="columns"
+        value-key="label"
         @cancel="hideSelectBallAge"
         @confirm="onSelectChange"
       />
@@ -101,7 +102,28 @@ export default {
       radio: "1",
       showSelectBallAge: false,
       selectVal: "",
-      columns: ["1-3年", "3-5年", "5年以上"],
+      columns: [
+            {
+                "label": "一年以下",
+                "value": 1
+            },
+            {
+                "label": "一到三年",
+                "value": 2
+            },
+            {
+                "label": "三到五年",
+                "value": 3
+            },
+            {
+                "label": "五到十年",
+                "value": 4
+            },
+            {
+                "label": "十年以上",
+                "value": 5
+            }
+        ],
       sexList: [{ name: "男", value: "1" }, { name: "女", value: "2" }],
       timer: 0,
       num: 0,
@@ -156,10 +178,12 @@ export default {
     },
     onSelectChange(e) {
       let { value, index } = e.target;
+      console.log("value", value);
       this.selectIndex = index;
       this.info.ballAge = value;
+      this.info.ballAgeText = value.label;
       this.$emit("changeInfo", {
-        ballAge: value
+        ballAge: value.value
       });
       this.hideSelectBallAge();
     },
