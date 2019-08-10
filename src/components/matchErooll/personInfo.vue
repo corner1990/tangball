@@ -68,7 +68,9 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="startSend">{{sendText}}</van-button>
+        <span v-if="sendStatus" slot="button" class="sendText">{{sendText}}</span>
+        <!-- <van-button disabled type="info"  slot="button" size="small">{{sendText}}</van-button> -->
+        <van-button slot="button" size="small" type="info" @click="startSend" v-else>{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -180,7 +182,7 @@ export default {
       this.sendText = `${this.sendTime}秒后重新获取`;
       setTimeout(() => {
         this.waitTime();
-      }, 300);
+      }, 1000);
     },
     // 根据发送状态判断是否调用倒计时方法
     startSend() {
@@ -261,5 +263,29 @@ export default {
 }
 .event-info {
   margin-top: 0.8rem;
+}
+.sendText {
+  /* color: #909399;
+  background: #f4f4f5;
+  padding: 12px 20px;
+  font-size: 14px;
+  border: 1px solid #d3d4d6;
+  border-radius: 4px;
+  height: 50px;
+  width: 100px; */
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  background: #f4f4f5;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  font-weight: 500;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 4px;
 }
 </style>
