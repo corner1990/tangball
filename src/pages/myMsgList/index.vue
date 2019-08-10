@@ -146,6 +146,7 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
+      console.log("msgg",this.msgg)
     },
     /**
      * 函数：{设置消息已读状态的函数}

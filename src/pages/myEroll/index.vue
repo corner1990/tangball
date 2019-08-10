@@ -55,7 +55,7 @@ export default {
       let info = this.myErollList[index];
       let url = `/pages/matchEroll/main?id=2`;
       let { sex, orderMoney } = info;
-      let active = 1;
+      // let active = 2;
       info = { ...info, total_fee: orderMoney };
       let matchInfo = {
         ...info.matchDoc,
@@ -64,7 +64,7 @@ export default {
       };
       wx.setStorage({
         key: "myErollDetail",
-        data: JSON.stringify({ active, info, matchInfo, P1 }),
+        data: JSON.stringify({  info, matchInfo, P1 }),
         success() {
           wx.navigateTo({ url });
         }
