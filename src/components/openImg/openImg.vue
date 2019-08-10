@@ -2,13 +2,12 @@
   <div>
     <div>
       <swiper
-        style="height:250px"
+        style="height:200px"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
         :duration="duration"
         indicator-active-color="white"
-     
       >
         <block v-for="item in value" :key="item.url[0]">
           <swiper-item>
