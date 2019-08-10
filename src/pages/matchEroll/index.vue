@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div v-show="active < 2">
+    <div v-show="active <2||payStatus==2">
       <debug_item v-model="info" text="info" />
       <van-steps :steps="steps" :active="active" />
     </div>
@@ -11,16 +11,23 @@
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
     </div>
     <div v-show="active === 2">
-      <End :info="state" @changeActive="changeActive" />
+      <div v-if="payStatus==2">
+        <EventInfo :info="info" :matchInfo="objMatchInfo" />
+        <div class="icon_success">
+          <div class="__success">
+            <van-icon name="success" color="#07c160" size="32px" />
+          </div>
+          <div class="__span">已支付</div>
+        </div>
+      </div>
+      <End :info="state"  v-else />
     </div>
     <div class="btn-wrap" v-show="active < 2">
-      <van-row v-if="payStatus==2">
-        <van-button size="large" type="info" plain>已支付</van-button>
-      </van-row>
-      <van-row v-else-if="payStatus==1">
+      <!-- <van-row v-if="payStatus==2"></van-row> -->
+      <van-row v-if="payStatus==1">
         <van-button size="large" type="info" @click="nextStep">立即支付</van-button>
       </van-row>
-      <van-row v-else>
+      <van-row v-if="payStatus==0">
         <van-col span="11">
           <van-button type="info" plain block @click="prevStep">上一步</van-button>
         </van-col>
@@ -87,11 +94,12 @@ export default {
     if (options.id == 2) {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
-        let { active, info, matchInfo, P1 } = data;
-        this.active = active;
+        let { info, matchInfo, P1 } = data;
+
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
+        this.active = this.info.payStatus;
       }
     } else {
       //  如果是从赛事详情进入
@@ -106,9 +114,6 @@ export default {
     // console.log('this', this)
   },
   methods: {
-    changeActive(index) {
-      this.active = index;
-    },
     nextStep() {
       if (this.active >= 1) {
         return this.showTip();
@@ -202,7 +207,7 @@ export default {
       if (!this.iconShow) {
         // 如果支付成，是显示为已支付
         this.payStatus = 2;
-        this.active = 1;
+        this.active = 2;
       }
     },
     funlyPay(data) {
@@ -322,5 +327,22 @@ export default {
 }
 .btn-wrap {
   margin-top: 0.533rem;
+}
+.icon_success {
+  width: 100%;
+  border: 1px solid #009b4d;
+  color: #009b4d;
+  font-size: 18px;
+  text-align: center;
+}
+.icon_success .__success {
+  padding: 10px 2px 5px 0;
+  display: inline-block;
+}
+.icon_success .__span {
+  vertical-align: middle;
+  box-sizing: border-box;
+  margin-top: -30px;
+  display: inline-block;
 }
 </style>

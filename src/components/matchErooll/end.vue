@@ -8,7 +8,7 @@
       <van-button type="primary" round block @click="goHome">返回首页</van-button>
     </p>
     <p class="btn-detail">
-      <van-button type="warning" round block @click="changeActive" plain>查看详情</van-button>
+      <van-button type="warning" round block @click="goMyEroll" plain>查看详情</van-button>
     </p>
   </section>
 </template>
@@ -29,8 +29,9 @@ export default {
       let url = "/pages/index/main";
       wx.switchTab({ url });
     },
-    changeActive(){
-        this.$emit("changeActive", 1);
+    goMyEroll() {
+      let url = "/pages/myEroll/main";
+      wx.navigateTo({ url });
     }
   }
 };

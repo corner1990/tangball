@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息</h3>
+    <h2 class="info-title">个人信息</h2>
     <debug_item v-model="info" text="info" />
     <debug_item v-model="matchInfo" text="matchInfo" />
     <van-cell-group>
@@ -32,7 +32,7 @@
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
     </van-cell-group>
-    <h3 class="info-title event-info">赛事及场馆信息</h3>
+    <h2 class="info-title event-info">赛事及场馆信息</h2>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
       <div>{{ matchInfo.matchName }}</div>
@@ -68,7 +68,9 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="startSend">{{sendText}}</van-button>
+        <span v-if="sendStatus" slot="button" class="sendText">{{sendText}}</span>
+        <!-- <van-button disabled type="info"  slot="button" size="small">{{sendText}}</van-button> -->
+        <van-button slot="button" size="small" type="info" @click="startSend" v-else>{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -110,7 +112,7 @@ export default {
       // },
       sendText: "发送验证码",
       sendTime: 60,
-      sendStatus:false//用户是否已经点击发送验证码
+      sendStatus: false //用户是否已经点击发送验证码
     };
   },
   mounted() {
@@ -180,13 +182,13 @@ export default {
       this.sendText = `${this.sendTime}秒后重新获取`;
       setTimeout(() => {
         this.waitTime();
-      }, 300);
+      }, 1000);
     },
     // 根据发送状态判断是否调用倒计时方法
-    startSend(){
+    startSend() {
       if (!this.sendStatus) {
         this.sendStatus = true;
-        this.waitTime()
+        this.waitTime();
       }
     },
     getVerfity(mobile) {
@@ -254,11 +256,28 @@ export default {
   line-height: 0.6rem;
   font-weight: 700;
   color: #333;
+  font-weight: bold;
 }
 .tangBallInput {
   font-size: 0.373rem;
 }
 .event-info {
   margin-top: 0.8rem;
+}
+.sendText {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  background: #f4f4f5;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  font-weight: 500;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 4px;
 }
 </style>
