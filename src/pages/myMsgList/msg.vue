@@ -6,9 +6,10 @@
     </div>
     <div class="flesh">
       <div class="content-box" v-if="showcontent">
-        发信人：{{crowArr[gant].CreateUser}}
+        标题：
         <br />
-        标题：{{crowArr[gant].name}}
+        {{crowArr[gant].name}}
+        <br />内容：
         <br />
         {{crowArr[gant].detail}}
         <div class="close-box" @click="shut(gant,msgId)">关 闭</div>
@@ -16,9 +17,8 @@
       <div v-show="!showcontent">
         <div class="mas-box" v-for="(mass,index) in crowArr" :key="index">
           <div class="news" @click="content(index,mass.P1 )">
-            发信人：{{mass.CreateUser}}
-            <br />
-            标题：{{mass.name}}
+            <div class="news-title">标题：{{mass.name}}</div>
+            <div class="news-detail">{{mass.detail}}</div>
             <input
               type="checkbox"
               class="delete-box"
@@ -153,7 +153,7 @@ export default {
     }
   },
   onUnload() {
-    this.crowArr=[]
+    this.crowArr = [];
     this.allCheck();
     if (this.showcontent) {
       this.showcontent = false;
@@ -210,7 +210,14 @@ export default {
   height: 50px;
   text-align: left;
   line-height: 25px;
-  overflow: auto;
+  overflow: hidden;
+}
+.news-title,
+.news-detail {
+  height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .delete-box {
   margin: 10px;
@@ -244,6 +251,7 @@ export default {
   border-radius: 8px;
   overflow: auto;
   background-color: #f5f5f5;
+  overflow: scroll;
 }
 .close-box {
   position: absolute;
