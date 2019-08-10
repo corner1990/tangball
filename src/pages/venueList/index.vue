@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       // 地区组件聚焦的index
-      selectIndex: -1,
+      selectIndex: 0,
       pageName: "场馆列表",
       venueList: [],
       keywords: null, //搜索关键字
@@ -90,7 +90,7 @@ export default {
         item.show = true;
       });
       this.venueList = data.list;
-      console.log("this.venueList", this.venueList);
+      
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
         listData: this.venueList,
@@ -99,7 +99,7 @@ export default {
         idKeyColumn: "P7",
         page: "dmagic_area"
       });
-      console.log("this.venueList2", this.venueList);
+      
     }
   },
   mounted() {

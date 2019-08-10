@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 class="info-title">个人信息</h3>
+    <h2 class="info-title">个人信息</h2>
     <debug_item v-model="info" text="info" />
     <debug_item v-model="matchInfo" text="matchInfo" />
     <van-cell-group>
@@ -32,7 +32,7 @@
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
     </van-cell-group>
-    <h3 class="info-title event-info">赛事及场馆信息</h3>
+    <h2 class="info-title event-info">赛事及场馆信息</h2>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
       <div>{{ matchInfo.matchName }}</div>
@@ -68,7 +68,7 @@
         @blur="verfiyChange"
         use-button-slot
       >
-        <van-button slot="button" size="small" type="info" @click="waitTime">{{sendText}}</van-button>
+        <van-button slot="button" size="small" type="info" @click="startSend">{{sendText}}</van-button>
       </van-field>
     </van-cell-group>
     <!-- 选择球龄 -->
@@ -109,7 +109,8 @@ export default {
       //   total_fee: "xxx"
       // },
       sendText: "发送验证码",
-      sendTime: 60
+      sendTime: 60,
+      sendStatus: false //用户是否已经点击发送验证码
     };
   },
   mounted() {
@@ -169,6 +170,7 @@ export default {
         this.getVerfity(mobile);
       }
       if (this.sendTime <= 1) {
+        this.sendStatus = false;
         this.sendTime = 60;
         this.sendText = "发送验证码";
         return false;
@@ -179,6 +181,13 @@ export default {
       setTimeout(() => {
         this.waitTime();
       }, 300);
+    },
+    // 根据发送状态判断是否调用倒计时方法
+    startSend() {
+      if (!this.sendStatus) {
+        this.sendStatus = true;
+        this.waitTime();
+      }
     },
     getVerfity(mobile) {
       // 请求赛事列表接口函数
@@ -193,7 +202,7 @@ export default {
       });
     },
     nameChange(e) {
-      let name = e.mp.detail.value;
+      let name = e.mp.detail;
       this.$emit("changeInfo", {
         name
       });
@@ -245,6 +254,7 @@ export default {
   line-height: 0.6rem;
   font-weight: 700;
   color: #333;
+  font-weight: bold;
 }
 .tangBallInput {
   font-size: 0.373rem;
