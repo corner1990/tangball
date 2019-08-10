@@ -124,6 +124,7 @@ export default {
           message: "请先获取并且输入验证码"
         });
       }
+      this.modifyMember();
       this.checkVerfiy();
     },
     prevStep() {
@@ -270,15 +271,18 @@ export default {
     },
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
-    async modifyMember() {
-      util.post({
+    async modifyMember(){
+      console.log(this.info);
+      let { tangballUserInfo } = this.$store.state;
+      let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: { openid: this.tangballUserInfo.openid },
-          modifyJson: this.memberMessage
+          findJson: {openid: tangballUserInfo.openid},
+          modifyJson:this.info
         }
       });
-    },
+      this.$store.commit('setTangballUserInfo',this.info)
+      },
     /**
      * @desc 修改信息
      */
