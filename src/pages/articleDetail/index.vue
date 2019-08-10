@@ -1,7 +1,8 @@
 <template>
-  <div class="main-wrap">
-      <web-view :src="wxArticleUrl" v-if="wxArticleUrl"></web-view>
-      <div class="" v-else> 找不到公众号文章url</div>
+  <div class="main-wrap PL15 PR15">
+    <!-- <debug_item v-model="docArticle" text="文章数据" /> -->
+      <div class="FS20 LH50 TA2 FWB">{{docArticle.articleTitle}}</div>
+      <rich-text :nodes="docArticle.articleContent" class="FS16 LH24"></rich-text>
   </div>
 </template>
 <script>
@@ -13,43 +14,30 @@ export default {
   components: {
     mytabbar,
     debug_item,
-    util,
+    util
   },
   data() {
     return {
       wxArticleUrl: null,
+      docArticle: {}
     };
   },
-  methods: {
-  },
+  methods: {},
   created() {},
   async mounted() {
-    let param=util.getQuery();//获取页面参数
-   console.log("param", param);
-   this.dataId=param.dataId;
-    this.wxArticleUrl=param.wxArticleUrl;
+    let param = util.getQuery(); //获取页面参数
+    console.log("param", param);
+    this.dataId = param.dataId;
+    
+      //ajax获取单篇文章数据
+      this.docArticle = await util.ajaxGetDoc({
+        page: "tangball_article",
+        id: this.dataId
+      });
+      
   }
 };
 </script>
 <style scoped>
-.data-group {
-  padding: 5px 10px;
-  border-bottom: 1px #ddd solid;
-  font-size: 16px;
-  display: flex;
-}
-.data-group-left {
-  flex: 1;
-}
-.data-group-right {
-  text-align: right;
-  width: 60px;
-}
-.n-input {
-  display: inline-block;
-  border: 1px #ddd solid;
-  height: 28px;
-  line-height: 28px;
-  border-radius: 5px;
-}
+
 </style>

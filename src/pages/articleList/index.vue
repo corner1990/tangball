@@ -1,11 +1,11 @@
 <template>
   <div class="main-wrap">
-    <div class="H100">
+    <div class="">
       <div
         class="data-group"
         v-for="(item,i) in articleList"
         :key="i"
-        @click="gotoPage(`/pages/articleDetail/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
+        @click="gotoPage(`/pages/articleDetailWX/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
       >
         <div class="data-group-left">
           <span class="title_text">{{item.articleTitle}}</span>
@@ -50,9 +50,11 @@ export default {
         page: "tangball_article",
         pageSize: 15,
         findJson: {
-          articleCategory: null
+          articleCategory: 3//锁定公众号文章分类
         }
       });
+
+      
       this.Categorylist = await util.ajaxGetList({
         page: "tangball_article_category",
         pageSize: 15,
