@@ -117,7 +117,7 @@ export default {
   width: 23%;
   margin-right: 2%;
   height: 35px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .active {
   background-color: #F4B116;

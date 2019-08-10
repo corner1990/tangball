@@ -1,10 +1,14 @@
 <template>
   <div>
       <div class="article-box">
-         <div class="article-title"><span>文章标题:</span>&nbsp;&nbsp;
+         <div class="article-title">
          {{article.articleTitle}}</div>
-         <div class="article-title" 
-          @click="gotoPage(`/pages/articleDetail/main?dataId=${article.P1}&wxArticleUrl=${$lodash.get(article, 'extend.wxArticleUrl','')}`)">
+         <div class="article-title" v-if="article.articleCategory==3" 
+          @click="gotoPage(`/pages/articleDetailWX/main?dataId=${article.P1}&wxArticleUrl=${$lodash.get(article, 'extend.wxArticleUrl','')}`)">
+             文章详情>>
+           </div>
+           <div class="article-title" v-else 
+          @click="gotoPage(`/pages/articleDetail/main?dataId=${article.P1}`)">
              文章详情>>
            </div>
       </div>
@@ -23,7 +27,7 @@ export default {
   methods: {
     gotoPage(url){
       wx.navigateTo({ url });
-    }
+    },
   },
 }
 </script>

@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="TAC LH30 CLB " style="color:#999" >
+    <div class="TAC LH30 CLB MB20" style="color:#999" >
        <navigator url="/pages/articleDetail/main?dataId=8"  hover-class="other-navigator-hover">商务合作</navigator>
       
       </div>

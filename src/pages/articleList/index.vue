@@ -11,11 +11,11 @@
           <span class="title_text">{{item.articleTitle}}</span>
           <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
         </div>
-        <div class="data-group-right">
+        <!-- <div class="data-group-right">
           <img src="../image/location.png" />
-        </div>
+        </div> -->
       </div>
-      <div style="height:50px"></div>
+      <div style="height:20px"></div>
     </div>
     <mytabbar></mytabbar>
   </div>
@@ -111,8 +111,10 @@ export default {
   display: flex;
 }
 .data-group-left {
-  width: 210px;
-  position: relative;
+  width: 100%;
+position: relative;
+height: 70px;
+
 }
 .name_time_text{
   font-size: 12px;

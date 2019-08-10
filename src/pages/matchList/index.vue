@@ -37,9 +37,9 @@ export default {
       activeStep: 0,
       matchlist: [],
       tabList: [
-        { category: "近期" },
-        { category: "全国" },
-        { category: "加盟商" },
+        { category: "近期赛事" },
+        { category: "全国赛" },
+        { category: "普通赛" },
         { category: "全部" }
       ]
     };
