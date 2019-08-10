@@ -165,8 +165,13 @@ export default {
     },
     waitTime() {
       let { phone: mobile } = this.info;
-      if (!mobile) {
-        return Toast.fail("手机号不能为空！");
+      if(!mobile){
+        this.sendStatus = false
+        return Toast.fail("手机号为空,请输入手机号");
+      }
+      if (!(/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(mobile))) {
+        this.sendStatus = false
+        return Toast.fail("手机号格式错误");
       }
       if (this.sendTime === 60) {
         this.getVerfity(mobile);
