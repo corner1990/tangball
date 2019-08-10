@@ -265,14 +265,6 @@ export default {
   margin-top: 0.8rem;
 }
 .sendText {
-  /* color: #909399;
-  background: #f4f4f5;
-  padding: 12px 20px;
-  font-size: 14px;
-  border: 1px solid #d3d4d6;
-  border-radius: 4px;
-  height: 50px;
-  width: 100px; */
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
