@@ -8,15 +8,16 @@
         :interval="interval"
         :duration="duration"
         indicator-active-color="white"
+     
       >
         <block v-for="item in value" :key="item.url[0]">
           <swiper-item>
             <img
-              style="width:100%"
+               v-if="item.url"
+              style="width:100%;height:100%"
               @click="showImg(item.url)"
               :src="item.url"
               class="slide-image"
-              height="250"
             />
           </swiper-item>
         </block>
