@@ -105,26 +105,27 @@ export default {
 </script>
 <style scoped>
 .data-group {
-  padding: 5px 10px;
+  padding: 5px 0;
   border-bottom: 1px #ddd solid;
   font-size: 16px;
   display: flex;
 }
 .data-group-left {
   width: 100%;
-position: relative;
-height: 70px;
+/* position: relative; */
+/* height: 70px; */
 
 }
 .name_time_text{
+  margin:5px 0;
   font-size: 12px;
   color: #ccc;
-    position: absolute;
+    /* position: absolute;
     bottom:0px;
-    left: 0px;
+    left: 0px; */
 }
 .title_text {
-  font-size: 18px;
+  font-size: 16px;
   /* 自动换行 */
   text-overflow: ellipsis;
   overflow: hidden;

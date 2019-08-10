@@ -219,7 +219,7 @@ export default {
   font-weight: bold;
   line-height: 40px;
   /* text-align: center; */
-  padding-left: 30px;
+  padding-left: 16px;
 }
 .main-wrap {
   padding-bottom: 60px;
