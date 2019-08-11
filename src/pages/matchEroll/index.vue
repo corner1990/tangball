@@ -20,7 +20,7 @@
           <div class="__span">已支付</div>
         </div>
       </div>
-      <End :info="state"  v-else />
+      <End :info="state" v-else />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <!-- <van-row v-if="payStatus==2"></van-row> -->
@@ -233,7 +233,7 @@ export default {
       this.matchInfo = JSON.parse(matchInfo);
       let { tangballUserInfo } = this.$store.state;
       wx.self = this;
-      let { matchId, venueId } = this.matchInfo;
+      let { matchId, venueId:cityVenueId } = this.matchInfo;
       let {
         P1: memberId,
         name,
@@ -252,28 +252,28 @@ export default {
         phone,
         career,
         matchId,
-        venueId,
+        cityVenueId,
         ballAge
       };
       switch (this.info.ballAge) {
         case 1:
-          this.info.ballAgeText = "一年以下"
+          this.info.ballAgeText = "一年以下";
           break;
         case 2:
-          this.info.ballAgeText = "一到三年"
+          this.info.ballAgeText = "一到三年";
           break;
         case 3:
-          this.info.ballAgeText = "三到五年"
+          this.info.ballAgeText = "三到五年";
           break;
         case 4:
-          this.info.ballAgeText = "五到十年"
+          this.info.ballAgeText = "五到十年";
           break;
         case 5:
-          this.info.ballAgeText = "十年以上"
+          this.info.ballAgeText = "十年以上";
           break;
-      
+
         default:
-          this.info.ballAgeText = "请选择"
+          this.info.ballAgeText = "请选择";
           break;
       }
     },
@@ -292,17 +292,22 @@ export default {
     },
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
-    async modifyMember(){
-      console.log(this.info);
+    async modifyMember() {
+      console.log("this.info%", this.info);
+
+      let { tangballUserInfo } = this.$store.state;
+      console.log("tangballUserInfo%", tangballUserInfo);
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: {openid: this.info.openid},
-          modifyJson:this.info
+          findJson: { openid: tangballUserInfo.openid },
+          modifyJson: this.info
         }
       });
-      this.$store.commit('setTangballUserInfo',this.info)
-      },
+      //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
+      let tangballUserInfoNew = Object.assign(tangballUserInfo, this.info); //
+      this.$store.commit("setTangballUserInfo", tangballUserInfoNew);
+    },
     /**
      * @desc 修改信息
      */
