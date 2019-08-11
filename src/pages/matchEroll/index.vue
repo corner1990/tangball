@@ -294,11 +294,10 @@ export default {
     // 请求修改接口,修改成功跳转到首页
     async modifyMember(){
       console.log(this.info);
-      let { tangballUserInfo } = this.$store.state;
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: {openid: tangballUserInfo.openid},
+          findJson: {openid: this.info.openid},
           modifyJson:this.info
         }
       });
