@@ -27,7 +27,7 @@
       <div class="flex line">
         <p class="sub-title">球龄</p>
         <div @click="selectAge">
-          <input type="text" class="tangBallInput" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly />
+          <input type="text" class="tangBallInput FS15" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly disabled />
         </div>
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
@@ -288,7 +288,7 @@ export default {
   font-weight: bold;
 }
 .tangBallInput {
-  font-size: 0.373rem;
+  font-size: 12px;
 }
 .event-info {
   margin-top: 0.8rem;
