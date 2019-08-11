@@ -26,7 +26,7 @@
       <van-field :value="selfInfo.phone" label="联系电话" @blur="phoneChange" placeholder="请输入手机号" />
       <div class="flex line">
         <p class="sub-title">球龄</p>
-        <div @click="selectAge" style="width:100%">
+        <div @click="selectAge" >
           {{selfInfo.ballAgeText}}
           <!-- <input type="text" class="tangBallInput" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly /> -->
         </div>
@@ -43,13 +43,11 @@
       <div>{{ matchInfo.matchTime }}</div>
     </div>
     <div class="flex line">
-      <p class="sub-title" style="width: 90px;">赛事地点</p>
+      <p class="sub-title" >赛事地点</p>
       <div v-if="matchInfo.venue">{{ matchInfo.venue }}</div>
       <div v-else>
-        <span>
-          {{ matchInfo.cityName }}
-          {{ matchInfo.venueName }}
-        </span>
+        {{ matchInfo.cityName }}
+        {{ matchInfo.venueName }}
       </div>
     </div>
     <div class="flex line">
@@ -104,27 +102,27 @@ export default {
       showSelectBallAge: false,
       selectVal: "",
       columns: [
-            {
-                "label": "一年以下",
-                "value": 1
-            },
-            {
-                "label": "一到三年",
-                "value": 2
-            },
-            {
-                "label": "三到五年",
-                "value": 3
-            },
-            {
-                "label": "五到十年",
-                "value": 4
-            },
-            {
-                "label": "十年以上",
-                "value": 5
-            }
-        ],
+        {
+          label: "一年以下",
+          value: 1
+        },
+        {
+          label: "一到三年",
+          value: 2
+        },
+        {
+          label: "三到五年",
+          value: 3
+        },
+        {
+          label: "五到十年",
+          value: 4
+        },
+        {
+          label: "十年以上",
+          value: 5
+        }
+      ],
       sexList: [{ name: "男", value: "1" }, { name: "女", value: "2" }],
       timer: 0,
       num: 0,
@@ -190,12 +188,14 @@ export default {
     },
     waitTime() {
       let { phone: mobile } = this.info;
-      if(!mobile){
-        this.sendStatus = false
+      if (!mobile) {
+        this.sendStatus = false;
         return Toast.fail("手机号为空,请输入手机号");
       }
-      if (!(/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(mobile))) {
-        this.sendStatus = false
+      if (
+        !/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(mobile)
+      ) {
+        this.sendStatus = false;
         return Toast.fail("手机号格式错误");
       }
       if (this.sendTime === 60) {
