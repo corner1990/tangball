@@ -124,6 +124,7 @@ export default {
           message: "请先获取并且输入验证码"
         });
       }
+      this.modifyMember();
       this.checkVerfiy();
     },
     prevStep() {
@@ -254,6 +255,27 @@ export default {
         venueId,
         ballAge
       };
+      switch (this.info.ballAge) {
+        case 1:
+          this.info.ballAgeText = "一年以下"
+          break;
+        case 2:
+          this.info.ballAgeText = "一到三年"
+          break;
+        case 3:
+          this.info.ballAgeText = "三到五年"
+          break;
+        case 4:
+          this.info.ballAgeText = "五到十年"
+          break;
+        case 5:
+          this.info.ballAgeText = "十年以上"
+          break;
+      
+        default:
+          this.info.ballAgeText = "请选择"
+          break;
+      }
     },
     // 请求会员接口
     async getMember() {
@@ -270,15 +292,18 @@ export default {
     },
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
-    async modifyMember() {
-      util.post({
+    async modifyMember(){
+      console.log(this.info);
+      let { tangballUserInfo } = this.$store.state;
+      let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: { openid: this.tangballUserInfo.openid },
-          modifyJson: this.memberMessage
+          findJson: {openid: tangballUserInfo.openid},
+          modifyJson:this.info
         }
       });
-    },
+      this.$store.commit('setTangballUserInfo',this.info)
+      },
     /**
      * @desc 修改信息
      */
