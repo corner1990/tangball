@@ -289,7 +289,7 @@ export default {
   font-weight: bold;
 }
 .tangBallInput {
-  font-size: 0.373rem;
+  font-size: 12px;
 }
 .event-info {
   margin-top: 0.8rem;
