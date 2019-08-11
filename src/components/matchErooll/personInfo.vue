@@ -150,6 +150,11 @@ export default {
     // })
   },
   watch: {
+    skipPage: function (val, oldVal) {
+      this.sendText="发送验证码",
+      this.sendTime=60,
+      this.sendStatus=false
+    }
     // info: {
     //   handler (info, oldName) {
     //     console.log('info12212', info)
@@ -163,7 +168,7 @@ export default {
       return this.info;
     }
   },
-  props: ["info", "matchInfo"],
+  props: ["info", "matchInfo","skipPage"],
   methods: {
     onRadioChange(radio) {
       this.info.sex = radio.target.value;

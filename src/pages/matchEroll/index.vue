@@ -5,7 +5,7 @@
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" />
+      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage"/>
     </div>
     <div v-if="active === 1">
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      skipPage:0,
       payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
@@ -84,6 +85,8 @@ export default {
   },
   mounted() {
     console.log("mounted###");
+    this.skipPage=0;
+    
     // 页面加载请求会员数据
     this.getMember();
   },
@@ -129,6 +132,8 @@ export default {
     },
     prevStep() {
       if (this.active <= 0) {
+        this.skipPage = 0;
+        this.skipPage = 1
         wx.navigateBack();
         return false;
       }
@@ -330,6 +335,8 @@ export default {
 
   onUnload: function() {
     // 页面销毁时执行
+    this.skipPage = 0;
+    this.skipPage = 1;
     this.changeState();
   }
 };
