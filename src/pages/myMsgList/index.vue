@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     reader(){
-      console.log(1111);
       this.read = !this.read
     },
     //顶部聚焦按钮
@@ -63,13 +62,13 @@ export default {
       if (event.mp.detail.index == 0) {
         this.unread();
       } else {
-        this.read();
+        this.readed();
       }
     },
     // 已读按钮
     // msgg值控制子组件显示的为哪个数组
     // transform值告知子组件处于何种状态，触发监听器
-    read() {
+    readed() {
       this.msgg = this.crow2;
       this.transform = false;
     },
