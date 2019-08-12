@@ -9,13 +9,13 @@
         :interval="interval"
         :duration="duration"
       >
-        <block v-for="item in matchlistDoc.album" :key="item">
+        <block v-for="item in matchDoc.album" :key="item">
           <swiper-item>
             <image
               @click="showImg(item.url)"
               :src="item.url"
               class="slide-image"
-              v-if="matchlistDoc.album"
+              v-if="matchDoc.album"
               style="width:100%"
               height="250"
             />
@@ -33,30 +33,30 @@
       </van-popup>
     </div>
     <!-- 赛事名称 -->
-    <div class="FS24 TAC LH36">{{matchlistDoc.matchName}}</div>
+    <div class="FS24 TAC LH36">{{matchDoc.matchName}}</div>
     <!-- 赛事步骤 -->
     <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
     <van-cell-group title="赛事信息">
-      <van-cell title="赛事时间" title-width="100px" :value="matchlistDoc.matchTime" />
-      <van-cell title="距报名截止时间" :value="matchlistDoc.enrollTimeEnd" />
+      <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
+      <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
       <!-- 如果是全国赛 -->
       <van-collapse
         v-model="NationalmatchIndex"
         @change="matchTypeChange"
-        v-if="matchlistDoc.matchType==2&&matchlistDoc.matchType"
+        v-if="matchDoc.matchType==2&&matchDoc.matchType"
       >
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
             <span
-              v-for="(item,index) in matchlistDoc.cityVenueList"
+              v-for="(item,index) in matchDoc.cityVenueList"
               :key="index"
             >{{item.cityName}}--{{item.venueName}}</span>
           </div>
         </van-collapse-item>
       </van-collapse>
-      <van-cell title="决赛场馆" :value="matchlistDoc.venue" v-else />
-      <van-cell title="报名费" :value="matchlistDoc.registrationFee" />
-      <van-cell title="已报名人数" :value="matchlistDoc.registeredPersons" />
+      <van-cell title="决赛场馆" :value="matchDoc.venue" v-else />
+      <van-cell title="报名费" :value="matchDoc.registrationFee" />
+      <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
     <van-button size="large" v-if="isMatchIdStatus" plain disabled :style="style">{{enrollText}}</van-button>
@@ -108,7 +108,7 @@ export default {
         { text: "1/4决赛", desc: "", value: 22 },
         { text: "决赛", desc: "", value: 23 }
       ],
-      matchlistDoc: {}, //赛事详情列表
+      matchDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
       indicatorDots: true,
       autoplay: false,
@@ -138,11 +138,7 @@ export default {
     onCloseDialog() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let {
-        matchName,
-        matchTime,
-        registrationFee: total_fee
-      } = this.matchlistDoc;
+      let { matchName, matchTime, registrationFee: total_fee } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -170,9 +166,7 @@ export default {
     pickerChange(event) {
       // 缓存当前选中的场馆id、场馆名字、城市名字
       let { index } = event.mp.detail;
-      let { venueId, cityName, venueName } = this.matchlistDoc.cityVenueList[
-        index
-      ];
+      let { venueId, cityName, venueName } = this.matchDoc.cityVenueList[index];
       this.venueId = venueId;
       this.cityName = cityName;
       this.venueName = venueName;
@@ -183,13 +177,13 @@ export default {
      * @param url是跳转的地址
      */
     gotoPage() {
-      if (this.matchlistDoc.matchType !== 2 || !this.matchlistDoc.matchType) {
+      if (this.matchDoc.matchType !== 2 || !this.matchDoc.matchType) {
         let {
           matchName,
           matchTime,
           venue,
           registrationFee: total_fee
-        } = this.matchlistDoc;
+        } = this.matchDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main?id=1`;
         // 保存报名数据
@@ -212,16 +206,10 @@ export default {
         this.cityName = null;
         this.venueName = null;
         // 拼接场馆列表数组
-        this.cityVenueList = this.matchlistDoc.cityVenueList.map(
-          (item, index) => {
-            return item.cityName + "---" + item.venueName;
-          }
-        );
-        let {
-          venueId,
-          cityName,
-          venueName
-        } = this.matchlistDoc.cityVenueList[0];
+        this.cityVenueList = this.matchDoc.cityVenueList.map((item, index) => {
+          return item.cityName + "---" + item.venueName;
+        });
+        let { venueId, cityName, venueName } = this.matchDoc.cityVenueList[0];
         this.venueId = venueId; //默认选中第一个
         this.cityName = cityName;
         this.venueName = venueName;
@@ -278,20 +266,30 @@ export default {
      */
     //
     let { data } = await util.post({
-      url: global.PUB.domain + "/crossDetail?page=tangball_match",
+      url: global.PUB.domain + "/tangball/getMatchDetail",
       param: { id: this.matchId }
     });
-    this.matchlistDoc = data.Doc; //赛事详情列表
+    this.matchDoc = data.Doc; //赛事详情列表
     // 如果报名未截止
-    if (this.matchlistDoc.publicationStatus == 1) {
-      this.getEnrollList(); //获取报名订单列表函数
+    if (this.matchDoc.publicationStatus == 1) {
+      if (this.matchDoc.enrollStatus == "3") {
+        this.enrollText = "报名时间已结束";
+        this.isMatchIdStatus = true;
+      } else if (this.matchDoc.enrollStatus == "1") {
+        this.enrollText = "报名时间未开始";
+        this.isMatchIdStatus = true;
+      } else if (this.matchDoc.enrollStatus == "4") {
+        this.enrollText = "报名时间设置异常";
+        this.isMatchIdStatus = true;
+      } else {
+        this.getEnrollList(); //获取报名订单列表函数
+      }
     } else {
-      // 如果报名时间已经截止
-      this.enrollText = "报名已结束";
+      this.enrollText = "赛事未发布";
       this.isMatchIdStatus = true;
     }
     // 赛事步骤状态处理
-    let Progress = this.matchlistDoc.matchProgress.smallProgress; //当前赛事阶段
+    let Progress = this.matchDoc.matchProgress.smallProgress; //当前赛事阶段
     if (Progress) {
       //如果当前赛事阶段存在
       this.steps.forEach((item, index) => {

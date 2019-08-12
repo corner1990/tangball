@@ -5,7 +5,7 @@
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" />
+      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage"/>
     </div>
     <div v-if="active === 1">
       <EventInfo :info="info" :matchInfo="objMatchInfo" />
@@ -20,7 +20,7 @@
           <div class="__span">已支付</div>
         </div>
       </div>
-      <End :info="state" @changeActive="changeActive" v-else />
+      <End :info="state" v-else />
     </div>
     <div class="btn-wrap" v-show="active < 2">
       <!-- <van-row v-if="payStatus==2"></van-row> -->
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      skipPage:0,
       payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
@@ -84,6 +85,8 @@ export default {
   },
   mounted() {
     console.log("mounted###");
+    this.skipPage=0;
+    
     // 页面加载请求会员数据
     this.getMember();
   },
@@ -114,9 +117,6 @@ export default {
     // console.log('this', this)
   },
   methods: {
-    changeActive(index) {
-      this.active = index;
-    },
     nextStep() {
       if (this.active >= 1) {
         return this.showTip();
@@ -127,10 +127,13 @@ export default {
           message: "请先获取并且输入验证码"
         });
       }
+      this.modifyMember();
       this.checkVerfiy();
     },
     prevStep() {
       if (this.active <= 0) {
+        this.skipPage = 0;
+        this.skipPage = 1
         wx.navigateBack();
         return false;
       }
@@ -235,7 +238,7 @@ export default {
       this.matchInfo = JSON.parse(matchInfo);
       let { tangballUserInfo } = this.$store.state;
       wx.self = this;
-      let { matchId, venueId } = this.matchInfo;
+      let { matchId, venueId:cityVenueId } = this.matchInfo;
       let {
         P1: memberId,
         name,
@@ -254,9 +257,30 @@ export default {
         phone,
         career,
         matchId,
-        venueId,
+        cityVenueId,
         ballAge
       };
+      switch (this.info.ballAge) {
+        case 1:
+          this.info.ballAgeText = "一年以下";
+          break;
+        case 2:
+          this.info.ballAgeText = "一到三年";
+          break;
+        case 3:
+          this.info.ballAgeText = "三到五年";
+          break;
+        case 4:
+          this.info.ballAgeText = "五到十年";
+          break;
+        case 5:
+          this.info.ballAgeText = "十年以上";
+          break;
+
+        default:
+          this.info.ballAgeText = "请选择";
+          break;
+      }
     },
     // 请求会员接口
     async getMember() {
@@ -274,13 +298,20 @@ export default {
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
     async modifyMember() {
-      util.post({
+      console.log("this.info%", this.info);
+
+      let { tangballUserInfo } = this.$store.state;
+      console.log("tangballUserInfo%", tangballUserInfo);
+      let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: { openid: this.tangballUserInfo.openid },
-          modifyJson: this.memberMessage
+          findJson: { openid: tangballUserInfo.openid },
+          modifyJson: this.info
         }
       });
+      //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
+      let tangballUserInfoNew = Object.assign(tangballUserInfo, this.info); //
+      this.$store.commit("setTangballUserInfo", tangballUserInfoNew);
     },
     /**
      * @desc 修改信息
@@ -304,6 +335,8 @@ export default {
 
   onUnload: function() {
     // 页面销毁时执行
+    this.skipPage = 0;
+    this.skipPage = 1;
     this.changeState();
   }
 };

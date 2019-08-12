@@ -1,21 +1,21 @@
 <template>
   <div class="main-wrap">
-    <div class="H100">
+    <div class="">
       <div
         class="data-group"
         v-for="(item,i) in articleList"
         :key="i"
-        @click="gotoPage(`/pages/articleDetail/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
+        @click="gotoPage(`/pages/articleDetailWX/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
       >
         <div class="data-group-left">
           <span class="title_text">{{item.articleTitle}}</span>
           <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
         </div>
-        <div class="data-group-right">
+        <!-- <div class="data-group-right">
           <img src="../image/location.png" />
-        </div>
+        </div> -->
       </div>
-      <div style="height:50px"></div>
+      <div style="height:20px"></div>
     </div>
     <mytabbar></mytabbar>
   </div>
@@ -50,9 +50,11 @@ export default {
         page: "tangball_article",
         pageSize: 15,
         findJson: {
-          articleCategory: null
+          articleCategory: 3//锁定公众号文章分类
         }
       });
+
+      
       this.Categorylist = await util.ajaxGetList({
         page: "tangball_article_category",
         pageSize: 15,
@@ -103,24 +105,27 @@ export default {
 </script>
 <style scoped>
 .data-group {
-  padding: 5px 10px;
+  padding: 5px 0;
   border-bottom: 1px #ddd solid;
   font-size: 16px;
   display: flex;
 }
 .data-group-left {
-  width: 210px;
-  position: relative;
+  width: 100%;
+/* position: relative; */
+/* height: 70px; */
+
 }
 .name_time_text{
+  margin:5px 0;
   font-size: 12px;
   color: #ccc;
-    position: absolute;
+    /* position: absolute;
     bottom:0px;
-    left: 0px;
+    left: 0px; */
 }
 .title_text {
-  font-size: 18px;
+  font-size: 16px;
   /* 自动换行 */
   text-overflow: ellipsis;
   overflow: hidden;

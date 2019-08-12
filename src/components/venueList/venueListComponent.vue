@@ -53,7 +53,7 @@ export default {
   width: 345px;
   margin: 15px;
   overflow: hidden;
-  border-bottom: 1px solid #f4b116;
+  border-bottom: 1px solid #ddd;
 }
 .venue-imgBox {
   width: 85px;

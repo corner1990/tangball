@@ -18,7 +18,7 @@
       </div>
       <div class="flex line">
         <title class="sub-title">球龄</title>
-        <p>{{ info.ballAge }}</p>
+        <p>{{ info.ballAgeText }}</p>
       </div>
       <div class="flex line">
         <title class="sub-title">职业</title>
@@ -36,13 +36,11 @@
         <div>{{ matchInfo.matchTime }}</div>
       </div>
       <div class="flex line">
-        <p class="sub-title" style="width: 90px;">赛事地点</p>
+        <p class="sub-title">赛事地点</p>
         <div v-if="matchInfo.venue">{{ matchInfo.venue }}</div>
         <div v-else>
-          <span>
-            {{ matchInfo.cityName }}
-            {{ matchInfo.venueName }}
-          </span>
+          {{ matchInfo.cityName }}
+          {{ matchInfo.venueName }}
         </div>
       </div>
       <div class="flex line">
@@ -126,8 +124,8 @@ export default {
   font-weight: 700;
 }
 .info-title {
- font-weight: bold;
- font-size: 16px;
-  padding:5px 0 ;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 0;
 }
 </style>

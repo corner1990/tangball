@@ -142,7 +142,7 @@ export default {
 </script>
 <style scoped>
 .button-box {
-  font-size: 18px;
+  font-size: 14px;
   height: 40px;
   line-height: 40px;
   /* display: flex; */
