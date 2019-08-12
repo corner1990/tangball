@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-box">
+  <div class="PL20 PR20 ">
     <!-- <van-button type="primary" size="small" @click="ajaxVenueList" class="MR10">获取场馆列表</van-button> -->
     <van-button
       type="primary"

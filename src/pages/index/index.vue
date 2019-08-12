@@ -43,25 +43,30 @@
         <matchlist></matchlist>
       </div>
     </div>
-    <div>
-      <div class="index_area_title">文章列表</div>
+    <div style="">
+      <div class="index_area_title">唐球资讯</div>
       <div class="card">
         <articleList></articleList>
       </div>
     </div>
-    <div class="all">
+
+    <div class="TAC LH30 CLB MB20" style="color:#999" >
+       <navigator url="/pages/articleDetail/main?dataId=8"  hover-class="other-navigator-hover">商务合作</navigator>
+      
+      </div>
+    <!-- <div class="all">
       <div class="left"></div>
       <div class="right"></div>
-    </div>
-    <van-cell
+    </div> -->
+    <!-- <van-cell
       is-link
       :title="item.title"
       link-type="navigateTo"
       :url="item.url"
       v-for="(item,i) in arrLink"
       :key="i"
-    />
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
+    /> -->
+    <!-- <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
     <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
     <view class="btn-area">
       <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
@@ -75,7 +80,8 @@
         open-type="switchTab"
         hover-class="other-navigator-hover"
       >切换 Tab-针对tabar中的页面--</navigator>
-    </view>
+    </view> -->
+
     <mytabbar :active="0"></mytabbar>
   </div>
 </template>
@@ -213,7 +219,7 @@ export default {
   font-weight: bold;
   line-height: 40px;
   /* text-align: center; */
-  padding-left: 30px;
+  padding-left: 16px;
 }
 .main-wrap {
   padding-bottom: 60px;

@@ -65,7 +65,7 @@ export default {
         {index:"name",value:"姓名:"},
         {index:"sex",value:"性别:",type:"redio"},
         {index:"ballAge",value:"球龄:",type:"select"},
-        {index:"idCard",value:"身份证证号:"},
+        // {index:"idCard",value:"身份证证号:"},
         {index:"phone",value:"手机号码:"},
         {index:"career",value:"职业:"}
       ]
@@ -137,6 +137,7 @@ export default {
       this.memberMessage = data.Doc
       this.sexToString();
       this.ballAgeToString();
+      console.log(this.memberMessage);
   },
   // 请求修改接口,修改成功跳转到首页
   async modifyMember(){
@@ -161,6 +162,8 @@ export default {
     // 页面加载请求会员数据
     this.getMember();
     console.log(this.tangballUserInfo);
+    
+    
     
   }
 }

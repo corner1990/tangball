@@ -79,7 +79,7 @@ export default {
   margin: 5px 15px;
   /* margin-bottom: 5px; */
   /* position: relative; */
-  border-bottom: #f4b116 1px solid;
+  border-bottom: #ddd 1px solid;
   height: 97px;
   display: flex;
 }
