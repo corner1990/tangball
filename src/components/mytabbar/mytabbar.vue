@@ -86,6 +86,7 @@ export default {
         url
       });
     },
+    // 获取信息接口，得到用户有多少消息未读
     async getMyMsgList() {
       let { data } = await util.post({
         //请求接口
@@ -112,6 +113,8 @@ export default {
         });
         this.unread = data.list.length
       }
+      // 得到用户未读消息数列，如果为0 设置为undefined不显示，
+      // 将数据保存到vuex方便引用
       this.unread = data.list.length - this.unread
         let UserInfo = this.$store.state.tangballUserInfo
         if (this.unread==0) {
