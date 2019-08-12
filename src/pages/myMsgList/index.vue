@@ -1,13 +1,13 @@
 <template>
   <div class="main-wrap">
-    <mytabbar></mytabbar>
+    <mytabbar :read="read"></mytabbar>
     <div>
       <van-tabs :active="active" @change="onChange" sticky>
         <van-tab title="未读"></van-tab>
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
-    <msg :transformm="transform" :crowArr="msgg" @newMsgg="moveMsg" @spliceMsgg="closeDoor"></msg>
+    <msg :transformm="transform" :crowArr="msgg" @newMsgg="moveMsg" @spliceMsgg="closeDoor" @reader="reader"></msg>
   </div>
 </template>
 <script>
@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      read:false,
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -53,6 +54,10 @@ export default {
     this.transform = true;
   },
   methods: {
+    reader(){
+      console.log(1111);
+      this.read = !this.read
+    },
     //顶部聚焦按钮
     onChange(event) {
       if (event.mp.detail.index == 0) {

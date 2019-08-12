@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="jumpTo(data.path)">
-    <van-icon :name="data.icon" color="#009B4C" size="30px" />
+    <van-icon :name="data.icon" color="#009B4C" size="30px" :info="data.info"/>
     <p class="card-title">{{data.text}}</p>
   </div>
 </template>
