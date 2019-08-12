@@ -13,7 +13,12 @@
     <div v-show="active === 2">
       <div v-if="payStatus==2">
         <EventInfo :info="info" :matchInfo="objMatchInfo" />
-        <van-button size="large" type="info" plain>已支付</van-button>
+        <div class="icon_success">
+          <div class="__success">
+            <van-icon name="success" color="#07c160" size="32px" />
+          </div>
+          <div class="__span">已支付</div>
+        </div>
       </div>
       <End :info="state" @changeActive="changeActive" v-else />
     </div>
@@ -90,11 +95,11 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
-       
+
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
-         this.active = this.info.payStatus;
+        this.active = this.info.payStatus;
       }
     } else {
       //  如果是从赛事详情进入
@@ -325,5 +330,22 @@ export default {
 }
 .btn-wrap {
   margin-top: 0.533rem;
+}
+.icon_success {
+  width: 100%;
+  border: 1px solid #009b4d;
+  color: #009b4d;
+  font-size: 18px;
+  text-align: center;
+}
+.icon_success .__success {
+  padding: 10px 2px 5px 0;
+  display: inline-block;
+}
+.icon_success .__span {
+  vertical-align: middle;
+  box-sizing: border-box;
+  margin-top: -30px;
+  display: inline-block;
 }
 </style>
