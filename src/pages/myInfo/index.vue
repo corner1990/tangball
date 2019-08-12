@@ -149,9 +149,6 @@ export default {
         }
       });
       this.$store.commit('setTangballUserInfo',this.memberMessage)
-      console.log(this.tangballUserInfo);
-      
-      wx.switchTab({url:"/pages/index/main"})
        wx.showToast({
       title: '修改成功',
       icon: 'success'
