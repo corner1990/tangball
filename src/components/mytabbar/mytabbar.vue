@@ -32,6 +32,7 @@ export default {
   },
   data: function() {
     return {
+      request:false,
       unread:0,
       list: [
         {
@@ -128,7 +129,6 @@ export default {
      }
   },
   mounted(){
-   this.getMyMsgList();
   }
 }
 </script>
