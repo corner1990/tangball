@@ -26,7 +26,7 @@
       <van-field :value="selfInfo.phone" label="联系电话" @blur="phoneChange" placeholder="请输入手机号" />
       <div class="flex line">
         <p class="sub-title">球龄</p>
-        <div @click="selectAge" >
+        <div @click="selectAge">
           {{selfInfo.ballAgeText}}
           <!-- <input type="text" class="tangBallInput" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly /> -->
         </div>
@@ -43,7 +43,7 @@
       <div>{{ matchInfo.matchTime }}</div>
     </div>
     <div class="flex line">
-      <p class="sub-title" >赛事地点</p>
+      <p class="sub-title">赛事地点</p>
       <div v-if="matchInfo.venue">{{ matchInfo.venue }}</div>
       <div v-else>
         {{ matchInfo.cityName }}
@@ -148,10 +148,10 @@ export default {
     // })
   },
   watch: {
-    skipPage: function (val, oldVal) {
-      this.sendText="发送验证码",
-      this.sendTime=60,
-      this.sendStatus=false
+    skipPage: function(val, oldVal) {
+      (this.sendText = "发送验证码"),
+        (this.sendTime = 60),
+        (this.sendStatus = false);
     }
     // info: {
     //   handler (info, oldName) {
@@ -166,7 +166,7 @@ export default {
       return this.info;
     }
   },
-  props: ["info", "matchInfo","skipPage"],
+  props: ["info", "matchInfo", "skipPage"],
   methods: {
     onRadioChange(radio) {
       this.info.sex = radio.target.value;
@@ -193,6 +193,8 @@ export default {
     },
     waitTime() {
       let { phone: mobile } = this.info;
+      console.log("this.selfInfo.sex_________________", this.selfInfo.sex);
+      console.log("this.selfInfo________________", this.selfInfo);
       if (!mobile) {
         this.sendStatus = false;
         return Toast.fail("手机号为空,请输入手机号");
@@ -203,9 +205,15 @@ export default {
         this.sendStatus = false;
         return Toast.fail("手机号格式错误");
       }
+      if ([undefined, "", -1, null, "null"].includes(this.selfInfo.sex)) {
+        this.sendStatus = false;
+        return Toast.fail("性别必填");
+      }
+
       if (this.sendTime === 60) {
         this.getVerfity(mobile);
       }
+
       if (this.sendTime <= 1) {
         this.sendStatus = false;
         this.sendTime = 60;
