@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <mytabbar :read="read"></mytabbar>
+    <mytabbar :read="readd"></mytabbar>
     <div>
       <van-tabs :active="active" @change="onChange" sticky>
         <van-tab title="未读"></van-tab>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      read:false,
+      readd:false,
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -55,8 +55,7 @@ export default {
   },
   methods: {
     reader(){
-      console.log(1111);
-      this.read = !this.read
+      this.readd = !this.readd
     },
     //顶部聚焦按钮
     onChange(event) {
@@ -151,7 +150,6 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
-      console.log("msgg",this.msgg)
     },
     /**
      * 函数：{设置消息已读状态的函数}
