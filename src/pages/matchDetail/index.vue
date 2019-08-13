@@ -267,10 +267,13 @@ export default {
       });
     }
   },
-  created() {},
+  onUnload() {
+    wx.flagJumped = false; //页面卸载时改变状态
+  },
   async mounted() {
     this.showdDialog = false;
     this.showBigImg = false;
+    wx.authorizeJump = false; //控制获取权限之后跳转到当前页面
     /**
      * @desc 请求赛事详情接口函数
      */
@@ -323,11 +326,43 @@ export default {
   /**
    * @desc 获取页面参数,
    */
-  onLoad: function(options) {
-    this.NationalmatchIndex = null;
+
+  async onLoad(options) {
     if (options.id) {
+      //获取页面参数，并赋值与当前的赛事id
       this.matchId = options.id;
     }
+    let isShare = options.isShare; //如果是从分享页进来的会有isShare=true参数
+    // 显示右上角的分享页方法
+    wx.showShareMenu({
+      withShareTicket: true,
+      success() {},
+      fail() {}
+    });
+
+    let url = `/pages/matchDetail/main?id=${this.matchId}&isShare=true`; //用于分享页分享的地址
+    // /--------是否获取权限和分享页进来-------------/
+    if (!wx.flagJumped && isShare) {
+      let result = await util.getMyWXSetting(url);
+      if (result == undefined) {
+        return;
+      }
+      // //如果未授权，先return,等待用户主动授权
+      if (result == "noAuth") {
+        // wx.flagJumped = false;
+        wx.redirectTo({
+          url: `/pages/authorize/main?id=${this.matchId}`
+        }); //跳转到授权页面
+        return;
+      }
+    }
+  },
+  //配置分享页的内容
+  onShareAppMessage: function() {
+    return {
+      title: "唐球赛事",
+      path: `/pages/matchDetail/main?id=${this.matchId}&isShare=true`
+    };
   }
 };
 </script>
