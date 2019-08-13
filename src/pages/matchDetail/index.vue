@@ -35,7 +35,12 @@
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchDoc.matchName}}</div>
     <!-- 赛事步骤 -->
-    <van-steps v-if="matchDoc.matchType==2" :steps="steps" :active="activeStep" active-color="#F4B116" />
+    <van-steps
+      v-if="matchDoc.matchType==2"
+      :steps="steps"
+      :active="activeStep"
+      active-color="#F4B116"
+    />
     <van-steps v-else :steps="steps2" :active="activeStep2" active-color="#F4B116" />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
@@ -166,7 +171,6 @@ export default {
           wx.navigateTo({ url });
         }
       });
-      wx.navigateTo({ url });
     },
     /**
      * @name pickerChange是场馆选择器函数
@@ -310,12 +314,12 @@ export default {
           this.activeStep = index; //当前步骤条的选中状态
         }
       });
-        this.steps2.forEach((item, index) => {
+      this.steps2.forEach((item, index) => {
         if (Progress == item.value) {
           this.activeStep2 = index; //当前步骤条的选中状态
         }
       });
-    };
+    }
   },
   computed: {
     // 当前会员id
