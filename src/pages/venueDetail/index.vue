@@ -6,11 +6,12 @@
       <div>
         <openImg v-model="venueDoc.album" ></openImg>
         <van-tabs :active="active" v-bind:change="onChange">
-          <van-tab title="场馆介绍1">
+          <van-tab title="场馆介绍">
             <div style="font-size:16px;margin-top:5px">
               <van-cell title="场馆名称" title-width="100px" :value="venueDoc.name" />
               <van-cell title="场馆地址" title-width="100px" :value="venueDoc.address" />
               <van-cell title="场馆电话" title-width="100px" :value="venueDoc.phoneNumber" />
+              <van-cell title="场馆详情" title-width="100px" :value="Detail" />
             </div>
           </van-tab>
           <van-tab title="地理位置">
@@ -46,6 +47,7 @@ export default {
   data() {
     return {
       // radio: 1,
+      Detail:"范德萨范德萨范德萨范德，萨企鹅窝群二下次，不出现字符的范德萨发的范德萨发，范德萨发达大厦范德萨范德萨发",
       pageName: "场馆详情",
       value: "", // 搜索value
       venueDoc: null,

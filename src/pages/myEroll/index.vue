@@ -21,21 +21,25 @@
       </div>
     </div>
     <mytabbar></mytabbar>
+    <!--无数据时显示暂无数据-->
+     <tisp v-if="myErollList.length<=0"></tisp>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
+import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
     mytabbar,
-    debug_item
+    debug_item,
+    tisp
   },
   data() {
     return {
-      myErollList: null
+      myErollList: []
     };
   },
   computed: {
@@ -109,6 +113,7 @@ export default {
   },
   mounted() {
     this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
+    console.log("this.myErollList",this.myErollList)
   }
 };
 </script>
