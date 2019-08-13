@@ -35,7 +35,8 @@
     <!-- 赛事名称 -->
     <div class="FS24 TAC LH36">{{matchDoc.matchName}}</div>
     <!-- 赛事步骤 -->
-    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
+    <van-steps v-if="matchDoc.matchType==2" :steps="steps" :active="activeStep" active-color="#F4B116" />
+    <van-steps v-else :steps="steps2" :active="activeStep2" active-color="#F4B116" />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
@@ -47,7 +48,8 @@
       >
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
-            <span style="color:black"
+            <span
+              style="color:black"
               v-for="(item,index) in matchDoc.cityVenueList"
               :key="index"
             >{{item.cityName}}--{{item.venueName}}</span>
@@ -59,7 +61,7 @@
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
-    <van-button size="large" v-if="isMatchIdStatus" plain disabled :style="style">{{enrollText}}</van-button>
+    <div class="enrolled" v-if="isMatchIdStatus">{{enrollText}}</div>
     <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
     <!-- 显示选择场馆弹窗 -->
     <van-dialog
@@ -98,6 +100,7 @@ export default {
       matchId: 37, //  当前赛事id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
+      activeStep2: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
       steps: [
         //步骤条数组
@@ -108,13 +111,20 @@ export default {
         { text: "1/4决赛", desc: "", value: 22 },
         { text: "决赛", desc: "", value: 23 }
       ],
+      steps2: [
+        //步骤条数组
+        { text: "选拔赛", desc: "", value: 11 },
+        { text: "晋级赛", desc: "", value: 12 },
+        { text: "决赛", desc: "", value: 13 }
+      ],
       matchDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
       indicatorDots: true,
       autoplay: false,
       interval: 5000,
       duration: 1000,
-      value: "" // 搜索value
+      value: "", // 搜索value
+      National: false
     };
   },
   methods: {
@@ -297,7 +307,12 @@ export default {
           this.activeStep = index; //当前步骤条的选中状态
         }
       });
-    }
+        this.steps2.forEach((item, index) => {
+        if (Progress == item.value) {
+          this.activeStep2 = index; //当前步骤条的选中状态
+        }
+      });
+    };
   },
   computed: {
     // 当前会员id
@@ -344,5 +359,15 @@ export default {
   display: block;
   background-color: #fafafa;
   margin: 5px 15px;
+}
+.enrolled {
+  width: 100%;
+  height: 50px;
+  line-height: 48px;
+  font-size: 16px;
+  background-color: #eee;
+  text-align: center;
+  color: gray;
+  border: 1px #eee solid;
 }
 </style>
