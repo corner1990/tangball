@@ -7,6 +7,12 @@
 /* eslint-disable */
 import itemCard from './cardItem'
 export default {
+  watch:{
+    unreadCount:function(){
+      this.list[2].info = this.unreadCount
+    }
+  },
+  props:['unreadCount'],
   data () {
     return {
       list: [
@@ -23,7 +29,8 @@ export default {
         {
           text: '我的消息',
           path: '/pages/myMsgList/main',
-          icon: 'chat-o'
+          icon: 'chat-o',
+          info:this.unreadCount
         },
         // {
         //   text: '我的订单',
@@ -55,7 +62,7 @@ export default {
   },
   components: {
     itemCard
-  }
+  },
 }
 </script>
 <style>

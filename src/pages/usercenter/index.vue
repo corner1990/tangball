@@ -1,7 +1,7 @@
 <template>
   <div>
     <Info />
-    <UserOperList />
+    <UserOperList :unreadCount="unreadCount"></UserOperList>
      <mytabbar :active="3"></mytabbar>
   </div>
 </template>
@@ -11,12 +11,17 @@ import Info from '@/components/usercenter/userinfo'
 import UserOperList from '@/components/usercenter/userCard'
 import mytabbar from '@/components/mytabbar/mytabbar'
 export default {
+  // name: 'leo',
+  mounted(){
+  },
   components: {
     Info,
     UserOperList,mytabbar
   },
-  data: {
-    name: 'leo',
+  data(){
+    return{
+      unreadCount: this.$store.state.tangballUserInfo.unreadCount
+    }
   },
   methods: {
     /**
@@ -29,6 +34,7 @@ export default {
     }
   },
   onShow () {
+    this.unreadCount = this.$store.state.tangballUserInfo.unreadCount
     wx.hideTabBar({
       complete () {
         console.log('关闭tabbar')

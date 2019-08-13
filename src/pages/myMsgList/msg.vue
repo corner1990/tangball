@@ -140,6 +140,7 @@ export default {
       this.showcontent = false;
       this.showcompile = true;
       this.crowArr.splice(gant, 1);
+      this.$emit("reader")
     }
   },
   mounted() {

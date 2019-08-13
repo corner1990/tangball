@@ -6,16 +6,33 @@
         v-for="(item, key) in list"
         :key="key"
         @click="tabChange(item.pagePath)"
+        :info="item.info"
       >{{item.text}}</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
+import util from "@/utils/util";
 export default {
-  props: ["active"],
+  props: ["active","read"],
+   computed: {
+    //唐球会员信息-在vuex中获取
+    UserID: function() {
+      return this.$store.state.tangballUserInfo.P1;
+    }
+  },
+  watch:{
+    UserID:function(val, oldVal){
+        this.getMyMsgList();
+    },
+    read:function(val, oldVal){
+        this.getMyMsgList();
+    }
+  },
   data: function() {
     return {
+      unread:0,
       list: [
         {
           text: "首页",
@@ -35,7 +52,8 @@ export default {
         {
           text: "个人中心",
           pagePath: "../usercenter/main",
-          iconPath: "friends-o"
+          iconPath: "friends-o",
+          info:""
         }
       ],
       indicatorDots: false,
@@ -52,18 +70,64 @@ export default {
     }
     // console.log("this.activeNeed", this.activeNeed);
   },
+  onShow () {
+    if (this.$store.state.tangballUserInfo.unreadCount==0) {
+          this.list[3].info = "none";
+        }else{
+        this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
+        }
+  },
   methods: {
     /**
      * @desc 导航切换回调
      */
     tabChange(url) {
-      // console.log(url);
       wx.switchTab({
         url
       });
-    }
+    },
+    async getMyMsgList() {
+      let { data } = await util.post({
+        //请求接口
+        url: global.PUB.domain + "/crossList?page=tangball_msg ",
+        param: {
+          findJson: {
+            //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
+            $or: [
+              { range: 1 },
+              { range: 2, memberIdList: this.UserID }
+            ]
+          }
+        } //传递参数
+      });
+      {
+        let { data } = await util.post({
+          //请求接口
+          url: global.PUB.domain + "/crossList?page=tangball_msg_read",
+          param: {
+            findJson: {
+              memberId: this.UserID
+            }
+          } //传递参数
+        });
+        this.unread = data.list.length
+      }
+      this.unread = data.list.length - this.unread
+        let UserInfo = this.$store.state.tangballUserInfo
+        if (this.unread==0) {
+          UserInfo.unreadCount = undefined
+          this.$store.commit('setTangballUserInfo',UserInfo)
+          this.list[3].info = this.$store.state.tangballUserInfo.unreadCount;
+        }else{
+          UserInfo.unreadCount =this.unread
+        this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
+        }
+     }
+  },
+  mounted(){
+   this.getMyMsgList();
   }
-};
+}
 </script>
 <style>
 </style>
