@@ -113,9 +113,9 @@ export default {
       ],
       steps2: [
         //步骤条数组
-        { text: "选拔赛", desc: "", value: 11 },
-        { text: "晋级赛", desc: "", value: 12 },
-        { text: "决赛", desc: "", value: 13 }
+        { text: "选拔赛", desc: "", value: 21 },
+        { text: "晋级赛", desc: "", value: 22 },
+        { text: "决赛", desc: "", value: 23 }
       ],
       matchDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
