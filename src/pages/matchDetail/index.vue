@@ -47,7 +47,7 @@
       >
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
-            <span
+            <span style="color:black"
               v-for="(item,index) in matchDoc.cityVenueList"
               :key="index"
             >{{item.cityName}}--{{item.venueName}}</span>
@@ -309,6 +309,7 @@ export default {
    * @desc 获取页面参数,
    */
   onLoad: function(options) {
+    this.NationalmatchIndex = null;
     if (options.id) {
       this.matchId = options.id;
     }
