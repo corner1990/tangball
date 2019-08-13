@@ -1,6 +1,6 @@
 /* eslint-disable */
 // const lodash = require("./lodash");
-const lodash = require("../../static/lodash.min.js"); 
+const lodash = require("../../static/lodash.min.js");
 function formatTime(timeteamp) {
   var date = new Date(timeteamp)
   var year = date.getFullYear()
@@ -380,13 +380,26 @@ let gotoPage = function (url) {
   wx.navigateTo({ url });
 };
 let getMyWXSetting = async function (url) {
+
   // console.log("getMyWXSetting");
   let resSetting = await wxGetSetting();
   if (resSetting.authSetting["scope.userInfo"]) {
     // console.log("用户已经授权过,跳转到首页");
-    wx.switchTab({
-      url: "/pages/index/main"
-    });
+    if (url) {
+      //如果有地址是从赛事详情进来的
+      wx.flagJumped = true;
+      if (wx.authorizeJump) {
+        // 获取权限后才需要调转到赛事详情
+        wx.redirectTo({
+          url: `${url}`
+        });
+      }
+    } else {
+      // 否则获取权限之后跳转到首页
+      wx.switchTab({
+        url: "/pages/index/main"
+      });
+    }
   } else {
     // console.log("用户还未授权过，返回noAuth");
     return "noAuth"

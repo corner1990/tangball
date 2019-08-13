@@ -7,34 +7,33 @@
     <div>
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
-          <matchListcomponent :cf="item" v-for="(item,i) in matchlist" :key="i"></matchListcomponent>
+         
+          <matchListIndex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchListIndex>
+       
         </van-tab>
       </van-tabs>
     </div>
-    <mytabbar></mytabbar>
+    <!-- <mytabbar></mytabbar> -->
   </div>
 </template>
 <script>
 /* eslint-disable */
-import matchListcomponent from "@/components/matchList/matchListComponent";
+import matchListIndex from "@/components/matchList/matchListIndex";
 import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import Dialog from "../../../static/vant/dialog/dialog";
-// import debug_item from "@/components/common/debug_item/debug_item";
+import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
     card,
     mytabbar,
     Dialog,
-    matchListcomponent,
-    // debug_item
+    matchListIndex,
+    debug_item
   },
   data() {
     return {
-      searchValue: "111", // 搜索value
-      matchType: null,
-      activeStep: 0,
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
@@ -45,21 +44,6 @@ export default {
     };
   },
   methods: {
-    changeValue(event) {
-      this.searchValue = event.mp.detail;
-    },
-    //----------- 请求接口数据的函数-------------------
-    async getlist() {
-      let { data } = await util.post({
-        url: global.PUB.domain + "/crossList?page=tangball_match",
-        param: { findJson: { matchType: this.matchType } }
-      });
-      this.matchlist = data.list;
-      //--------------数组的日期排序的方法-----------------------
-      this.matchlist.sort((a, b) => {
-        return a.matchTime > b.matchTime ? -1 : 1;
-      });
-    },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
       // ------------------地区区分---------------------
@@ -83,13 +67,24 @@ export default {
         this.matchType = null;
         this.getlist();
       }
+    },
+    changeValue(event) {
+      this.searchValue = event.mp.detail;
+    },
+    //----------- 请求接口数据的函数-------------------
+
+    async getlist() {
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_match",
+        param: { findJson: { matchType: this.matchType } }
+      });
+      this.matchlist = data.list;
+     
+      //--------------数组的日期排序的方法-----------------------
+      this.matchlist.sort((a, b) => {
+        return a.matchTime > b.matchTime ? -1 : 1;
+      });
     }
-    /**
-     * @desc 搜索回调
-     */
-    /**
-     * @desc 赛事切换回调
-     */
   },
   async mounted() {
     this.getlist(); //页面创建成功后，调用一次请求接口，此时是加载所有数据
@@ -97,12 +92,4 @@ export default {
 };
 </script>
 <style scoped>
-.title {
-  margin: 10px 20px;
-  color: #333;
-  border-bottom: 1px solid #000;
-}
-.card {
-  margin: 0 10px;
-}
 </style>

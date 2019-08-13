@@ -2,7 +2,7 @@
   <div>
     <div>
       <swiper
-        style="height:250px"
+        style="height:200px"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
@@ -12,11 +12,11 @@
         <block v-for="item in value" :key="item.url[0]">
           <swiper-item>
             <img
-              style="width:100%"
+               v-if="item.url"
+              style="width:100%;height:100%"
               @click="showImg(item.url)"
               :src="item.url"
               class="slide-image"
-              height="250"
             />
           </swiper-item>
         </block>

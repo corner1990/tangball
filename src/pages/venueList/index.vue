@@ -13,12 +13,15 @@
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
     <!-- 赛事场馆列表组件 -->
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
+     <!--无数据时显示暂无数据-->
+    <tisp v-if="venueList.length<=0||!status"></tisp>
     <mytabbar :active="1"></mytabbar>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import mytabbar from "@/components/mytabbar/mytabbar";
+import tisp from "@/components/tisp/tisp";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 import venueListComponent from "@/components/venueList/venueListComponent";
@@ -28,7 +31,8 @@ export default {
     mytabbar,
     debug_item,
     venueListComponent,
-    city_select
+    city_select,
+    tisp
   },
   data() {
     return {
@@ -37,7 +41,8 @@ export default {
       pageName: "场馆列表",
       venueList: [],
       keywords: null, //搜索关键字
-      show: true //是否显示
+      show: true, //是否显示
+      status: true//显示暂无数据
     };
   },
   methods: {
@@ -47,6 +52,7 @@ export default {
      * @param 是否显示：show
      */
     onSearch(keywords) {
+      console.log("this.status1111", this.status);
       this.venueList.forEach(item => {
         let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
         if (index > -1) {
@@ -55,12 +61,18 @@ export default {
         } else {
           //如果关键字不匹配
           item.show = false;
+          this.status = false;
         }
       });
+      // console.log("this.status222", this.status,this.venueList.length);
+      // if (this.venueList.length == 0) {
+      //   console.log("this.status333", this.status);
+      //   this.status = true;
+      // }
     },
     /**
      * @desc 请求接口数据的函数
-     * 
+     *
      */
     async search(areaId) {
       if (areaId) {
@@ -86,11 +98,12 @@ export default {
           }
         }
       });
+        this.status = true;
       data.list.forEach(item => {
         item.show = true;
       });
       this.venueList = data.list;
-      
+
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
         listData: this.venueList,
@@ -99,7 +112,6 @@ export default {
         idKeyColumn: "P7",
         page: "dmagic_area"
       });
-      
     }
   },
   mounted() {
