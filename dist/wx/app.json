@@ -1,12 +1,17 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/articleList/main",
+    "pages/matchList/main",
+    
+    
+    
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main",
-    "pages/matchList/main",
+    "pages/myInfo/main", 
+  
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
@@ -17,7 +22,7 @@
     "pages/venueDetail/main",
     "pages/rankingList/main",
     "pages/myErollDetail/main",
-    "pages/articleList/main",
+  
     "pages/articleDetail/main",
     "pages/searchPage/main"
   ],
@@ -77,6 +82,5 @@
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index",
     "van-toast": "/static/vant/toast/index"
-  },
-  "sitemapLocation": "sitemap54.json"
+  }
 }
