@@ -1,52 +1,50 @@
 <template>
-  <div class="main-wrap">
-    <!-- {{searchValue}} -->
-    <!-- <debug_item path="steps" v-model="steps" text="步骤" />
-    <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
-    <debug_item path="searchValue" v-model="searchValue" text="searchValue" />-->
+
     <div>
-          <div >
+      <div>子组件</div>
+          <!-- <div v-for="(item,i) in cf" :key="i">
             <navigator :url="matchDetailUrl">
               <div class="match-box">
                 <div class="match-img-box">
                   <img :src="matchListImg" />
                 </div>
                 <div class="match-img-box1">
-                  <h1>{{cf.matchName}}</h1>
-                  <div>赛事时间：{{cf.matchTime}}</div>
-                  <div>报名费用：{{cf.registrationFee}}</div>
+                  <h1>{{item.matchName}}</h1>
+                  <div>赛事时间：{{item.matchTime}}</div>
+                  <div>报名费用：{{item.registrationFee}}</div>
                 </div>
-                <div class="rpg11">
+                <div class="rpg11">o
                   <div class="arrow">
                     <van-icon name="arrow" size="20px" />
                   </div>
                 </div>
               </div>
             </navigator>
-          </div>
+          </div> -->
        
     </div>
  
-  </div>
+
 </template>
 <script>
 /* eslint-disable */
 
-import util from "../../utils/util";
-import card from "../card";
-import mytabbar from "../mytabbar/mytabbar";
-import "./matchList.css";
+// import util from "../../utils/util";
+// import card from "../card";
+// import mytabbar from "../mytabbar/mytabbar";
+// import "./matchList.css";
 // import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   components: {
-    card,
-    mytabbar
+    // card,
+    // mytabbar
 
     // debug_item
   },props:["cf"],
   data() {
     return {
-      matchListImg: null,
+   
+       matchListImg: null,
       placeholderImg: null,
       searchValue: "111", // 搜索value
       matchType: null,
@@ -62,8 +60,7 @@ export default {
     /**
      * @desc 赛事切换回调
      */
-  },
-  mounted() {
+  },mounted() {
     /**
      * @name 加载图片的方法
      * @desc 调用lodash库导入图片，默认占位图
@@ -73,12 +70,14 @@ export default {
     let placeholderImg =
       "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
     this.matchListImg = this.$lodash.get(
-      this.cf,
+      this.cf.item,
       "album[0].url",
       placeholderImg
     );
-
+    console.log("加载子组件");
+    
   }
+ 
 };
 </script>
 <style scoped>
