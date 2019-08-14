@@ -25,7 +25,7 @@
         </div>
         <!-- 展示排名信息组件 -->
         <rankingListComponent
-          v-for="(each,j) in memberList"
+          v-for="(each,j) in memberList[sexIndex - 1].list "
           :ranking="j+1"
           :cf="each"
           :value="arrList[rankingIndex].value"
@@ -84,8 +84,7 @@ export default {
       rankingIndex: 0, //参赛次数、成绩排名、鸟王排名、积分排名的索引
       sexIndex: 1, //男或者女的索引
       activeTitle: "参赛次数", //参赛次数、成绩排名、鸟王排名、积分排名的文字
-      // memberList: [{ list: [] }, { list: [] }] //会员数据列表
-      memberList: [] //会员数据列表
+      memberList: [{ list: [] }, { list: [] }] //会员数据列表
     };
   },
   methods: {
@@ -98,7 +97,6 @@ export default {
       if (e.target.index == 0) {
       }
       this.sexIndex = e.target.index + 1; //改变当前男女状态的索引
-      this.getMemberList(); //请求会员列表函数
     },
     /**
      * @name clickfun根据索引值判断需要调用的列表
@@ -122,23 +120,18 @@ export default {
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
           pageSize: 20, //每页20条数据
-          sortJson: { [RankingName]: -1 }, //参赛次数
-          findJson: {
-            sex: this.sexIndex
-          }
+          sortJson: { [RankingName]: -1 } //参赛次数
         }
       });
-      console.log("data", data.list);
-      this.memberList = data.list;
       /**
        * @desc 根据成绩列表的第一个列表是男，第二个列表是女
        */
-      // this.memberList[0].list = data.list.filter(doc => {
-      //   return doc.sex == 1;
-      // });
-      // this.memberList[1].lgetMemberListist = data.list.filter(doc => {
-      //   return doc.sex == 2;
-      // });
+      this.memberList[0].list = data.list.filter(doc => {
+        return doc.sex == 1;
+      });
+      this.memberList[1].list = data.list.filter(doc => {
+        return doc.sex == 2;
+      });
     }
   },
   beforeMount() {
@@ -160,7 +153,7 @@ export default {
 .button-box div {
   width: 20%;
   margin: 0 5px;
-  padding: 0 2px;
+    padding: 0 2px;
   border: 1px solid #f4b116;
   display: inline-block;
 }
