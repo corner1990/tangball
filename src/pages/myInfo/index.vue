@@ -162,6 +162,9 @@ export default {
     
     
     
+  },
+  onLoad(){
+    this.showSelect=false
   }
 }
 </script>

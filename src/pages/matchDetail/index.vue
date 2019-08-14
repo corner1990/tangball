@@ -332,6 +332,7 @@ export default {
    */
 
   async onLoad(options) {
+    this.NationalmatchIndex=null;
     if (options.id) {
       //获取页面参数，并赋值与当前的赛事id
       this.matchId = options.id;
