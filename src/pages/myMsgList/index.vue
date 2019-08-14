@@ -34,11 +34,7 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-      readd:false,
-=======
       read: false,
->>>>>>> 18b706504e0374b1f7ac46a3a7b8bc3c0680e9aa
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -68,13 +64,8 @@ export default {
     this.transform = true;
   },
   methods: {
-<<<<<<< HEAD
-    reader(){
-      this.readd = !this.readd
-=======
     reader() {
       this.read = !this.read;
->>>>>>> 18b706504e0374b1f7ac46a3a7b8bc3c0680e9aa
     },
     //顶部聚焦按钮
     onChange(event) {
@@ -169,10 +160,7 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
-<<<<<<< HEAD
-=======
       console.log("msgg", this.msgg);
->>>>>>> 18b706504e0374b1f7ac46a3a7b8bc3c0680e9aa
     },
     /**
      * 函数：{设置消息已读状态的函数}

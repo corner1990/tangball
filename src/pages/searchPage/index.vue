@@ -11,7 +11,7 @@
         <div v-else>
           <div style="height:20px;"></div>
           <!-- 赛事列表组件 -->
-            <matchlistindex :cf="item" v-for="(item,i) in matchList" :key="i"></matchlistindex>
+            <matchListIndex :cf="item" v-for="(item,i) in matchList" :key="i"></matchListIndex>
             <div style="height:30px;"></div>
         </div>
         </van-tab>
@@ -35,11 +35,11 @@ import'@/components/matchList/matchList.css'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
 import util from '@/utils/util'
-import matchlistindex from "@/components/matchList/matchlistindex";
+import matchListIndex from "@/components/matchList/matchlistindex";
 import articleComponent from '../../components/searchArticle/articleComponent'
 export default {
   components: {
-    mytabbar, debug_item,matchlistindex,articleComponent
+    mytabbar, debug_item,matchListIndex,articleComponent
   },
   data() {
     return {

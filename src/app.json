@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/articleList/main",
     "pages/matchList/main",
+   
+    "pages/articleList/main",
+  
     
     
     
