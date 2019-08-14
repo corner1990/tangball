@@ -7,7 +7,12 @@
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
+<<<<<<< HEAD
     "pages/myInfo/main",
+=======
+    "pages/myInfo/main", 
+  
+>>>>>>> 2dffcce77d7e892fc90f22110b48f8e668a71ef0
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
