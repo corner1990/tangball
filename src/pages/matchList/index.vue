@@ -7,9 +7,11 @@
     <div>
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
-         
-          <matchlistindex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchlistindex>
-       
+            <!--无数据时显示暂无数据-->
+          <tisp v-if="matchlist.length<=0"></tisp>
+          <div v-else>
+            <matchlistindex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchlistindex>
+          </div>
         </van-tab>
       </van-tabs>
     </div>
@@ -18,6 +20,7 @@
 </template>
 <script>
 /* eslint-disable */
+import tisp from "@/components/tisp/tisp";
 import matchlistindex from "@/components/matchList/matchlistindex";
 import util from "@/utils/util";
 import card from "@/components/card";
@@ -30,7 +33,8 @@ export default {
     mytabbar,
     Dialog,
     matchlistindex,
-    debug_item
+    debug_item,
+    tisp
   },
   data() {
     return {
@@ -79,7 +83,7 @@ export default {
         param: { findJson: { matchType: this.matchType } }
       });
       this.matchlist = data.list;
-     
+
       //--------------数组的日期排序的方法-----------------------
       this.matchlist.sort((a, b) => {
         return a.matchTime > b.matchTime ? -1 : 1;

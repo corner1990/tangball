@@ -31,6 +31,7 @@
           :value="arrList[rankingIndex].value"
           :key="j"
         ></rankingListComponent>
+        <tisp v-if="memberList.length<=0"></tisp>
       </van-tab>
     </van-tabs>
     <div class="bottom-space"></div>
@@ -39,6 +40,7 @@
 </template>
 <script>
 /* eslint-disable */
+import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import rankingListComponent from "./rankingListComponent";
@@ -49,7 +51,8 @@ export default {
     mytabbar,
     debug_item,
     rankingListComponent,
-    pageLink
+    pageLink,
+    tisp
   },
   data() {
     return {
