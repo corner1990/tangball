@@ -4,7 +4,15 @@
     <div>
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
+<<<<<<< HEAD
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
+=======
+            <!--无数据时显示暂无数据-->
+          <tisp v-if="matchlist.length<=0"></tisp>
+          <div v-else>
+            <matchlistindex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchlistindex>
+          </div>
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
         </van-tab>
       </van-tabs>
     </div>
@@ -12,8 +20,13 @@
 </template>
 <script>
 /* eslint-disable */
+<<<<<<< HEAD
 import matct_detail from "@/components/matchList/match_detail";
 import matchListIndex from "@/components/matchList/matchlistindex.vue";
+=======
+import tisp from "@/components/tisp/tisp";
+import matchlistindex from "@/components/matchList/matchlistindex";
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
 import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
@@ -24,9 +37,15 @@ export default {
     card,
     mytabbar,
     Dialog,
+<<<<<<< HEAD
     matchListIndex,
     debug_item,
     matct_detail
+=======
+    matchlistindex,
+    debug_item,
+    tisp
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
   },
   data() {
     return {
@@ -73,7 +92,10 @@ export default {
         param: { findJson: { matchType: this.matchType } }
       });
       this.matchlist = data.list;
+<<<<<<< HEAD
       console.log(" this.matchlist", this.matchlist, this.matchType);
+=======
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
 
       //--------------数组的日期排序的方法-----------------------
       this.matchlist.sort((a, b) => {

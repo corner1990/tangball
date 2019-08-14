@@ -2,12 +2,15 @@
   "pages": [
     "pages/index/main",
     "pages/matchList/main",
+<<<<<<< HEAD
    
     "pages/articleList/main",
   
     
     
     
+=======
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
@@ -24,7 +27,6 @@
     "pages/venueDetail/main",
     "pages/rankingList/main",
     "pages/myErollDetail/main",
-  
     "pages/articleDetail/main",
     "pages/searchPage/main"
   ],
@@ -84,5 +86,6 @@
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index",
     "van-toast": "/static/vant/toast/index"
-  }
+  },
+  "sitemapLocation": "sitemap98.json"
 }

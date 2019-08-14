@@ -7,6 +7,7 @@
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
+    
     <msg
       :transformm="transform"
       :crowArr="msgg"
@@ -14,14 +15,14 @@
       @spliceMsgg="closeDoor"
       @reader="reader"
     ></msg>
-     <!--无数据时显示暂无数据-->
-    <tisp v-if="msgg0.length<=0"></tisp>
+     
+    
   </div>
 </template>
 <script>
 /* eslint-disable */
 import msg from "@/pages/myMsgList/msg";
-import tisp from "@/components/tisp/tisp";
+// import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -30,11 +31,15 @@ export default {
     mytabbar,
     debug_item,
     msg,
-    tisp
+    // tisp
   },
   data() {
     return {
+<<<<<<< HEAD
       read: false,
+=======
+      readd:false,
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -64,8 +69,13 @@ export default {
     this.transform = true;
   },
   methods: {
+<<<<<<< HEAD
     reader() {
       this.read = !this.read;
+=======
+    reader(){
+      this.readd = !this.readd
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
     },
     //顶部聚焦按钮
     onChange(event) {
@@ -160,7 +170,10 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
+<<<<<<< HEAD
       console.log("msgg", this.msgg);
+=======
+>>>>>>> bbf814bf418c7250ff0cc2e58861d17122b2fe93
     },
     /**
      * 函数：{设置消息已读状态的函数}
