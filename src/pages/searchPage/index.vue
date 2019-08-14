@@ -35,7 +35,7 @@ import'@/components/matchList/matchList.css'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
 import util from '@/utils/util'
-import matchlistindex from "@/components/matchList/matchlistIndex";
+import matchlistindex from "@/components/matchList/matchlistindex";
 import articleComponent from '../../components/searchArticle/articleComponent'
 export default {
   components: {

@@ -11,11 +11,7 @@
     "pages/myEroll/main",
     "pages/myMsgList/main",
     "pages/myInfo/main", 
-<<<<<<< HEAD
   
-=======
-    "pages/matchList/main",
->>>>>>> 6a77937cf59a934548a0d86dba7fed8ffce20d8b
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",

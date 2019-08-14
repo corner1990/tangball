@@ -8,7 +8,7 @@
       <van-tabs :active="active" @change="onClickTab">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
          
-          <matchListIndex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchListIndex>
+          <matchlistindex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchlistindex>
        
         </van-tab>
       </van-tabs>
@@ -18,7 +18,7 @@
 </template>
 <script>
 /* eslint-disable */
-import matchListIndex from "@/components/matchList/matchListIndex";
+import matchlistindex from "@/components/matchList/matchlistindex";
 import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
@@ -29,7 +29,7 @@ export default {
     card,
     mytabbar,
     Dialog,
-    matchListIndex,
+    matchlistindex,
     debug_item
   },
   data() {
