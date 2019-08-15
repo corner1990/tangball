@@ -3,7 +3,10 @@
     <matchListIndex :cf="matchlist"></matchListIndex>
     <div>
       <van-tabs :active="active" @change="onClickTab">
+
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
+          <tisp v-if="matchlist.length<=0"></tisp>
+
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
        
@@ -16,6 +19,7 @@
 <script>
 /* eslint-disable */
 import matct_detail from "@/components/matchList/match_detail";
+import tisp from "@/components/tisp/tisp";
 import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
@@ -26,7 +30,7 @@ export default {
     card,
     mytabbar,
     Dialog,
-
+    tisp,
     debug_item,
     matct_detail
   },
