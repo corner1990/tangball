@@ -35,11 +35,11 @@ import'@/components/matchList/matchList.css'
 import mytabbar from '@/components/mytabbar/mytabbar'
 import debug_item from '@/components/common/debug_item/debug_item'
 import util from '@/utils/util'
-import matchListIndex from "@/components/matchList/matchlistindex";
+// import matchListIndex from "@/components/matchList/matchlistindex";
 import articleComponent from '../../components/searchArticle/articleComponent'
 export default {
   components: {
-    mytabbar, debug_item,matchListIndex,articleComponent
+    mytabbar, debug_item,articleComponent
   },
   data() {
     return {
