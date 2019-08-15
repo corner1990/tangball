@@ -1,10 +1,11 @@
 <template>
   <div>
     <navigator :url="matchDetailUrl">
-      {{item.P1}}--{{matchDetailUrl}}
+     
       <div class="match-box">
         <div class="match-img-box">
-          <img :src="matchListImg" />
+          <img :src="item.album[0].url" v-if="item.album"/>
+          <img :src="matchListImg" v-else/>
         </div>
         <div class="match-img-box1">
           <h1>{{item.matchName}}</h1>
@@ -19,6 +20,7 @@
       </div>
     </navigator>
   </div>
+
 </template>
 <script>
 /* eslint-disable */
@@ -27,9 +29,8 @@ import "./matchList.css";
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
   watch: {
-    active:function (newdata,olddata) {
-      console.log(newdata,olddata);
- 
+    active: function(newdata, olddata) {
+    
     }
   },
   components: {
@@ -38,7 +39,7 @@ export default {
   props: ["item", "active"],
   data() {
     return {
-      matchListImg: null,
+      matchListImg: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg",
       placeholderImg: null,
       searchValue: "111", // 搜索value
       matchType: null,
@@ -56,7 +57,7 @@ export default {
     /**
      * @desc 搜索回调
      */
-    /**
+    /**   
      * @desc 赛事切换回调
      */
   },
@@ -68,19 +69,19 @@ export default {
      * @param 接收的图片地址：matchListImg
      */
 
-    let placeholderImg =
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
-    this.matchListImg = this.$lodash.get(
-      this.item,
-      "album[0].url",
-      placeholderImg
-    );
+    // let placeholderImg =
+    //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
+    // this.matchListImg = this.$lodash.get(
+    //   this.item,
+    //   "album[0].url",
+    //   placeholderImg
+    // );
     // this.applyUrl = `/pages/matchEroll/main?id= ${this.item.P1}`;
     // this.matchDetailUrl = `/pages/matchDetail/main?id= ${this.item.P1}`;
   },
   mounted() {
-    console.log("this.item.P1___##", this.item.P1, this.item.matchName);
-    console.log(this.item)
+    // console.log("this.item.P1___##", this.item.P1, this.item.matchName);
+    // console.log(this.item);
   }
 };
 </script>
