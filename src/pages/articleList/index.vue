@@ -1,19 +1,24 @@
 <template>
   <div class="main-wrap">
     <div class>
-    
-        <!-- <div class="data-group-right">
+      <!-- <div class="data-group-right">
           <img src="../image/location.png" />
-        </div>-->
-      </div>
-      <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
-      <div style="height:20px"></div>
-  
+      </div>-->
+    </div>
+    <!--无数据时显示暂无数据-->
+    <tisp v-if="articleList.length<=0"></tisp>
+    <div v-else>
+       <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
+    </div>
+   
+    <div style="height:20px"></div>
+
     <!-- <mytabbar></mytabbar> -->
   </div>
 </template>
 <script>
 /* eslint-disable */
+import tisp from "@/components/tisp/tisp";
 import articleListIndex from "@/components/articleList/articleListIndex";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
@@ -27,11 +32,12 @@ export default {
     debug_item,
     util,
     my_field,
-    articleListIndex
+    articleListIndex,
+     tisp
   },
   data() {
     return {
-      articleList: null, //文章列表
+      articleList: [], //文章列表
       Categorylist: null //文章列表
     };
   },
@@ -97,5 +103,4 @@ export default {
 };
 </script>
 <style scoped>
-
 </style>

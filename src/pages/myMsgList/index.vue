@@ -7,6 +7,7 @@
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
+    
     <msg
       :transformm="transform"
       :crowArr="msgg"
@@ -14,14 +15,14 @@
       @spliceMsgg="closeDoor"
       @reader="reader"
     ></msg>
-     <!--无数据时显示暂无数据-->
-    <tisp v-if="msgg0.length<=0"></tisp>
+     
+    
   </div>
 </template>
 <script>
 /* eslint-disable */
 import msg from "@/pages/myMsgList/msg";
-import tisp from "@/components/tisp/tisp";
+// import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -30,7 +31,7 @@ export default {
     mytabbar,
     debug_item,
     msg,
-    tisp
+    // tisp
   },
   data() {
     return {

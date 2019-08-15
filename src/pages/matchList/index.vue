@@ -1,24 +1,25 @@
 <template>
   <div class="main-wrap">
-    <!-- {{searchValue}} -->
-    <!-- <debug_item path="steps" v-model="steps" text="步骤" />
-    <debug_item path="matchlist" v-model="matchlist" text="赛事列表" />
-    <debug_item path="searchValue" v-model="searchValue" text="searchValue" />-->
+    <matchListIndex :cf="matchlist"></matchListIndex>
     <div>
       <van-tabs :active="active" @change="onClickTab">
+
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
-         
-          <matchListIndex v-for="(item,i) in matchlist" :key="i" :cf="item"></matchListIndex>
-       
+          <tisp v-if="matchlist.length<=0"></tisp>
+
+          <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
+       
       </van-tabs>
+      
     </div>
-    <!-- <mytabbar></mytabbar> -->
+   
   </div>
 </template>
 <script>
 /* eslint-disable */
-import matchListIndex from "@/components/matchList/matchListIndex";
+import matct_detail from "@/components/matchList/match_detail";
+import tisp from "@/components/tisp/tisp";
 import util from "@/utils/util";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
@@ -29,11 +30,13 @@ export default {
     card,
     mytabbar,
     Dialog,
-    matchListIndex,
-    debug_item
+    tisp,
+    debug_item,
+    matct_detail
   },
   data() {
     return {
+      active: 0,
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
@@ -46,24 +49,19 @@ export default {
   methods: {
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
+      this.active = event.target.index;
       // ------------------地区区分---------------------
-      //如果是近期（因为近期的index为0）
+      //如果是近期（因为近期的index为0）,全国Index=1,如果是加盟商Index=2
       if (event.target.index == 0) {
         this.matchType = null; //改变请求接口参数
         this.getlist(); //调用一次接口
-      }
-      //全国Index=1
-      if (event.target.index == 1) {
+      } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
         this.getlist(); //调用一次接口
-      }
-      //如果是加盟商Index=2
-      if (event.target.index == 2) {
+      } else if (event.target.index == 2) {
         this.matchType = 1;
         this.getlist(); //调用一次接口
-      }
-      //全部列表
-      if (event.target.index == 3) {
+      } else if (event.target.index == 3) {
         this.matchType = null;
         this.getlist();
       }
@@ -79,14 +77,16 @@ export default {
         param: { findJson: { matchType: this.matchType } }
       });
       this.matchlist = data.list;
-     
+    
+
       //--------------数组的日期排序的方法-----------------------
       this.matchlist.sort((a, b) => {
         return a.matchTime > b.matchTime ? -1 : 1;
       });
     }
   },
-  async mounted() {
+  onLoad() {
+  
     this.getlist(); //页面创建成功后，调用一次请求接口，此时是加载所有数据
   }
 };
