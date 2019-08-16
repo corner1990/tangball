@@ -101,17 +101,18 @@ export default {
           }
         }
       });
-      wx.hideLoading();//请求到数据后加载中隐藏
-      if (this.venueList.length <= 0) {//判断接口数据的长度小于等于0显示暂无数据
-        this.status = false;
-      } else {
-        this.status = true;
-      }
+      wx.hideLoading(); //请求到数据后加载中隐藏
 
       data.list.forEach(item => {
         item.show = true;
       });
       this.venueList = data.list;
+      //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.venueList.length <= 0) {
+        this.status = true;
+      } else {
+        this.status = false;
+      }
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
         listData: this.venueList,
