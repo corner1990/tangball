@@ -2,7 +2,6 @@
   <div class="main-wrap">
     <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
     <div class v-if="venueDoc">
-      <div class="FS24 TAC LH36">{{venueDoc.name}}</div>
       <div>
         <openImg v-model="venueDoc.album" ></openImg>
         <van-tabs :active="active" v-bind:change="onChange">
@@ -47,7 +46,7 @@ export default {
   data() {
     return {
       // radio: 1,
-      Detail:"范德萨范德萨范德萨范德，萨企鹅窝群二下次，不出现字符的范德萨发的范德萨发，范德萨发达大厦范德萨范德萨发",
+      Detail:"一二三四五六七八九十十一十二十三十四",
       pageName: "场馆详情",
       value: "", // 搜索value
       venueDoc: null,

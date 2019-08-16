@@ -1,27 +1,25 @@
 <template>
   <div class="main-wrap">
-    <div class="">
-      <div
-        class="data-group"
-        v-for="(item,i) in articleList"
-        :key="i"
-        @click="gotoPage(`/pages/articleDetailWX/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(item, 'extend.wxArticleUrl','')}`)"
-      >
-        <div class="data-group-left">
-          <span class="title_text">{{item.articleTitle}}</span>
-          <div class="name_time_text">{{item.CategoryName}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.CreateTime}}</div>
-        </div>
-        <!-- <div class="data-group-right">
+    <div class>
+      <!-- <div class="data-group-right">
           <img src="../image/location.png" />
-        </div> -->
-      </div>
-      <div style="height:20px"></div>
+      </div>-->
     </div>
-    <mytabbar></mytabbar>
+    <!--无数据时显示暂无数据-->
+    <tisp v-if="articleList.length<=0"></tisp>
+    <div v-else>
+       <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
+    </div>
+   
+    <div style="height:20px"></div>
+
+    <!-- <mytabbar></mytabbar> -->
   </div>
 </template>
 <script>
 /* eslint-disable */
+import tisp from "@/components/tisp/tisp";
+import articleListIndex from "@/components/articleList/articleListIndex";
 import card from "@/components/card";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
@@ -33,11 +31,13 @@ export default {
     mytabbar,
     debug_item,
     util,
-    my_field
+    my_field,
+    articleListIndex,
+     tisp
   },
   data() {
     return {
-      articleList: null, //文章列表
+      articleList: [], //文章列表
       Categorylist: null //文章列表
     };
   },
@@ -50,11 +50,10 @@ export default {
         page: "tangball_article",
         pageSize: 15,
         findJson: {
-          articleCategory: 3//锁定公众号文章分类
+          articleCategory: 3 //锁定公众号文章分类
         }
       });
 
-      
       this.Categorylist = await util.ajaxGetList({
         page: "tangball_article_category",
         pageSize: 15,
@@ -104,49 +103,4 @@ export default {
 };
 </script>
 <style scoped>
-.data-group {
-  padding: 5px 0;
-  border-bottom: 1px #ddd solid;
-  font-size: 16px;
-  display: flex;
-}
-.data-group-left {
-  width: 100%;
-/* position: relative; */
-/* height: 70px; */
-
-}
-.name_time_text{
-  margin:5px 0;
-  font-size: 12px;
-  color: #ccc;
-    /* position: absolute;
-    bottom:0px;
-    left: 0px; */
-}
-.title_text {
-  font-size: 16px;
-  /* 自动换行 */
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-break: break-word;
-}
-.data-group-right {
-  flex: 1;
-  height: 75px;
-}
-.data-group-right img {
-  height: 100%;
-  width: 100%;
-}
-.n-input {
-  display: inline-block;
-  border: 1px #ddd solid;
-  height: 28px;
-  line-height: 28px;
-  border-radius: 5px;
-}
 </style>

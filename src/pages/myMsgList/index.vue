@@ -1,18 +1,28 @@
 <template>
   <div class="main-wrap">
-    <mytabbar :read="read"></mytabbar>
+    <mytabbar :read="readd"></mytabbar>
     <div>
       <van-tabs :active="active" @change="onChange" sticky>
         <van-tab title="未读"></van-tab>
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
-    <msg :transformm="transform" :crowArr="msgg" @newMsgg="moveMsg" @spliceMsgg="closeDoor" @reader="reader"></msg>
+    
+    <msg
+      :transformm="transform"
+      :crowArr="msgg"
+      @newMsgg="moveMsg"
+      @spliceMsgg="closeDoor"
+      @reader="reader"
+    ></msg>
+     
+    
   </div>
 </template>
 <script>
 /* eslint-disable */
 import msg from "@/pages/myMsgList/msg";
+// import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -20,11 +30,12 @@ export default {
   components: {
     mytabbar,
     debug_item,
-    msg
+    msg,
+    // tisp
   },
   data() {
     return {
-      read:false,
+      readd:false,
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -55,7 +66,7 @@ export default {
   },
   methods: {
     reader(){
-      this.read = !this.read
+      this.readd = !this.readd
     },
     //顶部聚焦按钮
     onChange(event) {
@@ -105,7 +116,7 @@ export default {
     async getMyMsgList(_json) {
       let { data } = await util.post({
         //请求接口
-        url: global.PUB.domain + "/crossList?page=tangball_msg ",
+        url: global.PUB.domain + "/crossList?page=tangball_msg",
         param: {
           findJson: {
             //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
@@ -150,7 +161,6 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
-      console.log("msgg",this.msgg)
     },
     /**
      * 函数：{设置消息已读状态的函数}
@@ -177,4 +187,5 @@ export default {
 .main-wrap {
   padding-bottom: 100px;
 }
+
 </style>

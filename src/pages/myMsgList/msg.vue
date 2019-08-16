@@ -4,6 +4,8 @@
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-if="showSelect" @click="allCheck()">全选</div>
     </div>
+    <!--无数据时显示暂无数据-->
+    <tisp v-if="crowArr.length<=0"></tisp>
     <div class="flesh">
       <div class="content-box" v-if="showcontent">
         标题：
@@ -35,7 +37,11 @@
 </template>
 <script >
 /* eslint-disable */
+import tisp from "@/components/tisp/tisp";
 export default {
+  components: {
+    tisp
+  },
   props: {
     //父组件传入的当前对应已读或未读的数组
     crowArr: {
@@ -78,6 +84,16 @@ export default {
           this.$emit("spliceMsgg", close);
         }
       }
+    },
+    crowArr: function(nval, oval) {
+      this.checkedList.length = this.crowArr.length;
+      for (let i = 0; i < this.checkedList.length; i++) {
+        if (this.checkedList[i]) {
+          this.checkedList[i] = !this.checkedList[i];
+        } else {
+          this.checkedList[i] = false;
+        }
+      }
     }
   },
   methods: {
@@ -86,6 +102,7 @@ export default {
     //然后将true状态的消息的id和内容传递给父组件并触发已读接口
     //但目前似乎是请求速度过快，导致全选后虽然有传递数据，但有时会丢失数据
     purification() {
+      console.log("crowArr", this.crowArr);
       for (let i = this.crowArr.length - 1; i >= 0; i--) {
         if (this.checkedList[i]) {
           this.msgId = this.crowArr[i].P1;
@@ -102,6 +119,7 @@ export default {
     },
     // 全选按钮
     allCheck() {
+      console.log("触发了全选", this.checkedList);
       for (let i = 0; i < this.checkedList.length; i++) {
         if (this.checked) {
           this.checkedList[i] = false;
@@ -140,17 +158,7 @@ export default {
       this.showcontent = false;
       this.showcompile = true;
       this.crowArr.splice(gant, 1);
-      this.$emit("reader")
-    }
-  },
-  mounted() {
-    this.checkedList.length = this.crowArr.length;
-    for (let i = 0; i < this.checkedList.length; i++) {
-      if (this.checkedList[i]) {
-        this.checkedList[i] = !this.checkedList[i];
-      } else {
-        this.checkedList[i] = false;
-      }
+      this.$emit("reader");
     }
   },
   onUnload() {
@@ -200,7 +208,7 @@ export default {
 }
 .mas-box {
   height: 70px;
-  padding:0 15px;
+  padding: 0 15px;
   border-radius: 10px;
   margin: 10px 8px;
   position: relative;
@@ -214,7 +222,7 @@ export default {
 }
 .news-title,
 .news-detail {
-    line-height: 35px;
+  line-height: 35px;
   height: 35px;
   overflow: hidden;
   white-space: nowrap;
