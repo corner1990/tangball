@@ -13,8 +13,8 @@
     <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
     <!-- 赛事场馆列表组件 -->
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
-     <!--无数据时显示暂无数据-->
-    <tisp v-if="venueList.length<=0||!status"></tisp>
+    <!--无数据时显示暂无数据-->
+    <tisp v-if="status"></tisp>
     <mytabbar :active="1"></mytabbar>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
       venueList: [],
       keywords: null, //搜索关键字
       show: true, //是否显示
-      status: true//显示暂无数据
+      status: false //显示暂无数据
     };
   },
   methods: {
@@ -61,7 +61,8 @@ export default {
         } else {
           //如果关键字不匹配
           item.show = false;
-          this.status = false;
+          //如果关键字不匹配显示暂无数据
+          this.status = true;
         }
       });
       // console.log("this.status222", this.status,this.venueList.length);
@@ -80,6 +81,8 @@ export default {
       } else {
         this.selectIndex = -1;
       }
+      //还未请求到数据前显示showLoading加载中
+      wx.showLoading({ title: "加载中", icon: "loading" });
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
@@ -98,12 +101,17 @@ export default {
           }
         }
       });
+      wx.hideLoading();//请求到数据后加载中隐藏
+      if (this.venueList.length <= 0) {//判断接口数据的长度小于等于0显示暂无数据
+        this.status = false;
+      } else {
         this.status = true;
+      }
+
       data.list.forEach(item => {
         item.show = true;
       });
       this.venueList = data.list;
-
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
         listData: this.venueList,
