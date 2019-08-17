@@ -127,7 +127,7 @@ export default {
           }
         }
       });
-      console.log("data", data.list);
+     
       this.memberList = data.list;
       /**
        * @desc 根据成绩列表的第一个列表是男，第二个列表是女
