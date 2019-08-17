@@ -11,7 +11,7 @@
 
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
-        <!-- <footer @click="aa()" class="aa">更多赛事</footer> -->
+        <footer @click="aa()" class="aa">更多赛事</footer>
       </van-tabs>
     </div>
   </div>

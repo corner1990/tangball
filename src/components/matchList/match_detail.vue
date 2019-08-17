@@ -4,7 +4,7 @@
      
       <div class="match-box">
         <div class="match-img-box">
-          <img :src="item.album[0].url" v-if="item.album"/>
+          <img :src="item.album[0].url" v-if="item.album[0].url"/>
           <img :src="matchListImg" v-else/>
         </div>
         <div class="match-img-box1">
