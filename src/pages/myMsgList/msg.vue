@@ -1,26 +1,23 @@
 <template>
   <div>
     <div class="top-box" v-if="transformm">
-      <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
+      <div class="compile-box" @click="compile()" v-show="showcompile">批量操作</div>
       <div class="all-box" v-if="showSelect" @click="allCheck()">全选</div>
     </div>
     <!-- 无数据时显示暂无数据
     <tisp v-if="crowArr.length<=0"></tisp> -->
     <div class="flesh">
       <div class="content-box" v-if="showcontent">
-        标题：
-        <br />
-        {{crowArr[gant].name}}
-        <br />内容：
-        <br />
+        <span style="font-weight:bold">{{crowArr[gant].name}} </span>
+        <div class="span"></div>
         {{crowArr[gant].detail}}
         <div class="close-box" @click="shut(gant,msgId)">关 闭</div>
       </div>
       <div v-show="!showcontent">
         <div class="mas-box" v-for="(mass,index) in crowArr" :key="index">
           <div class="news" @click="content(index,mass.P1 )">
-            <div class="news-title">标题：{{mass.name}}</div>
-            <div class="news-detail">{{mass.detail}}</div>
+            <div class="news-title" style="font-size:15px;font-weight:bold">{{mass.name}}</div>
+            <div class="news-title" style="text-align: right">{{mass.CreateTime}}</div>
             <input
               type="checkbox"
               class="delete-box"
@@ -56,6 +53,7 @@ export default {
   },
   data() {
     return {
+      magIdList: [],
       unreadBox: [], //在$emit触发时，传递给父组件当前被选中的未读消息的对应数组数据，使父组件能在已读假数组中添加对应数据
       msgId: null, //当前被点击的消息id，通过$emit传递给父组件
       gant: {}, //当前被点击消息的index值
@@ -102,24 +100,24 @@ export default {
     //然后将true状态的消息的id和内容传递给父组件并触发已读接口
     //但目前似乎是请求速度过快，导致全选后虽然有传递数据，但有时会丢失数据
     purification() {
-      console.log("crowArr", this.crowArr);
       for (let i = this.crowArr.length - 1; i >= 0; i--) {
         if (this.checkedList[i]) {
-          this.msgId = this.crowArr[i].P1;
-          this.unreadBox = this.crowArr[i];
-          let transmit = {
-            newcrow: { msgId: this.msgId, unreadBox: this.unreadBox }
-          };
-          this.$emit("newMsgg", transmit);
+          this.magIdList.push(this.crowArr[i].P1);
+          this.unreadBox = this.unreadBox.concat(this.crowArr[i]);
           this.crowArr.splice(i, 1);
           this.checkedList.splice(i, 1);
         }
       }
+      let transmit = {
+        newcrow: { magIdList: this.magIdList, unreadBox: this.unreadBox }
+      };
+      this.$emit("newMsgg", transmit);
       this.compile();
+      this.magIdList = [];
+      this.unreadBox = [];
     },
     // 全选按钮
     allCheck() {
-      console.log("触发了全选", this.checkedList);
       for (let i = 0; i < this.checkedList.length; i++) {
         if (this.checked) {
           this.checkedList[i] = false;
@@ -143,21 +141,26 @@ export default {
     // 消息列表按钮，点击会向父件传值，触发事件
     content(index, msgId) {
       this.gant = index;
-      this.msgId = msgId;
-      if (this.showSelect) {
-      } else {
-        this.showcontent = true;
-        this.showcompile = false;
-        this.unreadBox = this.crowArr[index];
-        let transmit = { newcrow: { msgId: msgId, unreadBox: this.unreadBox } };
-        this.$emit("newMsgg", transmit);
+      this.magIdList.push(msgId);
+      if (this.transformm) {
+          this.unreadBox = this.unreadBox.concat(this.crowArr[index]);
+        let transmit = {
+          newcrow: { magIdList: this.magIdList, unreadBox: this.unreadBox }
+        };
+         this.$emit("newMsgg", transmit)
       }
+       this.showcontent = true;
+        this.showcompile = false;
+      this.magIdList = [];
+      this.unreadBox = [];
     },
     // 消息弹窗确定按钮
     shut(gant, msgId) {
       this.showcontent = false;
       this.showcompile = true;
-      this.crowArr.splice(gant, 1);
+      if(this.transformm){
+         this.crowArr.splice(gant, 1);
+      }
       this.$emit("reader");
     }
   },
@@ -189,7 +192,7 @@ export default {
   overflow: scroll;
 }
 .compile-box {
-  width: 35px;
+  width: 70px;
   height: 35px;
   position: absolute;
   text-align: center;
@@ -216,12 +219,15 @@ export default {
   color: #232323;
 }
 .news {
-  height: 70px;
+  height: 105px;
   text-align: left;
   overflow: hidden;
 }
-.news-title,
-.news-detail {
+.span {
+  height: 15px;
+  width: 100%;
+}
+.news-title {
   line-height: 35px;
   height: 35px;
   overflow: hidden;
@@ -236,7 +242,7 @@ export default {
   line-height: 25px;
   color: teal;
   position: absolute;
-  top: 0;
+  top: 12px;
   right: 0;
 }
 .bottom-box {
@@ -249,7 +255,6 @@ export default {
   height: 100px;
   line-height: 50px;
   width: 100%;
-  /* z-index:100; */
 }
 .content-box {
   position: relative;
@@ -261,6 +266,7 @@ export default {
   overflow: auto;
   background-color: #f5f5f5;
   overflow: scroll;
+  font-size: 15px;
 }
 .close-box {
   position: absolute;

@@ -7,7 +7,7 @@
         <van-tab title="已读"></van-tab>
       </van-tabs>
     </div>
-    
+
     <msg
       :transformm="transform"
       :crowArr="msgg"
@@ -15,8 +15,6 @@
       @spliceMsgg="closeDoor"
       @reader="reader"
     ></msg>
-     
-    
   </div>
 </template>
 <script>
@@ -30,12 +28,14 @@ export default {
   components: {
     mytabbar,
     debug_item,
-    msg,
+    msg
     // tisp
   },
   data() {
     return {
-      readd:false,
+      parcel: [],
+      magIdLis: [],
+      readd: false,
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
@@ -65,8 +65,8 @@ export default {
     this.transform = true;
   },
   methods: {
-    reader(){
-      this.readd = !this.readd
+    reader() {
+      this.readd = !this.readd;
     },
     //顶部聚焦按钮
     onChange(event) {
@@ -92,13 +92,16 @@ export default {
     // 触发已读消息接口，传递已读的消息id
     // 并且修改页面未读消息数组，将页面被点击的已读移动至未读（此处只修改未读，已读在子组件修改）
     moveMsg(transmit) {
-      this.msgId = transmit.newcrow.msgId;
-      this.crow2.push(transmit.newcrow.unreadBox);
+      this.parcel=[],
+      this.magIdList = transmit.newcrow.magIdList;
+      this.crow2 = this.crow2.concat(transmit.newcrow.unreadBox);
+      this.magIdList.map((item, index) => {
+        this.parcel.push(
+          Object.assign({},{msgId:item}, { memberId: this.tangballUserInfo.P1 })
+        );
+      });
       if (this.transform) {
-        this.setReadStatus({
-          memberId: this.tangballUserInfo.P1,
-          msgId: this.msgId
-        });
+        this.setReadStatus(this.parcel);
       }
     },
     // 被子组件$emit触发的方法2，解决用户未点击消息确定就切换已读未读按钮，导致消息数组无法正确删除的问题
@@ -170,22 +173,18 @@ export default {
     //已读数据接口，在页面加载后，只会在未读消息被点击时才会向页面传递当前消息的id，
     // 将后端接口的消息更改为已读
     async setReadStatus(_json) {
-      let { memberId, msgId } = _json;
       await util.post({
         //请求接口
-        url: global.PUB.domain + "/crossModify?page=tangball_msg_read",
-        param: {
-          findJson: { memberId, msgId },
-          modifyJson: { memberId, msgId }
-        }
+        url: global.PUB.domain + "/crossAdd?page=tangball_msg_read",
+        param: {data:_json}
       });
     }
   }
 };
+
 </script>
 <style scoped>
 .main-wrap {
   padding-bottom: 100px;
 }
-
 </style>

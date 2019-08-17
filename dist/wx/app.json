@@ -79,5 +79,13 @@
     "van-toast": "/static/vant/toast/index",
     "van-loading": "/static/vant/loading/index"
   },
+<<<<<<< HEAD
   "sitemapLocation": "sitemap20.json"
+=======
+<<<<<<< HEAD
+  "sitemapLocation": "sitemap46.json"
+=======
+  "sitemapLocation": "sitemap40.json"
+>>>>>>> 81498df574da9f5268611b072464ad4bf771043d
+>>>>>>> eaa4ab63159b67c8b7938de9d594fc060e06475c
 }
