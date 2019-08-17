@@ -39,7 +39,7 @@ export default {
     return {
       pageSize: 5,
       pageIndex: 1,
-
+      alldata: [],
       page: {},
       matchlist1: [],
       count: 0,
@@ -55,9 +55,14 @@ export default {
     };
   },
   methods: {
+    tabCutInin() {
+      this.matchlist = [];
+      this.pageIndex = 1;
+      this.getlist(); //调用一次接口
+    },
     aa() {
       this.pageIndex++;
-      console.log("count------------------", this.pageIndex);
+
       this.getlist();
     },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
@@ -67,24 +72,16 @@ export default {
       //如果是近期（因为近期的index为0）,全国Index=1,如果是加盟商Index=2
       if (event.target.index == 0) {
         this.matchType = null; //改变请求接口参数
-        this.matchlist=[]
-        this.pageIndex=1
-        this.getlist(); //调用一次接口
+        this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
-         this.matchlist=[]
-         this.pageIndex=1
-        this.getlist(); //调用一次接口
+        this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 2) {
         this.matchType = 1;
-        this.matchlist=[]
-        this.pageIndex=1
-        this.getlist(); //调用一次接口
+        this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 3) {
         this.matchType = null;
-         this.matchlist=[]
-         this.pageIndex=1
-        this.getlist();
+        this.tabCutInin(); //切换初始化方法
       }
     },
     changeValue(event) {
@@ -99,6 +96,7 @@ export default {
         param: {
           pageSize: this.pageSize,
           pageIndex: this.pageIndex,
+          sortJson: { matchTime: -1 },
           findJson: { matchType: this.matchType }
         }
       });
@@ -116,6 +114,13 @@ export default {
       this.matchlist.sort((a, b) => {
         return a.matchTime > b.matchTime ? -1 : 1;
       });
+      // -------------数组拼接---------------------------
+      if (arr.length > 0) {
+     let arrJoint=this.matchlist.concat(arr)
+        this.matchlist = arrJoint;
+        
+      }
+      
     }
   },
   onLoad() {
@@ -130,10 +135,14 @@ export default {
 </script>
 <style scoped>
 .aa {
+  opacity: 0.5;
+  font-weight: bold;
+  line-height: 30px;
+  text-align: center;
   position: absolute;
   bottom: 9px;
   left: 0;
-  background: #ccc;
+  background: rgb(158, 149, 149);
   height: 30px;
   width: 100%;
 }
