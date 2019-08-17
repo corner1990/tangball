@@ -4,8 +4,8 @@
       <div class="compile-box" @click="compile()" v-show="showcompile">编辑</div>
       <div class="all-box" v-if="showSelect" @click="allCheck()">全选</div>
     </div>
-    <!--无数据时显示暂无数据-->
-    <tisp v-if="crowArr.length<=0"></tisp>
+    <!-- 无数据时显示暂无数据
+    <tisp v-if="crowArr.length<=0"></tisp> -->
     <div class="flesh">
       <div class="content-box" v-if="showcontent">
         标题：
@@ -37,10 +37,10 @@
 </template>
 <script >
 /* eslint-disable */
-import tisp from "@/components/tisp/tisp";
+// import tisp from "@/components/tisp/tisp";
 export default {
   components: {
-    tisp
+    // tisp
   },
   props: {
     //父组件传入的当前对应已读或未读的数组

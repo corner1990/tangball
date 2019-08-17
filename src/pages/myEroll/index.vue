@@ -22,7 +22,7 @@
     </div>
     <mytabbar></mytabbar>
     <!--无数据时显示暂无数据-->
-     <tisp v-if="myErollList.length<=0"></tisp>
+     <tisp v-if="status"></tisp>
   </div>
 </template>
 <script>
@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-      myErollList: []
+      myErollList: [],
+      status: false //显示暂无数据
     };
   },
   computed: {
@@ -90,6 +91,7 @@ export default {
      * @param xxxx
      */
     async ajaxEnrollList() {
+       wx.showLoading({ title: "加载中", icon: "loading" });
       this.myErollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 9999,
@@ -109,6 +111,13 @@ export default {
         idKeyColumn: "P1",
         page: "tangball_venue"
       });
+       wx.hideLoading(); //请求到数据后加载中隐藏
+       //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.myErollList.length <= 0) {
+        this.status = true;
+      } else {
+        this.status = false;
+      }
     }
   },
   mounted() {
