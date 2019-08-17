@@ -85,5 +85,10 @@
     "van-picker": "/static/vant/picker/index",
     "van-toast": "/static/vant/toast/index",
     "van-loading": "/static/vant/loading/index"
+<<<<<<< HEAD
   }
+=======
+  },
+  "sitemapLocation": "sitemap89.json"
+>>>>>>> 2583a8cc3e8d5855377203f507556f186e8a8ed2
 }

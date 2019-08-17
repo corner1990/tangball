@@ -2,8 +2,6 @@
   <div class="main-wrap">
     <debug_item v-model="memberList" text="会员列表" />
     <p class="H10 OF2 CL1"></p>
-    <!-- 分页组件 -->
-    <pageLink></pageLink>
     <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
     <div class="button-box">
       <div
@@ -44,14 +42,12 @@ import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import rankingListComponent from "./rankingListComponent";
-import pageLink from "./pageLink";
 import util from "@/utils/util";
 export default {
   components: {
     mytabbar,
     debug_item,
     rankingListComponent,
-    pageLink,
     tisp
   },
   data() {
