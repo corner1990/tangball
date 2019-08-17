@@ -11,8 +11,6 @@
 }
 .match-box {
   margin: 5px 15px;
-  /* margin-bottom: 5px; */
-  /* position: relative; */
   border-bottom: #ddd 1px solid;
   height: 97px;
   display: flex;
