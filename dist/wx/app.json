@@ -79,5 +79,7 @@
     "van-toast": "/static/vant/toast/index",
     "van-loading": "/static/vant/loading/index"
   },
+
   "sitemapLocation": "sitemap46.json"
+
 }

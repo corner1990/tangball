@@ -6,11 +6,11 @@
       </div>-->
     </div>
     <!--无数据时显示暂无数据-->
-    <tisp v-if="articleList.length<=0"></tisp>
+    <tisp v-if="status"></tisp>
     <div v-else>
-       <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
+      <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
     </div>
-   
+
     <div style="height:20px"></div>
 
     <!-- <mytabbar></mytabbar> -->
@@ -33,12 +33,13 @@ export default {
     util,
     my_field,
     articleListIndex,
-     tisp
+    tisp
   },
   data() {
     return {
       articleList: [], //文章列表
-      Categorylist: null //文章列表
+      Categorylist: null, //文章列表
+      status: false //显示暂无数据
     };
   },
   methods: {
@@ -46,6 +47,7 @@ export default {
       wx.navigateTo({ url });
     },
     async getArticleList() {
+      wx.showLoading({ title: "加载中", icon: "loading" });
       this.articleList = await util.ajaxGetList({
         page: "tangball_article",
         pageSize: 15,
@@ -59,6 +61,7 @@ export default {
         pageSize: 15,
         findJson: {}
       });
+      wx.hideLoading(); //请求到数据后加载中隐藏
       let dictPerson = {}; //人员数据字典对象
       this.Categorylist.forEach(item => {
         //循环：{人员数组}
@@ -70,6 +73,12 @@ export default {
          */
         matchEach.CategoryName = dictPerson[matchEach.articleCategory].name;
       });
+      //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.articleList.length <= 0 || this.Categorylist.length <= 0) {
+        this.status = true;
+      } else {
+        this.status = false;
+      }
     }
   },
   mounted() {
