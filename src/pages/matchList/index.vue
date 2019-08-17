@@ -7,7 +7,7 @@
     <div>
       <van-tabs :active="active" @change="onClickTab" style="position: relative;">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
-          <tisp v-if="matchlist.length<=0"></tisp>
+          <tisp v-if="status"></tisp>
 
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
@@ -32,7 +32,8 @@ export default {
     Dialog,
     tisp,
     debug_item,
-    matct_detail
+    matct_detail,
+    
   },
   data() {
     return {
@@ -49,7 +50,8 @@ export default {
         { category: "全国赛" },
         { category: "普通赛" },
         { category: "全部" }
-      ]
+      ],
+      status: false //显示暂无数据
     };
   },
   methods: {
@@ -88,6 +90,10 @@ export default {
     //----------- 请求接口数据的函数-------------------
 
     async getlist() {
+<<<<<<< HEAD
+=======
+       wx.showLoading({ title: "加载中", icon: "loading" });
+>>>>>>> 5a8675fa025898f71dc51887a564d516e938fd0a
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_match",
         param: {
@@ -97,11 +103,24 @@ export default {
           findJson: { matchType: this.matchType }
         }
       });
+<<<<<<< HEAD
       let arr = this.matchlist;
       this.matchlist = data.list;
       this.alldata = data,
         console.log("dfadkljfajlkfjklaljkfsd", this.alldata);
       this.page = data.page;
+=======
+       wx.hideLoading(); //请求到数据后加载中隐藏
+      this.matchlist = data.list;
+      //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.matchlist.length <= 0 ) {
+        this.status = true;
+      } else {
+        this.status = false;
+      }
+    
+
+>>>>>>> 5a8675fa025898f71dc51887a564d516e938fd0a
       //--------------数组的日期排序的方法-----------------------
       this.matchlist.sort((a, b) => {
         return a.matchTime > b.matchTime ? -1 : 1;
