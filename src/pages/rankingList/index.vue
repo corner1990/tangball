@@ -130,12 +130,8 @@ export default {
           }
         }
       });
-<<<<<<< HEAD
-     
-=======
 
       wx.hideLoading(); //请求到数据后加载中隐藏
->>>>>>> 5a8675fa025898f71dc51887a564d516e938fd0a
       this.memberList = data.list;
       //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.memberList.length <= 0 || !this.memberList) {

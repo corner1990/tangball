@@ -11,9 +11,9 @@
 
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
-        <footer @click="aa()" class="aa">更多赛事</footer>
       </van-tabs>
     </div>
+    <footer @click="aa()" :class="{aa:true,bb:!isStatus}">{{footerText}}</footer>
   </div>
 </template>
 <script>
@@ -32,8 +32,23 @@ export default {
     Dialog,
     tisp,
     debug_item,
-    matct_detail,
-    
+    matct_detail
+  },
+  onPageScroll(res) {
+    let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
+    let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
+    // 相当每一次滚动到底部的时候，就会进行一次加载
+    if (this.pageIndex == index) {
+      this.pageIndex++;
+      if (this.isStatus) {
+        //这里是点击更多赛事触发了调取接口函数，在这里作判断
+        this.getlist();
+      }
+    }
+  },
+  onReachBottom(res) {
+    //滑动到底部
+    //  console.log("---------------------",res);
   },
   data() {
     return {
@@ -51,7 +66,9 @@ export default {
         { category: "普通赛" },
         { category: "全部" }
       ],
-      status: false //显示暂无数据
+      status: false, //显示暂无数据
+      footerText: "更多赛事", //初始为更多赛事，当最后一页时是查往事
+      isStatus: true //控制能够触发请求接口的状态
     };
   },
   methods: {
@@ -62,16 +79,21 @@ export default {
     },
     aa() {
       this.pageIndex++;
-
-      this.getlist();
+      if (this.isStatus) {
+        //这里是点击更多赛事触发了调取接口函数，在这里作判断
+        this.getlist();
+      }
     },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
       this.active = event.target.index;
+      this.isStatus = true; //切换普通赛事等时，要能够请求函数，所以设置为true
+      this.footerText = "更多赛事"; //切换普通赛事等时，重新把查看往事变为更多赛事
       // ------------------地区区分---------------------
       //如果是近期（因为近期的index为0）,全国Index=1,如果是加盟商Index=2
       if (event.target.index == 0) {
         this.matchType = null; //改变请求接口参数
+
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
@@ -90,10 +112,7 @@ export default {
     //----------- 请求接口数据的函数-------------------
 
     async getlist() {
-<<<<<<< HEAD
-=======
-       wx.showLoading({ title: "加载中", icon: "loading" });
->>>>>>> 5a8675fa025898f71dc51887a564d516e938fd0a
+      wx.showLoading({ title: "加载中", icon: "loading" });
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_match",
         param: {
@@ -103,35 +122,32 @@ export default {
           findJson: { matchType: this.matchType }
         }
       });
-<<<<<<< HEAD
-      let arr = this.matchlist;
-      this.matchlist = data.list;
-      this.alldata = data,
-        console.log("dfadkljfajlkfjklaljkfsd", this.alldata);
-      this.page = data.page;
-=======
-       wx.hideLoading(); //请求到数据后加载中隐藏
-      this.matchlist = data.list;
-      //-----判断接口数据的长度小于等于0显示暂无数据
-      if (this.matchlist.length <= 0 ) {
-        this.status = true;
-      } else {
-        this.status = false;
-      }
-    
+      wx.hideLoading(); //请求到数据后加载中隐藏
+      let arr = data.list;
 
->>>>>>> 5a8675fa025898f71dc51887a564d516e938fd0a
+      // -------------数组拼接---------------------------
+      // console.log("arr.length-----------------------");
+      if (arr.length > 0) {
+        let arrJoint = this.matchlist.concat(arr);
+        this.matchlist = arrJoint;
+      }
       //--------------数组的日期排序的方法-----------------------
       this.matchlist.sort((a, b) => {
         return a.matchTime > b.matchTime ? -1 : 1;
       });
-      // -------------数组拼接---------------------------
-      if (arr.length > 0) {
-     let arrJoint=this.matchlist.concat(arr)
-        this.matchlist = arrJoint;
-        
+
+      //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.matchlist.length <= 0) {
+        this.status = true;
+      } else {
+        this.status = false;
       }
-      
+
+      if (this.pageIndex == data.page.pageCount) {
+        this.footerText = "查看往事"; //当当前页数等于接口的页数时，就文字变为查看往事，不能请求接口了
+        this.isStatus = false;
+        return;
+      }
     }
   },
   onLoad() {
@@ -141,6 +157,9 @@ export default {
     objParam() {
       return { pageSize: this.pageSize, pageIndex: this.pageIndex };
     }
+  },
+  onUNnLoad() {
+    this.footerText = "更多赛事";
   }
 };
 </script>
@@ -148,13 +167,17 @@ export default {
 .aa {
   opacity: 0.5;
   font-weight: bold;
-  line-height: 30px;
+  /* line-height: 30px; */
   text-align: center;
-  position: absolute;
+  /* position: absolute;
   bottom: 9px;
-  left: 0;
+  left: 0; */
   background: rgb(158, 149, 149);
+
   height: 30px;
   width: 100%;
+}
+.bb {
+  background-color: aliceblue;
 }
 </style>
