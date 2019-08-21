@@ -117,6 +117,7 @@ export default {
         this.msgg0.splice(this.gant, 1);
       }
     },
+
     // 这里是消息列表的接口，此接口只在页面创建后加载一次，将数据加载至页面已读未读的假数组中
     async getMyMsgList(_json) {
       wx.showLoading({ title: "加载中", icon: "loading" });
@@ -161,7 +162,7 @@ export default {
         if (docRead) {
           msgEach.isRead = true; //已读
           msgEach.readTime = docRead.readTime;
-          // this.crow2.push(msgEach); //加载数据至已读接口
+          this.crow2.push(msgEach); //加载数据至已读接口
         } else {
           msgEach.isRead = false; //未读
           this.msgg0.push(msgEach); //加载数据至未读接口

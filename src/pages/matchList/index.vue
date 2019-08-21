@@ -1,6 +1,5 @@
 <template>
   <div class="main-wrap">
-
     <div>
       <van-tabs :active="active" @change="onClickTab" style="position: relative;">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
@@ -170,11 +169,15 @@ export default {
   bottom: 9px;
   left: 0; */
   background: rgb(158, 149, 149);
-
   height: 30px;
   width: 100%;
 }
 .noload {
-  background-color: aliceblue;
+  color: #999999;
+  background-color: #fff;
+  height: 30px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 30px;
 }
-</style>
+</style> 
