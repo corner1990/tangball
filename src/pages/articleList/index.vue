@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       articleList: [], //文章列表
-      Categorylist: null, //文章列表
+      Categorylist: [], //文章列表
       status: false //显示暂无数据
     };
   },

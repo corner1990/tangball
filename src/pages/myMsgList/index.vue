@@ -20,7 +20,6 @@
 <script>
 /* eslint-disable */
 import msg from "@/pages/myMsgList/msg";
-// import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
@@ -29,7 +28,6 @@ export default {
     mytabbar,
     debug_item,
     msg
-    // tisp
   },
   data() {
     return {
@@ -39,8 +37,8 @@ export default {
       active: 0, //默认聚焦未读
       transform: true, //传递向子组件告知已读未读的状态值
       msgId: null, //传递给接口的消息id
-      myMsgList: null, //传递接口的消息列表
-      myMsgRead: null, //传递接口的已读消息列表
+      myMsgList: [], //传递接口的消息列表
+      myMsgRead: [], //传递接口的已读消息列表
       dictMsgRead: null, //传递接口的已读消息数字字典
       msgg0: [], //未读数组
       msgg: [], //传递向子组件的数组值
@@ -54,6 +52,7 @@ export default {
       return this.$store.state.tangballUserInfo;
     }
   },
+
   mounted() {
     (this.msgg0 = []), //未读数组
       (this.crow2 = []), //已读数组
@@ -92,12 +91,15 @@ export default {
     // 触发已读消息接口，传递已读的消息id
     // 并且修改页面未读消息数组，将页面被点击的已读移动至未读（此处只修改未读，已读在子组件修改）
     moveMsg(transmit) {
-      this.parcel=[],
-      this.magIdList = transmit.newcrow.magIdList;
+      (this.parcel = []), (this.magIdList = transmit.newcrow.magIdList);
       this.crow2 = this.crow2.concat(transmit.newcrow.unreadBox);
       this.magIdList.map((item, index) => {
         this.parcel.push(
-          Object.assign({},{msgId:item}, { memberId: this.tangballUserInfo.P1 })
+          Object.assign(
+            {},
+            { msgId: item },
+            { memberId: this.tangballUserInfo.P1 }
+          )
         );
       });
       if (this.transform) {
@@ -117,6 +119,7 @@ export default {
     },
     // 这里是消息列表的接口，此接口只在页面创建后加载一次，将数据加载至页面已读未读的假数组中
     async getMyMsgList(_json) {
+      wx.showLoading({ title: "加载中", icon: "loading" });
       let { data } = await util.post({
         //请求接口
         url: global.PUB.domain + "/crossList?page=tangball_msg",
@@ -130,6 +133,7 @@ export default {
           }
         } //传递参数
       });
+
       {
         let { data } = await util.post({
           //请求接口
@@ -140,13 +144,14 @@ export default {
             }
           } //传递参数
         });
+
         this.myMsgRead = data.list;
       }
-      // this.dictMsgRead = {}; //消息阅读记录的数据字典对象
-      // this.myMsgRead.forEach(msgReadEach => {
-      //   //循环：{消息阅读记录数组}
-      //   this.dictMsgRead[msgReadEach.msgId] = msgReadEach;
-      // });
+      this.dictMsgRead = {}; //消息阅读记录的数据字典对象
+      this.myMsgRead.forEach(msgReadEach => {
+        //循环：{消息阅读记录数组}
+        this.dictMsgRead[msgReadEach.msgId] = msgReadEach;
+      });
       //使用lodash.keyBy制作数据字典
       this.dictMsgRead = this.$lodash.keyBy(this.myMsgRead, "msgId");
       //循环：{消息数组}
@@ -156,7 +161,7 @@ export default {
         if (docRead) {
           msgEach.isRead = true; //已读
           msgEach.readTime = docRead.readTime;
-          this.crow2.push(msgEach); //加载数据至已读接口
+          // this.crow2.push(msgEach); //加载数据至已读接口
         } else {
           msgEach.isRead = false; //未读
           this.msgg0.push(msgEach); //加载数据至未读接口
@@ -164,6 +169,7 @@ export default {
       });
       this.myMsgList = data.list;
       this.msgg = this.msgg0; //页面加载后使子组件默认显示未读数组
+      wx.hideLoading(); //请求到数据后加载中隐藏
     },
     /**
      * 函数：{设置消息已读状态的函数}
@@ -176,12 +182,11 @@ export default {
       await util.post({
         //请求接口
         url: global.PUB.domain + "/crossAdd?page=tangball_msg_read",
-        param: {data:_json}
+        param: { data: _json }
       });
     }
   }
 };
-
 </script>
 <style scoped>
 .main-wrap {

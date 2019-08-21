@@ -1,9 +1,6 @@
 <template>
   <div class="main-wrap">
-    page.allCount---------------{{page.allCount}}
-    page.pageCount---------------{{page.pageCount}}
-    page.pageIndex---------------{{page.pageIndex}}
-    pageSize--------------------{{page.pageSize}}
+
     <div>
       <van-tabs :active="active" @change="onClickTab" style="position: relative;">
         <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
@@ -13,7 +10,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <footer @click="aa()" :class="{aa:true,bb:!isStatus}">{{footerText}}</footer>
+    <footer @click="footLoadLazy()" :class="{footLoadLazy:true,noload:!isStatus}">{{footerText}}</footer>
   </div>
 </template>
 <script>
@@ -77,7 +74,7 @@ export default {
       this.pageIndex = 1;
       this.getlist(); //调用一次接口
     },
-    aa() {
+    footLoadLazy() {
       this.pageIndex++;
       if (this.isStatus) {
         //这里是点击更多赛事触发了调取接口函数，在这里作判断
@@ -144,7 +141,7 @@ export default {
       }
 
       if (this.pageIndex == data.page.pageCount) {
-        this.footerText = "查看往事"; //当当前页数等于接口的页数时，就文字变为查看往事，不能请求接口了
+        this.footerText = "已无更多赛事"; //当当前页数等于接口的页数时，就文字变为查看往事，不能请求接口了
         this.isStatus = false;
         return;
       }
@@ -164,7 +161,7 @@ export default {
 };
 </script>
 <style scoped>
-.aa {
+.foot-loadlazy {
   opacity: 0.5;
   font-weight: bold;
   /* line-height: 30px; */
@@ -177,7 +174,7 @@ export default {
   height: 30px;
   width: 100%;
 }
-.bb {
+.noload {
   background-color: aliceblue;
 }
 </style>
