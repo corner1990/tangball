@@ -161,7 +161,7 @@ export default {
         if (docRead) {
           msgEach.isRead = true; //已读
           msgEach.readTime = docRead.readTime;
-          // this.crow2.push(msgEach); //加载数据至已读接口
+         this.crow2.push(msgEach); //加载数据至已读接口
         } else {
           msgEach.isRead = false; //未读
           this.msgg0.push(msgEach); //加载数据至未读接口
