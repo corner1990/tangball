@@ -147,6 +147,7 @@ export default {
     },
     // 消息列表按钮，点击会向父件传值，触发事件
     content(index, msgId) {
+      if(!this.showSelect){
       this.gant = index;
       this.magIdList.push(msgId);
       if (this.transformm) {
@@ -160,6 +161,7 @@ export default {
       this.showcompile = false;
       this.magIdList = [];
       this.unreadBox = [];
+      }
     },
     // 消息弹窗确定按钮
     shut(gant, msgId) {
