@@ -217,7 +217,7 @@ export default {
   right: 20px;
 }
 .mas-box {
-  height: 70px;
+  height: 85px;
   padding: 0 15px;
   border-radius: 10px;
   margin: 10px 8px;
@@ -235,8 +235,8 @@ export default {
   width: 100%;
 }
 .news-title {
-  line-height: 35px;
-  height: 35px;
+  line-height: 40px;
+  height: 40px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
