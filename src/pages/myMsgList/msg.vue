@@ -4,11 +4,12 @@
       <div class="compile-box" @click="compile()" v-show="showcompile">批量操作</div>
       <div class="all-box" v-if="showSelect" @click="allCheck()">全选</div>
     </div>
-    <!-- 无数据时显示暂无数据
-    <tisp v-if="crowArr.length<=0"></tisp> -->
+    <!-- 无数据时显示暂无数据 -->
+
+    <tisp v-if="status"></tisp>
     <div class="flesh">
       <div class="content-box" v-if="showcontent">
-        <span style="font-weight:bold">{{crowArr[gant].name}} </span>
+        <span style="font-weight:bold">{{crowArr[gant].name}}</span>
         <div class="span"></div>
         {{crowArr[gant].detail}}
         <div class="close-box" @click="shut(gant,msgId)">关 闭</div>
@@ -34,10 +35,10 @@
 </template>
 <script >
 /* eslint-disable */
-// import tisp from "@/components/tisp/tisp";
+import tisp from "@/components/tisp/tisp";
 export default {
   components: {
-    // tisp
+    tisp
   },
   props: {
     //父组件传入的当前对应已读或未读的数组
@@ -61,7 +62,8 @@ export default {
       showcompile: true, //判断编辑按钮显隐
       checked: false, //多选时复选框默认的状态
       showSelect: false, //全选，复选框，及确认已读按钮显隐
-      showcontent: false //消息列表显隐
+      showcontent: false, //消息列表显隐
+      status: false
     };
   },
   //监听器：通过监听父组件传进来的已读未读状态触发
@@ -91,6 +93,11 @@ export default {
         } else {
           this.checkedList[i] = false;
         }
+      }
+      if (this.crowArr.length <= 0) {
+        this.status = true;
+      } else {
+        this.status = false;
       }
     }
   },
@@ -143,14 +150,14 @@ export default {
       this.gant = index;
       this.magIdList.push(msgId);
       if (this.transformm) {
-          this.unreadBox = this.unreadBox.concat(this.crowArr[index]);
+        this.unreadBox = this.unreadBox.concat(this.crowArr[index]);
         let transmit = {
           newcrow: { magIdList: this.magIdList, unreadBox: this.unreadBox }
         };
-         this.$emit("newMsgg", transmit)
+        this.$emit("newMsgg", transmit);
       }
-       this.showcontent = true;
-        this.showcompile = false;
+      this.showcontent = true;
+      this.showcompile = false;
       this.magIdList = [];
       this.unreadBox = [];
     },
@@ -158,8 +165,8 @@ export default {
     shut(gant, msgId) {
       this.showcontent = false;
       this.showcompile = true;
-      if(this.transformm){
-         this.crowArr.splice(gant, 1);
+      if (this.transformm) {
+        this.crowArr.splice(gant, 1);
       }
       this.$emit("reader");
     }
