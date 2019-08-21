@@ -2,8 +2,6 @@
   <div class="main-wrap">
     <debug_item v-model="memberList" text="会员列表" />
     <p class="H10 OF2 CL1"></p>
-    <!-- 分页组件 -->
-    <pageLink></pageLink>
     <!--参赛次数、成绩排名、鸟王排名、积分排名等按钮 -->
     <div class="button-box">
       <div
@@ -31,7 +29,8 @@
           :value="arrList[rankingIndex].value"
           :key="j"
         ></rankingListComponent>
-        <tisp v-if="memberList.length<=0"></tisp>
+        <!--无数据时显示暂无数据-->
+        <tisp v-if="status"></tisp>
       </van-tab>
     </van-tabs>
     <div class="bottom-space"></div>
@@ -44,14 +43,12 @@ import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import rankingListComponent from "./rankingListComponent";
-import pageLink from "./pageLink";
 import util from "@/utils/util";
 export default {
   components: {
     mytabbar,
     debug_item,
     rankingListComponent,
-    pageLink,
     tisp
   },
   data() {
@@ -88,7 +85,8 @@ export default {
       sexIndex: 1, //男或者女的索引
       activeTitle: "参赛次数", //参赛次数、成绩排名、鸟王排名、积分排名的文字
       // memberList: [{ list: [] }, { list: [] }] //会员数据列表
-      memberList: [] //会员数据列表
+      memberList: [], //会员数据列表
+      status: false //显示暂无数据
     };
   },
   methods: {
@@ -121,6 +119,7 @@ export default {
      */
     async getMemberList(url, sortJson, selectJson) {
       let RankingName = this.arrList[this.rankingIndex].value[1]; //排名名称
+      wx.showLoading({ title: "加载中", icon: "loading" });
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_member",
         param: {
@@ -131,8 +130,15 @@ export default {
           }
         }
       });
-      console.log("data", data.list);
+
+      wx.hideLoading(); //请求到数据后加载中隐藏
       this.memberList = data.list;
+      //-----判断接口数据的长度小于等于0显示暂无数据
+      if (this.memberList.length <= 0 || !this.memberList) {
+        this.status = true;
+      } else {
+        this.status = false;
+      }
       /**
        * @desc 根据成绩列表的第一个列表是男，第二个列表是女
        */

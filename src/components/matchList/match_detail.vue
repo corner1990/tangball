@@ -4,7 +4,7 @@
      
       <div class="match-box">
         <div class="match-img-box">
-          <img :src="item.album[0].url" v-if="item.album"/>
+          <img :src="item.album[0].url" v-if="item.album[0].url"/>
           <img :src="matchListImg" v-else/>
         </div>
         <div class="match-img-box1">
@@ -19,6 +19,7 @@
         </div>
       </div>
     </navigator>
+  
   </div>
 
 </template>
@@ -54,12 +55,7 @@ export default {
     }
   },
   methods: {
-    /**
-     * @desc 搜索回调
-     */
-    /**   
-     * @desc 赛事切换回调
-     */
+ 
   },
   onLoad() {
     /**
@@ -94,4 +90,5 @@ export default {
 .card {
   margin: 0 10px;
 }
+
 </style>
