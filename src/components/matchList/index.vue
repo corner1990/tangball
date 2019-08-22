@@ -1,16 +1,15 @@
 <template>
-  <div class="main-wrap">
+
     <div>
       <van-tabs :active="active" @change="onClickTab" style="position: relative;">
-        <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem" >
+        <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
           <tisp v-if="status"></tisp>
-
           <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
         </van-tab>
       </van-tabs>
     </div>
-    <!-- <footer @click="footLoadLazy()" :class="{footLoadLazy:true,noload:!isStatus}">{{footerText}}</footer> -->
-  </div>
+  
+
 </template>
 <script>
 /* eslint-disable */
