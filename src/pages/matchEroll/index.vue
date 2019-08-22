@@ -311,6 +311,7 @@ export default {
       //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
       let tangballUserInfoNew = Object.assign(tangballUserInfo, this.info); //
       this.$store.commit("setTangballUserInfo", tangballUserInfoNew);
+     
     },
     /**
      * @desc 修改信息

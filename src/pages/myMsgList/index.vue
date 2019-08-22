@@ -43,13 +43,26 @@ export default {
       msgg0: [], //未读数组
       msgg: [], //传递向子组件的数组值
       crow2: [], //已读数组
-      pageName: "个人中心-系统消息列表" //页面名
+      pageName: "个人中心-系统消息列表" ,//页面名
+       pageSize:'5',
+       pageIndex:'1'
     };
   },
   computed: {
     //唐球会员信息-在vuex中获取
     tangballUserInfo: function() {
       return this.$store.state.tangballUserInfo;
+    }
+  }, onPageScroll(res) {
+    let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
+    let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
+    // 相当每一次滚动到底部的时候，就会进行一次加载
+    if (this.pageIndex == index) {
+      this.pageIndex++;
+      if (this.isStatus) {
+        //这里是点击更多赛事触发了调取接口函数，在这里作判断
+        this.getlist();
+      }
     }
   },
 
@@ -125,6 +138,8 @@ export default {
         //请求接口
         url: global.PUB.domain + "/crossList?page=tangball_msg",
         param: {
+          pageSize: this.pageSize,
+          pageIndex: this.pageIndex,
           findJson: {
             //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
             $or: [
@@ -134,6 +149,7 @@ export default {
           }
         } //传递参数
       });
+      console.log("adafda", data);
 
       {
         let { data } = await util.post({

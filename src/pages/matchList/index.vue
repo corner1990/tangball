@@ -9,7 +9,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <footer @click="footLoadLazy()" :class="{footLoadLazy:true,noload:!isStatus}">{{footerText}}</footer>
+    <!-- <footer @click="footLoadLazy()" :class="{footLoadLazy:true,noload:!isStatus}">{{footerText}}</footer> -->
   </div>
 </template>
 <script>
@@ -30,18 +30,18 @@ export default {
     debug_item,
     matct_detail
   },
-  onPageScroll(res) {
-    let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
-    let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
-    // 相当每一次滚动到底部的时候，就会进行一次加载
-    if (this.pageIndex == index) {
-      this.pageIndex++;
-      if (this.isStatus) {
-        //这里是点击更多赛事触发了调取接口函数，在这里作判断
-        this.getlist();
-      }
-    }
-  },
+  // onPageScroll(res) {
+  //   let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
+  //   let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
+  //   // 相当每一次滚动到底部的时候，就会进行一次加载
+  //   if (this.pageIndex == index) {
+  //     this.pageIndex++;
+  //     if (this.isStatus) {
+  //       //这里是点击更多赛事触发了调取接口函数，在这里作判断
+  //       this.getlist();
+  //     }
+  //   }
+  // },
   onReachBottom(res) {
     //滑动到底部
     //  console.log("---------------------",res);
@@ -120,7 +120,7 @@ export default {
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
       let arr = data.list;
-
+      
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
       if (arr.length > 0) {
@@ -156,6 +156,7 @@ export default {
   },
   onUNnLoad() {
     this.footerText = "更多赛事";
+
   }
 };
 </script>
