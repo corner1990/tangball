@@ -138,8 +138,7 @@ export default {
         //请求接口
         url: global.PUB.domain + "/crossList?page=tangball_msg",
         param: {
-          pageSize: this.pageSize,
-          pageIndex: this.pageIndex,
+          
           findJson: {
             //或查询条件：range==1或[range==2&&memberIdList包含当前会员id]
             $or: [
