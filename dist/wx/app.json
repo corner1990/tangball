@@ -2,20 +2,18 @@
   "pages": [
     "pages/index/main",
     "pages/matchList/main",
+<<<<<<< HEAD
    
  
     
+=======
+>>>>>>> 1509ff2fdda4eec5db176653d47128d0da9cbc58
     "pages/articleList/main",
-  
-    
-    
-    
     "pages/authorize/main",
     "pages/ajaxDemo/main",
     "pages/myEroll/main",
     "pages/myMsgList/main",
-    "pages/myInfo/main", 
-  
+    "pages/myInfo/main",
     "pages/venueList/main",
     "pages/matchEroll/main",
     "pages/tanghome/main",
@@ -26,7 +24,6 @@
     "pages/venueDetail/main",
     "pages/rankingList/main",
     "pages/myErollDetail/main",
-  
     "pages/articleDetail/main",
     "pages/searchPage/main"
   ],
