@@ -122,6 +122,7 @@ export default {
       this.compile();
       this.magIdList = [];
       this.unreadBox = [];
+      this.$emit("reader");
     },
     // 全选按钮
     allCheck() {
