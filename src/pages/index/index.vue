@@ -40,7 +40,7 @@
     <div>
       <div class="index_area_title">唐球赛事</div>
       <div class>
-        <matchlist></matchlist>
+        <togod pageSize=5></togod>
       </div>
     </div>
     <div style="">
@@ -89,7 +89,7 @@
 /* eslint-disable */
 import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
-import matchlist from "../matchList/index";
+import togod from "../../components/matchList/togod";
 import articleList from "../articleList/index";
 import card from "@/components/card";
 // import { get } from '@/utils/request'
@@ -98,7 +98,7 @@ export default {
   components: {
     card,
     mytabbar,
-    matchlist,
+    togod,
     articleList,
     debug_item
   },

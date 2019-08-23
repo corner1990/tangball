@@ -2,12 +2,6 @@
   "pages": [
     "pages/index/main",
     "pages/matchList/main",
-<<<<<<< HEAD
-   
- 
-    
-=======
->>>>>>> 1509ff2fdda4eec5db176653d47128d0da9cbc58
     "pages/articleList/main",
     "pages/authorize/main",
     "pages/ajaxDemo/main",
