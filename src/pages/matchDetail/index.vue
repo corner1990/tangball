@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrap">
+    
     <!-- 赛事照片 -->
     <div class>
       <swiper
@@ -33,7 +34,21 @@
       </van-popup>
     </div>
     <!-- 赛事名称 -->
-    <div class="FS24 TAC LH36">{{matchDoc.matchName}}</div>
+    <div>
+      <div class="FS24 TAC LH36 ">{{matchDoc.matchName}}
+        <div class="share-button-box">
+          <div>
+            <button open-type="share" class="share-button">
+              <van-icon name="share" class="shareImg"/>
+            </button>
+          </div>
+          <div class="share-text">分享</div>
+        </div>
+        
+        <div style="clear:both"></div>
+      </div>
+      
+    </div>
     <!-- 赛事步骤 -->
     <van-steps
       v-if="matchDoc.matchType==2"
@@ -409,5 +424,29 @@ export default {
   text-align: center;
   color: gray;
   border: 1px #eee solid;
+}
+.share-button-box{
+  float: right;
+}
+.share-button{
+  width: 40px;
+  background-color: white;
+  color: gray;
+  padding: 0;
+  border:0 solid red;
+  overflow:visible;
+  line-height: 18px;
+  position: static;
+  text-align: center;
+  margin-top:5px;
+  font-size: 20px;
+}
+.shareImg{
+  height: 30px;
+}
+.share-text{
+  font-size: 10px;
+  line-height: 10px;
+  color: gray;
 }
 </style>
