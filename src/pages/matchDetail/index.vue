@@ -183,7 +183,12 @@ export default {
           cityName
         }),
         success() {
-          wx.navigateTo({ url });
+          if (false) {
+            wx.navigateTo({ url });
+          }else{
+            wx.navigateTo({ url:"/pages/myEroll_groups/main" });
+          }
+          
         }
       });
     },

@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div v-if="!groupGame">
     <h2 class="info-title">个人信息</h2>
     <debug_item v-model="info" text="info" />
     <debug_item v-model="matchInfo" text="matchInfo" />
@@ -33,6 +34,18 @@
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
     </van-cell-group>
+    </div>
+    <div v-if="groupGame">
+      <h2 class="info-title">队伍信息</h2>
+      <div class="groups-box"><div class="groups-title">队名</div><div class="FL">{{groups.name}}</div>
+      <div style="clear:both"></div></div>
+      <div v-for='(item,index) in groups.member' :key="index" class="groups-box">
+        <div class="groups-title">{{index==0?'队长':'队员'+index}}</div><div class="FL">{{item.name}}
+          (&nbsp;{{item.sex==1?'男':'女'}}--{{item.phone?item.phone:'无'}}&nbsp;)
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
     <h2 class="info-title event-info">赛事及场馆信息</h2>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
@@ -98,6 +111,8 @@ export default {
 
   data() {
     return {
+      groupGame:true,
+      groups:{},
       radio: "1",
       showSelectBallAge: false,
       selectVal: "",
@@ -137,6 +152,10 @@ export default {
     };
   },
   mounted() {
+    if (this.groupGame) {
+      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+    }
+    
     // 获取赛事数据
     // let data = wx.getStorageSync("matchInfo");
     // if (data) {
@@ -322,5 +341,16 @@ export default {
   padding: 10px;
   font-size: 12px;
   border-radius: 4px;
+}
+.groups-box{
+  height: 40px;
+  font-size: 12px;
+  line-height: 40px;
+  border-bottom: 1px solid #eee;
+  margin-left: 15px;
+}
+.groups-title{
+  float: left;
+  width: 80px;
 }
 </style>
