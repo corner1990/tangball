@@ -168,7 +168,7 @@ export default {
     onCloseDialog() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime, registrationFee: total_fee } = this.matchDoc;
+      let { matchName, matchTime, registrationFee: total_fee,matchForm } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -180,13 +180,20 @@ export default {
           matchId,
           venueId,
           venueName,
-          cityName
+          cityName,
+          matchForm
         }),
         success() {
-          if (false) {
+          if (matchForm == 1) {
             wx.navigateTo({ url });
           }else{
-            wx.navigateTo({ url:"/pages/myEroll_groups/main" });
+            wx.setStorage({
+              key: "groupsMsg",
+              data: '',
+              success() {
+               wx.navigateTo({ url:"/pages/myEroll_groups/main" });
+            }
+            });
           }
           
         }
@@ -216,7 +223,8 @@ export default {
           matchName,
           matchTime,
           venue,
-          registrationFee: total_fee
+          registrationFee: total_fee,
+          matchForm
         } = this.matchDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main?id=1`;
@@ -228,10 +236,21 @@ export default {
             matchTime,
             total_fee,
             matchId,
-            venue
+            venue,
+            matchForm
           }),
           success() {
+            if (matchForm == 1) {
             wx.navigateTo({ url });
+          }else{
+            wx.setStorage({
+              key: "groupsMsg",
+              data: '',
+              success() {
+               wx.navigateTo({ url:"/pages/myEroll_groups/main" });
+            }
+            });
+          }
           }
         });
       } else {
@@ -307,6 +326,7 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
+    
     // 如果报名未截止
     if (this.matchDoc.publicationStatus == 1) {
       if (this.matchDoc.enrollStatus == "3") {
