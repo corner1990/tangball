@@ -13,7 +13,7 @@
           <!-- <div style="clear:both"></div> -->
         <div v-for="(item,index) in member" :key='index' class="playerBox">
             <div class="playerName">{{index==0?'队长：':''}}{{item.name?item.name:'无'}}
-              (&nbsp;{{item.sex==1?'男':'女'}}--{{item.phone?item.phone:'无'}}&nbsp;)</div>
+              (&nbsp;{{item.sex==1?'男':'女'}}\{{item.phone?item.phone:'无'}}&nbsp;)</div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
             <div class="playerModify" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
             <div style="clear:both"></div>
@@ -123,12 +123,12 @@ export default {
         this.phoneError = false
       if (this.add) {
         this.member.push(JSON.parse(JSON.stringify(this.player)))
-        this.player = {name:'',sex:1,phone:''}
+        this.player = {name:'',sex:'1',phone:''}
         this.add = false
         this.showModify = false
       }else{
       this.member[this.playerIndex] = JSON.parse(JSON.stringify(this.player))
-      this.player = {name:'',sex:1,phone:''}
+      this.player = {name:'',sex:'1',phone:''}
        this.showModify = false
       }
       }
@@ -137,7 +137,7 @@ export default {
         this.showModify = false
         this.nameError = false
         this.phoneError = false
-      // this.player = {name:'',sex:1,phone:''}
+      // this.player = {name:'',sex:'1',phone:''}
     },
     showDetailDialog(item){
       this.showDetail = true
@@ -160,9 +160,12 @@ export default {
       })
       }
       else{
+      let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+      console.log('objMatchInfo',objMatchInfo);
+      
       let addGroups = {
-        createMemberId:this.tangballUserInfo.openid,
-        matchId:1,
+        createMemberId:this.tangballUserInfo.P1,
+        matchId:objMatchInfo.matchId,
         member:this.member,
         CreateUser:this.member[0].name,
         name:this.name
@@ -181,7 +184,7 @@ export default {
     addPlay(){
       this.add = true
       this.modifyTitle = '添加队员'
-      this.player = {name:'',sex:1,phone:''}
+      this.player = {name:'',sex:'1',phone:''}
       this.showModify = true
     },
     deletePlayer(index){
@@ -196,13 +199,14 @@ export default {
     }
   },
   mounted() {
+    this.member = []
     console.log('aaa',this.tangballUserInfo);
     this.player.name = this.tangballUserInfo.name || '',
-    this.player.sex = this.tangballUserInfo.sex || '',
+    this.player.sex = this.tangballUserInfo.sex+'' || '',
     this.player.phone= this.tangballUserInfo.phone || ''
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
-    this.player = {name:'',sex:1,phone:''}
+    this.player = {name:'',sex:'1',phone:''}
   },
   created(){
   }

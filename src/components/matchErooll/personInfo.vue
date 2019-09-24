@@ -41,7 +41,7 @@
       <div style="clear:both"></div></div>
       <div v-for='(item,index) in groups.member' :key="index" class="groups-box">
         <div class="groups-title">{{index==0?'队长':'队员'+index}}</div><div class="FL">{{item.name}}
-          (&nbsp;{{item.sex==1?'男':'女'}}--{{item.phone?item.phone:'无'}}&nbsp;)
+          (&nbsp;{{item.sex==1?'男':'女'}}\{{item.phone?item.phone:'无'}}&nbsp;)
         </div>
         <div style="clear:both"></div>
       </div>
@@ -111,7 +111,7 @@ export default {
 
   data() {
     return {
-      groupGame:true,
+      groupGame:false,
       groups:{},
       radio: "1",
       showSelectBallAge: false,
@@ -152,7 +152,8 @@ export default {
     };
   },
   mounted() {
-    if (this.groupGame) {
+    if (this.matchInfo.matchForm == 2) {
+      this.groupGame = true
       this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
     }
     

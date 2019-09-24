@@ -106,6 +106,7 @@ export default {
     } else {
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+      
     }
 
     // 请求赛事详情接口函数
@@ -183,6 +184,7 @@ export default {
      * @desc 统一下单
      */
     pay(info) {
+      let matchForm = this.objMatchInfo.matchForm
       let data = {
         total_fee: 0.01,
         goodsNameAll: "abc",
@@ -193,11 +195,28 @@ export default {
         url: `${global.PUB.domain}/tangball/wxCreateOrder`,
         data,
         method: "post",
-        success(res) {
+       async success(res) {
           let { statusCode, data } = res;
           if (statusCode === 200) {
             let { data: chrildData } = data;
             self.funlyPay(JSON.parse(chrildData));
+          }
+          console.log('res',res);
+          if (matchForm == 2) {
+            let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+            if (!groups.orderId) {
+              console.log('groups',res.data.orderId);
+              
+              groups.orderId = res.data.orderId
+              let  data  = await util.post({
+              url: global.PUB.domain + "/crossAdd?page=tangball_team",
+              param: {
+                data:groups
+              }
+            });
+              console.log('data',data);
+              
+            }
           }
         }
       });
