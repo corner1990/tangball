@@ -80,6 +80,11 @@
       <van-cell title="报名费" :value="matchDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
+    <div class="regulation-box" @click="gotoMatchManual">
+      <div class="FL" style="color:#333;">赛事规程</div>
+      <div class="FR"><van-icon name="arrow" /></div>
+      <div style="clear:both"></div>
+      </div>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
     <div class="enrolled" v-if="isMatchIdStatus">{{enrollText}}</div>
     <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
@@ -148,6 +153,16 @@ export default {
     };
   },
   methods: {
+    // 跳转赛事规程的方法
+    gotoMatchManual(){
+      wx.setStorage({
+          key: "matchInfo",
+          data: JSON.stringify(this.matchDoc),
+      success() {
+        wx.navigateTo({ url:"/pages/macthManual/main" });
+      }
+      })
+    },
     /**
      * @desc 打开点击图片放大函数
      */
@@ -168,7 +183,7 @@ export default {
     onCloseDialog() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime, registrationFee: total_fee,matchForm } = this.matchDoc;
+      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -181,7 +196,9 @@ export default {
           venueId,
           venueName,
           cityName,
-          matchForm
+          matchForm,
+          teamMemberMin,
+          teamMemberMax
         }),
         success() {
           if (matchForm == 1) {
@@ -224,7 +241,9 @@ export default {
           matchTime,
           venue,
           registrationFee: total_fee,
-          matchForm
+          matchForm,
+          teamMemberMax,
+          teamMemberMin
         } = this.matchDoc;
         let { matchId } = this;
         let url = `/pages/matchEroll/main?id=1`;
@@ -237,7 +256,9 @@ export default {
             total_fee,
             matchId,
             venue,
-            matchForm
+            matchForm,
+            teamMemberMax,
+            teamMemberMin
           }),
           success() {
             if (matchForm == 1) {
@@ -473,5 +494,13 @@ export default {
   font-size: 10px;
   line-height: 10px;
   color: gray;
+}
+.regulation-box{
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+  color: gray;
+  margin: 0 10px;
+  margin-left: 20px;
 }
 </style>

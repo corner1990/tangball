@@ -208,6 +208,11 @@ export default {
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
     this.player = {name:'',sex:'1',phone:''}
+    let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+    console.log('objMatchInfo',objMatchInfo);
+    
+    this.maxPlayer = objMatchInfo.teamMemberMax
+    this.minPlayer = objMatchInfo.teamMemberMin
   },
   created(){
   }
