@@ -16,12 +16,12 @@
               <span class="C_999">(&nbsp;{{item.sex==1?'男':'女'}}{{item.phone? " | "+item.phone:'无'}}{{index==0?' | 队长':''}})</span>
               </div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
-            <div class="playerModify" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
+            <div class="playerDetail" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
             <div style="clear:both"></div>
         </div>
         <div   v-if="member.length<maxPlayer">
-          <div class="addPlayer FL C_999" >队伍人数要求{{minPlayer-1}}-{{maxPlayer-1}}人</div>
-          <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay"/></div>
+          <div class="addPlayer FL C_999" >队伍人数要求{{minPlayer}}-{{maxPlayer}}人</div>
+          <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay" class="playerDetail" style="padding-right: 5px;"/></div>
           <div style="clear:both"></div></div>
         <div v-else class="addPlayer">队员数量已经达到上限</div>
     </div>
@@ -256,15 +256,12 @@ export default {
 .playerName{
   float: left;
 }
-.playerModify{
-  float: right;
-  margin-right: 10px;
-  color: #F4B116;
-}
+
 .playerDetail{
   float: right;
-  margin-right: 10px;
+  padding-right: 10px;
   color: #F4B116;
+  font-size: 20px;
 }
 .button-modify{
      background-color: #F4B116;
