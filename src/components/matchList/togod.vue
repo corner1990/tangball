@@ -44,8 +44,8 @@ export default {
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
-        { category: "全国赛" },
-        { category: "普通赛" },
+        { category: "团队赛" },
+        { category: "个人赛" },
         { category: "全部" }
       ],
 
@@ -77,7 +77,7 @@ export default {
           pageSize: this.pageSize,
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
-          findJson: { matchType: this.matchType }
+          findJson: { matchForm: this.matchType }
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏

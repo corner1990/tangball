@@ -59,6 +59,7 @@
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
+      <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
       <!-- 如果是全国赛 -->
       <van-collapse
         v-model="NationalmatchIndex"
@@ -301,7 +302,7 @@ export default {
       let obj = {text:item.name,desc:'',value:item.name}
       return obj
     })
-    console.log(this.matchDoc.progress);
+    console.log(this.matchDoc);
     
     // 如果报名未截止
     if (this.matchDoc.publicationStatus == 1) {
