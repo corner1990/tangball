@@ -21,8 +21,6 @@ export default {
   },
   mounted(){
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
-    console.log(this.matchDoc.matchManual);
-    
   }
 
 };
