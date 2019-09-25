@@ -120,11 +120,11 @@ export default {
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 2) {
         this.matchType = 1;
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 3) {
         this.matchType = null;

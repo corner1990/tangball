@@ -78,8 +78,13 @@
       <van-cell title="报名费" :value="matchDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
-    <div class="regulation-box" @click="gotoMatchManual">
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/macthManual/main'})" v-if="matchDoc.matchManual">
       <div class="FL" style="color:#333;">赛事规程</div>
+      <div class="FR"><van-icon name="arrow" /></div>
+      <div style="clear:both"></div>
+      </div>
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" v-if="matchDoc.matchResult">
+      <div class="FL" style="color:#333;">赛事结果</div>
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
@@ -140,12 +145,12 @@ export default {
   },
   methods: {
     // 跳转赛事规程的方法
-    gotoMatchManual(){
+    gotoMatchManual(url){
       wx.setStorage({
           key: "matchInfo",
           data: JSON.stringify(this.matchDoc),
       success() {
-        wx.navigateTo({ url:"/pages/macthManual/main" });
+        wx.navigateTo(url);
       }
       })
     },
