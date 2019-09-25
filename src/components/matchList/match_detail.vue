@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <navigator :url="matchDetailUrl">
      
       <div class="match-box">

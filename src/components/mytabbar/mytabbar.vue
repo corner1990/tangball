@@ -71,21 +71,23 @@ export default {
     }
     // console.log("this.activeNeed", this.activeNeed);
   },
-  onShow () {
-    if (this.$store.state.tangballUserInfo.unreadCount==0) {
-          this.list[3].info = "none";
+   onLoad() {
+     console.log('this.list[3].info',this.list[3].info);
+     if (this.$store.state.tangballUserInfo.unreadCount==undefined) {
+          this.list[3].info = undefined;
         }else{
         this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
         }
-  },
+   },
   methods: {
     /**
      * @desc 导航切换回调
      */
     tabChange(url) {
+      // this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
       wx.switchTab({
         url
-      });
+      }); 
     },
     // 获取信息接口，得到用户有多少消息未读
     async getMyMsgList() {

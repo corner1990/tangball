@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       myErollList: [],
-      status: false //显示暂无数据
+      status: false, //显示暂无数据
+      groups:{}
     };
   },
   computed: {
@@ -55,7 +56,7 @@ export default {
      * @desc 向报名详情传id，
      * @param 使用模板字符串拼接P1传参
      */
-    gotoPage(P1, index) {
+   async gotoPage(P1, index) {
       // 拼接详情需要的数据
       let info = this.myErollList[index];
       let url = `/pages/matchEroll/main?id=2`;
@@ -67,6 +68,36 @@ export default {
         total_fee: orderMoney,
         sex
       };
+      console.log('info.orderId',info.orderId);
+      
+      if (matchInfo.matchForm == 2) {
+        let { data  }= await util.post({
+              url: global.PUB.domain + "/crossList?page=tangball_team",
+              param: {
+                findJson:{
+                  orderId:info.orderId
+                }
+              }
+        });
+        this.groups = data.list[0]
+        console.log('gtopis',this.groups.orderId);
+        wx.setStorage({
+        key: "myErollDetail",
+        data: JSON.stringify({  info, matchInfo, P1 }),
+        success() {
+          // wx.navigateTo({ url });
+              wx.setStorage({
+              key: "groupsMsg",
+              data: JSON.stringify(data.list[0]),
+              success() {
+                wx.navigateTo({ url });
+              }
+          });
+        }
+      });
+      }else{
+      
+      
       wx.setStorage({
         key: "myErollDetail",
         data: JSON.stringify({  info, matchInfo, P1 }),
@@ -74,6 +105,7 @@ export default {
           wx.navigateTo({ url });
         }
       });
+      }
       // let url = `/pages/myErollDetail/main?P1=${P1}`;
       // wx.setStorage({
       //   key: "myErollList",
@@ -84,6 +116,10 @@ export default {
       // });
 
       // wx.navigateTo({ url });
+    },
+    // 请求接口获取组队信息
+    async getGroups(orderId){
+      
     },
     /**
      * @name ajax获取报名列表函数

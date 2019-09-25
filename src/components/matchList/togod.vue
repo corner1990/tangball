@@ -1,59 +1,46 @@
 <template>
-
-    <div>
-      <van-tabs :active="active" @change="onClickTab" style="position: relative;">
-        <van-tab :title="bigItem.category " v-for="bigItem in tabList" :key="bigItem">
-          <tisp v-if="status"></tisp>
-          <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
-        </van-tab>
-      </van-tabs>
-    </div>
-  
-
+  <div>
+    <van-tabs :active="active" @change="onClickTab" style="position: relative;">
+      <van-tab :title="bigItem.category " v-for="(bigItem,index) in tabList" :key="index">
+        <tisp v-if="status"></tisp>
+        <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
+      </van-tab>
+    </van-tabs>
+  </div>
 </template>
 <script>
 /* eslint-disable */
-import matct_detail from "@/components/matchList/match_detail";
-import tisp from "@/components/tisp/tisp";
-import util from "@/utils/util";
-import card from "@/components/card";
-import mytabbar from "@/components/mytabbar/mytabbar";
-import Dialog from "../../../static/vant/dialog/dialog";
-import debug_item from "@/components/common/debug_item/debug_item";
+import matct_detail from "./match_detail";
+import tisp from "../tisp/tisp";
+import util from "../../utils/util";
+import mytabbar from "../mytabbar/mytabbar";
+import debug_item from "../common/debug_item/debug_item";
 export default {
   components: {
-    card,
     mytabbar,
-    Dialog,
     tisp,
     debug_item,
     matct_detail
   },
-  // onPageScroll(res) {
-  //   let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
-  //   let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
-  //   // 相当每一次滚动到底部的时候，就会进行一次加载
-  //   if (this.pageIndex == index) {
-  //     this.pageIndex++;
-  //     if (this.isStatus) {
-  //       //这里是点击更多赛事触发了调取接口函数，在这里作判断
-  //       this.getlist();
-  //     }
-  //   }
-  // },
-  onReachBottom(res) {
-    //滑动到底部
-    //  console.log("---------------------",res);
+  props: {
+    pageSize: {
+      type: Number,
+      default: 6
+    },
+    pageIndex: {
+      type: Number,
+      default: 1
+    }
   },
+ 
   data() {
     return {
-      pageSize: 5,
-      pageIndex: 1,
-      alldata: [],
-      page: {},
-      matchlist1: [],
-      count: 0,
+      matchType: null,
+      // pageSize: 10,
+      // pageIndex: 1,
       active: 0,
+      alldata: [],
+      count: 0,
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
@@ -61,6 +48,7 @@ export default {
         { category: "普通赛" },
         { category: "全部" }
       ],
+
       status: false, //显示暂无数据
       footerText: "更多赛事", //初始为更多赛事，当最后一页时是查往事
       isStatus: true //控制能够触发请求接口的状态
@@ -70,6 +58,7 @@ export default {
     tabCutInin() {
       this.matchlist = [];
       this.pageIndex = 1;
+    
       this.getlist(); //调用一次接口
     },
     footLoadLazy() {
@@ -79,33 +68,7 @@ export default {
         this.getlist();
       }
     },
-    //----------- 点击标签时触发的函数，并且会默认传递event-------------------
-    onClickTab(event) {
-      this.active = event.target.index;
-      this.isStatus = true; //切换普通赛事等时，要能够请求函数，所以设置为true
-      this.footerText = "更多赛事"; //切换普通赛事等时，重新把查看往事变为更多赛事
-      // ------------------地区区分---------------------
-      //如果是近期（因为近期的index为0）,全国Index=1,如果是加盟商Index=2
-      if (event.target.index == 0) {
-        this.matchType = null; //改变请求接口参数
-
-        this.tabCutInin(); //切换初始化方法
-      } else if (event.target.index == 1) {
-        this.matchType = 2; //改变请求接口参数
-        this.tabCutInin(); //切换初始化方法
-      } else if (event.target.index == 2) {
-        this.matchType = 1;
-        this.tabCutInin(); //切换初始化方法
-      } else if (event.target.index == 3) {
-        this.matchType = null;
-        this.tabCutInin(); //切换初始化方法
-      }
-    },
-    changeValue(event) {
-      this.searchValue = event.mp.detail;
-    },
     //----------- 请求接口数据的函数-------------------
-
     async getlist() {
       wx.showLoading({ title: "加载中", icon: "loading" });
       let { data } = await util.post({
@@ -119,7 +82,8 @@ export default {
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
       let arr = data.list;
-      
+     
+
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
       if (arr.length > 0) {
@@ -143,20 +107,63 @@ export default {
         this.isStatus = false;
         return;
       }
+    },
+    //----------- 点击标签时触发的函数，并且会默认传递event-------------------
+    onClickTab(event) {
+      this.active = event.target.index;
+
+      // ------------------地区区分---------------------
+      //如果是近期（因为近期的index为0）,全国Index=1,如果是加盟商Index=2
+      if (event.target.index == 0) {
+        this.matchType = null; //改变请求接口参数
+          this.pageSize = 5;
+        this.tabCutInin(); //切换初始化方法
+      } else if (event.target.index == 1) {
+        this.matchType = 2; //改变请求接口参数
+          this.pageSize = 5;
+        this.tabCutInin(); //切换初始化方法
+      } else if (event.target.index == 2) {
+        this.matchType = 1;
+          this.pageSize = 5;
+        this.tabCutInin(); //切换初始化方法
+      } else if (event.target.index == 3) {
+        this.matchType = null;
+        this.pageSize=1000;
+        this.tabCutInin(); //切换初始化方法
+        
+      }
+    },
+    changeValue(event) {
+      this.searchValue = event.mp.detail;
     }
   },
   onLoad() {
     this.getlist(); //页面创建成功后，调用一次请求接口，此时是加载所有数据
+  },
+  onUNnLoad() {
+    this.footerText = "更多赛事";
   },
   computed: {
     objParam() {
       return { pageSize: this.pageSize, pageIndex: this.pageIndex };
     }
   },
-  onUNnLoad() {
-    this.footerText = "更多赛事";
-
-  }
+  //  onPageScroll(res) {
+  //   let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
+  //   let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
+  //   // 相当每一次滚动到底部的时候，就会进行一次加载
+  //   if (this.pageIndex == index) {
+  //     this.pageIndex++;
+  //     if (this.isStatus) {
+  //       //这里是点击更多赛事触发了调取接口函数，在这里作判断
+  //       this.getlist();
+  //     }
+  //   }
+  // },
+  onReachBottom(res) {
+    //滑动到底部
+    //  console.log("---------------------",res);
+  },
 };
 </script>
 <style scoped>

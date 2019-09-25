@@ -9,8 +9,13 @@
             <div style="font-size:16px;margin-top:5px">
               <van-cell title="场馆名称" title-width="100px" :value="venueDoc.name" />
               <van-cell title="场馆地址" title-width="100px" :value="venueDoc.address" />
+              <van-cell title="场馆尺寸" title-width="100px" :value="venueDoc.extend.venueSize" />
+              <van-cell title="场馆层数" title-width="100px" :value="venueDoc.extend.floorCount" />
+              <van-cell title="场馆洞数" title-width="100px" :value="venueDoc.extend.holeCount" />
+              <van-cell title="场馆打位数" title-width="100px" :value="venueDoc.extend.placesCount" />
               <van-cell title="场馆电话" title-width="100px" :value="venueDoc.phoneNumber" />
-              <van-cell title="场馆详情" title-width="100px" :value="Detail" />
+              <van-cell title="场馆联系人" title-width="100px" :value="venueDoc.extend.contacts" />
+               <van-cell title="场馆详情" title-width="100px" :value="Detail" />
             </div>
           </van-tab>
           <van-tab title="地理位置">
