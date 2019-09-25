@@ -8,18 +8,19 @@
           <div class="groupsName" style="margin-left:10px;">
             <input v-model="name" placeholder="请输入队伍名称" />
           </div>
-          <div style="clear:both"></div>
+         <div style="clear:both;height:4px"></div>
         </div>
           <!-- <div style="clear:both"></div> -->
         <div v-for="(item,index) in member" :key='index' class="playerBox">
-            <div class="playerName">{{index==0?'队长：':''}}{{item.name?item.name:'无'}}
-              (&nbsp;{{item.sex==1?'男':'女'}}\{{item.phone?item.phone:'无'}}&nbsp;)</div>
+            <div class="playerName">{{item.name?item.name:'无'}}
+              <span class="C_999">(&nbsp;{{item.sex==1?'男':'女'}}{{item.phone? " | "+item.phone:'无'}}{{index==0?' | 队长':''}})</span>
+              </div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
             <div class="playerModify" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
             <div style="clear:both"></div>
         </div>
         <div   v-if="member.length<maxPlayer">
-          <div class="addPlayer FL">添加队员({{minPlayer-1}}-{{maxPlayer-1}}人)</div>
+          <div class="addPlayer FL C_999" >队伍人数要求{{minPlayer-1}}-{{maxPlayer-1}}人</div>
           <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay"/></div>
           <div style="clear:both"></div></div>
         <div v-else class="addPlayer">队员数量已经达到上限</div>
@@ -238,7 +239,7 @@ export default {
   height: 30px;
   line-height: 30px;
   border-radius: 2px;
-  border: 1px solid  #F4B116;
+  border: 1px solid  #ddd;
 }
 .playerBox{
   font-size: 16px;
