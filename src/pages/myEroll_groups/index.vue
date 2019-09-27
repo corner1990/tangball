@@ -16,12 +16,12 @@
               <span class="C_999">(&nbsp;{{item.sex==1?'男':'女'}}{{item.phone? " | "+item.phone:'无'}}{{index==0?' | 队长':''}})</span>
               </div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
-            <div class="playerModify" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
+            <div class="playerDetail" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
             <div style="clear:both"></div>
         </div>
         <div   v-if="member.length<maxPlayer">
-          <div class="addPlayer FL C_999" >队伍人数要求{{minPlayer-1}}-{{maxPlayer-1}}人</div>
-          <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay"/></div>
+          <div class="addPlayer FL C_999" >队伍人数要求{{minPlayer}}-{{maxPlayer}}人</div>
+          <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay" class="playerDetail" style="padding-right: 5px;"/></div>
           <div style="clear:both"></div></div>
         <div v-else class="addPlayer">队员数量已经达到上限</div>
     </div>
@@ -45,8 +45,8 @@
         <div  class="modify-text">姓别：</div>
         <div class="modify-input">
           <radio-group @change="changeSex" v-model="player.sex">
-                    <radio value="1" :checked="player.sex=='1'?true:false"/>男
-                    <radio value="2" :checked="player.sex=='2'?true:false"/>女
+                    <radio value=1 :checked="player.sex==1?true:false"/>男
+                    <radio value=2 :checked="player.sex==2?true:false"/>女
           </radio-group>
         </div>
         <div style="clear:both"></div>
@@ -72,18 +72,18 @@ export default {
   },
   data() {
     return {
-      nameError:false,
-      phoneError:false,
-      modifyTitle:'修改队员信息',
-      maxPlayer:8,
-      minPlayer:4,
-      add:false,
-      playerIndex:'',
-      member:[],
-      name:'',
-      player:{name:'',sex:1,phone:''},
-      showModify:false,
-      buttonList:[
+      nameError:false,//名字校验key
+      phoneError:false,//电话校验key
+      modifyTitle:'修改队员信息',//弹窗title
+      maxPlayer:8,//队伍最大人数
+      minPlayer:4,//队伍最少人数
+      add:false,//添加人数key
+      playerIndex:'',//当前球员对应数组的key
+      member:[],//保存队伍信息数组
+      name:'',//队名
+      player:{name:'',sex:1,phone:''},//当前球员的数据
+      showModify:false,//显示弹窗key
+      buttonList:[//弹窗按钮设置
         {text:"取消"},
         {text:"确认"}
       ]
@@ -96,55 +96,62 @@ export default {
     }
   },
   methods: {
+    // 点击弹出按钮触发的方法
     modifyDialog(e){
+      // 点击取消按钮触发关闭弹窗方法
       if(e.target.index==0){
         this.closeModifyDialog()
-      }else{
+      }else{//点击确认按钮触发修改方法
         this.modifyPlayer()
       }
       
     },
+    // 显示修改弹窗触发的方法
     showModifyDialog(item,index){
       this.modifyTitle = '修改队员信息'
       this.playerIndex = index
       this.player = JSON.parse(JSON.stringify(item))
       this.showModify = true
     },
+    // 修改性别触发双向绑定
     changeSex(event){
       this.player.sex = event.target.value
     },
+    // 修改或增加球员的方法
     modifyPlayer(){
+      // 如果名字为空
       if (this.player.name == '') {
         this.nameError = true
+        // 如果手机号格式错误
       }else if (!/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(this.player.phone)) {
         this.nameError = false
         this.phoneError = true
       }else{
         this.nameError = false
         this.phoneError = false
+        // 如果是新增球员
       if (this.add) {
         this.member.push(JSON.parse(JSON.stringify(this.player)))
-        this.player = {name:'',sex:'1',phone:''}
+        this.player = {name:'',sex:1,phone:''}
         this.add = false
         this.showModify = false
-      }else{
+      }else{//修改球员信息
       this.member[this.playerIndex] = JSON.parse(JSON.stringify(this.player))
-      this.player = {name:'',sex:'1',phone:''}
+      this.player = {name:'',sex:1,phone:''}
        this.showModify = false
       }
       }
     },
+    // 关闭修改弹窗的方法
     closeModifyDialog(){
         this.showModify = false
         this.nameError = false
         this.phoneError = false
       // this.player = {name:'',sex:'1',phone:''}
     },
-    showDetailDialog(item){
-      this.showDetail = true
-      this.player = JSON.parse(JSON.stringify(item))
-    },
+    // 保存球队信息跳转页面
     createGroups(){
+      // 队名不能为空
       if (this.name=='') {
         Dialog.alert({
       title: '提示',
@@ -152,6 +159,7 @@ export default {
     }).then(() => {
   // on confirm
       })
+      // 队伍要达到人数下限
       }else if(this.member.length<this.minPlayer){
         Dialog.alert({
       title: '提示',
@@ -182,12 +190,14 @@ export default {
       // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
       }
     },
+    // 显示新增球员弹窗的方法
     addPlay(){
       this.add = true
       this.modifyTitle = '添加队员'
-      this.player = {name:'',sex:'1',phone:''}
+      this.player = {name:'',sex:1,phone:''}
       this.showModify = true
     },
+    // 删除球员触发的方法
     deletePlayer(index){
       Dialog.confirm({
       title: '确定删除该队员?',
@@ -200,10 +210,11 @@ export default {
     }
   },
   mounted() {
+    // 页面加载时初始化球队信息
     this.member = []
     console.log('aaa',this.tangballUserInfo);
     this.player.name = this.tangballUserInfo.name || '',
-    this.player.sex = this.tangballUserInfo.sex+'' || '',
+    this.player.sex = this.tangballUserInfo.sex || '',
     this.player.phone= this.tangballUserInfo.phone || ''
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
@@ -256,15 +267,12 @@ export default {
 .playerName{
   float: left;
 }
-.playerModify{
-  float: right;
-  margin-right: 10px;
-  color: #F4B116;
-}
+
 .playerDetail{
   float: right;
-  margin-right: 10px;
+  padding-right: 10px;
   color: #F4B116;
+  font-size: 20px;
 }
 .button-modify{
      background-color: #F4B116;

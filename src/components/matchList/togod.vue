@@ -44,8 +44,8 @@ export default {
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
-        { category: "全国赛" },
-        { category: "普通赛" },
+        { category: "团队赛" },
+        { category: "个人赛" },
         { category: "全部" }
       ],
 
@@ -77,7 +77,7 @@ export default {
           pageSize: this.pageSize,
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
-          findJson: { matchType: this.matchType }
+          findJson: { matchForm: this.matchType }
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
@@ -120,11 +120,11 @@ export default {
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 2) {
         this.matchType = 1;
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 3) {
         this.matchType = null;
