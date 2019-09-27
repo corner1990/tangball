@@ -45,8 +45,8 @@
         <div  class="modify-text">姓别：</div>
         <div class="modify-input">
           <radio-group @change="changeSex" v-model="player.sex">
-                    <radio value="1" :checked="player.sex=='1'?true:false"/>男
-                    <radio value="2" :checked="player.sex=='2'?true:false"/>女
+                    <radio value=1 :checked="player.sex==1?true:false"/>男
+                    <radio value=2 :checked="player.sex==2?true:false"/>女
           </radio-group>
         </div>
         <div style="clear:both"></div>
@@ -124,12 +124,12 @@ export default {
         this.phoneError = false
       if (this.add) {
         this.member.push(JSON.parse(JSON.stringify(this.player)))
-        this.player = {name:'',sex:'1',phone:''}
+        this.player = {name:'',sex:1,phone:''}
         this.add = false
         this.showModify = false
       }else{
       this.member[this.playerIndex] = JSON.parse(JSON.stringify(this.player))
-      this.player = {name:'',sex:'1',phone:''}
+      this.player = {name:'',sex:1,phone:''}
        this.showModify = false
       }
       }
@@ -185,7 +185,7 @@ export default {
     addPlay(){
       this.add = true
       this.modifyTitle = '添加队员'
-      this.player = {name:'',sex:'1',phone:''}
+      this.player = {name:'',sex:1,phone:''}
       this.showModify = true
     },
     deletePlayer(index){
@@ -203,7 +203,7 @@ export default {
     this.member = []
     console.log('aaa',this.tangballUserInfo);
     this.player.name = this.tangballUserInfo.name || '',
-    this.player.sex = this.tangballUserInfo.sex+'' || '',
+    this.player.sex = this.tangballUserInfo.sex || '',
     this.player.phone= this.tangballUserInfo.phone || ''
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
