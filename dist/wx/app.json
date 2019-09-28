@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/main",
     "pages/matchList/main",
     "pages/articleList/main",
@@ -21,7 +20,8 @@
     "pages/myErollDetail/main",
     "pages/articleDetail/main",
     "pages/searchPage/main",
-    "pages/myEroll_groups/main"
+    "pages/myEroll_groups/main",
+    "pages/macthManual/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
