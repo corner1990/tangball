@@ -95,11 +95,12 @@
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
-    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" v-if="matchDoc.matchResult">
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" >
       <div class="FL" style="color:#333;">赛事结果</div>
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
+      <div style="height:50px"></div>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
     <div class="enrolled enrollButton" v-if="isMatchIdStatus">{{enrollText}}</div>
     <van-button class="enrollButton" size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
