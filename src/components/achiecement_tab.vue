@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="achievement-box">
    <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
         <div class="achievement-tr-box">
             <div class="achievement-td-left-box">排名</div>
@@ -12,7 +12,7 @@
             <div class="achievement-td-right-box">{{item.score==-1?'无':item.score}}</div>
         </div>
       </div>
-    <div v-else>成绩暂未录入</div>
+    <div v-else class="noAchievement-box">成绩暂未录入</div>
 </div>
 </template>
 <script>
@@ -44,5 +44,12 @@ export default {
     }
     .achievement-td-right-box{
         flex:0 0 20%;
+    }
+    .achievement-box{
+      margin-top:10px;
+      margin-right: 10px;
+    }
+    .noAchievement-box{
+      font-size: 16px;
     }
 </style>
