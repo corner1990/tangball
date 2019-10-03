@@ -60,7 +60,8 @@
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
       <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
-      <!-- 如果是全国赛 -->
+
+      
       <van-collapse
         v-model="NationalmatchIndex"
         @change="matchTypeChange"
@@ -75,6 +76,17 @@
           </div>
         </van-collapse-item>
       </van-collapse>
+      <van-collapse
+        v-model="showEnrollRequirements"
+        @change="enrollRequirementsChange"
+        v-if="matchDoc.enrollRequirements"
+      >
+        <van-collapse-item title="报名要求" name="1">
+          <div class="collapse">
+            {{matchDoc.enrollRequirements}}
+          </div>
+        </van-collapse-item>
+      </van-collapse>
       <van-cell title="报名费" :value="matchDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
@@ -83,14 +95,15 @@
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
-    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" v-if="matchDoc.matchResult">
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" >
       <div class="FL" style="color:#333;">赛事结果</div>
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
+      <div style="height:50px"></div>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
-    <div class="enrolled" v-if="isMatchIdStatus">{{enrollText}}</div>
-    <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
+    <div class="enrolled enrollButton" v-if="isMatchIdStatus">{{enrollText}}</div>
+    <van-button class="enrollButton" size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
     <!-- 显示选择场馆弹窗 -->
     <van-dialog
       use-slot
@@ -125,6 +138,7 @@ export default {
       venueName: null, //场馆名字
       cityName: null, //场馆城市名
       NationalmatchIndex: null, //举办地点聚焦
+      showEnrollRequirements:null,//报名要求聚焦
       matchId: 37, //  当前赛事id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
@@ -266,6 +280,9 @@ export default {
      */
     matchTypeChange(val) {
       this.NationalmatchIndex = val.mp.detail;
+    },
+    enrollRequirementsChange(val){
+      this.showEnrollRequirements = val.mp.detail;
     },
     onShow() {
       this.show = true;
@@ -448,5 +465,10 @@ export default {
   color: gray;
   margin: 0 10px;
   margin-left: 20px;
+}
+.enrollButton{
+  position: fixed;
+  bottom: 10%;
+  width: 100%;
 }
 </style>
