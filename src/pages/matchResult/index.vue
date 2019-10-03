@@ -15,7 +15,7 @@
           <van-tab :title="item.name" v-for="(item,i) in matchDoc.progress" :key="i">
                 <div v-if="item.roundCount>1" class="roundNum-box">
                   <div v-for="num in roundNum" :key="num" @click="changeRoundCount(num,i)" class="roundNum"
-                  :class="roundNumIndex==num?'active':''">第{{num}}轮</div>
+                  :class="roundNumIndex==num?'active':''">第{{num+1}}轮</div>
                 </div>
                 <!-- <van-tabs :active="roundNumIndex" @change="changeRoundCount($event,item.roundCount,i)">
                   <van-tab :title="'第'+(j+1)+'轮'" v-for="j in roundNum" :key="j"> -->
