@@ -82,5 +82,6 @@
     "van-toast": "/static/vant/toast/index",
     "van-loading": "/static/vant/loading/index",
     "mp-dialog": "/static/dialog/dialog"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
