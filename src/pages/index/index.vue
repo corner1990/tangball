@@ -244,15 +244,22 @@ export default {
           param
         }
       ).then(res => {
-        let { code } = res;
+        let { code } = res.data;
+        let aaaa = { phone: '11111'}
         if (code === 0) {
           this.getPhoneNumberShow = false;
+          // 防止一直弹出绑定手机弹窗
+          wx.setStorage({
+          key: 'tangballUserInfo',
+          data: JSON.stringify(aaaa)
+      })
         }
       })
       // 测试代码， 调试接口的时候删除
       // this.getPhoneNumberShow = false;
     },
     updataGetPhoneNumberShow (getPhoneNumberShow) {
+      
       this.getPhoneNumberShow = getPhoneNumberShow;
     },
   },
@@ -260,6 +267,19 @@ export default {
     wx.hideTabBar({
       complete() {}
     });
+    wx.getStorage({
+      key: "tangballUserInfo",
+      success: (res) => {
+        let { phone } = JSON.parse(res.data);
+        
+        if (!phone) {
+          this.updataGetPhoneNumberShow(true)
+        }
+      },
+      fail: () => {
+        this.updataGetPhoneNumberShow(true)
+      }
+    })
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
@@ -278,18 +298,7 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
-    wx.getStorage({
-      key: "tangballUserInfo",
-      success: (res) => {
-        let { phone } = JSON.parse(res.data);
-        if (!phone) {
-          this.updataGetPhoneNumberShow(true)
-        }
-      },
-      fail: () => {
-        this.updataGetPhoneNumberShow(true)
-      }
-    })
+    
     // console.log('√', this.$store.state)
   }
 
