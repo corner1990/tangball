@@ -21,7 +21,8 @@
     "pages/articleDetail/main",
     "pages/searchPage/main",
     "pages/myEroll_groups/main",
-    "pages/macthManual/main"
+    "pages/macthManual/main",
+    "pages/matchResult/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
