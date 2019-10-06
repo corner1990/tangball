@@ -17,8 +17,8 @@ import Vuex from 'vuex'//导入vuex模块
 const lodash = require("../static/lodash.min.js"); 
 // let lodash={}static\lodash.min.js
 // import lodash from "lodash";
-console.log("lodash111", lodash);
-console.log("lodash.get", lodash.get);
+// console.log("lodash111", lodash);
+// console.log("lodash.get", lodash.get);
 Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
@@ -37,7 +37,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
     }
   }
 })
-Vue.prototype.$store = store//让vue实例中可访问$store
+Vue.prototype.$store = store; // 让vue实例中可访问$store
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue(App)

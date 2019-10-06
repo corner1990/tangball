@@ -54,12 +54,12 @@
       </div>
       <div class="modify-box">
         <div  class="modify-text">手机号：</div>
-        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" /></div>
+        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"/></div>
         <div style="clear:both"></div>
       </div>
       <div v-if="phoneError" class="nameError">手机号格式错误</div>
     </mp-dialog>
-  
+
   <van-dialog id="van-dialog" />
   </div>
 </template>
@@ -105,7 +105,7 @@ export default {
       }else{//点击确认按钮触发修改方法
         this.modifyPlayer()
       }
-      
+
     },
     // 显示修改弹窗触发的方法
     showModifyDialog(item,index){
@@ -116,7 +116,7 @@ export default {
     },
     // 修改性别触发双向绑定
     changeSex(event){
-      this.player.sex = event.target.value
+      this.player.sex = Number(event.target.value)
     },
     // 修改或增加球员的方法
     modifyPlayer(){
@@ -172,7 +172,7 @@ export default {
       else{
       let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
       console.log('objMatchInfo',objMatchInfo);
-      
+
       let addGroups = {
         createMemberId:this.tangballUserInfo.P1,
         matchId:objMatchInfo.matchId,
@@ -219,10 +219,10 @@ export default {
     this.player.phone= this.tangballUserInfo.phone || ''
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
-    this.player = {name:'',sex:'1',phone:''}
+    this.player = {name:'',sex:1,phone:''}
     let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     console.log('objMatchInfo',objMatchInfo);
-    
+
     this.maxPlayer = objMatchInfo.teamMemberMax
     this.minPlayer = objMatchInfo.teamMemberMin
   },
