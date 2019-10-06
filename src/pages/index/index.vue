@@ -161,7 +161,7 @@ export default {
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
       value: "", // 搜索value,
-      getPhoneNumberShow: true,
+      getPhoneNumberShow: false,
     };
   },
   methods: {
@@ -231,7 +231,8 @@ export default {
       wx.getStorage({
         key: 'ids',
         success (res) {
-          let param = { ...res.data, encryptedData, iv };
+          let { session_key, openid } = JSON.parse(res.data);
+          let param = { session_key, openid, encryptedData, iv };
           self.sendPhoneData(param)
         }
       })
@@ -239,7 +240,7 @@ export default {
     sendPhoneData (param) {
       util.post(
         {
-          url: `${global.PUB.domain}/encodePhoneNumber`,
+          url: `${global.PUB.domain}/tangball/encodePhoneNumber`,
           param
         }
       ).then(res => {
@@ -249,8 +250,11 @@ export default {
         }
       })
       // 测试代码， 调试接口的时候删除
-      this.getPhoneNumberShow = false;
-    }
+      // this.getPhoneNumberShow = false;
+    },
+    updataGetPhoneNumberShow (getPhoneNumberShow) {
+      this.getPhoneNumberShow = getPhoneNumberShow;
+    },
   },
   onShow() {
     wx.hideTabBar({
@@ -274,6 +278,19 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+    wx.getStorage({
+      key: "tangballUserInfo",
+      success: (res) => {
+        let { phone } = JSON.parse(res.data);
+        if (!phone) {
+          this.updataGetPhoneNumberShow(true)
+        }
+      },
+      fail: () => {
+        this.updataGetPhoneNumberShow(true)
+      }
+    })
+    // console.log('√', this.$store.state)
   }
 
 };

@@ -444,9 +444,9 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
   });
   var iv = encodeURIComponent(resUserInfo.iv);
   var encryptedData = encodeURIComponent(resUserInfo.encryptedData);
-  console.log("js_code", js_code);
-  console.log("iv", iv);
-  console.log("encryptedData", encryptedData);
+  // console.log("js_code", js_code);
+  // console.log("iv", iv);
+  // console.log("encryptedData", encryptedData);
   try {
     /**
      * ajax请求微信用户信息
@@ -465,11 +465,11 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
       data: JSON.stringify(data.data1)
     });
     wx.hideLoading();
-    console.log("vm.$store.commit");
+    // console.log("vm.$store.commit");
     vm.$store.commit("setWXUserInfo", data.data2);
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
-    console.log("openid", openid);
+    // console.log("openid", openid);
     {
       /**
           * ajax获取唐球用户信息，如果不存在会自动注册
@@ -481,6 +481,10 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
         }
       });
       vm.$store.commit("setTangballUserInfo", data);
+      wx.setStorage({
+        key: "tangballUserInfo",
+        data: JSON.stringify(data)
+      })
     }
   } catch (err) {
     wx.showLoading({
