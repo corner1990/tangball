@@ -21,12 +21,18 @@
                 <div class="input-text" v-if="!showSelect" @click="showSelect=!showSelect">{{ballAge}}</div>
                 <div v-if="showSelect">
                     <div class="mask-layer"></div>
-                    <van-picker class="picker-box" :columns="columns" 
+                    <van-picker class="picker-box" :columns="columns"
                     show-toolbar="true"
                     @confirm="changeSelect"
                     @cancel="closeSelect"/>
                 </div>
               </div>
+              <input v-else-if="message.type=='num'"
+              class="input-text" :class="focusIndex==index?'active':''" type="number"
+              v-model="memberMessage[message.index]"
+              pattern="[0-9]*"
+              @click="focusIndex=index"
+              placeholder="请输入"/>
               <input v-else
               class="input-text" :class="focusIndex==index?'active':''" type="text" v-model="memberMessage[message.index]"
               @click="focusIndex=index"
@@ -66,7 +72,7 @@ export default {
         {index:"sex",value:"性别:",type:"redio"},
         {index:"ballAge",value:"球龄:",type:"select"},
         // {index:"idCard",value:"身份证证号:"},
-        {index:"phone",value:"手机号码:"},
+        {index:"phone",value:"手机号码:",type:'num'},
         {index:"career",value:"职业:"}
       ]
     }
@@ -74,7 +80,7 @@ export default {
   computed: {
   //唐球会员信息-在vuex中获取
     tangballUserInfo: function() {
-      return this.$store.state.tangballUserInfo 
+      return this.$store.state.tangballUserInfo
     }
   },
   methods: {
@@ -159,9 +165,9 @@ export default {
     // 页面加载请求会员数据
     this.getMember();
     console.log(this.tangballUserInfo);
-    
-    
-    
+
+
+
   },
   onLoad(){
     this.showSelect=false
