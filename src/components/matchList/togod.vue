@@ -32,7 +32,7 @@ export default {
       default: 1
     }
   },
- 
+
   data() {
     return {
       matchType: null,
@@ -58,7 +58,7 @@ export default {
     tabCutInin() {
       this.matchlist = [];
       this.pageIndex = 1;
-    
+
       this.getlist(); //调用一次接口
     },
     footLoadLazy() {
@@ -77,12 +77,13 @@ export default {
           pageSize: this.pageSize,
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
-          findJson: { matchForm: this.matchType }
+          findJson: { matchForm: this.matchType,
+          publicationStatus:1}
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
       let arr = data.list;
-     
+
 
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
@@ -130,7 +131,7 @@ export default {
         this.matchType = null;
         this.pageSize=1000;
         this.tabCutInin(); //切换初始化方法
-        
+
       }
     },
     changeValue(event) {
@@ -187,4 +188,4 @@ export default {
   text-align: center;
   line-height: 30px;
 }
-</style> 
+</style>
