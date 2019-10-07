@@ -20,6 +20,9 @@ export default {
     //唐球会员信息-在vuex中获取
     UserID: function() {
       return this.$store.state.tangballUserInfo.P1;
+    },
+    unreadNum(){
+      return this.$store.state.unreadCount
     }
   },
   watch:{
@@ -58,7 +61,7 @@ export default {
           text: "个人中心",
           pagePath: "../usercenter/main",
           iconPath: "friends-o",
-          info:""
+          info:this.unreadNum
         }
       ],
       indicatorDots: false,

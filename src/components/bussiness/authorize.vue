@@ -81,6 +81,7 @@ export default {
       key: "tangballUserInfo",
       success: async (res) => {
         let { phone } = JSON.parse(res.data);
+        console.log(phone);
 
         if (!phone) {
           this.updataGetPhoneNumberShow(true)
