@@ -4,7 +4,7 @@
     <div>
       <div
         class="data-group"
-        @click="gotoPage(`/pages/articleDetailWX/main?dataId=${item.P1}&wxArticleUrl=${$lodash.get(cf, 'extend.wxArticleUrl','')}`)"
+        @click="gotoPage(cf)"
       >
         <div class="data-group-left">
           <span class="title_text">{{cf.articleTitle}}</span>
@@ -46,6 +46,10 @@ export default {
     };
   },
   methods: {
+    //跳转页面方法，20191007刘咏辉修正
+    gotoPage(cf){
+      util.gotoPage(`/pages/articleDetailWX/main?dataId=${cf.P1}&wxArticleUrl=${this.$lodash.get(cf, 'extend.wxArticleUrl','')}`)
+    }
     /**
      * @desc 搜索回调
      */
@@ -61,7 +65,7 @@ export default {
      * @param 接收的图片地址：matchListImg
      */
     let placeholderImg =
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
+      "http://qn-static.dmagic.cn/images/placeholder.png";
     this.matchListImg = this.$lodash.get(
       this.cf,
       "album[0].url",

@@ -1,9 +1,14 @@
 <template>
   <div class="main-wrap">
+<<<<<<< HEAD
     <van-search
      placeholder="请输入搜索关键词"
      @search="searchList"/>
      <!-- <openImg v-model="venueDoc.album" ></openImg> -->
+=======
+    <van-search placeholder="请输入搜索关键词" @search="searchList" />
+    <!-- <openImg v-model="venueDoc.album" ></openImg> -->
+>>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -14,12 +19,7 @@
     >
       <block v-for="item in arrRecommend" :key="item.P1">
         <swiper-item>
-          <image
-            :src="item.imageUrl"
-            class="slide-image"
-            height="150"
-            @click="gotoPage(item.link)"
-          />
+          <image :src="item.imageUrl" class="slide-image" height="150" @click="gotoPage(item.link)" />
         </swiper-item>
       </block>
     </swiper>
@@ -40,10 +40,10 @@
     <div>
       <div class="index_area_title">唐球赛事</div>
       <div class>
-        <togod pageSize=5></togod>
+        <togod pageSize="5"></togod>
       </div>
     </div>
-    <div style="">
+    <div style>
       <div class="index_area_title">唐球资讯</div>
       <div class="card">
         <articleList></articleList>
@@ -57,7 +57,7 @@
     <!-- <div class="all">
       <div class="left"></div>
       <div class="right"></div>
-    </div> -->
+    </div>-->
     <!-- <van-cell
       is-link
       :title="item.title"
@@ -65,7 +65,7 @@
       :url="item.url"
       v-for="(item,i) in arrLink"
       :key="i"
-    /> -->
+    />-->
     <!-- <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
     <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
     <view class="btn-area">
@@ -80,7 +80,7 @@
         open-type="switchTab"
         hover-class="other-navigator-hover"
       >切换 Tab-针对tabar中的页面--</navigator>
-    </view> -->
+    </view>-->
 
     <mytabbar :active="0"></mytabbar>
     <!-- <mp-dialog
@@ -89,8 +89,21 @@
       show-cancel-button
     >
       <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
+<<<<<<< HEAD
     </mp-dialog> -->
 
+=======
+    </mp-dialog>-->
+    <van-dialog :show="getPhoneNumberShow" title="唐球" use-slot :show-confirm-button="false">
+      <p class="getNumberTip">为了方便您查询比赛成绩，唐球邀请您绑定手机号！</p>
+      <van-button
+        type="primary"
+        open-type="getPhoneNumber"
+        @getphonenumber="getPhoneNumber"
+        block
+      >确定</van-button>
+    </van-dialog>
+>>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
   </div>
 </template>
 <script>
@@ -100,7 +113,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import togod from "../../components/matchList/togod";
 import articleList from "../articleList/index";
 import card from "@/components/card";
-import Dialog from '../../../static/vant/dialog/dialog';
+import Dialog from "../../../static/vant/dialog/dialog";
 // import { get } from '@/utils/request'
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
@@ -148,7 +161,11 @@ export default {
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
       value: "", // 搜索value,
+<<<<<<< HEAD
 
+=======
+      getPhoneNumberShow: false
+>>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     };
   },
   methods: {
@@ -162,9 +179,11 @@ export default {
         docEach.imageUrl = this.$lodash.get(docEach, `album[0].url`);
       });
       this.arrRecommend = arrRecommend;
-        },
-    searchList(event){
-      wx.navigateTo({url:"/pages/searchPage/main?search="+event.mp.detail})
+    },
+    searchList(event) {
+      wx.navigateTo({
+        url: "/pages/searchPage/main?search=" + event.mp.detail
+      });
     },
     gotoPage(url) {
       wx.navigateTo({ url });
@@ -192,10 +211,86 @@ export default {
         url
       });
     },
+<<<<<<< HEAD
 
   },
   onShow() {
 
+=======
+    /**
+     * @desc 获取手机号回调函数
+     */
+    getPhoneNumber(e) {
+      let { errMsg } = e.target;
+      if (errMsg.indexOf("ok") < 0) {
+        this.getPhoneNumberShow = false;
+        return setTimeout(() => {
+          this.getPhoneNumberShow = true;
+        }, 1000);
+      }
+      this.updataPhone(e.target);
+    },
+    /**
+     * @desc 获取手机号用户点击同意时回调
+     */
+    updataPhone(data) {
+      let { encryptedData, iv } = data;
+      let self = this;
+      wx.getStorage({
+        key: "ids",
+        success(res) {
+          let { session_key, openid } = JSON.parse(res.data);
+          let param = { session_key, openid, encryptedData, iv };
+          self.sendPhoneData(param);
+        }
+      });
+    },
+    sendPhoneData(param) {
+      util
+        .post({
+          url: `${global.PUB.domain}/tangball/encodePhoneNumber`,
+          param
+        })
+        .then(res => {
+          let { code } = res.data;
+          let aaaa = { phone: "11111" };
+          if (code === 0) {
+            this.getPhoneNumberShow = false;
+            // 防止一直弹出绑定手机弹窗
+            wx.setStorage({
+              key: "tangballUserInfo",
+              data: JSON.stringify(aaaa)
+            });
+          }
+        });
+      // 测试代码， 调试接口的时候删除
+      // this.getPhoneNumberShow = false;
+    },
+    updataGetPhoneNumberShow(getPhoneNumberShow) {
+      this.getPhoneNumberShow = getPhoneNumberShow;
+    }
+  },
+  onShow() {
+    wx.hideTabBar({
+      complete() {}
+    });
+    setTimeout(() => {
+      //延迟函数
+      wx.getStorage({
+        key: "tangballUserInfo",
+        success: res => {
+          let { phone } = JSON.parse(res.data);
+
+          if (!phone) {
+            this.updataGetPhoneNumberShow(true);
+          }
+        },
+        fail: () => {
+          this.updataGetPhoneNumberShow(true);
+        }
+      });
+    }, 2000);
+>>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
@@ -216,10 +311,12 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     // console.log('√', this.$store.state)
   }
-
 };
 </script>
 <style scoped>
@@ -253,7 +350,7 @@ export default {
   color: gray;
   margin-right: 8px;
 }
-.getNumberTip{
+.getNumberTip {
   color: #646464;
   font-size: 16px;
   padding: 30px 20px;
