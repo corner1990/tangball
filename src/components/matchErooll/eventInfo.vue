@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div v-if="!groupGame">
     <h3 class="info-title">个人信息</h3>
     <!-- <debug_item v-model="info" text="info" /> -->
     <!-- <debug_item path="info.total_fee" v-model="info.total_fee" text="info" /> -->
@@ -25,6 +26,18 @@
         <p>{{ info.career }}</p>
       </div>
     </van-cell-group>
+    </div>
+    <div v-if="groupGame">
+      <h2 class="info-title">队伍信息</h2>
+      <div class="groups-box"><div class="groups-title">队名</div><div class="FL">{{groups.name}}</div>
+      <div style="clear:both"></div></div>
+      <div v-for='(item,index) in groups.member' :key="index" class="groups-box">
+        <div class="groups-title">{{index==0?'队长':'队员'+index}}</div><div class="FL">{{item.name}}
+          (&nbsp;{{item.sex==1?'男':'女'}}\{{item.phone?item.phone:'无'}}&nbsp;)
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
     <van-cell-group>
       <h3 class="info-title event-info">赛事及场馆信息</h3>
       <div class="flex line">
@@ -61,7 +74,9 @@ export default {
   },
   data() {
     return {
-      radio: "1"
+      groupGame:false,
+      radio: "1",
+      groups:{}
       // matchInfo: {
       //   matchName: '',
       //   matchTime: '未确定',
@@ -73,6 +88,10 @@ export default {
   },
   props: ["info", "matchInfo"],
   mounted() {
+    if (this.matchInfo.matchForm == 2) {
+      this.groupGame = true
+      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+    }
     // 获取赛事数据
     // let data = wx.getStorageSync('matchInfo')
     // if (data) {
@@ -127,5 +146,16 @@ export default {
   font-weight: bold;
   font-size: 16px;
   padding: 5px 0;
+}
+.groups-box{
+  height: 40px;
+  font-size: 12px;
+  line-height: 40px;
+  border-bottom: 1px solid #eee;
+  margin-left: 15px;
+}
+.groups-title{
+  float: left;
+  width: 80px;
 }
 </style>

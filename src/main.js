@@ -1,9 +1,10 @@
 /* eslint-disable */
 global.PUB={}
-//  global.PUB.domain="http://120.76.160.41:3000" 
- global.PUB.domain="https://www.dmagic.cn"  
+
+//  global.PUB.domain="https://www.dmagic.cn"  
+  //global.PUB.domain="http://test.dmagic.cn"  
 //  global.PUB.domain="http://localhost:3000"
- //global.PUB.domain="http://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
+global.PUB.domain="https://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
 import Vue from 'vue'
 import App from './App'
 import './css/public.css'
@@ -16,8 +17,8 @@ import Vuex from 'vuex'//导入vuex模块
 const lodash = require("../static/lodash.min.js"); 
 // let lodash={}static\lodash.min.js
 // import lodash from "lodash";
-console.log("lodash111", lodash);
-console.log("lodash.get", lodash.get);
+// console.log("lodash111", lodash);
+// console.log("lodash.get", lodash.get);
 Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
@@ -36,7 +37,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
     }
   }
 })
-Vue.prototype.$store = store//让vue实例中可访问$store
+Vue.prototype.$store = store; // 让vue实例中可访问$store
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue(App)

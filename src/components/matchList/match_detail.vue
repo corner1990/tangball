@@ -1,17 +1,17 @@
 <template>
   <div>
-
     <navigator :url="matchDetailUrl">
      
-      <div class="match-box">
-        <div class="match-img-box">
-          <img :src="item.album[0].url" v-if="item.album[0].url"/>
+      <div class="match-box" >
+        <div class="match-img-box" >
+          <img :src="item.album[0].url" v-if="item.album"/>
           <img :src="matchListImg" v-else/>
         </div>
         <div class="match-img-box1">
           <h1>{{item.matchName}}</h1>
           <div>赛事时间：{{item.matchTime}}</div>
           <div>报名费用：{{item.registrationFee}}</div>
+          <div :class="statusIndex?'active':''">{{matchStatus}}</div>
         </div>
         <div class="rpg11">
           <div class="arrow">
@@ -45,14 +45,34 @@ export default {
       placeholderImg: null,
       searchValue: "111", // 搜索value
       matchType: null,
-      activeStep: 0,
-      applyUrl: null
+      applyUrl: null,
+      
+      statusIndex:false
       // matchDetailUrl: null
     };
   },
   computed: {
     matchDetailUrl: function() {
       return `/pages/matchDetail/main?id= ${this.item.P1}`;
+    },
+    matchStatus(){
+      let nowDate=new Date().getTime();
+      let enrollTimeDate = new Date(this.item.enrollTime).getTime();
+      let enrollTimeEnd = new Date(this.item.enrollTimeEnd).getTime();
+      let matchTime = new Date(this.item.matchTime).getTime();
+      let matchTimeEnd = new Date(this.item.matchTimeEnd).getTime();
+      if (nowDate>matchTimeEnd) {
+        return '赛事已结束'
+      }else if(nowDate>matchTime){
+        return '赛事已开始'
+      }else if (nowDate>enrollTimeEnd) {
+        return '报名时间已结束'
+      }else if (nowDate>enrollTimeDate) {
+        this.statusIndex = true
+        return '火热报名中'
+      }else{
+        return '赛事未发布'
+      }
     }
   },
   methods: {
@@ -65,7 +85,8 @@ export default {
      * @param 默认占位图：placeholderImg
      * @param 接收的图片地址：matchListImg
      */
-
+    
+    
     // let placeholderImg =
     //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564478930764&di=fbf54154d40d042b2a71bee21bd7bef9&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F20%2F02%2F16pic_2002642_b.jpg";
     // this.matchListImg = this.$lodash.get(
@@ -91,5 +112,7 @@ export default {
 .card {
   margin: 0 10px;
 }
-
+.active{
+  color: red
+}
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrap">
+    
     <!-- 赛事照片 -->
     <div class>
       <swiper
@@ -33,41 +34,76 @@
       </van-popup>
     </div>
     <!-- 赛事名称 -->
-    <div class="FS24 TAC LH36">{{matchDoc.matchName}}</div>
+    <div>
+      <div class="FS24 TAC LH36 ">{{matchDoc.matchName}}
+        <div class="share-button-box">
+          <div>
+            <button open-type="share" class="share-button">
+              <van-icon name="share" class="shareImg"/>
+            </button>
+          </div>
+          <div class="share-text">分享</div>
+        </div>
+        
+        <div style="clear:both"></div>
+      </div>
+      
+    </div>
     <!-- 赛事步骤 -->
+
     <van-steps
-      v-if="matchDoc.matchType==2"
       :steps="steps"
       :active="activeStep"
       active-color="#F4B116"
     />
-    <van-steps v-else :steps="steps2" :active="activeStep2" active-color="#F4B116" />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
       <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
-      <!-- 如果是全国赛 -->
+      <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
+
+      
       <van-collapse
         v-model="NationalmatchIndex"
         @change="matchTypeChange"
-        v-if="matchDoc.matchType==2&&matchDoc.matchType"
       >
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
             <span
               style="color:black"
-              v-for="(item,index) in matchDoc.cityVenueList"
+              v-for="(item,index) in matchDoc.venue"
               :key="index"
             >{{item.cityName}}--{{item.venueName}}</span>
           </div>
         </van-collapse-item>
       </van-collapse>
-      <van-cell title="决赛场馆" :value="matchDoc.venue" v-else />
+      <van-collapse
+        v-model="showEnrollRequirements"
+        @change="enrollRequirementsChange"
+        v-if="matchDoc.enrollRequirements"
+      >
+        <van-collapse-item title="报名要求" name="1">
+          <div class="collapse">
+            {{matchDoc.enrollRequirements}}
+          </div>
+        </van-collapse-item>
+      </van-collapse>
       <van-cell title="报名费" :value="matchDoc.registrationFee" />
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/macthManual/main'})" v-if="matchDoc.matchManual">
+      <div class="FL" style="color:#333;">赛事规程</div>
+      <div class="FR"><van-icon name="arrow" /></div>
+      <div style="clear:both"></div>
+      </div>
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" >
+      <div class="FL" style="color:#333;">赛事结果</div>
+      <div class="FR"><van-icon name="arrow" /></div>
+      <div style="clear:both"></div>
+      </div>
+      <div style="height:50px"></div>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
-    <div class="enrolled" v-if="isMatchIdStatus">{{enrollText}}</div>
-    <van-button size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
+    <div class="enrolled enrollButton" v-if="isMatchIdStatus">{{enrollText}}</div>
+    <van-button class="enrollButton" size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
     <!-- 显示选择场馆弹窗 -->
     <van-dialog
       use-slot
@@ -102,25 +138,14 @@ export default {
       venueName: null, //场馆名字
       cityName: null, //场馆城市名
       NationalmatchIndex: null, //举办地点聚焦
+      showEnrollRequirements:null,//报名要求聚焦
       matchId: 37, //  当前赛事id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
-      activeStep2: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
       steps: [
         //步骤条数组
-        { text: "选拔赛", desc: "", value: 11 },
-        { text: "晋级赛", desc: "", value: 12 },
-        { text: "决赛", desc: "", value: 13 },
-        { text: "淘汰赛", desc: "", value: 21 },
-        { text: "1/4决赛", desc: "", value: 22 },
-        { text: "决赛", desc: "", value: 23 }
-      ],
-      steps2: [
-        //步骤条数组
-        { text: "选拔赛", desc: "", value: 21 },
-        { text: "晋级赛", desc: "", value: 22 },
-        { text: "决赛", desc: "", value: 23 }
+  
       ],
       matchDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
@@ -133,6 +158,16 @@ export default {
     };
   },
   methods: {
+    // 跳转赛事规程的方法
+    gotoMatchManual(url){
+      wx.setStorage({
+          key: "matchInfo",
+          data: JSON.stringify(this.matchDoc),
+      success() {
+        wx.navigateTo(url);
+      }
+      })
+    },
     /**
      * @desc 打开点击图片放大函数
      */
@@ -153,7 +188,7 @@ export default {
     onCloseDialog() {
       this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime, registrationFee: total_fee } = this.matchDoc;
+      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -165,10 +200,24 @@ export default {
           matchId,
           venueId,
           venueName,
-          cityName
+          cityName,
+          matchForm,
+          teamMemberMin,
+          teamMemberMax
         }),
         success() {
-          wx.navigateTo({ url });
+          if (matchForm == 1) {
+            wx.navigateTo({ url });
+          }else{
+            wx.setStorage({
+              key: "groupsMsg",
+              data: '',
+              success() {
+               wx.navigateTo({ url:"/pages/myEroll_groups/main" });
+            }
+            });
+          }
+          
         }
       });
     },
@@ -191,43 +240,20 @@ export default {
      * @param url是跳转的地址
      */
     gotoPage() {
-      if (this.matchDoc.matchType !== 2 || !this.matchDoc.matchType) {
-        let {
-          matchName,
-          matchTime,
-          venue,
-          registrationFee: total_fee
-        } = this.matchDoc;
-        let { matchId } = this;
-        let url = `/pages/matchEroll/main?id=1`;
-        // 保存报名数据
-        wx.setStorage({
-          key: "matchInfo",
-          data: JSON.stringify({
-            matchName,
-            matchTime,
-            total_fee,
-            matchId,
-            venue
-          }),
-          success() {
-            wx.navigateTo({ url });
-          }
-        });
-      } else {
+
         this.showdDialog = true; //打开弹窗
         this.venueId = null; //清空变量
         this.cityName = null;
         this.venueName = null;
         // 拼接场馆列表数组
-        this.cityVenueList = this.matchDoc.cityVenueList.map((item, index) => {
+        this.cityVenueList = this.matchDoc.venue.map((item, index) => {
           return item.cityName + "---" + item.venueName;
         });
-        let { venueId, cityName, venueName } = this.matchDoc.cityVenueList[0];
+        let { venueId, cityName, venueName } = this.matchDoc.venue[0];
         this.venueId = venueId; //默认选中第一个
         this.cityName = cityName;
         this.venueName = venueName;
-      }
+      
     },
     /**
      * @name getEnrollList是获取报名订单列表函数
@@ -254,6 +280,9 @@ export default {
      */
     matchTypeChange(val) {
       this.NationalmatchIndex = val.mp.detail;
+    },
+    enrollRequirementsChange(val){
+      this.showEnrollRequirements = val.mp.detail;
     },
     onShow() {
       this.show = true;
@@ -287,6 +316,16 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
+    // 赛事步骤处理
+    this.steps = this.matchDoc.progress.map((item,index)=>{
+      if (item.checked == true) {
+        this.activeStep = index
+      }
+      let obj = {text:item.name,desc:'',value:item.name}
+      return obj
+    })
+    console.log(this.matchDoc);
+    
     // 如果报名未截止
     if (this.matchDoc.publicationStatus == 1) {
       if (this.matchDoc.enrollStatus == "3") {
@@ -304,21 +343,6 @@ export default {
     } else {
       this.enrollText = "赛事未发布";
       this.isMatchIdStatus = true;
-    }
-    // 赛事步骤状态处理
-    let Progress = this.matchDoc.matchProgress.smallProgress; //当前赛事阶段
-    if (Progress) {
-      //如果当前赛事阶段存在
-      this.steps.forEach((item, index) => {
-        if (Progress == item.value) {
-          this.activeStep = index; //当前步骤条的选中状态
-        }
-      });
-      this.steps2.forEach((item, index) => {
-        if (Progress == item.value) {
-          this.activeStep2 = index; //当前步骤条的选中状态
-        }
-      });
     }
   },
   computed: {
@@ -409,5 +433,42 @@ export default {
   text-align: center;
   color: gray;
   border: 1px #eee solid;
+}
+.share-button-box{
+  float: right;
+}
+.share-button{
+  width: 40px;
+  background-color: white;
+  color: gray;
+  padding: 0;
+  border:0 solid red;
+  overflow:visible;
+  line-height: 18px;
+  position: static;
+  text-align: center;
+  margin-top:5px;
+  font-size: 20px;
+}
+.shareImg{
+  height: 30px;
+}
+.share-text{
+  font-size: 10px;
+  line-height: 10px;
+  color: gray;
+}
+.regulation-box{
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+  color: gray;
+  margin: 0 10px;
+  margin-left: 20px;
+}
+.enrollButton{
+  position: fixed;
+  bottom: 10%;
+  width: 100%;
 }
 </style>

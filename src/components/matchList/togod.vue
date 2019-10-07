@@ -32,7 +32,7 @@ export default {
       default: 1
     }
   },
- 
+
   data() {
     return {
       matchType: null,
@@ -44,8 +44,8 @@ export default {
       matchlist: [],
       tabList: [
         { category: "近期赛事" },
-        { category: "全国赛" },
-        { category: "普通赛" },
+        { category: "团队赛" },
+        { category: "个人赛" },
         { category: "全部" }
       ],
 
@@ -58,7 +58,7 @@ export default {
     tabCutInin() {
       this.matchlist = [];
       this.pageIndex = 1;
-    
+
       this.getlist(); //调用一次接口
     },
     footLoadLazy() {
@@ -77,12 +77,13 @@ export default {
           pageSize: this.pageSize,
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
-          findJson: { matchType: this.matchType }
+          findJson: { matchForm: this.matchType,
+          publicationStatus:1}
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
       let arr = data.list;
-     
+
 
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
@@ -120,17 +121,17 @@ export default {
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 1) {
         this.matchType = 2; //改变请求接口参数
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 2) {
         this.matchType = 1;
-          this.pageSize = 5;
+          this.pageSize = 10;
         this.tabCutInin(); //切换初始化方法
       } else if (event.target.index == 3) {
         this.matchType = null;
         this.pageSize=1000;
         this.tabCutInin(); //切换初始化方法
-        
+
       }
     },
     changeValue(event) {
@@ -195,4 +196,4 @@ export default {
   text-align: center;
   line-height: 30px;
 }
-</style> 
+</style>

@@ -12,7 +12,7 @@
 .match-box {
   margin: 5px 15px;
   border-bottom: #ddd 1px solid;
-  height: 97px;
+  height: 110px;
   display: flex;
 }
 .rpg11 {
@@ -22,7 +22,7 @@
 }
 .match-img-box {
   margin: 5px 1px 0 0px;
-  height: 85px;
+  height: 95px;
   width: 85px;
   background: #fff;
 }

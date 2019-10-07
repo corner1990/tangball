@@ -19,7 +19,10 @@
     "pages/rankingList/main",
     "pages/myErollDetail/main",
     "pages/articleDetail/main",
-    "pages/searchPage/main"
+    "pages/searchPage/main",
+    "pages/myEroll_groups/main",
+    "pages/macthManual/main",
+    "pages/matchResult/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -77,6 +80,8 @@
     "van-dialog": "/static/vant/dialog/index",
     "van-picker": "/static/vant/picker/index",
     "van-toast": "/static/vant/toast/index",
-    "van-loading": "/static/vant/loading/index"
-  }
+    "van-loading": "/static/vant/loading/index",
+    "mp-dialog": "/static/dialog/dialog"
+  },
+  "sitemapLocation": "sitemap.json"
 }
