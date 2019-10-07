@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
-    <van-search 
-     placeholder="请输入搜索关键词" 
+    <van-search
+     placeholder="请输入搜索关键词"
      @search="searchList"/>
      <!-- <openImg v-model="venueDoc.album" ></openImg> -->
     <swiper
@@ -52,7 +52,7 @@
 
     <div class="TAC LH30 CLB MB20" style="color:#999" >
        <navigator url="/pages/articleDetail/main?dataId=8"  hover-class="other-navigator-hover">商务合作</navigator>
-      
+
       </div>
     <!-- <div class="all">
       <div class="left"></div>
@@ -90,20 +90,7 @@
     >
       <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
     </mp-dialog> -->
-    <van-dialog
-      :show="getPhoneNumberShow"
-      title="唐球"
-      use-slot
-      :show-confirm-button="false"
-    >
-      <p class="getNumberTip">为了方便您查询比赛成绩，唐球邀请您绑定手机号！</p>
-      <van-button
-      type="primary"
-      open-type="getPhoneNumber"
-      @getphonenumber="getPhoneNumber"
-      block
-      >确定</van-button>
-    </van-dialog>
+
   </div>
 </template>
 <script>
@@ -161,7 +148,7 @@ export default {
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
       value: "", // 搜索value,
-      getPhoneNumberShow: false,
+
     };
   },
   methods: {
@@ -205,92 +192,23 @@ export default {
         url
       });
     },
-    /**
-     * @desc 获取手机号回调函数
-     */
-    getPhoneNumber (e) {
-      let { errMsg } = e.target;
-      if ( errMsg.indexOf('ok') < 0 ) {
-        
-        this.getPhoneNumberShow = false
-        return setTimeout(() => {
-          this.getPhoneNumberShow = true
-        }, 1000);
-      }
-      this.updataPhone(e.target);
-    },
-    /**
-     * @desc 获取手机号用户点击同意时回调
-     */
-    updataPhone (data) {
-      let {
-        encryptedData,
-        iv
-      } = data;
-      let self = this;
-      wx.getStorage({
-        key: 'ids',
-        success (res) {
-          let { session_key, openid } = JSON.parse(res.data);
-          let param = { session_key, openid, encryptedData, iv };
-          self.sendPhoneData(param)
-        }
-      })
-    },
-    sendPhoneData (param) {
-      util.post(
-        {
-          url: `${global.PUB.domain}/tangball/encodePhoneNumber`,
-          param
-        }
-      ).then(res => {
-        let { code } = res.data;
-        let aaaa = { phone: '11111'}
-        if (code === 0) {
-          this.getPhoneNumberShow = false;
-          // 防止一直弹出绑定手机弹窗
-          wx.setStorage({
-          key: 'tangballUserInfo',
-          data: JSON.stringify(aaaa)
-      })
-        }
-      })
-      // 测试代码， 调试接口的时候删除
-      // this.getPhoneNumberShow = false;
-    },
-    updataGetPhoneNumberShow (getPhoneNumberShow) {
-      
-      this.getPhoneNumberShow = getPhoneNumberShow;
-    },
+
   },
   onShow() {
-    wx.hideTabBar({
-      complete() {}
-    });
-    wx.getStorage({
-      key: "tangballUserInfo",
-      success: (res) => {
-        let { phone } = JSON.parse(res.data);
-        
-        if (!phone) {
-          this.updataGetPhoneNumberShow(true)
-        }
-      },
-      fail: () => {
-        this.updataGetPhoneNumberShow(true)
-      }
-    })
+
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
-    let result = await util.getMyWXSetting();
-    //如果未授权，先return,等待用户主动授权
-    if (result == "noAuth") {
-      util.gotoPage("/pages/authorize/main"); //跳转到授权页面
-      return;
-    }
+    // let result = await util.getMyWXSetting();
+    // //如果未授权，先return,等待用户主动授权
+    // if (result == "noAuth") {
+    //   util.gotoPage("/pages/authorize/main"); //跳转到授权页面
+    //   return;
+    // }
+    // await util.loginAndInitUser(this);
+    // util.isLogin(this);
     this.ajaxRecommendList(); //调用：{ajax获取轮播图列表函数}
-    await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
+     //函数：{登录并ajax初始化用户信息的函数}
     /****************************微信会员登录和信息存储-END****************************/
   },
   created() {
@@ -298,7 +216,7 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
-    
+
     // console.log('√', this.$store.state)
   }
 

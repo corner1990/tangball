@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-tabs :active="active" @change="onClickTab" style="position: relative;">
+    <van-tabs :active="active" @change="onClickTab" style="position: relative;" >
       <van-tab :title="bigItem.category " v-for="(bigItem,index) in tabList" :key="index">
         <tisp v-if="status"></tisp>
         <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
