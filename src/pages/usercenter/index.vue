@@ -5,8 +5,9 @@
         <img src="/static/images/timg.jpg" alt="bg" class="bg" />
         <div class="avatar-row">
           <div class="avatar"></div>
-          <div class="avatar-text" @click="login">&nbsp;&nbsp;&nbsp;&nbsp;暂未登录</div>
-          <div class="avatar-text" @click="login">点击授权登录</div>
+          <!-- <div class="avatar-text" @click="login">&nbsp;&nbsp;&nbsp;&nbsp;暂未登录</div> -->
+          <div class="avatar-text" >
+            <van-button type="primary" size="small" round @click="login">点击授权登录</van-button></div>
         </div>
       </div>
 
@@ -110,9 +111,11 @@ export default {
   height: 80px;
   margin-top: 10px;
   border-radius: 50%;
-  background-color: gray;
+
   margin-left:40%;
   margin-top:30px;
+  background-image: url('http://qn-static.dmagic.cn/images/placeholder_head.jpg');
+  background-size: 100%
 }
 .avatar-row {
   position: relative;
@@ -123,9 +126,13 @@ export default {
   color:white;
   line-height: 24px;
   font-size: 16px;
-  font-weight: 700;
+  /* font-weight: 700; */
   cursor: pointer;
   text-align: left;
   margin-left:38%;
+  /* background-color: #F4B116; */
+  border-radius: 10px;
+  width:110px;
+  margin-top: 10px;
 }
 </style>
