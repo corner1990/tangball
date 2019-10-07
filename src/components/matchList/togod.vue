@@ -147,7 +147,15 @@ export default {
     objParam() {
       return { pageSize: this.pageSize, pageIndex: this.pageIndex };
     }
-  },
+  }, watch: {
+            'matchlist.length': {
+                handler(newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        // getlist()
+                    }
+                }
+            }
+        },
   //  onPageScroll(res) {
   //   let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
   //   let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
