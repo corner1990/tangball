@@ -43,9 +43,7 @@ export default {
     };
   },
   methods: {
-    gotoPage(url) {
-      wx.navigateTo({ url });
-    },
+    
     async getArticleList() {
       wx.showLoading({ title: "加载中", icon: "loading" });
       this.articleList = await util.ajaxGetList({
