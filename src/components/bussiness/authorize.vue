@@ -20,7 +20,7 @@
       class="phone-button"
       type="primary"
       size="small"
-      @click="getPhoneNumberShow = false"
+      @click="closePhoneDialog"
       block
       >取消</van-button>
       <van-button
@@ -61,6 +61,18 @@ export default {
     };
   },
   methods: {
+   async closePhoneDialog(){
+      this.getPhoneNumberShow = false
+      if (this.JumpId) {
+          // 如果是从赛事进来的，那么获取权限之后，需要跳转回当前的赛事
+
+          let url=`/pages/matchDetail/main?id=${this.JumpId}`//拼接当前的赛事id
+          wx.authorizeJump=true//获取权限时候可以跳转
+          await util.getMyWXSetting(url);
+        } else {
+          await util.getMyWXSetting();//跳转至首页
+        }
+    },
     async existPhone(){
       wx.hideTabBar({
       complete() {}

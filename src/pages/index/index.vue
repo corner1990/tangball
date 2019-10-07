@@ -1,14 +1,9 @@
 <template>
   <div class="main-wrap">
-<<<<<<< HEAD
     <van-search
      placeholder="请输入搜索关键词"
      @search="searchList"/>
      <!-- <openImg v-model="venueDoc.album" ></openImg> -->
-=======
-    <van-search placeholder="请输入搜索关键词" @search="searchList" />
-    <!-- <openImg v-model="venueDoc.album" ></openImg> -->
->>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -89,21 +84,8 @@
       show-cancel-button
     >
       <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
-<<<<<<< HEAD
     </mp-dialog> -->
 
-=======
-    </mp-dialog>-->
-    <van-dialog :show="getPhoneNumberShow" title="唐球" use-slot :show-confirm-button="false">
-      <p class="getNumberTip">为了方便您查询比赛成绩，唐球邀请您绑定手机号！</p>
-      <van-button
-        type="primary"
-        open-type="getPhoneNumber"
-        @getphonenumber="getPhoneNumber"
-        block
-      >确定</van-button>
-    </van-dialog>
->>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
   </div>
 </template>
 <script>
@@ -161,11 +143,6 @@ export default {
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
       value: "", // 搜索value,
-<<<<<<< HEAD
-
-=======
-      getPhoneNumberShow: false
->>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     };
   },
   methods: {
@@ -211,86 +188,10 @@ export default {
         url
       });
     },
-<<<<<<< HEAD
 
   },
   onShow() {
 
-=======
-    /**
-     * @desc 获取手机号回调函数
-     */
-    getPhoneNumber(e) {
-      let { errMsg } = e.target;
-      if (errMsg.indexOf("ok") < 0) {
-        this.getPhoneNumberShow = false;
-        return setTimeout(() => {
-          this.getPhoneNumberShow = true;
-        }, 1000);
-      }
-      this.updataPhone(e.target);
-    },
-    /**
-     * @desc 获取手机号用户点击同意时回调
-     */
-    updataPhone(data) {
-      let { encryptedData, iv } = data;
-      let self = this;
-      wx.getStorage({
-        key: "ids",
-        success(res) {
-          let { session_key, openid } = JSON.parse(res.data);
-          let param = { session_key, openid, encryptedData, iv };
-          self.sendPhoneData(param);
-        }
-      });
-    },
-    sendPhoneData(param) {
-      util
-        .post({
-          url: `${global.PUB.domain}/tangball/encodePhoneNumber`,
-          param
-        })
-        .then(res => {
-          let { code } = res.data;
-          let aaaa = { phone: "11111" };
-          if (code === 0) {
-            this.getPhoneNumberShow = false;
-            // 防止一直弹出绑定手机弹窗
-            wx.setStorage({
-              key: "tangballUserInfo",
-              data: JSON.stringify(aaaa)
-            });
-          }
-        });
-      // 测试代码， 调试接口的时候删除
-      // this.getPhoneNumberShow = false;
-    },
-    updataGetPhoneNumberShow(getPhoneNumberShow) {
-      this.getPhoneNumberShow = getPhoneNumberShow;
-    }
-  },
-  onShow() {
-    wx.hideTabBar({
-      complete() {}
-    });
-    setTimeout(() => {
-      //延迟函数
-      wx.getStorage({
-        key: "tangballUserInfo",
-        success: res => {
-          let { phone } = JSON.parse(res.data);
-
-          if (!phone) {
-            this.updataGetPhoneNumberShow(true);
-          }
-        },
-        fail: () => {
-          this.updataGetPhoneNumberShow(true);
-        }
-      });
-    }, 2000);
->>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
@@ -311,10 +212,6 @@ export default {
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)
     // })
-<<<<<<< HEAD
-
-=======
->>>>>>> 5f6e608bae579b71ceadc1c0d3b24f0ac9c3fb71
     // console.log('√', this.$store.state)
   }
 };
