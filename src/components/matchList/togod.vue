@@ -2,7 +2,7 @@
   <div>
     <van-tabs :active="active" @change="onClickTab" style="position: relative;" >
       <van-tab :title="bigItem.category " v-for="(bigItem,index) in tabList" :key="index">
-        <tisp v-if="status"></tisp>
+          <tisp v-if="status"></tisp>
         <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
       </van-tab>
     </van-tabs>
@@ -187,5 +187,8 @@ export default {
   font-weight: bold;
   text-align: center;
   line-height: 30px;
+}
+.van-tab__pane{
+  overflow-y:visible
 }
 </style>
