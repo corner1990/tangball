@@ -74,7 +74,6 @@ export default {
   },
   data() {
     return {
-      groupGame:false,
       radio: "1",
       groups:{}
       // matchInfo: {
@@ -86,12 +85,10 @@ export default {
       // }
     };
   },
-  props: ["info", "matchInfo"],
+  props: ["info", "matchInfo",,'groupGame'],
   mounted() {
-    if (this.matchInfo.matchForm == 2) {
-      this.groupGame = true
-      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-    }
+    this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+
     // 获取赛事数据
     // let data = wx.getStorageSync('matchInfo')
     // if (data) {

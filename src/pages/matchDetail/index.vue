@@ -283,7 +283,12 @@ export default {
         this.cityName = cityName;
         this.venueName = venueName;
         }else{
+          let { venueId, cityName, venueName } = this.matchDoc.venue[0];
+          this.venueId = venueId; //默认选中第一个
+        this.cityName = cityName;
+        this.venueName = venueName;
           this.onCloseDialog()
+
         }
       }else{
         this.showLogin = true

@@ -111,7 +111,6 @@ export default {
 
   data() {
     return {
-      groupGame:false,
       groups:{},
       radio: "1",
       showSelectBallAge: false,
@@ -152,11 +151,9 @@ export default {
     };
   },
   mounted() {
-    if (this.matchInfo.matchForm == 2) {
-      this.groupGame = true
       this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-    }
-    
+
+
     // 获取赛事数据
     // let data = wx.getStorageSync("matchInfo");
     // if (data) {
@@ -186,7 +183,7 @@ export default {
       return this.info;
     }
   },
-  props: ["info", "matchInfo", "skipPage"],
+  props: ["info", "matchInfo", "skipPage",'groupGame'],
   methods: {
     onRadioChange(radio) {
       this.info.sex = radio.target.value;

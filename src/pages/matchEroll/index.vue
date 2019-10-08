@@ -5,14 +5,14 @@
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage"/>
+      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage" :groupGame="groupGame"/>
     </div>
     <div v-if="active === 1">
-      <EventInfo :info="info" :matchInfo="objMatchInfo" />
+      <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame"/>
     </div>
     <div v-show="active === 2">
       <div v-if="payStatus==2">
-        <EventInfo :info="info" :matchInfo="objMatchInfo" />
+        <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame"/>
         <div class="icon_success">
           <div class="__success">
             <van-icon name="success" color="#07c160" size="32px" />
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      groupGame:false,
       skipPage:0,
       payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
@@ -86,7 +87,7 @@ export default {
   mounted() {
     console.log("mounted###");
     this.skipPage=0;
-    
+
     // 页面加载请求会员数据
     this.getMember();
   },
@@ -102,12 +103,21 @@ export default {
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
+
       }
     } else {
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-      
+
+
     }
+    if (this.objMatchInfo.matchForm == 2) {
+          this.groupGame =true
+        }else{
+          this.groupGame =false
+        }
+  console.log('this.groupGame',this.objMatchInfo);
+  console.log('this.groupGame',this.groupGame);
 
     // 请求赛事详情接口函数
     // let doc = await util.post({
@@ -206,7 +216,7 @@ export default {
             let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
             if (!groups.orderId) {
               console.log('groups',res.data.orderId);
-              
+
               groups.orderId = res.data.orderId
               let  data  = await util.post({
               url: global.PUB.domain + "/crossAdd?page=tangball_team",
@@ -215,7 +225,7 @@ export default {
               }
             });
               console.log('data',data);
-              
+
             }
           }
         }
@@ -330,7 +340,7 @@ export default {
       //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
       let tangballUserInfoNew = Object.assign(tangballUserInfo, this.info); //
       this.$store.commit("setTangballUserInfo", tangballUserInfoNew);
-     
+
     },
     /**
      * @desc 修改信息
