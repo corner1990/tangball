@@ -13,7 +13,7 @@
           <!-- <div style="clear:both"></div> -->
         <div v-for="(item,index) in member" :key='index' class="playerBox">
             <div class="playerName">{{item.name?item.name:'无'}}
-              <span class="C_999">(&nbsp;{{item.sex==1?'男':'女'}}{{item.phone? " | "+item.phone:'| 无'}}{{index==0?' | 队长':''}})</span>
+              <span class="C_999">(&nbsp;{{item.sex==2?'女':'男'}}{{item.phone? "  "+item.phone:'| 无'}}{{index==0?' | 队长':''}})</span>
               </div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
             <div class="playerDetail" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
