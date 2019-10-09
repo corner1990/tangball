@@ -19,17 +19,50 @@
                 </div>
                 <!-- <van-tabs :active="roundNumIndex" @change="changeRoundCount($event,item.roundCount,i)">
                   <van-tab :title="'第'+(j+1)+'轮'" v-for="j in roundNum" :key="j"> -->
-                  <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab>
+                  <!-- <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab> -->
                   <!-- </van-tab>
                 </van-tabs> -->
                 <!-- <div v-for="j in 3" :key="j">{{j}}</div> -->
+                <div class="achievement-box">
+  <!-- {{groupAchievementlist}} -->
+   <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
+        <div class="achievement-tr-box">
+            <div class="achievement-td-left-box">排名</div>
+            <div class="achievement-td-center-box">{{text}}</div>
+            <div class="achievement-td-right-box">成绩(积分)</div>
+        </div>
+        <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
+            <div class="achievement-td-left-box">{{index+1}}</div>
+            <div class="achievement-td-center-box">{{item.groupName}}</div>
+            <div class="achievement-td-right-box">{{item.score==-1?'无':item.score}}</div>
+        </div>
+      </div>
+    <div v-else class="noAchievement-box">成绩暂未录入</div>
+</div>
 
 
           </van-tab>
         </van-tabs>
       </div>
       <div v-else>
-              <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab>
+              <!-- <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab> -->
+              <div class="achievement-box">
+  <!-- {{groupAchievementlist}} -->
+   <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
+        <div class="achievement-tr-box">
+            <div class="achievement-td-left-box">排名</div>
+            <div class="achievement-td-center-box">{{text}}</div>
+            <div class="achievement-td-right-box">成绩(积分)</div>
+        </div>
+        <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
+            <div class="achievement-td-left-box">{{index+1}}</div>
+            <div class="achievement-td-center-box">{{item.groupName}}</div>
+            <div class="achievement-td-right-box">{{item.score==-1?'无':item.score}}</div>
+        </div>
+      </div>
+    <div v-else class="noAchievement-box">成绩暂未录入</div>
+</div>
+
       </div>
     </div>
     <div style="height:20px;"></div>
@@ -39,9 +72,9 @@
 /* eslint-disable */
 import util from "@/utils/util";
 // import tisp from '../../components/tisp/tisp'
-import achiecement_tab from "../../components/achiecement_tab";
+// import achiecement_tab from "../../components/achiecement_tab";
 export default {
-  components:{ achiecement_tab },
+  // components:{ achiecement_tab },
   data() {
     return {
       matchDoc:{},//赛事数据对象
@@ -182,7 +215,10 @@ export default {
     },
     // 获取个人赛成绩
     async getIndividualAchievement(){
+
+
       wx.showLoading({ title: "加载中", icon: "loading" });
+      console.log(1111);
       let { data }  = await util.post({
           url: global.PUB.domain + "/crossList?page=tangball_achievement",
           param: {
@@ -223,21 +259,25 @@ export default {
     }
   },
 
-  mounted(){
+  onLoad(options){
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
     console.log('this.matchDoc',this.matchDoc);
+
     // 初始化成绩数据
     if (this.matchDoc.progress[0].roundCount>1) {
       this.gradeText = "teamHoleScoreTotal_p1_r1"
     }else{
       this.gradeText = "teamHoleScoreTotal_p1"
     }
+    // this.groupAchievementlist = []
     this.progressIndex = 0
     this.roundNumIndex = 0
     this.roundNum = Number(this.matchDoc.progress[0].roundCount)
     wx.showLoading({ title: "加载中", icon: "loading" });
+
     if (this.matchDoc.matchForm == 2) {
+      this.text='队员'
       this.getGroup()
     }else{
       this.text = '球员'
@@ -271,6 +311,7 @@ export default {
     margin-bottom: 10px;
   }
   .achievement-box{
+    width: 90%;
      padding: 0 20px;
   }
   .roundNum-box{
@@ -290,6 +331,37 @@ export default {
     background-color: #F4B116;
     color: white;
   }
+  .achievement-tr-box{
+        display: flex;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
+    .achievement-tr-box div{
+        border: 1px solid black;
+    }
+    .achievement-tab-box .achievement-tr-box:first-child div{
+        background-color:  #F4B116;
+        color: white;
+        font-weight: 700
+    }
+    .achievement-td-left-box{
+        flex:0 0 20%;
+    }
+    .achievement-td-center-box{
+        flex:0 0 50%;
+    }
+    .achievement-td-right-box{
+        flex:0 0 30%;
+    }
+    .achievement-box{
+      margin-top:10px;
+      margin-right: 10px;
+    }
+    .noAchievement-box{
+      font-size: 16px;
+    }
 </style>
 <style>
 

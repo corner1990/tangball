@@ -47,8 +47,9 @@
           <div class="share-text">分享</div>
         </div>
 
-        <!-- <div style="clear:both"></div> -->
+
     </div>
+    <div style="height:15px;"></div>
     <!-- 赛事步骤 -->
 
     <van-steps
@@ -81,7 +82,7 @@
         @change="enrollRequirementsChange"
         v-if="matchDoc.enrollRequirements"
       >
-        <van-collapse-item title="报名要求" name="1">
+        <van-collapse-item title="报名要求" name="1" >
           <div class="collapse">
             {{matchDoc.enrollRequirements}}
           </div>
@@ -368,6 +369,8 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
+    console.log('this.matchDoc',this.matchDoc);
+
     // 赛事步骤处理
     this.steps = this.matchDoc.progress.map((item,index)=>{
       if (item.checked == true) {
@@ -497,6 +500,8 @@ export default {
   color: gray;
   margin: 0 10px;
   margin-left: 20px;
+  border-bottom: 1px solid #eee;
+
 }
 .enrollButton{
   position: fixed;
