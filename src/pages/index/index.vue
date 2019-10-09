@@ -213,6 +213,13 @@ export default {
     //   console.log('res', res)
     // })
     // console.log('√', this.$store.state)
+  },
+  //配置分享页的内容
+  onShareAppMessage: function() {
+    return {
+      title: "唐球",
+      path: `/pages/index/main`
+    };
   }
 };
 </script>
