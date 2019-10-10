@@ -5,9 +5,9 @@
       <div class="macthManual-main-title">赛事结果说明：</div>
       <div v-html="matchDoc.matchResult" class="macthManual-main"></div>
     </div>
-    <div v-else class="no-macthManual">
+    <!-- <div v-else class="no-macthManual">
         暂无赛事结果说明
-    </div>
+    </div> -->
     <div class="achievement-box" v-if="matchDoc.progress">
       <div class="macthManual-main-title" style="margin-top:10px;">成绩榜：</div>
       <div v-if="matchDoc.progress.length>1">
@@ -29,7 +29,7 @@
         <div class="achievement-tr-box">
             <div class="achievement-td-left-box">排名</div>
             <div class="achievement-td-center-box">{{text}}</div>
-            <div class="achievement-td-right-box">成绩(积分)</div>
+            <div class="achievement-td-right-box">{{scoreText}}</div>
         </div>
         <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
             <div class="achievement-td-left-box">{{index+1}}</div>
@@ -52,7 +52,7 @@
         <div class="achievement-tr-box">
             <div class="achievement-td-left-box">排名</div>
             <div class="achievement-td-center-box">{{text}}</div>
-            <div class="achievement-td-right-box">成绩(积分)</div>
+            <div class="achievement-td-right-box">{{scoreText}}</div>
         </div>
         <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
             <div class="achievement-td-left-box">{{index+1}}</div>
@@ -87,7 +87,8 @@ export default {
       roundNum:0,//当前赛程有多少轮数key
       text:'队名',
       nowRrogressIndex: 1,
-      nowRoundNum: 1
+      nowRoundNum: 1,
+      scoreText:'积分'
     }
   },
   methods:{
@@ -222,7 +223,7 @@ export default {
       let { data }  = await util.post({
           url: global.PUB.domain + "/crossList?page=tangball_achievement",
           param: {
-            sortJson: {  "matchScore": -1 },
+            sortJson: {  "matchScore": 1 },
             findJson:{
                 matchId:this.matchDoc.P1,
                 progressIndex: this.nowRrogressIndex,
@@ -278,9 +279,11 @@ export default {
 
     if (this.matchDoc.matchForm == 2) {
       this.text='队员'
+      this.scoreText = '积分'
       this.getGroup()
     }else{
       this.text = '球员'
+      this.scoreText = '总杆数'
       this.getIndividualAchievement()
     }
 
