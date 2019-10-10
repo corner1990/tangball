@@ -342,7 +342,7 @@ export default {
         font-size: 14px;
     }
     .achievement-tr-box div{
-        border: 1px solid black;
+        border: 1px solid rgb(224, 222, 222)
     }
     .achievement-tab-box .achievement-tr-box:first-child div{
         background-color:  #F4B116;
