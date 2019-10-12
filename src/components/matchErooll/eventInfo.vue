@@ -146,7 +146,7 @@ export default {
 }
 .groups-box{
   height: 40px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 40px;
   border-bottom: 1px solid #eee;
   margin-left: 15px;
