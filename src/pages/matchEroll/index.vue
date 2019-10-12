@@ -5,14 +5,14 @@
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage" :groupGame="groupGame"/>
+      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage" :groupGame="groupGame" :groups="groups"/>
     </div>
     <div v-if="active === 1">
-      <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame"/>
+      <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups"/>
     </div>
     <div v-show="active === 2">
       <div v-if="payStatus==2">
-        <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame"/>
+        <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups"/>
         <div class="icon_success">
           <div class="__success">
             <van-icon name="success" color="#07c160" size="32px" />
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      groups:{},
       groupGame:false,
       skipPage:0,
       payStatus: 0, //是否为已支付状态
@@ -113,8 +114,12 @@ export default {
     }
     if (this.objMatchInfo.matchForm == 2) {
           this.groupGame =true
+          this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+          console.log('groups',this.groups );
+
         }else{
           this.groupGame =false
+          // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
         }
   console.log('this.groupGame',this.objMatchInfo);
   console.log('this.groupGame',this.groupGame);
@@ -367,6 +372,7 @@ export default {
     this.skipPage = 0;
     this.skipPage = 1;
     this.changeState();
+
   }
 };
 </script>

@@ -59,7 +59,42 @@
       </div>
       <div v-if="phoneError" class="nameError">手机号格式错误</div>
     </mp-dialog>
-
+    <mp-dialog
+      :title="captainTitle"
+      :show="showCaptainDialog"
+      :buttons='captainButtonList'
+      :mask-closable="false"
+      @buttontap="modifyPlayer"
+  >
+  <!-- <div style="height:10px;"></div> -->
+  <div class="captainAlert">ps:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，请先完善您的个人信息：</div>
+  <div style="height:10px;"></div>
+      <div class="modify-box">
+        <div class="modify-text">姓名：</div>
+        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名" /></div>
+        <div style="clear:both"></div>
+      </div>
+      <div v-if="nameError" class="nameError">姓名不能为空</div>
+      <div class="modify-box">
+        <div  class="modify-text">姓别：</div>
+        <div class="modify-input">
+          <radio-group @change="changeSex" v-model="player.sex">
+                    <radio value=1 :checked="player.sex==1?true:false"/>男
+                    <radio value=2 :checked="player.sex==2?true:false"/>女
+          </radio-group>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div class="modify-box">
+        <div  class="modify-text">手机号：</div>
+        <div class="modify-input"><input v-model="player.phone"
+        placeholder="请输入队员手机号"
+        placeholder-style='color:rgba(214, 212, 205, 0.918);'
+        type="number"/></div>
+        <div style="clear:both"></div>
+      </div>
+      <div v-if="phoneError" class="nameError">手机号格式错误</div>
+  </mp-dialog>
   <van-dialog id="van-dialog" />
   </div>
 </template>
@@ -74,6 +109,11 @@ export default {
   },
   data() {
     return {
+      captainTitle:'',
+      showCaptainDialog:false,
+      captainButtonList:[{
+        text:"确认"
+      }],
       nameError:false,//名字校验key
       phoneError:false,//电话校验key
       modifyTitle:'修改队员信息',//弹窗title
@@ -97,6 +137,27 @@ export default {
       return this.$store.state.tangballUserInfo;
     }
   },
+   onUnload: function(){
+      // console.log(1111);
+      let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+      let addGroups = {
+        createMemberId:this.tangballUserInfo.P1,
+        matchId:objMatchInfo.matchId,
+        member:this.member,
+        CreateUser:this.member[0].name,
+        name:this.name
+      }
+      // console.log('addobj',addGroups);
+      wx.setStorage({
+        key: "groupsMsg",
+        data: JSON.stringify(addGroups),
+        success() {
+          // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
+        }
+      });
+      // console.log(1111);
+
+    },
   methods: {
     // 点击弹出按钮触发的方法
     modifyDialog(e){
@@ -119,6 +180,7 @@ export default {
     changeSex(event){
       this.player.sex = Number(event.target.value)
     },
+
     // 修改或增加球员的方法
    async modifyPlayer(){
       // 如果名字为空
@@ -155,7 +217,7 @@ export default {
       this.member[this.playerIndex] = JSON.parse(JSON.stringify(this.player))
       this.player = {name:'',sex:1,phone:''}
        this.showModify = false
-
+       this.showCaptainDialog = false
       }
       }
     },
@@ -187,7 +249,7 @@ export default {
       }
       else{
       let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-      console.log('objMatchInfo',objMatchInfo);
+      // console.log('objMatchInfo',objMatchInfo);
 
       let addGroups = {
         createMemberId:this.tangballUserInfo.P1,
@@ -196,7 +258,7 @@ export default {
         CreateUser:this.member[0].name,
         name:this.name
       }
-      console.log('addobj',addGroups);
+      // console.log('addobj',addGroups);
       wx.setStorage({
         key: "groupsMsg",
         data: JSON.stringify(addGroups),
@@ -227,20 +289,49 @@ export default {
     }
   },
   mounted() {
+    let groups = wx.getStorageSync("groupsMsg")
+    // console.log('11111',wx.getStorageSync("groupsMsg"));
+
+    if (groups||groups!='') {
+      // console.log(1111);
+
+      groups = JSON.parse(groups)
+      if (groups.member.length>1) {
+      this.member = groups.member
+      this.name = groups.name
+    }else{
     // 页面加载时初始化球队信息
     this.member = []
-    console.log('aaa',this.tangballUserInfo);
+    // console.log('aaa',this.tangballUserInfo);
     this.player.name = this.tangballUserInfo.name || '',
     this.player.sex = this.tangballUserInfo.sex || '',
     this.player.phone= this.tangballUserInfo.phone || ''
     let obj = JSON.parse(JSON.stringify(this.player))
     this.member.push(obj)
-    this.player = {name:'',sex:1,phone:''}
-    let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-    console.log('objMatchInfo',objMatchInfo);
+    }
+    }else{
+        // 页面加载时初始化球队信息
+    this.member = []
+    // console.log('aaa',this.tangballUserInfo);
+    this.player.name = this.tangballUserInfo.name || '',
+    this.player.sex = this.tangballUserInfo.sex || '',
+    this.player.phone= this.tangballUserInfo.phone || ''
+    let obj = JSON.parse(JSON.stringify(this.player))
+    this.member.push(obj)
+    }
 
+    // this.player = {name:'',sex:1,phone:''}
+    let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+    // console.log('objMatchInfo',objMatchInfo);
     this.maxPlayer = objMatchInfo.teamMemberMax
     this.minPlayer = objMatchInfo.teamMemberMin
+
+    if (!this.tangballUserInfo.phone||this.tangballUserInfo.phone == '') {
+      this.showCaptainDialog = true
+      this.playerIndex = 0
+    }else{
+      this.player = {name:'',sex:1,phone:''}
+    }
   },
   created(){
   }
@@ -336,5 +427,12 @@ export default {
      margin-right: 15px;
      font-size: 12px;
      color: red;
+   }
+   .captainAlert{
+     /* margin-top:-10px; */
+     font-size:16px;
+     /* color: rgba(214, 212, 205, 0.918); */
+     color: #F4B116;
+     /* font-weight: 700; */
    }
 </style>

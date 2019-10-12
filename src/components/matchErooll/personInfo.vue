@@ -74,6 +74,7 @@
         :value="sms"
         center
         clearable
+        type="number"
         label="短信验证码"
         placeholder="请输入短信验证码"
         required
@@ -111,7 +112,7 @@ export default {
 
   data() {
     return {
-      groups:{},
+      // groups:{},
       radio: "1",
       showSelectBallAge: false,
       selectVal: "",
@@ -151,7 +152,7 @@ export default {
     };
   },
   mounted() {
-      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+      // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
 
 
     // 获取赛事数据
@@ -183,7 +184,7 @@ export default {
       return this.info;
     }
   },
-  props: ["info", "matchInfo", "skipPage",'groupGame'],
+  props: ["info", "matchInfo", "skipPage",'groupGame','groups'],
   methods: {
     onRadioChange(radio) {
       this.info.sex = radio.target.value;

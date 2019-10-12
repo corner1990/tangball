@@ -234,13 +234,9 @@ export default {
           if (matchForm == 1) {
             wx.navigateTo({ url });
           }else{
-            wx.setStorage({
-              key: "groupsMsg",
-              data: '',
-              success() {
+
                wx.navigateTo({ url:"/pages/myEroll_groups/main" });
-            }
-            });
+
           }
 
         }
@@ -265,7 +261,8 @@ export default {
      * @param url是跳转的地址
      */
    async gotoPage() {
-     console.log('aaaa');
+    //  console.log('aaaa');
+    //   console.log('11111',wx.getStorageSync("groupsMsg"));
      // 判断是否登录后进行 操作
       let status = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
       console.log(status);
