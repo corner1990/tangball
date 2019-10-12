@@ -13,7 +13,7 @@
           <!-- <div style="clear:both"></div> -->
         <div v-for="(item,index) in member" :key='index' class="playerBox">
             <div class="playerName">{{item.name?item.name:'无'}}
-              <span class="C_999">(&nbsp;{{item.sex?'':item.sex==1?'男':'女'}}{{item.phone? "  "+item.phone+'|':''}}{{index==0?' 队长':''}})</span>
+              <span class="C_999">(&nbsp;{{item.sex?item.sex==1?'男 |':'女 |':''}}{{item.phone? "  "+item.phone+'':''}}{{index==0?' | 队长':''}})</span>
               </div>
             <div class="playerDetail"  @click="deletePlayer(index)" v-if="index!=0"> <van-icon name="close" title="删除"/></div>
             <div class="playerDetail" @click="showModifyDialog(item,index)"><van-icon name="edit" title="修改"/></div>
@@ -66,6 +66,7 @@
 <script>
 /* eslint-disable */
 import Dialog from "../../../static/vant/dialog/dialog";
+import util from '@/utils/util'
 export default {
 
   components: {
@@ -119,7 +120,7 @@ export default {
       this.player.sex = Number(event.target.value)
     },
     // 修改或增加球员的方法
-    modifyPlayer(){
+   async modifyPlayer(){
       // 如果名字为空
       if (this.player.name == '') {
         this.nameError = true
@@ -137,9 +138,24 @@ export default {
         this.add = false
         this.showModify = false
       }else{//修改球员信息
+       if (this.playerIndex == 0) {
+         let modifyData = this.tangballUserInfo
+         modifyData.name = this.player.name
+         modifyData.sex = this.player.sex
+         modifyData.phone = this.player.phone
+         let { data } = await util.post({
+        url: global.PUB.domain + "/crossModify?page=tangball_member",
+        param: {
+          findJson: {openid: this.tangballUserInfo.openid},
+          modifyJson:modifyData
+        }
+      });
+      this.$store.commit('setTangballUserInfo',modifyData)
+       }
       this.member[this.playerIndex] = JSON.parse(JSON.stringify(this.player))
       this.player = {name:'',sex:1,phone:''}
        this.showModify = false
+
       }
       }
     },
