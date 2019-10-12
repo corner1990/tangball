@@ -38,7 +38,8 @@
       <div style="height:10px;"></div>
       <div class="modify-box">
         <div class="modify-text">姓名：</div>
-        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名" /></div>
+        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名"
+        placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
         <div style="clear:both"></div>
       </div>
       <div v-if="nameError" class="nameError">姓名不能为空</div>
@@ -54,7 +55,8 @@
       </div>
       <div class="modify-box">
         <div  class="modify-text">手机号：</div>
-        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"/></div>
+        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"
+        placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
         <div style="clear:both"></div>
       </div>
       <div v-if="phoneError" class="nameError">手机号格式错误</div>
@@ -71,7 +73,8 @@
   <div style="height:10px;"></div>
       <div class="modify-box">
         <div class="modify-text">姓名：</div>
-        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名" /></div>
+        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名"
+        placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
         <div style="clear:both"></div>
       </div>
       <div v-if="nameError" class="nameError">姓名不能为空</div>
