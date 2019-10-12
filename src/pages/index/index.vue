@@ -230,7 +230,7 @@ export default {
   height: 40px;
   color: #000;
   font-size: 18px;
-  font-weight: bold;
+ 
   line-height: 40px;
   /* text-align: center; */
   padding-left: 16px;

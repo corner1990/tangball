@@ -440,7 +440,7 @@ let loginAndInitUser = async function (vm, wxLoginAsync) {
 let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
   console.log("ajaxMyWXUserInfo####");
   wx.showLoading({
-    title: "请求openId"
+    title: "请求中"
     // mask: true,
   });
   var iv = encodeURIComponent(resUserInfo.iv);
