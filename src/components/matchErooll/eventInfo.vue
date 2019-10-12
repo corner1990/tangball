@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       radio: "1",
-      groups:{}
+      // groups:{}
       // matchInfo: {
       //   matchName: '',
       //   matchTime: '未确定',
@@ -85,9 +85,9 @@ export default {
       // }
     };
   },
-  props: ["info", "matchInfo",,'groupGame'],
+  props: ["info", "matchInfo",,'groupGame','groups'],
   mounted() {
-    this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+    // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
 
     // 获取赛事数据
     // let data = wx.getStorageSync('matchInfo')
