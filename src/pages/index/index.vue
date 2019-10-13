@@ -1,9 +1,7 @@
 <template>
   <div class="main-wrap">
-    <van-search
-     placeholder="请输入搜索关键词"
-     @search="searchList"/>
-     <!-- <openImg v-model="venueDoc.album" ></openImg> -->
+    <van-search placeholder="请输入搜索关键词" @search="searchList" />
+    <!-- <openImg v-model="venueDoc.album" ></openImg> -->
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -18,20 +16,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <!-- <swiper
-      :indicator-active-color="indicatorActiveColor"
-      :indicator-color="indicatorColor"
-      :indicator-dots="indicatorDots"
-      :autoplay="autoplay"
-      :interval="interval"
-      :duration="duration"
-    >
-      <block v-for="item in imgUrls" :key="item">
-        <swiper-item>
-          <image :src="item" class="slide-image" height="150"  />
-        </swiper-item>
-      </block>
-    </swiper>-->
+   
     <div>
       <div class="index_area_title">唐球赛事</div>
       <div class>
@@ -45,47 +30,16 @@
       </div>
     </div>
 
-    <div class="TAC LH30 CLB MB20" style="color:#999" >
-       <navigator url="/pages/articleDetail/main?dataId=8"  hover-class="other-navigator-hover">商务合作</navigator>
-
-      </div>
-    <!-- <div class="all">
-      <div class="left"></div>
-      <div class="right"></div>
-    </div>-->
-    <!-- <van-cell
-      is-link
-      :title="item.title"
-      link-type="navigateTo"
-      :url="item.url"
-      v-for="(item,i) in arrLink"
-      :key="i"
-    />-->
-    <!-- <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
-    <view class="btn-area">
-      <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
+    <div class="TAC LH30 CLB MB20" style="color:#999">
       <navigator
-        url="/pages/myErollDetail/main?dataId=3"
-        open-type="redirect"
+        url="/pages/articleDetail/main?dataId=8"
         hover-class="other-navigator-hover"
-      >在当前页打开</navigator>
-      <navigator
-        url="/pages/tanghome/main"
-        open-type="switchTab"
-        hover-class="other-navigator-hover"
-      >切换 Tab-针对tabar中的页面--</navigator>
-    </view>-->
+      >商务合作 &gt;</navigator>
+    </div>
+   
 
     <mytabbar :active="0"></mytabbar>
-    <!-- <mp-dialog
-      :show="getPhoneNumberShow"
-      title="唐球"
-      show-cancel-button
-    >
-      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
-    </mp-dialog> -->
-
+   
   </div>
 </template>
 <script>
@@ -142,7 +96,7 @@ export default {
       duration: 1000,
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
-      value: "", // 搜索value,
+      value: "" // 搜索value,
     };
   },
   methods: {
@@ -188,10 +142,34 @@ export default {
         url
       });
     },
-
+   
   },
   onShow() {
+    console.log("onShow");
+    const updateManager = wx.getUpdateManager();
+    updateManager.onCheckForUpdate(function(res) {
+      console.log("CheckForUpdate-res:", res);
+      // // 请求完新版本信息的回调
+      // console.log(res.hasUpdate);
+    });
 
+    updateManager.onUpdateReady(function() {
+      wx.showModal({
+        title: "更新提示",
+        content: "新版本已经准备好，是否重启应用？",
+        success(res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate();
+          }
+        }
+      });
+    });
+
+    updateManager.onUpdateFailed(function() {
+      console.log("onUpdateFailed");
+      // 新版本下载失败
+    });
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
@@ -204,7 +182,7 @@ export default {
     // await util.loginAndInitUser(this);
     // util.isLogin(this);
     this.ajaxRecommendList(); //调用：{ajax获取轮播图列表函数}
-     //函数：{登录并ajax初始化用户信息的函数}
+    //函数：{登录并ajax初始化用户信息的函数}
     /****************************微信会员登录和信息存储-END****************************/
   },
   created() {
@@ -230,7 +208,7 @@ export default {
   height: 40px;
   color: #000;
   font-size: 18px;
- 
+
   line-height: 40px;
   /* text-align: center; */
   padding-left: 16px;

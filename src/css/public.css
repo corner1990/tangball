@@ -755,3 +755,8 @@ table.n-table.n-table-debug th {
   border-radius: 5px;
   padding:0 0 0 8px;
 }
+input{
+  border: 1px #fff solid;
+  padding:0px;
+  text-align: left
+}
