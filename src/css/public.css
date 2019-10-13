@@ -755,6 +755,7 @@ table.n-table.n-table-debug th {
   border-radius: 5px;
   padding:0 0 0 8px;
 }
+/* 2019-10-13刘咏辉增加了白色边框-尝试解决某些手机下输入过程看不到文字的过程 */
 input{
   border: 1px #fff solid;
   padding:0px;
