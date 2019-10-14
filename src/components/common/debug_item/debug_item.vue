@@ -1,6 +1,6 @@
 <template>
   <div class="debug_item">
-    <div class="FWB PSR">
+    <div class=" PSR">
       {{text}}:{{pathNeed}}
       <van-icon class="PSA R3 T3" :name="iconName" size="20px" @click="expand"/>
     </div>
@@ -75,6 +75,6 @@ console.log("this.pathNeed", this.pathNeed);
   padding: 5px;
   border: 1px #f30 solid;
   margin: 5px;
-  display: none;
+  /* display: none; */
 }
 </style>

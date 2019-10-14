@@ -469,7 +469,10 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
 
     wx.hideLoading();
     // console.log("vm.$store.commit");
-    vm.$store.commit("setWXUserInfo", data.data2);
+    //强行修改openid，用于测试，注意不要乱开启
+    // data.data2.openId="ocnBO5WjcRaZMXU05i_9T-J94Gy0"
+    
+    vm.$store.commit("setWXUserInfo", data.data2);//vuex保存微信会员信息
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
     // console.log("openid", openid);

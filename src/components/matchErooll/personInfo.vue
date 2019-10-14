@@ -253,7 +253,7 @@ export default {
       }
     },
     getVerfity(mobile) {
-      // 请求赛事列表接口函数
+      // 发送短信验证码接口函数
       util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
         param: { mobile }
