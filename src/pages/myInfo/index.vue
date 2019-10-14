@@ -178,7 +178,7 @@ export default {
         if (!/\d{4}/.test(this.verfiy)) {
        return   wx.showToast({
             title: "请输入四位数字验证码",
-            icon: "",
+            icon: "none",
             duration: 2000
           });
         }
@@ -190,6 +190,7 @@ export default {
         if (data.code !== 0) {
           return wx.showToast({
             title: data.message,
+            icon: "none",
             duration: 2000
           });
         }
