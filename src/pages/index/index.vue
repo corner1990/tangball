@@ -256,7 +256,7 @@ export default {
   margin-top: 5px;
   /* background: #f4f7fe; */
   height: 40px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: #F4B116;
   font-size: 18px;
 
