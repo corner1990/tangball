@@ -1,14 +1,14 @@
 <template>
-  <div class="main-wrap">
+  <div class="main-wrap" >
     <div class="macthManual-title">{{matchDoc.matchName}}</div>
     <div class="macthManual-main-box" v-if="matchDoc.matchResult">
       <div class="macthManual-main-title">赛事结果说明：</div>
       <div v-html="matchDoc.matchResult" class="macthManual-main"></div>
     </div>
-    <div v-else class="no-macthManual">
+    <!-- <div v-else class="no-macthManual">
         暂无赛事结果说明
-    </div>
-    <div v-if="achievementList.length>0" class="achievement-box">
+    </div> -->
+    <div class="achievement-box" v-if="matchDoc.progress">
       <div class="macthManual-main-title" style="margin-top:10px;">成绩榜：</div>
       <div v-if="matchDoc.progress.length>1">
         <van-tabs :active="progressIndex" @change="changeProgress($event,matchDoc.progress)">
@@ -19,17 +19,50 @@
                 </div>
                 <!-- <van-tabs :active="roundNumIndex" @change="changeRoundCount($event,item.roundCount,i)">
                   <van-tab :title="'第'+(j+1)+'轮'" v-for="j in roundNum" :key="j"> -->
-                  <achiecement_tab :groupAchievementlist='groupAchievementlist'></achiecement_tab>
+                  <!-- <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab> -->
                   <!-- </van-tab>
                 </van-tabs> -->
                 <!-- <div v-for="j in 3" :key="j">{{j}}</div> -->
+                <div class="achievement-box">
+  <!-- {{groupAchievementlist}} -->
+   <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
+        <div class="achievement-tr-box">
+            <div class="achievement-td-left-box">排名</div>
+            <div class="achievement-td-center-box">{{text}}</div>
+            <div class="achievement-td-right-box">{{scoreText}}</div>
+        </div>
+        <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
+            <div class="achievement-td-left-box">{{index+1}}</div>
+            <div class="achievement-td-center-box">{{item.groupName}}</div>
+            <div class="achievement-td-right-box">{{item.score==-1?'无':item.score}}</div>
+        </div>
+      </div>
+    <div v-else class="noAchievement-box">成绩暂未录入</div>
+</div>
 
 
           </van-tab>
         </van-tabs>
       </div>
       <div v-else>
-              <achiecement_tab :groupAchievementlist='groupAchievementlist'></achiecement_tab>
+              <!-- <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab> -->
+              <div class="achievement-box">
+  <!-- {{groupAchievementlist}} -->
+   <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
+        <div class="achievement-tr-box">
+            <div class="achievement-td-left-box">排名</div>
+            <div class="achievement-td-center-box">{{text}}</div>
+            <div class="achievement-td-right-box">{{scoreText}}</div>
+        </div>
+        <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
+            <div class="achievement-td-left-box">{{index+1}}</div>
+            <div class="achievement-td-center-box">{{item.groupName}}</div>
+            <div class="achievement-td-right-box">{{item.score==-1?'无':item.score}}</div>
+        </div>
+      </div>
+    <div v-else class="noAchievement-box">成绩暂未录入</div>
+</div>
+
       </div>
     </div>
     <div style="height:20px;"></div>
@@ -39,9 +72,9 @@
 /* eslint-disable */
 import util from "@/utils/util";
 // import tisp from '../../components/tisp/tisp'
-import achiecement_tab from "../../components/achiecement_tab";
+// import achiecement_tab from "../../components/achiecement_tab";
 export default {
-  components:{ achiecement_tab },
+  // components:{ achiecement_tab },
   data() {
     return {
       matchDoc:{},//赛事数据对象
@@ -52,6 +85,10 @@ export default {
       progressIndex:0,//赛程key
       roundNumIndex:0,//论述key
       roundNum:0,//当前赛程有多少轮数key
+      text:'队名',
+      nowRrogressIndex: 1,
+      nowRoundNum: 1,
+      scoreText:'积分'
     }
   },
   methods:{
@@ -62,9 +99,8 @@ export default {
       // console.log(progress);
       this.roundNum = Number(progress[e.target.index].roundCount)
       this.roundNumIndex= 0
-      // console.log(this.roundNumIndex);
-
-      if (progress[e.target.index].roundCount>1) {
+      if (this.matchDoc.matchForm == 2) {
+        if (progress[e.target.index].roundCount>1) {
         this.gradeText = 'teamHoleScoreTotal_p'+(e.target.index+1)+'_r1'
       }else{
         this.gradeText = 'teamHoleScoreTotal_p'+(e.target.index+1)
@@ -72,6 +108,13 @@ export default {
       // console.log(this.gradeText);
 
       this.getGroupAchievementlist()
+      }else{
+        this.nowRoundNum = 1
+        this.nowRrogressIndex = e.target.index +1
+        this.getIndividualAchievement()
+      // console.log(this.roundNumIndex);
+
+      }
       console.log('aaaa');
     },
     // 切换轮数的方法
@@ -82,8 +125,14 @@ export default {
 
       // this.roundNum = Number(roundCount)
       // console.log(this.roundNum);
+       if (this.matchDoc.matchForm == 2) {
       this.gradeText = 'teamHoleScoreTotal_p'+(index+1)+'_r'+num
+
       this.getGroupAchievementlist()
+       }else{
+         this.nowRoundNum = num
+         this.getIndividualAchievement()
+       }
     },
     // 获取成绩队员数据列表的方法
     getGroupAchievementlist(){
@@ -165,23 +214,79 @@ export default {
       console.log('this.achievementList',this.achievementList);
 
     },
+    // 获取个人赛成绩
+    async getIndividualAchievement(){
+
+
+      wx.showLoading({ title: "加载中", icon: "loading" });
+      console.log(1111);
+      let { data }  = await util.post({
+          url: global.PUB.domain + "/crossList?page=tangball_achievement",
+          param: {
+            sortJson: {  "matchScore": 1 },
+            findJson:{
+                matchId:this.matchDoc.P1,
+                progressIndex: this.nowRrogressIndex,
+                roundNum: this.nowRoundNum
+                }
+            }
+    })
+    console.log('data',data);
+    this.groupAchievementlist = []
+    let arr = []
+    let memberIdList =[]
+    arr = data.list.map(item=>{
+      let obj = {score:item.matchScore}
+      memberIdList.push(item.participantsId)
+      return obj
+    })
+    {
+      let { data }  = await util.post({
+          url: global.PUB.domain + "/crossList?page=tangball_member",
+          param: {
+            findJson:{
+                P1:memberIdList
+                }
+            }
+
+      })
+      data.list.forEach((item,index)=>{
+        arr[index].groupName = item.name
+      })
+    }
+    this.groupAchievementlist = arr
+    console.log( 'this.groupAchievementlist', this.groupAchievementlist);
+    wx.hideLoading();
+    }
   },
 
-  mounted(){
+  onLoad(options){
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
     console.log('this.matchDoc',this.matchDoc);
+
     // 初始化成绩数据
     if (this.matchDoc.progress[0].roundCount>1) {
       this.gradeText = "teamHoleScoreTotal_p1_r1"
     }else{
       this.gradeText = "teamHoleScoreTotal_p1"
     }
+    // this.groupAchievementlist = []
     this.progressIndex = 0
     this.roundNumIndex = 0
     this.roundNum = Number(this.matchDoc.progress[0].roundCount)
     wx.showLoading({ title: "加载中", icon: "loading" });
-    this.getGroup()
+
+    if (this.matchDoc.matchForm == 2) {
+      this.text='队员'
+      this.scoreText = '积分'
+      this.getGroup()
+    }else{
+      this.text = '球员'
+      this.scoreText = '总杆数'
+      this.getIndividualAchievement()
+    }
+
   }
 
 };
@@ -209,6 +314,7 @@ export default {
     margin-bottom: 10px;
   }
   .achievement-box{
+    width: 90%;
      padding: 0 20px;
   }
   .roundNum-box{
@@ -228,6 +334,37 @@ export default {
     background-color: #F4B116;
     color: white;
   }
+  .achievement-tr-box{
+        display: flex;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
+    .achievement-tr-box div{
+        border: 1px solid rgb(224, 222, 222)
+    }
+    .achievement-tab-box .achievement-tr-box:first-child div{
+        background-color:  #F4B116;
+        color: white;
+        font-weight: 700
+    }
+    .achievement-td-left-box{
+        flex:0 0 20%;
+    }
+    .achievement-td-center-box{
+        flex:0 0 50%;
+    }
+    .achievement-td-right-box{
+        flex:0 0 30%;
+    }
+    .achievement-box{
+      margin-top:10px;
+      margin-right: 10px;
+    }
+    .noAchievement-box{
+      font-size: 16px;
+    }
 </style>
 <style>
 

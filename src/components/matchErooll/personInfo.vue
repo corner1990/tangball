@@ -74,6 +74,7 @@
         :value="sms"
         center
         clearable
+        type="number"
         label="短信验证码"
         placeholder="请输入短信验证码"
         required
@@ -111,8 +112,7 @@ export default {
 
   data() {
     return {
-      groupGame:false,
-      groups:{},
+      // groups:{},
       radio: "1",
       showSelectBallAge: false,
       selectVal: "",
@@ -152,11 +152,9 @@ export default {
     };
   },
   mounted() {
-    if (this.matchInfo.matchForm == 2) {
-      this.groupGame = true
-      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-    }
-    
+      // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+
+
     // 获取赛事数据
     // let data = wx.getStorageSync("matchInfo");
     // if (data) {
@@ -186,7 +184,7 @@ export default {
       return this.info;
     }
   },
-  props: ["info", "matchInfo", "skipPage"],
+  props: ["info", "matchInfo", "skipPage",'groupGame','groups'],
   methods: {
     onRadioChange(radio) {
       this.info.sex = radio.target.value;
@@ -255,7 +253,7 @@ export default {
       }
     },
     getVerfity(mobile) {
-      // 请求赛事列表接口函数
+      // 发送短信验证码接口函数
       util.post({
         url: `${global.PUB.domain}/tangball/sendMobileVCode`,
         param: { mobile }
@@ -345,7 +343,7 @@ export default {
 }
 .groups-box{
   height: 40px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 40px;
   border-bottom: 1px solid #eee;
   margin-left: 15px;

@@ -1,6 +1,6 @@
 <template>
   <div class="debug_item">
-    <div class="FWB PSR">
+    <div class=" PSR">
       {{text}}:{{pathNeed}}
       <van-icon class="PSA R3 T3" :name="iconName" size="20px" @click="expand"/>
     </div>

@@ -9,8 +9,8 @@
         </div>
         <div class="match-img-box1">
           <h1>{{item.matchName}}</h1>
-          <div>赛事时间：{{item.matchTime}}</div>
-          <div>报名费用：{{item.registrationFee}}</div>
+          <div class="C_999">赛事时间：{{item.matchTime}}</div>
+          <div class="C_999">报名费用：{{item.registrationFee}}</div>
           <div :class="statusIndex?'active':''">{{matchStatus}}</div>
         </div>
         <div class="rpg11">

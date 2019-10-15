@@ -1,8 +1,8 @@
 <template>
   <div>
-    <van-tabs :active="active" @change="onClickTab" style="position: relative;">
+    <van-tabs :active="active" @change="onClickTab" style="position: relative;" >
       <van-tab :title="bigItem.category " v-for="(bigItem,index) in tabList" :key="index">
-        <tisp v-if="status"></tisp>
+          <tisp v-if="status"></tisp>
         <matct_detail v-for="(item,i) in matchlist" :key="i" :item="item" :active="active"></matct_detail>
       </van-tab>
     </van-tabs>
@@ -46,7 +46,7 @@ export default {
         { category: "近期赛事" },
         { category: "团队赛" },
         { category: "个人赛" },
-        { category: "全部" }
+        // { category: "全部" }
       ],
 
       status: false, //显示暂无数据
@@ -84,30 +84,30 @@ export default {
       wx.hideLoading(); //请求到数据后加载中隐藏
       let arr = data.list;
 
-
+      this.matchlist = data.list;
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
-      if (arr.length > 0) {
-        let arrJoint = this.matchlist.concat(arr);
-        this.matchlist = arrJoint;
-      }
-      //--------------数组的日期排序的方法-----------------------
-      this.matchlist.sort((a, b) => {
-        return a.matchTime > b.matchTime ? -1 : 1;
-      });
+      // if (arr.length > 0) {
+      //   let arrJoint = this.matchlist.concat(arr);
+      //   this.matchlist = arrJoint;
+      // }
+      // //--------------数组的日期排序的方法-----------------------
+      // this.matchlist.sort((a, b) => {
+      //   return a.matchTime > b.matchTime ? -1 : 1;
+      // });
 
-      //-----判断接口数据的长度小于等于0显示暂无数据
-      if (this.matchlist.length <= 0) {
-        this.status = true;
-      } else {
-        this.status = false;
-      }
+      // //-----判断接口数据的长度小于等于0显示暂无数据
+      // if (this.matchlist.length <= 0) {
+      //   this.status = true;
+      // } else {
+      //   this.status = false;
+      // }
 
-      if (this.pageIndex == data.page.pageCount) {
-        this.footerText = "已无更多赛事"; //当当前页数等于接口的页数时，就文字变为查看往事，不能请求接口了
-        this.isStatus = false;
-        return;
-      }
+      // if (this.pageIndex == data.page.pageCount) {
+      //   this.footerText = "已无更多赛事"; //当当前页数等于接口的页数时，就文字变为查看往事，不能请求接口了
+      //   this.isStatus = false;
+      //   return;
+      // }
     },
     //----------- 点击标签时触发的函数，并且会默认传递event-------------------
     onClickTab(event) {
@@ -195,5 +195,8 @@ export default {
   font-weight: bold;
   text-align: center;
   line-height: 30px;
+}
+.van-tab__pane{
+  overflow-y:visible
 }
 </style>

@@ -7,11 +7,11 @@
         </div>
         <div class="venue-textBox">
           <div class="venue-text">
-            <span class="C_999" v-if="cf.cityDoc">【{{cf.cityDoc.P2}}】</span>
-            <span class="FWB FS16">{{cf.name}}</span>
+            <!-- <span class="C_999" v-if="cf.cityDoc">[{{cf.cityDoc.P2}}]</span> -->
+            <span class=" FS14">{{cf.name}}</span>
           </div>
-          <div>电话:{{cf.phoneNumber}}</div>
-          <div class="venue-text">地址:{{cf.address}}</div>
+          <div class="C_999">电话:{{cf.phoneNumber}}</div>
+          <div class="venue-text C_999">地址:{{cf.address}}</div>
         </div>
         <div class="arrow">
           <van-icon name="arrow" size="20px" />

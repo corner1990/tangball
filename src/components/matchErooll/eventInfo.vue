@@ -74,9 +74,8 @@ export default {
   },
   data() {
     return {
-      groupGame:false,
       radio: "1",
-      groups:{}
+      // groups:{}
       // matchInfo: {
       //   matchName: '',
       //   matchTime: '未确定',
@@ -86,12 +85,10 @@ export default {
       // }
     };
   },
-  props: ["info", "matchInfo"],
+  props: ["info", "matchInfo",,'groupGame','groups'],
   mounted() {
-    if (this.matchInfo.matchForm == 2) {
-      this.groupGame = true
-      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-    }
+    // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+
     // 获取赛事数据
     // let data = wx.getStorageSync('matchInfo')
     // if (data) {
@@ -149,7 +146,7 @@ export default {
 }
 .groups-box{
   height: 40px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 40px;
   border-bottom: 1px solid #eee;
   margin-left: 15px;

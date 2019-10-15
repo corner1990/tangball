@@ -16,81 +16,40 @@
         </swiper-item>
       </block>
     </swiper>
-    <!-- <swiper
-      :indicator-active-color="indicatorActiveColor"
-      :indicator-color="indicatorColor"
-      :indicator-dots="indicatorDots"
-      :autoplay="autoplay"
-      :interval="interval"
-      :duration="duration"
-    >
-      <block v-for="item in imgUrls" :key="item">
-        <swiper-item>
-          <image :src="item" class="slide-image" height="150"  />
-        </swiper-item>
-      </block>
-    </swiper>-->
+   
     <div>
-      <div class="index_area_title">唐球赛事</div>
+      <div style="display:flex">
+        <div class="index_area_title" style="flex:0 0 30%">唐球赛事</div>
+
+        <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事</div>
+      </div>
+      
       <div class>
         <togod pageSize="5"></togod>
       </div>
     </div>
     <div style>
-      <div class="index_area_title">唐球资讯</div>
+      <div style="display:flex">
+        <div class="index_area_title" style="flex:0 0 30%">唐球资讯</div>
+        <div class="all-box" @click="gotoPage('/pages/articleList/main')">全部资讯</div>
+      </div>
+      
+      
       <div class="card">
         <articleList></articleList>
       </div>
     </div>
 
     <div class="TAC LH30 CLB MB20" style="color:#999">
-      <navigator url="/pages/articleDetail/main?dataId=8" hover-class="other-navigator-hover">商务合作</navigator>
+      <navigator
+        url="/pages/articleDetail/main?dataId=8"
+        hover-class="other-navigator-hover"
+      >商务合作 &gt;</navigator>
     </div>
-    <!-- <div class="all">
-      <div class="left"></div>
-      <div class="right"></div>
-    </div>-->
-    <!-- <van-cell
-      is-link
-      :title="item.title"
-      link-type="navigateTo"
-      :url="item.url"
-      v-for="(item,i) in arrLink"
-      :key="i"
-    />-->
-    <!-- <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=1&type=t1')">我的参赛详情1</van-button>
-    <van-button size="large" @click="gotoPage('/pages/myErollDetail/main?dataId=2')">我的参赛详情2</van-button>
-    <view class="btn-area">
-      <navigator url="/pages/myErollDetail/main?dataId=3" hover-class="navigator-hover">跳转到新页面</navigator>
-      <navigator
-        url="/pages/myErollDetail/main?dataId=3"
-        open-type="redirect"
-        hover-class="other-navigator-hover"
-      >在当前页打开</navigator>
-      <navigator
-        url="/pages/tanghome/main"
-        open-type="switchTab"
-        hover-class="other-navigator-hover"
-      >切换 Tab-针对tabar中的页面--</navigator>
-    </view>-->
+   
 
     <mytabbar :active="0"></mytabbar>
-    <!-- <mp-dialog
-      :show="getPhoneNumberShow"
-      title="唐球"
-      show-cancel-button
-    >
-      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取手机号</button>
-    </mp-dialog>-->
-    <van-dialog :show="getPhoneNumberShow" title="唐球" use-slot :show-confirm-button="false">
-      <p class="getNumberTip">为了方便您查询比赛成绩，唐球邀请您绑定手机号！</p>
-      <van-button
-        type="primary"
-        open-type="getPhoneNumber"
-        @getphonenumber="getPhoneNumber"
-        block
-      >确定</van-button>
-    </van-dialog>
+   
   </div>
 </template>
 <script>
@@ -98,7 +57,7 @@
 import util from "@/utils/util";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import togod from "../../components/matchList/togod";
-import articleList from "../articleList/index";
+import articleList from "../articleList/articlelistIndex";
 import card from "@/components/card";
 import Dialog from "../../../static/vant/dialog/dialog";
 // import { get } from '@/utils/request'
@@ -147,11 +106,13 @@ export default {
       duration: 1000,
       indicatorActiveColor: "#2f0000",
       indicatorColor: "#e0e0e0",
-      value: "", // 搜索value,
-      getPhoneNumberShow: false
+      value: "" // 搜索value,
     };
   },
   methods: {
+    gotoPage(url){
+      util.gotoPage(url)
+    },
     //函数：{ajax获取轮播图列表函数}
     async ajaxRecommendList() {
       let arrRecommend = await util.ajaxGetList({
@@ -194,90 +155,47 @@ export default {
         url
       });
     },
-    /**
-     * @desc 获取手机号回调函数
-     */
-    getPhoneNumber(e) {
-      let { errMsg } = e.target;
-      if (errMsg.indexOf("ok") < 0) {
-        this.getPhoneNumberShow = false;
-        return setTimeout(() => {
-          this.getPhoneNumberShow = true;
-        }, 1000);
-      }
-      this.updataPhone(e.target);
-    },
-    /**
-     * @desc 获取手机号用户点击同意时回调
-     */
-    updataPhone(data) {
-      let { encryptedData, iv } = data;
-      let self = this;
-      wx.getStorage({
-        key: "ids",
-        success(res) {
-          let { session_key, openid } = JSON.parse(res.data);
-          let param = { session_key, openid, encryptedData, iv };
-          self.sendPhoneData(param);
-        }
-      });
-    },
-    sendPhoneData(param) {
-      util
-        .post({
-          url: `${global.PUB.domain}/tangball/encodePhoneNumber`,
-          param
-        })
-        .then(res => {
-          let { code } = res.data;
-          let aaaa = { phone: "11111" };
-          if (code === 0) {
-            this.getPhoneNumberShow = false;
-            // 防止一直弹出绑定手机弹窗
-            wx.setStorage({
-              key: "tangballUserInfo",
-              data: JSON.stringify(aaaa)
-            });
-          }
-        });
-      // 测试代码， 调试接口的时候删除
-      // this.getPhoneNumberShow = false;
-    },
-    updataGetPhoneNumberShow(getPhoneNumberShow) {
-      this.getPhoneNumberShow = getPhoneNumberShow;
-    }
+   
   },
   onShow() {
-    wx.hideTabBar({
-      complete() {}
+    console.log("onShow");
+    const updateManager = wx.getUpdateManager();
+    updateManager.onCheckForUpdate(function(res) {
+      console.log("CheckForUpdate-res:", res);
+      // // 请求完新版本信息的回调
+      // console.log(res.hasUpdate);
     });
-    setTimeout(() => {
-      //延迟函数
-      wx.getStorage({
-        key: "tangballUserInfo",
-        success: res => {
-          let { phone } = JSON.parse(res.data);
 
-          if (!phone) {
-            this.updataGetPhoneNumberShow(true);
+    updateManager.onUpdateReady(function() {
+      wx.showModal({
+        title: "更新提示",
+        content: "新版本已经准备好，是否重启应用？",
+        success(res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate();
           }
-        },
-        fail: () => {
-          this.updataGetPhoneNumberShow(true);
         }
       });
-    }, 2000);
+    });
+
+    updateManager.onUpdateFailed(function() {
+      console.log("onUpdateFailed");
+      // 新版本下载失败
+    });
   },
   async mounted() {
     /****************************微信会员登录和信息存储-START****************************/
-    let result = await util.getMyWXSetting();
-    //如果未授权，先return,等待用户主动授权
-    if (result == "noAuth") {
-      util.gotoPage("/pages/authorize/main"); //跳转到授权页面
-      return;
-    }
+    // let result = await util.getMyWXSetting();
+    // //如果未授权，先return,等待用户主动授权
+    // if (result == "noAuth") {
+    //   util.gotoPage("/pages/authorize/main"); //跳转到授权页面
+    //   return;
+    // }
+    // await util.loginAndInitUser(this);
+    // util.isLogin(this);
     this.ajaxRecommendList(); //调用：{ajax获取轮播图列表函数}
-    await util.loginAndInitUser(this); //函数：{登录并ajax初始化用户信息的函数}
+    //函数：{登录并ajax初始化用户信息的函数}
     /****************************微信会员登录和信息存储-END****************************/
   },
   created() {
@@ -286,6 +204,13 @@ export default {
     //   console.log('res', res)
     // })
     // console.log('√', this.$store.state)
+  },
+  //配置分享页的内容
+  onShareAppMessage: function() {
+    return {
+      title: "唐球",
+      path: `/pages/index/main`
+    };
   }
 };
 </script>
@@ -296,7 +221,7 @@ export default {
   height: 40px;
   color: #000;
   font-size: 18px;
-  font-weight: bold;
+
   line-height: 40px;
   /* text-align: center; */
   padding-left: 16px;
@@ -324,5 +249,18 @@ export default {
   color: #646464;
   font-size: 16px;
   padding: 30px 20px;
+}
+.all-box{
+  flex:0 0 63%;
+  text-align: right;
+  margin-top: 5px;
+  /* background: #f4f7fe; */
+  height: 40px;
+  text-decoration: underline;
+  color: #F4B116;
+  font-size: 18px;
+
+  line-height: 40px;
+  /* margin-right: 15px; */
 }
 </style>

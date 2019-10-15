@@ -1,10 +1,11 @@
 <template>
 <div class="achievement-box">
+  <!-- {{groupAchievementlist}} -->
    <div class='achievement-tab-box' v-if="groupAchievementlist&&groupAchievementlist.length>0">
         <div class="achievement-tr-box">
             <div class="achievement-td-left-box">排名</div>
-            <div class="achievement-td-center-box">队名</div>
-            <div class="achievement-td-right-box">总成绩</div>
+            <div class="achievement-td-center-box">{{text}}</div>
+            <div class="achievement-td-right-box">成绩(积分)</div>
         </div>
         <div class="achievement-tr-box" v-for="(item,index) in groupAchievementlist" :key="index">
             <div class="achievement-td-left-box">{{index+1}}</div>
@@ -16,8 +17,17 @@
 </div>
 </template>
 <script>
+/* eslint-disable */
 export default {
-  props: ['groupAchievementlist']
+  props: ['groupAchievementlist','text'],
+
+  data(){
+
+  },
+  onLoad(){
+    // console.log('aaa',this.groupAchievementlist);
+
+  }
 }
 </script>
 <style  scoped>

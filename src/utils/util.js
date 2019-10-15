@@ -195,7 +195,7 @@ let deepCopy = function (obj) {//深拷贝一个Json对象的函数
   return objNew
 }
 let class2type = {},
-  //用于记录[object class]样式  
+  //用于记录[object class]样式
   arrObjs = "Boolean Number String Function Array Date RegExp Null Undefined".split(" ");
 for (var i = 0, l = arrObjs.length; i < l; i++) {
   class2type["[object " + arrObjs[i] + "]"] = arrObjs[i].toLowerCase();
@@ -256,7 +256,7 @@ async function ajaxGetListPopulate(_json) {
   }
   /**
    * 根据填充配置进行一次ajax请求关联数据并进行拼装的函数
-   * 
+   *
    */
   let funPopulate = async function (populateConfig) {
     // console.log("funPopulate@@");
@@ -287,7 +287,7 @@ async function ajaxGetListPopulate(_json) {
   }
   /**
    * 循环填充配置数组，请求关联数据，并进行拼装
-   * 
+   *
    */
   if (populate) {//如果{填充配置数组}存在.
     // populate.forEach(async populateCFEach => {//循环异步操作：{填充配置数组}
@@ -383,6 +383,8 @@ let getMyWXSetting = async function (url) {
 
   // console.log("getMyWXSetting");
   let resSetting = await wxGetSetting();
+  console.log('resSetting',resSetting);
+
   if (resSetting.authSetting["scope.userInfo"]) {
     // console.log("用户已经授权过,跳转到首页");
     if (url) {
@@ -397,7 +399,7 @@ let getMyWXSetting = async function (url) {
     } else {
       // 否则获取权限之后跳转到首页
       wx.switchTab({
-        url: "/pages/index/main"
+        url: "/pages/usercenter/main"
       });
     }
   } else {
@@ -407,7 +409,7 @@ let getMyWXSetting = async function (url) {
 };
 /**
      * @name 登录并ajax初始化用户信息的函数
-     * @desc 
+     * @desc
      * @param vm：vue实例，传递给ajaxMyWXUserInfo方法需要对vuex进行操作
      */
 let loginAndInitUser = async function (vm, wxLoginAsync) {
@@ -419,7 +421,6 @@ let loginAndInitUser = async function (vm, wxLoginAsync) {
     try {
       // console.log("getUserInfo开始");
       let resUserInfo = await wxGetUserInfo(); //微信会员登录
-      // console.log("getUserInfo成功");
       await util.ajaxMyWXUserInfo(resUserInfo, js_code, vm); //调用：{ajax获取当前微信用户详细信息}
     } catch (err) {
       // console.log("getUserInfo或ajaxMyWXUserInfo失败,原因", err);
@@ -439,7 +440,7 @@ let loginAndInitUser = async function (vm, wxLoginAsync) {
 let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
   console.log("ajaxMyWXUserInfo####");
   wx.showLoading({
-    title: "请求openId"
+    title: "请求中"
     // mask: true,
   });
   var iv = encodeURIComponent(resUserInfo.iv);
@@ -459,14 +460,19 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
         encryptedData
       }
     });
+
     wx.setStorage({
       //存储ids到storeage
       key: "ids",
       data: JSON.stringify(data.data1)
     });
+
     wx.hideLoading();
     // console.log("vm.$store.commit");
-    vm.$store.commit("setWXUserInfo", data.data2);
+    //强行修改openid，用于测试，注意不要乱开启
+    // data.data2.openId="ocnBO5WjcRaZMXU05i_9T-J94Gy0"
+    
+    vm.$store.commit("setWXUserInfo", data.data2);//vuex保存微信会员信息
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
     // console.log("openid", openid);
@@ -492,7 +498,23 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     });
   }
 };
+/**
+    * 判断用户是否登录的方法
+    */
+   let isLogin = async function(vm,url){
+    console.log('aaaa');
+    let result = await getMyWXSetting(url);
+    console.log('aaaa',result);
+    //如果未授权，先return,等待用户主动授权
+    if (result == "noAuth") {
+      // gotoPage("/pages/authorize/main"); //跳转到授权页面
+      return false;
+    }
+    await loginAndInitUser(vm);
+    return true
+   }
 let util = {
+  isLogin,//是否登录函数
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数
   get: get, // get方法封装

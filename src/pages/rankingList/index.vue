@@ -63,7 +63,7 @@ export default {
         },
         {
           name: "成绩排名",
-          title: "参数成绩",
+          title: "参赛成绩",
           value: ["name", "countAchievement"],
           id: 1
         },

@@ -20,14 +20,21 @@ export default {
     //唐球会员信息-在vuex中获取
     UserID: function() {
       return this.$store.state.tangballUserInfo.P1;
+    },
+    unreadNum(){
+      return this.$store.state.unreadCount
     }
   },
   watch:{
     UserID:function(val, oldVal){
+      if (this.UserID) {
         this.getMyMsgList();
+      }
     },
     read:function(val, oldVal){
+      if (this.UserID) {
         this.getMyMsgList();
+      }
     }
   },
   data: function() {
@@ -54,7 +61,7 @@ export default {
           text: "个人中心",
           pagePath: "../usercenter/main",
           iconPath: "friends-o",
-          info:""
+          info:this.unreadNum
         }
       ],
       indicatorDots: false,
@@ -73,10 +80,10 @@ export default {
   },
    onLoad() {
      console.log('this.list[3].info',this.list[3].info);
-     if (this.$store.state.tangballUserInfo.unreadCount==undefined) {
+     if (this.$store.state.unreadCount==undefined) {
           this.list[3].info = undefined;
         }else{
-        this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
+        this.list[3].info = this.$store.state.unreadCount
         }
    },
   methods: {
@@ -87,7 +94,7 @@ export default {
       // this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
       wx.switchTab({
         url
-      }); 
+      });
     },
     // 获取信息接口，得到用户有多少消息未读
     async getMyMsgList() {
@@ -118,16 +125,23 @@ export default {
       }
       // 得到用户未读消息数列，如果为0 设置为undefined不显示，
       // 将数据保存到vuex方便引用
+
       this.unread = data.list.length - this.unread
-        let UserInfo = this.$store.state.tangballUserInfo
+        let unreadCount = this.$store.state.unreadCount
+        // console.log(111);
+
         if (this.unread==0) {
-          UserInfo.unreadCount = undefined
-          this.$store.commit('setTangballUserInfo',UserInfo)
-          this.list[3].info = this.$store.state.tangballUserInfo.unreadCount;
+          unreadCount = undefined
+          this.$store.commit('setUnreadCount',unreadCount)
+          this.list[3].info = this.$store.state.unreadCount;
         }else{
-          UserInfo.unreadCount =this.unread
-        this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
+          unreadCount =this.unread
+          this.$store.commit('setUnreadCount',unreadCount)
+        this.list[3].info = this.$store.state.unreadCount
+
         }
+        // console.log('aaa',this.$store.state.unreadCount);
+
      }
   },
   mounted(){
