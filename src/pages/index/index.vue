@@ -16,12 +16,22 @@
         </swiper-item>
       </block>
     </swiper>
-   
+    <div style="height:20px;"></div>
+    <div>
+      <div class="nav-box">
+        <div class="nav-main" @click="gotoPage('/pages/venueList/main')"><van-icon name="home-o" style="color:#F4B116"/>&nbsp;&nbsp;场馆列表</div>
+        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116"/>&nbsp;&nbsp;赛事列表</div>
+      </div>
+      <div class="nav-box">
+        <div class="nav-main" @click="gotoPage('/pages/rankingList/main')"><van-icon name="bar-chart-o" style="color:#F4B116"/>&nbsp;&nbsp;排行榜</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116"/>&nbsp;&nbsp;资讯</div>
+      </div>
+    </div>
     <div>
       <div style="display:flex">
         <div class="index_area_title" style="flex:0 0 30%">唐球赛事</div>
 
-        <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事</div>
+        <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事&nbsp;></div>
       </div>
       
       <div class>
@@ -31,7 +41,7 @@
     <div style>
       <div style="display:flex">
         <div class="index_area_title" style="flex:0 0 30%">唐球资讯</div>
-        <div class="all-box" @click="gotoPage('/pages/articleList/main')">全部资讯</div>
+        <div class="all-box" @click="gotoPage('/pages/articleList/main')">全部资讯&nbsp;></div>
       </div>
       
       
@@ -257,10 +267,20 @@ export default {
   /* background: #f4f7fe; */
   height: 40px;
   /* text-decoration: underline; */
-  color: #F4B116;
+  /* color: #F4B116; */
   font-size: 18px;
 
   line-height: 40px;
   /* margin-right: 15px; */
+}
+.nav-box{
+  display: flex;
+  font-size: 20px;
+  line-height: 40px;
+  
+}
+.nav-main{
+  flex:0 0 30%;
+  margin-left: 13%;
 }
 </style>

@@ -124,8 +124,8 @@ export default {
 .moreArticle-box {
   text-align: center;
   line-height: 30px;
-  text-decoration: underline;
-  color: #f4b116;
+  /* text-decoration: underline; */
+  color: #999;
   font-size: 16px;
 }
 </style>

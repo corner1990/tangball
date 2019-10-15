@@ -17,7 +17,7 @@
     <UserOperList :unreadCount="unreadCount"></UserOperList>
 
      </div>
-     <mytabbar :active="3"></mytabbar>
+     <mytabbar :active="1"></mytabbar>
      <!-- <canvas style="width: 100px; height: 100px;" canvas-id="myQrcode"></canvas> -->
   </div>
 

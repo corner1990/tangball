@@ -6,7 +6,8 @@
      @search="getlist"/>
      <div class="input-text" >
        <div style="flex: 0 0 30%">赛事时间：</div>
-     <div class="time-box"  @click="showSelect=!showSelect">{{matchTime}}</div>
+     <div class="time-box"  @click="showSelect=!showSelect">{{matchTime}}
+        <van-icon name="arrow-down" style="margin-top:10px;" /></div>
      </div>
             <div v-if="showSelect">
               <div class="mask-layer"></div>
@@ -217,9 +218,9 @@ export default {
   flex: 0 0 20%;
   padding: 0 15px;
   border-radius: 10px;
-  /* background-color: #F4B116 */
-  border:1px solid #F4B116;
-  color: #F4B116;
+  background-color: white;
+  border:1px solid #999;
+  color: black;
   text-align: center;
 }
 </style> 
