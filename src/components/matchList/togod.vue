@@ -46,7 +46,7 @@ export default {
         { category: "近期赛事" },
         { category: "团队赛" },
         { category: "个人赛" },
-        { category: "全部" }
+        // { category: "全部" }
       ],
 
       status: false, //显示暂无数据

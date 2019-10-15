@@ -18,13 +18,23 @@
     </swiper>
    
     <div>
-      <div class="index_area_title">唐球赛事</div>
+      <div style="display:flex">
+        <div class="index_area_title" style="flex:0 0 30%">唐球赛事</div>
+
+        <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事</div>
+      </div>
+      
       <div class>
         <togod pageSize="5"></togod>
       </div>
     </div>
     <div style>
-      <div class="index_area_title">唐球资讯</div>
+      <div style="display:flex">
+        <div class="index_area_title" style="flex:0 0 30%">唐球资讯</div>
+        <div class="all-box" >全部资讯</div>
+      </div>
+      
+      
       <div class="card">
         <articleList></articleList>
       </div>
@@ -100,6 +110,9 @@ export default {
     };
   },
   methods: {
+    gotoPage(url){
+      util.gotoPage(url)
+    },
     //函数：{ajax获取轮播图列表函数}
     async ajaxRecommendList() {
       let arrRecommend = await util.ajaxGetList({
@@ -236,5 +249,18 @@ export default {
   color: #646464;
   font-size: 16px;
   padding: 30px 20px;
+}
+.all-box{
+  flex:0 0 63%;
+  text-align: right;
+  margin-top: 5px;
+  /* background: #f4f7fe; */
+  height: 40px;
+  text-decoration: underline;
+  color: #F4B116;
+  font-size: 18px;
+
+  line-height: 40px;
+  /* margin-right: 15px; */
 }
 </style>
