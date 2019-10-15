@@ -77,6 +77,10 @@ export default {
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
           findJson: {
+            matchName:{
+              $options: "i",
+              $regex: this.searchMsg
+            },
             publicationStatus:1
           }
         }

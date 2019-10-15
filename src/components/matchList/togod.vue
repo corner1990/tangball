@@ -82,9 +82,10 @@ export default {
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
+      this.matchlist = [];
       let arr = data.list;
 
-      this.matchlist = data.list;
+       this.matchlist= data.list;
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
       // if (arr.length > 0) {
