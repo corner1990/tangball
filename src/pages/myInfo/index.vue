@@ -119,6 +119,7 @@ export default {
   },
   data() {
     return {
+      groups:false,
       buttonList: [
         //弹窗按钮设置
         { text: "取消" },
@@ -351,6 +352,12 @@ export default {
         title: "修改成功",
         icon: "success"
       });
+      if (this.groups) {
+        wx.navigateTo({url:'/pages/myEroll_groups/main'})
+      }else{
+        wx.switchTab({url:'/pages/usercenter/main'})
+      }
+      
     }
   },
   mounted() {
@@ -358,7 +365,13 @@ export default {
     this.getMember();
     console.log(this.tangballUserInfo);
   },
-  onLoad() {
+  onLoad(options) {
+    console.log('aaaa',options);
+    if (options.groups) {
+      this.groups = options.groups
+    }else{
+      this.groups = false
+    }
     this.showSelect = false;
   }
 };

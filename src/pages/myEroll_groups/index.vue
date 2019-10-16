@@ -53,11 +53,10 @@
         </div>
         <div style="clear:both"></div>
       </div>
-      <div class="modify-box">
+      <div class="modify-box"  v-if="playerIndex != 0||add">
         <div  class="modify-text">手机号：</div>
-        <div class="modify-input" v-if="playerIndex != 0||add"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"
+        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"
         placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
-    <div class="modify-input" v-else>{{player.phone}}</div>
         <div style="clear:both"></div>
       </div>
       <div v-if="phoneError" class="nameError">手机号格式错误</div>
@@ -71,33 +70,7 @@
   >
   <!-- <div style="height:10px;"></div> -->
   <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，请先完善您的个人信息。</div>
-  <!-- <div style="height:10px;"></div>
-      <div class="modify-box">
-        <div class="modify-text">姓名：</div>
-        <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名"
-        placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
-        <div style="clear:both"></div>
-      </div>
-      <div v-if="nameError" class="nameError">姓名不能为空</div>
-      <div class="modify-box">
-        <div  class="modify-text">姓别：</div>
-        <div class="modify-input">
-          <radio-group @change="changeSex" v-model="player.sex">
-                    <radio value=1 :checked="player.sex==1?true:false"/>男
-                    <radio value=2 :checked="player.sex==2?true:false"/>女
-          </radio-group>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-      <div class="modify-box">
-        <div  class="modify-text">手机号：</div>
-        <div class="modify-input"><input v-model="player.phone"
-        placeholder="请输入队员手机号"
-        placeholder-style='color:rgba(214, 212, 205, 0.918);'
-        type="number"/></div>
-        <div style="clear:both"></div>
-      </div>
-      <div v-if="phoneError" class="nameError">手机号格式错误</div> -->
+
   </mp-dialog>
   <van-dialog id="van-dialog" />
   </div>
@@ -164,7 +137,7 @@ export default {
     },
   methods: {
     gotoPage(){
-      util.gotoPage('/pages/myInfo/main')
+      util.gotoPage('/pages/myInfo/main?groups=true')
     },
     // 点击弹出按钮触发的方法
     modifyDialog(e){
@@ -446,5 +419,8 @@ export default {
      /* color: rgba(214, 212, 205, 0.918); */
      color: #F4B116;
      /* font-weight: 700; */
+   }
+   .captain-box{
+
    }
 </style>
