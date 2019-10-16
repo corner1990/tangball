@@ -25,8 +25,10 @@
       </div>
       <div class="nav-box">
        
-        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116"/>&nbsp;&nbsp;资讯</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116"/>&nbsp;&nbsp;唐球资讯</div>
         <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116"/>&nbsp;&nbsp;商务合作</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetailWX/main?dataId=18&wxArticleUrl='+url)"><van-icon name="gem-o" style="color:#F4B116"/>&nbsp;&nbsp;人民唐球</div>
+
       </div>
     </div>
     <div>
@@ -52,12 +54,12 @@
       </div>
     </div>
 
-    <div class="TAC LH30 CLB MB20" style="color:#999">
+    <!-- <div class="TAC LH30 CLB MB20" style="color:#999">
       <navigator
         url="/pages/articleDetail/main?dataId=8"
         hover-class="other-navigator-hover"
       >商务合作 &gt;</navigator>
-    </div>
+    </div> -->
    
 
     <mytabbar :active="0"></mytabbar>
@@ -84,6 +86,7 @@ export default {
   },
   data() {
     return {
+      url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
       arrLink: [
         { title: "ajaxDemo", url: "/pages/ajaxDemo/main" },
@@ -270,19 +273,19 @@ export default {
   height: 40px;
   /* text-decoration: underline; */
   /* color: #F4B116; */
-  font-size: 18px;
+  font-size: 14px;
 
   line-height: 40px;
   /* margin-right: 15px; */
 }
 .nav-box{
   display: flex;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 14px;
+  line-height: 30px;
   
 }
 .nav-main{
-  flex:0 0 27%;
-  margin-left: 6%;
+  flex:0 0 20%;
+  margin-left: 10%;
 }
 </style>

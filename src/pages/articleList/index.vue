@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrap">
-    <div class="main-wrap">
+    <div class="main-wrap" style="margin-left:-10px;">
       <van-search
         v-model="searchMsg"
         placeholder="请输入搜索关键词"
@@ -69,7 +69,7 @@ export default {
         }
       });
       if (this.articleList.length < 15) {
-        this.moreArticleText = "已加载全部赛事";
+        this.moreArticleText = "已加载全部资讯";
         this.moreArticle = false;
       }
       wx.hideLoading(); //请求到数据后加载中隐藏
@@ -99,7 +99,7 @@ export default {
           this.articleList.push(...data);
         }
         if (data.length < 5) {
-          this.moreArticleText = "已加载全部赛事";
+          this.moreArticleText = "已加载全部资讯";
           this.moreArticle = false;
         }
         wx.hideLoading();

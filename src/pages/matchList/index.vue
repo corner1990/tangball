@@ -215,7 +215,7 @@ export default {
   margin-left: 20px;
 }
 .time-box{
-  flex: 0 0 20%;
+  flex: 0 0 25%;
   padding: 0 15px;
   border-radius: 10px;
   background-color: white;
