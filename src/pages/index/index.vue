@@ -19,15 +19,15 @@
     <div style="height:20px;"></div>
     <div>
       <div class="nav-box">
-        <div class="nav-main" @click="gotoPage('/pages/venueList/main')"><van-icon name="home-o" style="color:#F4B116"/>&nbsp;&nbsp;场馆列表</div>
-        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116"/>&nbsp;&nbsp;赛事列表</div>
-        <div class="nav-main" @click="gotoPage('/pages/rankingList/main')"><van-icon name="bar-chart-o" style="color:#F4B116"/>&nbsp;&nbsp;排行榜</div>
+        <div class="nav-main" @click="gotoPage('/pages/venueList/main')"><van-icon name="home-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;场馆列表</div>
+        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;赛事列表</div>
+        <div class="nav-main" @click="gotoPage('/pages/rankingList/main')"><van-icon name="bar-chart-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;排行榜</div>
       </div>
       <div class="nav-box">
        
-        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116"/>&nbsp;&nbsp;唐球资讯</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116"/>&nbsp;&nbsp;商务合作</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetailWX/main?dataId=18&wxArticleUrl='+url)"><van-icon name="gem-o" style="color:#F4B116"/>&nbsp;&nbsp;人民唐球</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;唐球资讯</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;商务合作</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetailWX/main?dataId=18&wxArticleUrl='+url)"><van-icon name="gem-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;人民唐球</div>
 
       </div>
     </div>
@@ -285,7 +285,10 @@ export default {
   
 }
 .nav-main{
-  flex:0 0 20%;
-  margin-left: 10%;
+  flex:0 0 23%;
+  margin-left: 7%;
+}
+.nav-img{
+  font-size: 18px;
 }
 </style>
