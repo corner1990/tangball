@@ -26,7 +26,7 @@
       <div class="nav-box">
        
         <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116"/>&nbsp;&nbsp;资讯</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main')"><van-icon name="friends-o" style="color:#F4B116"/>&nbsp;&nbsp;商务合作</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116"/>&nbsp;&nbsp;商务合作</div>
       </div>
     </div>
     <div>
@@ -282,7 +282,7 @@ export default {
   
 }
 .nav-main{
-  flex:0 0 28%;
+  flex:0 0 27%;
   margin-left: 6%;
 }
 </style>
