@@ -101,6 +101,7 @@
       </div>
     </mp-dialog>
     <van-dialog id="van-dialog" />
+     <van-toast id="van-toast" />
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -324,6 +325,12 @@ export default {
 
     // 尝试请求修改函数
     async tryModifyMember() {
+      if (
+        !/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(this.memberMessage.phone)
+      ) {
+        this.sendStatus = false;
+        return Toast.fail("手机号格式错误");
+      }
       if (this.memberMessage.phone != this.phoneOld) {
         return (this.isShowDialogMobileConfirm = true);
       }
