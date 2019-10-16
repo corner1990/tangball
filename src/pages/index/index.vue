@@ -27,7 +27,7 @@
        
         <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;唐球资讯</div>
         <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;商务合作</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetailWX/main?dataId=18&wxArticleUrl='+url)"><van-icon name="gem-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;人民唐球</div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=18')"><van-icon name="gem-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;人民唐球</div>
 
       </div>
     </div>
@@ -86,7 +86,7 @@ export default {
   },
   data() {
     return {
-      url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
+      // url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
       arrLink: [
         { title: "ajaxDemo", url: "/pages/ajaxDemo/main" },

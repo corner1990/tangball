@@ -77,11 +77,12 @@
         </div>
         <van-cell-group>
           <van-field
+            title-width="0"
             :value="verfiy"
             center
             clearable
             type="number"
-            label="短信验证码"
+            :label="null"
             placeholder="请输入短信验证码"
             required
             @blur="verfiyChange"
