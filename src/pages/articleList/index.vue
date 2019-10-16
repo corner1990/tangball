@@ -1,16 +1,18 @@
 <template>
   <div class="main-wrap">
-    <div class>
-      <!-- <div class="data-group-right">
-          <img src="../image/location.png" />
-      </div>-->
+    <div class="main-wrap">
+      <van-search
+        v-model="searchMsg"
+        placeholder="请输入搜索关键词"
+        @change="changeSearchMsg"
+        @search="getArticleList"
+      />
     </div>
-    <!--无数据时显示暂无数据-->
     <tisp v-if="status"></tisp>
     <div v-else>
       <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
     </div>
-
+    <div class="moreArticle-box" @click="getMoreArticle">{{moreArticleText}}</div>
     <div style="height:20px"></div>
 
     <!-- <mytabbar></mytabbar> -->
@@ -37,77 +39,93 @@ export default {
   },
   data() {
     return {
+      pageIndex: 1,
+      moreArticle: true,
+      moreArticleText: "更多资讯文章",
+      searchMsg: "",
       articleList: [], //文章列表
       Categorylist: [], //文章列表
       status: false //显示暂无数据
     };
   },
   methods: {
-    
+    changeSearchMsg(event) {
+      this.searchMsg = event.mp.detail;
+    },
+
     async getArticleList() {
       wx.showLoading({ title: "加载中", icon: "loading" });
       this.articleList = await util.ajaxGetList({
         page: "tangball_article",
         pageSize: 15,
+        pageIndex: 1,
+        sortJson: { matchTime: -1 },
         findJson: {
-          articleCategory: 3 //锁定公众号文章分类
+          articleTitle: {
+            $options: "i",
+            $regex: this.searchMsg
+          },
+         //锁定公众号文章分类
         }
       });
-
-      this.Categorylist = await util.ajaxGetList({
-        page: "tangball_article_category",
-        pageSize: 15,
-        findJson: {}
-      });
+      if (this.articleList.length < 15) {
+        this.moreArticleText = "已加载全部赛事";
+        this.moreArticle = false;
+      }
       wx.hideLoading(); //请求到数据后加载中隐藏
-      let dictPerson = {}; //人员数据字典对象
-      this.Categorylist.forEach(item => {
-        //循环：{人员数组}
-        dictPerson[item.P1] = item;
-      });
-      this.articleList.forEach(matchEach => {
-        /**
-         * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
-         */
-        matchEach.CategoryName = dictPerson[matchEach.articleCategory].name;
-      });
+
       //-----判断接口数据的长度小于等于0显示暂无数据
-      if (this.articleList.length <= 0 || this.Categorylist.length <= 0) {
+      if (this.articleList.length <= 0) {
         this.status = true;
       } else {
         this.status = false;
       }
+    },
+    async getMoreArticle() {
+      if (this.moreArticle) {
+        this.pageIndex++;
+        wx.showLoading({ title: "加载中", icon: "loading" });
+        let data = await util.ajaxGetList({
+          page: "tangball_article",
+          pageSize: 5,
+          pageIndex: this.pageIndex,
+          sortJson: { matchTime: -1 },
+          findJson: {
+            //锁定公众号文章分类
+          }
+        });
+        if (data.length > 0) {
+          // console.log('this.matchListh',data.list);
+          this.articleList.push(...data);
+        }
+        if (data.length < 5) {
+          this.moreArticleText = "已加载全部赛事";
+          this.moreArticle = false;
+        }
+        wx.hideLoading();
+      }
     }
   },
-  mounted() {
-    this.getArticleList();
+  onLoad() {
+    this.pageIndex = 1;
+    this.moreArticle = true;
+    this.searchMsg = "";
+    this.getArticleList(); //页面创建成功后，调用一次请求接口，此时是加载所有数据
+  },
+  onReachBottom() {
+    this.getMoreArticle();
   }
-  // created() {
-  //   //id是自增
-  //   this.Categorylist = [
-  //     { P1: "1", name: "张三" },//p1
-  //     { P1: "2", name: "李四" },
-  //     { P1: "4", name: "大明" }
-  //   ];
-  //   //赛事数组
-  //   this.articleList = [
-  //     { id: 1, matc: "赛事1", articleCategory: "1" },//articleCategory
-  //     { id: 2, matchName: "赛事2", articleCategory: "4" }
-  //   ];
-  //   /**为第三种方式准备 */
-  //   this.dictPerson = {}; //人员数据字典对象
-  //   this.Categorylist.forEach(Category => {
-  //     //循环：{人员数组}
-  //     this.dictPerson[Category.P1] = Category;
-  //   });
-  //   this.articleList.forEach(matchEach => {
-  //     /**
-  //      * 第3种方式：使用数据字典对象，需要在循环之前拼装好数据字典
-  //      */
-  //     matchEach.personName = this.dictPerson[matchEach.articleCategory].name;
-  //   });
-  // }
 };
 </script>
 <style scoped>
+.main-wrap {
+  margin-left: 10px;
+}
+.moreArticle-box {
+  text-align: center;
+  line-height: 30px;
+  /* text-decoration: underline; */
+  color: #999;
+  font-size: 16px;
+}
 </style>

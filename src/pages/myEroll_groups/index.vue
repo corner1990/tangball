@@ -55,8 +55,9 @@
       </div>
       <div class="modify-box">
         <div  class="modify-text">手机号：</div>
-        <div class="modify-input"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"
+        <div class="modify-input" v-if="playerIndex != 0||add"><input v-model="player.phone" placeholder="请输入队员手机号" type="number"
         placeholder-style='color:rgba(214, 212, 205, 0.918);'/></div>
+    <div class="modify-input" v-else>{{player.phone}}</div>
         <div style="clear:both"></div>
       </div>
       <div v-if="phoneError" class="nameError">手机号格式错误</div>
@@ -66,11 +67,11 @@
       :show="showCaptainDialog"
       :buttons='captainButtonList'
       :mask-closable="false"
-      @buttontap="modifyPlayer"
+      @buttontap="gotoPage"
   >
   <!-- <div style="height:10px;"></div> -->
-  <div class="captainAlert">ps:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，请先完善您的个人信息：</div>
-  <div style="height:10px;"></div>
+  <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，请先完善您的个人信息。</div>
+  <!-- <div style="height:10px;"></div>
       <div class="modify-box">
         <div class="modify-text">姓名：</div>
         <div class="modify-input"><input v-model="player.name" placeholder="请输入队员姓名"
@@ -96,7 +97,7 @@
         type="number"/></div>
         <div style="clear:both"></div>
       </div>
-      <div v-if="phoneError" class="nameError">手机号格式错误</div>
+      <div v-if="phoneError" class="nameError">手机号格式错误</div> -->
   </mp-dialog>
   <van-dialog id="van-dialog" />
   </div>
@@ -115,7 +116,7 @@ export default {
       captainTitle:'',
       showCaptainDialog:false,
       captainButtonList:[{
-        text:"确认"
+        text:"前往修改"
       }],
       nameError:false,//名字校验key
       phoneError:false,//电话校验key
@@ -162,6 +163,9 @@ export default {
 
     },
   methods: {
+    gotoPage(){
+      util.gotoPage('/pages/myInfo/main')
+    },
     // 点击弹出按钮触发的方法
     modifyDialog(e){
       // 点击取消按钮触发关闭弹窗方法
@@ -328,11 +332,13 @@ export default {
     // console.log('objMatchInfo',objMatchInfo);
     this.maxPlayer = objMatchInfo.teamMemberMax
     this.minPlayer = objMatchInfo.teamMemberMin
-
+    console.log('this.tangballUserInfo',this.tangballUserInfo);
+    
     if (!this.tangballUserInfo.phone||this.tangballUserInfo.phone == '') {
       this.showCaptainDialog = true
       this.playerIndex = 0
     }else{
+      this.showCaptainDialog = false
       this.player = {name:'',sex:1,phone:''}
     }
   },
@@ -370,13 +376,14 @@ export default {
 }
 .playerBox{
   font-size: 16px;
-  height: 40px;
+  /* height: 40px; */
   line-height: 40px;
   margin-right: 5px;
   border-bottom: 2px solid rgb(230, 230, 230);
 }
 .playerName{
   float: left;
+  width: 80%;
 }
 
 .playerDetail{
@@ -407,7 +414,9 @@ export default {
      flex:0 0 80px;
    }
    .modify-input{
-    flex:1
+    flex:1;
+    text-align: left;
+    margin-left: 10px;
    }
    .modify-input input{
       height: 40px;
@@ -433,7 +442,7 @@ export default {
    }
    .captainAlert{
      /* margin-top:-10px; */
-     font-size:16px;
+     font-size:18px;
      /* color: rgba(214, 212, 205, 0.918); */
      color: #F4B116;
      /* font-weight: 700; */

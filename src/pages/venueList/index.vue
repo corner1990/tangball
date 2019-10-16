@@ -15,7 +15,7 @@
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
     <!--无数据时显示暂无数据-->
     <tisp v-if="status"></tisp>
-    <mytabbar :active="1"></mytabbar>
+    <!-- <mytabbar :active="1"></mytabbar> -->
   </div>
 </template>
 <script>

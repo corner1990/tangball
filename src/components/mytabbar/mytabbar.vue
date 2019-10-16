@@ -47,16 +47,16 @@ export default {
           pagePath: "../index/main",
           iconPath: "home-o"
         },
-        {
-          text: "唐球馆",
-          pagePath: "../venueList/main",
-          iconPath: "fire-o"
-        },
-        {
-          text: "唐球达人",
-          pagePath: "../rankingList/main",
-          iconPath: "medel-o"
-        },
+        // {
+        //   text: "唐球馆",
+        //   pagePath: "../venueList/main",
+        //   iconPath: "fire-o"
+        // },
+        // {
+        //   text: "唐球达人",
+        //   pagePath: "../rankingList/main",
+        //   iconPath: "medel-o"
+        // },
         {
           text: "个人中心",
           pagePath: "../usercenter/main",
@@ -79,11 +79,11 @@ export default {
     // console.log("this.activeNeed", this.activeNeed);
   },
    onLoad() {
-     console.log('this.list[3].info',this.list[3].info);
+     console.log('this.list[1].info',this.list[1].info);
      if (this.$store.state.unreadCount==undefined) {
-          this.list[3].info = undefined;
+          this.list[1].info = undefined;
         }else{
-        this.list[3].info = this.$store.state.unreadCount
+        this.list[1].info = this.$store.state.unreadCount
         }
    },
   methods: {
@@ -91,7 +91,7 @@ export default {
      * @desc 导航切换回调
      */
     tabChange(url) {
-      // this.list[3].info = this.$store.state.tangballUserInfo.unreadCount
+      // this.list[1].info = this.$store.state.tangballUserInfo.unreadCount
       wx.switchTab({
         url
       });
@@ -133,11 +133,11 @@ export default {
         if (this.unread==0) {
           unreadCount = undefined
           this.$store.commit('setUnreadCount',unreadCount)
-          this.list[3].info = this.$store.state.unreadCount;
+          this.list[1].info = this.$store.state.unreadCount;
         }else{
           unreadCount =this.unread
           this.$store.commit('setUnreadCount',unreadCount)
-        this.list[3].info = this.$store.state.unreadCount
+        this.list[1].info = this.$store.state.unreadCount
 
         }
         // console.log('aaa',this.$store.state.unreadCount);

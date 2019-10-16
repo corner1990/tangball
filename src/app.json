@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/main",
+    "pages/index/main", 
     "pages/matchList/main",
+       
     "pages/articleList/main",
     "pages/authorize/main",
     "pages/ajaxDemo/main",
@@ -42,18 +43,7 @@
         "iconPath": "static/tabs/home.png",
         "selectedIconPath": "static/tabs/home-active.png"
       },
-      {
-        "text": "唐球馆",
-        "pagePath": "pages/venueList/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      },
-      {
-        "text": "唐球达人",
-        "pagePath": "pages/rankingList/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      },
+   
       {
         "text": "个人中心",
         "pagePath": "pages/usercenter/main",

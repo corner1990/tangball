@@ -46,7 +46,7 @@ export default {
         { category: "近期赛事" },
         { category: "团队赛" },
         { category: "个人赛" },
-        { category: "全部" }
+        // { category: "全部" }
       ],
 
       status: false, //显示暂无数据
@@ -82,9 +82,10 @@ export default {
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
+      this.matchlist = [];
       let arr = data.list;
 
-      this.matchlist = data.list;
+       this.matchlist= data.list;
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
       // if (arr.length > 0) {
@@ -148,7 +149,15 @@ export default {
     objParam() {
       return { pageSize: this.pageSize, pageIndex: this.pageIndex };
     }
-  },
+  }, watch: {
+            'matchlist.length': {
+                handler(newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        // getlist()
+                    }
+                }
+            }
+        },
   //  onPageScroll(res) {
   //   let listHeight = this.matchlist.length * 82.5 - 120.5; //计算赛事列表现有的长度
   //   let index = Math.ceil(res.scrollTop / listHeight); //计算页面滚动的距离除以页面长度，并且取整数
