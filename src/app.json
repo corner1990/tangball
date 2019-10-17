@@ -1,8 +1,9 @@
 {
   "pages": [
+    
     "pages/index/main", 
     "pages/matchList/main",
-       
+    "pages/macth_group/main",
     "pages/articleList/main",
     "pages/authorize/main",
     "pages/ajaxDemo/main",

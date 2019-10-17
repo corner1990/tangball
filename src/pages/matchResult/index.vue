@@ -44,7 +44,11 @@
           </van-tab>
         </van-tabs>
       </div>
-      <div v-else>
+      <div v-else-if="matchDoc">
+        <div v-if="matchDoc.progress[0].roundCount>1" class="roundNum-box">
+                  <div v-for="num in roundNum" :key="num" @click="changeRoundCount(num,i)" class="roundNum"
+                  :class="roundNumIndex==num?'active':''">第{{num+1}}轮</div>
+                </div>
               <!-- <achiecement_tab :groupAchievementlist='groupAchievementlist' :text='text'></achiecement_tab> -->
               <div class="achievement-box">
   <!-- {{groupAchievementlist}} -->
@@ -320,6 +324,7 @@ export default {
   .roundNum-box{
     display: flex;
     margin-top:10px;
+    margin-left: 20px;
   }
   .roundNum{
     flex:0 0 20%;

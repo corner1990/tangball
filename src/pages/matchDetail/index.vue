@@ -96,6 +96,11 @@
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
+    <div class="regulation-box" @click="gotoMatchManual({url:'/pages/macth_group/main'})" >
+      <div class="FL" style="color:#333;">对阵分组</div>
+      <div class="FR"><van-icon name="arrow" /></div>
+      <div style="clear:both"></div>
+      </div>
     <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" >
       <div class="FL" style="color:#333;">赛事结果</div>
       <div class="FR"><van-icon name="arrow" /></div>
