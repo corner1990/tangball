@@ -299,9 +299,9 @@ export default {
   .macthManual-title{
     text-align: center;
     /* height: 50px; */
-    line-height: 50px;
+    line-height: 40px;
     font-size: 20px;
-    font-weight: 700;
+    /* font-weight: 700; */
     padding:0 10px;
   }
   .macthManual-main-box{

@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrap" >
+    <div style="height:10px;"></div>
     <div class="macthManual-title">{{matchDoc.matchName}}</div>
     <div class="macthManual-title">对阵分组数据表</div>
        <div v-if="matchDoc.progress.length>1">
@@ -222,9 +223,10 @@ export default {
     .macthManual-title{
     text-align: center;
     /* height: 50px; */
-    line-height: 50px;
+    line-height: 35px;
     font-size: 20px;
-    font-weight: 700;
+  
+    /* font-weight: 700; */
     padding:0 10px;
   }
   .macthManual-main-box{

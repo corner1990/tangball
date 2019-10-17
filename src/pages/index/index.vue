@@ -20,7 +20,7 @@
     <div>
       <div class="nav-box">
         <div class="nav-main" @click="gotoPage('/pages/venueList/main')"><van-icon name="home-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;场馆列表</div>
-        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;赛事列表</div>
+        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;赛事中心</div>
         <div class="nav-main" @click="gotoPage('/pages/rankingList/main')"><van-icon name="bar-chart-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;排行榜</div>
       </div>
       <div class="nav-box">
@@ -31,9 +31,20 @@
 
       </div>
     </div>
+    <!-- 首页大标题 -->
+    <div class="home-title-box" v-if="pageTitle">
+        <div class="title-left-box" @click="gotoPage(pageTitle.bigTitleLink)">
+          <div class="bigtitle-box">{{pageTitle.bigTitle}}</div>
+          <div style="background-color:#F4B116;height:2px;"></div>
+          <div class="smalltitle-box">{{pageTitle.smallTitle}}</div>
+        </div>
+        <div class="title-right-box" >
+            <div @click="gotoPage(pageTitle.buttonLink)" class="button-box">{{pageTitle.buttonText}}</div>
+        </div>
+    </div>
     <div>
       <div style="display:flex">
-        <div class="index_area_title" style="flex:0 0 30%">唐球赛事</div>
+        <div class="index_area_title" style="flex:0 0 30%">赛事中心</div>
 
         <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事&nbsp;></div>
       </div>
@@ -86,6 +97,7 @@ export default {
   },
   data() {
     return {
+      pageTitle:{},
       // url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
       arrLink: [
@@ -220,6 +232,18 @@ export default {
     // })
     // console.log('√', this.$store.state)
   },
+  async onLoad(){
+        let { data }  = await util.post({
+          url: global.PUB.domain + "/crossDetail?page=tangball_article",
+          param: {
+            findJson:{
+                P1:38
+            }
+          }
+         })
+         this.pageTitle = data.doc.extend
+         console.log('aaaa',this.pageTitle);
+   },
   //配置分享页的内容
   onShareAppMessage: function() {
     return {
@@ -290,5 +314,40 @@ export default {
 }
 .nav-img{
   font-size: 18px;
+}
+.home-title-box{
+  height: 100px;
+  border: 1px solid #F4B116;
+  display: flex;
+  margin: 15px 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+.title-left-box{
+  flex: 0 0 50%;
+  margin-left: 7%;
+}
+.title-right-box{
+  flex:0 0 31%;
+  margin-left: 7%;
+}
+.button-box{
+  height: 40px;
+  margin-top:30px;
+  border-radius: 10px;
+  background-color: #F4B116;
+  color: white;
+  line-height: 40px;
+}
+.smalltitle-box{
+  margin-top:10px;
+  color: #F4B116;
+}
+.bigtitle-box{
+  height: 40px;
+  margin-top:15px;
+  margin-bottom: 5px;
+  color: #F4B116;
 }
 </style>
