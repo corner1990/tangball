@@ -337,11 +337,7 @@ export default {
     enrollRequirementsChange(val){
       this.showEnrollRequirements = val.mp.detail;
     },
-    async onShow() {
-
-      this.show = true;
-
-    },
+    
     /**
      * @desc 搜索回调
      */
@@ -402,6 +398,12 @@ export default {
       this.isMatchIdStatus = true;
     }
   },
+  async onShow() {
+      console.log(1111);
+      
+      this.show = true;
+      this.getEnrollList()
+    },
   computed: {
     // 当前会员id
     tangballUserId: function() {

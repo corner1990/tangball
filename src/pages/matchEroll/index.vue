@@ -199,9 +199,10 @@ export default {
      * @desc 统一下单
      */
     pay(info) {
+      let { total_fee } = this.objMatchInfo
       let matchForm = this.objMatchInfo.matchForm
       let data = {
-        total_fee: 0.01,
+        total_fee,
         goodsNameAll: "abc",
         ...info
       };
