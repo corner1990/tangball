@@ -22,7 +22,7 @@
         <div   v-if="member.length<maxPlayer">
           <div class="addPlayer FL C_999" v-if="minPlayer!=maxPlayer">队伍人数要求{{minPlayer}}-{{maxPlayer}}人</div>
           <div class="addPlayer FL C_999" v-else>队伍人数要求{{minPlayer}}人</div>
-          <div class="addPlayer FR MR10" style="color: #F4B116;"><van-icon name="add-o" title="添加" @click="addPlay" class="playerDetail" style="padding-right: 5px;"/></div>
+          <div class="addPlayer FR MR10" style="color: #F4B116;">(&nbsp;添加队员&nbsp;)&nbsp;&nbsp;<van-icon name="add-o" title="添加" @click="addPlay" class="playerDetail" style="padding-right: 5px;margin-top:5px;"/></div>
           <div style="clear:both"></div></div>
         <div v-else class="addPlayer">队员数量已经达到上限</div>
     </div>
