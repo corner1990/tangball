@@ -188,12 +188,29 @@ export default {
           Dialog.close();
         });
     },
-    sendPay() {
+   async sendPay() {
       setTimeout(() => {
         Dialog.close();
       }, 1000);
       // 统一下单
-      this.pay(this.info);
+      console.log('this.objMatchInfo.P1',this.objMatchInfo);
+      
+      let { data } = await util.post({
+        url: global.PUB.domain + "/crossList?page=tangball_enroll",
+        param: {
+          findJson: { matchId: this.objMatchInfo.P1, memberId: this.tangballUserId }
+        }
+      });
+      if (data.list.length==0) {
+        this.pay(this.info);
+      }else{
+        wx.navigateTo({url:`/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`})
+         wx.showToast({
+        title: "您已报名，无法再次报名",
+        icon: "none"
+      });
+      }
+      // this.pay(this.info);
     },
     /**
      * @desc 统一下单
@@ -374,7 +391,13 @@ export default {
     this.skipPage = 1;
     this.changeState();
 
-  }
+  },
+  computed: {
+    // 当前会员id
+    tangballUserId: function() {
+      return this.$store.state.tangballUserInfo.P1;
+    }
+  },
 };
 </script>
 <style scoped>

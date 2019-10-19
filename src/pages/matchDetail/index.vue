@@ -74,6 +74,7 @@
               v-for="(item,index) in matchDoc.venue"
               :key="index"
             >{{item.cityName}}--{{item.venueName}}</span>
+            <div style="height:15px;"></div>
           </div>
         </van-collapse-item>
       </van-collapse>
@@ -88,7 +89,7 @@
           </div>
         </van-collapse-item>
       </van-collapse>
-      <van-cell title="报名费" :value="matchDoc.registrationFee" />
+      <van-cell title="报名费" :value="matchDoc.registrationFee+'元'" />
       <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
     </van-cell-group>
     <div class="regulation-box" @click="gotoMatchManual({url:'/pages/macthManual/main'})" v-if="matchDoc.matchManual">
@@ -157,8 +158,8 @@ export default {
       venueId: null, //场馆id
       venueName: null, //场馆名字
       cityName: null, //场馆城市名
-      NationalmatchIndex: null, //举办地点聚焦
-      showEnrollRequirements:null,//报名要求聚焦
+      NationalmatchIndex: ['1'], //举办地点聚焦
+      showEnrollRequirements:['1'],//报名要求聚焦
       matchId: 37, //  当前赛事id
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
@@ -218,7 +219,7 @@ export default {
       }
 
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm } = this.matchDoc;
+      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1 } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -233,7 +234,8 @@ export default {
           cityName,
           matchForm,
           teamMemberMin,
-          teamMemberMax
+          teamMemberMax,
+          P1
         }),
         success() {
           if (matchForm == 1) {
@@ -332,9 +334,12 @@ export default {
      * @param val是默认传的参数
      */
     matchTypeChange(val) {
+      console.log(val.mp.detail);
       this.NationalmatchIndex = val.mp.detail;
     },
     enrollRequirementsChange(val){
+      console.log(val.mp.detail);
+      
       this.showEnrollRequirements = val.mp.detail;
     },
     
@@ -416,7 +421,8 @@ export default {
 
   async onLoad(options) {
 
-    this.NationalmatchIndex=null;
+    this.NationalmatchIndex=['1'];
+    this.showEnrollRequirements=['1']
     if (options.id) {
       //获取页面参数，并赋值与当前的赛事id
       this.matchId = options.id;
