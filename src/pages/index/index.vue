@@ -35,7 +35,7 @@
     <div class="home-title-box" v-if="pageTitle">
         <div class="title-left-box" @click="gotoPage(pageTitle.bigTitleLink)">
           <div class="bigtitle-box">{{pageTitle.bigTitle}}</div>
-          <div style="background-color:#F4B116;height:2px;"></div>
+          <div style="background-color:#F4B116;height:1px;"></div>
           <div class="smalltitle-box">{{pageTitle.smallTitle}}</div>
         </div>
         <div class="title-right-box" >

@@ -6,7 +6,7 @@
         v-for="(item, key) in list"
         :key="key"
         @click="tabChange(item.pagePath)"
-        :info="item.info"
+        :info="(key==1?unreadNum:undefined)"
       >{{item.text}}</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -32,9 +32,9 @@ export default {
       }
     },
     read:function(val, oldVal){
-      if (this.UserID) {
-        this.getMyMsgList();
-      }
+      this.getMyMsgList();
+     
+      
     }
   },
   data: function() {
@@ -61,7 +61,7 @@ export default {
           text: "个人中心",
           pagePath: "../usercenter/main",
           iconPath: "friends-o",
-          info:this.unreadNum
+          info:undefined
         }
       ],
       indicatorDots: false,
@@ -78,23 +78,33 @@ export default {
     }
     // console.log("this.activeNeed", this.activeNeed);
   },
+  onshow(){
+   console.log('this.unreadNum',this.unreadNum);
+   this.list[1].info = this.unreadNum
+   console.log('this.unreadNum',this.list[1].info );
+  },
    onLoad() {
-     console.log('this.list[1].info',this.list[1].info);
-     if (this.$store.state.unreadCount==undefined) {
-          this.list[1].info = undefined;
-        }else{
-        this.list[1].info = this.$store.state.unreadCount
-        }
+     console.log('this.unreadNum',this.unreadNum);
+     this.list[1].info = this.unreadNum
    },
   methods: {
     /**
      * @desc 导航切换回调
      */
+    
     tabChange(url) {
-      // this.list[1].info = this.$store.state.tangballUserInfo.unreadCount
+      console.log('this.unreadNum',this.unreadNum);
+      let obj = JSON.parse(JSON.stringify(this.list[1])) 
+      obj.info = this.unreadNum
+      this.$set(this.list,1,obj)
+       
+      // this.list[1].info = this.unreadNum
+      console.log('this.unreadNum',this.list[1].info);
+      
       wx.switchTab({
         url
       });
+     
     },
     // 获取信息接口，得到用户有多少消息未读
     async getMyMsgList() {
@@ -141,6 +151,7 @@ export default {
 
         }
         // console.log('aaa',this.$store.state.unreadCount);
+         console.log('this.unreadNum',this.unreadNum);
 
      }
   },

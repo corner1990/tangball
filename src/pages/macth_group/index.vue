@@ -99,16 +99,16 @@ export default {
       if (!date) {
         return '暂无'
       }else{
-      let day = new Date(date).toLocaleDateString()
-      return day
+      let day = new Date(date)
+      return day.getFullYear()+'/'+(day.getMonth()+1)+'/'+day.getDate()
       }
     },
     getTime(date){
        if (!date) {
         return '暂无'
       }else{
-      let time = new Date(date).toLocaleTimeString()
-      return time
+      let time = new Date(date)
+      return (time.getHours()>9?time.getHours():"0"+time.getHours())+":"+(time.getMinutes()>9?time.getMinutes():"0"+time.getMinutes())+":"+(time.getSeconds()>9?time.getSeconds():"0"+time.getSeconds())
       }
     },
     // 将获取到的数据拼接成所需的对阵分组数据

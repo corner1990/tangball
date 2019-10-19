@@ -19,7 +19,8 @@
       </div>
       <div class="flex line">
         <title class="sub-title">球龄</title>
-        <p>{{ info.ballAgeText }}</p>
+        <p v-if="info.ballAgeText!='请选择'">{{ info.ballAgeText }}</p>
+        <!-- <p v-else style="color:#a9a9a9">{{ info.ballAgeText }}</p> -->
       </div>
       <div class="flex line">
         <title class="sub-title">职业</title>

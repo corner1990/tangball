@@ -27,10 +27,11 @@
       <van-field :value="selfInfo.phone" label="联系电话" @blur="phoneChange" placeholder="请输入手机号" />
       <div class="flex line">
         <p class="sub-title">球龄</p>
-        <div @click="selectAge">
+        <div @click="selectAge" v-if="selfInfo.ballAgeText!='请选择'">
           {{selfInfo.ballAgeText}}
           <!-- <input type="text" class="tangBallInput" v-model="selfInfo.ballAgeText" placeholder="请输入球龄" readonly /> -->
         </div>
+        <div v-else style="color:#a9a9a9"  @click="selectAge">请选择球龄</div>
       </div>
       <van-field :value="selfInfo.career" label="职业" placeholder="请输入职业" @blur="careerChange" />
     </van-cell-group>

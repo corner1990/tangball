@@ -178,7 +178,7 @@ export default {
       let { matchName, matchTime, total_fee } = this.objMatchInfo;
       Dialog.confirm({
         title: "参赛报名提醒",
-        message: `你将要报名参加${matchName}，${matchTime} 时举办，报名费${total_fee}元，一旦报名成功，将不在退还`,
+        message: `你将要报名参加${matchName}，${matchTime} 时举办，报名费${total_fee}元，一旦报名成功，将不再退还`,
         asyncClose: true
       })
         .then(() => {
