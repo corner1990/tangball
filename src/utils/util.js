@@ -502,7 +502,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     * 判断用户是否登录的方法
     */
    let isLogin = async function(vm,url){
-    console.log('aaaa');
+    // console.log('aaaa');
     let result = await getMyWXSetting(url);
     console.log('aaaa',result);
     //如果未授权，先return,等待用户主动授权
@@ -510,7 +510,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
       // gotoPage("/pages/authorize/main"); //跳转到授权页面
       return false;
     }
-    await loginAndInitUser(vm);
+   await loginAndInitUser(vm);
     return true
    }
 let util = {

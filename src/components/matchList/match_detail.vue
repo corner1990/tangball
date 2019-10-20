@@ -1,8 +1,8 @@
 <template>
   <div>
-    <navigator :url="matchDetailUrl">
+    <!-- <navigator :url="matchDetailUrl"> -->
      
-      <div class="match-box" >
+      <div class="match-box" @click="gotoPage">
         <div class="match-img-box" >
           <img :src="item.album[0].url" v-if="item.album"/>
           <img :src="matchListImg" v-else/>
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-    </navigator>
+    <!-- </navigator> -->
   
   </div>
 
@@ -64,7 +64,7 @@ export default {
       if (nowDate>matchTimeEnd) {
         return '赛事已结束'
       }else if(nowDate>matchTime){
-        return '赛事已开始'
+        return '正在比赛中'
       }else if (nowDate>enrollTimeEnd) {
         return '报名时间已结束'
       }else if (nowDate>enrollTimeDate) {
@@ -76,7 +76,19 @@ export default {
     }
   },
   methods: {
- 
+    gotoPage(){
+      if (this.matchStatus == '火热报名中'||this.matchStatus =='报名时间已结束'||this.matchStatus=='赛事未发布') {
+        wx.navigateTo({url:`/pages/matchDetail/main?id= ${this.item.P1}`})
+      }else{
+         wx.setStorage({
+           key: "matchInfo",
+           data:JSON.stringify(this.item),
+           success(){
+              wx.navigateTo({url:`/pages/matchResult/main`})
+           }
+         })
+      }
+    }
   },
   onLoad() {
     /**

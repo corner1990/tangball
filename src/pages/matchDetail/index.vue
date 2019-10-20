@@ -103,7 +103,7 @@
       <div style="clear:both"></div>
       </div>
     <div class="regulation-box" @click="gotoMatchManual({url:'/pages/matchResult/main'})" >
-      <div class="FL" style="color:#333;">赛事结果</div>
+      <div class="FL" style="color:#333;">成绩排名</div>
       <div class="FR"><van-icon name="arrow" /></div>
       <div style="clear:both"></div>
       </div>
@@ -219,7 +219,7 @@ export default {
       }
 
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1 } = this.matchDoc;
+      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1,album} = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -235,7 +235,8 @@ export default {
           matchForm,
           teamMemberMin,
           teamMemberMax,
-          P1
+          P1,
+          album
         }),
         success() {
           if (matchForm == 1) {
@@ -317,7 +318,22 @@ export default {
           findJson: { matchId: this.matchId, memberId: this.tangballUserId }
         }
       });
-      this.isMatchIdStatus = false; //变量初始化为false
+       let nowDate=new Date().getTime();
+      let enrollTimeDate = new Date(this.matchDoc.enrollTime).getTime();
+      let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
+      let matchTime = new Date(this.matchDoc.matchTime).getTime();
+      let matchTimeEnd = new Date(this.matchDoc.matchTimeEnd).getTime();
+      if (nowDate>matchTimeEnd) {
+        this.enrollText =  '赛事已结束'
+        this.isMatchIdStatus = true;
+      }else if(nowDate>matchTime){
+        this.enrollText =   '正在比赛中'
+        this.isMatchIdStatus = true;
+      }else if (nowDate>enrollTimeEnd) {
+        this.enrollText = '报名时间已结束'
+        this.isMatchIdStatus = true;
+      }else if (nowDate>enrollTimeDate) {
+        this.isMatchIdStatus = false; //变量初始化为false
       this.enrollText = "立即报名"; //初始化为立即报名
       if (data.list[0].P1) {
         this.isMatchIdStatus = true; //该用户已经报名
@@ -327,6 +343,11 @@ export default {
         this.isMatchIdStatus = false; //变量初始化为false
         this.enrollText = "立即报名"; //初始化为立即报名
       }
+      }else{
+        this.enrollText = "赛事未发布";
+      this.isMatchIdStatus = true;
+      }
+      
 
     },
     /**
@@ -385,27 +406,27 @@ export default {
     console.log(this.matchDoc);
 
     // 如果报名未截止
-    if (this.matchDoc.publicationStatus == 1) {
-      if (this.matchDoc.enrollStatus == "3") {
-        this.enrollText = "报名时间已结束";
-        this.isMatchIdStatus = true;
-      } else if (this.matchDoc.enrollStatus == "1") {
-        this.enrollText = "报名时间未开始";
-        this.isMatchIdStatus = true;
-      } else if (this.matchDoc.enrollStatus == "4") {
-        this.enrollText = "报名时间设置异常";
-        this.isMatchIdStatus = true;
-      } else {
-        this.getEnrollList(); //获取报名订单列表函数
-      }
-    } else {
-      this.enrollText = "赛事未发布";
-      this.isMatchIdStatus = true;
-    }
+    
+      
+    // if (this.matchDoc.publicationStatus == 1) {
+    //   if (this.matchDoc.enrollStatus == "3") {
+    //     this.enrollText = "报名时间已结束";
+    //     this.isMatchIdStatus = true;
+    //   } else if (this.matchDoc.enrollStatus == "1") {
+    //     this.enrollText = "报名时间未开始";
+    //     this.isMatchIdStatus = true;
+    //   } else if (this.matchDoc.enrollStatus == "4") {
+    //     this.enrollText = "报名时间设置异常";
+    //     this.isMatchIdStatus = true;
+    //   } else {
+    //     this.getEnrollList(); //获取报名订单列表函数
+    //   }
+    // } else {
+    //   this.enrollText = "赛事未发布";
+    //   this.isMatchIdStatus = true;
+    // }
   },
   async onShow() {
-      console.log(1111);
-      
       this.show = true;
       this.getEnrollList()
     },
@@ -452,7 +473,10 @@ export default {
       }
     }
     this.isLogin = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
-      console.log('aaaa',this.isLogin);
+    this.getEnrollList()
+     
+      // console.log(this.enrollText);
+    
   },
   //配置分享页的内容
   onShareAppMessage: function() {

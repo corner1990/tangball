@@ -1,6 +1,21 @@
 <template>
   <div class="main-wrap" >
-    <div class="macthManual-title">{{matchDoc.matchName}}</div>
+    <div class="macthManual-title-box">
+      <div class="img-box">
+          <img :src="matchDoc.album[0].url" v-if="matchDoc.album" />
+          <img :src="matchListImg" v-else />
+      </div>
+      <div class="macth-msg-box">
+        <div class="macthManual-title">{{matchDoc.matchName}}</div>
+        <div style="height:5px;"></div>
+        <div style="display:flex">
+          <div class="macth-main"><van-icon name="clock-o" />{{matchDoc.matchTime}}</div>
+          <div class="macth-button" @click="gotoPage(`/pages/matchDetail/main?id= ${matchDoc.P1}`)">赛事信息</div>
+          <div class="macth-button" @click="gotoPage('/pages/macth_group/main')">对阵分组</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:10px;background-color: #ddd;"></div>
     <div class="macthManual-main-box" v-if="matchDoc.matchResult">
       <div class="macthManual-main-title">赛事结果说明：</div>
       <div v-html="matchDoc.matchResult" class="macthManual-main"></div>
@@ -81,6 +96,7 @@ export default {
   // components:{ achiecement_tab },
   data() {
     return {
+      matchListImg: "http://qn-static.dmagic.cn/images/placeholder.png",
       matchDoc:{},//赛事数据对象
       groupList:[],//队伍数据列表
       achievementList:[],//成绩数据列表
@@ -96,6 +112,9 @@ export default {
     }
   },
   methods:{
+    gotoPage(url){
+      util.gotoPage(url)
+    },
     // 切换赛程的方法
     changeProgress(e,progress){
       wx.showLoading({ title: "加载中", icon: "loading" });
@@ -267,6 +286,8 @@ export default {
   onLoad(options){
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
+    let date = new Date(this.matchDoc.matchTime)
+    this.matchDoc.matchTime = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()
     console.log('this.matchDoc',this.matchDoc);
 
     // 初始化成绩数据
@@ -298,11 +319,12 @@ export default {
 <style scoped>
   .macthManual-title{
     text-align: center;
-    /* height: 50px; */
-    line-height: 40px;
-    font-size: 20px;
-    /* font-weight: 700; */
+    height: 55px;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: 700;
     padding:0 10px;
+    padding-top:5px;
   }
   .macthManual-main-box{
     padding: 0 20px;
@@ -369,6 +391,43 @@ export default {
     }
     .noAchievement-box{
       font-size: 16px;
+    }
+    .macthManual-title-box{
+      display: flex;
+      height: 100px;
+      padding: 10px 20px;
+      padding-left: 10px;
+    }
+    .img-box{
+      flex: 0 0 30%;
+      /* border-radius: 5px; */
+      /* height: 80px; */
+    }
+    .img-box img{
+      margin-top:8px;
+      width: 85px;
+      height: 90px;;
+    }
+    .macth-msg-box{
+      flex: 0 0 70%;
+      /* display: flex; */
+    }
+    .macth-main{
+      flex: 0 0 37%;
+      color: gray;
+      height: 30px;
+      line-height: 30px;
+    }
+    .macth-button{
+      flex: 0 0 25%;
+      margin-left:5%;
+      height: 28px;
+      border-radius: 10px;
+      border: #F4B116 1px solid;
+      color:#F4B116;
+      font-size: 14px;
+      text-align: center;
+      line-height: 28px;
     }
 </style>
 <style>

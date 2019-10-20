@@ -79,12 +79,12 @@ export default {
     // console.log("this.activeNeed", this.activeNeed);
   },
   onshow(){
-   console.log('this.unreadNum',this.unreadNum);
+  //  console.log('this.unreadNum',this.unreadNum);
    this.list[1].info = this.unreadNum
-   console.log('this.unreadNum',this.list[1].info );
+  //  console.log('this.unreadNum',this.list[1].info );
   },
    onLoad() {
-     console.log('this.unreadNum',this.unreadNum);
+    //  console.log('this.unreadNum',this.unreadNum);
      this.list[1].info = this.unreadNum
    },
   methods: {
@@ -93,13 +93,13 @@ export default {
      */
     
     tabChange(url) {
-      console.log('this.unreadNum',this.unreadNum);
+      // console.log('this.unreadNum',this.unreadNum);
       let obj = JSON.parse(JSON.stringify(this.list[1])) 
       obj.info = this.unreadNum
       this.$set(this.list,1,obj)
        
       // this.list[1].info = this.unreadNum
-      console.log('this.unreadNum',this.list[1].info);
+      // console.log('this.unreadNum',this.list[1].info);
       
       wx.switchTab({
         url
@@ -151,7 +151,7 @@ export default {
 
         }
         // console.log('aaa',this.$store.state.unreadCount);
-         console.log('this.unreadNum',this.unreadNum);
+        //  console.log('this.unreadNum',this.unreadNum);
 
      }
   },
