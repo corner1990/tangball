@@ -10,7 +10,7 @@
         <div class="macthManual-title">{{matchDoc.matchName}}</div>
         <div style="height:5px;"></div>
         <div style="display:flex">
-          <div class="macth-main"><van-icon name="clock-o" />{{matchDoc.matchTime}}</div>
+          <div class="macth-main"><van-icon name="clock-o" style="margin-top:5px"/>&nbsp;{{matchDoc.matchTime}}</div>
           <div class="macth-button" @click="gotoPage(`/pages/matchDetail/main?id= ${matchDoc.P1}`)">赛事信息</div>
           <div class="macth-button" @click="gotoPage('/pages/matchResult/main')">成绩排名</div>
         </div>
