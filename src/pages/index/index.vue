@@ -9,10 +9,11 @@
       :autoplay="autoplay"
       :interval="interval"
       :duration="duration"
+      :style="imgHeight"
     >
       <block v-for="item in arrRecommend" :key="item.P1">
-        <swiper-item>
-          <image :src="item.imageUrl" class="slide-image" height="150" @click="gotoPage(item.link)" />
+        <swiper-item >
+          <image :src="item.imageUrl" class="slide-image" :style="imgHeight" @click="gotoPage(item.link)" />
         </swiper-item>
       </block>
     </swiper>
@@ -97,6 +98,7 @@ export default {
   },
   data() {
     return {
+      imgHeight:'height:150px',
       pageTitle:{},
       // url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
@@ -243,6 +245,17 @@ export default {
          })
          this.pageTitle = data.doc.extend
          console.log('aaaa',this.pageTitle);
+         let width = 150
+         wx.getSystemInfo({
+           success:function (res) {
+             console.log('res',res.screenWidth);
+             width = res.screenWidth
+             
+             
+           }
+         })
+         this.imgHeight =`height:${width*0.42}px`
+         console.log('this.imgHeight',this.imgHeight);
    },
   //配置分享页的内容
   onShareAppMessage: function() {
