@@ -51,6 +51,7 @@ export default {
         pageSize: 15,
         findJson: {
           // articleCategory: 3 //锁定公众号文章分类
+           auditStatus:1,
           recommend:1
         }
       });

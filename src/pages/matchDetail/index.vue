@@ -59,7 +59,7 @@
     />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
-      <van-cell title="距报名截止时间" :value="matchDoc.enrollTimeEnd" />
+      <van-cell title="报名截止时间" :value="matchDoc.enrollTimeEnd" />
       <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
 
 
@@ -539,7 +539,7 @@ export default {
 }
 .enrollButton{
   position: fixed;
-  bottom: 10%;
+  bottom: 8%;
   width: 100%;
 }
 .match-title-box{

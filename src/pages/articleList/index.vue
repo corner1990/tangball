@@ -61,7 +61,8 @@ export default {
         pageIndex: 1,
         sortJson: { matchTime: -1 },
         findJson: {
-          $and:[{P1:{$ne:42}},{P1:{$ne:8}}],
+          $and:[{P1:{$ne:38}},{P1:{$ne:8}}],
+          auditStatus:1,
           articleTitle: {
             $options: "i",
             $regex: this.searchMsg
@@ -92,6 +93,8 @@ export default {
           pageIndex: this.pageIndex,
           sortJson: { matchTime: -1 },
           findJson: {
+            $and:[{P1:{$ne:38}},{P1:{$ne:8}}],
+          auditStatus:1,
             //锁定公众号文章分类
           }
         });
