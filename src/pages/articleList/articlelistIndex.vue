@@ -50,7 +50,8 @@ export default {
         page: "tangball_article",
         pageSize: 15,
         findJson: {
-          articleCategory: 3 //锁定公众号文章分类
+          // articleCategory: 3 //锁定公众号文章分类
+          recommend:1
         }
       });
 

@@ -61,6 +61,7 @@ export default {
         pageIndex: 1,
         sortJson: { matchTime: -1 },
         findJson: {
+          $and:[{P1:{$ne:42}},{P1:{$ne:8}}],
           articleTitle: {
             $options: "i",
             $regex: this.searchMsg
