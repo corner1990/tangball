@@ -307,7 +307,7 @@ export default {
      */
     async getEnrollList() {
       // 判断是否登录后进行 操作
-
+    
       let status =await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
 
 
@@ -318,6 +318,7 @@ export default {
           findJson: { matchId: this.matchId, memberId: this.tangballUserId }
         }
       });
+      
        let nowDate=new Date().getTime();
       let enrollTimeDate = new Date(this.matchDoc.enrollTime).getTime();
       let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
@@ -333,22 +334,24 @@ export default {
         this.enrollText = '报名时间已结束'
         this.isMatchIdStatus = true;
       }else if (nowDate>enrollTimeDate) {
-        this.isMatchIdStatus = false; //变量初始化为false
-      this.enrollText = "立即报名"; //初始化为立即报名
+       
+       
+       
       if (data.list[0].P1) {
         this.isMatchIdStatus = true; //该用户已经报名
         this.enrollText = "您已报名";
       }
-      }else{
+      else{
         this.isMatchIdStatus = false; //变量初始化为false
-        this.enrollText = "立即报名"; //初始化为立即报名
+        this.enrollText = `立即报名`; //初始化为立即报名
       }
       }else{
-        this.enrollText = "赛事未发布";
-      this.isMatchIdStatus = true;
+        
+        this.enrollText = "报名时间未到";
+        this.isMatchIdStatus = true;
+      }
       }
       
-
     },
     /**
      * @desc  matchTypeChange举办地点函数 当点击举办地点时，选择展开或者折叠
@@ -403,6 +406,7 @@ export default {
       let obj = {text:item.name,desc:'',value:item.name}
       return obj
     })
+    this.getEnrollList()
     console.log(this.matchDoc);
 
     // 如果报名未截止

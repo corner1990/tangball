@@ -71,13 +71,13 @@ export default {
         this.statusIndex = true
         return '火热报名中'
       }else{
-        return '赛事未发布'
+        return '报名时间未到'
       }
     }
   },
   methods: {
     gotoPage(){
-      if (this.matchStatus == '火热报名中'||this.matchStatus =='报名时间已结束'||this.matchStatus=='赛事未发布') {
+      if (this.matchStatus == '火热报名中'||this.matchStatus =='报名时间已结束'||this.matchStatus=='报名时间未到') {
         wx.navigateTo({url:`/pages/matchDetail/main?id= ${this.item.P1}`})
       }else{
          wx.setStorage({
