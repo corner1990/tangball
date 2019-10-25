@@ -110,7 +110,7 @@
           <div v-else class="noAchievement-box">成绩暂未录入</div>
         </div>
       </div>
-      <div v-else class="noAchievement-box">成绩暂未录入</div>
+      <div v-else class="noAchievement-box" style="padding-left:15px;">成绩暂未录入</div>
     </div>
     <div style="height:20px;"></div>
   </div>
@@ -310,9 +310,12 @@ export default {
   onLoad(options) {
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
-    let date = new Date(this.matchDoc.matchTime);
-    this.matchDoc.matchTime =
-      date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    let matchTime = this.matchDoc.matchTime
+    matchTime = matchTime.split(' ')[0]
+    console.log(matchTime);
+    
+    let date = new Date(matchTime );
+    this.matchDoc.matchTime =date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
     console.log("this.matchDoc", this.matchDoc);
     if (this.matchDoc.progress.length>0) {
     // 初始化成绩数据
