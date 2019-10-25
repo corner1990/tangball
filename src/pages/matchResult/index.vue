@@ -398,7 +398,12 @@ export default {
   font-size: 14px;
 }
 .achievement-tr-box div {
-  border: 1px solid rgb(224, 222, 222);
+  border-left: 1px solid rgb(224, 222, 222);
+  border-top: 1px solid rgb(224, 222, 222);
+}
+.achievement-tab-box{
+  border-right: 1px solid rgb(224, 222, 222);
+  border-bottom: 1px solid rgb(224, 222, 222);
 }
 .achievement-tab-box .achievement-tr-box:first-child div {
   background-color: #f4b116;
@@ -442,7 +447,7 @@ export default {
   /* display: flex; */
 }
 .macth-main {
-  flex: 0 0 40%;
+  flex: 0 0 42%;
   color: gray;
   height: 30px;
   line-height: 30px;

@@ -137,26 +137,16 @@ export default {
       if (!date) {
         return "暂无";
       } else {
-        let day = new Date(date);
-        return (
-          day.getFullYear() + "/" + (day.getMonth() + 1) + "/" + day.getDate()
-        );
+        // let day = new Date(date);
+        return global.moment(date).format('YYYY-MM-DD');
       }
     },
     getTime(date) {
       if (!date) {
         return "暂无";
       } else {
-        let time = new Date(date);
-        return (
-          (time.getHours() > 9 ? time.getHours() : "0" + time.getHours()) +
-          ":" +
-          (time.getMinutes() > 9
-            ? time.getMinutes()
-            : "0" + time.getMinutes()) +
-          ":" +
-          (time.getSeconds() > 9 ? time.getSeconds() : "0" + time.getSeconds())
-        );
+        // let time = new Date(date);
+        return global.moment(date).format('HH:mm:ss');
       }
     },
     // 将获取到的数据拼接成所需的对阵分组数据
@@ -331,7 +321,12 @@ export default {
   font-size: 14px;
 }
 .achievement-tr-box div {
-  border: 1px solid rgb(224, 222, 222);
+  border-left: 1px solid rgb(224, 222, 222);
+  border-top: 1px solid rgb(224, 222, 222);
+}
+.achievement-tab-box{
+  border-right: 1px solid rgb(224, 222, 222);
+  border-bottom: 1px solid rgb(224, 222, 222);
 }
 .achievement-tab-box .achievement-tr-box:first-child div {
   background-color: #f4b116;
@@ -376,7 +371,7 @@ export default {
   /* display: flex; */
 }
 .macth-main {
-  flex: 0 0 40%;
+  flex: 0 0 42%;
   color: gray;
   height: 30px;
   line-height: 30px;

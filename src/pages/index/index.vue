@@ -228,6 +228,8 @@ export default {
     /****************************微信会员登录和信息存储-END****************************/
   },
   created() {
+    console.log('新版本');
+    
     // let app = getApp()
     // get('http://localhost:4001/api/users').then(res => {
     //   console.log('res', res)

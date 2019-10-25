@@ -9,7 +9,7 @@
         </div>
         <div class="match-img-box1">
           <h1>{{item.matchName}}</h1>
-          <div class="C_999">赛事时间：{{item.matchTime}}</div>
+          <div class="C_999">赛事时间：{{matchTime}}</div>
           <div class="C_999">报名费用：{{item.registrationFee}}</div>
           <div :class="statusIndex?'active':''">{{matchStatus}}</div>
         </div>
@@ -46,7 +46,7 @@ export default {
       searchValue: "111", // 搜索value
       matchType: null,
       applyUrl: null,
-      
+      matchTime:null,
       statusIndex:false
       // matchDetailUrl: null
     };
@@ -91,6 +91,7 @@ export default {
     }
   },
   onLoad() {
+    this.matchTime = global.moment(this.item.matchTime).format('YYYY-MM-DD');
     /**
      * @name 加载图片的方法
      * @desc 调用lodash库导入图片，默认占位图

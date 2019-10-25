@@ -15,6 +15,9 @@ import Vuex from 'vuex'//导入vuex模块
 // import lodash from "lodash";
 // const lodash = require("@/utils/lodash/lodash.min.js");
 const lodash = require("../static/lodash.min.js");
+
+import moment from "moment";
+global.moment = moment; 
 // let lodash={}static\lodash.min.js
 // import lodash from "lodash";
 // console.log("lodash111", lodash);

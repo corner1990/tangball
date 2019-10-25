@@ -58,8 +58,8 @@
       active-color="#F4B116"
     />
     <van-cell-group title="赛事信息">
-      <van-cell title="赛事时间" title-width="100px" :value="matchDoc.matchTime" />
-      <van-cell title="报名截止时间" :value="matchDoc.enrollTimeEnd" />
+      <van-cell title="赛事时间" title-width="100px" :value="matchTime" />
+      <van-cell title="报名截止时间" :value="enrollTimeEnd" />
       <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
 
 
@@ -168,6 +168,8 @@ export default {
         //步骤条数组
 
       ],
+      matchTime:null,
+      enrollTimeEnd:null,
       matchDoc: {}, //赛事详情列表
       style: "background-color:#eee;padding: 13px 0 16px 0;", //已经报名或者截止报名的样式
       indicatorDots: true,
@@ -309,7 +311,8 @@ export default {
       // 判断是否登录后进行 操作
     
       let status =await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
-
+      // console.log('status',status );
+      
 
       if (status) {
         let { data } = await util.post({
@@ -318,12 +321,21 @@ export default {
           findJson: { matchId: this.matchId, memberId: this.tangballUserId }
         }
       });
-      
+     this.matchDoc.enrollTime =  this.matchDoc.enrollTime.split(' ')[0]
+     this.matchDoc.enrollTimeEnd=  this.matchDoc.enrollTimeEnd.split(' ')[0]
+     this.matchDoc.matchTime =  this.matchDoc.matchTime.split(' ')[0]
+     this.matchDoc.matchTimeEnd =  this.matchDoc.matchTimeEnd.split(' ')[0]
        let nowDate=new Date().getTime();
       let enrollTimeDate = new Date(this.matchDoc.enrollTime).getTime();
       let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
       let matchTime = new Date(this.matchDoc.matchTime).getTime();
       let matchTimeEnd = new Date(this.matchDoc.matchTimeEnd).getTime();
+      // console.log('nowDate',nowDate);
+      // console.log("enrollTimeDate",enrollTimeDate);
+      // console.log("enrollTimeEn",enrollTimeEnd);
+      // console.log("matchTime",matchTime);
+      // console.log("matchTimeEnd",matchTimeEnd);
+      
       if (nowDate>matchTimeEnd) {
         this.enrollText =  '赛事已结束'
         this.isMatchIdStatus = true;
@@ -335,9 +347,9 @@ export default {
         this.isMatchIdStatus = true;
       }else if (nowDate>enrollTimeDate) {
        
+       console.log("aaa123",data);
        
-       
-      if (data.list[0].P1) {
+      if (data.list.length>0) {
         this.isMatchIdStatus = true; //该用户已经报名
         this.enrollText = "您已报名";
       }
@@ -350,6 +362,8 @@ export default {
         this.enrollText = "报名时间未到";
         this.isMatchIdStatus = true;
       }
+       console.log("aaa",this.enrollText);
+       console.log("aaa",data);
       }
       
     },
@@ -396,6 +410,8 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
+    this.matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD HH:mm');
+    this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
     console.log('this.matchDoc',this.matchDoc);
 
     // 赛事步骤处理
@@ -522,8 +538,7 @@ export default {
 }
 .enrolled {
   width: 100%;
-  height: 50px;
-  line-height: 48px;
+  
   font-size: 16px;
   background-color: #eee;
   text-align: center;
@@ -542,9 +557,12 @@ export default {
 
 }
 .enrollButton{
+  font-size: 16px;
   position: fixed;
   bottom: 8%;
   width: 100%;
+  height: 60px;
+  line-height: 48px;
 }
 .match-title-box{
   display: flex;
