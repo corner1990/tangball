@@ -321,20 +321,25 @@ export default {
           findJson: { matchId: this.matchId, memberId: this.tangballUserId }
         }
       });
-     this.matchDoc.enrollTime =  this.matchDoc.enrollTime.split(' ')[0]
-     this.matchDoc.enrollTimeEnd=  this.matchDoc.enrollTimeEnd.split(' ')[0]
-     this.matchDoc.matchTime =  this.matchDoc.matchTime.split(' ')[0]
-     this.matchDoc.matchTimeEnd =  this.matchDoc.matchTimeEnd.split(' ')[0]
-       let nowDate=new Date().getTime();
-      let enrollTimeDate = new Date(this.matchDoc.enrollTime).getTime();
-      let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
-      let matchTime = new Date(this.matchDoc.matchTime).getTime();
-      let matchTimeEnd = new Date(this.matchDoc.matchTimeEnd).getTime();
-      // console.log('nowDate',nowDate);
-      // console.log("enrollTimeDate",enrollTimeDate);
-      // console.log("enrollTimeEn",enrollTimeEnd);
-      // console.log("matchTime",matchTime);
-      // console.log("matchTimeEnd",matchTimeEnd);
+      let nowDate=global.moment().format('YYYY-MM-DD HH:mm');
+     let enrollTimeDate = global.moment(this.matchDoc.enrollTime).format('YYYY-MM-DD HH:mm');
+     let enrollTimeEnd  = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
+     let matchTime = global.moment(this.matchDoc.matchTime ).format('YYYY-MM-DD HH:mm');
+     let matchTimeEnd = global.moment(this.matchDoc.matchTimeEnd ).format('YYYY-MM-DD HH:mm');
+    //  this.matchDoc.enrollTime =  this.matchDoc.enrollTime.split(' ')[0]
+    //  this.matchDoc.enrollTimeEnd=  this.matchDoc.enrollTimeEnd.split(' ')[0]
+    //  this.matchDoc.matchTime =  this.matchDoc.matchTime.split(' ')[0]
+    //  this.matchDoc.matchTimeEnd =  this.matchDoc.matchTimeEnd.split(' ')[0]
+      //  let nowDate=new Date().getTime();
+      // let enrollTimeDate = new Date(this.matchDoc.enrollTime).getTime();
+      // let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
+      // let matchTime = new Date(this.matchDoc.matchTime).getTime();
+      // let matchTimeEnd = new Date(this.matchDoc.matchTimeEnd).getTime();
+      console.log('nowDate',nowDate);
+      console.log("enrollTimeDate",enrollTimeDate);
+      console.log("enrollTimeEn",enrollTimeEnd);
+      console.log("matchTime",matchTime);
+      console.log("matchTimeEnd",matchTimeEnd);
       
       if (nowDate>matchTimeEnd) {
         this.enrollText =  '赛事已结束'

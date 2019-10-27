@@ -215,7 +215,8 @@ export default {
     /**
      * @desc 统一下单
      */
-    pay(info) {
+   async pay(info) {
+      let matchInfo = await JSON.parse(wx.getStorageSync("matchInfo"));
       let { total_fee } = this.objMatchInfo
       let matchForm = this.objMatchInfo.matchForm
       let data = {
@@ -224,6 +225,54 @@ export default {
         ...info
       };
       const self = this;
+      if (total_fee == 0) { 
+        let orderId = `${new Date().valueOf()}${this.tangballUserId}${this.objMatchInfo.P1}`
+        let time = global.moment().format('YYYY-MM-DD HH:mm');
+       let addData  = await util.post({
+              url: global.PUB.domain + "/crossAdd?page=tangball_enroll",
+              param: {
+                data:{
+                  additStatus:1,
+                  payStatus:2,
+                  time,
+                  cityVenueId:matchInfo.venueId,
+                  memberId:this.tangballUserId,
+                  matchId:this.objMatchInfo.P1,
+                  orderId,
+                  orderMoney:0
+                }
+              }
+        })
+        console.log('data',addData);
+        
+        if (matchForm == 2) {
+            let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+            if (!groups.orderId) {
+              console.log('groups',res.data.orderId);
+
+              groups.orderId = res.data.orderId
+              let  data  = await util.post({
+              url: global.PUB.domain + "/crossAdd?page=tangball_team",
+              param: {
+                data:groups
+              }
+            });
+              console.log('data',data);
+
+            }
+          }
+      //     wx.showToast({
+      //   title: "报名成功",
+      //   icon: "success"
+      // });
+      setInterval(()=>{
+ this.active = 2
+      },1000)
+         
+      }
+      
+      else{
+      
       wx.request({
         url: `${global.PUB.domain}/tangball/wxCreateOrder`,
         data,
@@ -253,6 +302,7 @@ export default {
           }
         }
       });
+      }
     },
     endStep(state) {
       this.state = state;

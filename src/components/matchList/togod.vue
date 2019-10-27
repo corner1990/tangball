@@ -86,6 +86,8 @@ export default {
       let arr = data.list;
 
        this.matchlist= data.list;
+       console.log('this.matchlist',this.matchlist);
+       
       // -------------数组拼接---------------------------
       // console.log("arr.length-----------------------");
       // if (arr.length > 0) {

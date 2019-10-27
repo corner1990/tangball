@@ -56,11 +56,18 @@ export default {
       return `/pages/matchDetail/main?id= ${this.item.P1}`;
     },
     matchStatus(){
-      let nowDate=new Date().getTime();
-      let enrollTimeDate = new Date(this.item.enrollTime).getTime();
-      let enrollTimeEnd = new Date(this.item.enrollTimeEnd).getTime();
-      let matchTime = new Date(this.item.matchTime).getTime();
-      let matchTimeEnd = new Date(this.item.matchTimeEnd).getTime();
+      console.log(this.item);
+      
+      let nowDate=global.moment().format('YYYY-MM-DD HH:mm');
+     let enrollTimeDate = global.moment(this.item.enrollTime).format('YYYY-MM-DD HH:mm');
+     let enrollTimeEnd  = global.moment(this.item.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
+     let matchTime = global.moment(this.item.matchTime ).format('YYYY-MM-DD HH:mm');
+     let matchTimeEnd = global.moment(this.item.matchTimeEnd ).format('YYYY-MM-DD HH:mm');
+    //  console.log('nowDate',nowDate);
+    //   console.log("enrollTimeDate",enrollTimeDate);
+    //   console.log("enrollTimeEn",enrollTimeEnd);
+    //   console.log("matchTime",matchTime);
+    //   console.log("matchTimeEnd",matchTimeEnd);
       if (nowDate>matchTimeEnd) {
         return '赛事已结束'
       }else if(nowDate>matchTime){
