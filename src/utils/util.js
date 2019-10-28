@@ -381,9 +381,7 @@ let gotoPage = function (url) {
 };
 let getMyWXSetting = async function (url) {
 
-  // console.log("getMyWXSetting");
   let resSetting = await wxGetSetting();
-  console.log('resSetting',resSetting);
 
   if (resSetting.authSetting["scope.userInfo"]) {
     // console.log("用户已经授权过,跳转到首页");
@@ -471,7 +469,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     // console.log("vm.$store.commit");
     //强行修改openid，用于测试，注意不要乱开启
     // data.data2.openId="ocnBO5WjcRaZMXU05i_9T-J94Gy0"
-    
+
     vm.$store.commit("setWXUserInfo", data.data2);//vuex保存微信会员信息
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
@@ -501,18 +499,18 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
 /**
     * 判断用户是否登录的方法
     */
-   let isLogin = async function(vm,url){
-    // console.log('aaaa');
-    let result = await getMyWXSetting(url);
-    console.log('aaaa',result);
-    //如果未授权，先return,等待用户主动授权
-    if (result == "noAuth") {
-      // gotoPage("/pages/authorize/main"); //跳转到授权页面
-      return false;
-    }
-   await loginAndInitUser(vm);
-    return true
-   }
+let isLogin = async function (vm, url) {
+  // console.log('aaaa');
+  let result = await getMyWXSetting(url);
+  console.log('aaaa', result);
+  //如果未授权，先return,等待用户主动授权
+  if (result == "noAuth") {
+    // gotoPage("/pages/authorize/main"); //跳转到授权页面
+    return false;
+  }
+  await loginAndInitUser(vm);
+  return true
+}
 let util = {
   isLogin,//是否登录函数
   formatTime: formatTime, // 时间格式化函数
