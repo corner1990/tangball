@@ -145,7 +145,8 @@ export default {
       showRadio: false,
       columns: ["一年以下", "一到三年", "三到五年", "五到十年", "十年以上"],
       memberMessageList: [
-        { index: "name", value: "姓名:" },
+        { index: "name", value: "昵称:" },
+        { index: "trueName", value: "姓名:" },
         { index: "sex", value: "性别:", type: "redio" },
         { index: "ballAge", value: "球龄:", type: "select" },
         // {index:"idCard",value:"身份证证号:"},
