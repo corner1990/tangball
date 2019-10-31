@@ -2,7 +2,7 @@
   <div>
     <div>
       <swiper
-        style="height:200px"
+        :style="imgHeight"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
@@ -36,6 +36,7 @@ export default {
   props: ["value"],
   data() {
     return {
+      imgHeight:'height:150px',
       // radio: 1,
       //   注册图片
       bigImg: "",
@@ -59,6 +60,17 @@ export default {
   mounted() {},
   onLoad() {
     this.show = false;
+    let width = 150
+         wx.getSystemInfo({
+           success:function (res) {
+             console.log('res',res.screenWidth);
+             width = res.screenWidth
+             
+             
+           }
+         })
+         this.imgHeight =`height:${width*0.8}px`
+         console.log('this.imgHeight',this.imgHeight);
   }
 };
 </script>

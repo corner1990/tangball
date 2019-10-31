@@ -4,7 +4,7 @@
     <!-- 赛事照片 -->
     <div class>
       <swiper
-        style="height:250px"
+        :style="imgHeight"
         :indicator-dots="indicatorDots"
         :autoplay="autoplay"
         :interval="interval"
@@ -18,7 +18,7 @@
               class="slide-image"
               v-if="matchDoc.album"
               style="width:100%"
-              height="250"
+          
             />
           </swiper-item>
         </block>
@@ -149,6 +149,7 @@ export default {
   },
   data() {
     return {
+      imgHeight:'height:150px',
       isLogin:false,
       showLogin:false,
       bigImg: "", //图片点击放大地址
@@ -485,7 +486,17 @@ export default {
         return;
       }
     }
-    
+    let width = 150
+         wx.getSystemInfo({
+           success:function (res) {
+             console.log('res',res.screenWidth);
+             width = res.screenWidth
+             
+             
+           }
+         })
+         this.imgHeight =`height:${width*0.8}px`
+         console.log('this.imgHeight',this.imgHeight);
     // this.getEnrollList()//获取报名订单列表函数
      
       // console.log(this.enrollText);
@@ -506,7 +517,7 @@ export default {
 }
 .slide-image {
   width: 100%;
-  height: 120%;
+  height: 100%;
   overflow: hidden;
 }
 .main-wrap {
