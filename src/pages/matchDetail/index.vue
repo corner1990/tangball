@@ -309,12 +309,11 @@ export default {
      */
     async getEnrollList() {
       // 判断是否登录后进行 操作
-    
-      let status =await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
+
       // console.log('status',status );
       
 
-      if (status) {
+
         let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
@@ -354,7 +353,7 @@ export default {
        
        console.log("aaa123",data);
        
-      if (data.list.length>0) {
+      if (data.list.length>0&&this.isLogin) {
         this.isMatchIdStatus = true; //该用户已经报名
         this.enrollText = "您已报名";
       }
@@ -369,7 +368,7 @@ export default {
       }
        console.log("aaa",this.enrollText);
        console.log("aaa",data);
-      }
+
       
     },
     /**
@@ -437,7 +436,11 @@ export default {
   async onShow() {
      console.log("onShow#####");
       this.show = true;
-      this.getEnrollList()
+      this.isLogin = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
+
+        this.getEnrollList()
+
+      
     },
   computed: {
     // 当前会员id
@@ -482,8 +485,8 @@ export default {
         return;
       }
     }
-    this.isLogin = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
-    this.getEnrollList()//获取报名订单列表函数
+    
+    // this.getEnrollList()//获取报名订单列表函数
      
       // console.log(this.enrollText);
     
