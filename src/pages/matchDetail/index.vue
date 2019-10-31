@@ -417,7 +417,7 @@ export default {
     this.matchDoc = data.Doc; //赛事详情列表
     this.matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD HH:mm');
     this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
-    console.log('this.matchDoc',this.matchDoc);
+
 
     // 赛事步骤处理
     this.steps = this.matchDoc.progress.map((item,index)=>{
@@ -427,31 +427,15 @@ export default {
       let obj = {text:item.name,desc:'',value:item.name}
       return obj
     })
-    this.getEnrollList()
-    console.log(this.matchDoc);
+    // this.getEnrollList()
+        
 
     // 如果报名未截止
     
-      
-    // if (this.matchDoc.publicationStatus == 1) {
-    //   if (this.matchDoc.enrollStatus == "3") {
-    //     this.enrollText = "报名时间已结束";
-    //     this.isMatchIdStatus = true;
-    //   } else if (this.matchDoc.enrollStatus == "1") {
-    //     this.enrollText = "报名时间未开始";
-    //     this.isMatchIdStatus = true;
-    //   } else if (this.matchDoc.enrollStatus == "4") {
-    //     this.enrollText = "报名时间设置异常";
-    //     this.isMatchIdStatus = true;
-    //   } else {
-    //     this.getEnrollList(); //获取报名订单列表函数
-    //   }
-    // } else {
-    //   this.enrollText = "赛事未发布";
-    //   this.isMatchIdStatus = true;
-    // }
+    
   },
   async onShow() {
+     console.log("onShow#####");
       this.show = true;
       this.getEnrollList()
     },
@@ -466,6 +450,7 @@ export default {
    */
 
   async onLoad(options) {
+    console.log("onLoad#####");
 
     this.NationalmatchIndex=['1'];
     this.showEnrollRequirements=['1']
@@ -498,7 +483,7 @@ export default {
       }
     }
     this.isLogin = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
-    this.getEnrollList()
+    this.getEnrollList()//获取报名订单列表函数
      
       // console.log(this.enrollText);
     
