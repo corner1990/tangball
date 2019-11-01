@@ -142,7 +142,7 @@ export default {
           message: "请先获取并且输入验证码"
         });
       }
-      if (this.active === 0 && !this.info.name) {
+      if (this.active === 0 && !this.info.name &&this.objMatchInfo.matchForm == 1) {
         return Dialog.alert({
           title: "提示",
           message: "姓名不能为空"

@@ -145,8 +145,8 @@ export default {
       showRadio: false,
       columns: ["一年以下", "一到三年", "三到五年", "五到十年", "十年以上"],
       memberMessageList: [
-        { index: "name", value: "昵称:" },
-        { index: "trueName", value: "姓名:" },
+        { index: "wxNickName", value: "昵称:" },
+        { index: "name", value: "姓名:" },
         { index: "sex", value: "性别:", type: "redio" },
         { index: "ballAge", value: "球龄:", type: "select" },
         // {index:"idCard",value:"身份证证号:"},
@@ -342,6 +342,12 @@ export default {
 
     // ajax修改会员信息函数,修改成功跳转到首页
     async modifyMember() {
+      if (this.memberMessage.name||this.memberMessage.name=='') {
+        return Dialog.alert({
+          title: "提示",
+          message: "姓名不能为空"
+        });
+      }
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {

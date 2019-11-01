@@ -100,7 +100,7 @@
       @buttontap="gotoPage"
     >
       <!-- <div style="height:10px;"></div> -->
-      <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，请先完善您的个人信息。</div>
+      <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，您的姓名必须填写，请先完善您的个人信息。</div>
     </mp-dialog>
     <van-dialog id="van-dialog" />
   </div>
@@ -354,7 +354,10 @@ export default {
     if (!this.tangballUserInfo.phone || this.tangballUserInfo.phone == "") {
       this.showCaptainDialog = true;
       this.playerIndex = 0;
-    } else {
+    } else if(!this.tangballUserInfo.name||this.tangballUserInfo.name==''){
+        this.showCaptainDialog = true;
+      this.playerIndex = 0;
+      }else {
       this.showCaptainDialog = false;
       this.player = { name: "", sex: 1, phone: "" };
     }
