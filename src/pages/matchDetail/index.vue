@@ -109,7 +109,8 @@
       </div>
       <div style="height:60px"></div>
     <!-- 如果已经截止报名和该用户已经报名，那么禁选 -->
-    <div class="enrolled enrollButton" v-if="isMatchIdStatus">{{enrollText}}</div>
+    <div class="enrollButton check-box" v-if="isMatchIdStatus=='show'" @click="gotoPage(url)">{{enrollText}}</div>
+    <div class="enrolled enrollButton" v-else-if="isMatchIdStatus" >{{enrollText}}</div>
     <van-button class="enrollButton" size="large" type="primary" @click="gotoPage(url)" v-else>{{enrollText}}</van-button>
     <!-- 显示选择场馆弹窗 -->
     <van-dialog
@@ -149,6 +150,8 @@ export default {
   },
   data() {
     return {
+      orderMsg:{},
+      payStatus:false,
       imgHeight:'height:150px',
       isLogin:false,
       showLogin:false,
@@ -220,9 +223,10 @@ export default {
       if(this.matchDoc.venue.length>1){
         this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       }
-
+      
+      
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1,album} = this.matchDoc;
+      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1,album,menCount,womenCount} = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -239,13 +243,16 @@ export default {
           teamMemberMin,
           teamMemberMax,
           P1,
-          album
+          album,
+          menCount,
+          womenCount
+
         }),
         success() {
           if (matchForm == 1) {
             wx.navigateTo({ url });
           }else{
-
+              
                wx.navigateTo({ url:"/pages/myEroll_groups/main" });
 
           }
@@ -274,6 +281,60 @@ export default {
    async gotoPage() {
     //  console.log('aaaa');
     //   console.log('11111',wx.getStorageSync("groupsMsg"));
+     
+     if (this.payStatus||this.isMatchIdStatus=='show') {
+       let info = this.matchDoc;
+      let url = `/pages/matchEroll/main?id=2`;
+      let { sex, orderMoney } = this.orderMsg;
+      console.log(info,info);
+      
+      // let active = 2;
+      info = { ...this.orderMsg, total_fee: orderMoney };
+      let matchInfo = {
+        ...this.matchDoc,
+        total_fee: orderMoney,
+        sex
+      };
+      console.log('info.orderId',info,matchInfo);
+      
+      if (matchInfo.matchForm == 2) {
+        let { data  }= await util.post({
+              url: global.PUB.domain + "/crossList?page=tangball_team",
+              param: {
+                findJson:{
+                  orderId:info.orderId
+                }
+              }
+        });
+        this.groups = data.list[0]
+        console.log('gtopis',this.groups.orderId);
+        wx.setStorage({
+        key: "myErollDetail",
+        data: JSON.stringify({  info, matchInfo, P1:this.orderMsg.P1 }),
+        success() {
+          // wx.navigateTo({ url });
+              wx.setStorage({
+              key: "groupsMsg",
+              data: JSON.stringify(data.list[0]),
+              success() {
+                wx.navigateTo({ url });
+              }
+          });
+        }
+      });
+      }else{
+      
+      
+      wx.setStorage({
+        key: "myErollDetail",
+        data: JSON.stringify({  info, matchInfo, P1:this.orderMsg.P1 }),
+        success() {
+          wx.navigateTo({ url });
+        }
+      });
+      }
+       return
+     }
      // 判断是否登录后进行 操作
       let status = await util.isLogin(this,`/pages/matchDetail/main?id=${this.matchId}`)
       console.log(status);
@@ -335,11 +396,11 @@ export default {
       // let enrollTimeEnd = new Date(this.matchDoc.enrollTimeEnd).getTime();
       // let matchTime = new Date(this.matchDoc.matchTime).getTime();
       // let matchTimeEnd = new Date(this.matchDoc.matchTimeEnd).getTime();
-      console.log('nowDate',nowDate);
-      console.log("enrollTimeDate",enrollTimeDate);
-      console.log("enrollTimeEn",enrollTimeEnd);
-      console.log("matchTime",matchTime);
-      console.log("matchTimeEnd",matchTimeEnd);
+      // console.log('nowDate',nowDate);
+      // console.log("enrollTimeDate",enrollTimeDate);
+      // console.log("enrollTimeEn",enrollTimeEnd);
+      // console.log("matchTime",matchTime);
+      // console.log("matchTimeEnd",matchTimeEnd);
       
       if (nowDate>matchTimeEnd) {
         this.enrollText =  '赛事已结束'
@@ -355,8 +416,17 @@ export default {
        console.log("aaa123",data);
        
       if (data.list.length>0&&this.isLogin) {
-        this.isMatchIdStatus = true; //该用户已经报名
-        this.enrollText = "您已报名";
+        this.payStatus = true
+          this.orderMsg = data.list[0]
+        if (data.list[0].payStatus == 1) {
+          
+          this.isMatchIdStatus = false; //变量初始化为false
+          this.enrollText = `您已报名，前往缴费`;
+        }else{
+          this.isMatchIdStatus = "show"; //该用户已经报名
+          this.enrollText = "您已报名,查看详情";
+        }
+        
       }
       else{
         this.isMatchIdStatus = false; //变量初始化为false
@@ -447,6 +517,9 @@ export default {
     // 当前会员id
     tangballUserId: function() {
       return this.$store.state.tangballUserInfo.P1;
+    },
+    tangballUserInfo: function() {
+      return this.$store.state.tangballUserInfo;
     }
   },
   /**
@@ -454,6 +527,8 @@ export default {
    */
 
   async onLoad(options) {
+    this.payStatus = false
+    this.orderMsg = {}
     console.log("onLoad#####");
 
     this.NationalmatchIndex=['1'];
@@ -603,5 +678,10 @@ export default {
   line-height: 10px;
   color: gray;
   text-align: center;
+}
+.check-box{
+  background-color: rgb(0, 155, 77);
+  text-align: center;
+  color:white;
 }
 </style>

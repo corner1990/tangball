@@ -68,7 +68,7 @@ export default {
         total_fee: orderMoney,
         sex
       };
-      console.log('info.orderId',info.orderId);
+
       
       if (matchInfo.matchForm == 2) {
         let { data  }= await util.post({
@@ -114,7 +114,7 @@ export default {
       //     wx.navigateTo({ url });
       //   }
       // });
-
+            console.log('info.orderId',{  info, matchInfo, P1 });
       // wx.navigateTo({ url });
     },
     // 请求接口获取组队信息

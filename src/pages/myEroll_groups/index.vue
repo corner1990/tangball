@@ -26,25 +26,36 @@
         </div>
         <div style="clear:both"></div>
       </div>
-      <div v-if="member.length<maxPlayer">
-        <div
-          class="addPlayer FL C_999"
-          v-if="minPlayer!=maxPlayer"
-        >队伍人数要求{{minPlayer}}-{{maxPlayer}}人</div>
-        <div class="addPlayer FL C_999" v-else>队伍人数要求{{minPlayer}}人</div>
-        <div class="addPlayer FR MR10" style="color: #F4B116;">
+      <div class="addPlayer">
+        <div class="FL" v-if="minPlayer!=maxPlayer">队伍人数要求{{minPlayer}}-{{maxPlayer}}人</div>
+        <div class="FL" v-else>队伍人数要求{{minPlayer}}人</div>
+        <div class="FR MR10" style="color: #F4B116;" v-if="member.length<maxPlayer">
           (&nbsp;添加队员&nbsp;)&nbsp;&nbsp;
-          <van-icon
-            name="add-o"
-            title="添加"
-            @click="addPlay"
-            class="playerDetail"
-            style="padding-right: 5px;margin-top:5px;"
-          />
+          <span class="addbutton">
+            <van-icon
+              name="add-o"
+              title="添加"
+              @click="addPlay"
+              style="padding-right: 5px;margin-top:5px;"
+            />
+          </span>
         </div>
         <div style="clear:both"></div>
       </div>
-      <div v-else class="addPlayer">队员数量已经达到上限</div>
+      <div v-if="womenCount||menCount">
+        <div v-if="menCount" class="require-box">
+          <sapn v-if="menCount.min&&menCount.max">男性人数要求({{menCount.min}}-{{menCount.max}})人</sapn>
+          <sapn v-else-if="menCount.min&&menCount.min!=0">男性人数至少{{menCount.min}}人</sapn>
+          <sapn v-else-if="menCount.max">男性人数不能超过{{menCount.max}}人</sapn>
+        </div>
+        <div v-if="womenCount" class="require-box">
+          <sapn v-if="womenCount.min&&womenCount.max">女性人数要求({{womenCount.min}}-{{womenCount.max}})人</sapn>
+          <sapn v-else-if="womenCount.min&&womenCount.min!=0">女性人数至少{{womenCount.min}}人</sapn>
+          <sapn v-else-if="womenCount.max">女性人数不能超过{{womenCount.max}}人</sapn>
+        </div>
+      </div>
+
+      <!-- <div v-else class="addPlayer">队员数量已经达到上限</div> -->
     </div>
     <div class="button-modify" @click="createGroups">创建队伍并报名</div>
     <div style="height:20px;"></div>
@@ -100,7 +111,7 @@
       @buttontap="gotoPage"
     >
       <!-- <div style="height:10px;"></div> -->
-      <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，您的姓名必须填写，请先完善您的个人信息。</div>
+      <div class="captainAlert">PS:本赛事为团体赛，报名后您将成为队长，您的手机号需接收短信验证码，您的姓名和性别必须填写，请先完善您的个人信息。</div>
     </mp-dialog>
     <van-dialog id="van-dialog" />
   </div>
@@ -120,6 +131,8 @@ export default {
           text: "前往修改"
         }
       ],
+      menCount: {},
+      womenCount: {},
       nameError: false, //名字校验key
       phoneError: false, //电话校验key
       modifyTitle: "修改队员信息", //弹窗title
@@ -244,6 +257,27 @@ export default {
       this.phoneError = false;
       // this.player = {name:'',sex:'1',phone:''}
     },
+    groupEroll(){
+      let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
+        // console.log('objMatchInfo',objMatchInfo);
+
+        let addGroups = {
+          createMemberId: this.tangballUserInfo.P1,
+          matchId: objMatchInfo.matchId,
+          member: this.member,
+          CreateUser: this.member[0].name,
+          name: this.name
+        };
+        // console.log('addobj',addGroups);
+        wx.setStorage({
+          key: "groupsMsg",
+          data: JSON.stringify(addGroups),
+          success() {
+            wx.navigateTo({ url: `/pages/matchEroll/main?id=1` });
+          }
+        });
+        // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
+    },
     // 保存球队信息跳转页面
     createGroups() {
       // 队名不能为空
@@ -269,26 +303,73 @@ export default {
         }).then(() => {
           // on confirm
         });
-      } else {
-        let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-        // console.log('objMatchInfo',objMatchInfo);
-
-        let addGroups = {
-          createMemberId: this.tangballUserInfo.P1,
-          matchId: objMatchInfo.matchId,
-          member: this.member,
-          CreateUser: this.member[0].name,
-          name: this.name
-        };
-        // console.log('addobj',addGroups);
-        wx.setStorage({
-          key: "groupsMsg",
-          data: JSON.stringify(addGroups),
-          success() {
-            wx.navigateTo({ url: `/pages/matchEroll/main?id=1` });
+      } else if (this.menCount || this.womenCount) {
+        if (this.menCount) {
+          let count = 0;
+          this.member.forEach(item => {
+            if (item.sex == 1) {
+              count++;
+            }
+          });
+          if (this.menCount.min) {
+            if (count < this.menCount.min) {
+              Dialog.alert({
+                title: "提示",
+                message: "男性人性不够"
+              }).then(() => {
+                return
+              });
+              return
+            }
           }
-        });
-        // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
+          if (this.menCount.max) {
+            if (count > this.menCount.max) {
+              Dialog.alert({
+                title: "提示",
+                message: "男性人性超过上限"
+              }).then(() => {
+                return
+              });
+              return
+            }
+          }
+        }
+          if (this.womenCount) {
+          let count = 0;
+          this.member.forEach(item => {
+            if (item.sex == 2) {
+              count++;
+            }
+          });
+          if (this.womenCount.min) {
+            if (count < this.womenCount.min) {
+              Dialog.alert({
+                title: "提示",
+                message: "女性人性不够"
+              }).then(() => {
+                
+              });
+              return
+            }
+          }
+          if (this.womenCount.max) {
+            if (count > this.womenCount.max) {
+              Dialog.alert({
+                title: "提示",
+                message: "女性人性超过上限"
+              }).then(() => {
+                
+              });
+              return
+            }
+          }
+        }
+        
+          this.groupEroll()
+        
+        
+      } else {
+        this.groupEroll()
       }
     },
     // 显示新增球员弹窗的方法
@@ -314,6 +395,9 @@ export default {
   },
   mounted() {
     let groups = wx.getStorageSync("groupsMsg");
+
+    console.log(this.menCount, this.womenCount);
+
     // console.log('11111',wx.getStorageSync("groupsMsg"));
 
     if (groups || groups != "") {
@@ -341,6 +425,7 @@ export default {
         (this.player.sex = this.tangballUserInfo.sex || ""),
         (this.player.phone = this.tangballUserInfo.phone || "");
       let obj = JSON.parse(JSON.stringify(this.player));
+
       this.member.push(obj);
     }
 
@@ -349,15 +434,15 @@ export default {
     // console.log('objMatchInfo',objMatchInfo);
     this.maxPlayer = objMatchInfo.teamMemberMax;
     this.minPlayer = objMatchInfo.teamMemberMin;
+    this.menCount = objMatchInfo.menCount;
+    this.womenCount = objMatchInfo.womenCount;
+    console.log(this.menCount, this.womenCount);
     console.log("this.tangballUserInfo", this.tangballUserInfo);
 
-    if (!this.tangballUserInfo.phone || this.tangballUserInfo.phone == "") {
+    if (!this.tangballUserInfo.phone || this.tangballUserInfo.phone == "" ||!this.tangballUserInfo.name||this.tangballUserInfo.name == ""||!this.tangballUserInfo.sex) {
       this.showCaptainDialog = true;
       this.playerIndex = 0;
-    } else if(!this.tangballUserInfo.name||this.tangballUserInfo.name==''){
-        this.showCaptainDialog = true;
-      this.playerIndex = 0;
-      }else {
+    } else {
       this.showCaptainDialog = false;
       this.player = { name: "", sex: 1, phone: "" };
     }
@@ -378,7 +463,7 @@ export default {
 .groupsName-box {
   font-size: 16px;
   line-height: 40px;
-  border-bottom: 2px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
   margin-right: 5px;
 }
 .groupsName {
@@ -398,7 +483,7 @@ export default {
   /* height: 40px; */
   line-height: 40px;
   margin-right: 5px;
-  border-bottom: 2px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
 }
 .playerName {
   float: left;
@@ -444,13 +529,16 @@ export default {
 .Detail-box {
   height: 40px;
   line-height: 40px;
-  border-bottom: 2px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
   margin: 0 10px;
 }
 .addPlayer {
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px;
+  /* height: 40px; */
+  line-height: 24px;
+  /* font-size: 16px; */
+  /* border-bottom: 1px solid rgb(230, 230, 230); */
+  color: #f4b116;
+  box-sizing: border-box;
 }
 .nameError {
   height: 12px;
@@ -466,6 +554,20 @@ export default {
   color: #f4b116;
   /* font-weight: 700; */
 }
+.require-box {
+  /* height: 40px; */
+  line-height: 24px;
+  /* border-bottom: 1px solid rgb(230, 230, 230); */
+  color: #f4b116;
+  /* font-size: 16px; */
+}
 .captain-box {
+}
+.addbutton {
+  margin-top: 3px;
+  font-size: 18px;
+  float: right;
+
+  /* line-height: 24px; */
 }
 </style>

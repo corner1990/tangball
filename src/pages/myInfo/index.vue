@@ -342,10 +342,18 @@ export default {
 
     // ajax修改会员信息函数,修改成功跳转到首页
     async modifyMember() {
-      if (this.memberMessage.name||this.memberMessage.name=='') {
+      console.log();
+      
+      if (!this.memberMessage.name||this.memberMessage.name=='') {
         return Dialog.alert({
           title: "提示",
           message: "姓名不能为空"
+        });
+      }
+      if (!this.memberMessage.sex) {
+        return Dialog.alert({
+          title: "提示",
+          message: "请选择性别"
         });
       }
       let { data } = await util.post({

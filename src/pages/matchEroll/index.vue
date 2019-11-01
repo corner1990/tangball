@@ -207,7 +207,7 @@ export default {
           findJson: { matchId: this.objMatchInfo.P1, memberId: this.tangballUserId }
         }
       });
-      if (data.list.length==0) {
+      if (data.list.length==0||data.list[0].payStatus==1) {
         this.pay(this.info);
       }else{
         wx.navigateTo({url:`/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`})
