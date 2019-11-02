@@ -434,8 +434,8 @@ export default {
     // console.log('objMatchInfo',objMatchInfo);
     this.maxPlayer = objMatchInfo.teamMemberMax;
     this.minPlayer = objMatchInfo.teamMemberMin;
-    this.menCount = objMatchInfo.menCount;
-    this.womenCount = objMatchInfo.womenCount;
+    this.menCount = objMatchInfo.menCount?objMatchInfo.menCount:{};
+    this.womenCount = objMatchInfo.womenCount?objMatchInfo.womenCount:{};
     console.log(this.menCount, this.womenCount);
     console.log("this.tangballUserInfo", this.tangballUserInfo);
 
