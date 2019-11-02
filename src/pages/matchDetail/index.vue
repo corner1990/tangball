@@ -485,7 +485,7 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
-    this.matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD HH:mm');
+    this.matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD')+"至"+global.moment(this.matchDoc.matchTimeEnd ).format('YYYY-MM-DD');
     this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
 
 

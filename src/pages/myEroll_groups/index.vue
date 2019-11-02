@@ -44,14 +44,14 @@
       </div>
       <div v-if="womenCount||menCount">
         <div v-if="menCount" class="require-box">
-          <sapn v-if="menCount.min&&menCount.max">男性人数要求({{menCount.min}}-{{menCount.max}})人</sapn>
-          <sapn v-else-if="menCount.min&&menCount.min!=0">男性人数至少{{menCount.min}}人</sapn>
-          <sapn v-else-if="menCount.max">男性人数不能超过{{menCount.max}}人</sapn>
+          <sapn v-if="menCount.min&&menCount.max">男队员人数要求({{menCount.min}}-{{menCount.max}})人</sapn>
+          <sapn v-else-if="menCount.min&&menCount.min!=0">男队员人数至少{{menCount.min}}人</sapn>
+          <sapn v-else-if="menCount.max">男队员人数不能超过{{menCount.max}}人</sapn>
         </div>
         <div v-if="womenCount" class="require-box">
-          <sapn v-if="womenCount.min&&womenCount.max">女性人数要求({{womenCount.min}}-{{womenCount.max}})人</sapn>
-          <sapn v-else-if="womenCount.min&&womenCount.min!=0">女性人数至少{{womenCount.min}}人</sapn>
-          <sapn v-else-if="womenCount.max">女性人数不能超过{{womenCount.max}}人</sapn>
+          <sapn v-if="womenCount.min&&womenCount.max">女队员人数要求({{womenCount.min}}-{{womenCount.max}})人</sapn>
+          <sapn v-else-if="womenCount.min&&womenCount.min!=0">女队员人数至少{{womenCount.min}}人</sapn>
+          <sapn v-else-if="womenCount.max">女队员人数不能超过{{womenCount.max}}人</sapn>
         </div>
       </div>
 
@@ -315,7 +315,7 @@ export default {
             if (count < this.menCount.min) {
               Dialog.alert({
                 title: "提示",
-                message: "男性人性不够"
+                message: "男队员人数不够"
               }).then(() => {
                 return
               });
@@ -326,7 +326,7 @@ export default {
             if (count > this.menCount.max) {
               Dialog.alert({
                 title: "提示",
-                message: "男性人性超过上限"
+                message: "男队员人数超过上限"
               }).then(() => {
                 return
               });
@@ -345,7 +345,7 @@ export default {
             if (count < this.womenCount.min) {
               Dialog.alert({
                 title: "提示",
-                message: "女性人性不够"
+                message: "女队员人数不够"
               }).then(() => {
                 
               });
@@ -356,7 +356,7 @@ export default {
             if (count > this.womenCount.max) {
               Dialog.alert({
                 title: "提示",
-                message: "女性人性超过上限"
+                message: "女队员人数超过上限"
               }).then(() => {
                 
               });

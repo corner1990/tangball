@@ -11,12 +11,11 @@
         :key="index"
         style="margin:5px 0px"
       >
-        <div class="message-text">{{message.value}}</div>
+        <div class="message-text"><span v-if="message.required" class="required-box">★</span>{{message.value}}</div>
         <div class="message-input">
           <!-- 如果input类型是单选框，显示单选框 -->
           <div v-if="message.type=='redio'">
-            <div class="input-text" v-if="!showRadio" @click="showRadio=!showRadio">{{sex}}</div>
-            <div v-if="showRadio">
+            <div >
               <radio-group @change="changeSex">
                 <radio :value="1" :checked="memberMessage[message.index]=='1'?true:false" />男
                 <radio :value="2" :checked="memberMessage[message.index]=='2'?true:false" />女
@@ -146,11 +145,12 @@ export default {
       columns: ["一年以下", "一到三年", "三到五年", "五到十年", "十年以上"],
       memberMessageList: [
         { index: "wxNickName", value: "昵称:" },
-        { index: "name", value: "姓名:" },
-        { index: "sex", value: "性别:", type: "redio" },
+        { index: "name", value: "真实姓名:",required:true},
+        { index: "sex", value: "性别:", type: "redio",required:true },
+        { index: "phone", value: "手机号码:", type: "num",required:true },
         { index: "ballAge", value: "球龄:", type: "select" },
         // {index:"idCard",value:"身份证证号:"},
-        { index: "phone", value: "手机号码:", type: "num" },
+        
         { index: "career", value: "职业:" }
       ]
     };
@@ -468,5 +468,11 @@ export default {
   left: 0;
   width: 100%;
   z-index: 101;
+}
+.required-box{
+  color: #f4b116;
+  font-size: 12px;
+
+  line-height: 20px;
 }
 </style>
