@@ -94,7 +94,7 @@
         <div v-else class="noAchievement-box">暂无对阵分组信息</div>
       </div>
     </div>
-    <div v-else class="noAchievement-box" style="padding-left:15px;">成绩暂未录入</div>
+    <div v-else class="noAchievement-box" style="padding-left:15px;">暂无对阵分组信息</div>
     <div style="height:20px;"></div>
   </div>
 </template>

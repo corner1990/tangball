@@ -90,7 +90,7 @@
         </van-collapse-item>
       </van-collapse>
       <van-cell title="报名费" :value="matchDoc.registrationFee+'元'" />
-      <van-cell title="已报名人数" :value="matchDoc.registeredPersons" />
+      <!-- <van-cell title="已报名人数" :value="matchDoc.registeredPersons" /> -->
     </van-cell-group>
     <div class="regulation-box" @click="gotoMatchManual({url:'/pages/macthManual/main'})" v-if="matchDoc.matchManual">
       <div class="FL" style="color:#333;">赛事规程</div>
