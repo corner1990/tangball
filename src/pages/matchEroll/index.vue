@@ -66,14 +66,14 @@ export default {
   },
   data() {
     return {
-      groups: {},
-      groupGame: false,
+      groups: {},//保存队伍数据对象
+      groupGame: false,//判断是否显示队伍数据key
       skipPage: 0,
       payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
-      btnText: "下一步",
+      btnText: "下一步",//下一步按钮显示文字
       steps: [
         {
           text: "确认报名资料"
@@ -86,7 +86,7 @@ export default {
         }
       ],
       active: 0,
-      info: {},
+      info: {},//用户数据
       state: {
         errMsg: ""
       }
@@ -129,6 +129,7 @@ export default {
     // });
   },
   methods: {
+    // 立即报名方法
     nextStep() {
       if (this.active >= 1) {
         return this.showTip();
@@ -149,7 +150,9 @@ export default {
           message: "姓名不能为空"
         });
       }
+      // 在开始报名时触发修改会员数据方法保存修改后的会员数据
       this.modifyMember();
+      // 报名方法
       this.checkVerfiy();
     },
     prevStep() {
@@ -162,6 +165,7 @@ export default {
       this.btnText = "下一步";
       this.active = this.active - 1;
     },
+    
     async checkVerfiy() {
       let { phone: mobile, verfiy: vCode } = this.info;
       let { data } = await util.post({
@@ -258,7 +262,7 @@ export default {
           }
         });
    
-
+        // 这里如果是团队赛就要请求队伍接口 保存队伍数据
         if (matchForm == 2) {
           let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
        
@@ -345,6 +349,7 @@ export default {
       }
     },
     initInfo() {
+      // 获取赛事数据 订单数据  保存
       let matchInfo = wx.getStorageSync("matchInfo");
       this.matchInfo = JSON.parse(matchInfo);
       let { tangballUserInfo } = this.$store.state;
@@ -407,7 +412,7 @@ export default {
       this.initInfo(data.Doc);
     },
     askAndGoBack() {},
-    // 请求修改接口,修改成功跳转到首页
+    // 修改会员数据
     async modifyMember() {
 
       let { tangballUserInfo } = this.$store.state;
