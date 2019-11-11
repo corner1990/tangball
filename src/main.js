@@ -1,9 +1,9 @@
 /* eslint-disable */
 global.PUB={}
 
- global.PUB.domain="https://www.dmagic.cn"  
+global.PUB.domain="https://www.dmagic.cn"  
   // global.PUB.domain="http://test.dmagic.cn"  
-//  global.PUB.domain="http://localhost:3000"
+   //global.PUB.domain="http://localhost:3000"
 // global.PUB.domain="https://e6234kn.hn3.mofasuidao.cn"//魔法隧道地质
 import Vue from 'vue'
 import App from './App'

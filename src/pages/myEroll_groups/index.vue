@@ -49,10 +49,26 @@
           <sapn v-else-if="menCount.max">男队员人数不能超过{{menCount.max}}人</sapn>
         </div>
         <div v-if="womenCount" class="require-box">
-          <sapn v-if="womenCount.min&&womenCount.max">女队员人数要求({{womenCount.min}}-{{womenCount.max}})人</sapn>
+          <sapn
+            v-if="womenCount.min&&womenCount.max"
+          >女队员人数要求({{womenCount.min}}-{{womenCount.max}})人</sapn>
           <sapn v-else-if="womenCount.min&&womenCount.min!=0">女队员人数至少{{womenCount.min}}人</sapn>
           <sapn v-else-if="womenCount.max">女队员人数不能超过{{womenCount.max}}人</sapn>
         </div>
+      </div>
+      <div class style="padding:5px 0">
+        <div style="padding:3px 0">选择比赛日期：</div>
+
+        <radio-group @change="changePlayingTime" v-model="playingTime">
+          <template class v-for="(item,i) in arrPlayingTime">
+            <div style="margin:0 5px 9px 0" :key="i" >
+               <radio  :value="item" :checked="item==playingTime?true:false"  />
+            {{item}}
+            </div>
+           
+           
+          </template>
+        </radio-group>
       </div>
 
       <!-- <div v-else class="addPlayer">队员数量已经达到上限</div> -->
@@ -124,6 +140,8 @@ export default {
   components: {},
   data() {
     return {
+      playingTime: null,
+      arrPlayingTime: [], //出场日期数组
       captainTitle: "",
       showCaptainDialog: false,
       captainButtonList: [
@@ -158,7 +176,6 @@ export default {
     }
   },
   onUnload: function() {
-    // console.log(1111);
     let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     let addGroups = {
       createMemberId: this.tangballUserInfo.P1,
@@ -167,7 +184,6 @@ export default {
       CreateUser: this.member[0].name,
       name: this.name
     };
-    // console.log('addobj',addGroups);
     wx.setStorage({
       key: "groupsMsg",
       data: JSON.stringify(addGroups),
@@ -175,7 +191,6 @@ export default {
         // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
       }
     });
-    // console.log(1111);
   },
   methods: {
     gotoPage() {
@@ -202,7 +217,10 @@ export default {
     changeSex(event) {
       this.player.sex = Number(event.target.value);
     },
-
+// 修改比赛日期
+    changePlayingTime(event) {
+      this.playingTime = event.target.value;
+    },
     // 修改或增加球员的方法
     async modifyPlayer() {
       // 如果名字为空
@@ -257,29 +275,30 @@ export default {
       this.phoneError = false;
       // this.player = {name:'',sex:'1',phone:''}
     },
-    groupEroll(){
+    groupEroll() {
       let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-        // console.log('objMatchInfo',objMatchInfo);
 
-        let addGroups = {
-          createMemberId: this.tangballUserInfo.P1,
-          matchId: objMatchInfo.matchId,
-          member: this.member,
-          CreateUser: this.member[0].name,
-          name: this.name
-        };
-        // console.log('addobj',addGroups);
-        wx.setStorage({
-          key: "groupsMsg",
-          data: JSON.stringify(addGroups),
-          success() {
-            wx.navigateTo({ url: `/pages/matchEroll/main?id=1` });
-          }
-        });
-        // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
+      let addGroups = {
+        createMemberId: this.tangballUserInfo.P1,
+        matchId: objMatchInfo.matchId,
+        member: this.member,
+        CreateUser: this.member[0].name,
+        name: this.name,
+        playingTime: this.playingTime,
+      };
+      wx.setStorage({
+        key: "groupsMsg",
+        data: JSON.stringify(addGroups),
+        success() {
+          wx.navigateTo({ url: `/pages/matchEroll/main?id=1` });
+        }
+      });
+      // wx.navigateTo({url:`/pages/matchEroll/main?id=1`});
     },
     // 保存球队信息跳转页面
     createGroups() {
+    
+
       // 队名不能为空
       if (this.name == "") {
         Dialog.alert({
@@ -303,7 +322,14 @@ export default {
         }).then(() => {
           // on confirm
         });
-      } else if (this.menCount || this.womenCount) {
+      }  else if (this.arrPlayingTime.length>1&&!this.playingTime ) {
+        Dialog.alert({
+          title: "提示",
+          message: "请选择参赛日期"
+        }).then(() => {
+          // on confirm
+        });
+      }else if (this.menCount || this.womenCount) {
         if (this.menCount) {
           let count = 0;
           this.member.forEach(item => {
@@ -317,9 +343,9 @@ export default {
                 title: "提示",
                 message: "男队员人数不够"
               }).then(() => {
-                return
+                return;
               });
-              return
+              return;
             }
           }
           if (this.menCount.max) {
@@ -328,13 +354,13 @@ export default {
                 title: "提示",
                 message: "男队员人数超过上限"
               }).then(() => {
-                return
+                return;
               });
-              return
+              return;
             }
           }
         }
-          if (this.womenCount) {
+        if (this.womenCount) {
           let count = 0;
           this.member.forEach(item => {
             if (item.sex == 2) {
@@ -346,10 +372,8 @@ export default {
               Dialog.alert({
                 title: "提示",
                 message: "女队员人数不够"
-              }).then(() => {
-                
-              });
-              return
+              }).then(() => {});
+              return;
             }
           }
           if (this.womenCount.max) {
@@ -357,19 +381,15 @@ export default {
               Dialog.alert({
                 title: "提示",
                 message: "女队员人数超过上限"
-              }).then(() => {
-                
-              });
-              return
+              }).then(() => {});
+              return;
             }
           }
         }
-        
-          this.groupEroll()
-        
-        
+
+        this.groupEroll();
       } else {
-        this.groupEroll()
+        this.groupEroll();
       }
     },
     // 显示新增球员弹窗的方法
@@ -396,12 +416,9 @@ export default {
   mounted() {
     let groups = wx.getStorageSync("groupsMsg");
 
-    console.log(this.menCount, this.womenCount);
 
-    // console.log('11111',wx.getStorageSync("groupsMsg"));
 
     if (groups || groups != "") {
-      // console.log(1111);
 
       groups = JSON.parse(groups);
       if (groups.member.length > 1) {
@@ -410,7 +427,6 @@ export default {
       } else {
         // 页面加载时初始化球队信息
         this.member = [];
-        // console.log('aaa',this.tangballUserInfo);
         (this.player.name = this.tangballUserInfo.name || ""),
           (this.player.sex = this.tangballUserInfo.sex || ""),
           (this.player.phone = this.tangballUserInfo.phone || "");
@@ -420,7 +436,6 @@ export default {
     } else {
       // 页面加载时初始化球队信息
       this.member = [];
-      // console.log('aaa',this.tangballUserInfo);
       (this.player.name = this.tangballUserInfo.name || ""),
         (this.player.sex = this.tangballUserInfo.sex || ""),
         (this.player.phone = this.tangballUserInfo.phone || "");
@@ -431,15 +446,28 @@ export default {
 
     // this.player = {name:'',sex:1,phone:''}
     let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-    // console.log('objMatchInfo',objMatchInfo);
+    //比赛开始时间
+    let matchTime = global.moment(objMatchInfo.matchTime).format("YYYY-MM-DD");
+    //比赛结束时间
+    let matchTimeEnd = global
+      .moment(objMatchInfo.matchTimeEnd)
+      .format("YYYY-MM-DD");
+
+    //获取时间段内的所有日期作为选项
+    this.arrPlayingTime = util.getDatefromDuration(matchTime, matchTimeEnd);
+
     this.maxPlayer = objMatchInfo.teamMemberMax;
     this.minPlayer = objMatchInfo.teamMemberMin;
-    this.menCount = objMatchInfo.menCount?objMatchInfo.menCount:{};
-    this.womenCount = objMatchInfo.womenCount?objMatchInfo.womenCount:{};
-    console.log(this.menCount, this.womenCount);
-    console.log("this.tangballUserInfo", this.tangballUserInfo);
+    this.menCount = objMatchInfo.menCount ? objMatchInfo.menCount : {};
+    this.womenCount = objMatchInfo.womenCount ? objMatchInfo.womenCount : {};
 
-    if (!this.tangballUserInfo.phone || this.tangballUserInfo.phone == "" ||!this.tangballUserInfo.name||this.tangballUserInfo.name == ""||!this.tangballUserInfo.sex) {
+    if (
+      !this.tangballUserInfo.phone ||
+      this.tangballUserInfo.phone == "" ||
+      !this.tangballUserInfo.name ||
+      this.tangballUserInfo.name == "" ||
+      !this.tangballUserInfo.sex
+    ) {
       this.showCaptainDialog = true;
       this.playerIndex = 0;
     } else {

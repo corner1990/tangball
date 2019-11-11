@@ -511,7 +511,44 @@ let isLogin = async function (vm, url) {
   await loginAndInitUser(vm);
   return true
 }
+
+
+Date.prototype.format = function () {
+  var s = '';
+  var mouth = (this.getMonth() + 1) >= 10 ? (this.getMonth() + 1) : ('0' + (this.getMonth() + 1));
+  var day = this.getDate() >= 10 ? this.getDate() : ('0' + this.getDate());
+  s += this.getFullYear() + '-'; // 获取年份。
+  s += mouth + "-"; // 获取月份。
+  s += day; // 获取日。
+  return (s); // 返回日期。
+};
+
+//从时间段获取所有日期的函数
+function getDatefromDuration(begin, end) {
+  var arr = [];
+  var ab = begin.split("-");
+  var ae = end.split("-");
+  var db = new Date();
+  db.setUTCFullYear(ab[0], ab[1] - 1, ab[2]);
+  var de = new Date();
+  de.setUTCFullYear(ae[0], ae[1] - 1, ae[2]);
+  var unixDb = db.getTime() - 24 * 60 * 60 * 1000;
+  var unixDe = de.getTime() - 24 * 60 * 60 * 1000;
+  for (var k = unixDb; k <= unixDe;) {
+    //console.log((new Date(parseInt(k))).format());
+    k = k + 24 * 60 * 60 * 1000;
+    arr.push((new Date(parseInt(k))).format());
+  }
+  return arr;
+}
+
+console.log(getDatefromDuration('2018-07-05', '2018-08-05'));
+
+
+
+
 let util = {
+  getDatefromDuration,
   isLogin,//是否登录函数
   formatTime: formatTime, // 时间格式化函数
   generateMixed: generateMixed, // 获取随机数

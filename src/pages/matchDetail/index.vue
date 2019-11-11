@@ -226,7 +226,7 @@ export default {
       
       
       //拼接跳转到报名订单的地址
-      let { matchName, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1,album,menCount,womenCount} = this.matchDoc;
+      let { matchName,matchTimeEnd, matchTime,teamMemberMax,teamMemberMin, registrationFee: total_fee,matchForm,P1,album,menCount,womenCount} = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -234,6 +234,7 @@ export default {
         data: JSON.stringify({
           matchName,
           matchTime,
+          matchTimeEnd,//比赛结束时间
           total_fee,
           matchId,
           venueId,

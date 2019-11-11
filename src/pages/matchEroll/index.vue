@@ -5,14 +5,21 @@
       <van-steps :steps="steps" :active="active" />
     </div>
     <div v-if="active === 0">
-      <PersonInfo :info="info" @changeInfo="changeInfo" :matchInfo="objMatchInfo" :skipPage="skipPage" :groupGame="groupGame" :groups="groups"/>
+      <PersonInfo
+        :info="info"
+        @changeInfo="changeInfo"
+        :matchInfo="objMatchInfo"
+        :skipPage="skipPage"
+        :groupGame="groupGame"
+        :groups="groups"
+      />
     </div>
     <div v-if="active === 1">
-      <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups"/>
+      <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
     </div>
     <div v-show="active === 2">
       <div v-if="payStatus==2">
-        <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups"/>
+        <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
         <div class="icon_success">
           <div class="__success">
             <van-icon name="success" color="#07c160" size="32px" />
@@ -59,9 +66,9 @@ export default {
   },
   data() {
     return {
-      groups:{},
-      groupGame:false,
-      skipPage:0,
+      groups: {},
+      groupGame: false,
+      skipPage: 0,
       payStatus: 0, //是否为已支付状态
       objMatchInfo: {}, //存储赛事信息
       matchInfo: {}, //存储赛事信息
@@ -86,14 +93,12 @@ export default {
     };
   },
   mounted() {
-    console.log("mounted###");
-    this.skipPage=0;
+    this.skipPage = 0;
 
     // 页面加载请求会员数据
     this.getMember();
   },
   onLoad(options) {
-    console.log("onLoad#######");
     // 缓存赛事信息
     // 如果是从报名列表进入
     if (options.id == 2) {
@@ -104,32 +109,24 @@ export default {
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
-
       }
     } else {
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
-
-
     }
     if (this.objMatchInfo.matchForm == 2) {
-          this.groupGame =true
-          this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-          console.log('groups',this.groups );
-
-        }else{
-          this.groupGame =false
-          // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-        }
-  console.log('this.groupGame',this.objMatchInfo);
-  console.log('this.groupGame',this.groupGame);
+      this.groupGame = true;
+      this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+    } else {
+      this.groupGame = false;
+      // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+    }
 
     // 请求赛事详情接口函数
     // let doc = await util.post({
     //   url: global.PUB.domain + "/crossDetail?page=tangball_match",
     //   param: { id: this.P1 }
     // });
-    // console.log('this', this)
   },
   methods: {
     nextStep() {
@@ -142,7 +139,11 @@ export default {
           message: "请先获取并且输入验证码"
         });
       }
-      if (this.active === 0 && !this.info.name &&this.objMatchInfo.matchForm == 1) {
+      if (
+        this.active === 0 &&
+        !this.info.name &&
+        this.objMatchInfo.matchForm == 1
+      ) {
         return Dialog.alert({
           title: "提示",
           message: "姓名不能为空"
@@ -154,7 +155,7 @@ export default {
     prevStep() {
       if (this.active <= 0) {
         this.skipPage = 0;
-        this.skipPage = 1
+        this.skipPage = 1;
         wx.navigateBack();
         return false;
       }
@@ -194,120 +195,123 @@ export default {
           Dialog.close();
         });
     },
-   async sendPay() {
+    async sendPay() {
       setTimeout(() => {
         Dialog.close();
       }, 1000);
       // 统一下单
-      console.log('this.objMatchInfo.P1',this.objMatchInfo);
-      
+
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
-          findJson: { matchId: this.objMatchInfo.P1, memberId: this.tangballUserId }
+          findJson: {
+            matchId: this.objMatchInfo.P1,
+            memberId: this.tangballUserId
+          }
         }
       });
-      if (data.list.length==0||data.list[0].payStatus==1) {
+      if (data.list.length == 0 || data.list[0].payStatus == 1) {
         this.pay(this.info);
-      }else{
-        wx.navigateTo({url:`/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`})
-         wx.showToast({
-        title: "您已报名，无法再次报名",
-        icon: "none"
-      });
+      } else {
+        wx.navigateTo({
+          url: `/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`
+        });
+        wx.showToast({
+          title: "您已报名，无法再次报名",
+          icon: "none"
+        });
       }
       // this.pay(this.info);
     },
     /**
      * @desc 统一下单
      */
-   async pay(info) {
+    async pay(info) {
       let matchInfo = await JSON.parse(wx.getStorageSync("matchInfo"));
-      let { total_fee } = this.objMatchInfo
-      let matchForm = this.objMatchInfo.matchForm
+      let { total_fee } = this.objMatchInfo;
+      let matchForm = this.objMatchInfo.matchForm;
       let data = {
         total_fee,
-        goodsNameAll: "abc",
+        goodsNameAll: "abcd",
         ...info
       };
       const self = this;
-      if (total_fee == 0) { 
-        let orderId = `${new Date().valueOf()}${this.tangballUserId}${this.objMatchInfo.P1}`
-        let time = global.moment().format('YYYY-MM-DD HH:mm');
-       let addData  = await util.post({
-              url: global.PUB.domain + "/crossAdd?page=tangball_enroll",
-              param: {
-                data:{
-                  additStatus:1,
-                  payStatus:2,
-                  time,
-                  cityVenueId:matchInfo.venueId,
-                  memberId:this.tangballUserId,
-                  matchId:this.objMatchInfo.P1,
-                  orderId,
-                  orderMoney:0
-                }
-              }
-        })
-        console.log('data',addData);
-        
+      //Q1:订单总价是0
+      if (total_fee == 0) {
+        let orderId = `${new Date().valueOf()}${this.tangballUserId}${
+          this.objMatchInfo.P1
+        }`;
+        let time = global.moment().format("YYYY-MM-DD HH:mm");
+        let addData = await util.post({
+          url: global.PUB.domain + "/crossAdd?page=tangball_enroll",
+          param: {
+            data: {
+              additStatus: 1,
+              payStatus: 2,
+              time,
+              cityVenueId: matchInfo.venueId,
+              memberId: this.tangballUserId,
+              matchId: this.objMatchInfo.P1,
+              orderId,
+              orderMoney: 0
+            }
+          }
+        });
+   
+
         if (matchForm == 2) {
-            let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-            if (!groups.orderId) {
-              console.log('groups',res.data.orderId);
+          let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+       
+          data.playingTime = groups.playingTime; //***补充用户选择的比赛日期
 
-              groups.orderId = res.data.orderId
-              let  data  = await util.post({
+          if (!groups.orderId) {
+
+            groups.orderId = res.data.orderId;
+            let data = await util.post({
               url: global.PUB.domain + "/crossAdd?page=tangball_team",
               param: {
-                data:groups
+                data: groups
               }
             });
-              console.log('data',data);
-
-            }
-          }
-      //     wx.showToast({
-      //   title: "报名成功",
-      //   icon: "success"
-      // });
-      setInterval(()=>{
- this.active = 2
-      },1000)
-         
-      }
-      
-      else{
-      
-      wx.request({
-        url: `${global.PUB.domain}/tangball/wxCreateOrder`,
-        data,
-        method: "post",
-       async success(res) {
-          let { statusCode, data } = res;
-          if (statusCode === 200) {
-            let { data: chrildData } = data;
-            self.funlyPay(JSON.parse(chrildData));
-          }
-          console.log('res',res);
-          if (matchForm == 2) {
-            let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-            if (!groups.orderId) {
-              console.log('groups',res.data.orderId);
-
-              groups.orderId = res.data.orderId
-              let  data  = await util.post({
-              url: global.PUB.domain + "/crossAdd?page=tangball_team",
-              param: {
-                data:groups
-              }
-            });
-              console.log('data',data);
-
-            }
           }
         }
-      });
+        //     wx.showToast({
+        //   title: "报名成功",
+        //   icon: "success"
+        // });
+        setInterval(() => {
+          this.active = 2;
+        }, 1000);
+      } else {
+        //Q2:订单总价非0
+        let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
+        data.playingTime = groups.playingTime; //补充用户选择的比赛日期
+        wx.request({
+          url: `${global.PUB.domain}/tangball/wxCreateOrder`,
+          data,
+          method: "post",
+          async success(res) {
+            let { statusCode, data } = res;
+            if (statusCode === 200) {
+              let { data: chrildData } = data;
+              self.funlyPay(JSON.parse(chrildData));
+            }
+            if (matchForm == 2) {
+              
+
+              if (!groups.orderId) {
+
+                groups.orderId = res.data.orderId;
+                let data = await util.post({
+                  url: global.PUB.domain + "/crossAdd?page=tangball_team",
+                  param: {
+                    data: groups
+                  }
+                });
+              }
+            }
+          }
+        });
       }
     },
     endStep(state) {
@@ -345,7 +349,7 @@ export default {
       this.matchInfo = JSON.parse(matchInfo);
       let { tangballUserInfo } = this.$store.state;
       wx.self = this;
-      let { matchId, venueId:cityVenueId } = this.matchInfo;
+      let { matchId, venueId: cityVenueId } = this.matchInfo;
       let {
         P1: memberId,
         name,
@@ -405,10 +409,8 @@ export default {
     askAndGoBack() {},
     // 请求修改接口,修改成功跳转到首页
     async modifyMember() {
-      console.log("this.info%", this.info);
 
       let { tangballUserInfo } = this.$store.state;
-      console.log("tangballUserInfo%", tangballUserInfo);
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
@@ -419,7 +421,6 @@ export default {
       //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
       let tangballUserInfoNew = Object.assign(tangballUserInfo, this.info); //
       this.$store.commit("setTangballUserInfo", tangballUserInfoNew);
-
     },
     /**
      * @desc 修改信息
@@ -446,14 +447,13 @@ export default {
     this.skipPage = 0;
     this.skipPage = 1;
     this.changeState();
-
   },
   computed: {
     // 当前会员id
     tangballUserId: function() {
       return this.$store.state.tangballUserInfo.P1;
     }
-  },
+  }
 };
 </script>
 <style scoped>
