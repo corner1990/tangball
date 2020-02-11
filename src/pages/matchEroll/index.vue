@@ -298,11 +298,9 @@ export default {
             let { statusCode, data } = res;
             if (statusCode === 200) {
               let { data: chrildData } = data;
-              self.funlyPay(JSON.parse(chrildData));
+              self.funlyPay(JSON.parse(chrildData));//调用：{小程序支付函数}
             }
-            if (matchForm == 2) {
-              
-
+            if (matchForm == 2) {//如果是团体赛
               if (!groups.orderId) {
 
                 groups.orderId = res.data.orderId;
@@ -331,6 +329,7 @@ export default {
         this.active = 2;
       }
     },
+    //函数：{小程序支付函数}
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
       let self = this;
