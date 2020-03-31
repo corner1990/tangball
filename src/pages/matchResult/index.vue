@@ -310,12 +310,7 @@ export default {
   onLoad(options) {
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
-    let matchTime = this.matchDoc.matchTime
-    matchTime = matchTime.split(' ')[0]
-    console.log(matchTime);
-    
-    let date = new Date(matchTime );
-    this.matchDoc.matchTime =date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    this.matchDoc.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY/MM/DD');
     console.log("this.matchDoc", this.matchDoc);
     if (this.matchDoc.progress.length>0) {
     // 初始化成绩数据

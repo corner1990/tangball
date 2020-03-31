@@ -3,7 +3,7 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": false,
+		"enhance": true,
 		"postcss": true,
 		"minified": false,
 		"newFeature": true,
@@ -25,7 +25,7 @@
 	"projectname": "bowling",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.8.0",
+	"libVersion": "2.10.4",
 	"condition": {
 		"search": {
 			"current": -1,

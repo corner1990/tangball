@@ -60,7 +60,7 @@
         <div style="padding:3px 0">选择比赛日期：</div>
 
         <radio-group @change="changePlayingTime" v-model="playingTime">
-          <template class v-for="(item,i) in arrPlayingTime">
+          <template  v-for="(item,i) in arrPlayingTime">
             <div style="margin:0 5px 9px 0" :key="i" >
                <radio  :value="item" :checked="item==playingTime?true:false"  />
             {{item}}

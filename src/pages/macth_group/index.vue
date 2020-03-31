@@ -251,16 +251,8 @@ export default {
     this.progressIndex = 1;
     this.roundNum = 1;
     this.matchDoc = await JSON.parse(wx.getStorageSync("matchInfo"));
-    console.log("this.matchDoc.matchTime", this.matchDoc.matchTime);
-    let matchTime = this.matchDoc.matchTime
-    matchTime = matchTime.split(' ')[0]
-    console.log(matchTime);
-    
-    let date = new Date(matchTime );
-    console.log('aaaa',date);
-    console.log('aaaa',date.getFullYear());
-    this.matchDoc.matchTime =date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-      console.log("this.matchDoc.matchTime", this.matchDoc.matchTime);
+ 
+    this.matchDoc.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY/MM/DD');
       if (this.matchDoc.progress.length>0) {
     this.nowRoundNum = Number(this.matchDoc.progress[0].roundCount);
       }

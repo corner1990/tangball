@@ -378,14 +378,21 @@ export default {
           findJson: { matchId: this.matchId, memberId: this.tangballUserId }
         }
       });
+      
       let nowDate = global.moment().format('YYYY-MM-DD HH:mm');
-      let enrollTimeDate = global.moment(this.matchDoc.enrollTime).format('YYYY-MM-DD HH:mm');
-      let enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
-      let matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD HH:mm');
-      let matchTimeEnd = global.moment(this.matchDoc.matchTimeEnd).format('YYYY-MM-DD HH:mm');
-   
+      let enrollTimeDate = global.moment(this.matchDoc.enrollTime.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
+      let enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
+      let matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
+      let matchTimeEnd = global.moment(this.matchDoc.matchTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
+      // let date = new Date("2020/03/31 00:00:00")
+      // let date2 = new Date("2020/03/31")
+      // console.log('Date',date.toLocaleDateString())
+      // console.log('Date2',date2.toLocaleDateString())
+      // console.log('nowDate',nowDate)
+      // console.log('matchTime',this.matchDoc.matchTime)
+      // console.log('matchTime',matchTime)
 
-      if (nowDate > matchTimeEnd) {
+      if (nowDate > matchTimeEnd) {2
         this.enrollText = '赛事已结束'
         this.isMatchIdStatus = true;
       } else if (nowDate > matchTime) {
@@ -464,8 +471,8 @@ export default {
       param: { id: this.matchId }
     });
     this.matchDoc = data.Doc; //赛事详情列表
-    this.matchTime = global.moment(this.matchDoc.matchTime).format('YYYY-MM-DD') + "至" + global.moment(this.matchDoc.matchTimeEnd).format('YYYY-MM-DD');
-    this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
+    this.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY-MM-DD') + "至" + global.moment(this.matchDoc.matchTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD');
+    this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
 
 
     // 赛事步骤处理
