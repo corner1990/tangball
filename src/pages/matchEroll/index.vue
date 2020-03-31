@@ -165,7 +165,7 @@ export default {
       this.btnText = "下一步";
       this.active = this.active - 1;
     },
-    
+
     async checkVerfiy() {
       let { phone: mobile, verfiy: vCode } = this.info;
       let { data } = await util.post({
@@ -204,26 +204,18 @@ export default {
         Dialog.close();
       }, 1000);
       // 统一下单
-
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
-          findJson: {
-            matchId: this.objMatchInfo.P1,
-            memberId: this.tangballUserId
-          }
+          findJson: {matchId: this.objMatchInfo.P1,memberId: this.tangballUserId}
         }
       });
       if (data.list.length == 0 || data.list[0].payStatus == 1) {
-        this.pay(this.info);
+
+        this.pay(this.info);//调用：{统一下单函数}
       } else {
-        wx.navigateTo({
-          url: `/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`
-        });
-        wx.showToast({
-          title: "您已报名，无法再次报名",
-          icon: "none"
-        });
+        wx.navigateTo({url: `/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`});
+        wx.showToast({title: "您已报名，无法再次报名",icon: "none"});
       }
       // this.pay(this.info);
     },
@@ -231,91 +223,79 @@ export default {
      * @desc 统一下单
      */
     async pay(info) {
-      let matchInfo = await JSON.parse(wx.getStorageSync("matchInfo"));
+     
+      let matchInfo = JSON.parse(wx.getStorageSync("matchInfo"));//从本地存储中获取赛事信息
       let { total_fee } = this.objMatchInfo;
       let matchForm = this.objMatchInfo.matchForm;
-      let data = {
+      let pramePay = {
         total_fee,
         goodsNameAll: "abcd",
         ...info
       };
+     
       const self = this;
-      //Q1:订单总价是0
-      if (total_fee == 0) {
+     
+
+      if (total_fee == 0) {//Q1:订单总价是0，不走支付流程
         let orderId = `${new Date().valueOf()}${this.tangballUserId}${
           this.objMatchInfo.P1
-        }`;
+          }`;
         let time = global.moment().format("YYYY-MM-DD HH:mm");
         let addData = await util.post({
           url: global.PUB.domain + "/crossAdd?page=tangball_enroll",
           param: {
             data: {
-              additStatus: 1,
-              payStatus: 2,
-              time,
-              cityVenueId: matchInfo.venueId,
-              memberId: this.tangballUserId,
-              matchId: this.objMatchInfo.P1,
-              orderId,
-              orderMoney: 0
+              additStatus: 1, payStatus: 2, time, cityVenueId: matchInfo.venueId,
+              memberId: this.tangballUserId, matchId: this.objMatchInfo.P1, orderId, orderMoney: 0
             }
           }
         });
-   
         // 这里如果是团队赛就要请求队伍接口 保存队伍数据
         if (matchForm == 2) {
-          let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-       
-          data.playingTime = groups.playingTime; //***补充用户选择的比赛日期
+          let groups = JSON.parse(wx.getStorageSync("groupsMsg"));//从本地存储中获取到队伍信息
 
-          if (!groups.orderId) {
+          pramePay.playingTime = groups.playingTime; //***补充用户选择的比赛日期
 
+          if (!groups.orderId) {//如果{groups.orderId}不存在
             groups.orderId = res.data.orderId;
             let data = await util.post({
-              url: global.PUB.domain + "/crossAdd?page=tangball_team",
-              param: {
-                data: groups
-              }
+              url: global.PUB.domain + "/crossAdd?page=tangball_team", param: { data: groups }
             });
           }
         }
-        //     wx.showToast({
-        //   title: "报名成功",
-        //   icon: "success"
-        // });
-        setInterval(() => {
-          this.active = 2;
-        }, 1000);
-      } else {
-        //Q2:订单总价非0
-        let groups = JSON.parse(wx.getStorageSync("groupsMsg"));
-        data.playingTime = groups.playingTime; //补充用户选择的比赛日期
-        wx.request({
-          url: `${global.PUB.domain}/tangball/wxCreateOrder`,
-          data,
-          method: "post",
-          async success(res) {
-            let { statusCode, data } = res;
-            if (statusCode === 200) {
-              let { data: chrildData } = data;
-              self.funlyPay(JSON.parse(chrildData));//调用：{小程序支付函数}
-            }
-            if (matchForm == 2) {//如果是团体赛
-              if (!groups.orderId) {
 
-                groups.orderId = res.data.orderId;
-                let data = await util.post({
-                  url: global.PUB.domain + "/crossAdd?page=tangball_team",
-                  param: {
-                    data: groups
-                  }
-                });
-              }
-            }
+        setInterval(() => {
+          this.active = 2;//???
+        }, 1000);
+      } else {//Q2:订单总价非0,要走支付流程
+        let groups
+        if (matchForm == 2) {//如果是团体赛，
+          groups = JSON.parse(wx.getStorageSync("groupsMsg"));//获取存储中的组队信息
+          pramePay.playingTime = groups.playingTime; //补充用户选择的比赛日期
+        }
+        //****微信统一下单接口
+        let res = await util.post({ url: `${global.PUB.domain}/tangball/wxCreateOrder`, param: pramePay });
+
+        let { statusCode, data: dataRes } = res;
+        if (statusCode === 200) {
+          let { data: chrildData } = dataRes;
+          self.funlyPay(JSON.parse(chrildData));//调用：{小程序支付函数}
+        }
+        if (matchForm == 2) {//如果是团体赛，ajax提交队伍信息
+          if (!groups.orderId) {
+            groups.orderId = res.data.orderId;
+            let data = await util.post({
+              url: global.PUB.domain + "/crossAdd?page=tangball_team", param: { data: groups }
+            });
           }
-        });
+        }
+
+
+
+
       }
     },
+
     endStep(state) {
       this.state = state;
       this.active = this.active + 1;
@@ -335,9 +315,7 @@ export default {
       let self = this;
       if (status == 100) {
         wx.requestPayment({
-          ...args,
-          signType: "MD5",
-          timeStamp,
+          ...args,signType: "MD5",timeStamp,
           success(res) {
             self.endStep(res);
           },
@@ -354,26 +332,10 @@ export default {
       let { tangballUserInfo } = this.$store.state;
       wx.self = this;
       let { matchId, venueId: cityVenueId } = this.matchInfo;
-      let {
-        P1: memberId,
-        name,
-        sex = -1,
-        openid: openId,
-        phone,
-        career,
-        ballAge
-      } = tangballUserInfo;
+      let { P1: memberId, name, sex = -1, openid: openId, phone, career, ballAge } = tangballUserInfo;
       this.info = {
         ...this.info,
-        name,
-        sex: `${sex}`,
-        memberId,
-        openId,
-        phone,
-        career,
-        matchId,
-        cityVenueId,
-        ballAge
+        name, sex: `${sex}`, memberId, openId, phone, career, matchId, cityVenueId, ballAge
       };
       switch (this.info.ballAge) {
         case 1:
@@ -402,15 +364,11 @@ export default {
       let { tangballUserInfo } = this.$store.state;
       let { data } = await util.post({
         url: global.PUB.domain + "/crossDetail?page=tangball_member",
-        param: {
-          findJson: {
-            openid: tangballUserInfo.openid
-          }
-        }
+        param: { findJson: { openid: tangballUserInfo.openid } }
       });
       this.initInfo(data.Doc);
     },
-    askAndGoBack() {},
+    askAndGoBack() { },
     // 修改会员数据
     async modifyMember() {
 
@@ -418,8 +376,7 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: { openid: tangballUserInfo.openid },
-          modifyJson: this.info
+          findJson: { openid: tangballUserInfo.openid },modifyJson: this.info
         }
       });
       //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写
@@ -446,7 +403,7 @@ export default {
     }
   },
 
-  onUnload: function() {
+  onUnload: function () {
     // 页面销毁时执行
     this.skipPage = 0;
     this.skipPage = 1;
@@ -454,7 +411,7 @@ export default {
   },
   computed: {
     // 当前会员id
-    tangballUserId: function() {
+    tangballUserId: function () {
       return this.$store.state.tangballUserInfo.P1;
     }
   }

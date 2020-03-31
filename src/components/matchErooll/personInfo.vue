@@ -172,13 +172,7 @@ export default {
         (this.sendTime = 60),
         (this.sendStatus = false);
     }
-    // info: {
-    //   handler (info, oldName) {
-    //     console.log('info12212', info)
-    //   },
-    //   immediate: true,
-    //   deep: true
-    // }
+   
   },
   computed: {
     selfInfo() {
@@ -201,7 +195,6 @@ export default {
     },
     onSelectChange(e) {
       let { value, index } = e.target;
-      console.log("value", value);
       this.selectIndex = index;
       this.info.ballAge = value;
       this.info.ballAgeText = value.label;
@@ -212,8 +205,7 @@ export default {
     },
     waitTime() {
       let { phone: mobile } = this.info;
-      console.log("this.selfInfo.sex_________________", this.selfInfo.sex);
-      console.log("this.selfInfo________________", this.selfInfo);
+      
       if (!mobile) {
         this.sendStatus = false;
         return Toast.fail("手机号为空,请输入手机号");

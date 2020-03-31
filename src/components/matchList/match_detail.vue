@@ -56,18 +56,14 @@ export default {
       return `/pages/matchDetail/main?id= ${this.item.P1}`;
     },
     matchStatus(){
-      console.log(this.item);
+    
       
       let nowDate=global.moment().format('YYYY-MM-DD HH:mm');
      let enrollTimeDate = global.moment(this.item.enrollTime).format('YYYY-MM-DD HH:mm');
      let enrollTimeEnd  = global.moment(this.item.enrollTimeEnd).format('YYYY-MM-DD HH:mm');
      let matchTime = global.moment(this.item.matchTime ).format('YYYY-MM-DD HH:mm');
      let matchTimeEnd = global.moment(this.item.matchTimeEnd ).format('YYYY-MM-DD HH:mm');
-    //  console.log('nowDate',nowDate);
-    //   console.log("enrollTimeDate",enrollTimeDate);
-    //   console.log("enrollTimeEn",enrollTimeEnd);
-    //   console.log("matchTime",matchTime);
-    //   console.log("matchTimeEnd",matchTimeEnd);
+   
       if (nowDate>matchTimeEnd) {
         return '赛事已结束'
       }else if(nowDate>matchTime){
@@ -107,19 +103,10 @@ export default {
      */
     
     
-    // let placeholderImg =
-    //   "http://qn-static.dmagic.cn/images/placeholder.png";
-    // this.matchListImg = this.$lodash.get(
-    //   this.item,
-    //   "album[0].url",
-    //   placeholderImg
-    // );
-    // this.applyUrl = `/pages/matchEroll/main?id= ${this.item.P1}`;
-    // this.matchDetailUrl = `/pages/matchDetail/main?id= ${this.item.P1}`;
+  
   },
   mounted() {
-    // console.log("this.item.P1___##", this.item.P1, this.item.matchName);
-    // console.log(this.item);
+   
   }
 };
 </script>

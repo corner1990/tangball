@@ -33,8 +33,7 @@ function wxPromisify(fn) {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
       obj.success = function (res) {
-        // console.log("wxPromisify-obj.success");
-        // console.log("res", res);
+    
         //成功
         resolve(res)
       }
@@ -117,7 +116,6 @@ var parseParam = function (param, key1) { //函数：{将json转成url参数形�
 // function getRequest(url, data) {
 //   var getRequest = wxPromisify(wx.request)
 //   data = parseParam(data); //调用：{将json转成url参数形式},
-//   console.log("data###", data);
 //   return getRequest({
 //     url: url,
 //     method: 'GET',
@@ -240,7 +238,6 @@ async function ajaxGetList(_json) {
 }
 //ajax获取数据列表的函数
 async function ajaxGetListPopulate(_json) {
-  // console.log("ajaxGetListPopulate-1");
   let { populate } = _json;
   let listData;//变量：{最终需要返回的列表}
   {
@@ -259,7 +256,6 @@ async function ajaxGetListPopulate(_json) {
    *
    */
   let funPopulate = async function (populateConfig) {
-    // console.log("funPopulate@@");
     let { page, populateColumn, idColumn, idKeyColumn } = populateConfig;
     let arrId = [];
     listData.forEach(itemEach => {//循环：{原数据数组}
@@ -384,7 +380,6 @@ let getMyWXSetting = async function (url) {
   let resSetting = await wxGetSetting();
 
   if (resSetting.authSetting["scope.userInfo"]) {
-    // console.log("用户已经授权过,跳转到首页");
     if (url) {
       //如果有地址是从赛事详情进来的
       wx.flagJumped = true;
@@ -401,7 +396,6 @@ let getMyWXSetting = async function (url) {
       });
     }
   } else {
-    // console.log("用户还未授权过，返回noAuth");
     return "noAuth"
   }
 };
@@ -412,20 +406,17 @@ let getMyWXSetting = async function (url) {
      */
 let loginAndInitUser = async function (vm, wxLoginAsync) {
   let resLogin = await wxLogin(); //微信会员登录结果
-  // console.log("resLogin", resLogin);
   let js_code = resLogin.code; //当前用户的微信code
   if (js_code) {
     //Q1：{当前用户的微信code}存在
     try {
-      // console.log("getUserInfo开始");
       let resUserInfo = await wxGetUserInfo(); //微信会员登录
       await util.ajaxMyWXUserInfo(resUserInfo, js_code, vm); //调用：{ajax获取当前微信用户详细信息}
     } catch (err) {
-      // console.log("getUserInfo或ajaxMyWXUserInfo失败,原因", err);
     }
   } else {
     //Q2：{当前用户的微信code}不存在
-    // console.log("登录失败！" + res.errMsg);
+    // console.warn("登录失败！" + res.errMsg);
   }
 };
 /**
@@ -436,16 +427,13 @@ let loginAndInitUser = async function (vm, wxLoginAsync) {
     * @param vm：vue实例，需要对vuex进行操作
     */
 let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
-  console.log("ajaxMyWXUserInfo####");
   wx.showLoading({
     title: "请求中"
     // mask: true,
   });
   var iv = encodeURIComponent(resUserInfo.iv);
   var encryptedData = encodeURIComponent(resUserInfo.encryptedData);
-  // console.log("js_code", js_code);
-  // console.log("iv", iv);
-  // console.log("encryptedData", encryptedData);
+ 
   try {
     /**
      * ajax请求微信用户信息
@@ -466,14 +454,12 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     });
 
     wx.hideLoading();
-    // console.log("vm.$store.commit");
     //强行修改openid，用于测试，注意不要乱开启
     // data.data2.openId="ocnBO5WjcRaZMXU05i_9T-J94Gy0"
 
     vm.$store.commit("setWXUserInfo", data.data2);//vuex保存微信会员信息
     let openid = vm.$lodash.get(data, `data2.openId`);
     let wxNickName = vm.$lodash.get(data, `data2.nickName`);
-    // console.log("openid", openid);
     {
       /**
           * ajax获取唐球用户信息，如果不存在会自动注册
@@ -500,9 +486,7 @@ let ajaxMyWXUserInfo = async function (resUserInfo, js_code, vm) {
     * 判断用户是否登录的方法
     */
 let isLogin = async function (vm, url) {
-  // console.log('aaaa');
   let result = await getMyWXSetting(url);
-  console.log('aaaa', result);
   //如果未授权，先return,等待用户主动授权
   if (result == "noAuth") {
     // gotoPage("/pages/authorize/main"); //跳转到授权页面
@@ -535,14 +519,12 @@ function getDatefromDuration(begin, end) {
   var unixDb = db.getTime() - 24 * 60 * 60 * 1000;
   var unixDe = de.getTime() - 24 * 60 * 60 * 1000;
   for (var k = unixDb; k <= unixDe;) {
-    //console.log((new Date(parseInt(k))).format());
     k = k + 24 * 60 * 60 * 1000;
     arr.push((new Date(parseInt(k))).format());
   }
   return arr;
 }
 
-console.log(getDatefromDuration('2018-07-05', '2018-08-05'));
 
 
 

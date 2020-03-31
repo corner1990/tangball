@@ -1,7 +1,6 @@
 <template>
   <div class="main-wrap">
     <van-search placeholder="请输入搜索关键词" @search="searchList" />
-    <!-- <openImg v-model="venueDoc.album" ></openImg> -->
     <swiper
       :indicator-active-color="indicatorActiveColor"
       :indicator-color="indicatorColor"
@@ -12,36 +11,51 @@
       :style="imgHeight"
     >
       <block v-for="item in arrRecommend" :key="item.P1">
-        <swiper-item >
-          <image :src="item.imageUrl" class="slide-image" :style="imgHeight" @click="gotoPage(item.link)" />
+        <swiper-item>
+          <image
+            :src="item.imageUrl"
+            class="slide-image"
+            :style="imgHeight"
+            @click="gotoPage(item.link)"
+          />
         </swiper-item>
       </block>
     </swiper>
     <div style="height:20px;"></div>
     <div>
       <div class="nav-box">
-        <div class="nav-main" @click="gotoPage('/pages/venueList/main')"><van-icon name="home-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;场馆列表</div>
-        <div class="nav-main" @click="gotoPage('/pages/matchList/main')"><van-icon name="flag-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;赛事中心</div>
-        <div class="nav-main" @click="gotoPage('/pages/rankingList/main')"><van-icon name="bar-chart-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;排行榜</div>
+        <div class="nav-main" @click="gotoPage('/pages/venueList/main')">
+          <van-icon name="home-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;场馆列表
+        </div>
+        <div class="nav-main" @click="gotoPage('/pages/matchList/main')">
+          <van-icon name="flag-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;赛事中心
+        </div>
+        <div class="nav-main" @click="gotoPage('/pages/rankingList/main')">
+          <van-icon name="bar-chart-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;排行榜
+        </div>
       </div>
       <div class="nav-box">
-       
-        <div class="nav-main" @click="gotoPage('/pages/articleList/main')"><van-icon name="description" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;唐球资讯</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')"><van-icon name="friends-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;商务合作</div>
-        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=18')"><van-icon name="gem-o" style="color:#F4B116" class="nav-img"/>&nbsp;&nbsp;人民唐球</div>
-
+        <div class="nav-main" @click="gotoPage('/pages/articleList/main')">
+          <van-icon name="description" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;唐球资讯
+        </div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=8')">
+          <van-icon name="friends-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;商务合作
+        </div>
+        <div class="nav-main" @click="gotoPage('/pages/articleDetail/main?dataId=18')">
+          <van-icon name="gem-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;人民唐球
+        </div>
       </div>
     </div>
     <!-- 首页大标题 -->
     <div class="home-title-box" v-if="pageTitle">
-        <div class="title-left-box" @click="gotoPage(pageTitle.bigTitleLink)">
-          <div class="bigtitle-box">{{pageTitle.bigTitle}}</div>
-          <div style="background-color:#F4B116;height:1px;"></div>
-          <div class="smalltitle-box">{{pageTitle.smallTitle}}</div>
-        </div>
-        <div class="title-right-box" >
-            <div @click="gotoPage(pageTitle.buttonLink)" class="button-box">{{pageTitle.buttonText}}</div>
-        </div>
+      <div class="title-left-box" @click="gotoPage(pageTitle.bigTitleLink)">
+        <div class="bigtitle-box">{{pageTitle.bigTitle}}</div>
+        <div style="background-color:#F4B116;height:1px;"></div>
+        <div class="smalltitle-box">{{pageTitle.smallTitle}}</div>
+      </div>
+      <div class="title-right-box">
+        <div @click="gotoPage(pageTitle.buttonLink)" class="button-box">{{pageTitle.buttonText}}</div>
+      </div>
     </div>
     <div>
       <div style="display:flex">
@@ -49,7 +63,7 @@
 
         <div class="all-box" @click="gotoPage('/pages/matchList/main')">全部赛事&nbsp;></div>
       </div>
-      
+
       <div class>
         <togod pageSize="5"></togod>
       </div>
@@ -59,23 +73,15 @@
         <div class="index_area_title" style="flex:0 0 30%">唐球资讯</div>
         <div class="all-box" @click="gotoPage('/pages/articleList/main')">全部资讯&nbsp;></div>
       </div>
-      
-      
+
       <div class="card">
         <articleList></articleList>
       </div>
     </div>
 
-    <!-- <div class="TAC LH30 CLB MB20" style="color:#999">
-      <navigator
-        url="/pages/articleDetail/main?dataId=8"
-        hover-class="other-navigator-hover"
-      >商务合作 &gt;</navigator>
-    </div> -->
-   
+  
 
     <mytabbar :active="0"></mytabbar>
-   
   </div>
 </template>
 <script>
@@ -98,8 +104,8 @@ export default {
   },
   data() {
     return {
-      imgHeight:'height:150px',
-      pageTitle:{},
+      imgHeight: 'height:42vw',
+      pageTitle: {},
       // url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
       arrLink: [
@@ -139,7 +145,7 @@ export default {
     };
   },
   methods: {
-    gotoPage(url){
+    gotoPage(url) {
       util.gotoPage(url)
     },
     //函数：{ajax获取轮播图列表函数}
@@ -175,7 +181,7 @@ export default {
     /**
      * @desc 搜索回调
      */
-    onSearch() {},
+    onSearch() { },
     /**
      * @desc 赛事切换回调
      */
@@ -184,18 +190,16 @@ export default {
         url
       });
     },
-   
+
   },
   onShow() {
-    console.log("onShow");
     const updateManager = wx.getUpdateManager();
-    updateManager.onCheckForUpdate(function(res) {
-      console.log("CheckForUpdate-res:", res);
+    updateManager.onCheckForUpdate(function (res) {
       // // 请求完新版本信息的回调
-      // console.log(res.hasUpdate);
+   
     });
 
-    updateManager.onUpdateReady(function() {
+    updateManager.onUpdateReady(function () {
       wx.showModal({
         title: "更新提示",
         content: "新版本已经准备好，是否重启应用？",
@@ -208,8 +212,8 @@ export default {
       });
     });
 
-    updateManager.onUpdateFailed(function() {
-      console.log("onUpdateFailed");
+    updateManager.onUpdateFailed(function () {
+      console.warn("onUpdateFailed");
       // 新版本下载失败
     });
   },
@@ -228,39 +232,24 @@ export default {
     /****************************微信会员登录和信息存储-END****************************/
   },
   created() {
-    console.log('新版本');
-    
-    // let app = getApp()
-    // get('http://localhost:4001/api/users').then(res => {
-    //   console.log('res', res)
-    // })
-    // console.log('√', this.$store.state)
+    console.warn('新版本');
+
+   
   },
-  async onLoad(){
-        let { data }  = await util.post({
-          url: global.PUB.domain + "/crossDetail?page=tangball_article",
-          param: {
-            findJson:{
-                P1:38
-            }
-          }
-         })
-         this.pageTitle = data.doc.extend
-         console.log('aaaa',this.pageTitle);
-         let width = 150
-         wx.getSystemInfo({
-           success:function (res) {
-             console.log('res',res.screenWidth);
-             width = res.screenWidth
-             
-             
-           }
-         })
-         this.imgHeight =`height:${width*0.42}px`
-         console.log('this.imgHeight',this.imgHeight);
-   },
+  async onLoad() {
+    let { data } = await util.post({
+      url: global.PUB.domain + "/crossDetail?page=tangball_article",
+      param: {
+        findJson: {
+          P1: 38
+        }
+      }
+    })
+    this.pageTitle = data.doc.extend
+
+  },
   //配置分享页的内容
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: "唐球",
       path: `/pages/index/main`
@@ -304,8 +293,8 @@ export default {
   font-size: 16px;
   padding: 30px 20px;
 }
-.all-box{
-  flex:0 0 63%;
+.all-box {
+  flex: 0 0 63%;
   text-align: right;
   margin-top: 5px;
   /* background: #f4f7fe; */
@@ -317,52 +306,51 @@ export default {
   line-height: 40px;
   /* margin-right: 15px; */
 }
-.nav-box{
+.nav-box {
   display: flex;
   font-size: 14px;
   line-height: 30px;
-  
 }
-.nav-main{
-  flex:0 0 23%;
+.nav-main {
+  flex: 0 0 23%;
   margin-left: 7%;
 }
-.nav-img{
+.nav-img {
   font-size: 18px;
 }
-.home-title-box{
+.home-title-box {
   height: 100px;
-  border: 1px solid #F4B116;
+  border: 1px solid #f4b116;
   display: flex;
   margin: 15px 15px;
   border-radius: 10px;
   text-align: center;
   font-size: 14px;
 }
-.title-left-box{
+.title-left-box {
   flex: 0 0 50%;
   margin-left: 7%;
 }
-.title-right-box{
-  flex:0 0 31%;
+.title-right-box {
+  flex: 0 0 31%;
   margin-left: 7%;
 }
-.button-box{
+.button-box {
   height: 40px;
-  margin-top:30px;
+  margin-top: 30px;
   border-radius: 10px;
-  background-color: #F4B116;
+  background-color: #f4b116;
   color: white;
   line-height: 40px;
 }
-.smalltitle-box{
-  margin-top:10px;
-  color: #F4B116;
+.smalltitle-box {
+  margin-top: 10px;
+  color: #f4b116;
 }
-.bigtitle-box{
+.bigtitle-box {
   height: 40px;
-  margin-top:15px;
+  margin-top: 15px;
   margin-bottom: 5px;
-  color: #F4B116;
+  color: #f4b116;
 }
 </style>
