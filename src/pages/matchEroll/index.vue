@@ -94,7 +94,8 @@ export default {
   },
   mounted() {
     this.skipPage = 0;
-
+     // 页面加载请求会员数据
+    this.getMember();
     
   },
   onLoad(options) {
@@ -104,6 +105,7 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
+        
         console.log('info',info)
         this.info = info;
         this.objMatchInfo = matchInfo;
@@ -111,8 +113,7 @@ export default {
         this.active = this.info.payStatus;
       }
     } else {
-      // 页面加载请求会员数据
-    this.getMember();
+     
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -318,6 +319,7 @@ export default {
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
       let self = this;
+      console.log('args',args)
       if (status == 100) {
         wx.requestPayment({
           ...args,signType: "MD5",timeStamp,
@@ -338,10 +340,15 @@ export default {
       wx.self = this;
       let { matchId, venueId: cityVenueId } = this.matchInfo;
       let { P1: memberId, name, sex = -1, openid: openId, phone, career, ballAge } = tangballUserInfo;
-      this.info = {
-        ...this.info,
-        name, sex: `${sex}`, memberId, openId, phone, career, matchId, cityVenueId, ballAge
+      console.log('info',this.info)
+
+        this.info = {
+        
+        name, sex: `${sex}`, memberId, openId, phone, career, matchId, cityVenueId, ballAge,...this.info,
       };
+     
+
+      
       switch (this.info.ballAge) {
         case 1:
           this.info.ballAgeText = "一年以下";
