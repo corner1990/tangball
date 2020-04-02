@@ -36,13 +36,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 
 export default {
   
-  components: {
-
-    mytabbar,
-
-    matct_detail
-   
-  },
+ components:{mytabbar,matct_detail},
   data() {
     return {
       columns: ["全部", "一月内", "三月内", "半年内", "一年内"],
@@ -93,17 +87,10 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_match",
         param: {
-          pageSize: 7,
-          pageIndex: 1,
-          sortJson: { matchTime: -1 },
+          pageSize:7,pageIndex:1,sortJson:{matchTime:-1},
           findJson: {
-            matchName:{
-              $options: "i",
-              $regex: this.searchMsg
-            },
-            publicationStatus:1,
-            
-            matchTime:this.findTime,
+           matchName:{$options:"i",$regex:this.searchMsg},
+            publicationStatus:1,matchTime:this.findTime,
           },
           
           // findJson: { matchForm: this.matchType,

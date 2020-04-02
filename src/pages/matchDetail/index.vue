@@ -146,11 +146,7 @@ import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 export default {
-  components: {
-    mytabbar,
-    debug_item,
-    util
-  },
+  components: {mytabbar,debug_item,util},
   data() {
     return {
       orderMsg: {},
@@ -198,8 +194,7 @@ export default {
     // 跳转赛事规程的方法
     gotoMatchManual(url) {
       wx.setStorage({
-        key: "matchInfo",
-        data: JSON.stringify(this.matchDoc),
+        key: "matchInfo",data: JSON.stringify(this.matchDoc),
         success() {
           wx.navigateTo(url);
         }
@@ -235,22 +230,9 @@ export default {
       wx.setStorage({
         key: "matchInfo",
         data: JSON.stringify({
-          matchName,
-          matchTime,
-          matchTimeEnd,//比赛结束时间
-          total_fee,
-          matchId,
-          venueId,
-          venueName,
-          cityName,
-          matchForm,
-          teamMemberMin,
-          teamMemberMax,
-          P1,
-          album,
-          menCount,
-          womenCount,
-          mutiEnrool 
+         matchName,matchTime,matchTimeEnd,//比赛结束时间
+          total_fee,matchId,venueId,venueName,cityName,matchForm,teamMemberMin,
+          teamMemberMax,P1,album,menCount,womenCount,mutiEnrool
 
         }),
         success() {
@@ -291,20 +273,12 @@ export default {
 
         // let active = 2;
         info = { ...this.orderMsg, total_fee: orderMoney };
-        let matchInfo = {
-          ...this.matchDoc,
-          total_fee: orderMoney,
-          sex
-        };
+       letmatchInfo={...this.matchDoc,total_fee:orderMoney,sex};
 
         if (matchInfo.matchForm == 2) {
           let { data } = await util.post({
             url: global.PUB.domain + "/crossList?page=tangball_team",
-            param: {
-              findJson: {
-                orderId: info.orderId
-              }
-            }
+            param:{findJson:{orderId:info.orderId}}
           });
           this.groups = data.list[0]
           wx.setStorage({
@@ -312,8 +286,7 @@ export default {
             data: JSON.stringify({ info, matchInfo, P1: this.orderMsg.P1 }),
             success() {
               wx.setStorage({
-                key: "groupsMsg",
-                data: JSON.stringify(data.list[0]),
+                key: "groupsMsg",data: JSON.stringify(data.list[0]),
                 success() {
                   wx.navigateTo({ url });
                 }
@@ -324,8 +297,7 @@ export default {
 
 
           wx.setStorage({
-            key: "myErollDetail",
-            data: JSON.stringify({ info, matchInfo, P1: this.orderMsg.P1 }),
+            key: "myErollDetail",data: JSON.stringify({ info, matchInfo, P1: this.orderMsg.P1 }),
             success() {
               wx.navigateTo({ url });
             }

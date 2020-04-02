@@ -60,13 +60,11 @@
         <div style="padding:3px 0">选择比赛日期：</div>
 
         <radio-group @change="changePlayingTime" v-model="playingTime">
-          <template  v-for="(item,i) in arrPlayingTime">
-            <div style="margin:0 5px 9px 0" :key="i" >
-               <radio  :value="item" :checked="item==playingTime?true:false"  />
-            {{item}}
+          <template v-for="(item,i) in arrPlayingTime">
+            <div style="margin:0 5px 9px 0" :key="i">
+              <radio :value="item" :checked="item==playingTime?true:false" />
+              {{item}}
             </div>
-           
-           
           </template>
         </radio-group>
       </div>
@@ -144,11 +142,7 @@ export default {
       arrPlayingTime: [], //出场日期数组
       captainTitle: "",
       showCaptainDialog: false,
-      captainButtonList: [
-        {
-          text: "前往修改"
-        }
-      ],
+      captainButtonList: [{ text: "前往修改" }],
       menCount: {},
       womenCount: {},
       nameError: false, //名字校验key
@@ -162,27 +156,21 @@ export default {
       name: "", //队名
       player: { name: "", sex: 1, phone: "" }, //当前球员的数据
       showModify: false, //显示弹窗key
-      buttonList: [
-        //弹窗按钮设置
-        { text: "取消" },
-        { text: "确认" }
-      ]
+      buttonList: [{ text: "取消" }, { text: "确认" }]//弹窗按钮设置
     };
   },
   computed: {
     //唐球会员信息-在vuex中获取
-    tangballUserInfo: function() {
+    tangballUserInfo: function () {
       return this.$store.state.tangballUserInfo;
     }
   },
-  onUnload: function() {
+  onUnload: function () {
     let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     let addGroups = {
       createMemberId: this.tangballUserInfo.P1,
-      matchId: objMatchInfo.matchId,
-      member: this.member,
-      CreateUser: this.member[0].name,
-      name: this.name
+      matchId: objMatchInfo.matchId, member: this.member,
+      CreateUser: this.member[0].name, name: this.name
     };
     wx.setStorage({
       key: "groupsMsg",
@@ -217,7 +205,7 @@ export default {
     changeSex(event) {
       this.player.sex = Number(event.target.value);
     },
-// 修改比赛日期
+    // 修改比赛日期
     changePlayingTime(event) {
       this.playingTime = event.target.value;
     },
@@ -279,16 +267,12 @@ export default {
       let objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
 
       let addGroups = {
-        createMemberId: this.tangballUserInfo.P1,
-        matchId: objMatchInfo.matchId,
-        member: this.member,
-        CreateUser: this.member[0].name,
-        name: this.name,
-        playingTime: this.playingTime,
+        createMemberId: this.tangballUserInfo.P1,matchId: objMatchInfo.matchId,
+        member: this.member,CreateUser: this.member[0].name,
+        name: this.name,playingTime: this.playingTime,
       };
       wx.setStorage({
-        key: "groupsMsg",
-        data: JSON.stringify(addGroups),
+        key: "groupsMsg",data: JSON.stringify(addGroups),
         success() {
           wx.navigateTo({ url: `/pages/matchEroll/main?id=1` });
         }
@@ -297,7 +281,7 @@ export default {
     },
     // 保存球队信息跳转页面
     createGroups() {
-    
+
 
       // 队名不能为空
       if (this.name == "") {
@@ -322,14 +306,14 @@ export default {
         }).then(() => {
           // on confirm
         });
-      }  else if (this.arrPlayingTime.length>1&&!this.playingTime ) {
+      } else if (this.arrPlayingTime.length > 1 && !this.playingTime) {
         Dialog.alert({
           title: "提示",
           message: "请选择参赛日期"
         }).then(() => {
           // on confirm
         });
-      }else if (this.menCount || this.womenCount) {
+      } else if (this.menCount || this.womenCount) {
         if (this.menCount) {
           let count = 0;
           this.member.forEach(item => {
@@ -339,23 +323,13 @@ export default {
           });
           if (this.menCount.min) {
             if (count < this.menCount.min) {
-              Dialog.alert({
-                title: "提示",
-                message: "男队员人数不够"
-              }).then(() => {
-                return;
-              });
+              Dialog.alert({title: "提示",message: "男队员人数不够"}).then(() => {return;});
               return;
             }
           }
           if (this.menCount.max) {
             if (count > this.menCount.max) {
-              Dialog.alert({
-                title: "提示",
-                message: "男队员人数超过上限"
-              }).then(() => {
-                return;
-              });
+              Dialog.alert({title: "提示",message: "男队员人数超过上限"}).then(() => {return;});
               return;
             }
           }
@@ -369,19 +343,13 @@ export default {
           });
           if (this.womenCount.min) {
             if (count < this.womenCount.min) {
-              Dialog.alert({
-                title: "提示",
-                message: "女队员人数不够"
-              }).then(() => {});
+              Dialog.alert({title: "提示",message: "女队员人数不够"}).then(() => { });
               return;
             }
           }
           if (this.womenCount.max) {
             if (count > this.womenCount.max) {
-              Dialog.alert({
-                title: "提示",
-                message: "女队员人数超过上限"
-              }).then(() => {});
+              Dialog.alert({title: "提示",message: "女队员人数超过上限"}).then(() => { });
               return;
             }
           }
@@ -401,14 +369,10 @@ export default {
     },
     // 删除球员触发的方法
     deletePlayer(index) {
-      Dialog.confirm({
-        title: "确定删除该队员?"
-      })
-        .then(() => {
+      Dialog.confirm({title: "确定删除该队员?"}).then(() => {
           // on confirm
           this.member.splice(index, 1);
-        })
-        .catch(() => {
+        }).catch(() => {
           // on cancel
         });
     }
@@ -475,7 +439,7 @@ export default {
       this.player = { name: "", sex: 1, phone: "" };
     }
   },
-  created() {}
+  created() { }
 };
 </script>
 <style scoped>

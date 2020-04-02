@@ -27,13 +27,7 @@ import util from "@/utils/util";
 import venueListComponent from "@/components/venueList/venueListComponent";
 import city_select from "@/components/city_select";
 export default {
-  components: {
-    mytabbar,
-    debug_item,
-    venueListComponent,
-    city_select,
-    tisp
-  },
+  components: { mytabbar, debug_item, venueListComponent, city_select, tisp },
   data() {
     return {
       // 地区组件聚焦的index
@@ -54,17 +48,15 @@ export default {
     onSearch(keywords) {
       this.venueList.forEach(item => {
         let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
-        if (index > -1) {
-          //如果关键字匹配
+        if (index > -1) {//如果关键字匹配
           item.show = true;
-        } else {
-          //如果关键字不匹配
+        } else {//如果关键字不匹配
           item.show = false;
           //如果关键字不匹配显示暂无数据
           this.status = true;
         }
       });
-      
+
     },
     /**
      * @desc 请求接口数据的函数
@@ -81,26 +73,14 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
-          needRelation: "1",
-          columnItem: "P7",
-          columnTarget: "area",
-          sheetRelation: {
-            page: "dmagic_area",
-            findJson: {
-              P8: areaId
-            }
-          },
-          sheetTarget: {
-            page: "tangball_venue",
-            pageSize: "9999"
-          }
+          needRelation: "1", columnItem: "P7", columnTarget: "area",
+          sheetRelation: { page: "dmagic_area", findJson: { P8: areaId } },
+          sheetTarget: { page: "tangball_venue", pageSize: "9999" }
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
 
-      data.list.forEach(item => {
-        item.show = true;
-      });
+      data.list.forEach(item => { item.show = true; });
       this.venueList = data.list;
       //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.venueList.length <= 0) {
@@ -110,11 +90,8 @@ export default {
       }
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
-        listData: this.venueList,
-        populateColumn: "cityDoc",
-        idColumn: "area",
-        idKeyColumn: "P7",
-        page: "dmagic_area"
+        listData: this.venueList, populateColumn: "cityDoc",
+        idColumn: "area", idKeyColumn: "P7", page: "dmagic_area"
       });
     }
   },
