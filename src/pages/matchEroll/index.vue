@@ -78,14 +78,9 @@ export default {
   },
   mounted() {
     this.skipPage = 0;
-<<<<<<< HEAD
      // 页面加载请求会员数据
     this.getMember();
     
-=======
-
-
->>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
   },
   onLoad(options) {
     // 缓存赛事信息
@@ -94,23 +89,15 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
-<<<<<<< HEAD
         
         console.log('info',info)
-=======
->>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
       }
     } else {
-<<<<<<< HEAD
      
-=======
-      // 页面加载请求会员数据
-      this.getMember();
->>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
