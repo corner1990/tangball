@@ -147,6 +147,7 @@ export default {
         idKeyColumn: "P1",
         page: "tangball_venue"
       });
+      console.log("this.myErollList",this.myErollList)
        wx.hideLoading(); //请求到数据后加载中隐藏
        //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.myErollList.length <= 0) {
@@ -158,7 +159,7 @@ export default {
   },
   mounted() {
     this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-    console.log("this.myErollList",this.myErollList)
+    
   }
 };
 </script>

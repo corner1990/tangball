@@ -50,7 +50,7 @@
       <van-cell title="赛事时间" title-width="100px" :value="matchTime" />
       <van-cell title="报名截止时间" :value="enrollTimeEnd" />
       <van-cell title="赛事类型" :value="matchDoc.matchForm==1?'个人赛':'团队赛'" />
-
+      <van-cell title="可以多次报名" v-if="matchDoc.mutiEnrool " />
       <van-collapse v-model="NationalmatchIndex" @change="matchTypeChange">
         <van-collapse-item title="举办地点" name="1">
           <div class="collapse">
@@ -229,7 +229,7 @@ export default {
 
 
       //拼接跳转到报名订单的地址
-      let { matchName, matchTimeEnd, matchTime, teamMemberMax, teamMemberMin, registrationFee: total_fee, matchForm, P1, album, menCount, womenCount } = this.matchDoc;
+      let { matchName, matchTimeEnd, matchTime, teamMemberMax, teamMemberMin, registrationFee: total_fee, matchForm, P1, album, menCount, womenCount,mutiEnrool } = this.matchDoc;
       let { matchId, venueId, venueName, cityName } = this;
       let url = `/pages/matchEroll/main?id=1`;
       wx.setStorage({
@@ -249,7 +249,8 @@ export default {
           P1,
           album,
           menCount,
-          womenCount
+          womenCount,
+          mutiEnrool 
 
         }),
         success() {
@@ -283,7 +284,7 @@ export default {
      * @param url是跳转的地址
      */
     async gotoPage() {
-
+      console.log('this.payStatus',this.payStatus)
       if (this.payStatus || this.isMatchIdStatus == 'show') {
         let info = this.matchDoc;
         let url = `/pages/matchEroll/main?id=2`;
@@ -405,15 +406,21 @@ export default {
 
 
         if (data.list.length > 0 && this.isLogin) {
-          this.payStatus = true
+     
           this.orderMsg = data.list[0]
           if (data.list[0].payStatus == 1) {
-
+            this.payStatus = true
             this.isMatchIdStatus = false; //变量初始化为false
             this.enrollText = `您已报名，前往缴费`;
           } else {
-            this.isMatchIdStatus = "show"; //该用户已经报名
-            this.enrollText = "您已报名,查看详情";
+            // 支持多次报名
+            if (this.matchDoc.mutiEnrool==1) {
+                this.isMatchIdStatus = false; //变量初始化为false
+               this.enrollText = `立即报名`; //初始化为立即报名
+            }else{
+              this.isMatchIdStatus = "show"; //该用户已经报名
+              this.enrollText = "您已报名,查看详情";
+            }
           }
 
         }
@@ -470,6 +477,7 @@ export default {
       url: global.PUB.domain + "/tangball/getMatchDetail",
       param: { id: this.matchId }
     });
+    console.log('data',data)
     this.matchDoc = data.Doc; //赛事详情列表
     this.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY-MM-DD') + "至" + global.moment(this.matchDoc.matchTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD');
     this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');

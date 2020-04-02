@@ -95,8 +95,7 @@ export default {
   mounted() {
     this.skipPage = 0;
 
-    // 页面加载请求会员数据
-    this.getMember();
+    
   },
   onLoad(options) {
     // 缓存赛事信息
@@ -105,12 +104,15 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
+        console.log('info',info)
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
       }
     } else {
+      // 页面加载请求会员数据
+    this.getMember();
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -204,13 +206,14 @@ export default {
         Dialog.close();
       }, 1000);
       // 统一下单
+      console.log('this.objMatchInfo',this.objMatchInfo)
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
           findJson: {matchId: this.objMatchInfo.P1,memberId: this.tangballUserId}
         }
       });
-      if (data.list.length == 0 || data.list[0].payStatus == 1) {
+      if ((data.list.length == 0 || data.list[0].payStatus == 1)||this.objMatchInfo.mutiEnrool == 1) {
 
         this.pay(this.info);//调用：{统一下单函数}
       } else {
@@ -225,6 +228,7 @@ export default {
     async pay(info) {
      
       let matchInfo = JSON.parse(wx.getStorageSync("matchInfo"));//从本地存储中获取赛事信息
+      
       let { total_fee } = this.objMatchInfo;
       let matchForm = this.objMatchInfo.matchForm;
       let pramePay = {
@@ -273,6 +277,7 @@ export default {
           groups = JSON.parse(wx.getStorageSync("groupsMsg"));//获取存储中的组队信息
           pramePay.playingTime = groups.playingTime; //补充用户选择的比赛日期
         }
+        console.log('this.objMatchInfo',pramePay)
         //****微信统一下单接口
         let res = await util.post({ url: `${global.PUB.domain}/tangball/wxCreateOrder`, param: pramePay });
 

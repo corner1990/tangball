@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section >
     <div v-if="!groupGame">
     <h3 class="info-title">个人信息</h3>
     <!-- <debug_item v-model="info" text="info" /> -->
@@ -76,6 +76,8 @@ export default {
   data() {
     return {
       radio: "1",
+     
+      
       // groups:{}
       // matchInfo: {
       //   matchName: '',
@@ -88,8 +90,7 @@ export default {
   },
   props: ["info", "matchInfo",,'groupGame','groups'],
   mounted() {
-    console.log('matchInfo',this.matchInfo);
-    
+   this.info.ballAgeText = this.info.ballAge==1?'一年以下':this.info.ballAge==2?'一到三年':this.info.ballAge==3?'三到五年':this.info.ballAge==4?'五到十年':this.info.ballAge==5?'十年以上':'请选择'
     // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
 
     // 获取赛事数据
