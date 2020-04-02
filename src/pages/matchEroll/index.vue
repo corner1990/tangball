@@ -57,13 +57,7 @@ import End from "@/components/matchErooll/end";
 import Dialog from "../../../static/vant/dialog/dialog";
 import util from "@/utils/util";
 export default {
-  components: {
-    mytabbar,
-    debug_item,
-    PersonInfo,
-    EventInfo,
-    End
-  },
+  components: { mytabbar, debug_item, PersonInfo, EventInfo, End },
   data() {
     return {
       groups: {},//保存队伍数据对象
@@ -74,17 +68,7 @@ export default {
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
       btnText: "下一步",//下一步按钮显示文字
-      steps: [
-        {
-          text: "确认报名资料"
-        },
-        {
-          text: "支付报名费"
-        },
-        {
-          text: "完成缴费"
-        }
-      ],
+      steps: [{ text: "确认报名资料" }, { text: "支付报名费" }, { text: "完成缴费" }],
       active: 0,
       info: {},//用户数据
       state: {
@@ -94,9 +78,14 @@ export default {
   },
   mounted() {
     this.skipPage = 0;
+<<<<<<< HEAD
      // 页面加载请求会员数据
     this.getMember();
     
+=======
+
+
+>>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
   },
   onLoad(options) {
     // 缓存赛事信息
@@ -105,15 +94,23 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
+<<<<<<< HEAD
         
         console.log('info',info)
+=======
+>>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
       }
     } else {
+<<<<<<< HEAD
      
+=======
+      // 页面加载请求会员数据
+      this.getMember();
+>>>>>>> 961957c7a0f2d9c23a2bce5592a218a109803ac6
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -138,20 +135,14 @@ export default {
         return this.showTip();
       }
       if (this.active === 0 && !this.info.verfiy) {
-        return Dialog.alert({
-          title: "提示",
-          message: "请先获取并且输入验证码"
-        });
+        return Dialog.alert({ title: "提示", message: "请先获取并且输入验证码" });
       }
       if (
         this.active === 0 &&
         !this.info.name &&
         this.objMatchInfo.matchForm == 1
       ) {
-        return Dialog.alert({
-          title: "提示",
-          message: "姓名不能为空"
-        });
+        return Dialog.alert({ title: "提示", message: "姓名不能为空" });
       }
       // 在开始报名时触发修改会员数据方法保存修改后的会员数据
       this.modifyMember();
@@ -176,10 +167,7 @@ export default {
         param: { mobile, vCode }
       });
       if (data.code !== 0) {
-        return Dialog.alert({
-          title: "错误提醒",
-          message: data.message
-        });
+        return Dialog.alert({ title: "错误提醒", message: data.message });
       }
       this.active = this.active + 1;
       if (this.active === 1) {
@@ -207,19 +195,18 @@ export default {
         Dialog.close();
       }, 1000);
       // 统一下单
-      console.log('this.objMatchInfo',this.objMatchInfo)
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
-          findJson: {matchId: this.objMatchInfo.P1,memberId: this.tangballUserId}
+          findJson: { matchId: this.objMatchInfo.P1, memberId: this.tangballUserId }
         }
       });
-      if ((data.list.length == 0 || data.list[0].payStatus == 1)||this.objMatchInfo.mutiEnrool == 1) {
+      if ((data.list.length == 0 || data.list[0].payStatus == 1) || this.objMatchInfo.mutiEnrool == 1) {
 
         this.pay(this.info);//调用：{统一下单函数}
       } else {
-        wx.navigateTo({url: `/pages/matchDetail/main?id= ${this.objMatchInfo.P1}`});
-        wx.showToast({title: "您已报名，无法再次报名",icon: "none"});
+        wx.navigateTo({ url: `/pages/matchDetail/main?id= ${this.objMatchInfo.P1}` });
+        wx.showToast({ title: "您已报名，无法再次报名", icon: "none" });
       }
       // this.pay(this.info);
     },
@@ -227,9 +214,9 @@ export default {
      * @desc 统一下单
      */
     async pay(info) {
-     
+
       let matchInfo = JSON.parse(wx.getStorageSync("matchInfo"));//从本地存储中获取赛事信息
-      
+
       let { total_fee } = this.objMatchInfo;
       let matchForm = this.objMatchInfo.matchForm;
       let pramePay = {
@@ -237,9 +224,9 @@ export default {
         goodsNameAll: "abcd",
         ...info
       };
-     
+
       const self = this;
-     
+
 
       if (total_fee == 0) {//Q1:订单总价是0，不走支付流程
         let orderId = `${new Date().valueOf()}${this.tangballUserId}${
@@ -278,7 +265,6 @@ export default {
           groups = JSON.parse(wx.getStorageSync("groupsMsg"));//获取存储中的组队信息
           pramePay.playingTime = groups.playingTime; //补充用户选择的比赛日期
         }
-        console.log('this.objMatchInfo',pramePay)
         //****微信统一下单接口
         let res = await util.post({ url: `${global.PUB.domain}/tangball/wxCreateOrder`, param: pramePay });
 
@@ -322,7 +308,7 @@ export default {
       console.log('args',args)
       if (status == 100) {
         wx.requestPayment({
-          ...args,signType: "MD5",timeStamp,
+          ...args, signType: "MD5", timeStamp,
           success(res) {
             self.endStep(res);
           },
@@ -388,7 +374,7 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
         param: {
-          findJson: { openid: tangballUserInfo.openid },modifyJson: this.info
+          findJson: { openid: tangballUserInfo.openid }, modifyJson: this.info
         }
       });
       //合并对象,因为this.info里面的信息可能跟tangballUserInfoNew不一致，比如openid的大小写

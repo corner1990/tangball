@@ -1,6 +1,6 @@
 <template>
   <div class="PL20 PR20">
-    <!-- <van-button type="primary" size="small" @click="ajaxVenueList" class="MR10">获取场馆列表</van-button> -->
+    <!-- <van-button type="primary" size="small" @click="ajaxVenueList" class="MR10">获取球场列表</van-button> -->
     <van-button
       type="primary"
       size="large"
@@ -80,10 +80,8 @@ export default {
 
       //从Storage中获取tangballUserInfo
       let tangballUserInfo = wx.getStorageSync("tangballUserInfo")||{};
-      console.log("tangballUserInfo:", tangballUserInfo);
 
       let { phone } = JSON.parse(tangballUserInfo);
-      console.log("phone:", phone);
 
       if (!phone) {
         this.updataGetPhoneNumberShow(true);
@@ -102,8 +100,6 @@ export default {
      * @desc 获取手机号回调函数
      */
     async getPhoneNumber(e) {
-      console.log("method:getPhoneNumber");
-      console.log("e.target:", e.target);
       let { errMsg } = e.target;
 
       if (errMsg.indexOf("ok") < 0) {
@@ -136,22 +132,12 @@ export default {
       let self = this;
 
       let ids = wx.getStorageSync("ids");
-      console.log("ids:", ids);
       //注意，这个时间点可能ids还没获取下来
       let { session_key, openid } = JSON.parse(ids);
-      console.log("session_key:", session_key);
       let param = { session_key, openid, encryptedData, iv };
       this.sendPhoneData(param); //调用：{发送手机号到后端的函数}
 
-      // wx.getStorage({
-      //   key: "ids",
-      //   success(res) {
-      //     console.log("wx.getStorage-ids成功");
-      //     let { session_key, openid } = JSON.parse(res.data);
-      //     let param = { session_key, openid, encryptedData, iv };
-      //     self.sendPhoneData(param);
-      //   }
-      // });
+     
     },
     //发送手机号到后端的函数
     sendPhoneData(param) {
@@ -178,15 +164,11 @@ export default {
     },
     //变量：{显示或关闭绑定手机号弹窗函数}
     updataGetPhoneNumberShow(getPhoneNumberShow) {
-      console.log("getPhoneNumberShow:", getPhoneNumberShow);
-      console.log("method:updataGetPhoneNumberShow");
       this.getPhoneNumberShow = getPhoneNumberShow;
     },
     getUserInfo1() {
       //获取用户信息的函数-弹出微信授权弹窗
-      console.log("method:getUserInfo1");
       // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本
-      // console.log(wx.canIUse('button.open-type.getUserInfo'))
       if (wx.canIUse("button.open-type.getUserInfo")) {
         // 用户版本可用
       } else {

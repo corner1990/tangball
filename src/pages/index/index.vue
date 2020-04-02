@@ -25,7 +25,7 @@
     <div>
       <div class="nav-box">
         <div class="nav-main" @click="gotoPage('/pages/venueList/main')">
-          <van-icon name="home-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;场馆列表
+          <van-icon name="home-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;球场列表
         </div>
         <div class="nav-main" @click="gotoPage('/pages/matchList/main')">
           <van-icon name="flag-o" style="color:#F4B116" class="nav-img" />&nbsp;&nbsp;赛事中心
@@ -113,8 +113,8 @@ export default {
         { title: "赛事列表-", url: "/pages/matchList/main" },
         { title: "赛事详情", url: "/pages/matchDetail/main" },
         { title: "赛事报名", url: "/pages/matchEroll/main" },
-        // { "title": "场馆列表", "url": "/pages/venueList/main" },
-        { title: "场馆详情", url: "/pages/venueDetail/main" },
+        // { "title": "球场列表", "url": "/pages/venueList/main" },
+        { title: "球场详情", url: "/pages/venueDetail/main" },
         { title: "唐球达人", url: "/pages/rankingList/main" },
         { title: "个人中心-我的资料", url: "/pages/myInfo/main" },
         { title: "个人中心-赛事报名列表", url: "/pages/myEroll/main" },

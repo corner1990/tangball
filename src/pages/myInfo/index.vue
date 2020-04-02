@@ -11,11 +11,14 @@
         :key="index"
         style="margin:5px 0px"
       >
-        <div class="message-text"><span v-if="message.required" class="required-box">★</span>{{message.value}}</div>
+        <div class="message-text">
+          <span v-if="message.required" class="required-box">★</span>
+          {{message.value}}
+        </div>
         <div class="message-input">
           <!-- 如果input类型是单选框，显示单选框 -->
           <div v-if="message.type=='redio'">
-            <div >
+            <div>
               <radio-group @change="changeSex">
                 <radio :value="1" :checked="memberMessage[message.index]=='1'?true:false" />男
                 <radio :value="2" :checked="memberMessage[message.index]=='2'?true:false" />女
@@ -101,7 +104,7 @@
       </div>
     </mp-dialog>
     <van-dialog id="van-dialog" />
-     <van-toast id="van-toast" />
+    <van-toast id="van-toast" />
     <mytabbar></mytabbar>
   </div>
 </template>
@@ -113,13 +116,10 @@ import util from "@/utils/util";
 import Toast from "../../../static/vant/toast/toast";
 import Dialog from "../../../static/vant/dialog/dialog";
 export default {
-  components: {
-    mytabbar,
-    debug_item
-  },
+  components: { mytabbar, debug_item },
   data() {
     return {
-      groups:false,
+      groups: false,
       buttonList: [
         //弹窗按钮设置
         { text: "取消" },
@@ -145,19 +145,19 @@ export default {
       columns: ["一年以下", "一到三年", "三到五年", "五到十年", "十年以上"],
       memberMessageList: [
         { index: "wxNickName", value: "昵称:" },
-        { index: "name", value: "真实姓名:",required:true},
-        { index: "sex", value: "性别:", type: "redio",required:true },
-        { index: "phone", value: "手机号码:", type: "num",required:true },
+        { index: "name", value: "真实姓名:", required: true },
+        { index: "sex", value: "性别:", type: "redio", required: true },
+        { index: "phone", value: "手机号码:", type: "num", required: true },
         { index: "ballAge", value: "球龄:", type: "select" },
         // {index:"idCard",value:"身份证证号:"},
-        
+
         { index: "career", value: "职业:" }
       ]
     };
   },
   computed: {
     //唐球会员信息-在vuex中获取
-    tangballUserInfo: function() {
+    tangballUserInfo: function () {
       return this.$store.state.tangballUserInfo;
     }
   },
@@ -166,10 +166,7 @@ export default {
     async checkVCode(event) {
       let { data } = await util.post({
         url: global.PUB.domain + `/tangball/checkMobileVCode`,
-        param: {
-          mobile: this.memberMessage.phone,
-          vCode: this.verfiy
-        }
+        param: { mobile: this.memberMessage.phone, vCode: this.verfiy }
       });
       return data;
     },
@@ -180,7 +177,7 @@ export default {
         this.isShowDialogMobileConfirm = false;
       } else {
         if (!/\d{4}/.test(this.verfiy)) {
-       return   wx.showToast({
+          return wx.showToast({
             title: "请输入四位数字验证码",
             icon: "none",
             duration: 2000
@@ -188,20 +185,14 @@ export default {
         }
 
         //点击确认按钮触发修改方法
-        console.log("确认");
         let data = await this.checkVCode(); //调用：{检测验证码是否正确的函数}
 
         if (data.code !== 0) {
-          return wx.showToast({
-            title: data.message,
-            icon: "none",
-            duration: 2000
-          });
+          returnwx.showToast({ title: data.message, icon: "none", duration: 2000 });
         }
         await this.modifyMember(); //调用：{ajax修改会员信息函数}
         this.isShowDialogMobileConfirm = false;
         this.phoneOld = this.memberMessage.phone; //旧手机号更新
-        console.log("data:", data);
       }
     },
 
@@ -214,7 +205,6 @@ export default {
         this.verfiy = null; //验证码
         return;
       }
-      console.log("waitTime");
       let mobile = this.memberMessage.phone;
 
       if (!mobile) {
@@ -254,10 +244,7 @@ export default {
     },
     getVerfity(mobile) {
       // 发送短信验证码接口函数
-      util.post({
-        url: `${global.PUB.domain}/tangball/sendMobileVCode`,
-        param: { mobile }
-      });
+      util.post({ url: `${global.PUB.domain}/tangball/sendMobileVCode`, param: { mobile } });
     },
     verfiyChange(e) {
       this.verfiy = e.mp.detail.value;
@@ -328,9 +315,7 @@ export default {
 
     // 尝试请求修改函数
     async tryModifyMember() {
-      if (
-        !/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(this.memberMessage.phone)
-      ) {
+      if (!/^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$/.test(this.memberMessage.phone)) {
         this.sendStatus = false;
         return Toast.fail("手机号格式错误");
       }
@@ -343,18 +328,12 @@ export default {
     // ajax修改会员信息函数,修改成功跳转到首页
     async modifyMember() {
       console.log();
-      
-      if (!this.memberMessage.name||this.memberMessage.name=='') {
-        return Dialog.alert({
-          title: "提示",
-          message: "姓名不能为空"
-        });
+
+      if (!this.memberMessage.name || this.memberMessage.name == '') {
+        return Dialog.alert({ title: "提示", message: "姓名不能为空" });
       }
       if (!this.memberMessage.sex) {
-        return Dialog.alert({
-          title: "提示",
-          message: "请选择性别"
-        });
+        return Dialog.alert({ title: "提示", message: "请选择性别" });
       }
       let { data } = await util.post({
         url: global.PUB.domain + "/crossModify?page=tangball_member",
@@ -364,16 +343,13 @@ export default {
         }
       });
       this.$store.commit("setTangballUserInfo", this.memberMessage);
-      wx.showToast({
-        title: "修改成功",
-        icon: "success"
-      });
+      wx.showToast({ title: "修改成功", icon: "success" });
       if (this.groups) {
-        wx.navigateTo({url:'/pages/myEroll_groups/main'})
-      }else{
-        wx.switchTab({url:'/pages/usercenter/main'})
+        wx.navigateTo({ url: '/pages/myEroll_groups/main' })
+      } else {
+        wx.switchTab({ url: '/pages/usercenter/main' })
       }
-      
+
     }
   },
   mounted() {
@@ -382,10 +358,10 @@ export default {
     console.log(this.tangballUserInfo);
   },
   onLoad(options) {
-    console.log('aaaa',options);
+    console.log('aaaa', options);
     if (options.groups) {
       this.groups = options.groups
-    }else{
+    } else {
       this.groups = false
     }
     this.showSelect = false;
@@ -469,7 +445,7 @@ export default {
   width: 100%;
   z-index: 101;
 }
-.required-box{
+.required-box {
   color: #f4b116;
   font-size: 12px;
 

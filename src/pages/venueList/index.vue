@@ -10,8 +10,8 @@
     </div>
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <!-- 赛事场馆列表组件 -->
+    <!-- <debug_item path="venueList" v-model="venueList" text="球场列表" /> -->
+    <!-- 赛事球场列表组件 -->
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
     <!--无数据时显示暂无数据-->
     <tisp v-if="status"></tisp>
@@ -27,18 +27,12 @@ import util from "@/utils/util";
 import venueListComponent from "@/components/venueList/venueListComponent";
 import city_select from "@/components/city_select";
 export default {
-  components: {
-    mytabbar,
-    debug_item,
-    venueListComponent,
-    city_select,
-    tisp
-  },
+  components: { mytabbar, debug_item, venueListComponent, city_select, tisp },
   data() {
     return {
       // 地区组件聚焦的index
       selectIndex: 0,
-      pageName: "场馆列表",
+      pageName: "球场列表",
       venueList: [],
       keywords: null, //搜索关键字
       show: true, //是否显示
@@ -52,24 +46,17 @@ export default {
      * @param 是否显示：show
      */
     onSearch(keywords) {
-      console.log("this.status1111", this.status);
       this.venueList.forEach(item => {
         let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
-        if (index > -1) {
-          //如果关键字匹配
+        if (index > -1) {//如果关键字匹配
           item.show = true;
-        } else {
-          //如果关键字不匹配
+        } else {//如果关键字不匹配
           item.show = false;
           //如果关键字不匹配显示暂无数据
           this.status = true;
         }
       });
-      // console.log("this.status222", this.status,this.venueList.length);
-      // if (this.venueList.length == 0) {
-      //   console.log("this.status333", this.status);
-      //   this.status = true;
-      // }
+
     },
     /**
      * @desc 请求接口数据的函数
@@ -86,26 +73,14 @@ export default {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossListRelation",
         param: {
-          needRelation: "1",
-          columnItem: "P7",
-          columnTarget: "area",
-          sheetRelation: {
-            page: "dmagic_area",
-            findJson: {
-              P8: areaId
-            }
-          },
-          sheetTarget: {
-            page: "tangball_venue",
-            pageSize: "9999"
-          }
+          needRelation: "1", columnItem: "P7", columnTarget: "area",
+          sheetRelation: { page: "dmagic_area", findJson: { P8: areaId } },
+          sheetTarget: { page: "tangball_venue", pageSize: "9999" }
         }
       });
       wx.hideLoading(); //请求到数据后加载中隐藏
 
-      data.list.forEach(item => {
-        item.show = true;
-      });
+      data.list.forEach(item => { item.show = true; });
       this.venueList = data.list;
       //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.venueList.length <= 0) {
@@ -115,11 +90,8 @@ export default {
       }
       //填充地区数据cityDoc
       this.venueList = await util.ajaxPopulate({
-        listData: this.venueList,
-        populateColumn: "cityDoc",
-        idColumn: "area",
-        idKeyColumn: "P7",
-        page: "dmagic_area"
+        listData: this.venueList, populateColumn: "cityDoc",
+        idColumn: "area", idKeyColumn: "P7", page: "dmagic_area"
       });
     }
   },

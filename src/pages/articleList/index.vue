@@ -99,7 +99,6 @@ export default {
           }
         });
         if (data.length > 0) {
-          // console.log('this.matchListh',data.list);
           this.articleList.push(...data);
         }
         if (data.length < 5) {

@@ -47,7 +47,7 @@
         <div style="clear:both"></div>
       </div>
     </div>
-    <h2 class="info-title event-info">赛事及场馆信息</h2>
+    <h2 class="info-title event-info">赛事及球场信息</h2>
     <div class="flex line">
       <p class="sub-title">赛事名称</p>
       <div>{{ matchInfo.matchName }}</div>

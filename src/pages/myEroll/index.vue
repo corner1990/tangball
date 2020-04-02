@@ -14,7 +14,7 @@
           <span class="C_3a0" v-if="item.payStatus==2">已支付</span>
           <span class="C_f30" v-else>等待支付</span>
         </div>
-        <div class v-if="item.venueDoc">所选场馆：{{item.venueDoc.name}}</div>
+        <div class v-if="item.venueDoc">所选球场：{{item.venueDoc.name}}</div>
         <div class="TAR">
           <van-button plain size="small" type="danger" @click="gotoPage(item.P1,i)">查看详情</van-button>
         </div>
@@ -22,7 +22,7 @@
     </div>
     <mytabbar></mytabbar>
     <!--无数据时显示暂无数据-->
-     <tisp v-if="status"></tisp>
+    <tisp v-if="status"></tisp>
   </div>
 </template>
 <script>
@@ -32,21 +32,17 @@ import tisp from "@/components/tisp/tisp";
 import mytabbar from "@/components/mytabbar/mytabbar";
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
-  components: {
-    mytabbar,
-    debug_item,
-    tisp
-  },
+  components: { mytabbar, debug_item, tisp },
   data() {
     return {
       myErollList: [],
       status: false, //显示暂无数据
-      groups:{}
+      groups: {}
     };
   },
   computed: {
     //唐球会员信息-在vuex中获取
-    tangballUserInfo: function() {
+    tangballUserInfo: function () {
       return this.$store.state.tangballUserInfo;
     }
   },
@@ -56,70 +52,50 @@ export default {
      * @desc 向报名详情传id，
      * @param 使用模板字符串拼接P1传参
      */
-   async gotoPage(P1, index) {
+    async gotoPage(P1, index) {
       // 拼接详情需要的数据
       let info = this.myErollList[index];
       let url = `/pages/matchEroll/main?id=2`;
       let { sex, orderMoney } = info;
       // let active = 2;
       info = { ...info, total_fee: orderMoney };
-      let matchInfo = {
-        ...info.matchDoc,
-        total_fee: orderMoney,
-        sex
-      };
+      let matchInfo = { ...info.matchDoc, total_fee: orderMoney, sex };
 
-      
+
       if (matchInfo.matchForm == 2) {
-        let { data  }= await util.post({
-              url: global.PUB.domain + "/crossList?page=tangball_team",
-              param: {
-                findJson:{
-                  orderId:info.orderId
-                }
-              }
+        let { data } = await util.post({
+          url: global.PUB.domain + "/crossList?page=tangball_team",
+          param: { findJson: { orderId: info.orderId } }
         });
         this.groups = data.list[0]
-        console.log('gtopis',this.groups.orderId);
         wx.setStorage({
-        key: "myErollDetail",
-        data: JSON.stringify({  info, matchInfo, P1 }),
-        success() {
-          // wx.navigateTo({ url });
-              wx.setStorage({
-              key: "groupsMsg",
-              data: JSON.stringify(data.list[0]),
+          key: "myErollDetail",
+          data: JSON.stringify({ info, matchInfo, P1 }),
+          success() {
+            // wx.navigateTo({ url });
+            wx.setStorage({
+              key: "groupsMsg", data: JSON.stringify(data.list[0]),
               success() {
                 wx.navigateTo({ url });
               }
-          });
-        }
-      });
-      }else{
-      
-      
-      wx.setStorage({
-        key: "myErollDetail",
-        data: JSON.stringify({  info, matchInfo, P1 }),
-        success() {
-          wx.navigateTo({ url });
-        }
-      });
+            });
+          }
+        });
+      } else {
+
+
+        wx.setStorage({
+          key: "myErollDetail", data: JSON.stringify({ info, matchInfo, P1 }),
+          success() {
+            wx.navigateTo({ url });
+          }
+        });
       }
-      // let url = `/pages/myErollDetail/main?P1=${P1}`;
-      // wx.setStorage({
-      //   key: "myErollList",
-      //   data: JSON.stringify({ myErollList }),
-      //   success() {
-      //     wx.navigateTo({ url });
-      //   }
-      // });
-            console.log('info.orderId',{  info, matchInfo, P1 });
-      // wx.navigateTo({ url });
+
     },
     // 请求接口获取组队信息
-    async getGroups(orderId){
-      
+    async getGroups(orderId) {
+
     },
     /**
      * @name ajax获取报名列表函数
@@ -127,29 +103,22 @@ export default {
      * @param xxxx
      */
     async ajaxEnrollList() {
-       wx.showLoading({ title: "加载中", icon: "loading" });
+      wx.showLoading({ title: "加载中", icon: "loading" });
       this.myErollList = await util.ajaxGetList({
         page: "tangball_enroll",
         pageSize: 9999,
         findJson: { memberId: this.tangballUserInfo.P1 }
       });
       this.myErollList = await util.ajaxPopulate({
-        listData: this.myErollList,
-        populateColumn: "matchDoc",
-        idColumn: "matchId",
-        idKeyColumn: "P1",
-        page: "tangball_match"
+        listData: this.myErollList, populateColumn: "matchDoc",
+        idColumn: "matchId", idKeyColumn: "P1", page: "tangball_match"
       });
       this.myErollList = await util.ajaxPopulate({
-        listData: this.myErollList,
-        populateColumn: "venueDoc",
-        idColumn: "cityVenueId",
-        idKeyColumn: "P1",
-        page: "tangball_venue"
+        listData: this.myErollList, populateColumn: "venueDoc",
+        idColumn: "cityVenueId", idKeyColumn: "P1", page: "tangball_venue"
       });
-      console.log("this.myErollList",this.myErollList)
-       wx.hideLoading(); //请求到数据后加载中隐藏
-       //-----判断接口数据的长度小于等于0显示暂无数据
+      wx.hideLoading(); //请求到数据后加载中隐藏
+      //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.myErollList.length <= 0) {
         this.status = true;
       } else {
@@ -159,7 +128,7 @@ export default {
   },
   mounted() {
     this.ajaxEnrollList(); //调用：{ajax获取报名列表函数}
-    
+
   }
 };
 </script>

@@ -40,7 +40,7 @@
       </div>
     </div>
     <van-cell-group>
-      <h3 class="info-title event-info">赛事及场馆信息</h3>
+      <h3 class="info-title event-info">赛事及球场信息</h3>
       <div class="flex line">
         <p class="sub-title">赛事名称</p>
         <div>{{ matchInfo.matchName }}</div>
@@ -97,12 +97,10 @@ export default {
     // let data = wx.getStorageSync('matchInfo')
     // if (data) {
     //   this.matchInfo = JSON.parse(data)
-    //     console.log("this.matchInfo#", this.matchInfo);
     // }
   },
   filters: {
     initSex(val) {
-      console.log("initsex", val);
       if ([undefined, "", -1].includes(val)) return "";
       if (val == "1") return "男";
       if (val == "2") return "女";

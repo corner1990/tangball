@@ -1,21 +1,21 @@
 <template>
   <div class="main-wrap">
-    <debug_item path="pageName" v-model="venueDoc" text="场馆数据" />
+    <debug_item path="pageName" v-model="venueDoc" text="球场数据" />
     <div class v-if="venueDoc">
       <div>
         <openImg v-model="venueDoc.album" ></openImg>
         <van-tabs :active="active" v-bind:change="onChange">
-          <van-tab title="场馆介绍">
+          <van-tab title="球场介绍">
             <div style="font-size:16px;margin-top:5px">
-              <van-cell title="场馆名称" title-width="100px" :value="venueDoc.name" />
-              <van-cell title="场馆地址" title-width="100px" :value="venueDoc.address" />
-              <van-cell title="场馆尺寸" title-width="100px" :value="venueDoc.extend.venueSize" />
-              <van-cell title="场馆层数" title-width="100px" :value="venueDoc.extend.floorCount" />
-              <van-cell title="场馆洞数" title-width="100px" :value="venueDoc.extend.holeCount" />
-              <van-cell title="场馆打位数" title-width="100px" :value="venueDoc.extend.placesCount" />
-              <van-cell title="场馆电话" title-width="100px" :value="venueDoc.phoneNumber" />
-              <van-cell title="场馆联系人" title-width="100px" :value="venueDoc.extend.contacts" />
-               <van-cell title="场馆详情" title-width="100px" :value="Detail" />
+              <van-cell title="球场名称" title-width="100px" :value="venueDoc.name" />
+              <van-cell title="球场地址" title-width="100px" :value="venueDoc.address" />
+              <van-cell title="球场尺寸" title-width="100px" :value="venueDoc.extend.venueSize" />
+              <van-cell title="球场层数" title-width="100px" :value="venueDoc.extend.floorCount" />
+              <van-cell title="球场洞数" title-width="100px" :value="venueDoc.extend.holeCount" />
+              <van-cell title="球场打位数" title-width="100px" :value="venueDoc.extend.placesCount" />
+              <van-cell title="球场电话" title-width="100px" :value="venueDoc.phoneNumber" />
+              <van-cell title="球场联系人" title-width="100px" :value="venueDoc.extend.contacts" />
+               <van-cell title="球场详情" title-width="100px" :value="Detail" />
             </div>
           </van-tab>
           <van-tab title="地理位置">
@@ -52,7 +52,7 @@ export default {
     return {
       // radio: 1,
       Detail:"一二三四五六七八九十十一十二十三十四",
-      pageName: "场馆详情",
+      pageName: "球场详情",
       value: "", // 搜索value
       venueDoc: null,
       markers: [{ longitude: "", latitude: "", iconPath: "" }]
@@ -60,14 +60,14 @@ export default {
   },
   methods: {
     /**
-    * ajax获取当前场馆数据函数
+    * ajax获取当前球场数据函数
     */
     async getDoc() {
       let doc = await util.post({
         //详情接口
         url: global.PUB.domain + "/crossDetail?page=tangball_venue",
         param: {
-          id: this.P1 //每场馆id
+          id: this.P1 //每球场id
         }
       });
       this.venueDoc = doc.data.Doc;
@@ -83,7 +83,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.getDoc(); //调用：{ajax获取当前场馆数据函数}
+    this.getDoc(); //调用：{ajax获取当前球场数据函数}
   },
   // 页面登陆事件
   onLoad(options) {

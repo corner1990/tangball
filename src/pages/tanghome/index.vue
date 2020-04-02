@@ -13,7 +13,7 @@
       </block>
     </swiper>
     <div class="card">
-      <h3>合作场馆</h3>
+      <h3>合作球场</h3>
       <div>
         <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
       </div>
@@ -47,7 +47,6 @@ export default {
      * @desc tab切换回调
      */
     tabChange(url) {
-      console.log(url)
       wx.switchTab({
         url
       })
@@ -56,7 +55,6 @@ export default {
      * @desc 发起支付
      */
     sendPay () {
-      console.log('发起支付')
       let self = this;
       wx.getStorage({
         key: 'ids',
@@ -101,12 +99,10 @@ export default {
           }
         })
       }
-      console.log('data', data)
     }
   },
   onShow() {
     // `this` 指向 vm 实例
-    // console.log('234')
   }
 }
 </script>

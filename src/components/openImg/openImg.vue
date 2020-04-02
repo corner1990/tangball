@@ -63,14 +63,12 @@ export default {
     let width = 150
          wx.getSystemInfo({
            success:function (res) {
-             console.log('res',res.screenWidth);
              width = res.screenWidth
              
              
            }
          })
          this.imgHeight =`height:${width*0.8}px`
-         console.log('this.imgHeight',this.imgHeight);
   }
 };
 </script>

@@ -8,12 +8,10 @@
 export default {
   props: ['data'],
   mounted () {
-    // console.log('componentWillMount111', this)
   },
   methods: {
     jumpTo (url) {
       wx.navigateTo({ url })
-      // console.log('jumpto', path)
     }
   }
 }

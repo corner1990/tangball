@@ -10,7 +10,6 @@
 <script>
 /* eslint-disable */
 import util from "@/utils/util";
-console.log("util", util);
 export default {
   components: {
     //注册组件
@@ -18,7 +17,6 @@ export default {
   watch: {
     value: {
       handler(newName, oldName) {
-        console.log("value changed");
         this.setValue(); //调用：{设置值函数}
       },
       immediate: true,
@@ -37,7 +35,6 @@ export default {
   },
   methods: {
     expand() {
-      console.log("expand");
       if (this.maxHeight == 100) {
         this.maxHeight = 10000;
         this.iconName = "arrow-up";
@@ -60,7 +57,6 @@ export default {
   created() {
 //获取v-model变量名（表达式）
     this.pathNeed  = this.$lodash.get(this, "$vnode.data.model.expression");
-console.log("this.pathNeed", this.pathNeed);
   }
 };
 </script>

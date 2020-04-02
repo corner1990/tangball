@@ -79,7 +79,6 @@ export default {
     */
     onChange(event){
       this.active=event.mp.detail.index;
-      console.log(this.active);
     },
     /**
     * @name 获取赛事列表方法

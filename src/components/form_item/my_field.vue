@@ -9,7 +9,6 @@
 <script>
 /* eslint-disable */
 import mix from "@/utils/mix";
-console.log("mix", mix);
 export default {
   mixins: [mix.form_item], //混入
   props: ["label"],
@@ -23,7 +22,6 @@ export default {
     change() {}
   },
   created() {
-    console.log("n-field-created####");
   }
 };
 </script>

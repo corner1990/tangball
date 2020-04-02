@@ -25,7 +25,6 @@ export default {
 
   },
   onLoad(){
-    // console.log('aaa',this.groupAchievementlist);
 
   }
 }
