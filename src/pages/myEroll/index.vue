@@ -14,7 +14,7 @@
           <span class="C_3a0" v-if="item.payStatus==2">已支付</span>
           <span class="C_f30" v-else>等待支付</span>
         </div>
-        <div class v-if="item.venueDoc">所选场馆：{{item.venueDoc.name}}</div>
+        <div class v-if="item.venueDoc">所选球场：{{item.venueDoc.name}}</div>
         <div class="TAR">
           <van-button plain size="small" type="danger" @click="gotoPage(item.P1,i)">查看详情</van-button>
         </div>
@@ -80,7 +80,6 @@ export default {
               }
         });
         this.groups = data.list[0]
-        console.log('gtopis',this.groups.orderId);
         wx.setStorage({
         key: "myErollDetail",
         data: JSON.stringify({  info, matchInfo, P1 }),
@@ -106,16 +105,7 @@ export default {
         }
       });
       }
-      // let url = `/pages/myErollDetail/main?P1=${P1}`;
-      // wx.setStorage({
-      //   key: "myErollList",
-      //   data: JSON.stringify({ myErollList }),
-      //   success() {
-      //     wx.navigateTo({ url });
-      //   }
-      // });
-            console.log('info.orderId',{  info, matchInfo, P1 });
-      // wx.navigateTo({ url });
+     
     },
     // 请求接口获取组队信息
     async getGroups(orderId){
@@ -147,7 +137,6 @@ export default {
         idKeyColumn: "P1",
         page: "tangball_venue"
       });
-      console.log("this.myErollList",this.myErollList)
        wx.hideLoading(); //请求到数据后加载中隐藏
        //-----判断接口数据的长度小于等于0显示暂无数据
       if (this.myErollList.length <= 0) {

@@ -31,7 +31,6 @@ export default {
     }
   },
   mounted(){
-    console.log("this.tangballUserInfo", this.tangballUserInfo);
   }
 };
 </script>

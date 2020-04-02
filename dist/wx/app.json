@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/main",
+    
+    "pages/index/main", 
     "pages/matchList/main",
     "pages/macth_group/main",
     "pages/articleList/main",
@@ -43,6 +44,7 @@
         "iconPath": "static/tabs/home.png",
         "selectedIconPath": "static/tabs/home-active.png"
       },
+   
       {
         "text": "个人中心",
         "pagePath": "pages/usercenter/main",
@@ -71,6 +73,5 @@
     "van-toast": "/static/vant/toast/index",
     "van-loading": "/static/vant/loading/index",
     "mp-dialog": "/static/dialog/dialog"
-  },
-  "sitemapLocation": "sitemap16.json"
+  }
 }

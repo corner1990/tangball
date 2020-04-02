@@ -10,8 +10,8 @@
     </div>
     <!-- 引进筛选城市组件 -->
     <city_select @select="search" :selectIndex="selectIndex"></city_select>
-    <!-- <debug_item path="venueList" v-model="venueList" text="场馆列表" /> -->
-    <!-- 赛事场馆列表组件 -->
+    <!-- <debug_item path="venueList" v-model="venueList" text="球场列表" /> -->
+    <!-- 赛事球场列表组件 -->
     <venueListComponent :cf="item" v-for="(item,i) in venueList" :key="i"></venueListComponent>
     <!--无数据时显示暂无数据-->
     <tisp v-if="status"></tisp>
@@ -38,7 +38,7 @@ export default {
     return {
       // 地区组件聚焦的index
       selectIndex: 0,
-      pageName: "场馆列表",
+      pageName: "球场列表",
       venueList: [],
       keywords: null, //搜索关键字
       show: true, //是否显示
@@ -52,7 +52,6 @@ export default {
      * @param 是否显示：show
      */
     onSearch(keywords) {
-      console.log("this.status1111", this.status);
       this.venueList.forEach(item => {
         let index = item.name.indexOf(this.keywords); //关键字出现的位置索引值
         if (index > -1) {
@@ -65,11 +64,7 @@ export default {
           this.status = true;
         }
       });
-      // console.log("this.status222", this.status,this.venueList.length);
-      // if (this.venueList.length == 0) {
-      //   console.log("this.status333", this.status);
-      //   this.status = true;
-      // }
+      
     },
     /**
      * @desc 请求接口数据的函数

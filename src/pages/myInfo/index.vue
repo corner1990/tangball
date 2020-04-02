@@ -188,7 +188,6 @@ export default {
         }
 
         //点击确认按钮触发修改方法
-        console.log("确认");
         let data = await this.checkVCode(); //调用：{检测验证码是否正确的函数}
 
         if (data.code !== 0) {
@@ -201,7 +200,6 @@ export default {
         await this.modifyMember(); //调用：{ajax修改会员信息函数}
         this.isShowDialogMobileConfirm = false;
         this.phoneOld = this.memberMessage.phone; //旧手机号更新
-        console.log("data:", data);
       }
     },
 
@@ -214,7 +212,6 @@ export default {
         this.verfiy = null; //验证码
         return;
       }
-      console.log("waitTime");
       let mobile = this.memberMessage.phone;
 
       if (!mobile) {

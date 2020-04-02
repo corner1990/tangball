@@ -24,7 +24,6 @@ export default {
   },
   mounted() {
    let param=util.getQuery();//获取页面参数
-   console.log("param", param);
    this.dataId=param.dataId;
   }
 }

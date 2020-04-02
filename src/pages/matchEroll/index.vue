@@ -104,7 +104,6 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
-        console.log('info',info)
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
@@ -206,7 +205,6 @@ export default {
         Dialog.close();
       }, 1000);
       // 统一下单
-      console.log('this.objMatchInfo',this.objMatchInfo)
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_enroll",
         param: {
@@ -277,7 +275,6 @@ export default {
           groups = JSON.parse(wx.getStorageSync("groupsMsg"));//获取存储中的组队信息
           pramePay.playingTime = groups.playingTime; //补充用户选择的比赛日期
         }
-        console.log('this.objMatchInfo',pramePay)
         //****微信统一下单接口
         let res = await util.post({ url: `${global.PUB.domain}/tangball/wxCreateOrder`, param: pramePay });
 

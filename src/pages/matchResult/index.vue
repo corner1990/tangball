@@ -146,8 +146,6 @@ export default {
     // 切换赛程的方法
     changeProgress(e, progress) {
       wx.showLoading({ title: "加载中", icon: "loading" });
-      // console.log(e.target.index);
-      // console.log(progress);
       this.roundNum = Number(progress[e.target.index].roundCount);
       this.roundNumIndex = 0;
       if (this.matchDoc.matchForm == 2) {
@@ -157,25 +155,19 @@ export default {
         } else {
           this.gradeText = "teamHoleScoreTotal_p" + (e.target.index + 1);
         }
-        // console.log(this.gradeText);
 
         this.getGroupAchievementlist();
       } else {
         this.nowRoundNum = 1;
         this.nowRrogressIndex = e.target.index + 1;
         this.getIndividualAchievement();
-        // console.log(this.roundNumIndex);
       }
-      console.log("aaaa");
     },
     // 切换轮数的方法
     changeRoundCount(num, index) {
       wx.showLoading({ title: "加载中", icon: "loading" });
-      console.log(num);
       this.roundNumIndex = num - 1;
 
-      // this.roundNum = Number(roundCount)
-      // console.log(this.roundNum);
       if (this.matchDoc.matchForm == 2) {
         this.gradeText = "teamHoleScoreTotal_p" + (index + 1) + "_r" + num;
 
@@ -189,7 +181,6 @@ export default {
     getGroupAchievementlist() {
       this.groupAchievementlist = [];
       let groupList = JSON.parse(JSON.stringify(this.groupList));
-      // console.log('this.achievementList',this.achievementList );
       if (groupList.length <= 0) {
         this.groupAchievementlist = [];
       } else if (this.achievementList <= 0) {
@@ -212,28 +203,15 @@ export default {
                   this.groupAchievementlist.push(obj);
                 }
               }
-              // groupList.splice(index, 1)
             }
           });
         });
       }
-      console.log("this.groupAchievementlist", this.groupAchievementlist);
       this.groupAchievementlist.sort(function(obj1, obj2) {
         return obj2.score - obj1.score;
       });
       wx.hideLoading();
-      // console.log('this.groupAchievementlist',this.groupAchievementlist);
-      // console.log('this.groupList',this.groupList.length);
-      // if(groupList.length>0) {
-      //   // console.log('aaaa');
-      //     groupList.forEach(item => {
-      //       let groupName = item.name
-      //       let score = -1
-      //       let obj = {groupName,score}
-      //       this.groupAchievementlist.push(obj)
-      //     });
-      // console.log('this.groupAchievementlist',this.groupAchievementlist);
-      // }
+      
     },
     // 获取参赛队伍信息
     async getGroup() {
@@ -246,7 +224,6 @@ export default {
         }
       });
       this.groupList = data.list;
-      // console.log('this.groupList',this.groupList);
       this.getAchievement();
     },
     // 获取成绩信息信息
@@ -262,12 +239,10 @@ export default {
       });
       this.achievementList = data.list;
       this.getGroupAchievementlist();
-      console.log("this.achievementList", this.achievementList);
     },
     // 获取个人赛成绩
     async getIndividualAchievement() {
       wx.showLoading({ title: "加载中", icon: "loading" });
-      console.log(1111);
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_achievement",
         param: {
@@ -279,7 +254,6 @@ export default {
           }
         }
       });
-      console.log("data", data);
       this.groupAchievementlist = [];
       let arr = [];
       let memberIdList = [];
@@ -302,7 +276,6 @@ export default {
         });
       }
       this.groupAchievementlist = arr;
-      console.log("this.groupAchievementlist", this.groupAchievementlist);
       wx.hideLoading();
     }
   },
@@ -311,7 +284,6 @@ export default {
     // 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
     this.matchDoc.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY/MM/DD');
-    console.log("this.matchDoc", this.matchDoc);
     if (this.matchDoc.progress.length>0) {
     // 初始化成绩数据
     if (this.matchDoc.progress[0].roundCount > 1) {

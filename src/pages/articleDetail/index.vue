@@ -26,7 +26,6 @@ export default {
   created() {},
   async mounted() {
     let param = util.getQuery(); //获取页面参数
-    console.log("param", param);
     this.dataId = param.dataId;
     
       //ajax获取单篇文章数据

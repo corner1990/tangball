@@ -115,10 +115,10 @@
       @click="gotoPage(url)"
       v-else
     >{{enrollText}}</van-button>
-    <!-- 显示选择场馆弹窗 -->
+    <!-- 显示选择球场弹窗 -->
     <van-dialog
       use-slot
-      title="请选择场馆"
+      title="请选择球场"
       :show="showdDialog"
       @close="onCloseDialog"
       v-if="showdDialog"
@@ -160,11 +160,11 @@ export default {
       showLogin: false,
       bigImg: "", //图片点击放大地址
       showBigImg: false, //控制图片点击放大
-      showdDialog: false, //控制选择场馆弹窗
-      cityVenueList: null, //场馆列表
-      venueId: null, //场馆id
-      venueName: null, //场馆名字
-      cityName: null, //场馆城市名
+      showdDialog: false, //控制选择球场弹窗
+      cityVenueList: null, //球场列表
+      venueId: null, //球场id
+      venueName: null, //球场名字
+      cityName: null, //球场城市名
       NationalmatchIndex: ['1'], //举办地点聚焦
       showEnrollRequirements: ['1'],//报名要求聚焦
       matchId: 37, //  当前赛事id
@@ -266,12 +266,12 @@ export default {
       });
     },
     /**
-     * @name pickerChange是场馆选择器函数
-     * @desc 场馆选择，缓存当前选中的场馆id
+     * @name pickerChange是球场选择器函数
+     * @desc 球场选择，缓存当前选中的球场id
      * @param event是默认值
      */
     pickerChange(event) {
-      // 缓存当前选中的场馆id、场馆名字、城市名字
+      // 缓存当前选中的球场id、球场名字、城市名字
       let { index } = event.mp.detail;
       let { venueId, cityName, venueName } = this.matchDoc.cityVenueList[index];
       this.venueId = venueId;
@@ -280,11 +280,10 @@ export default {
     },
     /**
      * @name gotoPage是立即报名函数
-     * @desc 点击立即报名按钮，如果不是全国赛事则直接跳转到报名页，否则需要打开弹窗选择场馆
+     * @desc 点击立即报名按钮，如果不是全国赛事则直接跳转到报名页，否则需要打开弹窗选择球场
      * @param url是跳转的地址
      */
     async gotoPage() {
-      console.log('this.payStatus',this.payStatus)
       if (this.payStatus || this.isMatchIdStatus == 'show') {
         let info = this.matchDoc;
         let url = `/pages/matchEroll/main?id=2`;
@@ -342,7 +341,7 @@ export default {
           this.venueId = null; //清空变量
           this.cityName = null;
           this.venueName = null;
-          // 拼接场馆列表数组
+          // 拼接球场列表数组
           this.cityVenueList = this.matchDoc.venue.map((item, index) => {
             return item.cityName + "---" + item.venueName;
           });
@@ -385,13 +384,7 @@ export default {
       let enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
       let matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
       let matchTimeEnd = global.moment(this.matchDoc.matchTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');
-      // let date = new Date("2020/03/31 00:00:00")
-      // let date2 = new Date("2020/03/31")
-      // console.log('Date',date.toLocaleDateString())
-      // console.log('Date2',date2.toLocaleDateString())
-      // console.log('nowDate',nowDate)
-      // console.log('matchTime',this.matchDoc.matchTime)
-      // console.log('matchTime',matchTime)
+    
 
       if (nowDate > matchTimeEnd) {2
         this.enrollText = '赛事已结束'
@@ -477,7 +470,6 @@ export default {
       url: global.PUB.domain + "/tangball/getMatchDetail",
       param: { id: this.matchId }
     });
-    console.log('data',data)
     this.matchDoc = data.Doc; //赛事详情列表
     this.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY-MM-DD') + "至" + global.moment(this.matchDoc.matchTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD');
     this.enrollTimeEnd = global.moment(this.matchDoc.enrollTimeEnd.replace(/-/g, '/')).format('YYYY-MM-DD HH:mm');

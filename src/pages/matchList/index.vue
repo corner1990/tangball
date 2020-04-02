@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     getTime(index){
-      console.log(index);
       
       if (index == 0) {
         this.findTime = ''
@@ -68,26 +67,20 @@ export default {
       }else{
         let day = index==1?30:index==2?92:index==3?183:365
         let dateStart = new Date()
-      // console.log(dateStart.toLocaleDateString());
       let dateEnd = new Date().setDate(dateStart.getDate()+day)
       dateEnd = new Date(dateEnd)
-      //  console.log(dateEnd.toLocaleDateString());
        this.startTime = dateStart
        this.endTiem = dateEnd
        this.findTime={"$gte":this.startTime,"$lte":this.endTiem}
-      //  this.getlist()
       }
-      // let day = index==0?
       
     },
     // 点击下拉款确定的话将数据信息保存下来，实现双向绑定
     changeSelect(event) {
       this.showSelect = !this.showSelect;
       this.getTime(event.mp.detail.index)
-      // console.log(event.mp.detail.index);
       this.matchTime =this.columns[event.mp.detail.index]
       this.getlist()
-      // console.log(this.matchTime);
       
       // this.memberMessage.ballAge = event.mp.detail.index + 1;
       // this.ballAgeToString();
@@ -118,7 +111,6 @@ export default {
         }
       });
       this.matchList = data.list;
-      console.log('this.matchListh',this.matchList);
       if (this.matchList.length<7) {
         this.moreMatchText = "已加载全部赛事"
         this.moreMatch = false
@@ -146,7 +138,6 @@ export default {
         }
       });
       if (data.list.length>0) {
-        // console.log('this.matchListh',data.list);
         this.matchList.push(...data.list)
       }
       

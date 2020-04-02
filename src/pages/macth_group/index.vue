@@ -128,7 +128,6 @@ export default {
       this.getGroupMsg();
     },
     changeRoundCount(index) {
-      console.log(index);
 
       this.roundNum = index;
       this.getGroupMsg();
@@ -163,7 +162,6 @@ export default {
         });
         let timeStartDay = this.getDay(item.timeStart);
         let timeStart = this.getTime(item.timeStart);
-        console.log(item.timeStart);
 
         let obj = {
           groupNum: item.groupNum || 0,
@@ -173,7 +171,6 @@ export default {
         };
         this.groupsMsgList.push(obj);
       });
-      console.log("this.groupsMsgList ", this.groupsMsgList);
       wx.hideLoading();
     },
     // 获取队伍信息
@@ -187,7 +184,6 @@ export default {
         }
       });
       this.memberMsg = data.list;
-      console.log("aaaa", data.list);
       this.joingroupsMsg(groupsMsg);
     },
     // 获取个人信息
@@ -200,7 +196,6 @@ export default {
           }
         }
       });
-      console.log("aaaa", data.list);
       this.memberMsg = data.list;
       this.joingroupsMsg(groupsMsg);
     },
@@ -226,7 +221,6 @@ export default {
           }
         }
       });
-      console.log("分组数据", data.list);
       this.memberIdList = [];
       let arr = [];
       data.list.forEach(doc => {
@@ -237,9 +231,7 @@ export default {
           this.memberIdList.push(item.id);
         }
       });
-      console.log(this.memberIdList);
       if (this.matchDoc.matchForm == 2) {
-        console.log(111);
 
         this.getTeam(data.list);
       } else {

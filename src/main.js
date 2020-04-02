@@ -12,16 +12,12 @@ import './css/public.css'
 // import debug_item from '@/components/common/debug_item/index.js';   //导入debug_item
 // Vue.use(debug_item);   //作为全局组件，必须有install
 import Vuex from 'vuex'//导入vuex模块
-// import lodash from "lodash";
-// const lodash = require("@/utils/lodash/lodash.min.js");
+
 const lodash = require("../static/lodash.min.js");
 
 import moment from "moment";
 global.moment = moment; 
-// let lodash={}static\lodash.min.js
-// import lodash from "lodash";
-// console.log("lodash111", lodash);
-// console.log("lodash.get", lodash.get);
+
 Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象

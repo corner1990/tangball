@@ -79,7 +79,6 @@ export default {
         }
       });
       this.cityList = data.list;
-      console.log(this.cityList);
     }
   },
   mounted() {
