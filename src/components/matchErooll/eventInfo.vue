@@ -90,7 +90,7 @@ export default {
   },
   props: ["info", "matchInfo",,'groupGame','groups'],
   mounted() {
-   this.info.ballAgeText = this.info.ballAge==1?'一年以下':this.info.ballAge==2?'一到三年':this.info.ballAge==3?'三到五年':this.info.ballAge==4?'五到十年':this.info.ballAge==5?'十年以上':'请选择'
+  //  this.info.ballAgeText = this.info.ballAge==1?'一年以下':this.info.ballAge==2?'一到三年':this.info.ballAge==3?'三到五年':this.info.ballAge==4?'五到十年':this.info.ballAge==5?'十年以上':'请选择'
     // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
 
     // 获取赛事数据
