@@ -207,11 +207,11 @@ export default {
           });
         });
       }
-      this.groupAchievementlist.sort(function(obj1, obj2) {
+      this.groupAchievementlist.sort(function (obj1, obj2) {
         return obj2.score - obj1.score;
       });
       wx.hideLoading();
-      
+
     },
     // 获取参赛队伍信息
     async getGroup() {
@@ -281,23 +281,37 @@ export default {
   },
 
   onLoad(options) {
-    // 获取赛事数据
+    console.log(`onLoad:`);
+    
+  },
+  mounted() {
+
+   console.log(`mounted:`);
+    //解决组件数据缓存问题-20200403刘咏辉添加
+    /****************************初始化赛程和轮数-START****************************/
+    this.nowRrogressIndex = 1
+    this.nowRoundNum = 1
+    /****************************初始化赛程和轮数-END****************************/
+
+
+
+// 获取赛事数据
     this.matchDoc = JSON.parse(wx.getStorageSync("matchInfo"));
     this.matchDoc.matchTime = global.moment(this.matchDoc.matchTime.replace(/-/g, '/')).format('YYYY/MM/DD');
-    if (this.matchDoc.progress.length>0) {
-    // 初始化成绩数据
-    if (this.matchDoc.progress[0].roundCount > 1) {
-      this.gradeText = "teamHoleScoreTotal_p1_r1";
-    } else {
-      this.gradeText = "teamHoleScoreTotal_p1";
-    }
-    // this.groupAchievementlist = []
-    this.progressIndex = 0;
-    this.roundNumIndex = 0;
-    
+    if (this.matchDoc.progress.length > 0) {
+      // 初始化成绩数据
+      if (this.matchDoc.progress[0].roundCount > 1) {
+        this.gradeText = "teamHoleScoreTotal_p1_r1";
+      } else {
+        this.gradeText = "teamHoleScoreTotal_p1";
+      }
+      // this.groupAchievementlist = []
+      this.progressIndex = 0;
+      this.roundNumIndex = 0;
+
       this.roundNum = Number(this.matchDoc.progress[0].roundCount);
     }
-    
+
     wx.showLoading({ title: "加载中", icon: "loading" });
 
     if (this.matchDoc.matchForm == 2) {
@@ -309,6 +323,10 @@ export default {
       this.scoreText = "总杆数";
       this.getIndividualAchievement();
     }
+
+
+ 
+
   }
 };
 </script>
@@ -368,7 +386,7 @@ export default {
   border-left: 1px solid rgb(224, 222, 222);
   border-top: 1px solid rgb(224, 222, 222);
 }
-.achievement-tab-box{
+.achievement-tab-box {
   border-right: 1px solid rgb(224, 222, 222);
   border-bottom: 1px solid rgb(224, 222, 222);
 }
