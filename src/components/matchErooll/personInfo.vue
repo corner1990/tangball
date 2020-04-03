@@ -57,7 +57,7 @@
       <div>{{ matchInfo.matchTime }}</div>
     </div>
     <div class="flex line">
-      <p class="sub-title">赛事地点</p>
+      <p class="sub-title">比赛球场</p>
       <div v-if="matchInfo.venue">{{ matchInfo.venue[0].cityName}}--{{ matchInfo.venue[0].venueName}}</div>
       <div v-else>
         {{ matchInfo.cityName }}--
