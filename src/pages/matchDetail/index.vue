@@ -267,15 +267,16 @@ export default {
      */
     async gotoPage() {
       if (this.payStatus || this.isMatchIdStatus == 'show') {
+        
         let info = this.matchDoc;
         let url = `/pages/matchEroll/main?id=2`;
         let { sex, orderMoney } = this.orderMsg;
-
+       
         // let active = 2;
         info = { ...this.orderMsg, total_fee: orderMoney };
-       letmatchInfo={...this.matchDoc,total_fee:orderMoney,sex};
-
+       let matchInfo={...this.matchDoc,total_fee:orderMoney,sex};
         if (matchInfo.matchForm == 2) {
+         
           let { data } = await util.post({
             url: global.PUB.domain + "/crossList?page=tangball_team",
             param:{findJson:{orderId:info.orderId}}
@@ -294,8 +295,6 @@ export default {
             }
           });
         } else {
-
-
           wx.setStorage({
             key: "myErollDetail",data: JSON.stringify({ info, matchInfo, P1: this.orderMsg.P1 }),
             success() {
@@ -383,6 +382,8 @@ export default {
                 this.isMatchIdStatus = false; //变量初始化为false
                this.enrollText = `立即报名`; //初始化为立即报名
             }else{
+              this.payStatus = true
+              console.log('this.payStatus',this.payStatus)
               this.isMatchIdStatus = "show"; //该用户已经报名
               this.enrollText = "您已报名,查看详情";
             }
