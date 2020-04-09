@@ -17,7 +17,7 @@
     <div v-if="active === 1">
       <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
     </div>
-    <div v-show="active === 2">
+    <div v-if="active === 2">
       <div v-if="payStatus==2">
         <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
         <div class="icon_success">
@@ -29,8 +29,8 @@
       </div>
       <End :info="state" v-else />
     </div>
-    <div class="btn-wrap" v-show="active < 2">
-      <!-- <van-row v-if="payStatus==2"></van-row> -->
+    <div class="btn-wrap" v-if="active < 2">
+      <van-row v-if="payStatus==2"></van-row>
       <van-row v-if="payStatus==1">
         <van-button size="large" type="info" @click="nextStep">立即支付</van-button>
       </van-row>
@@ -99,7 +99,9 @@ export default {
         this.active = this.info.payStatus;
       }
     } else {
-
+      // this.payStatus = 0
+      // this.active = 0
+      // console.log( this.payStatus,this.active )
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -203,16 +205,13 @@ export default {
      * @desc 统一下单
      */
     async pay(info) {
+      console.log(`统一下单-1`);
 
       let matchInfo = JSON.parse(wx.getStorageSync("matchInfo"));//从本地存储中获取赛事信息
 
       let { total_fee } = this.objMatchInfo;
       let matchForm = this.objMatchInfo.matchForm;
-      let pramePay = {
-        total_fee,
-        goodsNameAll: "abcd",
-        ...info
-      };
+      let pramePay = { total_fee, goodsNameAll: "abcd", ...info };
 
       const self = this;
 
@@ -245,7 +244,7 @@ export default {
           }
         }
 
-        setInterval(() => {
+        setTimeout(() => {
           this.active = 2;//???
         }, 1000);
       } else {//Q2:订单总价非0,要走支付流程
@@ -275,6 +274,13 @@ export default {
 
 
       }
+       console.log(`统一下单-2`);
+      //***自动补充球员的场馆和加盟商信息
+      await util.post({ url: `${global.PUB.domain}/tangball/setMemberVenue`, param: { memberId: this.tangballUserId } });
+
+       console.log(`统一下单-3`);
+
+
     },
 
     endStep(state) {
@@ -345,6 +351,9 @@ export default {
           this.info.ballAgeText = "请选择";
           break;
       }
+      this.payStatus = 0
+      this.active = 0
+      console.log( this.payStatus,this.active )
     },
     // 请求会员接口
     async getMember() {
