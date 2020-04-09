@@ -44,8 +44,10 @@
     </div>
     <div style="height:15px;"></div>
     <!-- 赛事步骤 -->
-
-    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
+    <!-- <div class="steps-box" v-for="(item,index) in steps" :Key="index">
+      <van-steps :steps="item" :active="activeStep.group==index?activeStep.index:-1" active-color="#F4B116"  />
+    </div> -->
+    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116"  />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchTime" />
       <van-cell title="报名截止时间" :value="enrollTimeEnd" />
@@ -167,10 +169,7 @@ export default {
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
-      steps: [
-        //步骤条数组
-
-      ],
+      steps: [],//步骤条数组
       matchTime: null,
       enrollTimeEnd: null,
       matchDoc: {}, //赛事详情列表
@@ -218,6 +217,7 @@ export default {
      * @param event是默认值
      */
     onCloseDialog() {
+      
       if (this.matchDoc.venue.length > 1) {
         this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       }
@@ -237,6 +237,7 @@ export default {
         }),
         success() {
           if (matchForm == 1) {
+            console.log(url)
             wx.navigateTo({ url });
           } else {
 
@@ -272,15 +273,16 @@ export default {
      */
     async gotoPage() {
       if (this.payStatus || this.isMatchIdStatus == 'show') {
+        
         let info = this.matchDoc;
         let url = `/pages/matchEroll/main?id=2`;
         let { sex, orderMoney } = this.orderMsg;
-
+       
         // let active = 2;
         info = { ...this.orderMsg, total_fee: orderMoney };
-       letmatchInfo={...this.matchDoc,total_fee:orderMoney,sex};
-
+       let matchInfo={...this.matchDoc,total_fee:orderMoney,sex};
         if (matchInfo.matchForm == 2) {
+         
           let { data } = await util.post({
             url: global.PUB.domain + "/crossList?page=tangball_team",
             param:{findJson:{orderId:info.orderId}}
@@ -299,8 +301,6 @@ export default {
             }
           });
         } else {
-
-
           wx.setStorage({
             key: "myErollDetail",data: JSON.stringify({ info, matchInfo, P1: this.orderMsg.P1 }),
             success() {
@@ -388,6 +388,8 @@ export default {
                 this.isMatchIdStatus = false; //变量初始化为false
                this.enrollText = `立即报名`; //初始化为立即报名
             }else{
+              this.payStatus = true
+              console.log('this.payStatus',this.payStatus)
               this.isMatchIdStatus = "show"; //该用户已经报名
               this.enrollText = "您已报名,查看详情";
             }
@@ -453,6 +455,26 @@ export default {
 
 
     // 赛事步骤处理
+    // for (let index = 0; index < this.matchDoc.progress.length; index = index+3) {
+    //   let list = []
+    //   let j = 3
+    //   if (index+3>this.matchDoc.progress.length) {
+    //     j = this.matchDoc.progress.length - index
+    //     console.log(j,"j")
+    //   }
+    //   for (let i = 0; i < j; i++) {
+    //     console.log(list)
+    //     if (this.matchDoc.progress[index+i].checked == true) {
+    //       this.activeStep.group = index/3
+    //       this.activeStep.index = i
+    //     }
+    //     let obj = { text: this.matchDoc.progress[index+i].name, desc: '', value: this.matchDoc.progress[index+i].name }
+    //     list[i] = obj
+    //   }
+    //   console.log(list)
+    //   this.steps.push(list)
+    // }
+    // console.log('this.steps',this.steps)
     this.steps = this.matchDoc.progress.map((item, index) => {
       if (item.checked == true) {
         this.activeStep = index
@@ -460,7 +482,7 @@ export default {
       let obj = { text: item.name, desc: '', value: item.name }
       return obj
     })
-    // this.getEnrollList()
+    this.getEnrollList()
 
 
     // 如果报名未截止

@@ -17,7 +17,7 @@
     <div v-if="active === 1">
       <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
     </div>
-    <div v-show="active === 2">
+    <div v-if="active === 2">
       <div v-if="payStatus==2">
         <EventInfo :info="info" :matchInfo="objMatchInfo" :groupGame="groupGame" :groups="groups" />
         <div class="icon_success">
@@ -29,8 +29,8 @@
       </div>
       <End :info="state" v-else />
     </div>
-    <div class="btn-wrap" v-show="active < 2">
-      <!-- <van-row v-if="payStatus==2"></van-row> -->
+    <div class="btn-wrap" v-if="active < 2">
+      <van-row v-if="payStatus==2"></van-row>
       <van-row v-if="payStatus==1">
         <van-button size="large" type="info" @click="nextStep">立即支付</van-button>
       </van-row>
@@ -68,7 +68,9 @@ export default {
       matchInfo: {}, //存储赛事信息
       pageName: "比赛报名",
       btnText: "下一步",//下一步按钮显示文字
-      steps: [{ text: "确认报名资料" }, { text: "支付报名费" }, { text: "完成缴费" }],
+      steps: [{ text: "确认报名资料" },
+      { text: "支付报名费" },
+      { text: "完成缴费" }],
       active: 0,
       info: {},//用户数据
       state: {
@@ -97,7 +99,9 @@ export default {
         this.active = this.info.payStatus;
       }
     } else {
-
+      // this.payStatus = 0
+      // this.active = 0
+      // console.log( this.payStatus,this.active )
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -240,7 +244,7 @@ export default {
           }
         }
 
-        setInterval(() => {
+        setTimeout(() => {
           this.active = 2;//???
         }, 1000);
       } else {//Q2:订单总价非0,要走支付流程
@@ -347,6 +351,9 @@ export default {
           this.info.ballAgeText = "请选择";
           break;
       }
+      this.payStatus = 0
+      this.active = 0
+      console.log( this.payStatus,this.active )
     },
     // 请求会员接口
     async getMember() {

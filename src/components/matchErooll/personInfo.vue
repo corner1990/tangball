@@ -155,7 +155,6 @@ export default {
   mounted() {
       // this.groups = JSON.parse(wx.getStorageSync("groupsMsg"));
 
-
     // 获取赛事数据
     // let data = wx.getStorageSync("matchInfo");
     // if (data) {

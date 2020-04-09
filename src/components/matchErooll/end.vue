@@ -3,7 +3,7 @@
     <van-icon v-if="iconShow" name="close" color="#f44" size="40px" />
     <van-icon v-else name="success" color="#07c160" size="40px" />
     <p v-if="iconShow">支付失败！</p>
-    <p v-else>报名完成！</p>
+    <p v-else>报名完成！ </p>
     <p class="btn-wrap">
       <van-button type="primary" round block @click="goHome">返回首页</van-button>
     </p>
