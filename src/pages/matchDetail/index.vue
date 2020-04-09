@@ -253,9 +253,14 @@ export default {
      * @param event是默认值
      */
     pickerChange(event) {
+      console.log(`pickerChange-1`);
       // 缓存当前选中的球场id、球场名字、城市名字
       let { index } = event.mp.detail;
-      let { venueId, cityName, venueName } = this.matchDoc.cityVenueList[index];
+      console.log(`index:${index}`);
+       console.log(`pickerChange-2`);
+       console.log("this.matchDoc:", this.matchDoc);
+      let { venueId, cityName, venueName } = this.matchDoc.venue[index];
+       console.log(`pickerChange-3`);
       this.venueId = venueId;
       this.cityName = cityName;
       this.venueName = venueName;

@@ -78,9 +78,9 @@ export default {
   },
   mounted() {
     this.skipPage = 0;
-     // 页面加载请求会员数据
+    // 页面加载请求会员数据
     this.getMember();
-    
+
   },
   onLoad(options) {
     // 缓存赛事信息
@@ -89,15 +89,15 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
-        
-        console.log('info',info)
+
+        console.log('info', info)
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
       }
     } else {
-     
+
       //  如果是从赛事详情进入
       this.objMatchInfo = JSON.parse(wx.getStorageSync("matchInfo"));
     }
@@ -201,16 +201,13 @@ export default {
      * @desc 统一下单
      */
     async pay(info) {
+      console.log(`统一下单-1`);
 
       let matchInfo = JSON.parse(wx.getStorageSync("matchInfo"));//从本地存储中获取赛事信息
 
       let { total_fee } = this.objMatchInfo;
       let matchForm = this.objMatchInfo.matchForm;
-      let pramePay = {
-        total_fee,
-        goodsNameAll: "abcd",
-        ...info
-      };
+      let pramePay = { total_fee, goodsNameAll: "abcd", ...info };
 
       const self = this;
 
@@ -273,6 +270,13 @@ export default {
 
 
       }
+       console.log(`统一下单-2`);
+      //***自动补充球员的场馆和加盟商信息
+      await util.post({ url: `${global.PUB.domain}/tangball/setMemberVenue`, param: { memberId: this.tangballUserId } });
+
+       console.log(`统一下单-3`);
+
+
     },
 
     endStep(state) {
@@ -292,7 +296,7 @@ export default {
     funlyPay(data) {
       let { msg, status, timestamp: timeStamp, ...args } = data;
       let self = this;
-      console.log('args',args)
+      console.log('args', args)
       if (status == 100) {
         wx.requestPayment({
           ...args, signType: "MD5", timeStamp,
@@ -313,15 +317,15 @@ export default {
       wx.self = this;
       let { matchId, venueId: cityVenueId } = this.matchInfo;
       let { P1: memberId, name, sex = -1, openid: openId, phone, career, ballAge } = tangballUserInfo;
-      console.log('info',this.info)
+      console.log('info', this.info)
 
-        this.info = {
-        
-        name, sex: `${sex}`, memberId, openId, phone, career, matchId, cityVenueId, ballAge,...this.info,
+      this.info = {
+
+        name, sex: `${sex}`, memberId, openId, phone, career, matchId, cityVenueId, ballAge, ...this.info,
       };
-     
 
-      
+
+
       switch (this.info.ballAge) {
         case 1:
           this.info.ballAgeText = "一年以下";
