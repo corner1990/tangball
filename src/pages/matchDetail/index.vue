@@ -44,8 +44,10 @@
     </div>
     <div style="height:15px;"></div>
     <!-- 赛事步骤 -->
-
-    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116" />
+    <!-- <div class="steps-box" v-for="(item,index) in steps" :Key="index">
+      <van-steps :steps="item" :active="activeStep.group==index?activeStep.index:-1" active-color="#F4B116"  />
+    </div> -->
+    <van-steps :steps="steps" :active="activeStep" active-color="#F4B116"  />
     <van-cell-group title="赛事信息">
       <van-cell title="赛事时间" title-width="100px" :value="matchTime" />
       <van-cell title="报名截止时间" :value="enrollTimeEnd" />
@@ -167,10 +169,7 @@ export default {
       isMatchIdStatus: false, //控制是否跳转报名列表的状态
       activeStep: 0, //步骤条id
       enrollText: "立即报名", //管理是否立即报名的文字
-      steps: [
-        //步骤条数组
-
-      ],
+      steps: [],//步骤条数组
       matchTime: null,
       enrollTimeEnd: null,
       matchDoc: {}, //赛事详情列表
@@ -449,6 +448,26 @@ export default {
 
 
     // 赛事步骤处理
+    // for (let index = 0; index < this.matchDoc.progress.length; index = index+3) {
+    //   let list = []
+    //   let j = 3
+    //   if (index+3>this.matchDoc.progress.length) {
+    //     j = this.matchDoc.progress.length - index
+    //     console.log(j,"j")
+    //   }
+    //   for (let i = 0; i < j; i++) {
+    //     console.log(list)
+    //     if (this.matchDoc.progress[index+i].checked == true) {
+    //       this.activeStep.group = index/3
+    //       this.activeStep.index = i
+    //     }
+    //     let obj = { text: this.matchDoc.progress[index+i].name, desc: '', value: this.matchDoc.progress[index+i].name }
+    //     list[i] = obj
+    //   }
+    //   console.log(list)
+    //   this.steps.push(list)
+    // }
+    // console.log('this.steps',this.steps)
     this.steps = this.matchDoc.progress.map((item, index) => {
       if (item.checked == true) {
         this.activeStep = index
@@ -456,7 +475,7 @@ export default {
       let obj = { text: item.name, desc: '', value: item.name }
       return obj
     })
-    // this.getEnrollList()
+    this.getEnrollList()
 
 
     // 如果报名未截止
