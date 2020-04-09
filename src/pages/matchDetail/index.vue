@@ -217,6 +217,7 @@ export default {
      * @param event是默认值
      */
     onCloseDialog() {
+      
       if (this.matchDoc.venue.length > 1) {
         this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       }
@@ -236,6 +237,7 @@ export default {
         }),
         success() {
           if (matchForm == 1) {
+            console.log(url)
             wx.navigateTo({ url });
           } else {
 
