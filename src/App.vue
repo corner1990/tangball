@@ -38,7 +38,11 @@ export default {
   },
   onShow() {
     wx.hideTabBar();
-  }
+  },
+   onError(err){
+    console.log(`onError111111`);
+
+  },
 };
 </script>
 <style>

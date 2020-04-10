@@ -79,8 +79,6 @@
       </div>
     </div>
 
-  
-
     <mytabbar :active="0"></mytabbar>
   </div>
 </template>
@@ -95,16 +93,10 @@ import Dialog from "../../../static/vant/dialog/dialog";
 // import { get } from '@/utils/request'
 import debug_item from "@/components/common/debug_item/debug_item";
 export default {
-  components: {
-    card,
-    mytabbar,
-    togod,
-    articleList,
-    debug_item
-  },
+  components: { card, mytabbar, togod, articleList, debug_item },
   data() {
     return {
-      imgHeight: 'height:42vw',
+      imgHeight: "height:42vw",
       pageTitle: {},
       // url:"https://mp.weixin.qq.com/s/usuajbDvfPDGoq91Ewdwlw",
       arrRecommend: [],
@@ -125,10 +117,7 @@ export default {
         { title: "搜索页面", url: "/pages/searchPage/main" }
       ],
       motto: "Hello miniprograme",
-      userInfo: {
-        nickName: "mpvue",
-        avatarUrl: "http://mpvue.com/assets/logo.png"
-      },
+      userInfo: { nickName: "mpvue", avatarUrl: "http://mpvue.com/assets/logo.png" },
       radio: 1,
       // imgUrls: [
       //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573217134&di=5d6655a5878a881ec33b50267a5273f0&imgtype=0&src=http%3A%2F%2Fimg01.tooopen.com%2Fdowns%2Fimages%2F2010%2F12%2F13%2Fsy_20101213160951685816.jpg",
@@ -146,23 +135,18 @@ export default {
   },
   methods: {
     gotoPage(url) {
-      util.gotoPage(url)
+      util.gotoPage(url);
     },
     //函数：{ajax获取轮播图列表函数}
     async ajaxRecommendList() {
-      let arrRecommend = await util.ajaxGetList({
-        page: "tangball_recommend",
-        pageSize: 5
-      });
+      let arrRecommend = await util.ajaxGetList({ page: "tangball_recommend", pageSize: 5 });
       arrRecommend.forEach(docEach => {
         docEach.imageUrl = this.$lodash.get(docEach, `album[0].url`);
       });
       this.arrRecommend = arrRecommend;
     },
     searchList(event) {
-      wx.navigateTo({
-        url: "/pages/searchPage/main?search=" + event.mp.detail
-      });
+     wx.navigateTo({ url: "/pages/searchPage/main?search=" + event.mp.detail });
     },
     gotoPage(url) {
       wx.navigateTo({ url });
@@ -189,14 +173,12 @@ export default {
       wx.switchTab({
         url
       });
-    },
-
+    }
   },
   onShow() {
     const updateManager = wx.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
       // // 请求完新版本信息的回调
-   
     });
 
     updateManager.onUpdateReady(function () {
@@ -218,6 +200,7 @@ export default {
     });
   },
   async mounted() {
+   
     /****************************微信会员登录和信息存储-START****************************/
     // let result = await util.getMyWXSetting();
     // //如果未授权，先return,等待用户主动授权
@@ -231,29 +214,17 @@ export default {
     //函数：{登录并ajax初始化用户信息的函数}
     /****************************微信会员登录和信息存储-END****************************/
   },
-  created() {
-    console.warn('新版本22222');
-
-   
-  },
+  created() { },
   async onLoad() {
     let { data } = await util.post({
       url: global.PUB.domain + "/crossDetail?page=tangball_article",
-      param: {
-        findJson: {
-          P1: 38
-        }
-      }
-    })
-    this.pageTitle = data.doc.extend
-
+      param: { findJson: { P1: 38 } }
+    });
+    this.pageTitle = data.doc.extend;
   },
   //配置分享页的内容
   onShareAppMessage: function () {
-    return {
-      title: "唐球",
-      path: `/pages/index/main`
-    };
+    return { title: "唐球", path: `/pages/index/main` };
   }
 };
 </script>

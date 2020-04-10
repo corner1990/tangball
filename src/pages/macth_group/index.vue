@@ -163,12 +163,7 @@ export default {
         let timeStartDay = this.getDay(item.timeStart);
         let timeStart = this.getTime(item.timeStart);
 
-        let obj = {
-          groupNum: item.groupNum || 0,
-          timeStartDay,
-          timeStart,
-          groupMember: arr
-        };
+        let obj = { groupNum: item.groupNum || 0, timeStartDay, timeStart, groupMember: arr };
         this.groupsMsgList.push(obj);
       });
       wx.hideLoading();
@@ -177,11 +172,7 @@ export default {
     async getTeam(groupsMsg) {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_team",
-        param: {
-          findJson: {
-            P1: this.memberIdList
-          }
-        }
+        param: { findJson: { P1: this.memberIdList } }
       });
       this.memberMsg = data.list;
       this.joingroupsMsg(groupsMsg);
@@ -190,11 +181,7 @@ export default {
     async getMenber(groupsMsg) {
       let { data } = await util.post({
         url: global.PUB.domain + "/crossList?page=tangball_member",
-        param: {
-          findJson: {
-            P1: this.memberIdList
-          }
-        }
+        param: { findJson: { P1: this.memberIdList } }
       });
       this.memberMsg = data.list;
       this.joingroupsMsg(groupsMsg);
@@ -206,19 +193,8 @@ export default {
         url: global.PUB.domain + "/crossList?page=tangball_group",
         param: {
           sortJson: { groupNum: 1 },
-          findJson: {
-            matchId: this.matchDoc.P1,
-            progressIndex: this.progressIndex,
-            roundNum: this.roundNum
-          },
-          selectJson: {
-            P1: 1,
-            groupNum: 1,
-            groupMember: 1,
-            matchResultForScore: 1,
-            matchResult: 1,
-            timeStart: 1
-          }
+          findJson: { matchId: this.matchDoc.P1, progressIndex: this.progressIndex, roundNum: this.roundNum },
+          selectJson: { P1: 1, groupNum: 1, groupMember: 1, matchResultForScore: 1, matchResult: 1, timeStart: 1 }
         }
       });
       this.memberIdList = [];
