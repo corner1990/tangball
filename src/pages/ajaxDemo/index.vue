@@ -29,10 +29,7 @@ import debug_item from "@/components/common/debug_item/debug_item";
 import util from "@/utils/util";
 export default {
   components: {
-    card,
-    mytabbar,
-    debug_item,
-    util,
+    card, mytabbar, debug_item, util,
     phone_msg_code,test_venu_list,test_msg_list,test_enroll_list,test_article_list,authorize
   },
   data() {

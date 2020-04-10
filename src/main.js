@@ -22,8 +22,7 @@ Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 Vue.use(Vuex)//应用组件
 const store = new Vuex.Store({//定义Vuex的存储对象
   state: {
-    unreadCount:undefined,
-    debug:true,
+    unreadCount:undefined,debug:true,
     wxUserInfo:{},//微信用户信息
     tangballUserInfo:{}//唐球用户信息
   },
@@ -41,7 +40,7 @@ const store = new Vuex.Store({//定义Vuex的存储对象
   }
 })
 Vue.prototype.$store = store; // 让vue实例中可访问$store
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 App.mpType = 'app'
 const app = new Vue(App)
 app.$mount()
