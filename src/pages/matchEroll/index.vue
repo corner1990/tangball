@@ -91,12 +91,11 @@ export default {
       let data = JSON.parse(wx.getStorageSync("myErollDetail"));
       if (data) {
         let { info, matchInfo, P1 } = data;
-
-        console.log('info', info)
         this.info = info;
         this.objMatchInfo = matchInfo;
         this.payStatus = this.info.payStatus;
         this.active = this.info.payStatus;
+        console.log(this.payStatus,this.active)
       }
     } else {
       // this.payStatus = 0
@@ -351,8 +350,6 @@ export default {
           this.info.ballAgeText = "请选择";
           break;
       }
-      this.payStatus = 0
-      this.active = 0
       console.log( this.payStatus,this.active )
     },
     // 请求会员接口
