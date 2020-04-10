@@ -232,17 +232,14 @@ export default {
         // 这里如果是团队赛就要请求队伍接口 保存队伍数据
         if (matchForm == 2) {
           let groups = JSON.parse(wx.getStorageSync("groupsMsg"));//从本地存储中获取到队伍信息
-
           pramePay.playingTime = groups.playingTime; //***补充用户选择的比赛日期
-
           if (!groups.orderId) {//如果{groups.orderId}不存在
-            groups.orderId = res.data.orderId;
+            groups.orderId = orderId;
             let data = await util.post({
               url: global.PUB.domain + "/crossAdd?page=tangball_team", param: { data: groups }
             });
           }
         }
-
         setTimeout(() => {
           this.active = 2;//???
         }, 1000);
