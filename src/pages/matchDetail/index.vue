@@ -210,14 +210,14 @@ export default {
      * @desc 关闭点击图片放大函数
      */
     ClosePhoto() {
-      this.showBigImg = false;
+      this.showBigImg = false; 
     },
     /**
      * @desc onCloseDialog是弹窗的关闭函数
      * @param event是默认值
      */
     onCloseDialog() {
-      
+      console.log(111)
       if (this.matchDoc.venue.length > 1) {
         this.showdDialog = !this.showdDialog; //控制是否打开弹窗
       }
@@ -273,7 +273,6 @@ export default {
      */
     async gotoPage() {
       if (this.payStatus || this.isMatchIdStatus == 'show') {
-        
         let info = this.matchDoc;
         let url = `/pages/matchEroll/main?id=2`;
         let { sex, orderMoney } = this.orderMsg;
@@ -313,6 +312,7 @@ export default {
       // 判断是否登录后进行 操作
       let status = await util.isLogin(this, `/pages/matchDetail/main?id=${this.matchId}`)
       if (status) {
+        
         if (this.matchDoc.venue.length > 1) {
           this.showdDialog = true; //打开弹窗
           this.venueId = null; //清空变量
@@ -327,6 +327,7 @@ export default {
           this.cityName = cityName;
           this.venueName = venueName;
         } else {
+          console.log(2222)
           let { venueId, cityName, venueName } = this.matchDoc.venue[0];
           this.venueId = venueId; //默认选中第一个
           this.cityName = cityName;
