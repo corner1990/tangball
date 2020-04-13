@@ -1,6 +1,7 @@
 <template>
   <div class="main-wrap">
     <web-view :src="wxArticleUrl" v-if="wxArticleUrl"></web-view>
+    
     <div class="PL10 PR10" v-else>
       找不到公众号文章url
     </div>
