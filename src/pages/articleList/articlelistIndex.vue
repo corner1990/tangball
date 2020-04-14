@@ -8,7 +8,12 @@
     <!--无数据时显示暂无数据-->
     <tisp v-if="status"></tisp>
     <div v-else>
-      <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
+      <van-tabs :active="active" @change="onClickTab" style="position: relative;" >
+      <van-tab :title="bigItem.category " v-for="(bigItem,index) in tabList" :key="index ">
+        <div style="height:10px"></div>
+       <articleListIndex v-for="(item,i) in articleList" :key="i" :cf="item"></articleListIndex>
+      </van-tab>
+    </van-tabs>
     </div>
 
     <div style="height:20px"></div>
@@ -37,22 +42,44 @@ export default {
   },
   data() {
     return {
+      active: 0,
+      tabList: [
+        { category: "最新资讯" },
+        { category: "行业资讯" },
+        // { category: "全部" }
+      ],
+      articleCategory:29,  //分类资讯id  默认为最新资讯
       articleList: [], //文章列表
       Categorylist: [], //文章列表
       status: false //显示暂无数据
     };
   },
   methods: {
-    
+    onClickTab(event) {
+      console.log(event.target.index)
+      wx.showLoading({
+        title:'加载中'
+      })
+      this.active = event.target.index;
+      if (this.active == 0) {
+        this.articleCategory = 29   //切换分类为最新资讯
+      }
+      if (this.active == 1) {
+        this.articleCategory = 30   //切换分类为行业资讯
+      }
+      this.getArticleList()
+    },
     async getArticleList() {
       wx.showLoading({ title: "加载中", icon: "loading" });
       this.articleList = await util.ajaxGetList({
         page: "tangball_article",
         pageSize: 15,
+        sortJson: { topSort:-1,_id:-1},
         findJson: {
           // articleCategory: 3 //锁定公众号文章分类
-           auditStatus:1,
-          recommend:1
+          auditStatus:1,
+          recommend:1,
+          articleCategory:this.articleCategory
         }
       });
 

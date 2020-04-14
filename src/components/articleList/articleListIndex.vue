@@ -48,7 +48,12 @@ export default {
   methods: {
     //跳转页面方法，20191007刘咏辉修正
     gotoPage(cf){
-      util.gotoPage(`/pages/articleDetailWX/main?dataId=${cf.P1}&wxArticleUrl=${this.$lodash.get(cf, 'extend.wxArticleUrl','')}`)
+      if (cf.extend&&cf.extend.wxArticleUrl!='') {
+        util.gotoPage(`/pages/articleDetailWX/main?dataId=${cf.P1}&wxArticleUrl=${this.$lodash.get(cf, 'extend.wxArticleUrl','')}`)
+      }else{
+        util.gotoPage(`/pages/articleDetail/main?dataId=${cf.P1}`)
+      }
+      
     }
     /**
      * @desc 搜索回调
