@@ -59,10 +59,11 @@ export default {
         page: "tangball_article",
         pageSize: 15,
         pageIndex: 1,
-        sortJson: { matchTime: -1 },
+
         findJson: {
           $and:[{P1:{$ne:38}},{P1:{$ne:8}}],
           auditStatus:1,
+          
           articleTitle: {
             $options: "i",
             $regex: this.searchMsg

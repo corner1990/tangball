@@ -74,6 +74,7 @@ export default {
       this.articleList = await util.ajaxGetList({
         page: "tangball_article",
         pageSize: 15,
+        sortJson: { topSort:-1,_id:-1},
         findJson: {
           // articleCategory: 3 //锁定公众号文章分类
           auditStatus:1,
