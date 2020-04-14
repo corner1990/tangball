@@ -16,7 +16,7 @@ import Vuex from 'vuex'//导入vuex模块
 const lodash = require("../static/lodash.min.js");
 
 import moment from "moment";
-global.moment = moment; 
+global.moment = moment;  
 
 Vue.prototype.$lodash= lodash//让vue实例中可访问$lodash
 Vue.use(Vuex)//应用组件
